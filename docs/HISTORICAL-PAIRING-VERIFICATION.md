@@ -1,6 +1,6 @@
 # Historical pairing verification
 
-## Current status (2026-08-12)
+## Current status (2026-08-13)
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
@@ -20,6 +20,15 @@
 - The global matcher now backs the public Dutch engine. Staging deployment and
   release packaging remain pending production-path replay; criterion 3 stays
   open.
+- Closed: the complete 10,000-tournament, 7-player corpus partition at commit
+  `4a93b7a`: 49,961/49,961 historical rounds exact, zero colour variants,
+  deviations, no-solutions and resource limits. The attested evidence is
+  `docs/evidence/pairing-corpus-p7-full-4a93b7a.json` (corpus manifest
+  `faf0dc8e0f1618b703f9a270bfcb9ee8ad9fd26fd3a330a753cbd9dccb3445ba`).
+  The corpus run exposed and closed two model defects: the unmatched PAB's
+  QC18/QC20 score-position complement and conditional C9 being placed ahead
+  of QC6-QC8 instead of at its canonical position. Full p9+ replay remains
+  open, so criterion 3 is not yet closed.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the public `DutchPairingEngine`

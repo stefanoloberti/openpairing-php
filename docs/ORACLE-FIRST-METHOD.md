@@ -1,6 +1,6 @@
 # Oracle-first development method
 
-## Current status (2026-08-12)
+## Current status (2026-08-13)
 
 The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
 `epoch-2-dutch-500`. One 80-player tournament has completed 15/15 exact, but
@@ -15,6 +15,15 @@ buckets are not the acceptance language. Large-field verification is candidate
 versus the recorded reference: exact, colour variant, deviation or no matching.
 Every non-exact completed candidate is classified by Gacrux. Legacy evidence is
 used only for rounds where the legacy engine actually terminates.
+
+The first full corpus partition is now closed: all 49,961 rounds from 10,000
+seven-player tournaments are exact at commit `4a93b7a`. Before that run, the
+same partition produced 37 Gacrux-inferior deviations and six no-solutions.
+The exhaustive matcher reproduced the defects, while BBP agreed with the
+reference on all 37 completed residuals. This isolated two shared-model bugs:
+the PAB score-position complement omitted QC18/QC20, and conditional C9 was
+incorrectly encoded as a prefix that dominated QC6-QC8. The corrected field
+ordering eliminated all 43 affected tournaments without heuristic adjustment.
 
 ## Semantic baseline reset (historical epoch narrative)
 
