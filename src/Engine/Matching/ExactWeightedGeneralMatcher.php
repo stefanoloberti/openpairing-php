@@ -7,7 +7,10 @@ namespace OpenPairing\Engine\Matching;
 final class ExactWeightedGeneralMatcher implements WeightedGeneralMatchingInterface
 {
     public const MAX_VERTICES = 22;
-    private const MAX_WEIGHT_DIMENSIONS = self::MAX_VERTICES + 1;
+    // Dimensions affect only linear vector comparisons; the exponential guard
+    // is the vertex count. Keep enough room for the complete Dutch vector plus
+    // per-MDP lifecycle fields used by differential diagnostics.
+    private const MAX_WEIGHT_DIMENSIONS = 512;
     private const MAX_ABSOLUTE_EDGE_WEIGHT = 1_000_000_000_000;
 
     /** @var list<int> */
