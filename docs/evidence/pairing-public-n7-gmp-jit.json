@@ -1,0 +1,59 @@
+{
+    "schema": "openpairing.trf-historical-pairing-verification/3",
+    "historicalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+    "root": "/tmp/trf-n5-100",
+    "limit": 0,
+    "roundFilter": null,
+    "productionOnly": true,
+    "performanceRuntime": {
+        "opcacheEnableCli": "1",
+        "jit": "1255",
+        "jitBufferSize": "128M",
+        "xdebugMode": ""
+    },
+    "preliminaryGlobalAudit": false,
+    "shadowGlobalAudit": false,
+    "largeFieldAudit": false,
+    "elapsedSeconds": 1.605,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/tmp/openpairing-validation/backends/gmp-4e3e5ed/releases/3cde076430216647",
+        "autoloadPsr4Roots": [
+            "/tmp/openpairing-validation/backends/gmp-4e3e5ed/releases/3cde076430216647/src"
+        ],
+        "expectedEnginePath": "/tmp/openpairing-validation/backends/gmp-4e3e5ed/releases/3cde076430216647/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/tmp/openpairing-validation/backends/gmp-4e3e5ed/releases/3cde076430216647/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+        "sourceTreeSha256": "79ec6a49cb4dca642ff1701fae4f8287a95b754d1e8515e16c38ca1ca06c6d50",
+        "sourceFileCount": 79,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-identity/1",
+        "selection": "relative-path-ordinal-v1",
+        "requestedLimit": 0,
+        "fileCount": 100,
+        "totalBytes": 123100,
+        "manifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44"
+    },
+    "counts": {
+        "filesSeen": 100,
+        "decoded": 100,
+        "tournamentsVerified": 100,
+        "tournamentsAllExact": 100,
+        "roundsAttempted": 500,
+        "roundsExact": 500,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0
+    },
+    "diagnostics": [],
+    "samples": [],
+    "preliminarySamples": [],
+    "shadowSamples": [],
+    "shadowTimingSamples": [],
+    "shadowTimingAggregates": []
+}

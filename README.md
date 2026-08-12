@@ -128,8 +128,8 @@ The coverage map and reproduction commands are in `docs/CORPUS.md`.
 The 123,557-file external TRF scan is parser evidence only: 122,008 legacy
 files were decoded, but that number must not be presented as pairing-engine
 verification. Historical round replay is a separate gate. Frozen
-7/30/50-player samples are exact; the final public-path 80-player replay and
-the full 122,008-tournament campaign are still open. See
+7/30/50/80-player samples are exact; the full 122,008-tournament campaign is
+still open. See
 `docs/HISTORICAL-PAIRING-VERIFICATION.md`.
 
 ## Provenance and licence

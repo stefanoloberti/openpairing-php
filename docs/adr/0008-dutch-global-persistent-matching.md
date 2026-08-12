@@ -13,9 +13,8 @@ regressions, attested by `docs/evidence/pairing-epoch2-dutch-500.json` and Git
 tag `epoch-2-dutch-500`. The final two general defects were missing QC14/QC16
 endpoint contributions on heterogeneous edges and on the genuinely unmatched
 PAB endpoint. Production wiring was enabled after the frozen small-field gate;
-public-path samples at 30 and 50 players are exact, while the final 80-player
-public replay and the subsequent full-corpus replay remain separately attested
-gates.
+public-path samples at 30, 50 and 80 players are exact; the subsequent
+full-corpus replay remains a separately attested gate.
 
 The polynomial matcher must not be inserted independently into the current
 `solveGroups()` loop. Independent bracket optima cannot compare PAB choices or
@@ -84,10 +83,9 @@ attested:
 
 1. **Satisfied.** 500/500 exact on the frozen 100x7 sample, with no regression of the 455
    epoch-2 legacy-exact rounds and no unclassified shadow bucket.
-2. **Partially satisfied.** Exact direct-to-reference public-engine results:
-   110/110 rounds at 30 players and 150/150 at 50, with zero no-solutions,
-   colour variants or deviations. The final 80-player public-path report is
-   still required.
+2. **Satisfied.** Exact direct-to-reference public-engine results: 110/110
+   rounds at 30 players, 150/150 at 50 and 150/150 at 80, with zero
+   no-solutions, colour variants or deviations.
 3. **Open.** Full replay of all 122,008 previously decodable non-accelerated tournaments.
 
 Runtime-identity attestation from the historical verifier is part of every gate.

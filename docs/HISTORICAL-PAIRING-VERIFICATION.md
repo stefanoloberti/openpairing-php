@@ -4,11 +4,9 @@
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
-- Closed: direct-reference samples at 30 and 50 players: respectively 110/110
-  and 150/150 exact rounds through the public engine, with zero no-solutions,
-  colour variants and deviations. The final public-path 80-player replay is
-  running and must produce an attested report before that scale is called
-  closed.
+- Closed: direct-reference samples through the public engine at 30, 50 and 80
+  players: respectively 110/110, 150/150 and 150/150 exact rounds, with zero
+  no-solutions, colour variants and deviations.
 - Measured at 80: one complete 15-round tournament is 15/15 exact with zero
   no-matchings in 344.667 seconds using 30-bit limbs. Versioned evidence is
   `docs/evidence/pairing-p80-one-limbs-baseline.json`, corpus manifest
@@ -17,7 +15,8 @@
   proven-optimal residual cache now reuses a residual optimum only when a
   frozen edge belonged to the previous optimum and edge weights are unchanged;
   1,000 sequential stress cases compare every reused state with fresh Blossom
-  and the exhaustive oracle. Full-corpus throughput remains to be measured.
+  and the exhaustive oracle. The public 80-player batch still took 743.355
+  seconds for 150 rounds, so full-corpus throughput remains the open blocker.
 - The global matcher now backs the public Dutch engine. Staging deployment and
   release packaging remain pending production-path replay; criterion 3 stays
   open.

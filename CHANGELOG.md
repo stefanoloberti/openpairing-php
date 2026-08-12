@@ -64,6 +64,6 @@
 - TRF acceleration records 250/XXA are planned for v1.1; the current parser
   rejects them explicitly.
 - The historical pairing corpus gate is not yet passed. The public Dutch
-  engine is exact on frozen 7/30/50-player samples; 80-player public replay and
-  the complete campaign remain open.
+  engine is exact on frozen 7/30/50/80-player samples; the complete campaign
+  remains open.
 - Team, team-knockout and team-score tie-break variants remain phase 2.
