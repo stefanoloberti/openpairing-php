@@ -134,8 +134,14 @@ forbidden because Composer derives its PSR-4 base from the resolved vendor path.
 Run stratified directories in parallel on Windows with:
 
 ```powershell
-tools/run_historical_pairing_scan.ps1 -MaxFilesPerDirectory 5
+tools/run_historical_pairing_scan.ps1 -Mode large-field -MaxFilesPerDirectory 5
 ```
+
+`large-field` is the default and means the public Dutch engine, not the bounded
+legacy oracle. The aggregate fails closed if child reports mix source hashes,
+harness hashes or float semantics, or if any classifiable large-field case was
+omitted from the retained Gacrux input. Use `-Mode legacy` only for explicitly
+named small-field diagnostics; it is never the full-corpus acceptance mode.
 
 The result categories are exact, same-pairs-colour-variant, pairing-deviation,
 engine-no-solution and engine-resource-limit. A deviation is not automatically
