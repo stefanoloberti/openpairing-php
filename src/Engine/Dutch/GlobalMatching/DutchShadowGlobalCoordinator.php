@@ -72,7 +72,6 @@ final readonly class DutchShadowGlobalCoordinator
             if ($he->status !== WeightedMatchingStatus::Optimal) {
                 return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], $realRemaining, null, $timings, $freezeEvents);
             }
-            $selectedMdpIds = $this->selectedMdpIds($he, $graph, $scoreLevel);
             $homogeneousPairs = 0;
             foreach ($he->pairs as $pair) {
                 if ($pair['left'] !== 0 && $pair['right'] !== 0
@@ -81,6 +80,18 @@ final readonly class DutchShadowGlobalCoordinator
                     ++$homogeneousPairs;
                 }
             }
+            [$selectedMdpIds, $mdpMatchRequirements] = $this->selectMdpIds(
+                $he,
+                $state,
+                $graph,
+                $remaining,
+                $scoreLevel,
+                $pabScoreLevel,
+                $c9Applies,
+                $bsn,
+                $timings,
+                $computer,
+            );
 
             // BBP first finalizes the opponents of the HE-selected MDPs one at
             // a time. The rest of the bracket remains available to prove the
@@ -90,7 +101,7 @@ final readonly class DutchShadowGlobalCoordinator
                 $ho = $this->rematch(
                     $state, $graph, $remaining, $remaining, $scoreLevel,
                     $pabScoreLevel, $c9Applies, $bsn, $homogeneousPairs,
-                    'HO-mdp', $timings, $computer, $selectedMdpIds,
+                    'HO-mdp', $timings, $computer, $mdpMatchRequirements,
                 );
                 $pair = $this->pairForPlayer($ho, $mdpId);
                 if ($ho->status !== WeightedMatchingStatus::Optimal || $pair === null) {
@@ -112,6 +123,7 @@ final readonly class DutchShadowGlobalCoordinator
                     $remaining, $frozenPairs, $freezeEvents,
                 );
                 array_shift($selectedMdpIds);
+                unset($mdpMatchRequirements[$mdpId]);
             }
 
             // Only after heterogeneous opponents are final does the current
@@ -127,7 +139,7 @@ final readonly class DutchShadowGlobalCoordinator
                 $remainder = $this->rematch(
                     $state, $graph, $remaining, $remaining, $scoreLevel,
                     $pabScoreLevel, $c9Applies, $hoBsn, $homogeneousPairs,
-                    'HO-remainder', $timings, $computer, [],
+                    'HO-remainder', $timings, $computer, $mdpMatchRequirements,
                 );
                 if ($remainder->status !== WeightedMatchingStatus::Optimal) {
                     return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], $remaining, null, $timings, $freezeEvents);
@@ -193,9 +205,8 @@ final readonly class DutchShadowGlobalCoordinator
      * @param array<int, int> $bsn
      * @param list<DutchBracketTiming> $timings
      * @param-out PersistentWeightedMatchingComputer $computer
-     * @param list<int>|null $selectedMdpIds Null disables the matched-MDP
-     * constraint during HE; an empty list means that no remaining MDP may be
-     * paired in the current bracket.
+     * @param array<int, bool>|null $mdpMatchRequirements Null disables the
+     * matched-MDP constraint; true/false fixes one MDP's current-bracket state.
      */
     private function rematch(
         TournamentState $state,
@@ -210,7 +221,7 @@ final readonly class DutchShadowGlobalCoordinator
         string $phase,
         array &$timings,
         ?PersistentWeightedMatchingComputer &$computer,
-        ?array $selectedMdpIds = null,
+        ?array $mdpMatchRequirements = null,
     ): WeightedMatchingResult {
         $started = hrtime(true);
         $edges = $this->qualityGraphBuilder->edges(
@@ -224,8 +235,8 @@ final readonly class DutchShadowGlobalCoordinator
         if ($pabScoreLevel !== null) {
             $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies);
         }
-        if ($selectedMdpIds !== null) {
-            $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $selectedMdpIds);
+        if ($mdpMatchRequirements !== null) {
+            $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $mdpMatchRequirements);
         }
         $widths = array_values(array_unique(array_map(static fn (WeightedEdge $edge): int => count($edge->weight), $edges)));
         if (count($widths) > 1) {
@@ -263,22 +274,18 @@ final readonly class DutchShadowGlobalCoordinator
      * component, so a zero-violation perfect matching dominates any fallback.
      *
      * @param list<WeightedEdge> $edges
-     * @param list<int> $selectedMdpIds
+     * @param array<int, bool> $mdpMatchRequirements
      * @return list<WeightedEdge>
      */
-    private function constraintWeightedEdges(array $edges, DutchRoundGraph $graph, int $scoreLevel, array $selectedMdpIds): array
+    private function constraintWeightedEdges(array $edges, DutchRoundGraph $graph, int $scoreLevel, array $mdpMatchRequirements): array
     {
-        $selectedMdpSet = array_fill_keys($selectedMdpIds, true);
-        $mdpIds = array_values(array_filter(
-            array_keys($graph->playersById),
-            static fn (int $playerId): bool => $graph->scoreRankByPlayerId[$playerId] > $scoreLevel,
-        ));
+        $mdpIds = array_keys($mdpMatchRequirements);
         usort($mdpIds, static fn (int $left, int $right): int =>
             ($graph->scoreRankByPlayerId[$right] <=> $graph->scoreRankByPlayerId[$left])
             ?: ($graph->playersById[$left]->pairingNumber <=> $graph->playersById[$right]->pairingNumber)
         );
 
-        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $selectedMdpSet, $mdpIds): WeightedEdge {
+        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $mdpMatchRequirements, $mdpIds): WeightedEdge {
             $leftLevel = $graph->scoreRankByPlayerId[$edge->left];
             $rightLevel = $graph->scoreRankByPlayerId[$edge->right];
             $violations = [];
@@ -288,7 +295,7 @@ final readonly class DutchShadowGlobalCoordinator
                     $violations[] = 0;
                     continue;
                 }
-                $mustBeMatchedHere = isset($selectedMdpSet[$playerId]);
+                $mustBeMatchedHere = $mdpMatchRequirements[$playerId];
                 $opponentLevel = $edge->left === $playerId
                     ? $rightLevel
                     : $leftLevel;
@@ -357,6 +364,82 @@ final readonly class DutchShadowGlobalCoordinator
         );
 
         return $mdpIds;
+    }
+
+    /**
+     * BBP first derives how many MDPs from each score group can be paired in
+     * this bracket. It then fixes their identities in BSN order, accepting a
+     * player only when the whole active graph remains matchable.
+     *
+     * @param list<int> $remaining
+     * @param array<int, int> $bsn
+     * @param list<DutchBracketTiming> $timings
+     * @param-out PersistentWeightedMatchingComputer $computer
+     * @return array{list<int>, array<int, bool>}
+     */
+    private function selectMdpIds(
+        WeightedMatchingResult $stable,
+        TournamentState $state,
+        DutchRoundGraph $graph,
+        array $remaining,
+        int $scoreLevel,
+        ?int $pabScoreLevel,
+        bool $c9Applies,
+        array $bsn,
+        array &$timings,
+        PersistentWeightedMatchingComputer &$computer,
+    ): array {
+        $targetByLevel = [];
+        foreach ($this->selectedMdpIds($stable, $graph, $scoreLevel) as $playerId) {
+            $level = $graph->scoreRankByPlayerId[$playerId];
+            $targetByLevel[$level] = ($targetByLevel[$level] ?? 0) + 1;
+        }
+        $candidatesByLevel = [];
+        foreach ($remaining as $playerId) {
+            $level = $graph->scoreRankByPlayerId[$playerId];
+            if ($level > $scoreLevel) {
+                $candidatesByLevel[$level][] = $playerId;
+            }
+        }
+        krsort($candidatesByLevel, SORT_NUMERIC);
+        $requirements = [];
+        $selected = [];
+        foreach ($candidatesByLevel as $level => $candidates) {
+            usort($candidates, static fn (int $left, int $right): int =>
+                ($bsn[$left] <=> $bsn[$right])
+                ?: ($graph->playersById[$left]->pairingNumber <=> $graph->playersById[$right]->pairingNumber)
+            );
+            $needed = $targetByLevel[$level] ?? 0;
+            foreach ($candidates as $index => $playerId) {
+                $left = count($candidates) - $index;
+                $choose = false;
+                if ($needed > 0 && $left <= $needed) {
+                    $choose = true;
+                } elseif ($needed > 0) {
+                    $trialRequirements = $requirements;
+                    $trialRequirements[$playerId] = true;
+                    $trial = $this->rematch(
+                        $state, $graph, $remaining, $remaining, $scoreLevel,
+                        $pabScoreLevel, $c9Applies, $bsn, 0,
+                        'HE-select', $timings, $computer, $trialRequirements,
+                    );
+                    $pair = $this->pairForPlayer($trial, $playerId);
+                    $choose = $trial->status === WeightedMatchingStatus::Optimal
+                        && $pair !== null
+                        && $graph->scoreRankByPlayerId[$pair['left'] === $playerId ? $pair['right'] : $pair['left']] === $scoreLevel;
+                }
+                $requirements[$playerId] = $choose;
+                if ($choose) {
+                    $selected[] = $playerId;
+                    --$needed;
+                }
+            }
+            if ($needed !== 0) {
+                throw new \LogicException(sprintf('Could not preserve %d selected MDPs at score level %d.', $targetByLevel[$level] ?? 0, $level));
+            }
+        }
+
+        return [$selected, $requirements];
     }
 
     /** @return array{left: int, right: int}|null */
