@@ -58,6 +58,13 @@ composer check
 composer benchmark
 ```
 
+For production use, install PHP 8.3+ and enable `ext-gmp`; the engine selects
+the native backend automatically. Without GMP it remains correct and uses the
+bit-identical pure-PHP 30-bit-limb fallback, which is substantially slower on
+large fields. A prebuilt runtime archive contains the optimized Composer
+autoload files and can be unpacked and invoked directly with
+`php bin/openpairing.php`.
+
 Oracle tests require the ignored local upstream checkouts plus Python/WSL and
 are intentionally separate: `composer test-oracles`. Ordinary
 `composer check` verifies production code offline without them.

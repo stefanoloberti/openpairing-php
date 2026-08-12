@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0-rc1 - 2026-08-13
+
+First downloadable release candidate. The public Dutch engine is exact on the
+frozen 7/30/50/80-player gates, the runtime supports GMP with a bit-identical
+pure-PHP fallback, and pairing plus individual standings are available through
+the library and offline CLI. The full 122,008-tournament pairing replay remains
+open, so this release is not presented as a verified 1.0 or as a substitute for
+arbiter review.
+
 ## Unreleased
 
 ### Added
