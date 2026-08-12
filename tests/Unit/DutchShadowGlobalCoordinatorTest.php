@@ -145,6 +145,27 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
         self::assertSame(0, $beforePabBracket[0]->weight[12]);
     }
 
+    public function testPabSelectionCarriesRepeatedDownfloatScorePositionBelowItsScoreGroup(): void
+    {
+        $repeat = new Player(1, 1, 'Repeat', 2200, '', '', '', true, Score::fromDecimal('2.5'), floatHistory: ['down', 'none']);
+        $fresh = new Player(2, 2, 'Fresh', 2190, '', '', '', true, Score::fromDecimal('2.5'), floatHistory: ['none', 'none']);
+        $lower = new Player(3, 3, 'Lower', 2180, '', '', '', true, Score::fromDecimal('1.5'));
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 5, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$repeat, $fresh, $lower],
+        );
+        $graph = (new DutchRoundGraphBuilder())->build($state);
+        $edges = [new WeightedEdge(1, 3, array_fill(0, 24, 0))];
+        $method = new \ReflectionMethod(DutchShadowGlobalCoordinator::class, 'pabSelectionWeightedEdges');
+        /** @var list<WeightedEdge> $weighted */
+        $weighted = $method->invoke(new DutchShadowGlobalCoordinator(), $edges, $state, $graph, 0, 1, false, 1);
+
+        // With max PSD 1, QC20 starts at base position 16; two PAB prefix
+        // fields move the canonical bit to flattened position 18.
+        self::assertSame(1, $weighted[0]->weight[18]);
+        self::assertSame(0, $weighted[0]->weight[14]);
+    }
+
     public function testMatchedMdpConstraintUsesOnlyUnsignedIncidentBits(): void
     {
         $players = [$this->player(1, 2), $this->player(2, 1), $this->player(3, 1)];

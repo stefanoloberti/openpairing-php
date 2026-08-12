@@ -364,8 +364,10 @@ final readonly class DutchShadowGlobalCoordinator
 
         $qc14Offset = 8 + (2 * $maxPsd);
         $qc16Offset = $qc14Offset + 2;
+        $qc18Offset = 12 + (2 * $maxPsd);
+        $qc20Offset = $qc18Offset + (2 * $maxPsd);
 
-        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $scoreLevel, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset): WeightedEdge {
+        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $scoreLevel, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset, $qc18Offset, $qc20Offset, $maxPsd): WeightedEdge {
             $selection = 0;
             $c9 = 0;
             $weight = $edge->weight;
@@ -392,6 +394,22 @@ final readonly class DutchShadowGlobalCoordinator
                         : 'none';
                     $weight[$qc14Offset] += $last === 'down' ? 1 : 0;
                     $weight[$qc16Offset] += $previous === 'down' ? 1 : 0;
+                }
+                if ($candidate && $scoreLevel < $pabScoreLevel) {
+                    // Once the real unmatched PAB is carried below its own
+                    // score group, BBP C18/C20 minimize the score position of
+                    // repeated downfloaters. The unmatched vertex owns no
+                    // edge, so preserve the same criterion by rewarding each
+                    // matched eligible endpoint at its canonical PSD bit.
+                    $position = $maxPsd - ($pabScoreLevel - $scoreLevel);
+                    if ($position >= 0 && $position < $maxPsd) {
+                        $last = $player->floatHistory[array_key_last($player->floatHistory)] ?? 'none';
+                        $previous = count($player->floatHistory) > 1
+                            ? $player->floatHistory[count($player->floatHistory) - 2]
+                            : 'none';
+                        $weight[$qc18Offset + $position] += $last === 'down' ? 1 : 0;
+                        $weight[$qc20Offset + $position] += $previous === 'down' ? 1 : 0;
+                    }
                 }
             }
 
