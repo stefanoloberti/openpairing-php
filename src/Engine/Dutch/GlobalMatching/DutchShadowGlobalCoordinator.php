@@ -85,11 +85,11 @@ final readonly class DutchShadowGlobalCoordinator
             // a time. The rest of the bracket remains available to prove the
             // quality and completability of the suffix after every freeze.
             while ($selectedMdpIds !== []) {
-                $mdpId = array_shift($selectedMdpIds);
+                $mdpId = $selectedMdpIds[0];
                 $ho = $this->rematch(
                     $state, $graph, $remaining, $remaining, $scoreLevel,
                     $pabScoreLevel, $c9Applies, $bsn, $homogeneousPairs,
-                    'HO-mdp', $timings, $computer, [$mdpId],
+                    'HO-mdp', $timings, $computer, $selectedMdpIds,
                 );
                 $pair = $this->pairForPlayer($ho, $mdpId);
                 if ($ho->status !== WeightedMatchingStatus::Optimal || $pair === null) {
@@ -103,7 +103,8 @@ final readonly class DutchShadowGlobalCoordinator
                     $pair, $bracketIndex, $scoreLevel, $computer,
                     $remaining, $frozenPairs, $freezeEvents,
                 );
-                $bsn = array_filter($bsn, static fn (int $_bsn, int $id): bool => in_array($id, $remaining, true), ARRAY_FILTER_USE_BOTH);
+                array_shift($selectedMdpIds);
+                $bsn = $this->resequenceBsn($bsn, $remaining);
             }
 
             // Only after heterogeneous opponents are final does the current
@@ -113,7 +114,7 @@ final readonly class DutchShadowGlobalCoordinator
                 $remainder = $this->rematch(
                     $state, $graph, $remaining, $remaining, $scoreLevel,
                     $pabScoreLevel, $c9Applies, $bsn, $homogeneousPairs,
-                    'HO-remainder', $timings, $computer,
+                    'HO-remainder', $timings, $computer, [],
                 );
                 if ($remainder->status !== WeightedMatchingStatus::Optimal) {
                     return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], $remaining, null, $timings, $freezeEvents);
@@ -160,7 +161,9 @@ final readonly class DutchShadowGlobalCoordinator
      * @param array<int, int> $bsn
      * @param list<DutchBracketTiming> $timings
      * @param-out PersistentWeightedMatchingComputer $computer
-     * @param list<int> $selectedMdpIds
+     * @param list<int>|null $selectedMdpIds Null disables the matched-MDP
+     * constraint during HE; an empty list means that no remaining MDP may be
+     * paired in the current bracket.
      */
     private function rematch(
         TournamentState $state,
@@ -175,7 +178,7 @@ final readonly class DutchShadowGlobalCoordinator
         string $phase,
         array &$timings,
         ?PersistentWeightedMatchingComputer &$computer,
-        array $selectedMdpIds = [],
+        ?array $selectedMdpIds = null,
     ): WeightedMatchingResult {
         $started = hrtime(true);
         $edges = $this->qualityGraphBuilder->edges(
@@ -189,7 +192,23 @@ final readonly class DutchShadowGlobalCoordinator
         if ($pabScoreLevel !== null) {
             $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies);
         }
-        $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $selectedMdpIds);
+        if ($selectedMdpIds !== null) {
+            $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $selectedMdpIds);
+        }
+        $widths = array_values(array_unique(array_map(static fn (WeightedEdge $edge): int => count($edge->weight), $edges)));
+        if (count($widths) > 1) {
+            $shapes = array_map(
+                static fn (WeightedEdge $edge): string => sprintf('%d-%d:%d', $edge->left, $edge->right, count($edge->weight)),
+                $edges,
+            );
+            throw new \LogicException(sprintf(
+                'Dutch %s score level %d produced non-uniform edge widths: %s (%s).',
+                $phase,
+                $scoreLevel,
+                implode(',', $widths),
+                implode(' ', $shapes),
+            ));
+        }
         if ($computer === null) {
             $computer = new PersistentWeightedMatchingComputer($remaining, $edges, $this->matcher);
         } else {
@@ -223,17 +242,44 @@ final readonly class DutchShadowGlobalCoordinator
             $violation = 0;
             $leftLevel = $graph->scoreRankByPlayerId[$edge->left];
             $rightLevel = $graph->scoreRankByPlayerId[$edge->right];
-            foreach ([[$edge->left, $rightLevel], [$edge->right, $leftLevel]] as [$playerId, $opponentLevel]) {
-                if (!isset($selectedMdpSet[$playerId])) {
+            foreach ([[$edge->left, $leftLevel, $rightLevel], [$edge->right, $rightLevel, $leftLevel]] as [$playerId, $playerLevel, $opponentLevel]) {
+                if ($playerLevel <= $scoreLevel) {
                     continue;
                 }
-                if ($opponentLevel !== $scoreLevel) {
+                $mustBeMatchedHere = isset($selectedMdpSet[$playerId]);
+                $isMatchedHere = $opponentLevel === $scoreLevel;
+                if ($mustBeMatchedHere !== $isMatchedHere) {
                     ++$violation;
                 }
             }
 
             return new WeightedEdge($edge->left, $edge->right, [-$violation, ...$edge->weight]);
         }, $edges);
+    }
+
+    /**
+     * Frozen players leave the bracket sequence without leaving holes. Keep
+     * the inherited relative order, then assign the current bracket BSNs.
+     *
+     * @param array<int, int> $bsnByPlayerId
+     * @param list<int> $remainingPlayerIds
+     * @return array<int, int>
+     */
+    private function resequenceBsn(array $bsnByPlayerId, array $remainingPlayerIds): array
+    {
+        $remaining = array_fill_keys($remainingPlayerIds, true);
+        $ordered = array_filter(
+            $bsnByPlayerId,
+            static fn (int $_bsn, int $playerId): bool => isset($remaining[$playerId]),
+            ARRAY_FILTER_USE_BOTH,
+        );
+        asort($ordered, SORT_NUMERIC);
+        $result = [];
+        foreach (array_keys($ordered) as $index => $playerId) {
+            $result[$playerId] = $index + 1;
+        }
+
+        return $result;
     }
 
     /**

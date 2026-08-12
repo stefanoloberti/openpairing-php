@@ -63,10 +63,15 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
 
         self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
         self::assertContains('quality-HO-mdp', $phases);
-        self::assertLessThan(
-            array_search('quality-HO-remainder', $phases, true),
-            array_search('quality-HO-mdp', $phases, true),
+        $mdpPosition = array_search('quality-HO-mdp', $phases, true);
+        self::assertIsInt($mdpPosition);
+        $remainderPosition = array_search(
+            'quality-HO-remainder',
+            array_slice($phases, $mdpPosition + 1, null, true),
+            true,
         );
+        self::assertIsInt($remainderPosition);
+        self::assertLessThan($remainderPosition, $mdpPosition);
     }
 
     public function testReweightingPreservesTheInducedActiveGraphTopology(): void
