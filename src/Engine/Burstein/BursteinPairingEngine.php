@@ -113,7 +113,7 @@ final class BursteinPairingEngine implements PairingEngineInterface
                     qualityVector: $this->qualityVector($solution),
                     trace: $this->renumberTrace($trace),
                     algorithmVersion: self::VERSION,
-                    floatAssignments: $this->floatAssignments($solution->pairs),
+                    floatAssignments: $this->floatAssignments($solution->pairs, $bye),
                 );
                 if ((new PairingResultValidator())->validate($state, $result) !== []) {
                     throw new InvalidTournamentState('engine.internal_result', 'The generated result violates structural invariants.');
@@ -653,7 +653,7 @@ final class BursteinPairingEngine implements PairingEngineInterface
      * @param list<array{left: Player, right: Player}> $pairs
      * @return list<FloatAssignment>
      */
-    private function floatAssignments(array $pairs): array
+    private function floatAssignments(array $pairs, ?Player $bye): array
     {
         $assignments = [];
         foreach ($pairs as $pair) {
@@ -665,6 +665,9 @@ final class BursteinPairingEngine implements PairingEngineInterface
             $lower = $higher === $pair['left'] ? $pair['right'] : $pair['left'];
             $assignments[] = new FloatAssignment($higher->id, FloatDirection::Down);
             $assignments[] = new FloatAssignment($lower->id, FloatDirection::Up);
+        }
+        if ($bye !== null) {
+            $assignments[] = new FloatAssignment($bye->id, FloatDirection::Down);
         }
         usort($assignments, static fn (FloatAssignment $left, FloatAssignment $right): int => $left->playerId <=> $right->playerId);
 

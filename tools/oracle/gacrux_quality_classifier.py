@@ -200,6 +200,7 @@ def main() -> int:
         "sourceReport": str(report_path),
         "sourceRuntimeIdentity": report.get("runtimeIdentity"),
         "sourceCorpusIdentity": report.get("corpusIdentity"),
+        "sourceHistoricalFloatSemantics": report.get("historicalFloatSemantics"),
         "upstream": str(upstream),
         "counts": counts,
         "results": results,

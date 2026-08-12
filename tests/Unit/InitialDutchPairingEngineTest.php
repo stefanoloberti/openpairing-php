@@ -41,6 +41,12 @@ final class InitialDutchPairingEngineTest extends TestCase
             array_map(static fn ($table): array => [$table->whitePlayerId, $table->blackPlayerId], $first->tables),
         );
         self::assertSame([], (new PairingResultValidator())->validate($state, $first));
+        if ($bye !== null) {
+            self::assertSame(
+                [['playerId' => $bye, 'direction' => 'down']],
+                array_map(static fn ($assignment): array => $assignment->toArray(), $first->floatAssignments),
+            );
+        }
     }
 
     public function testFailsClosedForLaterRounds(): void

@@ -19,11 +19,11 @@ pairing history, not parsing.
 The first attested epoch-2 replay on the frozen 100x7 sample has corpus manifest
 `e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44`:
 
-- bounded legacy: 453/500 exact;
-- persistent shadow: 487/500 exact, zero no-matchings;
-- shadow buckets: 448 both exact, 39 progress, 5 regressions, 6 same
+- bounded legacy: 455/500 exact;
+- persistent shadow: 489/500 exact, zero no-matchings;
+- shadow buckets: 450 both exact, 39 progress, 5 regressions, 4 same
   deviations and 2 divergent deviations;
-- all 13 non-exact shadow rounds are Gacrux-inferior.
+- all 11 non-exact shadow rounds are Gacrux-inferior.
 
 The pairing gate remains open. The accepted small-field target is 500/500 with
 zero regressions and zero unclassified oracle-required results.

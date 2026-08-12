@@ -7,11 +7,11 @@ On 2026-08-12 the replay entered semantic epoch
 no float, so every earlier pairing checkpoint and QC distribution (including
 74, 59, legacy 441 and shadow 425/427/444/466) asked both engines the wrong
 question. Those numbers below are retained as experiment history only and are
-not gate evidence. The epoch-2 frozen baseline is legacy 453/500 and shadow
-487/500 with zero no-matchings; all 13 shadow residuals are Gacrux-inferior.
+not gate evidence. The epoch-2 frozen baseline is legacy 455/500 and shadow
+489/500 with zero no-matchings; all 11 shadow residuals are Gacrux-inferior.
 
 This is a fourth empirically disproved plausible conclusion: the motors did not
-improve when legacy moved from 441 to 453; the reconstructed input became
+improve when legacy moved from 441 first to 453 and then 455; the reconstructed input became
 semantically correct. Every future report must attest both source/corpus hashes
 and `historicalFloatSemantics`.
 

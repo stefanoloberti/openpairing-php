@@ -42,7 +42,7 @@ final readonly class DutchShadowGlobalCoordinator
 
         $preliminaryBye = $preliminary->unmatchedPlayerIds[0] ?? null;
         $pabScoreLevel = $preliminaryBye === null ? null : $graph->scoreRankByPlayerId[$preliminaryBye];
-        $c9Applies = $preliminaryBye !== null;
+        $c9Applies = $this->singleDownfloaterIsByeAssignee($preliminary, $graph);
         $remaining = $graph->vertices;
         if ($preliminaryBye !== null) {
             $remaining[] = 0; // virtual PAB vertex
@@ -297,6 +297,27 @@ final readonly class DutchShadowGlobalCoordinator
         }
 
         return $pairs;
+    }
+
+    private function singleDownfloaterIsByeAssignee(DutchPreliminaryRoundResult $preliminary, DutchRoundGraph $graph): bool
+    {
+        $bye = $preliminary->unmatchedPlayerIds[0] ?? null;
+        if ($bye === null) {
+            return false;
+        }
+        $topLevel = max($graph->scoreRankByPlayerId ?: [0]);
+        if ($graph->scoreRankByPlayerId[$bye] < $topLevel) {
+            return false;
+        }
+        foreach ($preliminary->pairs as $pair) {
+            $leftTop = $graph->scoreRankByPlayerId[$pair['left']] === $topLevel;
+            $rightTop = $graph->scoreRankByPlayerId[$pair['right']] === $topLevel;
+            if ($leftTop !== $rightTop) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

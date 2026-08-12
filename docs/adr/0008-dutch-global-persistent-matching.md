@@ -5,8 +5,8 @@ Status: accepted design; persistent state computer implemented, Dutch lifecycle 
 Baseline epoch: `fide-dutch-float/2-pab-downfloat`. Every replay figure below
 that predates this marker (74, 59, legacy 441 and shadow 425/427/444/466 plus
 their QC distributions) is retained only as non-gating debugging history. The
-correct frozen baseline is legacy 453/500 and shadow 487/500 with zero
-no-matchings. All 13 shadow residuals are independently Gacrux-inferior.
+correct frozen baseline is legacy 455/500 and shadow 489/500 with zero
+no-matchings. All 11 shadow residuals are independently Gacrux-inferior.
 
 The polynomial matcher must not be inserted independently into the current
 `solveGroups()` loop. Independent bracket optima cannot compare PAB choices or
@@ -62,7 +62,7 @@ passes the frozen gates.
 
 Acceptance proceeds without changing the corpus:
 
-1. 500/500 exact on the frozen 100x7 sample, with no regression of the 453
+1. 500/500 exact on the frozen 100x7 sample, with no regression of the 455
    epoch-2 legacy-exact rounds and no unclassified shadow bucket.
 2. No resource-limit results in the existing 30/50/80-player samples, with all
    deviations classified rather than treated as variants.
