@@ -159,6 +159,10 @@ def main() -> int:
     parser.add_argument("--output", required=True)
     parser.add_argument("--root", help="Override the corpus root recorded by a report produced on another host.")
     parser.add_argument(
+        "--allow-empty", action="store_true",
+        help="Permit a diagnostic selection that evaluates zero cases.",
+    )
+    parser.add_argument(
         "--sample-set", choices=["deviations", "preliminary-bye", "shadow-oracle", "shadow-regressions"], default="deviations",
         help="Classify production deviations, preliminary PAB counterfactuals, mandatory shadow cases or shadow regressions.",
     )
@@ -196,6 +200,12 @@ def main() -> int:
         result = {"file": sample["file"], "round": sample["round"], **result}
         results.append(result)
         counts[result["category"]] = counts.get(result["category"], 0) + 1
+    if not results and not args.allow_empty:
+        print(
+            f"diagnostic selected zero cases from {sample_key}; use --allow-empty only when zero is intentional",
+            file=sys.stderr,
+        )
+        return 4
     output = {
         "schema": "openpairing.gacrux-quality-classification/2",
         "sampleSet": args.sample_set,

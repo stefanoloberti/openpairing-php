@@ -141,6 +141,38 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
         self::assertSame(0, $weighted[0]->weight[14]);
     }
 
+    public function testMatchedMdpConstraintUsesOnlyUnsignedIncidentBits(): void
+    {
+        $players = [$this->player(1, 2), $this->player(2, 1), $this->player(3, 1)];
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, $players,
+        );
+        $graph = (new DutchRoundGraphBuilder())->build($state);
+        $edges = [
+            new WeightedEdge(1, 2, [0, 0, 0]),
+            new WeightedEdge(1, 3, [0, 0, 0]),
+            new WeightedEdge(2, 3, [0, 0, 0]),
+        ];
+        $method = new \ReflectionMethod(DutchShadowGlobalCoordinator::class, 'constraintWeightedEdges');
+        /** @var list<WeightedEdge> $weighted */
+        $weighted = $method->invoke(
+            new DutchShadowGlobalCoordinator(),
+            $edges,
+            $graph,
+            0,
+            [1 => true],
+            2,
+            null,
+            [1 => 1, 2 => 2, 3 => 3],
+        );
+
+        self::assertSame([1, 1, 0], array_map(static fn (WeightedEdge $edge): int => $edge->weight[2], $weighted));
+        foreach ($weighted as $edge) {
+            self::assertTrue(in_array($edge->weight[2], [0, 1], true));
+        }
+    }
+
     private function player(int $id, int $score): Player
     {
         return new Player($id, $id, 'P'.$id, 2200 - $id, '', '', '', true, Score::fromDecimal($score.'.0'));

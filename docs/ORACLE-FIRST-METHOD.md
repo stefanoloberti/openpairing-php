@@ -24,6 +24,24 @@ missing matched/remainder/exchange lifecycle, not a valid rules interpretation.
 Mechanism claims therefore require the normative text or pinned primary source
 in addition to output parity.
 
+A diagnostic must also prove that it ran. Oracle/classifier reports record the
+number of evaluated cases and fail when that count is zero unless the operator
+passes an explicit `--allow-empty`. A silent empty selection is infrastructure,
+not evidence; this is the same failure class as stale autoload and an oracle
+subprocess that returns no requested round.
+
+Repeated failure of different encodings for the same concept raises the level
+of suspicion from arithmetic to semantics. The matched-MDP incident-edge bug
+was not repairable by another penalty formula because an MDP whose opponent is
+outside the current score level is not selected in that bracket. Primary-source
+definitions are rechecked before a further weight experiment.
+
+The MDP incident bit is currently 0/1, never -1/0/+1. Canonical Dutch QC and HE
+fields may legitimately be signed; `LexicographicWeightEncoder` translates
+each observed field by its minimum before unsigned packing. A dedicated unit
+test proves that this translation preserves signed ordering without a borrow
+into a more significant criterion.
+
 The later lifecycle port supplied the missing state and made conditional C9 a
 real improvement rather than compensation: the frozen replay moved from
 490/500 to 494/500 with zero no-matchings. Conversely, a partial MDP-identity

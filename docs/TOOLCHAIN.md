@@ -23,3 +23,8 @@ the pre-replay gate and additionally executes the 1,000-graph static and
 sequential differentials, the 300-vertex capacity test and development-oracle
 tests. An official replay must use a committed tree and record its commit plus
 runtime source hash.
+
+`tools/commit.ps1 -Message "..."` commits an already staged, otherwise clean
+tree only after `composer check` succeeds. `-Wip` marks an intentionally
+incomplete branch checkpoint, but the wrapper still requires the rapid gate to
+be green. Official replays never use WIP or dirty trees.

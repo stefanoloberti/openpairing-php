@@ -7,6 +7,7 @@ import argparse
 from collections import Counter
 import json
 from pathlib import Path
+import sys
 from typing import Any
 
 
@@ -21,6 +22,10 @@ def main() -> int:
     parser.add_argument("--report", required=True)
     parser.add_argument("--classification", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--allow-empty", action="store_true",
+        help="Permit an audit that evaluates zero classified cases.",
+    )
     args = parser.parse_args()
 
     report = read_json(Path(args.report))
@@ -49,6 +54,13 @@ def main() -> int:
         else:
             relation = "freeze-after-difference"
         rows.append({**result, "firstFreezeBracketIndex": freeze_index, "relation": relation})
+
+    if not rows and not args.allow_empty:
+        print(
+            "diagnostic audited zero cases; use --allow-empty only when zero is intentional",
+            file=sys.stderr,
+        )
+        return 4
 
     counts = Counter(row["relation"] for row in rows)
     criteria = Counter((row.get("firstDifference") or {}).get("criterion", "none") for row in rows)

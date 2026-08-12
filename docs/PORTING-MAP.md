@@ -19,3 +19,30 @@ The matching files identified above are modified semantic derivatives of BBP
 Pairings under Apache-2.0 and carry file-level provenance comments. No MIT
 Gacrux source-level translation has been incorporated; Gacrux remains an
 offline development oracle.
+
+## Dutch weight-field map
+
+`LexicographicWeightEncoder` accepts signed PHP components, derives each
+dimension's observed minimum and maximum, and packs `component - minimum` into
+an unsigned `DynamicUInt` field sized for the maximum matching sum. Equal
+cardinality gives every candidate the same offset sum, so signed QC values
+cannot borrow from a preceding field. Cardinality is encoded above all quality
+fields and the deterministic mate vector below all of them.
+
+| BBP concept | PHP component | Lexicographic position | Input domain |
+|---|---|---|---|
+| PAB eligibility/completion | `pabSelectionWeightedEdges::$selection` | Prefix before QC6 | non-negative endpoint complement |
+| Conditional C9 PAB rank | `pabSelectionWeightedEdges::$c9` | After PAB eligibility, before QC6 | non-negative unplayed-game count |
+| C6-C21 | `DutchQualityVector` QC6-QC21 slice | Canonical order in `DutchQualityVector::ORDER` | signed integer penalties/rewards |
+| Finalized matched MDP identities | `constraintWeightedEdges::$violations` | After QC21, before HE1 | bit, exactly 0 or 1 per MDP |
+| Selected MDP opponent order | `constraintWeightedEdges::$opponentOrder` | After matched-MDP bits, before HE1 | dense rank 0 through current BSN width |
+| HE1-HE2 and HO1-HO5 | tail of `DutchQualityVector` | After MDP lifecycle controls | signed integer/vector criteria |
+| Deterministic matching choice | encoder mate vector | Below every semantic field | unsigned partner digits |
+
+There are two deliberately separate notions around BSN. The bracket sequence
+number is normative identity used by HE/HO and remains stable while selected
+MDP opponents are frozen. Once those opponents are final, `hoBsn` is a newly
+defined dense sequence of the actual remainder residents. Vector array offsets
+are allocation indices derived from those BSNs; they never renumber the
+normative bracket sequence in place. Commit `326212f` removed the earlier
+destructive resequencing that violated this distinction.

@@ -19,8 +19,9 @@ require $root.'/vendor/autoload.php';
 require $root.'/tools/TrfCorpusCompatibility.php';
 
 [$reportPath, $corpusRoot, $executable, $outputPath] = array_pad(array_slice($argv, 1), 4, null);
+$allowEmpty = in_array('--allow-empty', array_slice($argv, 5), true);
 if ($reportPath === null || $corpusRoot === null || $executable === null || $outputPath === null) {
-    fwrite(STDERR, "Usage: compare_bbp_shadow_residuals.php REPORT CORPUS_ROOT BBP_EXECUTABLE OUTPUT\n");
+    fwrite(STDERR, "Usage: compare_bbp_shadow_residuals.php REPORT CORPUS_ROOT BBP_EXECUTABLE OUTPUT [--allow-empty]\n");
     exit(2);
 }
 $report = json_decode((string) file_get_contents($reportPath), true, 64, JSON_THROW_ON_ERROR);
@@ -62,6 +63,10 @@ foreach ($report['shadowSamples'] ?? [] as $sample) {
         'shadow' => $sample['candidate'],
         'stderr' => $bbp->stderr,
     ];
+}
+if ($results === [] && !$allowEmpty) {
+    fwrite(STDERR, "Diagnostic selected zero BBP residuals; use --allow-empty only when zero is intentional.\n");
+    exit(4);
 }
 $reportGitCommit = getenv('OPENPAIRING_REPORT_GIT_COMMIT');
 if (!is_string($reportGitCommit) || preg_match('/^[0-9a-f]{40}$/D', $reportGitCommit) !== 1) {

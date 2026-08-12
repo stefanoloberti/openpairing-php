@@ -42,6 +42,24 @@ final class LexicographicWeightEncoderTest extends TestCase
         );
     }
 
+    public function testSignedComponentsAreOffsetWithoutChangingTheirOrder(): void
+    {
+        $problem = (new LexicographicWeightEncoder())->encode([1, 2, 3, 4], [
+            new WeightedEdge(1, 2, [0, -1]),
+            new WeightedEdge(3, 4, [0, -1]),
+            new WeightedEdge(1, 3, [0, 0]),
+            new WeightedEdge(2, 4, [0, 0]),
+        ]);
+        $weights = $this->weights($problem->edges);
+
+        // Every signed dimension is translated by its observed minimum before
+        // unsigned packing, so it cannot borrow from a preceding field.
+        self::assertGreaterThan(
+            0,
+            $weights['1-3']->add($weights['2-4'])->compare($weights['1-2']->add($weights['3-4'])),
+        );
+    }
+
     public function testPairingNumberTieBreakIsIndependentOfInputOrder(): void
     {
         $edges = [
