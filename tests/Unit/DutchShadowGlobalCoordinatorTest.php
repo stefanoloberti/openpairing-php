@@ -38,12 +38,35 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
         self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
         self::assertSame('preliminary', $result->timings[0]->phase);
         self::assertSame(
-            ['preliminary', 'quality-HE', 'quality-HO', 'quality-HE', 'quality-HO', 'quality-HE', 'quality-HO'],
+            ['preliminary', 'quality-HE', 'quality-HO-remainder', 'quality-HE', 'quality-HO-remainder', 'quality-HE'],
             array_map(static fn ($timing): string => $timing->phase, $result->timings),
         );
         foreach ($result->timings as $timing) {
             self::assertGreaterThanOrEqual(0.0, $timing->milliseconds);
         }
+    }
+
+    public function testFinalizesMdpOpponentBeforeBuildingRemainder(): void
+    {
+        $players = [
+            $this->player(1, 2),
+            $this->player(2, 1), $this->player(3, 1), $this->player(4, 1),
+            $this->player(5, 0), $this->player(6, 0),
+        ];
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, $players,
+        );
+
+        $result = (new DutchShadowGlobalCoordinator())->match($state);
+        $phases = array_map(static fn ($timing): string => $timing->phase, $result->timings);
+
+        self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
+        self::assertContains('quality-HO-mdp', $phases);
+        self::assertLessThan(
+            array_search('quality-HO-remainder', $phases, true),
+            array_search('quality-HO-mdp', $phases, true),
+        );
     }
 
     public function testReweightingPreservesTheInducedActiveGraphTopology(): void
