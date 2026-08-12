@@ -251,10 +251,15 @@ final readonly class DutchShadowGlobalCoordinator
             $rightLevel = $graph->scoreRankByPlayerId[$edge->right];
             $violations = [];
             foreach ($mdpIds as $playerId) {
+                $incident = $edge->left === $playerId || $edge->right === $playerId;
+                if (!$incident) {
+                    $violations[] = 0;
+                    continue;
+                }
                 $mustBeMatchedHere = isset($selectedMdpSet[$playerId]);
                 $opponentLevel = $edge->left === $playerId
                     ? $rightLevel
-                    : ($edge->right === $playerId ? $leftLevel : null);
+                    : $leftLevel;
                 $isMatchedHere = $opponentLevel === $scoreLevel;
                 $violations[] = $mustBeMatchedHere !== $isMatchedHere ? -1 : 0;
             }
