@@ -22,6 +22,13 @@ test ! -e "$target"
 
 mkdir -p "$target"
 cp -a "$source_release"/. "$target"/
+if test -e "$engine"; then
+    case "$engine" in
+        "$target"/engines/openpairing-php) ;;
+        *) echo "Unsafe inherited engine target: $engine" >&2; exit 2 ;;
+    esac
+    rm -rf -- "$engine"
+fi
 mkdir -p "$engine"
 tar -xzf "$archive" -C "$engine"
 
