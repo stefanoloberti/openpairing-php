@@ -161,7 +161,9 @@ final readonly class BbpOracleAdapter
         return [
             'upstreamCommit' => '8f9e3c5ffdc4d7a08a33d31c6fb49b4e7acef4d5',
             'upstream' => 'https://github.com/BieremaBoyzProgramming/bbpPairings',
-            'executableSha256' => '1dff7412b71cb1e2acba99c483b30cae9dfe1a3ac935697c9820970daa7a4421',
+            'executableSha256' => is_file($this->executable)
+                ? (hash_file('sha256', $this->executable) ?: 'unreadable')
+                : 'missing',
         ];
     }
 
