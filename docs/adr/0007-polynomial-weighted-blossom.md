@@ -17,9 +17,15 @@ is never below 128 bits. Two high guard bits preserve the upstream arithmetic
 precondition. Lexicographic vectors and a deterministic pairing-number mate
 vector are packed without cross-field carry.
 
-Correctness gates are exact equality with `ExactWeightedGeneralMatcher` on
-1,000 seeded non-bipartite graphs, targeted odd-cycle fixtures, input-order
-invariance, PHPStan at maximum level and capacity tests at 80 and 300 vertices.
+The first correctness gate used exact equality with
+`ExactWeightedGeneralMatcher` on 1,000 seeded graphs, targeted odd-cycle
+fixtures and input-order invariance. It passed while two bugs remained: delta1
+could terminate a maximum-cardinality stage early and a cached `bestEdge` could
+survive topology changes. The accepted strengthened gate adds 1,000 sparse
+sequences of match, freeze and reweight, comparing every mutation with a fresh
+Blossom and the exhaustive optimum. Those sequential tests exposed both bugs.
+PHPStan at maximum level and capacity tests at 80 and 300 vertices complete the
+gate.
 The 300-vertex complete-graph result proves removal of the former architectural
 limit, not a latency promise: PHP 8.3.6 in the inspected WSL environment used
 approximately 54.1 seconds and 279 MiB.

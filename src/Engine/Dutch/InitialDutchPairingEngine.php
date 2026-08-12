@@ -7,6 +7,8 @@ namespace OpenPairing\Engine\Dutch;
 use OpenPairing\Application\PairingEngineInterface;
 use OpenPairing\Diagnostics\Diagnostic;
 use OpenPairing\Domain\Colour\Colour;
+use OpenPairing\Domain\Pairing\FloatAssignment;
+use OpenPairing\Domain\Pairing\FloatDirection;
 use OpenPairing\Domain\Pairing\PairingResult;
 use OpenPairing\Domain\Pairing\PairingTable;
 use OpenPairing\Domain\Tournament\InvalidTournamentState;
@@ -69,6 +71,9 @@ final class InitialDutchPairingEngine implements PairingEngineInterface
             qualityVector: [],
             trace: $trace,
             algorithmVersion: self::VERSION,
+            floatAssignments: $byePlayerId === null
+                ? []
+                : [new FloatAssignment($byePlayerId, FloatDirection::Down)],
         );
     }
 

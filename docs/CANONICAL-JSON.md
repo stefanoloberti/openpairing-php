@@ -23,9 +23,11 @@ the virtual component.
 
 `PairingResult` is emitted as JSON by the CLI and includes
 `floatAssignments`, a deterministic list of `{playerId, direction}` entries
-for every cross-scoregroup table. Same-scoregroup players and the PAB are not
-listed there; their next historical float value is respectively `none` and
-the PAB handling selected by the tournament-state updater.
+for every cross-scoregroup table. A pairing-allocated bye is explicitly listed
+as `down`, including in the initial round; same-scoregroup players are
+not listed and receive `none`. Live state updaters must consume this list. For
+arbitrary entered results, `DutchFloatClassifier` is the canonical shared rule:
+an unplayed allocation worth more than the configured loss score is `down`.
 
 Optional v1 fields added for lossless supported TRF exchange are tournament
 name; loss, zero-point-bye, PAB and unknown-result scores; and player sex,

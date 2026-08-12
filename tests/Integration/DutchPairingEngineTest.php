@@ -64,8 +64,14 @@ final class DutchPairingEngineTest extends TestCase
         self::assertCount(2, $result->tables);
         self::assertSame([], $result->violations);
         self::assertStringContainsString('1 downfloater', $result->trace[1]['detail']);
-        self::assertCount(2, $result->floatAssignments);
-        self::assertSame(['down', 'up'], array_map(static fn ($assignment): string => $assignment->direction->value, $result->floatAssignments));
+        self::assertCount(3, $result->floatAssignments);
+        self::assertSame(
+            'down',
+            array_values(array_filter(
+                $result->floatAssignments,
+                static fn ($assignment): bool => $assignment->playerId === 5,
+            ))[0]->direction->value,
+        );
     }
 
     public function testReturnsExplicitNoSolutionWithoutPartialPairing(): void

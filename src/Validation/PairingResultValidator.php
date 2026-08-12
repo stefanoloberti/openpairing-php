@@ -88,6 +88,10 @@ final class PairingResultValidator
             }
         }
 
+        if ($result->byePlayerId !== null) {
+            $expectedFloats[$result->byePlayerId] = 'down';
+        }
+
         /** @var array<int, 'up'|'down'> $reportedFloats */
         $reportedFloats = [];
         foreach ($result->floatAssignments as $assignment) {
@@ -102,7 +106,7 @@ final class PairingResultValidator
         ksort($expectedFloats);
         ksort($reportedFloats);
         if ($reportedFloats !== $expectedFloats) {
-            $violations[] = new Diagnostic('float.mismatch', 'Float assignments do not match cross-scoregroup pairings.', 'error', [
+            $violations[] = new Diagnostic('float.mismatch', 'Float assignments do not match cross-scoregroup pairings and the PAB.', 'error', [
                 'expectedCount' => count($expectedFloats),
                 'reportedCount' => count($reportedFloats),
                 'expected' => $this->floatSignature($expectedFloats),

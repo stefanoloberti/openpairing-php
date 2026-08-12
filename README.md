@@ -38,8 +38,9 @@ development oracles.
 ## Explicit limits
 
 The production bracket engines remain bounded to 250,000 search nodes and
-8,192 candidates. A polynomial Blossom core now exists and passes its isolated
-correctness gate, but it does not establish Dutch or BBP parity until the full
+8,192 candidates. A polynomial Blossom core now exists and passes its
+strengthened sparse sequential freeze/reweight correctness gate, but it does
+not establish Dutch or BBP parity until the full
 C6-C21/HE/HO weight function is integrated and the historical replay passes.
 Combinatorially difficult production brackets therefore still return a
 machine-readable resource-limit result without a partial pairing. Canonical JSON supports virtual points and

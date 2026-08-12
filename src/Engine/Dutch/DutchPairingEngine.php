@@ -96,7 +96,7 @@ final class DutchPairingEngine implements PairingEngineInterface
                     qualityVector: $solution->quality,
                     trace: $trace,
                     algorithmVersion: self::VERSION,
-                    floatAssignments: $this->floatAssignments($solution->pairs),
+                    floatAssignments: $this->floatAssignments($solution->pairs, $bye),
                 );
                 $violations = (new PairingResultValidator())->validate($state, $result);
                 if ($violations !== []) {
@@ -595,7 +595,7 @@ final class DutchPairingEngine implements PairingEngineInterface
      * @param list<array{left: Player, right: Player}> $pairs
      * @return list<FloatAssignment>
      */
-    private function floatAssignments(array $pairs): array
+    private function floatAssignments(array $pairs, ?Player $bye): array
     {
         $assignments = [];
         foreach ($pairs as $pair) {
@@ -607,6 +607,9 @@ final class DutchPairingEngine implements PairingEngineInterface
             $lower = $higher === $pair['left'] ? $pair['right'] : $pair['left'];
             $assignments[] = new FloatAssignment($higher->id, FloatDirection::Down);
             $assignments[] = new FloatAssignment($lower->id, FloatDirection::Up);
+        }
+        if ($bye !== null) {
+            $assignments[] = new FloatAssignment($bye->id, FloatDirection::Down);
         }
         usort($assignments, static fn (FloatAssignment $left, FloatAssignment $right): int => $left->playerId <=> $right->playerId);
 

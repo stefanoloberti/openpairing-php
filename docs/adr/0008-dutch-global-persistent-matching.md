@@ -2,9 +2,15 @@
 
 Status: accepted design; persistent state computer implemented, Dutch lifecycle pending.
 
+Baseline epoch: `fide-dutch-float/2-pab-downfloat`. Every replay figure below
+that predates this marker (74, 59, legacy 441 and shadow 425/427/444/466 plus
+their QC distributions) is retained only as non-gating debugging history. The
+correct frozen baseline is legacy 453/500 and shadow 487/500 with zero
+no-matchings. All 13 shadow residuals are independently Gacrux-inferior.
+
 The polynomial matcher must not be inserted independently into the current
 `solveGroups()` loop. Independent bracket optima cannot compare PAB choices or
-float chains and therefore cannot close the frozen 59-deviation gate.
+float chains and therefore cannot close the frozen epoch-2 gate.
 
 The inspected BBP Pairings implementation at commit
 `8f9e3c5ffdc4d7a08a33d31c6fb49b4e7acef4d5`,
@@ -56,8 +62,8 @@ passes the frozen gates.
 
 Acceptance proceeds without changing the corpus:
 
-1. 500/500 exact on the frozen 100x7 sample; the residual distribution
-   27/11/8/5/4/2/1/1 must become zero with no regression of the 441 exact rounds.
+1. 500/500 exact on the frozen 100x7 sample, with no regression of the 453
+   epoch-2 legacy-exact rounds and no unclassified shadow bucket.
 2. No resource-limit results in the existing 30/50/80-player samples, with all
    deviations classified rather than treated as variants.
 3. Full replay of all 122,008 previously decodable non-accelerated tournaments.
@@ -130,12 +136,14 @@ code only and does not alter the 441/500 production path.
 
 `PersistentWeightedMatchingComputer` now supplies the mutation contract needed
 by the coordinator. Its initial policy recomputes the optimum from scratch after
-every freeze/reweight; it does not claim warm-start incrementality. A 1,000
-sequence differential over random sparse graphs checks it against both fresh
-Blossom and the exhaustive matcher. During this gate two latent Blossom defects
-were fixed: delta1 incorrectly terminated maximum-cardinality stages and cached
-best edges survived blossom topology changes. The bounded production enumerator
-remains the permanent small-n CI oracle even after a future switchover.
+every freeze/reweight; it does not claim warm-start incrementality. The original
+1,000 static/complete-graph differential passed despite two latent defects and
+was therefore insufficient. The strengthened gate uses 1,000 random sparse
+freeze/reweight sequences against both fresh Blossom and the exhaustive matcher;
+it exposed and fixed delta1 prematurely terminating maximum-cardinality stages
+and cached best edges surviving blossom topology changes. Confidence rests on
+this sequential sparse gate. The bounded production enumerator remains the
+permanent small-n CI oracle even after a future switchover.
 
 The shadow coordinator now instantiates that computer once and preserves the
 induced active-graph topology across HE/HO reweights; former edge filters are

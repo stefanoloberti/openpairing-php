@@ -89,7 +89,7 @@ final class DeterministicTournamentSimulator
                 $colours[] = $update['colour'];
                 $floatHistory[] = $floatById[$player->id] ?? 'none';
             } else {
-                $floatHistory[] = 'down';
+                $floatHistory[] = $floatById[$player->id] ?? 'none';
                 $receivedPab = true;
             }
             $results = $player->results;

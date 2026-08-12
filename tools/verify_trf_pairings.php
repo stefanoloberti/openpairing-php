@@ -14,7 +14,7 @@ use OpenPairing\Diagnostics\ShadowOraclePolicy;
 use OpenPairing\Diagnostics\ShadowPairingComparison;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Engine\Dutch\DutchRules;
-use OpenPairing\Engine\Dutch\HistoricalFloatClassifier;
+use OpenPairing\Engine\Dutch\DutchFloatClassifier;
 use OpenPairing\Engine\Dutch\GlobalMatching\DutchPreliminaryRoundMatcher;
 use OpenPairing\Engine\Dutch\GlobalMatching\DutchShadowGlobalCoordinator;
 use OpenPairing\Engine\Matching\WeightedMatchingStatus;
@@ -311,7 +311,8 @@ try {
     exit(4);
 }
 echo json_encode([
-    'schema' => 'openpairing.trf-historical-pairing-verification/2',
+    'schema' => 'openpairing.trf-historical-pairing-verification/3',
+    'historicalFloatSemantics' => DutchFloatClassifier::VERSION,
     'root' => $root,
     'limit' => $limit,
     'preliminaryGlobalAudit' => $auditPreliminaryGlobal,
@@ -352,7 +353,7 @@ function scoresEnteringRounds(TournamentState $state, DutchRules $rules): array
 /** @param array<int, array<int, Score>> $scoresEntering */
 function historicalState(TournamentState $full, int $round, array $scoresEntering, DutchRules $rules): TournamentState
 {
-    $floatClassifier = new HistoricalFloatClassifier($rules);
+    $floatClassifier = new DutchFloatClassifier($rules);
     $players = [];
     foreach ($full->players as $player) {
         $previous = array_values(array_filter($player->results, static fn (array $result): bool => $result['round'] < $round));

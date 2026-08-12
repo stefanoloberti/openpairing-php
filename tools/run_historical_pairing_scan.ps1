@@ -42,6 +42,10 @@ $identities = @($reports | ForEach-Object { $_.runtimeIdentity.sourceTreeSha256 
 if ($identities.Count -ne 1 -or [string]::IsNullOrWhiteSpace($identities[0])) {
     throw "Historical reports do not share exactly one runtime source-tree identity."
 }
+$floatSemantics = @($reports | ForEach-Object { $_.historicalFloatSemantics } | Sort-Object -Unique)
+if ($floatSemantics.Count -ne 1 -or [string]::IsNullOrWhiteSpace($floatSemantics[0])) {
+    throw "Historical reports do not share exactly one historical-float semantic identity."
+}
 $corpusManifest = [System.Security.Cryptography.IncrementalHash]::CreateHash([System.Security.Cryptography.HashAlgorithmName]::SHA256)
 foreach ($report in @($reports | Sort-Object root)) {
     $entry = [System.Text.Encoding]::UTF8.GetBytes(($report.root.Replace('\', '/') + "`0" + $report.corpusIdentity.manifestSha256 + "`n"))
@@ -59,6 +63,7 @@ foreach ($name in @('filesSeen', 'decoded', 'tournamentsVerified', 'tournamentsA
     directories = $reports.Count
     failedDirectories = $failures
     runtimeIdentity = $reports[0].runtimeIdentity
+    historicalFloatSemantics = $floatSemantics[0]
     corpusIdentity = [ordered]@{
         schema = 'openpairing.corpus-aggregate-identity/1'
         directoryCount = $reports.Count

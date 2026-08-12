@@ -1,5 +1,20 @@
 # Oracle-first development method
 
+## Semantic baseline reset
+
+On 2026-08-12 the replay entered semantic epoch
+`fide-dutch-float/2-pab-downfloat`. The historical harness had encoded a PAB as
+no float, so every earlier pairing checkpoint and QC distribution (including
+74, 59, legacy 441 and shadow 425/427/444/466) asked both engines the wrong
+question. Those numbers below are retained as experiment history only and are
+not gate evidence. The epoch-2 frozen baseline is legacy 453/500 and shadow
+487/500 with zero no-matchings; all 13 shadow residuals are Gacrux-inferior.
+
+This is a fourth empirically disproved plausible conclusion: the motors did not
+improve when legacy moved from 441 to 453; the reconstructed input became
+semantically correct. Every future report must attest both source/corpus hashes
+and `historicalFloatSemantics`.
+
 OpenPairing treats a plausible explanation as a hypothesis, not a pairing
 verdict. Before changing Dutch selection logic, the smallest isolating
 counterfactual is sent to the independent Gacrux checker and the report records
@@ -7,7 +22,7 @@ the code and corpus identities. A first-difference criterion identifies where
 quality first becomes measurably worse; it does **not** identify the component
 that caused the earlier selection error.
 
-This rule has prevented three reasonable but false conclusions:
+This rule has prevented four reasonable but false conclusions:
 
 1. Eleven historical deviations initially looked like legitimate equivalent
    variants. Full Gacrux classification proved all eleven inferior.
@@ -17,6 +32,9 @@ This rule has prevented three reasonable but false conclusions:
 3. The 55 within-score-group PAB deviations appeared to be a conditional-C9
    defect. Counterfactual classification disproved that theory: first
    differences span QC12, QC9, QC14, HE2, QC17, QN8, QC16 and QC15.
+4. Pairing replay treated a PAB as no historical float. Re-reading a minimized
+   TRF against Gacrux proved it is a downfloat for the next round and invalidated
+   every prior pairing baseline.
 
 Consequences for implementation:
 
@@ -74,6 +92,12 @@ recomputes Blossom from scratch after each mutation. One thousand random sparse
 freeze/reweight sequences must match a fresh Blossom exactly and an independent
 exhaustive solver in status and optimum weight. A warm-start implementation is
 only a future optimization and must pass this same test unchanged.
+
+The original static 1,000-graph Blossom differential had passed while still
+containing the maximum-cardinality delta1 termination bug and stale `bestEdge`
+cache bug. That gate was insufficient. Both defects were exposed only by the
+strengthened sparse-topology and sequential freeze/reweight tests. Confidence
+in the matcher rests on this strengthened gate, not the original static run.
 
 A direct but incomplete port of BBP's sequential MDP-opponent selection is a
 negative control. Freezing each selected MDP pair without simultaneously

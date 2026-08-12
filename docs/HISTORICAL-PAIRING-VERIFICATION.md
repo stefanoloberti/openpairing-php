@@ -1,5 +1,33 @@
 # Historical pairing verification
 
+## Pairing baseline epoch 2 (2026-08-12)
+
+The pairing replay baseline was reset after finding that the harness recorded a
+PAB as no historical float. Under FIDE Dutch semantics a PAB, and any unplayed
+scoring allocation worth more than the configured loss score, is a downfloat
+for the following round. Reports now use schema
+`openpairing.trf-historical-pairing-verification/3` and attest
+`historicalFloatSemantics: fide-dutch-float/2-pab-downfloat`.
+
+All pairing figures produced before this semantic epoch are invalid as gate
+evidence, including 426/74, 441/59, shadow 425/427/444/466 and every associated
+criterion distribution. They remain in this document only as debugging
+provenance and must not be compared with epoch-2 results. Parser decoding and
+TRF round-trip counts are unaffected because the defect was in reconstructed
+pairing history, not parsing.
+
+The first attested epoch-2 replay on the frozen 100x7 sample has corpus manifest
+`e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44`:
+
+- bounded legacy: 453/500 exact;
+- persistent shadow: 487/500 exact, zero no-matchings;
+- shadow buckets: 448 both exact, 39 progress, 5 regressions, 6 same
+  deviations and 2 divergent deviations;
+- all 13 non-exact shadow rounds are Gacrux-inferior.
+
+The pairing gate remains open. The accepted small-field target is 500/500 with
+zero regressions and zero unclassified oracle-required results.
+
 Parser validation is not pairing-engine verification. The historical verifier
 reconstructs the tournament state immediately before every recorded round,
 runs the native PHP Dutch engine, then compares opponents, colours and PAB with
@@ -55,7 +83,10 @@ was absent; it is covered by a regression test. It also demonstrated that the
 current exhaustive bracket enumerator reaches its 250,000-node/8,192-candidate
 limit frequently from 30 players upward. This is the present gate blocker.
 
-The 100-tournament, seven-player sample contains 500 reconstructed rounds: 426
+### Pre-epoch-2 diagnostic history (invalid as gate evidence)
+
+The following figures were measured with the old PAB-float semantics. The
+100-tournament, seven-player sample contains 500 reconstructed rounds: 426
 are exact and 74 deviate. Every deviation was analyzed with the official local
 Gacrux `pairingchecker.py -c -a -p`; all 74 are inferior to its deterministic
 optimum. First differences are QC14 27, HO1 12, QC12 10, QN8 10, QC6 8, QC8 5,
@@ -74,8 +105,9 @@ global round/PAB quality comparison. Evidence is in
 `build/historical-n5-100-he-ho.json` and
 `build/gacrux-quality-n5-100-he-ho.json` when generated in a working tree.
 
-The independent polynomial Blossom core now passes its isolated correctness
-gate, but Dutch is intentionally not wired to it yet. Rule-weight completion
+The independent polynomial Blossom core passes the strengthened sequential and
+sparse-topology correctness gate, but Dutch is intentionally not wired to it
+yet. Rule-weight completion
 and matcher integration are both required before the full corpus replay.
 
 ## Preliminary whole-round graph audit
