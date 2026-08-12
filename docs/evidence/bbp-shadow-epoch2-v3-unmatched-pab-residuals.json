@@ -1,0 +1,629 @@
+{
+    "schema": "openpairing.bbp-shadow-residual-comparison/1",
+    "sourceGitCommit": "17a58933bf30e9414a9011d62b15fdf7d25c89d9",
+    "sourceRuntimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/tmp/openpairing-validation/releases/4102092e22e2c7e3",
+        "autoloadPsr4Roots": [
+            "/tmp/openpairing-validation/releases/4102092e22e2c7e3/src"
+        ],
+        "expectedEnginePath": "/tmp/openpairing-validation/releases/4102092e22e2c7e3/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/tmp/openpairing-validation/releases/4102092e22e2c7e3/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.brackets/1",
+        "engineSha256": "e32a44603c382717a339d13ec9fdb0774ead055dfc3311d3a4ce79f27ee23d6e",
+        "sourceTreeSha256": "df6762e59afc5ae709a73c9288c4c84481a72d1775da38db7138da3bc0c900bd",
+        "sourceFileCount": 77
+    },
+    "sourceCorpusIdentity": {
+        "schema": "openpairing.corpus-identity/1",
+        "selection": "relative-path-ordinal-v1",
+        "requestedLimit": 0,
+        "fileCount": 100,
+        "totalBytes": 123100,
+        "manifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44"
+    },
+    "sourceHistoricalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+    "bbp": {
+        "commit": "8f9e3c5ffdc4d7a08a33d31c6fb49b4e7acef4d5",
+        "executableSha256": "ab94794a3f9c1fbaabc34eeea1d7f71207684dec9dc2adc106d86a4f6eba1103",
+        "role": "consultative; Gacrux corpus remains the acceptance gate"
+    },
+    "counts": {
+        "bbp-reference-exact": 10,
+        "bbp-shadow-exact": 0,
+        "bbp-third-result": 0,
+        "infrastructure-error": 0
+    },
+    "results": [
+        {
+            "file": "T0000.trf",
+            "round": 4,
+            "shadowCode": "shadow.divergent-deviation",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 1,
+                        "blackPlayerId": 4
+                    },
+                    {
+                        "whitePlayerId": 5,
+                        "blackPlayerId": 7
+                    },
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 2
+                    }
+                ],
+                "bye": 3
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 4
+                    },
+                    {
+                        "white": 6,
+                        "black": 2
+                    },
+                    {
+                        "white": 5,
+                        "black": 7
+                    }
+                ],
+                "bye": 3
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 4
+                    },
+                    {
+                        "white": 6,
+                        "black": 2
+                    },
+                    {
+                        "white": 3,
+                        "black": 7
+                    }
+                ],
+                "bye": 5
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0010.trf",
+            "round": 2,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 2
+                    },
+                    {
+                        "whitePlayerId": 3,
+                        "blackPlayerId": 1
+                    },
+                    {
+                        "whitePlayerId": 4,
+                        "blackPlayerId": 7
+                    }
+                ],
+                "bye": 5
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 6,
+                        "black": 2
+                    },
+                    {
+                        "white": 4,
+                        "black": 7
+                    }
+                ],
+                "bye": 5
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 6,
+                        "black": 2
+                    },
+                    {
+                        "white": 4,
+                        "black": 5
+                    }
+                ],
+                "bye": 7
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0025.trf",
+            "round": 4,
+            "shadowCode": "shadow.divergent-deviation",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 7,
+                        "blackPlayerId": 4
+                    },
+                    {
+                        "whitePlayerId": 3,
+                        "blackPlayerId": 1
+                    },
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 5
+                    }
+                ],
+                "bye": 2
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 7,
+                        "black": 4
+                    },
+                    {
+                        "white": 6,
+                        "black": 5
+                    }
+                ],
+                "bye": 2
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 6,
+                        "black": 1
+                    },
+                    {
+                        "white": 3,
+                        "black": 2
+                    },
+                    {
+                        "white": 7,
+                        "black": 4
+                    }
+                ],
+                "bye": 5
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0032.trf",
+            "round": 4,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 5
+                    },
+                    {
+                        "whitePlayerId": 4,
+                        "blackPlayerId": 2
+                    },
+                    {
+                        "whitePlayerId": 3,
+                        "blackPlayerId": 1
+                    }
+                ],
+                "bye": 7
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 4,
+                        "black": 2
+                    },
+                    {
+                        "white": 6,
+                        "black": 5
+                    }
+                ],
+                "bye": 7
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 7,
+                        "black": 1
+                    },
+                    {
+                        "white": 4,
+                        "black": 2
+                    },
+                    {
+                        "white": 6,
+                        "black": 5
+                    }
+                ],
+                "bye": 3
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0056.trf",
+            "round": 2,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 7,
+                        "blackPlayerId": 1
+                    },
+                    {
+                        "whitePlayerId": 3,
+                        "blackPlayerId": 2
+                    },
+                    {
+                        "whitePlayerId": 4,
+                        "blackPlayerId": 6
+                    }
+                ],
+                "bye": 5
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 7,
+                        "black": 1
+                    },
+                    {
+                        "white": 3,
+                        "black": 2
+                    },
+                    {
+                        "white": 4,
+                        "black": 6
+                    }
+                ],
+                "bye": 5
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 7,
+                        "black": 1
+                    },
+                    {
+                        "white": 3,
+                        "black": 2
+                    },
+                    {
+                        "white": 4,
+                        "black": 5
+                    }
+                ],
+                "bye": 6
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0064.trf",
+            "round": 3,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 1,
+                        "blackPlayerId": 2
+                    },
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 4
+                    },
+                    {
+                        "whitePlayerId": 7,
+                        "blackPlayerId": 3
+                    }
+                ],
+                "bye": 5
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 2
+                    },
+                    {
+                        "white": 7,
+                        "black": 3
+                    },
+                    {
+                        "white": 6,
+                        "black": 4
+                    }
+                ],
+                "bye": 5
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 2
+                    },
+                    {
+                        "white": 6,
+                        "black": 4
+                    },
+                    {
+                        "white": 7,
+                        "black": 5
+                    }
+                ],
+                "bye": 3
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0074.trf",
+            "round": 3,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 1,
+                        "blackPlayerId": 4
+                    },
+                    {
+                        "whitePlayerId": 2,
+                        "blackPlayerId": 3
+                    },
+                    {
+                        "whitePlayerId": 5,
+                        "blackPlayerId": 7
+                    }
+                ],
+                "bye": 6
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 4
+                    },
+                    {
+                        "white": 2,
+                        "black": 3
+                    },
+                    {
+                        "white": 5,
+                        "black": 7
+                    }
+                ],
+                "bye": 6
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 4
+                    },
+                    {
+                        "white": 2,
+                        "black": 3
+                    },
+                    {
+                        "white": 6,
+                        "black": 5
+                    }
+                ],
+                "bye": 7
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0076.trf",
+            "round": 5,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 2
+                    },
+                    {
+                        "whitePlayerId": 1,
+                        "blackPlayerId": 5
+                    },
+                    {
+                        "whitePlayerId": 7,
+                        "blackPlayerId": 4
+                    }
+                ],
+                "bye": 3
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 1,
+                        "black": 5
+                    },
+                    {
+                        "white": 6,
+                        "black": 2
+                    },
+                    {
+                        "white": 7,
+                        "black": 4
+                    }
+                ],
+                "bye": 3
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 6,
+                        "black": 2
+                    },
+                    {
+                        "white": 3,
+                        "black": 5
+                    },
+                    {
+                        "white": 7,
+                        "black": 4
+                    }
+                ],
+                "bye": 1
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0087.trf",
+            "round": 5,
+            "shadowCode": "shadow.same-deviation",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 7,
+                        "blackPlayerId": 6
+                    },
+                    {
+                        "whitePlayerId": 5,
+                        "blackPlayerId": 1
+                    },
+                    {
+                        "whitePlayerId": 2,
+                        "blackPlayerId": 4
+                    }
+                ],
+                "bye": 3
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 5,
+                        "black": 1
+                    },
+                    {
+                        "white": 2,
+                        "black": 4
+                    },
+                    {
+                        "white": 7,
+                        "black": 6
+                    }
+                ],
+                "bye": 3
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 5,
+                        "black": 1
+                    },
+                    {
+                        "white": 2,
+                        "black": 4
+                    },
+                    {
+                        "white": 7,
+                        "black": 3
+                    }
+                ],
+                "bye": 6
+            },
+            "stderr": ""
+        },
+        {
+            "file": "T0093.trf",
+            "round": 4,
+            "shadowCode": "shadow.candidate-regression",
+            "category": "bbp-reference-exact",
+            "bbpStatus": "valid",
+            "bbp": {
+                "pairs": [
+                    {
+                        "whitePlayerId": 6,
+                        "blackPlayerId": 4
+                    },
+                    {
+                        "whitePlayerId": 3,
+                        "blackPlayerId": 1
+                    },
+                    {
+                        "whitePlayerId": 7,
+                        "blackPlayerId": 2
+                    }
+                ],
+                "bye": 5
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 7,
+                        "black": 2
+                    },
+                    {
+                        "white": 6,
+                        "black": 4
+                    }
+                ],
+                "bye": 5
+            },
+            "shadow": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 6,
+                        "black": 4
+                    },
+                    {
+                        "white": 7,
+                        "black": 5
+                    }
+                ],
+                "bye": 2
+            },
+            "stderr": ""
+        }
+    ]
+}
