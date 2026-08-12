@@ -133,7 +133,7 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame([], $quality->components['QC20']);
     }
 
-    public function testCarriedMdpMatchedInCurrentBracketKeepsRepeatedDownfloatPositionPenalty(): void
+    public function testCarriedMdpMatchedInCurrentBracketHasNoRepeatedDownfloatPositionPenalty(): void
     {
         $mdp = new Player(
             1, 1, 'MDP', 2200, '', '', '', true,
@@ -152,8 +152,8 @@ final class DutchQualityModelTest extends TestCase
 
         self::assertSame(0, $quality->components['QC14']);
         self::assertSame(0, $quality->components['QC16']);
-        self::assertSame([1, 0], $quality->components['QC18']);
-        self::assertSame([1, 0], $quality->components['QC20']);
+        self::assertSame([0, 0], $quality->components['QC18']);
+        self::assertSame([0, 0], $quality->components['QC20']);
     }
 
     public function testCarriedMdpContinuingBelowBracketRecordsRepeatedDownfloatPosition(): void
