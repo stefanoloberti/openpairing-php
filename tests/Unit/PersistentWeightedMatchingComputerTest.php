@@ -13,6 +13,11 @@ use PHPUnit\Framework\TestCase;
 
 final class PersistentWeightedMatchingComputerTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        putenv('OPENPAIRING_BIGINT_BACKEND');
+    }
+
     #[Group('stress')]
     public function testOneThousandFreezeAndReweightSequencesMatchFreshAndExhaustiveSolvers(): void
     {
@@ -56,6 +61,22 @@ final class PersistentWeightedMatchingComputerTest extends TestCase
         $computer->reweight([new WeightedEdge(1, 2, [2])]);
     }
 
+    #[Group('stress')]
+    public function testGmpAndLimbBackendsProduceIdenticalSequentialStates(): void
+    {
+        if (!extension_loaded('gmp')) {
+            self::markTestSkipped('ext-gmp is unavailable.');
+        }
+
+        for ($seed = 1; $seed <= 1_000; ++$seed) {
+            self::assertSame(
+                $this->backendTrace($seed, 'limbs'),
+                $this->backendTrace($seed, 'gmp'),
+                'backend trace seed '.$seed,
+            );
+        }
+    }
+
     /**
      * @param list<int> $vertices
      * @return list<WeightedEdge>
@@ -90,5 +111,40 @@ final class PersistentWeightedMatchingComputerTest extends TestCase
             $edge->right,
             [mt_rand(-20, 20), mt_rand(-10, 10), -($edge->left * 100 + $edge->right)],
         ), $edges);
+    }
+
+    /** @return list<array<string, mixed>> */
+    private function backendTrace(int $seed, string $backend): array
+    {
+        putenv('OPENPAIRING_BIGINT_BACKEND='.$backend);
+        mt_srand($seed);
+        $vertices = range(1, 4 + 2 * ($seed % 3));
+        $computer = new PersistentWeightedMatchingComputer($vertices, $this->randomGraphEdges($vertices));
+        $trace = [];
+        while ($computer->vertices() !== []) {
+            $matching = $computer->match();
+            $trace[] = [
+                'vertices' => $computer->vertices(),
+                'edges' => array_map(
+                    static fn (WeightedEdge $edge): array => [$edge->left, $edge->right, $edge->weight],
+                    $computer->edges(),
+                ),
+                'status' => $matching->status->value,
+                'pairs' => $matching->pairs,
+                'unmatched' => $matching->unmatched,
+                'weight' => $matching->totalWeight,
+                'operations' => $matching->statesExplored,
+            ];
+            if ($matching->pairs === []) {
+                break;
+            }
+            $freeze = $matching->pairs[0];
+            $computer->freeze($freeze['left'], $freeze['right']);
+            if ($computer->vertices() !== []) {
+                $computer->reweight($this->reweightedEdges($computer->edges()));
+            }
+        }
+
+        return $trace;
     }
 }

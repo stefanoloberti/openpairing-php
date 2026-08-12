@@ -1,6 +1,16 @@
 # Oracle-first development method
 
-## Semantic baseline reset
+## Current status (2026-08-12)
+
+The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
+`epoch-2-dutch-500`. One 80-player tournament has completed 15/15 exact, but
+medium-field classification and the full 122,008-tournament replay remain
+open. The current blocker is performance: the limbs baseline takes 344.667
+seconds for that tournament. The active optimization protocol changes one
+factor per checkpoint and requires limb/GMP same-seed parity, the frozen gate,
+and the 80-player differential before retention.
+
+## Semantic baseline reset (historical epoch narrative)
 
 On 2026-08-12 the replay entered semantic epoch
 `fide-dutch-float/2-pab-downfloat`. The historical harness had encoded a PAB as

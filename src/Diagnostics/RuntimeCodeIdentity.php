@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OpenPairing\Diagnostics;
 
+use OpenPairing\Engine\Matching\DynamicUInt;
+
 /** Proves which checkout Composer actually resolves before a corpus verdict. */
 final class RuntimeCodeIdentity
 {
@@ -17,7 +19,9 @@ final class RuntimeCodeIdentity
      *   engineVersion: string,
      *   engineSha256: string,
      *   sourceTreeSha256: string,
-     *   sourceFileCount: int
+     *   sourceFileCount: int,
+     *   arithmeticBackend: string,
+     *   gmpAvailable: bool
      * }
      */
     public static function capture(string $projectRoot, object $loader, string $engineClass, string $engineVersion): array
@@ -84,6 +88,8 @@ final class RuntimeCodeIdentity
             'engineSha256' => $engineHash,
             'sourceTreeSha256' => $treeHash,
             'sourceFileCount' => $fileCount,
+            'arithmeticBackend' => DynamicUInt::backendName(),
+            'gmpAvailable' => extension_loaded('gmp'),
         ];
     }
 

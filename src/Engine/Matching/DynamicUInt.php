@@ -22,12 +22,34 @@ final readonly class DynamicUInt
     private const LIMB_BASE = 1 << self::LIMB_BITS;
     private const LIMB_MASK = self::LIMB_BASE - 1;
 
-    /** @param list<int> $limbs Little-endian; validated by all factories. */
-    private function __construct(private array $limbs)
+    /**
+     * @param list<int> $limbs Little-endian; validated by all factories.
+     * @param \GMP|null $native GMP value when the native backend is selected.
+     * @param \GMP|null $nativeMask GMP value equal to 2^bitWidth - 1.
+     */
+    private function __construct(
+        private array $limbs,
+        private ?\GMP $native = null,
+        private ?\GMP $nativeMask = null,
+        private int $nativeBitWidth = 0,
+    )
     {
-        if ($limbs === []) {
-            throw new \InvalidArgumentException('DynamicUInt requires at least one limb.');
+        if (($limbs === []) === ($native === null)) {
+            throw new \InvalidArgumentException('DynamicUInt requires exactly one arithmetic representation.');
         }
+    }
+
+    public static function backendName(): string
+    {
+        $requested = strtolower((string) (getenv('OPENPAIRING_BIGINT_BACKEND') ?: 'auto'));
+        if (!in_array($requested, ['auto', 'limbs', 'gmp'], true)) {
+            throw new \InvalidArgumentException('OPENPAIRING_BIGINT_BACKEND must be auto, limbs or gmp.');
+        }
+        if ($requested === 'gmp' && !extension_loaded('gmp')) {
+            throw new \RuntimeException('The GMP big-integer backend was requested but ext-gmp is unavailable.');
+        }
+
+        return $requested === 'limbs' || !extension_loaded('gmp') ? 'limbs-30' : 'gmp';
     }
 
     public static function zero(int $bitWidth = 128): self
@@ -36,8 +58,15 @@ final readonly class DynamicUInt
             throw new \InvalidArgumentException('DynamicUInt bit width must be positive.');
         }
 
+        $effectiveWidth = intdiv($bitWidth + self::LIMB_BITS - 1, self::LIMB_BITS) * self::LIMB_BITS;
+        if (self::backendName() === 'gmp') {
+            $mask = gmp_sub(gmp_pow(2, $effectiveWidth), 1);
+
+            return new self([], gmp_init(0), $mask, $effectiveWidth);
+        }
+
         /** @var non-empty-list<int> $limbs */
-        $limbs = array_fill(0, intdiv($bitWidth + self::LIMB_BITS - 1, self::LIMB_BITS), 0);
+        $limbs = array_fill(0, intdiv($effectiveWidth, self::LIMB_BITS), 0);
 
         return new self($limbs);
     }
@@ -48,6 +77,14 @@ final readonly class DynamicUInt
             throw new \InvalidArgumentException('DynamicUInt cannot be constructed from a negative integer.');
         }
         $result = self::zero($bitWidth);
+        if ($result->native !== null) {
+            $native = gmp_init($value);
+            if (gmp_cmp($native, $result->nativeMask()) > 0) {
+                throw new \OverflowException('Integer does not fit the requested DynamicUInt width.');
+            }
+
+            return new self([], $native, $result->nativeMask(), $result->nativeBitWidth);
+        }
         $limbs = $result->limbs;
         for ($index = 0; $index < count($limbs) && $value !== 0; ++$index) {
             $limbs[$index] = $value & self::LIMB_MASK;
@@ -62,11 +99,14 @@ final readonly class DynamicUInt
 
     public function bitWidth(): int
     {
-        return count($this->limbs) * self::LIMB_BITS;
+        return $this->native !== null ? $this->nativeBitWidth : count($this->limbs) * self::LIMB_BITS;
     }
 
     public function isZero(): bool
     {
+        if ($this->native !== null) {
+            return gmp_cmp($this->native, 0) === 0;
+        }
         foreach ($this->limbs as $limb) {
             if ($limb !== 0) {
                 return false;
@@ -79,6 +119,9 @@ final readonly class DynamicUInt
     public function compare(self $other): int
     {
         $this->assertSameWidth($other);
+        if ($this->native !== null) {
+            return gmp_cmp($this->native, $other->nativeValue());
+        }
         for ($index = count($this->limbs) - 1; $index >= 0; --$index) {
             if ($this->limbs[$index] !== $other->limbs[$index]) {
                 return $this->limbs[$index] <=> $other->limbs[$index];
@@ -91,6 +134,9 @@ final readonly class DynamicUInt
     public function add(self $other): self
     {
         $this->assertSameWidth($other);
+        if ($this->native !== null) {
+            return $this->fromNative(gmp_and(gmp_add($this->native, $other->nativeValue()), $this->nativeMask()));
+        }
         $result = [];
         $carry = 0;
         foreach ($this->limbs as $index => $limb) {
@@ -110,6 +156,14 @@ final readonly class DynamicUInt
     public function subtract(self $other): self
     {
         $this->assertSameWidth($other);
+        if ($this->native !== null) {
+            $difference = gmp_sub($this->native, $other->nativeValue());
+            if (gmp_cmp($difference, 0) < 0) {
+                $difference = gmp_add($difference, gmp_add($this->nativeMask(), 1));
+            }
+
+            return $this->fromNative(gmp_and($difference, $this->nativeMask()));
+        }
         $result = [];
         $borrow = 0;
         foreach ($this->limbs as $index => $limb) {
@@ -130,6 +184,13 @@ final readonly class DynamicUInt
     {
         if ($bits < 0) {
             return $this->shiftRight(-$bits);
+        }
+        if ($this->native !== null) {
+            if ($bits >= $this->nativeBitWidth) {
+                return $this->fromNative(gmp_init(0));
+            }
+
+            return $this->fromNative(gmp_and(gmp_mul($this->native, gmp_pow(2, $bits)), $this->nativeMask()));
         }
         $limbShift = intdiv($bits, self::LIMB_BITS);
         $bitShift = $bits % self::LIMB_BITS;
@@ -155,6 +216,13 @@ final readonly class DynamicUInt
         if ($bits < 0) {
             return $this->shiftLeft(-$bits);
         }
+        if ($this->native !== null) {
+            if ($bits >= $this->nativeBitWidth) {
+                return $this->fromNative(gmp_init(0));
+            }
+
+            return $this->fromNative(gmp_div_q($this->native, gmp_pow(2, $bits)));
+        }
         $limbShift = intdiv($bits, self::LIMB_BITS);
         $bitShift = $bits % self::LIMB_BITS;
         $count = count($this->limbs);
@@ -179,6 +247,9 @@ final readonly class DynamicUInt
         if ($value < 0 || $value > self::LIMB_MASK) {
             throw new \InvalidArgumentException('Low-bit value must fit one DynamicUInt limb.');
         }
+        if ($this->native !== null) {
+            return $this->fromNative(gmp_or($this->native, $value));
+        }
         $limbs = $this->limbs;
         $limbs[0] |= $value;
 
@@ -190,12 +261,18 @@ final readonly class DynamicUInt
         if ($mask < 0 || $mask > self::LIMB_MASK) {
             throw new \InvalidArgumentException('Low-bit mask must fit one DynamicUInt limb.');
         }
+        if ($this->native !== null) {
+            return gmp_intval(gmp_and($this->native, $mask));
+        }
 
         return $this->limbs[0] & $mask;
     }
 
     public function toHex(): string
     {
+        if ($this->native !== null) {
+            return gmp_strval($this->native, 16);
+        }
         $highestNibble = intdiv($this->bitWidth() + 3, 4) - 1;
         $hex = '';
         $started = false;
@@ -221,8 +298,34 @@ final readonly class DynamicUInt
 
     private function assertSameWidth(self $other): void
     {
-        if (count($this->limbs) !== count($other->limbs)) {
+        if (($this->native === null) !== ($other->native === null)) {
+            throw new \InvalidArgumentException('DynamicUInt operands must use the same arithmetic backend.');
+        }
+        if ($this->bitWidth() !== $other->bitWidth()) {
             throw new \InvalidArgumentException('DynamicUInt operands must have equal width.');
         }
+    }
+
+    private function fromNative(\GMP $value): self
+    {
+        return new self([], $value, $this->nativeMask(), $this->nativeBitWidth);
+    }
+
+    private function nativeValue(): \GMP
+    {
+        if ($this->native === null) {
+            throw new \LogicException('The GMP value is unavailable on the limb backend.');
+        }
+
+        return $this->native;
+    }
+
+    private function nativeMask(): \GMP
+    {
+        if ($this->nativeMask === null) {
+            throw new \LogicException('The GMP mask is unavailable on the limb backend.');
+        }
+
+        return $this->nativeMask;
     }
 }

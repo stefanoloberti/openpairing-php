@@ -1,5 +1,24 @@
 # Historical pairing verification
 
+## Current status (2026-08-12)
+
+- Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
+  `epoch-2-dutch-500` / commit `58ab5c6`.
+- Open: medium/large-field gate. The 30-player candidate has 80 exact shared
+  rounds and 7 progressions, but 23 legacy resource-limit rounds were not
+  compared. At 50 it has 60 exact, 11 progressions, one unclassified shared
+  deviation and 78 legacy resource-limit rounds. These runs do not satisfy
+  criterion 2 of ADR 0008.
+- Measured at 80: one complete 15-round tournament is 15/15 exact with zero
+  no-matchings in 344.667 seconds using 30-bit limbs. Versioned evidence is
+  `docs/evidence/pairing-p80-one-limbs-baseline.json`, corpus manifest
+  `a6a001f19a7ea1b5985c45705bddba2dc39c5bdfe2c90f46178f345dbe35e8d2`.
+- Current blocker: performance of from-scratch persistent rematches. The
+  80-player baseline executes 883 matchings and about 56.2 million Blossom
+  edge operations; `quality-HO-remainder` alone consumes 166.4 seconds.
+- Production/staging switchover remains forbidden until criteria 2 and 3 of
+  ADR 0008 close.
+
 ## Pairing baseline epoch 2 (2026-08-12)
 
 The pairing replay baseline was reset after finding that the harness recorded a
@@ -35,14 +54,12 @@ corpus manifest SHA-256 remains
 the checkpoint and its evidence are Git tag `epoch-2-dutch-500` at commit
 `58ab5c6` (the functional fix itself is `f419b7c`).
 
-The larger-field gate is still open for performance. Ten-tournament samples
-at 30 and 50 players completed with zero shadow no-matchings; the bounded
-legacy path hit 23 and 78 resource limits respectively. A ten-tournament
-80-player run was terminated after 48 minutes at full CPU before producing its
-first report. This confirms that polynomial matching removed the enumerator's
-correctness guard-rail, while from-scratch Blossom recomputation at every
-freeze remains too slow for the full corpus. No production switchover has been
-made.
+The larger-field gate is still open. The detailed current counters are in the
+status block above. A ten-tournament 80-player attempt was terminated after 48
+minutes, but a later shadow-only one-tournament run did complete all 15 rounds
+exactly. This confirms that polynomial matching removed the enumerator's
+correctness guard-rail while from-scratch Blossom recomputation at every freeze
+remains too slow for the full corpus. No production switchover has been made.
 
 The first BBP-faithful PAB representation (the bye is the sole unmatched real
 vertex, not an edge to a virtual vertex) is checkpointed at 490/500, zero
@@ -111,10 +128,14 @@ that comparison and the full decoded corpus replay pass, the project must not
 claim that the pairing engine is verified against the number of TRFs accepted
 by the parser.
 
+### Historical bounded-enumerator finding
+
 The first bounded replay found a first-round colour bug when the highest TPN
 was absent; it is covered by a regression test. It also demonstrated that the
 current exhaustive bracket enumerator reaches its 250,000-node/8,192-candidate
-limit frequently from 30 players upward. This is the present gate blocker.
+limit frequently from 30 players upward. This was the gate blocker before the
+persistent global matcher closed the frozen n=7 gate; it is not the current
+blocker.
 
 ### Pre-epoch-2 diagnostic history (invalid as gate evidence)
 
@@ -138,12 +159,12 @@ global round/PAB quality comparison. Evidence is in
 `build/historical-n5-100-he-ho.json` and
 `build/gacrux-quality-n5-100-he-ho.json` when generated in a working tree.
 
-The independent polynomial Blossom core passes the strengthened sequential and
-sparse-topology correctness gate, but Dutch is intentionally not wired to it
-yet. Rule-weight completion
-and matcher integration are both required before the full corpus replay.
+Historically, the independent polynomial Blossom core passed its strengthened
+sequential and sparse-topology correctness gate before Dutch was wired to it.
+That integration and the frozen 500/500 gate are now complete; this paragraph
+records the former sequencing rather than current status.
 
-## Preliminary whole-round graph audit
+## Preliminary whole-round graph audit (historical development stage)
 
 The optional `--preliminary-global` argument runs the new Blossom whole-round
 completability/PAB-score pass alongside, but not instead of, the bounded
