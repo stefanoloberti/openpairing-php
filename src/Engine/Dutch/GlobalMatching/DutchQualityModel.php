@@ -86,17 +86,19 @@ final readonly class DutchQualityModel
             $components['QC11'] = $c11;
             $components['QC12'] = $c12;
             $components['QC13'] = $c13;
+            // BBP rewards a player with a previous downfloat when this edge
+            // keeps that player in the current bracket (or moves the player
+            // up against an MDP). In a minimizing vector this is the negative
+            // endpoint contribution. It applies to every current-bracket
+            // edge, not only while selecting a PAB.
+            $components['QC14'] = -$this->floatAt($right, 1, 'down');
+            $components['QC16'] = -$this->floatAt($right, 2, 'down');
             if ($leftLevel > $rightLevel) {
                 $components['QC15'] = $this->floatAt($right, 1, 'up');
                 $components['QC17'] = $this->floatAt($right, 2, 'up');
-            }
-            if ($pabScoreLevel === $scoreLevel && $leftLevel === $scoreLevel) {
-                // The PAB is the unmatched real vertex. BBP represents its
-                // repeated-downfloat penalty by rewarding those endpoint
-                // histories on same-group edges: maximizing the complement
-                // keeps repeaters matched and leaves the best assignee free.
-                $components['QC14'] = -$this->floatAt($left, 1, 'down') - $this->floatAt($right, 1, 'down');
-                $components['QC16'] = -$this->floatAt($left, 2, 'down') - $this->floatAt($right, 2, 'down');
+            } else {
+                $components['QC14'] -= $this->floatAt($left, 1, 'down');
+                $components['QC16'] -= $this->floatAt($left, 2, 'down');
             }
         } elseif ($leftLevel >= $scoreLevel && $rightLevel < $scoreLevel) {
             $components['QC6'] = 1;
