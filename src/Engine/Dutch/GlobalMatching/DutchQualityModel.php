@@ -97,6 +97,12 @@ final readonly class DutchQualityModel
             if ($leftLevel > $rightLevel) {
                 $positionCounters['QC15'] = $components['QC15'] = $this->floatAt($right, 1, 'up');
                 $positionCounters['QC17'] = $components['QC17'] = $this->floatAt($right, 2, 'up');
+                // BBP/Gacrux keep the score-position component of a repeated
+                // downfloat when a carried MDP is finally paired in this
+                // bracket. QC14/QC16 themselves remain zero because the
+                // player is not being floated again.
+                $positionCounters['QC14'] = $this->floatAt($left, 1, 'down');
+                $positionCounters['QC16'] = $this->floatAt($left, 2, 'down');
             } else {
                 $components['QC14'] -= $this->floatAt($left, 1, 'down');
                 $components['QC16'] -= $this->floatAt($left, 2, 'down');
@@ -137,8 +143,8 @@ final readonly class DutchQualityModel
         // PSD above this bracket, not by the opponents' mutual score gap. The
         // position flags are deliberately independent from QC14-QC17: an MDP
         // carried below the current bracket has scalar QC14/QC16 zero but
-        // still contributes to QC18/QC20 at its PSD. An MDP matched in the
-        // current bracket and a resident sent down do not contribute here.
+        // still contributes to QC18/QC20 at its PSD. A carried MDP matched in
+        // the current bracket also contributes; a resident sent down does not.
         $floatLevel = max(0, $leftLevel - $scoreLevel);
         foreach (['QC14' => 'QC18', 'QC15' => 'QC19', 'QC16' => 'QC20', 'QC17' => 'QC21'] as $counter => $position) {
             if ($positionCounters[$counter] === 1 && $floatLevel > 0 && $maxPsd >= $floatLevel) {
