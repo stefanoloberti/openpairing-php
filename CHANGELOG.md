@@ -46,14 +46,24 @@
   classification of all 55 preliminary PAB counterfactuals.
 - Shadow comparison categories and a release-blocking candidate-regression
   distinction, ready for the complete global Dutch engine before switchover.
+- Public Dutch engine backed by the persistent whole-round matcher, with the
+  bounded Dutch engine retained as a small-field test oracle.
+- Runtime-selectable GMP arbitrary-width arithmetic with bit-identical limb
+  fallback, backend attestation, deterministic unsigned field packing and
+  1,000-sequence state-by-state differential coverage.
+- Proven-optimal residual matching reuse after unchanged-weight freezes,
+  guarded by fresh-Blossom and exhaustive sequential stress tests.
+- Direct-reference large-field protocol that exercises the public engine when
+  the bounded legacy oracle reaches its resource limit.
 
 ### Known limits
 
-- Dutch and Burstein production pairing searches remain explicitly bounded;
-  the polynomial matcher exists independently but is not wired into them yet.
+- Burstein pairing search remains explicitly bounded; Dutch uses the
+  polynomial persistent matcher in production.
 - TRF team and advanced control records are outside the documented subset.
 - TRF acceleration records 250/XXA are planned for v1.1; the current parser
   rejects them explicitly.
-- The historical pairing corpus gate is not yet passed: bounded enumeration
-  reaches its resource limit frequently at 30-80 players.
+- The historical pairing corpus gate is not yet passed. The public Dutch
+  engine is exact on frozen 7/30/50-player samples; 80-player public replay and
+  the complete campaign remain open.
 - Team, team-knockout and team-score tie-break variants remain phase 2.

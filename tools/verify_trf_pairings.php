@@ -42,9 +42,9 @@ try {
 $directory = $argv[1] ?? '';
 $limit = isset($argv[2]) ? (int) $argv[2] : 0;
 $mode = $argv[3] ?? '';
-$productionOnly = $mode === '--production';
 $largeField = $mode === '--large-field';
-$shadowOnly = $mode === '--shadow-only' || $largeField;
+$productionOnly = $mode === '--production' || $largeField;
+$shadowOnly = $mode === '--shadow-only';
 $auditShadowGlobal = $mode === '--shadow-global' || $shadowOnly;
 $auditPreliminaryGlobal = $mode === '--preliminary-global' || $auditShadowGlobal;
 $roundFilterRaw = getenv('OPENPAIRING_ROUND_ONLY');
@@ -291,6 +291,10 @@ foreach ($corpus['files'] as $corpusFile) {
                 $code = $result->violations[0]->code;
                 $bucket = $code === 'engine.resource_limit' ? 'roundsEngineResourceLimit' : 'roundsEngineNoSolution';
                 ++$counts[$bucket];
+                if ($largeField) {
+                    ++$counts['largeField.candidateNoMatching'];
+                    sample($shadowSamples, $relative, $round, 'large-field.no-matching', $result->violations[0]->message);
+                }
                 $allExact = false;
                 sample($samples, $relative, $round, $code, $result->violations[0]->message);
                 continue;
@@ -342,13 +346,30 @@ foreach ($corpus['files'] as $corpusFile) {
             }
             if ($generated['pairs'] === $reference['pairs'] && $generated['bye'] === $reference['bye']) {
                 ++$counts['roundsExact'];
+                if ($largeField) {
+                    ++$counts['largeField.candidateExact'];
+                }
             } elseif (array_keys($generated['pairs']) === array_keys($reference['pairs']) && $generated['bye'] === $reference['bye']) {
                 ++$counts['roundsSamePairsColourVariant'];
                 $allExact = false;
+                if ($largeField) {
+                    ++$counts['largeField.candidateColourVariant'];
+                    sample($shadowSamples, $relative, $round, 'large-field.colour-variant', 'Production engine has the reference opponents and PAB but different colours.', [
+                        'candidate' => pairingCandidate($generated),
+                        'reference' => pairingCandidate($reference),
+                    ]);
+                }
                 sample($samples, $relative, $round, 'same-pairs-colour-variant', 'Same opponents and bye, different colour allocation.');
             } else {
                 ++$counts['roundsPairingDeviation'];
                 $allExact = false;
+                if ($largeField) {
+                    ++$counts['largeField.candidateDeviation'];
+                    sample($shadowSamples, $relative, $round, 'large-field.pairing-deviation', 'Production engine differs from the reference.', [
+                        'candidate' => pairingCandidate($generated),
+                        'reference' => pairingCandidate($reference),
+                    ]);
+                }
                 sample($samples, $relative, $round, 'pairing-deviation', sprintf(
                     'Reference pairs: %s, bye: %s; generated pairs: %s, bye: %s.',
                     implode(',', array_keys($reference['pairs'])),

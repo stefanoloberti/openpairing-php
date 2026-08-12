@@ -4,23 +4,27 @@
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
-- Closed: medium/large-field gate. Direct reference comparison is 110/110
-  exact rounds at 30 players, 150/150 at 50, and 150/150 at 80; every sample
-  has zero no-matchings, colour variants and deviations.
+- Closed: direct-reference samples at 30 and 50 players: respectively 110/110
+  and 150/150 exact rounds through the public engine, with zero no-solutions,
+  colour variants and deviations. The final public-path 80-player replay is
+  running and must produce an attested report before that scale is called
+  closed.
 - Measured at 80: one complete 15-round tournament is 15/15 exact with zero
   no-matchings in 344.667 seconds using 30-bit limbs. Versioned evidence is
   `docs/evidence/pairing-p80-one-limbs-baseline.json`, corpus manifest
   `a6a001f19a7ea1b5985c45705bddba2dc39c5bdfe2c90f46178f345dbe35e8d2`.
-- Current blocker: performance of from-scratch persistent rematches. The
-  80-player baseline executes 883 matchings and about 56.2 million Blossom
-  edge operations; `quality-HO-remainder` alone consumes 166.4 seconds.
+- The former performance blocker was from-scratch persistent rematching. A
+  proven-optimal residual cache now reuses a residual optimum only when a
+  frozen edge belonged to the previous optimum and edge weights are unchanged;
+  1,000 sequential stress cases compare every reused state with fresh Blossom
+  and the exhaustive oracle. Full-corpus throughput remains to be measured.
 - The global matcher now backs the public Dutch engine. Staging deployment and
   release packaging remain pending production-path replay; criterion 3 stays
   open.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
-uses `--large-field`. This mode compares the persistent candidate directly to
-the recorded TRF reference and reports only four operative buckets:
+uses `--large-field`. This mode compares the public `DutchPairingEngine`
+directly to the recorded TRF reference and reports four operative buckets:
 `candidateExact`, `candidateColourVariant`, `candidateDeviation` and
 `candidateNoMatching`. Every non-exact completed result is exported to Gacrux
 with `--sample-set large-field`. The bounded engine remains an additional
@@ -214,8 +218,8 @@ corpus identities into its own output.
 The corresponding evidence is
 `build/gacrux-preliminary-bye-55-final.json`.
 
-The 256-player ceiling is both a parser/domain guard-rail and an explicit
-initial-engine check. More importantly, the current practical Dutch limit is
-lower because bracket enumeration grows combinatorially. Raising the guard-rail
-alone would therefore be misleading; a scalable weighted general matcher and
-candidate-generation strategy must come first.
+The 256-player ceiling remains a documented parser/domain safety guard-rail.
+The public Dutch path is polynomial and no longer inherits the bounded legacy
+enumerator's combinatorial guard, but raising the format limit requires its own
+codec, memory and latency gate and is not part of the 122,008-tournament
+campaign (whose accepted files are all at or below this limit).

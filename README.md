@@ -43,7 +43,8 @@ The public Dutch path uses the polynomial Blossom core and no longer has the
 legacy 250,000-node/8,192-candidate guard-rail. Burstein retains bounded
 exhaustive search, so difficult Burstein brackets can still return a
 machine-readable resource-limit result without a partial pairing. Canonical
-JSON supports virtual points and the engines apply them to scoregroups,
+JSON and TRF currently enforce a 256-player/256-round input safety ceiling.
+Canonical JSON supports virtual points and the engines apply them to scoregroups,
 internal order and board order; TRF
 record `250`, team/prohibited-pair records and team tie-breaks remain outside
 the documented individual product. See `docs/ACCELERATION.md`,
@@ -127,8 +128,9 @@ The coverage map and reproduction commands are in `docs/CORPUS.md`.
 The 123,557-file external TRF scan is parser evidence only: 122,008 legacy
 files were decoded, but that number must not be presented as pairing-engine
 verification. Historical round replay is a separate gate. Frozen
-7/30/50/80-player samples are exact; the full 122,008-tournament campaign is
-still open. See `docs/HISTORICAL-PAIRING-VERIFICATION.md`.
+7/30/50-player samples are exact; the final public-path 80-player replay and
+the full 122,008-tournament campaign are still open. See
+`docs/HISTORICAL-PAIRING-VERIFICATION.md`.
 
 ## Provenance and licence
 
