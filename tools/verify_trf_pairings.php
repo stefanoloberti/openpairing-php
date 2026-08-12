@@ -41,10 +41,11 @@ try {
 $directory = $argv[1] ?? '';
 $limit = isset($argv[2]) ? (int) $argv[2] : 0;
 $mode = $argv[3] ?? '';
-$auditShadowGlobal = $mode === '--shadow-global';
+$shadowOnly = $mode === '--shadow-only';
+$auditShadowGlobal = $mode === '--shadow-global' || $shadowOnly;
 $auditPreliminaryGlobal = $mode === '--preliminary-global' || $auditShadowGlobal;
 if ($directory === '' || !is_dir($directory) || $limit < 0 || ($mode !== '' && !$auditPreliminaryGlobal)) {
-    fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--preliminary-global|--shadow-global]\n");
+    fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--preliminary-global|--shadow-global|--shadow-only]\n");
     exit(2);
 }
 $root = realpath($directory);
@@ -218,6 +219,28 @@ foreach ($corpus['files'] as $corpusFile) {
                         }
                     }
                 }
+            }
+            if ($shadowOnly) {
+                if ($shadow === null || $shadow->status !== WeightedMatchingStatus::Optimal) {
+                    $allExact = false;
+                    ++$counts['roundsEngineNoSolution'];
+                    continue;
+                }
+                $generated = shadowRound($state, $shadow);
+                if ($generated['pairs'] === $reference['pairs'] && $generated['bye'] === $reference['bye']) {
+                    ++$counts['roundsExact'];
+                } elseif (array_keys($generated['pairs']) === array_keys($reference['pairs']) && $generated['bye'] === $reference['bye']) {
+                    ++$counts['roundsSamePairsColourVariant'];
+                    $allExact = false;
+                } else {
+                    ++$counts['roundsPairingDeviation'];
+                    $allExact = false;
+                    sample($samples, $relative, $round, 'shadow-only.pairing-deviation', 'Persistent coordinator differs from the reference.', [
+                        'candidate' => pairingCandidate($generated),
+                        'reference' => pairingCandidate($reference),
+                    ]);
+                }
+                continue;
             }
             $result = (new DutchPairingEngine())->pair($state);
             if ($result->violations !== []) {
