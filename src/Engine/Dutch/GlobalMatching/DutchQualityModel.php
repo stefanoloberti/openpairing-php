@@ -179,7 +179,7 @@ final readonly class DutchQualityModel
                 $components['HE2'] = $this->vectorAt(
                     $mdpCount,
                     $index,
-                    $residentBsn === null ? 0 : max(0, $residentBsn - $mdpCount),
+                    $residentBsn === null ? 0 : $residentBsn - $mdpCount,
                 );
             }
             return $components;

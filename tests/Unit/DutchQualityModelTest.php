@@ -58,6 +58,24 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame([0], $quality->components['HE2']);
     }
 
+    public function testHe2PreservesNegativeResidentOffset(): void
+    {
+        $mdp1 = $this->player(1, 2);
+        $mdp2 = $this->player(2, 2);
+        $resident = $this->player(3, 1);
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$mdp1, $mdp2, $resident],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $mdp1, $resident, 1, null, [1 => 2, 2 => 2, 3 => 1],
+            [$mdp1, $mdp2, $resident], [1 => 1, 2 => 2, 3 => 1],
+        );
+
+        self::assertSame([-1, 0], $quality->components['HE2']);
+    }
+
     public function testPabComplementKeepsRepeatedDownfloatersMatched(): void
     {
         $repeat = new Player(1, 1, 'Repeat', 2200, '', '', '', true, Score::zero(), floatHistory: ['down', 'down']);
