@@ -1,6 +1,6 @@
 # ADR 0007: polynomial weighted Blossom matching
 
-Status: accepted for the independent matcher; Dutch integration pending.
+Status: accepted and integrated into the public Dutch engine.
 
 The bounded dynamic-programming matcher remains an independent small-graph
 oracle, but it cannot be the production architecture for large Swiss brackets.
@@ -30,18 +30,15 @@ The 300-vertex complete-graph result proves removal of the former architectural
 limit, not a latency promise: PHP 8.3.6 in the inspected WSL environment used
 approximately 54.1 seconds and 279 MiB.
 
-The deliberately conservative deterministic mate-vector currently contributes
-most of the roughly 2,700 encoded bits at 300 vertices. It stays in the weight
-while differential correctness is open because it makes the selected optimum
-directly reproducible and inspectable. After Dutch parity, the principal
-performance experiment will move this final tie-break to deterministic matching
-visit order and prove, by differential tests against the current packed vector,
-that it selects the same mate vector. Only then may the extra weight fields be
-removed; the expected benefit must be measured rather than assumed.
+The deterministic mate-vector contributed most of the roughly 2,700 encoded
+bits at 300 vertices. After exact Dutch parity it was removed from the Dutch
+weight only, with input-order invariance, 500/500 small-field parity and an
+80-player exact round as gates. The measured 80-player improvement was only
+about 1.4%, confirming that rematch count, not weight width, is the remaining
+dominant cost. Generic matcher callers retain the packed mate-vector default.
 
-This ADR does not declare Dutch parity. The current Dutch engine still uses its
-bounded bracket enumerator, and the C6-C21 plus HE/HO weight function must be
-completed and replayed before switching it to Blossom.
+Dutch parity and its public-engine switchover are recorded in ADR 0008. The
+bounded Dutch engine remains an independent small-field oracle.
 
 ADR 0008 defines that integration as a persistent whole-round graph with
 bracket reweighting/finalization, following the control structure actually
