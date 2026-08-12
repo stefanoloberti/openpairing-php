@@ -4,11 +4,9 @@
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
-- Open: medium/large-field gate. The 30-player candidate has 80 exact shared
-  rounds and 7 progressions, but 23 legacy resource-limit rounds were not
-  compared. At 50 it has 60 exact, 11 progressions, one unclassified shared
-  deviation and 78 legacy resource-limit rounds. These runs do not satisfy
-  criterion 2 of ADR 0008.
+- Closed: medium/large-field gate. Direct reference comparison is 110/110
+  exact rounds at 30 players, 150/150 at 50, and 150/150 at 80; every sample
+  has zero no-matchings, colour variants and deviations.
 - Measured at 80: one complete 15-round tournament is 15/15 exact with zero
   no-matchings in 344.667 seconds using 30-bit limbs. Versioned evidence is
   `docs/evidence/pairing-p80-one-limbs-baseline.json`, corpus manifest
@@ -16,8 +14,9 @@
 - Current blocker: performance of from-scratch persistent rematches. The
   80-player baseline executes 883 matchings and about 56.2 million Blossom
   edge operations; `quality-HO-remainder` alone consumes 166.4 seconds.
-- Production/staging switchover remains forbidden until criteria 2 and 3 of
-  ADR 0008 close.
+- The global matcher now backs the public Dutch engine. Staging deployment and
+  release packaging remain pending production-path replay; criterion 3 stays
+  open.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the persistent candidate directly to
@@ -62,12 +61,10 @@ corpus manifest SHA-256 remains
 the checkpoint and its evidence are Git tag `epoch-2-dutch-500` at commit
 `58ab5c6` (the functional fix itself is `f419b7c`).
 
-The larger-field gate is still open. The detailed current counters are in the
-status block above. A ten-tournament 80-player attempt was terminated after 48
-minutes, but a later shadow-only one-tournament run did complete all 15 rounds
-exactly. This confirms that polynomial matching removed the enumerator's
-correctness guard-rail while from-scratch Blossom recomputation at every freeze
-remains too slow for the full corpus. No production switchover has been made.
+The larger-field gate is closed with the counters in the status block above.
+The earlier terminated and one-tournament runs remain performance history;
+from-scratch Blossom recomputation at every freeze is still too slow for a
+practical full-corpus campaign.
 
 The first BBP-faithful PAB representation (the bye is the sole unmatched real
 vertex, not an edge to a virtual vertex) is checkpointed at 490/500, zero

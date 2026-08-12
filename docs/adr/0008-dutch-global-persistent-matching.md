@@ -1,6 +1,6 @@
 # ADR 0008: Dutch integration uses one persistent round graph
 
-Status: accepted and small-field verified; larger-field performance pending.
+Status: accepted, public engine enabled; full-corpus verification pending.
 
 Baseline epoch: `fide-dutch-float/2-pab-downfloat`. Every replay figure below
 that predates this marker (74, 59, legacy 441 and shadow 425/427/444/466 plus
@@ -12,8 +12,8 @@ The completed lifecycle reaches 500/500 exact with zero no-matchings and zero
 regressions, attested by `docs/evidence/pairing-epoch2-dutch-500.json` and Git
 tag `epoch-2-dutch-500`. The final two general defects were missing QC14/QC16
 endpoint contributions on heterogeneous edges and on the genuinely unmatched
-PAB endpoint. Production wiring remains forbidden until the 80-player
-performance gate is practical and the subsequent full-corpus replay closes.
+PAB endpoint. Production wiring was enabled only after exact 30/50/80-player
+direct-reference gates; the subsequent full-corpus replay remains open.
 
 The polynomial matcher must not be inserted independently into the current
 `solveGroups()` loop. Independent bracket optima cannot compare PAB choices or
@@ -79,19 +79,20 @@ satisfied by tag `epoch-2-dutch-500`; criteria 2 and 3 remain open:
 
 1. **Satisfied.** 500/500 exact on the frozen 100x7 sample, with no regression of the 455
    epoch-2 legacy-exact rounds and no unclassified shadow bucket.
-2. **Open.** No resource-limit results in the existing 30/50/80-player samples, with all
-   deviations classified rather than treated as variants.
+2. **Satisfied.** Exact direct-to-reference large-field results: 110/110 rounds
+   at 30 players, 150/150 at 50 and 150/150 at 80, with zero no-matchings,
+   colour variants or deviations.
 3. **Open.** Full replay of all 122,008 previously decodable non-accelerated tournaments.
 
 Runtime-identity attestation from the historical verifier is part of every gate.
 
-Before switchover, the complete global engine runs only in shadow beside the
+Before switchover, the complete global engine ran only in shadow beside the
 bounded engine. `ShadowPairingComparison` defines the report categories:
 `both-exact`, `candidate-progress`, `candidate-regression`, `same-deviation`
 and `divergent-deviation`. Any `candidate-regression` blocks release; every
-divergent deviation requires Gacrux classification. Production switches only at
-500/500 with zero regression, after which the bounded engine remains a small
-field test oracle.
+divergent deviation requires Gacrux classification. Production switched after
+the frozen gates reached exact parity; the bounded engine remains a small-field
+test oracle.
 
 `same-deviation` also requires Gacrux classification: agreement between two PHP
 paths can merely expose a shared interpretation or shared-code defect. The
@@ -101,7 +102,7 @@ the classifier accepts `--sample-set=shadow-oracle`.
 The first implemented slice is the read-only preliminary pass in
 `Engine/Dutch/GlobalMatching`: one compatibility graph over all active players,
 Blossom completability, PAB eligibility and lowest completable PAB score group.
-It is not called by the production engine. Its frozen audit is 500/500 complete
+It originated as a shadow-only component; its frozen audit is 500/500 complete
 and 396/396 correct PAB score groups (341 exact assignees, 55 awaiting legal C9
 and bracket refinement).
 
@@ -117,8 +118,8 @@ HO1-HO5 ordering, including expanded vector components. `DutchQualityModel`
 produces edge penalties from that representation and
 `DutchQualityRoundGraphBuilder` turns them into maximizing Blossom weights.
 This is a semantic port of the criterion updates in Gacrux
-`crosstabledutch.py` at `14a34a2c`; it remains shadow-only while bracket freeze
-state is completed.
+`crosstabledutch.py` at `14a34a2c`; it remained shadow-only until bracket freeze
+state and the larger-field gates were completed.
 
 `DutchShadowGlobalCoordinator` records one preliminary timer plus one
 `quality-rematch` timer per occupied score level. This deliberately measures

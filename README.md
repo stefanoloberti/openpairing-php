@@ -4,8 +4,9 @@ OpenPairingPHP is an independent, deterministic and offline FIDE pairing
 library and CLI for PHP 8.3+. It is a new project, not a modification of Clever
 Chicken, and it does not implement USCF pairing rules.
 
-The project is experimental. It is **not certified, endorsed or approved by
-FIDE** and must not be used as the sole authority for a live tournament.
+The project is a release candidate. It is **not certified, endorsed or
+approved by FIDE**; tournament arbiters remain responsible for checking and
+publishing pairings.
 
 ## Implemented
 
@@ -16,9 +17,10 @@ FIDE** and must not be used as the sole authority for a live tournament.
 - exact integer/rational scoring without binary floating-point decisions;
 - FIDE Baku acceleration schedule and pairing-score handling for Dutch and
   Burstein, including an immutable late-entry-aware state transformer;
-- bounded exhaustive matching retained as a small-graph oracle, plus an
-  isolated pure-PHP O(V³) weighted Blossom core with arbitrary-width exact
-  weights; Dutch/Burstein production integration is still pending;
+- persistent whole-round Dutch matching in the public engine, with the bounded
+  implementation retained as an independent small-field regression oracle;
+- an isolated pure-PHP polynomial weighted Blossom core with arbitrary-width
+  exact weights;
 - canonical JSON v1 and fail-closed TRF-2026 individual read/write for Dutch
   and Burstein;
 - structured diagnostics, violations, quality vectors and deterministic trace;
@@ -37,14 +39,12 @@ development oracles.
 
 ## Explicit limits
 
-The production bracket engines remain bounded to 250,000 search nodes and
-8,192 candidates. A polynomial Blossom core now exists and passes its
-strengthened sparse sequential freeze/reweight correctness gate, but it does
-not establish Dutch or BBP parity until the full
-C6-C21/HE/HO weight function is integrated and the historical replay passes.
-Combinatorially difficult production brackets therefore still return a
-machine-readable resource-limit result without a partial pairing. Canonical JSON supports virtual points and
-the engines apply them to scoregroups, internal order and board order; TRF
+The public Dutch path uses the polynomial Blossom core and no longer has the
+legacy 250,000-node/8,192-candidate guard-rail. Burstein retains bounded
+exhaustive search, so difficult Burstein brackets can still return a
+machine-readable resource-limit result without a partial pairing. Canonical
+JSON supports virtual points and the engines apply them to scoregroups,
+internal order and board order; TRF
 record `250`, team/prohibited-pair records and team tie-breaks remain outside
 the documented individual product. See `docs/ACCELERATION.md`,
 `docs/TRF-2026.md`, `docs/TIE-BREAKS.md` and ADR 0003.
@@ -126,9 +126,9 @@ The coverage map and reproduction commands are in `docs/CORPUS.md`.
 
 The 123,557-file external TRF scan is parser evidence only: 122,008 legacy
 files were decoded, but that number must not be presented as pairing-engine
-verification. Historical round replay is a separate gate and is currently
-blocked by measured pairing deviations and search-limit exhaustion from
-medium-sized events. See `docs/HISTORICAL-PAIRING-VERIFICATION.md`.
+verification. Historical round replay is a separate gate. Frozen
+7/30/50/80-player samples are exact; the full 122,008-tournament campaign is
+still open. See `docs/HISTORICAL-PAIRING-VERIFICATION.md`.
 
 ## Provenance and licence
 
