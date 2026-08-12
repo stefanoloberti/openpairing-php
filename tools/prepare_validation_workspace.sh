@@ -15,6 +15,7 @@ archive=$(readlink -f "$archive")
 vendor_source=$(readlink -f "$vendor_source")
 test -f "$archive"
 test -d "$vendor_source/composer"
+mkdir -p "$workspace_root/releases"
 
 archive_hash=$(sha256sum "$archive" | cut -d' ' -f1)
 release="$workspace_root/releases/${archive_hash:0:16}"
