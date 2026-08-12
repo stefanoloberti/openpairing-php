@@ -133,6 +133,56 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame([], $quality->components['QC20']);
     }
 
+    public function testCarriedMdpMatchedInCurrentBracketHasNoRepeatedDownfloatPositionPenalty(): void
+    {
+        $mdp = new Player(
+            1, 1, 'MDP', 2200, '', '', '', true,
+            Score::fromDecimal('2.5'), floatHistory: ['down', 'down'],
+        );
+        $intermediate = $this->player(2, 2);
+        $lower = $this->player(3, 1);
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$mdp, $intermediate, $lower],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $mdp, $lower, 0, null, [1 => 2, 2 => 1, 3 => 0], [$mdp, $intermediate, $lower],
+        );
+
+        self::assertSame(0, $quality->components['QC14']);
+        self::assertSame(0, $quality->components['QC16']);
+        self::assertSame([0, 0], $quality->components['QC18']);
+        self::assertSame([0, 0], $quality->components['QC20']);
+    }
+
+    public function testCarriedMdpContinuingBelowBracketRecordsRepeatedDownfloatPosition(): void
+    {
+        $mdp = new Player(
+            1, 1, 'MDP', 2200, '', '', '', true,
+            Score::fromDecimal('3.0'), floatHistory: ['down', 'down'],
+        );
+        $aboveCurrent = $this->player(2, 2);
+        $current = $this->player(3, 1);
+        $below = $this->player(4, 0);
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256,
+            [$mdp, $aboveCurrent, $current, $below],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $mdp, $below, 1, null,
+            [1 => 3, 2 => 2, 3 => 1, 4 => 0],
+            [$mdp, $aboveCurrent, $current, $below],
+        );
+
+        self::assertSame(0, $quality->components['QC14']);
+        self::assertSame(0, $quality->components['QC16']);
+        self::assertSame([1, 0], $quality->components['QC18']);
+        self::assertSame([1, 0], $quality->components['QC20']);
+    }
+
     private function player(int $id, int $score): Player
     {
         return new Player($id, $id, 'P'.$id, 2200 - $id, '', '', '', true, Score::fromDecimal($score.'.0'));

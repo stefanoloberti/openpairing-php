@@ -79,6 +79,7 @@ final readonly class DutchQualityModel
             'HE1' => [], 'HE2' => [], 'HO1' => 0, 'HO2' => 0,
             'HO3' => [], 'HO4' => [], 'HO5' => [],
         ];
+        $positionCounters = ['QC14' => 0, 'QC15' => 0, 'QC16' => 0, 'QC17' => 0];
 
         if ($leftLevel >= $scoreLevel && $rightLevel === $scoreLevel) {
             [$c10, $c11, $c12, $c13] = $this->colourPenalties($state, $left, $right);
@@ -94,8 +95,8 @@ final readonly class DutchQualityModel
             $components['QC14'] = -$this->floatAt($right, 1, 'down');
             $components['QC16'] = -$this->floatAt($right, 2, 'down');
             if ($leftLevel > $rightLevel) {
-                $components['QC15'] = $this->floatAt($right, 1, 'up');
-                $components['QC17'] = $this->floatAt($right, 2, 'up');
+                $positionCounters['QC15'] = $components['QC15'] = $this->floatAt($right, 1, 'up');
+                $positionCounters['QC17'] = $components['QC17'] = $this->floatAt($right, 2, 'up');
             } else {
                 $components['QC14'] -= $this->floatAt($left, 1, 'down');
                 $components['QC16'] -= $this->floatAt($left, 2, 'down');
@@ -111,9 +112,11 @@ final readonly class DutchQualityModel
                 $qc7[$maxPsd - $level] = 1;
                 $components['QC7'] = array_values($qc7);
             }
+            $positionCounters['QC14'] = $this->floatAt($left, 1, 'down');
+            $positionCounters['QC16'] = $this->floatAt($left, 2, 'down');
             if ($leftLevel === $scoreLevel) {
-                $components['QC14'] = $this->floatAt($left, 1, 'down');
-                $components['QC16'] = $this->floatAt($left, 2, 'down');
+                $components['QC14'] = $positionCounters['QC14'];
+                $components['QC16'] = $positionCounters['QC16'];
             }
         }
 
@@ -131,11 +134,14 @@ final readonly class DutchQualityModel
             }
         }
         // Gacrux/BBP position repeated-float penalties by the higher player's
-        // PSD above this bracket, not by the opponents' mutual score gap. A
-        // resident sent down has level zero here, so QC18/QC20 do not apply.
+        // PSD above this bracket, not by the opponents' mutual score gap. The
+        // position flags are deliberately independent from QC14-QC17: an MDP
+        // carried below the current bracket has scalar QC14/QC16 zero but
+        // still contributes to QC18/QC20 at its PSD. An MDP matched in the
+        // current bracket and a resident sent down do not contribute here.
         $floatLevel = max(0, $leftLevel - $scoreLevel);
         foreach (['QC14' => 'QC18', 'QC15' => 'QC19', 'QC16' => 'QC20', 'QC17' => 'QC21'] as $counter => $position) {
-            if ($components[$counter] === 1 && $floatLevel > 0 && $maxPsd >= $floatLevel) {
+            if ($positionCounters[$counter] === 1 && $floatLevel > 0 && $maxPsd >= $floatLevel) {
                 $positionVector = $components[$position];
                 if (!is_array($positionVector)) {
                     throw new \LogicException($position.' must be vector-valued.');
