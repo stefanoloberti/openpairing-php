@@ -13,7 +13,8 @@ use OpenPairing\Engine\Dutch\DutchFloatClassifier;
 use OpenPairing\Engine\Dutch\DutchRules;
 use OpenPairing\Format\Trf\Trf2026Codec;
 
-$root = dirname(__DIR__, 2);
+$rootOverride = getenv('OPENPAIRING_PROJECT_ROOT');
+$root = is_string($rootOverride) && $rootOverride !== '' ? $rootOverride : dirname(__DIR__, 2);
 require $root.'/vendor/autoload.php';
 require $root.'/tools/TrfCorpusCompatibility.php';
 
