@@ -61,6 +61,84 @@ final class PersistentWeightedMatchingComputerTest extends TestCase
         $computer->reweight([new WeightedEdge(1, 2, [2])]);
     }
 
+    public function testUnchangedReweightReusesOptimalResidualAfterMatchedFreeze(): void
+    {
+        $edges = [
+            new WeightedEdge(1, 2, [5, 0]),
+            new WeightedEdge(3, 4, [4, 0]),
+            new WeightedEdge(1, 3, [1, 0]),
+            new WeightedEdge(2, 4, [1, 0]),
+        ];
+        $computer = new PersistentWeightedMatchingComputer([1, 2, 3, 4], $edges);
+        $initial = $computer->match();
+        self::assertSame([['left' => 1, 'right' => 2], ['left' => 3, 'right' => 4]], $initial->pairs);
+
+        $computer->freeze(1, 2);
+        $computer->reweight([new WeightedEdge(3, 4, [4, 0])]);
+        $residual = $computer->match();
+        $fresh = (new BlossomWeightedGeneralMatcher())->match($computer->vertices(), $computer->edges(), true);
+        $exact = (new ExactWeightedGeneralMatcher())->match($computer->vertices(), $computer->edges(), true);
+
+        self::assertSame(0, $residual->statesExplored);
+        self::assertSame($fresh->pairs, $residual->pairs);
+        self::assertSame($fresh->totalWeight, $residual->totalWeight);
+        self::assertSame($exact->pairs, $residual->pairs);
+        self::assertSame($exact->totalWeight, $residual->totalWeight);
+    }
+
+    public function testChangedReweightInvalidatesOptimalResidual(): void
+    {
+        $computer = new PersistentWeightedMatchingComputer([1, 2, 3, 4, 5, 6], [
+            new WeightedEdge(1, 2, [9]),
+            new WeightedEdge(3, 4, [8]),
+            new WeightedEdge(5, 6, [7]),
+            new WeightedEdge(3, 5, [1]),
+            new WeightedEdge(4, 6, [1]),
+        ]);
+        $initial = $computer->match();
+        $computer->freeze(1, 2);
+        $computer->reweight([
+            new WeightedEdge(3, 4, [0]),
+            new WeightedEdge(5, 6, [0]),
+            new WeightedEdge(3, 5, [10]),
+            new WeightedEdge(4, 6, [10]),
+        ]);
+        $changed = $computer->match();
+
+        self::assertGreaterThan(0, $initial->statesExplored);
+        self::assertGreaterThan(0, $changed->statesExplored);
+        self::assertSame([['left' => 3, 'right' => 5], ['left' => 4, 'right' => 6]], $changed->pairs);
+    }
+
+    #[Group('stress')]
+    public function testOneThousandUnchangedResidualSequencesRemainGloballyOptimal(): void
+    {
+        for ($seed = 1; $seed <= 1_000; ++$seed) {
+            mt_srand($seed);
+            $vertices = range(1, 4 + 2 * ($seed % 3));
+            $computer = new PersistentWeightedMatchingComputer($vertices, $this->randomGraphEdges($vertices));
+
+            while ($computer->vertices() !== []) {
+                $persistent = $computer->match();
+                $fresh = (new BlossomWeightedGeneralMatcher())->match($computer->vertices(), $computer->edges(), true);
+                $exact = (new ExactWeightedGeneralMatcher())->match($computer->vertices(), $computer->edges(), true);
+                self::assertSame($fresh->status, $persistent->status, 'fresh status seed '.$seed);
+                self::assertSame($fresh->totalWeight, $persistent->totalWeight, 'fresh weight seed '.$seed);
+                self::assertSame($exact->status, $persistent->status, 'exact status seed '.$seed);
+                self::assertSame($exact->totalWeight, $persistent->totalWeight, 'exact weight seed '.$seed);
+                if ($persistent->pairs === []) {
+                    break;
+                }
+
+                $freeze = $persistent->pairs[0];
+                $computer->freeze($freeze['left'], $freeze['right']);
+                if ($computer->vertices() !== []) {
+                    $computer->reweight($computer->edges());
+                }
+            }
+        }
+    }
+
     #[Group('stress')]
     public function testGmpAndLimbBackendsProduceIdenticalSequentialStates(): void
     {

@@ -21,6 +21,9 @@ final class PersistentWeightedMatchingComputer
     /** @var list<array{left: int, right: int}> */
     private array $frozenPairs = [];
 
+    private ?WeightedMatchingResult $cachedMatching = null;
+    private ?bool $cachedRequirePerfect = null;
+
     /**
      * @param list<int> $vertices
      * @param list<WeightedEdge> $edges
@@ -40,7 +43,14 @@ final class PersistentWeightedMatchingComputer
 
     public function match(bool $requirePerfect = true): WeightedMatchingResult
     {
-        return $this->matcher->match($this->vertices, $this->edges(), $requirePerfect);
+        if ($this->cachedMatching !== null && $this->cachedRequirePerfect === $requirePerfect) {
+            return $this->cachedMatching;
+        }
+
+        $this->cachedMatching = $this->matcher->match($this->vertices, $this->edges(), $requirePerfect);
+        $this->cachedRequirePerfect = $requirePerfect;
+
+        return $this->cachedMatching;
     }
 
     public function freeze(int $left, int $right): void
@@ -52,7 +62,9 @@ final class PersistentWeightedMatchingComputer
         if (!isset($this->edgesByKey[self::key($left, $right)])) {
             throw new \InvalidArgumentException('A frozen edge must exist in the active graph.');
         }
-        $this->frozenPairs[] = ['left' => $left, 'right' => $right];
+        $frozen = ['left' => $left, 'right' => $right];
+        $canRetain = $this->cachedMatching !== null && in_array($frozen, $this->cachedMatching->pairs, true);
+        $this->frozenPairs[] = $frozen;
         $removed = [$left => true, $right => true];
         $this->vertices = array_values(array_filter(
             $this->vertices,
@@ -62,6 +74,28 @@ final class PersistentWeightedMatchingComputer
             $this->edgesByKey,
             static fn (WeightedEdge $edge): bool => !isset($removed[$edge->left]) && !isset($removed[$edge->right]),
         );
+        if ($canRetain) {
+            $pairs = array_values(array_filter(
+                $this->cachedMatching->pairs,
+                static fn (array $pair): bool => $pair !== $frozen,
+            ));
+            $unmatched = array_values(array_filter(
+                $this->cachedMatching->unmatched,
+                static fn (int $vertex): bool => $vertex !== $left && $vertex !== $right,
+            ));
+            $totalWeight = $this->totalWeight($pairs);
+            $this->cachedMatching = new WeightedMatchingResult(
+                WeightedMatchingStatus::Optimal,
+                $pairs,
+                $unmatched,
+                $totalWeight,
+                count($pairs),
+                0,
+            );
+        } else {
+            $this->cachedMatching = null;
+            $this->cachedRequirePerfect = null;
+        }
     }
 
     /**
@@ -78,6 +112,10 @@ final class PersistentWeightedMatchingComputer
         sort($newKeys, SORT_STRING);
         if ($oldKeys !== $newKeys) {
             throw new \InvalidArgumentException('Reweighting must preserve every active edge and cannot add edges.');
+        }
+        if (!$this->sameWeights($this->edgesByKey, $replacement)) {
+            $this->cachedMatching = null;
+            $this->cachedRequirePerfect = null;
         }
         $this->edgesByKey = $replacement;
     }
@@ -133,5 +171,43 @@ final class PersistentWeightedMatchingComputer
     private static function key(int $left, int $right): string
     {
         return min($left, $right).':'.max($left, $right);
+    }
+
+    /**
+     * @param array<string, WeightedEdge> $left
+     * @param array<string, WeightedEdge> $right
+     */
+    private function sameWeights(array $left, array $right): bool
+    {
+        foreach ($left as $key => $edge) {
+            if (!isset($right[$key]) || $edge->weight !== $right[$key]->weight) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param list<array{left: int, right: int}> $pairs
+     * @return list<int>
+     */
+    private function totalWeight(array $pairs): array
+    {
+        if ($pairs === []) {
+            $first = reset($this->edgesByKey);
+
+            return $first instanceof WeightedEdge ? array_fill(0, count($first->weight), 0) : [];
+        }
+        $first = $this->edgesByKey[self::key($pairs[0]['left'], $pairs[0]['right'])];
+        $total = array_fill(0, count($first->weight), 0);
+        foreach ($pairs as $pair) {
+            $weight = $this->edgesByKey[self::key($pair['left'], $pair['right'])]->weight;
+            foreach ($weight as $index => $component) {
+                $total[$index] += $component;
+            }
+        }
+
+        return array_values($total);
     }
 }
