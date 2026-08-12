@@ -128,7 +128,10 @@ final readonly class DutchQualityModel
                 $components['QC8'] = array_values($qc8);
             }
         }
-        $floatLevel = max(0, $leftLevel - $rightLevel);
+        // Gacrux/BBP position repeated-float penalties by the higher player's
+        // PSD above this bracket, not by the opponents' mutual score gap. A
+        // resident sent down has level zero here, so QC18/QC20 do not apply.
+        $floatLevel = max(0, $leftLevel - $scoreLevel);
         foreach (['QC14' => 'QC18', 'QC15' => 'QC19', 'QC16' => 'QC20', 'QC17' => 'QC21'] as $counter => $position) {
             if ($components[$counter] === 1 && $floatLevel > 0 && $maxPsd >= $floatLevel) {
                 $positionVector = $components[$position];

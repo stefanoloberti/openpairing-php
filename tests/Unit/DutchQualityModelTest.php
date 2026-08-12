@@ -93,6 +93,25 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame(-1, $quality->components['QC16']);
     }
 
+    public function testResidentDownfloatDoesNotCreateScorePositionPenalty(): void
+    {
+        $resident = new Player(1, 1, 'Resident', 2200, '', '', '', true, Score::fromDecimal('1.0'), floatHistory: ['down', 'down']);
+        $lower = $this->player(2, 0);
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$resident, $lower],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $resident, $lower, 1, null, [1 => 1, 2 => 0], [$resident, $lower],
+        );
+
+        self::assertSame(1, $quality->components['QC14']);
+        self::assertSame(1, $quality->components['QC16']);
+        self::assertSame([], $quality->components['QC18']);
+        self::assertSame([], $quality->components['QC20']);
+    }
+
     private function player(int $id, int $score): Player
     {
         return new Player($id, $id, 'P'.$id, 2200 - $id, '', '', '', true, Score::fromDecimal($score.'.0'));
