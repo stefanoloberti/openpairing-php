@@ -431,8 +431,8 @@ final readonly class DutchShadowGlobalCoordinator
                         && $pair !== null
                         && $graph->scoreRankByPlayerId[$pair['left'] === $playerId ? $pair['right'] : $pair['left']] === $scoreLevel;
                 }
+                $requirements[$playerId] = $choose;
                 if ($choose) {
-                    $requirements[$playerId] = true;
                     $selected[] = $playerId;
                     --$needed;
                 }
