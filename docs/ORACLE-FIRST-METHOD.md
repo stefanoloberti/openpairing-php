@@ -116,6 +116,14 @@ It was removed in full. Sequential freeze is not independently composable with
 the retained bracket coordinator; the remainder lifecycle must be ported as one
 coherent state machine.
 
+A later, narrower attempt confirmed the same boundary after the PAB was
+correctly represented as the unmatched real vertex. Letting HE fix only the MDP
+identities while HO selected their opponents, but still omitting coupled
+`matched` and remainder state, produced 199 no-matchings. Commit `b733651` was
+reverted by `958c8ce`; the machine-readable negative control is
+`docs/evidence/negative-he-selection-without-remainder.json`. MDP selection,
+opponent finalization and remainder construction must land as one lifecycle.
+
 A smaller HE-model defect was independently fixable: HE vector width counted
 every player in higher score groups, including players already frozen and no
 longer present in the bracket BSN map. Counting only current-BSN MDPs raises the

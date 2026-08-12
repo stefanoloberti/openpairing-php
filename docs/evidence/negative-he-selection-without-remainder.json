@@ -1,0 +1,17 @@
+{
+  "schema": "openpairing.negative-control/1",
+  "gitCommit": "b733651",
+  "runtimeSourceTreeSha256": "f6f2e84be91b9025c4bfedf5af7f76e10d40dc571025ac5ab14d8b598af9f5a1",
+  "corpusManifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44",
+  "historicalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+  "hypothesis": "HE can fix selected MDP identities while HO chooses their opponents, without carrying matched/remainder state.",
+  "result": {
+    "bothExact": 265,
+    "candidateProgress": 25,
+    "candidateRegression": 8,
+    "sameDeviation": 2,
+    "divergentDeviation": 1,
+    "noMatching": 199
+  },
+  "verdict": "rejected and reverted by commit 958c8ce; HE selection is not independently composable without the coupled matched/remainder lifecycle"
+}
