@@ -232,11 +232,21 @@ final readonly class DutchShadowGlobalCoordinator
             $bsn,
             $homogeneousPairs,
         );
+        if ($mdpMatchRequirements !== null) {
+            $maxPsd = max(array_map(
+                static fn (int $playerId): int => $graph->scoreRankByPlayerId[$playerId] - $scoreLevel,
+                $realRemaining,
+            ) ?: [0]);
+            $edges = $this->constraintWeightedEdges(
+                $edges,
+                $graph,
+                $scoreLevel,
+                $mdpMatchRequirements,
+                12 + (6 * max(0, $maxPsd)),
+            );
+        }
         if ($pabScoreLevel !== null) {
             $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies);
-        }
-        if ($mdpMatchRequirements !== null) {
-            $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $mdpMatchRequirements);
         }
         $widths = array_values(array_unique(array_map(static fn (WeightedEdge $edge): int => count($edge->weight), $edges)));
         if (count($widths) > 1) {
@@ -270,14 +280,20 @@ final readonly class DutchShadowGlobalCoordinator
     }
 
     /**
-     * Keep every active edge. Former filters become the highest-priority
-     * component, so a zero-violation perfect matching dominates any fallback.
+     * Keep every active edge. BBP's matched-MDP bits belong after QC21 and
+     * before HE opponent ordering; they must not dominate PAB or QC quality.
      *
      * @param list<WeightedEdge> $edges
      * @param array<int, bool> $mdpMatchRequirements
      * @return list<WeightedEdge>
      */
-    private function constraintWeightedEdges(array $edges, DutchRoundGraph $graph, int $scoreLevel, array $mdpMatchRequirements): array
+    private function constraintWeightedEdges(
+        array $edges,
+        DutchRoundGraph $graph,
+        int $scoreLevel,
+        array $mdpMatchRequirements,
+        int $qcWidth,
+    ): array
     {
         $mdpIds = array_keys($mdpMatchRequirements);
         usort($mdpIds, static fn (int $left, int $right): int =>
@@ -285,7 +301,7 @@ final readonly class DutchShadowGlobalCoordinator
             ?: ($graph->playersById[$left]->pairingNumber <=> $graph->playersById[$right]->pairingNumber)
         );
 
-        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $mdpMatchRequirements, $mdpIds): WeightedEdge {
+        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $mdpMatchRequirements, $mdpIds, $qcWidth): WeightedEdge {
             $leftLevel = $graph->scoreRankByPlayerId[$edge->left];
             $rightLevel = $graph->scoreRankByPlayerId[$edge->right];
             $violations = [];
@@ -306,7 +322,11 @@ final readonly class DutchShadowGlobalCoordinator
                 $violations[] = $isMatchedHere && $mustBeMatchedHere ? 1 : 0;
             }
 
-            return new WeightedEdge($edge->left, $edge->right, [...$violations, ...$edge->weight]);
+            return new WeightedEdge($edge->left, $edge->right, [
+                ...array_slice($edge->weight, 0, $qcWidth),
+                ...$violations,
+                ...array_slice($edge->weight, $qcWidth),
+            ]);
         }, $edges);
     }
 
