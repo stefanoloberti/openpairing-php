@@ -6,9 +6,10 @@ namespace OpenPairing\Engine\Matching;
 
 /**
  * Persistent matching problem state with irreversible freezes and in-place
- * reweighting. This correctness-first implementation deliberately recomputes
- * the optimum from scratch after every mutation. A future warm-start solver may
- * replace that policy only after passing the same sequence differentials.
+ * reweighting. A frozen edge that belongs to the current optimum leaves an
+ * optimal residual while weights remain identical: any better residual would
+ * improve the original matching. Every changed weight or non-matched freeze
+ * invalidates that proof and recomputes from scratch.
  */
 final class PersistentWeightedMatchingComputer
 {
