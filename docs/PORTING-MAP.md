@@ -39,7 +39,7 @@ fields and the deterministic mate vector below all of them.
 | BBP concept | PHP component | Lexicographic position | Input domain |
 |---|---|---|---|
 | PAB eligibility/completion | `pabSelectionWeightedEdges::$selection` | Prefix before QC6 | non-negative endpoint complement |
-| Conditional C9 PAB rank | `pabSelectionWeightedEdges::$c9` | After PAB eligibility, before QC6 | non-negative unplayed-game count |
+| Conditional C9 PAB rank | `pabSelectionWeightedEdges` at the canonical QC9 offset | After QC8, before QC10 | non-negative unplayed-game complement |
 | C6-C21 | `DutchQualityVector` QC6-QC21 slice | Canonical order in `DutchQualityVector::ORDER` | signed integer penalties/rewards |
 | Finalized matched MDP identities | `constraintWeightedEdges::$violations` | After QC21, before HE1 | bit, exactly 0 or 1 per MDP |
 | Selected MDP opponent order | `constraintWeightedEdges::$opponentOrder` | After matched-MDP bits, before HE1 | dense rank 0 through current BSN width |

@@ -366,10 +366,10 @@ final readonly class DutchShadowGlobalCoordinator
         $qc16Offset = $qc14Offset + 2;
         $qc18Offset = 12 + (2 * $maxPsd);
         $qc20Offset = $qc18Offset + (2 * $maxPsd);
+        $qc9Offset = 3 + (2 * $maxPsd);
 
-        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $scoreLevel, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset, $qc18Offset, $qc20Offset, $maxPsd): WeightedEdge {
+        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $scoreLevel, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset, $qc18Offset, $qc20Offset, $qc9Offset, $maxPsd): WeightedEdge {
             $selection = 0;
-            $c9 = 0;
             $weight = $edge->weight;
             foreach ([$edge->left, $edge->right] as $playerId) {
                 $player = $graph->playersById[$playerId];
@@ -380,7 +380,7 @@ final readonly class DutchShadowGlobalCoordinator
                 } elseif ($c9Applies) {
                     foreach ($player->results as $result) {
                         if (!$result['played']) {
-                            ++$c9;
+                            ++$weight[$qc9Offset];
                         }
                     }
                 }
@@ -413,7 +413,7 @@ final readonly class DutchShadowGlobalCoordinator
                 }
             }
 
-            return new WeightedEdge($edge->left, $edge->right, [$selection, $c9, ...$weight]);
+            return new WeightedEdge($edge->left, $edge->right, [$selection, ...$weight]);
         }, $edges);
     }
 
