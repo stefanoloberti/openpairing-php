@@ -111,7 +111,6 @@ final readonly class DutchShadowGlobalCoordinator
                     $remaining, $frozenPairs, $freezeEvents,
                 );
                 array_shift($selectedMdpIds);
-                $bsn = $this->resequenceBsn($bsn, $remaining);
             }
 
             // Only after heterogeneous opponents are final does the current
@@ -273,31 +272,6 @@ final readonly class DutchShadowGlobalCoordinator
 
             return new WeightedEdge($edge->left, $edge->right, [...$violations, ...$edge->weight]);
         }, $edges);
-    }
-
-    /**
-     * Frozen players leave the bracket sequence without leaving holes. Keep
-     * the inherited relative order, then assign the current bracket BSNs.
-     *
-     * @param array<int, int> $bsnByPlayerId
-     * @param list<int> $remainingPlayerIds
-     * @return array<int, int>
-     */
-    private function resequenceBsn(array $bsnByPlayerId, array $remainingPlayerIds): array
-    {
-        $remaining = array_fill_keys($remainingPlayerIds, true);
-        $ordered = array_filter(
-            $bsnByPlayerId,
-            static fn (int $_bsn, int $playerId): bool => isset($remaining[$playerId]),
-            ARRAY_FILTER_USE_BOTH,
-        );
-        asort($ordered, SORT_NUMERIC);
-        $result = [];
-        foreach (array_keys($ordered) as $index => $playerId) {
-            $result[$playerId] = $index + 1;
-        }
-
-        return $result;
     }
 
     /**
