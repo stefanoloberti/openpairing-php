@@ -12,7 +12,7 @@ use OpenPairing\Engine\Matching\WeightedGeneralMatchingInterface;
 use OpenPairing\Engine\Matching\WeightedMatchingResult;
 use OpenPairing\Engine\Matching\WeightedMatchingStatus;
 
-/** Development-only progressive persistent-bracket shadow coordinator. */
+/** Progressive persistent-bracket coordinator; the historical name is retained for API compatibility. */
 final readonly class DutchShadowGlobalCoordinator
 {
     public function __construct(

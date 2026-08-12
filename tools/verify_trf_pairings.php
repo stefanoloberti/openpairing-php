@@ -13,6 +13,7 @@ use OpenPairing\Diagnostics\CorpusIdentity;
 use OpenPairing\Diagnostics\ShadowOraclePolicy;
 use OpenPairing\Diagnostics\ShadowPairingComparison;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
+use OpenPairing\Engine\Dutch\LegacyDutchPairingEngine;
 use OpenPairing\Engine\Dutch\DutchRules;
 use OpenPairing\Engine\Dutch\DutchFloatClassifier;
 use OpenPairing\Engine\Dutch\GlobalMatching\DutchPreliminaryRoundMatcher;
@@ -282,7 +283,7 @@ foreach ($corpus['files'] as $corpusFile) {
                 }
                 continue;
             }
-            $result = (new DutchPairingEngine())->pair($state);
+            $result = (new LegacyDutchPairingEngine())->pair($state);
             if ($result->violations !== []) {
                 $code = $result->violations[0]->code;
                 $bucket = $code === 'engine.resource_limit' ? 'roundsEngineResourceLimit' : 'roundsEngineNoSolution';

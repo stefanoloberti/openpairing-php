@@ -63,7 +63,8 @@ final class DutchPairingEngineTest extends TestCase
         self::assertSame(5, $result->byePlayerId);
         self::assertCount(2, $result->tables);
         self::assertSame([], $result->violations);
-        self::assertStringContainsString('1 downfloater', $result->trace[1]['detail']);
+        self::assertSame('engine.dutch_global', $result->diagnostics[0]->code);
+        self::assertContains('pab.selected', array_column($result->trace, 'code'));
         self::assertCount(3, $result->floatAssignments);
         self::assertSame(
             'down',

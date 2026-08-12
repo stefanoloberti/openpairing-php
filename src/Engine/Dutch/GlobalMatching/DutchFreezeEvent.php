@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OpenPairing\Engine\Dutch\GlobalMatching;
 
-/** One irreversible decision made by the development-only shadow coordinator. */
+/** One irreversible decision made by the persistent bracket coordinator. */
 final readonly class DutchFreezeEvent
 {
     public function __construct(
