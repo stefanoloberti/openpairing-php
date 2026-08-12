@@ -25,6 +25,14 @@ the PAB score-position complement omitted QC18/QC20, and conditional C9 was
 incorrectly encoded as a prefix that dominated QC6-QC8. The corrected field
 ordering eliminated all 43 affected tournaments without heuristic adjustment.
 
+The next 9-player partition closes at 69,922/69,922 exact rounds. Its only
+post-C9 residual illustrates why a checker's named first difference is not a
+root-cause label: Gacrux reported QC20 after bracket reconstruction, while a
+direct comparison of PHP matching vectors showed the first PHP error at QC11.
+The missing absolute-preference colour-sequence branch was ported from the
+source formula; both Gacrux and BBP then agreed with the corrected PHP output,
+and the complete p7 partition remained exact.
+
 ## Semantic baseline reset (historical epoch narrative)
 
 On 2026-08-12 the replay entered semantic epoch

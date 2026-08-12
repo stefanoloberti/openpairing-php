@@ -29,6 +29,15 @@
   QC18/QC20 score-position complement and conditional C9 being placed ahead
   of QC6-QC8 instead of at its canonical position. Full p9+ replay remains
   open, so criterion 3 is not yet closed.
+- Closed: the complete 9-player partition at commit `14539a6`: 9,999/9,999
+  decodable tournaments and 69,922/69,922 historical rounds exact, with zero
+  variants, deviations, no-solutions and resource limits. One source file is
+  rejected for its known NUL byte. Evidence is
+  `docs/evidence/pairing-corpus-p9-full-14539a6.json`, corpus manifest
+  `ecd419456f4563ac9505d4f5ee3a4aed83603072f3fc71a5d0d940bd0ab64c64`.
+  Its sole pre-fix residual exposed an incomplete QC11 topscorer colour-sequence
+  case; Gacrux and BBP both selected the recorded reference, and the correction
+  retained the perfect p7 result.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the public `DutchPairingEngine`
