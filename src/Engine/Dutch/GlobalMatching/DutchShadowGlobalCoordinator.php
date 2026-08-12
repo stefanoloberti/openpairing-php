@@ -465,6 +465,14 @@ final readonly class DutchShadowGlobalCoordinator
         array &$timings,
         PersistentWeightedMatchingComputer &$computer,
     ): array {
+        $maxPsd = max(array_map(
+            static fn (int $playerId): int => $graph->scoreRankByPlayerId[$playerId] - $scoreLevel,
+            $remaining,
+        ) ?: [0]);
+        // QC6-QC21 occupy 12 + 6*PSD flattened fields. Odd fields add the
+        // PAB-eligibility prefix ahead of that slice. HE identity selection
+        // may refine only below this complete semantic prefix.
+        $qualityPrefixWidth = 12 + (6 * max(0, $maxPsd)) + ($pabScoreLevel === null ? 0 : 1);
         $targetByLevel = [];
         foreach ($this->selectedMdpIds($stable, $graph, $scoreLevel) as $playerId) {
             $level = $graph->scoreRankByPlayerId[$playerId];
@@ -502,7 +510,9 @@ final readonly class DutchShadowGlobalCoordinator
                     $pair = $this->pairForPlayer($trial, $playerId);
                     $choose = $trial->status === WeightedMatchingStatus::Optimal
                         && $pair !== null
-                        && $graph->scoreRankByPlayerId[$pair['left'] === $playerId ? $pair['right'] : $pair['left']] === $scoreLevel;
+                        && $graph->scoreRankByPlayerId[$pair['left'] === $playerId ? $pair['right'] : $pair['left']] === $scoreLevel
+                        && array_slice($trial->totalWeight, 0, $qualityPrefixWidth)
+                            === array_slice($stable->totalWeight, 0, $qualityPrefixWidth);
                 }
                 if ($choose) {
                     $requirements[$playerId] = true;
