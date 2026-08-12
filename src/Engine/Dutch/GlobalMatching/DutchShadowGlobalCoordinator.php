@@ -261,7 +261,7 @@ final readonly class DutchShadowGlobalCoordinator
                     ? $rightLevel
                     : $leftLevel;
                 $isMatchedHere = $opponentLevel === $scoreLevel;
-                $violations[] = $mustBeMatchedHere !== $isMatchedHere ? -1 : 0;
+                $violations[] = $isMatchedHere ? ($mustBeMatchedHere ? 1 : -1) : 0;
             }
 
             return new WeightedEdge($edge->left, $edge->right, [...$violations, ...$edge->weight]);
