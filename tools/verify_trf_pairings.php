@@ -16,7 +16,10 @@ use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Engine\Dutch\DutchRules;
 use OpenPairing\Engine\Dutch\DutchFloatClassifier;
 use OpenPairing\Engine\Dutch\GlobalMatching\DutchPreliminaryRoundMatcher;
+use OpenPairing\Engine\Dutch\GlobalMatching\DutchQualityRoundGraphBuilder;
+use OpenPairing\Engine\Dutch\GlobalMatching\DutchRoundGraphBuilder;
 use OpenPairing\Engine\Dutch\GlobalMatching\DutchShadowGlobalCoordinator;
+use OpenPairing\Engine\Matching\ExactWeightedGeneralMatcher;
 use OpenPairing\Engine\Matching\WeightedMatchingStatus;
 use OpenPairing\Format\Trf\Trf2026Codec;
 
@@ -62,7 +65,16 @@ try {
 $codec = new Trf2026Codec();
 $rules = new DutchRules();
 $preliminaryMatcher = $auditPreliminaryGlobal ? new DutchPreliminaryRoundMatcher() : null;
-$shadowCoordinator = $auditShadowGlobal ? new DutchShadowGlobalCoordinator() : null;
+$shadowCoordinator = $auditShadowGlobal
+    ? ((getenv('OPENPAIRING_SHADOW_EXACT') === '1')
+        ? new DutchShadowGlobalCoordinator(
+            new DutchRoundGraphBuilder(),
+            new DutchPreliminaryRoundMatcher(),
+            new DutchQualityRoundGraphBuilder(),
+            new ExactWeightedGeneralMatcher(),
+        )
+        : new DutchShadowGlobalCoordinator())
+    : null;
 $counts = [
     'filesSeen' => 0,
     'decoded' => 0,
