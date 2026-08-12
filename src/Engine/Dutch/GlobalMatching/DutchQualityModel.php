@@ -173,16 +173,14 @@ final readonly class DutchQualityModel
             $mdp = $levels[$left->id] > $scoreLevel ? $left : $right;
             $resident = $mdp === $left ? $right : $left;
             $index = ($bsn[$mdp->id] ?? 1) - 1;
-            /** @var list<int> $he1 */
-            $he1 = $components['HE1'];
-            /** @var list<int> $he2 */
-            $he2 = $components['HE2'];
-            if (isset($he2[$index])) {
+            if ($index >= 0 && $index < $mdpCount) {
                 $residentBsn = $bsn[$resident->id] ?? null;
-                $he1[$index] = $residentBsn === null ? 1 : 0;
-                $he2[$index] = $residentBsn === null ? 0 : max(0, $residentBsn - $mdpCount);
-                $components['HE1'] = array_values($he1);
-                $components['HE2'] = array_values($he2);
+                $components['HE1'] = $this->vectorAt($mdpCount, $index, $residentBsn === null ? 1 : 0);
+                $components['HE2'] = $this->vectorAt(
+                    $mdpCount,
+                    $index,
+                    $residentBsn === null ? 0 : max(0, $residentBsn - $mdpCount),
+                );
             }
             return $components;
         }
@@ -212,6 +210,17 @@ final readonly class DutchQualityModel
 
         /** @var array<string, int|list<int>> $components */
         return $components;
+    }
+
+    /** @return list<int> */
+    private function vectorAt(int $length, int $index, int $value): array
+    {
+        $result = [];
+        for ($position = 0; $position < $length; ++$position) {
+            $result[] = $position === $index ? $value : 0;
+        }
+
+        return $result;
     }
 
     /** @return array{int, int, int, int} */
