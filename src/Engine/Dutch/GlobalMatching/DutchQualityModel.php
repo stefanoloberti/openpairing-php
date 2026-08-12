@@ -173,11 +173,16 @@ final readonly class DutchQualityModel
             $mdp = $levels[$left->id] > $scoreLevel ? $left : $right;
             $resident = $mdp === $left ? $right : $left;
             $index = ($bsn[$mdp->id] ?? 1) - 1;
+            /** @var list<int> $he1 */
+            $he1 = $components['HE1'];
             /** @var list<int> $he2 */
             $he2 = $components['HE2'];
             if (isset($he2[$index])) {
-                $he2[$index] = max(0, ($bsn[$resident->id] ?? count($bsn) + 1) - $mdpCount);
-                $components['HE2'] = $he2;
+                $residentBsn = $bsn[$resident->id] ?? null;
+                $he1[$index] = $residentBsn === null ? 1 : 0;
+                $he2[$index] = $residentBsn === null ? 0 : max(0, $residentBsn - $mdpCount);
+                $components['HE1'] = array_values($he1);
+                $components['HE2'] = array_values($he2);
             }
             return $components;
         }

@@ -40,6 +40,24 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame([1], $quality->components['HE2']);
     }
 
+    public function testHeRecordsResidentOutsideBracketInHe1NotHe2(): void
+    {
+        $mdp = $this->player(1, 2);
+        $residentBelow = $this->player(2, 0);
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 3, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$mdp, $residentBelow],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $mdp, $residentBelow, 1, null, [1 => 2, 2 => 0],
+            [$mdp, $residentBelow], [1 => 1],
+        );
+
+        self::assertSame([1], $quality->components['HE1']);
+        self::assertSame([0], $quality->components['HE2']);
+    }
+
     public function testPabComplementKeepsRepeatedDownfloatersMatched(): void
     {
         $repeat = new Player(1, 1, 'Repeat', 2200, '', '', '', true, Score::zero(), floatHistory: ['down', 'down']);
