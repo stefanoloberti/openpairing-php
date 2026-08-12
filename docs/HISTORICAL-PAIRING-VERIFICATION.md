@@ -32,7 +32,8 @@ zero no-matchings. The attested report is
 `62c99333645817d956f37c3e41808561c1312d219f89fdba8061e2b400c53e4f`,
 corpus manifest SHA-256 remains
 `e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44`, and
-the checkpoint is Git tag `epoch-2-dutch-500` at commit `f419b7c`.
+the checkpoint and its evidence are Git tag `epoch-2-dutch-500` at commit
+`58ab5c6` (the functional fix itself is `f419b7c`).
 
 The larger-field gate is still open for performance. Ten-tournament samples
 at 30 and 50 players completed with zero shadow no-matchings; the bounded
