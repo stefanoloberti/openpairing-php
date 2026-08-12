@@ -1,0 +1,62 @@
+{
+  "schema": "openpairing.regression-manifest/1",
+  "cases": [
+    {
+      "id": "initial-3-white",
+      "seed": null,
+      "input": "tests/Fixtures/initial-3.json",
+      "inputSha256": "1352476604564f8c18cf983fed2fd5ef553779907f7fb9f06207eda199f7cf8f",
+      "tournamentSchema": "openpairing.tournament/1",
+      "phpAlgorithm": "fide-dutch-2026.initial/1",
+      "phpResult": {
+        "pairs": [{"whitePlayerId": 1, "blackPlayerId": 2}],
+        "byePlayerId": 3
+      },
+      "oracle": {
+        "name": "Gacrux/TieBreakServer",
+        "commit": "14a34a2c2f36509b110e4f25d6247f31fc4bf2f5",
+        "result": {
+          "pairs": [{"whitePlayerId": 1, "blackPlayerId": 2}],
+          "byePlayerId": 3
+        }
+      },
+      "comparison": "exact",
+      "diagnostics": []
+    },
+    {
+      "id": "round-2-four-two-scoregroups",
+      "seed": null,
+      "input": "tests/Fixtures/round-2-four.json",
+      "inputSha256": "9cc960ed1caedeab1c79ecf51b74f1f0418db2ea1b0c240c51f46fe0719f8232",
+      "tournamentSchema": "openpairing.tournament/1",
+      "phpAlgorithm": "fide-dutch-2026.brackets/1",
+      "phpResult": {
+        "pairs": [
+          {"whitePlayerId": 4, "blackPlayerId": 1},
+          {"whitePlayerId": 2, "blackPlayerId": 3}
+        ],
+        "byePlayerId": null
+      },
+      "oracles": [
+        {"name": "Gacrux/TieBreakServer", "commit": "14a34a2c2f36509b110e4f25d6247f31fc4bf2f5", "comparison": "exact"},
+        {"name": "BBP Pairings", "commit": "8f9e3c5ffdc4d7a08a33d31c6fb49b4e7acef4d5", "comparison": "exact"}
+      ],
+      "diagnostics": []
+    },
+    {
+      "id": "gacrux-individual-tiebreak-round-robin",
+      "seed": null,
+      "input": "tests/Regression/gacrux-individual-tiebreak-round-robin.json",
+      "inputSha256": "d855da9bb1b6058bec9daf7de8bb9b7af1c9d0c0df21aae421db0b46e196ddef",
+      "tournamentSchema": "openpairing.tiebreak-regression/1",
+      "phpAlgorithm": "fide-tiebreak-2026.individual/1",
+      "oracle": {
+        "name": "Gacrux/TieBreakServer",
+        "commit": "14a34a2c2f36509b110e4f25d6247f31fc4bf2f5"
+      },
+      "descriptors": ["BH", "FB", "AOB", "AOB/F", "KS", "TPR", "PTP", "APRO", "APPO"],
+      "comparison": "exact",
+      "diagnostics": []
+    }
+  ]
+}

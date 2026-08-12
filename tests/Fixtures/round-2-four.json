@@ -1,0 +1,22 @@
+{
+  "schema": "openpairing.tournament/1",
+  "tournamentName": "Round Two Four",
+  "round": 2,
+  "numberOfRounds": 5,
+  "pairingSystem": "fide-dutch-2026",
+  "configuration": {"topColour": "white", "maxPlayers": 256},
+  "scoring": {
+    "win": {"units": 1, "scale": 1},
+    "draw": {"units": 1, "scale": 2},
+    "loss": {"units": 0, "scale": 1},
+    "zeroPointBye": {"units": 0, "scale": 1},
+    "pairingAllocatedBye": {"units": 1, "scale": 1},
+    "unknown": {"units": 1, "scale": 2}
+  },
+  "players": [
+    {"id":1,"pairingNumber":1,"name":"Player 1","rating":2199,"title":"","team":"","club":"","active":true,"score":{"units":1,"scale":1},"opponentHistory":[3],"colourHistory":["white"],"results":[{"round":1,"opponentId":3,"colour":"white","result":"1","played":true}],"receivedPairingAllocatedBye":false,"floatHistory":["none"],"acceleration":null},
+    {"id":2,"pairingNumber":2,"name":"Player 2","rating":2198,"title":"","team":"","club":"","active":true,"score":{"units":0,"scale":1},"opponentHistory":[4],"colourHistory":["black"],"results":[{"round":1,"opponentId":4,"colour":"black","result":"0","played":true}],"receivedPairingAllocatedBye":false,"floatHistory":["none"],"acceleration":null},
+    {"id":3,"pairingNumber":3,"name":"Player 3","rating":2197,"title":"","team":"","club":"","active":true,"score":{"units":0,"scale":1},"opponentHistory":[1],"colourHistory":["black"],"results":[{"round":1,"opponentId":1,"colour":"black","result":"0","played":true}],"receivedPairingAllocatedBye":false,"floatHistory":["none"],"acceleration":null},
+    {"id":4,"pairingNumber":4,"name":"Player 4","rating":2196,"title":"","team":"","club":"","active":true,"score":{"units":1,"scale":1},"opponentHistory":[2],"colourHistory":["white"],"results":[{"round":1,"opponentId":2,"colour":"white","result":"1","played":true}],"receivedPairingAllocatedBye":false,"floatHistory":["none"],"acceleration":null}
+  ]
+}
