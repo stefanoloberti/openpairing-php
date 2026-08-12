@@ -34,18 +34,83 @@ final class ColourAllocatorTest extends TestCase
         self::assertSame('5.2.2', $allocation->rule);
     }
 
-    public function testFallsBackToInitialColourAndTpnParity(): void
+    public function testFallsBackToInitialColourAndInitialRankParity(): void
     {
         $left = $this->player(2, []);
         $right = $this->player(3, []);
         $allocation = (new ColourAllocator())->allocate($this->state([$left, $right]), $left, $right);
 
-        self::assertSame(3, $allocation->white->id);
+        self::assertSame(2, $allocation->white->id);
         self::assertSame('5.2.5', $allocation->rule);
     }
 
-    /** @param list<Colour> $colours */
-    private function player(int $id, array $colours): Player
+    public function testInitialRankParityDoesNotAssumeContiguousPairingNumbers(): void
+    {
+        $higher = $this->player(20, []);
+        $opponent = $this->player(66, []);
+        $before = [];
+        for ($id = 1; $id < 20; ++$id) {
+            $before[] = $this->player($id, []);
+        }
+
+        $allocation = (new ColourAllocator())->allocate(
+            $this->state([...$before, $higher, $opponent]),
+            $higher,
+            $opponent,
+        );
+
+        self::assertSame(66, $allocation->white->id);
+        self::assertSame(20, $allocation->black->id);
+        self::assertSame('5.2.5', $allocation->rule);
+    }
+
+    public function testInactivePreviousParticipantRetainsEffectiveTpn(): void
+    {
+        $first = $this->player(1, []);
+        $sittingOut = $this->player(2, [], active: false, results: [[
+            'round' => 1,
+            'opponentId' => 9,
+            'colour' => 'white',
+            'result' => '1',
+            'played' => true,
+        ]]);
+        $higher = $this->player(3, []);
+        $opponent = $this->player(8, []);
+
+        $allocation = (new ColourAllocator())->allocate(
+            $this->state([$first, $sittingOut, $higher, $opponent]),
+            $higher,
+            $opponent,
+        );
+
+        self::assertSame(3, $allocation->white->id);
+        self::assertSame(8, $allocation->black->id);
+        self::assertSame('5.2.5', $allocation->rule);
+    }
+
+    public function testNeverEnteredPlayerIsExcludedFromEffectiveTpn(): void
+    {
+        $first = $this->player(1, []);
+        $neverEntered = $this->player(2, [], active: false);
+        $higher = $this->player(3, []);
+        $opponent = $this->player(8, []);
+
+        $allocation = (new ColourAllocator())->allocate(
+            $this->state([$first, $neverEntered, $higher, $opponent]),
+            $higher,
+            $opponent,
+        );
+
+        self::assertSame(8, $allocation->white->id);
+        self::assertSame(3, $allocation->black->id);
+        self::assertSame('5.2.5', $allocation->rule);
+    }
+
+    /**
+     * @param list<Colour> $colours
+     * @param list<array{round: int, opponentId: int|null, colour: string|null, result: string, played: bool}> $results
+     */
+    private function player(int $id, array $colours, bool $active = true, array $results = []): Player
     {
         return new Player(
             id: $id,
@@ -55,9 +120,10 @@ final class ColourAllocatorTest extends TestCase
             title: '',
             team: '',
             club: '',
-            active: true,
+            active: $active,
             score: Score::zero(),
             colourHistory: $colours,
+            results: $results,
         );
     }
 

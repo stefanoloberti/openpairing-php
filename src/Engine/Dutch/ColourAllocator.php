@@ -60,7 +60,22 @@ final readonly class ColourAllocator
             return $this->grant($higher, $lower, $higherPreference->colour, '5.2.4');
         }
 
-        $higherColour = $higher->pairingNumber % 2 === 1 ? $state->topColour : $state->topColour->opposite();
+        // Article 5.2.5 uses the effective TPN. Players who participated in an
+        // earlier pairing retain a TPN even while sitting out this round; late
+        // entries receive one when they first participate. BBP represents that
+        // one-based TPN as a dense, zero-based rankIndex.
+        $ranked = array_values(array_filter(
+            $state->players,
+            fn (Player $player): bool => $this->participatedInPairing($player),
+        ));
+        usort($ranked, static fn (Player $left, Player $right): int =>
+            $left->pairingNumber <=> $right->pairingNumber
+        );
+        $rankIndex = array_search($higher->id, array_map(static fn (Player $player): int => $player->id, $ranked), true);
+        if (!is_int($rankIndex)) {
+            throw new \LogicException('The colour-allocation player is absent from the active initial ranking.');
+        }
+        $higherColour = ($rankIndex & 1) === 0 ? $state->topColour : $state->topColour->opposite();
 
         return $this->grant($higher, $lower, $higherColour, '5.2.5');
     }
@@ -90,6 +105,21 @@ final readonly class ColourAllocator
             ColourPreferenceStrength::Strong => 2,
             ColourPreferenceStrength::Absolute => 3,
         };
+    }
+
+    private function participatedInPairing(Player $player): bool
+    {
+        if ($player->active) {
+            return true;
+        }
+
+        foreach ($player->results as $result) {
+            if ($result['opponentId'] !== null || in_array(strtoupper($result['result']), ['U', '+'], true)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @return list<Colour> */
