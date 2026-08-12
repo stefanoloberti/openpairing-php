@@ -97,7 +97,14 @@ final readonly class DutchShadowGlobalCoordinator
                 }
                 $opponentId = $pair['left'] === $mdpId ? $pair['right'] : $pair['left'];
                 if ($graph->scoreRankByPlayerId[$opponentId] !== $scoreLevel) {
-                    return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], [$mdpId, $opponentId], null, $timings, $freezeEvents);
+                    return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], [
+                        $mdpId,
+                        $opponentId,
+                        $scoreLevel,
+                        $graph->scoreRankByPlayerId[$mdpId],
+                        $graph->scoreRankByPlayerId[$opponentId],
+                        ...$selectedMdpIds,
+                    ], null, $timings, $freezeEvents);
                 }
                 $this->freezePair(
                     $pair, $bracketIndex, $scoreLevel, $computer,
@@ -337,7 +344,12 @@ final readonly class DutchShadowGlobalCoordinator
             if ($leftMdp === $rightMdp) {
                 continue;
             }
-            $mdpIds[] = $leftMdp ? $pair['left'] : $pair['right'];
+            $mdpId = $leftMdp ? $pair['left'] : $pair['right'];
+            $opponentId = $leftMdp ? $pair['right'] : $pair['left'];
+            if ($graph->scoreRankByPlayerId[$opponentId] !== $scoreLevel) {
+                continue;
+            }
+            $mdpIds[] = $mdpId;
         }
         usort($mdpIds, static fn (int $left, int $right): int =>
             ($graph->scoreRankByPlayerId[$right] <=> $graph->scoreRankByPlayerId[$left])
