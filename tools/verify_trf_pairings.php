@@ -42,6 +42,7 @@ try {
 $directory = $argv[1] ?? '';
 $limit = isset($argv[2]) ? (int) $argv[2] : 0;
 $mode = $argv[3] ?? '';
+$productionOnly = $mode === '--production';
 $largeField = $mode === '--large-field';
 $shadowOnly = $mode === '--shadow-only' || $largeField;
 $auditShadowGlobal = $mode === '--shadow-global' || $shadowOnly;
@@ -52,8 +53,8 @@ if ($roundFilterRaw !== false && $roundFilterRaw !== '' && (!is_int($roundFilter
     fwrite(STDERR, "OPENPAIRING_ROUND_ONLY must be a positive integer.\n");
     exit(2);
 }
-if ($directory === '' || !is_dir($directory) || $limit < 0 || ($mode !== '' && !$auditPreliminaryGlobal)) {
-    fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--preliminary-global|--shadow-global|--shadow-only|--large-field]\n");
+if ($directory === '' || !is_dir($directory) || $limit < 0 || ($mode !== '' && !$auditPreliminaryGlobal && !$productionOnly)) {
+    fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--production|--preliminary-global|--shadow-global|--shadow-only|--large-field]\n");
     exit(2);
 }
 $root = realpath($directory);
@@ -283,7 +284,9 @@ foreach ($corpus['files'] as $corpusFile) {
                 }
                 continue;
             }
-            $result = (new LegacyDutchPairingEngine())->pair($state);
+            $result = $productionOnly
+                ? (new DutchPairingEngine())->pair($state)
+                : (new LegacyDutchPairingEngine())->pair($state);
             if ($result->violations !== []) {
                 $code = $result->violations[0]->code;
                 $bucket = $code === 'engine.resource_limit' ? 'roundsEngineResourceLimit' : 'roundsEngineNoSolution';
@@ -409,6 +412,7 @@ echo json_encode([
     'root' => $root,
     'limit' => $limit,
     'roundFilter' => $roundFilter,
+    'productionOnly' => $productionOnly,
     'performanceRuntime' => [
         'opcacheEnableCli' => (string) ini_get('opcache.enable_cli'),
         'jit' => (string) ini_get('opcache.jit'),
