@@ -221,6 +221,23 @@ foreach ($corpus['files'] as $corpusFile) {
             if ($shadow !== null) {
                 if ($shadow->status !== WeightedMatchingStatus::Optimal) {
                     ++$counts['shadow.noMatching'];
+                    sample($shadowSamples, $relative, $round, 'shadow.no-matching', 'Persistent coordinator did not complete the round.', [
+                        'unmatchedPlayerIds' => $shadow->unmatchedPlayerIds,
+                        'timings' => array_map(static fn ($timing): array => [
+                            'scoreLevel' => $timing->scoreLevel,
+                            'phase' => $timing->phase,
+                            'remainingVertices' => $timing->remainingVertices,
+                        ], $shadow->timings),
+                        'freezeEvents' => array_map(static fn ($event): array => [
+                            'sequence' => $event->sequence,
+                            'bracketIndex' => $event->bracketIndex,
+                            'scoreLevel' => $event->scoreLevel,
+                            'left' => $event->left,
+                            'right' => $event->right,
+                            'remainingVerticesBefore' => $event->remainingVerticesBefore,
+                            'remainingVerticesAfter' => $event->remainingVerticesAfter,
+                        ], $shadow->freezeEvents),
+                    ]);
                 } else {
                     $shadowGenerated = shadowRound($state, $shadow);
                     $category = ShadowPairingComparison::classify($reference, $generated, $shadowGenerated);
