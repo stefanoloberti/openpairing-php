@@ -72,6 +72,7 @@ final readonly class DutchShadowGlobalCoordinator
                 return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], $realRemaining, null, $timings, $freezeEvents);
             }
             $selectedMdpIds = $this->selectedMdpIds($he, $graph, $scoreLevel);
+            $selectedMdpPairs = $this->selectedMdpPairs($he, $graph, $scoreLevel);
             $homogeneousPairs = 0;
             foreach ($he->pairs as $pair) {
                 if ($pair['left'] !== 0 && $pair['right'] !== 0
@@ -95,6 +96,7 @@ final readonly class DutchShadowGlobalCoordinator
                 $timings,
                 $computer,
                 $selectedMdpIds,
+                $selectedMdpPairs,
             );
             if ($ho->status !== WeightedMatchingStatus::Optimal) {
                 return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], $realRemaining, null, $timings, $freezeEvents);
@@ -153,6 +155,7 @@ final readonly class DutchShadowGlobalCoordinator
      * @param list<DutchBracketTiming> $timings
      * @param-out PersistentWeightedMatchingComputer $computer
      * @param list<int> $selectedMdpIds
+     * @param list<array{left: int, right: int}> $selectedMdpPairs
      */
     private function rematch(
         TournamentState $state,
@@ -168,6 +171,7 @@ final readonly class DutchShadowGlobalCoordinator
         array &$timings,
         ?PersistentWeightedMatchingComputer &$computer,
         array $selectedMdpIds = [],
+        array $selectedMdpPairs = [],
     ): WeightedMatchingResult {
         $started = hrtime(true);
         $edges = $this->qualityGraphBuilder->edges(
@@ -181,7 +185,7 @@ final readonly class DutchShadowGlobalCoordinator
         if ($pabScoreLevel !== null) {
             $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies);
         }
-        $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $selectedMdpIds);
+        $edges = $this->constraintWeightedEdges($edges, $graph, $scoreLevel, $selectedMdpIds, $selectedMdpPairs);
         if ($computer === null) {
             $computer = new PersistentWeightedMatchingComputer($remaining, $edges, $this->matcher);
         } else {
@@ -205,26 +209,28 @@ final readonly class DutchShadowGlobalCoordinator
      *
      * @param list<WeightedEdge> $edges
      * @param list<int> $selectedMdpIds
+     * @param list<array{left: int, right: int}> $selectedMdpPairs
      * @return list<WeightedEdge>
      */
-    private function constraintWeightedEdges(array $edges, DutchRoundGraph $graph, int $scoreLevel, array $selectedMdpIds): array
+    private function constraintWeightedEdges(array $edges, DutchRoundGraph $graph, int $scoreLevel, array $selectedMdpIds, array $selectedMdpPairs): array
     {
         $selectedMdpSet = array_fill_keys($selectedMdpIds, true);
+        $selectedPairSet = [];
+        foreach ($selectedMdpPairs as $pair) {
+            $selectedPairSet[min($pair['left'], $pair['right']).':'.max($pair['left'], $pair['right'])] = true;
+        }
 
-        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $selectedMdpSet): WeightedEdge {
+        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $selectedMdpSet, $selectedPairSet): WeightedEdge {
             $violation = 0;
-            $leftLevel = $graph->scoreRankByPlayerId[$edge->left];
-            $rightLevel = $graph->scoreRankByPlayerId[$edge->right];
-            if ($leftLevel > $scoreLevel && $rightLevel > $scoreLevel) {
-                ++$violation;
-            }
-            foreach ([[$edge->left, $rightLevel], [$edge->right, $leftLevel]] as [$playerId, $opponentLevel]) {
-                if ($graph->scoreRankByPlayerId[$playerId] <= $scoreLevel) {
-                    continue;
+            if ($edge->left !== 0 && $edge->right !== 0) {
+                if ($graph->scoreRankByPlayerId[$edge->left] > $scoreLevel
+                    && $graph->scoreRankByPlayerId[$edge->right] > $scoreLevel) {
+                    ++$violation;
                 }
-                $selected = isset($selectedMdpSet[$playerId]);
-                $matchedInCurrentBracket = $opponentLevel === $scoreLevel;
-                if ($selected !== $matchedInCurrentBracket) {
+                $leftSelected = isset($selectedMdpSet[$edge->left]);
+                $rightSelected = isset($selectedMdpSet[$edge->right]);
+                if (($leftSelected || $rightSelected)
+                    && !isset($selectedPairSet[min($edge->left, $edge->right).':'.max($edge->left, $edge->right)])) {
                     ++$violation;
                 }
             }
@@ -285,6 +291,20 @@ final readonly class DutchShadowGlobalCoordinator
         );
 
         return $mdpIds;
+    }
+
+    /** @return list<array{left: int, right: int}> */
+    private function selectedMdpPairs(WeightedMatchingResult $matching, DutchRoundGraph $graph, int $scoreLevel): array
+    {
+        $pairs = [];
+        foreach ($matching->pairs as $pair) {
+            if (($graph->scoreRankByPlayerId[$pair['left']] > $scoreLevel)
+                !== ($graph->scoreRankByPlayerId[$pair['right']] > $scoreLevel)) {
+                $pairs[] = $pair;
+            }
+        }
+
+        return $pairs;
     }
 
     private function singleDownfloaterIsByeAssignee(DutchPreliminaryRoundResult $preliminary, DutchRoundGraph $graph): bool
