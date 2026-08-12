@@ -38,7 +38,7 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
         self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
         self::assertSame('preliminary', $result->timings[0]->phase);
         self::assertSame(
-            ['preliminary', 'quality-HE', 'quality-HO-remainder', 'quality-HE', 'quality-HO-remainder', 'quality-HE'],
+            ['preliminary', 'quality-HE', 'quality-HO-remainder', 'quality-HO-remainder', 'quality-HE', 'quality-HO-remainder', 'quality-HE'],
             array_map(static fn ($timing): string => $timing->phase, $result->timings),
         );
         foreach ($result->timings as $timing) {
@@ -110,12 +110,14 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
 
         self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
         self::assertNotEmpty($recorder->calls);
-        foreach (array_chunk($recorder->calls, 2) as $phaseCalls) {
-            if (count($phaseCalls) !== 2) {
-                continue;
+        $edgesByActiveVertices = [];
+        foreach ($recorder->calls as $call) {
+            $key = implode(',', $call['vertices']);
+            if (isset($edgesByActiveVertices[$key])) {
+                self::assertSame($edgesByActiveVertices[$key], $call['edges']);
+            } else {
+                $edgesByActiveVertices[$key] = $call['edges'];
             }
-            self::assertSame($phaseCalls[0]['vertices'], $phaseCalls[1]['vertices']);
-            self::assertSame($phaseCalls[0]['edges'], $phaseCalls[1]['edges']);
         }
     }
 

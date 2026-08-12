@@ -116,7 +116,7 @@ final readonly class DutchShadowGlobalCoordinator
             // Only after heterogeneous opponents are final does the current
             // matching define the remainder. Freeze resident-resident pairs;
             // residents matched below remain active and move to the next bracket.
-            if (count($remaining) > ($preliminaryBye === null ? 0 : 1)) {
+            while (count($remaining) > ($preliminaryBye === null ? 0 : 1)) {
                 $remainder = $this->rematch(
                     $state, $graph, $remaining, $remaining, $scoreLevel,
                     $pabScoreLevel, $c9Applies, $bsn, $homogeneousPairs,
@@ -130,12 +130,20 @@ final readonly class DutchShadowGlobalCoordinator
                     static fn (array $pair): bool => $graph->scoreRankByPlayerId[$pair['left']] === $scoreLevel
                         && $graph->scoreRankByPlayerId[$pair['right']] === $scoreLevel,
                 ));
-                foreach ($residentPairs as $pair) {
-                    $this->freezePair(
-                        $pair, $bracketIndex, $scoreLevel, $computer,
-                        $remaining, $frozenPairs, $freezeEvents,
-                    );
+                if ($residentPairs === []) {
+                    break;
                 }
+                usort($residentPairs, static function (array $left, array $right) use ($bsn): int {
+                    $leftFirst = min($bsn[$left['left']], $bsn[$left['right']]);
+                    $rightFirst = min($bsn[$right['left']], $bsn[$right['right']]);
+
+                    return ($leftFirst <=> $rightFirst)
+                        ?: (max($bsn[$left['left']], $bsn[$left['right']]) <=> max($bsn[$right['left']], $bsn[$right['right']]));
+                });
+                $this->freezePair(
+                    $residentPairs[0], $bracketIndex, $scoreLevel, $computer,
+                    $remaining, $frozenPairs, $freezeEvents,
+                );
             }
         }
 
