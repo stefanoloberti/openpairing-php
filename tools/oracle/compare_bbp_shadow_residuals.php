@@ -62,9 +62,14 @@ foreach ($report['shadowSamples'] ?? [] as $sample) {
         'stderr' => $bbp->stderr,
     ];
 }
+$reportGitCommit = getenv('OPENPAIRING_REPORT_GIT_COMMIT');
+if (!is_string($reportGitCommit) || preg_match('/^[0-9a-f]{40}$/D', $reportGitCommit) !== 1) {
+    fwrite(STDERR, "OPENPAIRING_REPORT_GIT_COMMIT must identify the committed tree used by the report.\n");
+    exit(3);
+}
 $output = [
     'schema' => 'openpairing.bbp-shadow-residual-comparison/1',
-    'sourceGitCommit' => trim((string) shell_exec('git -C '.escapeshellarg($root).' rev-parse HEAD')),
+    'sourceGitCommit' => $reportGitCommit,
     'sourceRuntimeIdentity' => $report['runtimeIdentity'] ?? null,
     'sourceCorpusIdentity' => $report['corpusIdentity'] ?? null,
     'sourceHistoricalFloatSemantics' => $report['historicalFloatSemantics'] ?? null,
