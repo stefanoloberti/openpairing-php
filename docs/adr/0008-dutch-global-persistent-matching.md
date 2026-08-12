@@ -8,6 +8,12 @@ their QC distributions) is retained only as non-gating debugging history. The
 correct frozen baseline is legacy 455/500 and shadow 489/500 with zero
 no-matchings. All 11 shadow residuals are independently Gacrux-inferior.
 
+The latest retained lifecycle checkpoint is 494/500 with zero no-matchings,
+attested by `docs/evidence/pairing-epoch2-lifecycle-c9-494.json`. Carrying BBP's
+conditional C9 state across bracket transitions removed four inferior
+regressions. Six Gacrux-inferior cases remain; production wiring is still
+forbidden.
+
 The polynomial matcher must not be inserted independently into the current
 `solveGroups()` loop. Independent bracket optima cannot compare PAB choices or
 float chains and therefore cannot close the frozen epoch-2 gate.
@@ -28,6 +34,13 @@ bracket” or “one immutable whole-round matching”:
    and deterministic BSN order, then freezes accepted edges. Unmatched vertices
    remain in the same graph and flow to the next bracket.
 5. Only after all brackets have been finalized is the round emitted.
+
+An attempted partial port of BBP's per-score-group MDP identity selection
+improved one HE2 residual in isolation but produced 12 no-matchings and reduced
+the full frozen replay to 482 exact rounds. It was reverted immediately. The
+failure shows that `remainingMatchedMovedDownScoreGroupPlayers` and its
+matched/remainder accounting must be ported atomically; fixing earlier MDPs as
+unmatched without that state is over-constraining.
 
 Thus bracket structure remains control flow, but never becomes a sequence of
 isolated matching problems. Global PAB/float information is encoded in the

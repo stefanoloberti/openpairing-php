@@ -24,6 +24,14 @@ missing matched/remainder/exchange lifecycle, not a valid rules interpretation.
 Mechanism claims therefore require the normative text or pinned primary source
 in addition to output parity.
 
+The later lifecycle port supplied the missing state and made conditional C9 a
+real improvement rather than compensation: the frozen replay moved from
+490/500 to 494/500 with zero no-matchings. Conversely, a partial MDP-identity
+selection cycle fixed T0032 in a three-file slice but caused 12 no-matchings in
+the complete sample. It was reverted. Micro-corpus progress is therefore a
+diagnostic, never a checkpoint; every retained mechanism must survive the full
+frozen gate.
+
 OpenPairing treats a plausible explanation as a hypothesis, not a pairing
 verdict. Before changing Dutch selection logic, the smallest isolating
 counterfactual is sent to the independent Gacrux checker and the report records

@@ -36,6 +36,15 @@ evidence is `docs/evidence/pairing-epoch2-v3-pab-unmatched-490.json`; mutable
 truth. The checkpoint remains shadow-only while the matched/remainder/exchange
 lifecycle is incomplete.
 
+The retained conditional-C9 bracket lifecycle raises the attested shadow
+checkpoint to 494/500 with zero no-matchings (452 both exact, 42 progress, 3
+regressions, 1 same deviation and 2 divergent deviations). All six residuals
+are Gacrux-inferior; their first differences are three HE2 cases plus QC15,
+QC17 and QC18. The authoritative counters and identities are in
+`docs/evidence/pairing-epoch2-lifecycle-c9-494.json`; the complete oracle
+analyses are the adjacent `gacrux-lifecycle-c9-494-*.json` reports. The gate
+remains open at 500/500.
+
 Parser validation is not pairing-engine verification. The historical verifier
 reconstructs the tournament state immediately before every recorded round,
 runs the native PHP Dutch engine, then compares opponents, colours and PAB with

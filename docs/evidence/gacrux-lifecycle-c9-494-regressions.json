@@ -1,0 +1,3635 @@
+{
+  "schema": "openpairing.gacrux-quality-classification/2",
+  "sampleSet": "shadow-regressions",
+  "sourceReport": "/tmp/historical-lifecycle-current-mdp-500.json",
+  "sourceRuntimeIdentity": {
+    "schema": "openpairing.runtime-code-identity/1",
+    "projectRoot": "/tmp/openpairing-validation/releases/573fbfbed220b404",
+    "autoloadPsr4Roots": [
+      "/tmp/openpairing-validation/releases/573fbfbed220b404/src"
+    ],
+    "expectedEnginePath": "/tmp/openpairing-validation/releases/573fbfbed220b404/src/Engine/Dutch/DutchPairingEngine.php",
+    "loadedEnginePath": "/tmp/openpairing-validation/releases/573fbfbed220b404/src/Engine/Dutch/DutchPairingEngine.php",
+    "engineVersion": "fide-dutch-2026.brackets/1",
+    "engineSha256": "e32a44603c382717a339d13ec9fdb0774ead055dfc3311d3a4ce79f27ee23d6e",
+    "sourceTreeSha256": "8383a8db194c6ce024626444326bdcd87df63530e56d2c85a6218aeeecfa5a80",
+    "sourceFileCount": 78
+  },
+  "sourceCorpusIdentity": {
+    "schema": "openpairing.corpus-identity/1",
+    "selection": "relative-path-ordinal-v1",
+    "requestedLimit": 0,
+    "fileCount": 100,
+    "totalBytes": 123100,
+    "manifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44"
+  },
+  "sourceHistoricalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+  "upstream": "/srv/chesspairings-engine-staging/releases/production-engines-20260810/gacrux",
+  "counts": {
+    "inferior-to-checker-optimum": 3
+  },
+  "results": [
+    {
+      "file": "T0032.trf",
+      "round": 4,
+      "category": "inferior-to-checker-optimum",
+      "rules": "2026-02-01",
+      "checkerExact": false,
+      "firstDifference": {
+        "bracketIndex": 3,
+        "scorelevel": 1,
+        "criterion": "HE2",
+        "candidate": [
+          0,
+          1
+        ],
+        "best": [
+          1,
+          0
+        ]
+      },
+      "candidateBrackets": [
+        {
+          "scorelevel": 4,
+          "competitors": [
+            5
+          ],
+          "pairs": [],
+          "downfloaters": [
+            5
+          ],
+          "remaining": [
+            6,
+            2,
+            3,
+            4,
+            7,
+            1,
+            0
+          ],
+          "quality": {
+            "QC6": null,
+            "QC7": null,
+            "QN8": null,
+            "QC8": null,
+            "QC9": null,
+            "QMM": null,
+            "QC10": null,
+            "QC11": null,
+            "QC12": null,
+            "QC13": null,
+            "QC14": null,
+            "QC15": null,
+            "QC16": null,
+            "QC17": null,
+            "QC18": null,
+            "QC19": null,
+            "QC20": null,
+            "QC21": null,
+            "HE1": null,
+            "HE2": null,
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null,
+            "QL": null,
+            "HE0": null,
+            "HO0": null,
+            "B0": null,
+            "QS": null
+          },
+          "bsne": {
+            "5": 1
+          },
+          "bsno": {
+            "5": 1
+          },
+          "pab": false
+        },
+        {
+          "scorelevel": 3,
+          "competitors": [
+            5,
+            6
+          ],
+          "pairs": [
+            {
+              "ca": 5,
+              "cb": 6,
+              "sa": 4,
+              "sb": 3,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 3,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 1,
+                "QC13": 1,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 2561,
+              "qcweight": 640,
+              "heweight": 1,
+              "howeight": 1,
+              "colordiff": "BB",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "b": 5,
+              "w": 6,
+              "colorrule": "E.2",
+              "board": 1
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [
+            2,
+            3,
+            4,
+            7,
+            1,
+            0
+          ],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0
+            ],
+            "QN8": 2,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 1,
+            "QC13": 1,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "5": 1,
+            "6": 2
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 2,
+          "competitors": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "pairs": [
+            {
+              "ca": 2,
+              "cb": 4,
+              "sa": 2,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 2,
+              "quality": {
+                "QC6": 0,
+                "QC7": [],
+                "QN8": 0,
+                "QC8": [
+                  1
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [],
+                "QC19": [],
+                "QC20": [],
+                "QC21": [],
+                "HE1": [],
+                "HE2": [],
+                "HO1": 0,
+                "HO2": 0,
+                "HO3": [
+                  1
+                ],
+                "HO4": [
+                  3,
+                  3,
+                  3
+                ],
+                "HO5": [
+                  2,
+                  0,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 94,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 94,
+              "colordiff": "bw",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "b": 2,
+              "w": 4,
+              "colorrule": "E.1",
+              "board": 2
+            }
+          ],
+          "downfloaters": [
+            3,
+            7
+          ],
+          "remaining": [
+            1,
+            0
+          ],
+          "quality": {
+            "QC6": 2,
+            "QC7": [],
+            "QN8": 1,
+            "QC8": [
+              1
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [],
+            "QC19": [],
+            "QC20": [],
+            "QC21": [],
+            "HE1": null,
+            "HE2": null,
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [
+              1
+            ],
+            "HO4": [
+              3,
+              3,
+              3
+            ],
+            "HO5": [
+              2,
+              0,
+              0
+            ],
+            "IW": null
+          },
+          "bsne": {
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "7": 4
+          },
+          "bsno": {
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "7": 4
+          },
+          "pab": true
+        },
+        {
+          "scorelevel": 1,
+          "competitors": [
+            3,
+            7,
+            1
+          ],
+          "pairs": [
+            {
+              "ca": 1,
+              "cb": 7,
+              "sa": 1,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  1
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 1,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0,
+                  0
+                ],
+                "HE2": [
+                  0,
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 12961,
+              "qcweight": 810,
+              "heweight": 1,
+              "howeight": 42,
+              "colordiff": "Ww",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "b": 1,
+              "w": 7,
+              "colorrule": "E.2",
+              "board": 3
+            }
+          ],
+          "downfloaters": [
+            3
+          ],
+          "remaining": [
+            0
+          ],
+          "quality": {
+            "QC6": 1,
+            "QC7": [
+              1
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 1,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0,
+              0
+            ],
+            "HE2": [
+              0,
+              1
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "3": 1,
+            "7": 2,
+            "1": 3
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 0,
+          "competitors": [
+            3,
+            0
+          ],
+          "pairs": [
+            {
+              "ca": 0,
+              "cb": 3,
+              "sa": 0,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 0,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0,
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0,
+                  0
+                ],
+                "QC19": [
+                  0,
+                  0
+                ],
+                "QC20": [
+                  0,
+                  0
+                ],
+                "QC21": [
+                  0,
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 0,
+              "colordiff": "W ",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 3,
+              "b": 0,
+              "colorrule": "pab",
+              "board": 4
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0,
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0,
+              0
+            ],
+            "QC19": [
+              0,
+              0
+            ],
+            "QC20": [
+              0,
+              0
+            ],
+            "QC21": [
+              0,
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null
+          },
+          "bsne": {
+            "3": 1,
+            "0": 2
+          },
+          "bsno": {},
+          "pab": false
+        }
+      ],
+      "bestBrackets": [
+        {
+          "scorelevel": 4,
+          "competitors": [
+            5
+          ],
+          "pairs": [],
+          "downfloaters": [
+            5
+          ],
+          "remaining": [
+            6,
+            2,
+            3,
+            4,
+            7,
+            1,
+            0
+          ],
+          "quality": {
+            "QC6": null,
+            "QC7": null,
+            "QN8": null,
+            "QC8": null,
+            "QC9": null,
+            "QMM": null,
+            "QC10": null,
+            "QC11": null,
+            "QC12": null,
+            "QC13": null,
+            "QC14": null,
+            "QC15": null,
+            "QC16": null,
+            "QC17": null,
+            "QC18": null,
+            "QC19": null,
+            "QC20": null,
+            "QC21": null,
+            "HE1": null,
+            "HE2": null,
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null,
+            "QL": null,
+            "HE0": null,
+            "HO0": null,
+            "B0": null,
+            "QS": null
+          },
+          "bsne": {
+            "5": 1
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 3,
+          "competitors": [
+            5,
+            6
+          ],
+          "pairs": [
+            {
+              "ca": 5,
+              "cb": 6,
+              "sa": 4,
+              "sb": 3,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 3,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 1,
+                "QC13": 1,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 2561,
+              "qcweight": 640,
+              "heweight": 1,
+              "howeight": 0,
+              "colordiff": "BB",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 6,
+              "b": 5,
+              "colorrule": "E.2",
+              "board": 1
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [
+            2,
+            3,
+            4,
+            7,
+            1,
+            0
+          ],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0
+            ],
+            "QN8": 2,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 1,
+            "QC13": 1,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "5": 1,
+            "6": 2
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 2,
+          "competitors": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "pairs": [
+            {
+              "ca": 2,
+              "cb": 4,
+              "sa": 2,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 2,
+              "quality": {
+                "QC6": 0,
+                "QC7": [],
+                "QN8": 0,
+                "QC8": [
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [],
+                "QC19": [],
+                "QC20": [],
+                "QC21": [],
+                "HE1": null,
+                "HE2": null,
+                "HO1": 0,
+                "HO2": 0,
+                "HO3": [
+                  1
+                ],
+                "HO4": [
+                  1,
+                  1,
+                  1
+                ],
+                "HO5": [
+                  2,
+                  0,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 94,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 94,
+              "colordiff": "bw",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "w": 4,
+              "b": 2,
+              "colorrule": "E.1",
+              "board": 2
+            }
+          ],
+          "downfloaters": [
+            3,
+            7
+          ],
+          "remaining": [
+            1,
+            0
+          ],
+          "quality": {
+            "QC6": 2,
+            "QC7": [],
+            "QN8": 1,
+            "QC8": [
+              1
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [],
+            "QC19": [],
+            "QC20": [],
+            "QC21": [],
+            "HE1": null,
+            "HE2": null,
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [
+              1
+            ],
+            "HO4": [
+              3,
+              3,
+              3
+            ],
+            "HO5": [
+              2,
+              0,
+              0
+            ],
+            "IW": null
+          },
+          "bsne": {
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "7": 4
+          },
+          "bsno": {
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "7": 4
+          },
+          "pab": true
+        },
+        {
+          "scorelevel": 1,
+          "competitors": [
+            3,
+            7,
+            1
+          ],
+          "pairs": [
+            {
+              "ca": 1,
+              "cb": 3,
+              "sa": 1,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  1
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 1,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0,
+                  0
+                ],
+                "HE2": [
+                  1,
+                  0
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 12962,
+              "qcweight": 810,
+              "heweight": 2,
+              "howeight": 42,
+              "colordiff": "Ww",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 3,
+              "b": 1,
+              "colorrule": "E.2",
+              "board": 3
+            }
+          ],
+          "downfloaters": [
+            7
+          ],
+          "remaining": [
+            0
+          ],
+          "quality": {
+            "QC6": 1,
+            "QC7": [
+              1
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 1,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0,
+              0
+            ],
+            "HE2": [
+              1,
+              0
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "3": 1,
+            "7": 2,
+            "1": 3
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 0,
+          "competitors": [
+            7,
+            0
+          ],
+          "pairs": [
+            {
+              "ca": 0,
+              "cb": 7,
+              "sa": 0,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 0,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0,
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0,
+                  0
+                ],
+                "QC19": [
+                  0,
+                  0
+                ],
+                "QC20": [
+                  0,
+                  0
+                ],
+                "QC21": [
+                  0,
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 0,
+              "colordiff": "W ",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 7,
+              "b": 0,
+              "colorrule": "pab",
+              "board": 4
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0,
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0,
+              0
+            ],
+            "QC19": [
+              0,
+              0
+            ],
+            "QC20": [
+              0,
+              0
+            ],
+            "QC21": [
+              0,
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null
+          },
+          "bsne": {
+            "7": 1,
+            "0": 2
+          },
+          "bsno": {},
+          "pab": false
+        }
+      ],
+      "candidatePairs": [
+        [
+          6,
+          5
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "bestPairs": [
+        [
+          6,
+          5
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "file": "T0056.trf",
+      "round": 2,
+      "category": "inferior-to-checker-optimum",
+      "rules": "2026-02-01",
+      "checkerExact": false,
+      "firstDifference": {
+        "bracketIndex": 1,
+        "scorelevel": 1,
+        "criterion": "HE2",
+        "candidate": [
+          2
+        ],
+        "best": [
+          1
+        ]
+      },
+      "candidateBrackets": [
+        {
+          "scorelevel": 2,
+          "competitors": [
+            7
+          ],
+          "pairs": [],
+          "downfloaters": [
+            7
+          ],
+          "remaining": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            0
+          ],
+          "quality": {
+            "QC6": null,
+            "QC7": null,
+            "QN8": null,
+            "QC8": null,
+            "QC9": null,
+            "QMM": null,
+            "QC10": null,
+            "QC11": null,
+            "QC12": null,
+            "QC13": null,
+            "QC14": null,
+            "QC15": null,
+            "QC16": null,
+            "QC17": null,
+            "QC18": null,
+            "QC19": null,
+            "QC20": null,
+            "QC21": null,
+            "HE1": null,
+            "HE2": null,
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null,
+            "QL": null,
+            "HE0": null,
+            "HO0": null,
+            "B0": null,
+            "QS": null
+          },
+          "bsne": {
+            "7": 1
+          },
+          "bsno": {
+            "7": 1
+          },
+          "pab": false
+        },
+        {
+          "scorelevel": 1,
+          "competitors": [
+            7,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "pairs": [
+            {
+              "ca": 2,
+              "cb": 7,
+              "sa": 1,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  2
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 2,
+              "qcweight": 0,
+              "heweight": 2,
+              "howeight": 1,
+              "colordiff": "nB",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "b": 2,
+              "w": 7,
+              "colorrule": "E.1",
+              "board": 1
+            },
+            {
+              "ca": 1,
+              "cb": 4,
+              "sa": 1,
+              "sb": 1,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  0
+                ],
+                "HO1": 0,
+                "HO2": 0,
+                "HO3": [
+                  1,
+                  1
+                ],
+                "HO4": [
+                  3,
+                  3,
+                  3
+                ],
+                "HO5": [
+                  2,
+                  3,
+                  0,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 372,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 372,
+              "colordiff": "nW",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "b": 1,
+              "w": 4,
+              "colorrule": "E.1",
+              "board": 2
+            },
+            {
+              "ca": 3,
+              "cb": 6,
+              "sa": 1,
+              "sb": 1,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  0
+                ],
+                "HO1": 0,
+                "HO2": 1,
+                "HO3": [
+                  1,
+                  0
+                ],
+                "HO4": [
+                  1,
+                  1,
+                  1
+                ],
+                "HO5": [
+                  0,
+                  3,
+                  0,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 1326,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 1326,
+              "colordiff": "Wn",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "w": 3,
+              "b": 6,
+              "colorrule": "E.1",
+              "board": 3
+            }
+          ],
+          "downfloaters": [
+            5
+          ],
+          "remaining": [
+            0
+          ],
+          "quality": {
+            "QC6": 1,
+            "QC7": [
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              2
+            ],
+            "HO1": 0,
+            "HO2": 1,
+            "HO3": [
+              1,
+              1
+            ],
+            "HO4": [
+              3,
+              3,
+              3
+            ],
+            "HO5": [
+              2,
+              3,
+              0,
+              0
+            ],
+            "IW": null
+          },
+          "bsne": {
+            "7": 1,
+            "1": 2,
+            "2": 3,
+            "3": 4,
+            "4": 5,
+            "5": 6,
+            "6": 7
+          },
+          "bsno": {
+            "1": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4,
+            "6": 5
+          },
+          "pab": true
+        },
+        {
+          "scorelevel": 0,
+          "competitors": [
+            5,
+            0
+          ],
+          "pairs": [
+            {
+              "ca": 0,
+              "cb": 5,
+              "sa": 0,
+              "sb": 1,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 0,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 168,
+              "colordiff": "B ",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 5,
+              "b": 0,
+              "colorrule": "pab",
+              "board": 4
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null
+          },
+          "bsne": {
+            "5": 1,
+            "0": 2
+          },
+          "bsno": {},
+          "pab": false
+        }
+      ],
+      "bestBrackets": [
+        {
+          "scorelevel": 2,
+          "competitors": [
+            7
+          ],
+          "pairs": [],
+          "downfloaters": [
+            7
+          ],
+          "remaining": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            0
+          ],
+          "quality": {
+            "QC6": null,
+            "QC7": null,
+            "QN8": null,
+            "QC8": null,
+            "QC9": null,
+            "QMM": null,
+            "QC10": null,
+            "QC11": null,
+            "QC12": null,
+            "QC13": null,
+            "QC14": null,
+            "QC15": null,
+            "QC16": null,
+            "QC17": null,
+            "QC18": null,
+            "QC19": null,
+            "QC20": null,
+            "QC21": null,
+            "HE1": null,
+            "HE2": null,
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null,
+            "QL": null,
+            "HE0": null,
+            "HO0": null,
+            "B0": null,
+            "QS": null
+          },
+          "bsne": {
+            "7": 1
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 1,
+          "competitors": [
+            7,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "pairs": [
+            {
+              "ca": 1,
+              "cb": 7,
+              "sa": 1,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 0,
+              "colordiff": "nn",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 7,
+              "b": 1,
+              "colorrule": "E.5",
+              "board": 1
+            },
+            {
+              "ca": 2,
+              "cb": 3,
+              "sa": 1,
+              "sb": 1,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  0
+                ],
+                "HO1": 0,
+                "HO2": 0,
+                "HO3": [
+                  0,
+                  1
+                ],
+                "HO4": [
+                  2,
+                  3,
+                  3
+                ],
+                "HO5": [
+                  1,
+                  0,
+                  2,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 366,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 366,
+              "colordiff": "BW",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "w": 3,
+              "b": 2,
+              "colorrule": "E.1",
+              "board": 2
+            },
+            {
+              "ca": 4,
+              "cb": 6,
+              "sa": 1,
+              "sb": 1,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  0
+                ],
+                "HO1": 1,
+                "HO2": 2,
+                "HO3": [
+                  0,
+                  0
+                ],
+                "HO4": [
+                  0,
+                  1,
+                  1
+                ],
+                "HO5": [
+                  0,
+                  0,
+                  2,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 5450,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 5450,
+              "colordiff": "Wn",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "w": 4,
+              "b": 6,
+              "colorrule": "E.1",
+              "board": 3
+            }
+          ],
+          "downfloaters": [
+            5
+          ],
+          "remaining": [
+            0
+          ],
+          "quality": {
+            "QC6": 1,
+            "QC7": [
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": 1,
+            "HO2": 2,
+            "HO3": [
+              0,
+              1
+            ],
+            "HO4": [
+              2,
+              3,
+              3
+            ],
+            "HO5": [
+              1,
+              0,
+              2,
+              0
+            ],
+            "IW": null
+          },
+          "bsne": {
+            "7": 1,
+            "1": 2,
+            "2": 3,
+            "3": 4,
+            "4": 5,
+            "5": 6,
+            "6": 7
+          },
+          "bsno": {
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4,
+            "6": 5
+          },
+          "pab": true
+        },
+        {
+          "scorelevel": 0,
+          "competitors": [
+            5,
+            0
+          ],
+          "pairs": [
+            {
+              "ca": 0,
+              "cb": 5,
+              "sa": 0,
+              "sb": 1,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 0,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 168,
+              "colordiff": "B ",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 5,
+              "b": 0,
+              "colorrule": "pab",
+              "board": 4
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null
+          },
+          "bsne": {
+            "5": 1,
+            "0": 2
+          },
+          "bsno": {},
+          "pab": false
+        }
+      ],
+      "candidatePairs": [
+        [
+          7,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          0
+        ]
+      ],
+      "bestPairs": [
+        [
+          7,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          0
+        ]
+      ]
+    },
+    {
+      "file": "T0076.trf",
+      "round": 5,
+      "category": "inferior-to-checker-optimum",
+      "rules": "2026-02-01",
+      "checkerExact": false,
+      "firstDifference": {
+        "bracketIndex": 1,
+        "scorelevel": 2,
+        "criterion": "QC18",
+        "candidate": [
+          1
+        ],
+        "best": [
+          0
+        ]
+      },
+      "candidateBrackets": [
+        {
+          "scorelevel": 3,
+          "competitors": [
+            1,
+            2,
+            3,
+            6
+          ],
+          "pairs": [
+            {
+              "ca": 2,
+              "cb": 6,
+              "sa": 3,
+              "sb": 3,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 3,
+              "quality": {
+                "QC6": 0,
+                "QC7": [],
+                "QN8": 0,
+                "QC8": [
+                  1
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [],
+                "QC19": [],
+                "QC20": [],
+                "QC21": [],
+                "HE1": [],
+                "HE2": [],
+                "HO1": 1,
+                "HO2": 1,
+                "HO3": [
+                  0
+                ],
+                "HO4": [
+                  3,
+                  4,
+                  4
+                ],
+                "HO5": [
+                  0,
+                  2,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 500,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 500,
+              "colordiff": "bW",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "b": 2,
+              "w": 6,
+              "colorrule": "E.1",
+              "board": 1
+            }
+          ],
+          "downfloaters": [
+            1,
+            3
+          ],
+          "remaining": [
+            5,
+            7,
+            4,
+            0
+          ],
+          "quality": {
+            "QC6": 2,
+            "QC7": [],
+            "QN8": 2,
+            "QC8": [
+              1
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 1,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [],
+            "QC19": [],
+            "QC20": [],
+            "QC21": [],
+            "HE1": null,
+            "HE2": null,
+            "HO1": 1,
+            "HO2": 1,
+            "HO3": [
+              0
+            ],
+            "HO4": [
+              3,
+              4,
+              4
+            ],
+            "HO5": [
+              0,
+              2,
+              0
+            ],
+            "IW": null
+          },
+          "bsne": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "6": 4
+          },
+          "bsno": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "6": 4
+          },
+          "pab": true
+        },
+        {
+          "scorelevel": 2,
+          "competitors": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "pairs": [
+            {
+              "ca": 3,
+              "cb": 5,
+              "sa": 3,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 2,
+              "qlevel": 2,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  1
+                ],
+                "QN8": 0,
+                "QC8": [
+                  1,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 1,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  1
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0,
+                  0
+                ],
+                "HE2": [
+                  0,
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 183709,
+              "qcweight": 5103,
+              "heweight": 1,
+              "howeight": 42,
+              "colordiff": "ww",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 3,
+              "b": 5,
+              "colorrule": "E.4",
+              "board": 2
+            }
+          ],
+          "downfloaters": [
+            1,
+            7
+          ],
+          "remaining": [
+            4,
+            0
+          ],
+          "quality": {
+            "QC6": 2,
+            "QC7": [
+              1
+            ],
+            "QN8": 1,
+            "QC8": [
+              1,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 1,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 1,
+            "QC17": 0,
+            "QC18": [
+              1
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0,
+              0
+            ],
+            "HE2": [
+              0,
+              1
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [
+              2
+            ],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "1": 1,
+            "3": 2,
+            "5": 3,
+            "7": 4
+          },
+          "bsno": {
+            "7": 1
+          },
+          "pab": false
+        },
+        {
+          "scorelevel": 1,
+          "competitors": [
+            1,
+            7,
+            4
+          ],
+          "pairs": [
+            {
+              "ca": 4,
+              "cb": 7,
+              "sa": 1,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 2,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  1,
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  1,
+                  0
+                ],
+                "QC19": [
+                  0,
+                  0
+                ],
+                "QC20": [
+                  0,
+                  0
+                ],
+                "QC21": [
+                  0,
+                  0
+                ],
+                "HE1": [
+                  0,
+                  0
+                ],
+                "HE2": [
+                  0,
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 1,
+              "colordiff": "wB",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "b": 4,
+              "w": 7,
+              "colorrule": "E.1",
+              "board": 3
+            }
+          ],
+          "downfloaters": [
+            1
+          ],
+          "remaining": [
+            0
+          ],
+          "quality": {
+            "QC6": 1,
+            "QC7": [
+              1,
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              1,
+              0
+            ],
+            "QC19": [
+              0,
+              0
+            ],
+            "QC20": [
+              0,
+              0
+            ],
+            "QC21": [
+              0,
+              0
+            ],
+            "HE1": [
+              0,
+              0
+            ],
+            "HE2": [
+              0,
+              1
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "1": 1,
+            "7": 2,
+            "4": 3
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 0,
+          "competitors": [
+            1,
+            0
+          ],
+          "pairs": [
+            {
+              "ca": 0,
+              "cb": 1,
+              "sa": 0,
+              "sb": 3,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 0,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0,
+                  0,
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC19": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC20": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC21": [
+                  0,
+                  0,
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 0,
+              "colordiff": "w ",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 1,
+              "b": 0,
+              "colorrule": "pab",
+              "board": 4
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0,
+              0,
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0,
+              0,
+              0
+            ],
+            "QC19": [
+              0,
+              0,
+              0
+            ],
+            "QC20": [
+              0,
+              0,
+              0
+            ],
+            "QC21": [
+              0,
+              0,
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null
+          },
+          "bsne": {
+            "1": 1,
+            "0": 2
+          },
+          "bsno": {},
+          "pab": false
+        }
+      ],
+      "bestBrackets": [
+        {
+          "scorelevel": 3,
+          "competitors": [
+            1,
+            2,
+            3,
+            6
+          ],
+          "pairs": [
+            {
+              "ca": 2,
+              "cb": 6,
+              "sa": 3,
+              "sb": 3,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 1,
+              "qlevel": 3,
+              "quality": {
+                "QC6": 0,
+                "QC7": [],
+                "QN8": 0,
+                "QC8": [
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [],
+                "QC19": [],
+                "QC20": [],
+                "QC21": [],
+                "HE1": null,
+                "HE2": null,
+                "HO1": 1,
+                "HO2": 1,
+                "HO3": [
+                  0
+                ],
+                "HO4": [
+                  0,
+                  1,
+                  1
+                ],
+                "HO5": [
+                  0,
+                  2,
+                  0
+                ],
+                "IW": null
+              },
+              "weight": 500,
+              "qcweight": 0,
+              "heweight": 0,
+              "howeight": 500,
+              "colordiff": "bW",
+              "qc": true,
+              "mode": "HO",
+              "levels": 0,
+              "w": 6,
+              "b": 2,
+              "colorrule": "E.1",
+              "board": 1
+            }
+          ],
+          "downfloaters": [
+            1,
+            3
+          ],
+          "remaining": [
+            5,
+            7,
+            4,
+            0
+          ],
+          "quality": {
+            "QC6": 2,
+            "QC7": [],
+            "QN8": 2,
+            "QC8": [
+              1
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 1,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [],
+            "QC19": [],
+            "QC20": [],
+            "QC21": [],
+            "HE1": null,
+            "HE2": null,
+            "HO1": 1,
+            "HO2": 1,
+            "HO3": [
+              0
+            ],
+            "HO4": [
+              3,
+              4,
+              4
+            ],
+            "HO5": [
+              0,
+              2,
+              0
+            ],
+            "IW": null
+          },
+          "bsne": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "6": 4
+          },
+          "bsno": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "6": 4
+          },
+          "pab": true
+        },
+        {
+          "scorelevel": 2,
+          "competitors": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "pairs": [
+            {
+              "ca": 1,
+              "cb": 5,
+              "sa": 3,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 2,
+              "qlevel": 2,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  1
+                ],
+                "QN8": 0,
+                "QC8": [
+                  1,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 1,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0
+                ],
+                "QC19": [
+                  0
+                ],
+                "QC20": [
+                  0
+                ],
+                "QC21": [
+                  0
+                ],
+                "HE1": [
+                  0,
+                  0
+                ],
+                "HE2": [
+                  1,
+                  0
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 183711,
+              "qcweight": 5103,
+              "heweight": 3,
+              "howeight": 42,
+              "colordiff": "ww",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 1,
+              "b": 5,
+              "colorrule": "E.4",
+              "board": 2
+            }
+          ],
+          "downfloaters": [
+            3,
+            7
+          ],
+          "remaining": [
+            4,
+            0
+          ],
+          "quality": {
+            "QC6": 2,
+            "QC7": [
+              1
+            ],
+            "QN8": 1,
+            "QC8": [
+              1,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 1,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 1,
+            "QC17": 0,
+            "QC18": [
+              0
+            ],
+            "QC19": [
+              0
+            ],
+            "QC20": [
+              0
+            ],
+            "QC21": [
+              0
+            ],
+            "HE1": [
+              0,
+              0
+            ],
+            "HE2": [
+              1,
+              0
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [
+              2
+            ],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "1": 1,
+            "3": 2,
+            "5": 3,
+            "7": 4
+          },
+          "bsno": {
+            "7": 1
+          },
+          "pab": false
+        },
+        {
+          "scorelevel": 1,
+          "competitors": [
+            3,
+            7,
+            4
+          ],
+          "pairs": [
+            {
+              "ca": 4,
+              "cb": 7,
+              "sa": 1,
+              "sb": 2,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 2,
+              "qlevel": 1,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  1,
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0,
+                  0
+                ],
+                "QC19": [
+                  0,
+                  0
+                ],
+                "QC20": [
+                  0,
+                  0
+                ],
+                "QC21": [
+                  0,
+                  0
+                ],
+                "HE1": [
+                  0,
+                  0
+                ],
+                "HE2": [
+                  0,
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 1,
+              "colordiff": "wB",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 7,
+              "b": 4,
+              "colorrule": "E.1",
+              "board": 3
+            }
+          ],
+          "downfloaters": [
+            3
+          ],
+          "remaining": [
+            0
+          ],
+          "quality": {
+            "QC6": 1,
+            "QC7": [
+              1,
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0,
+              0
+            ],
+            "QC19": [
+              0,
+              0
+            ],
+            "QC20": [
+              0,
+              0
+            ],
+            "QC21": [
+              0,
+              0
+            ],
+            "HE1": [
+              0,
+              0
+            ],
+            "HE2": [
+              0,
+              1
+            ],
+            "HO1": 0,
+            "HO2": 0,
+            "HO3": [],
+            "HO4": [],
+            "HO5": [],
+            "IW": null
+          },
+          "bsne": {
+            "3": 1,
+            "7": 2,
+            "4": 3
+          },
+          "bsno": {},
+          "pab": false
+        },
+        {
+          "scorelevel": 0,
+          "competitors": [
+            3,
+            0
+          ],
+          "pairs": [
+            {
+              "ca": 0,
+              "cb": 3,
+              "sa": 0,
+              "sb": 3,
+              "canmeet": true,
+              "isblob": false,
+              "played": 0,
+              "unplayed": 0,
+              "qlevel": 0,
+              "quality": {
+                "QC6": 0,
+                "QC7": [
+                  0,
+                  0,
+                  0
+                ],
+                "QN8": 0,
+                "QC8": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "QC9": 0,
+                "QMM": [],
+                "QC10": 0,
+                "QC11": 0,
+                "QC12": 0,
+                "QC13": 0,
+                "QC14": 0,
+                "QC15": 0,
+                "QC16": 0,
+                "QC17": 0,
+                "QC18": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC19": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC20": [
+                  0,
+                  0,
+                  0
+                ],
+                "QC21": [
+                  0,
+                  0,
+                  0
+                ],
+                "HE1": [
+                  0
+                ],
+                "HE2": [
+                  1
+                ],
+                "HO1": null,
+                "HO2": null,
+                "HO3": null,
+                "HO4": null,
+                "HO5": null,
+                "IW": null
+              },
+              "weight": 1,
+              "qcweight": 0,
+              "heweight": 1,
+              "howeight": 0,
+              "colordiff": "w ",
+              "qc": true,
+              "mode": "HE",
+              "levels": 0,
+              "w": 3,
+              "b": 0,
+              "colorrule": "pab",
+              "board": 4
+            }
+          ],
+          "downfloaters": [],
+          "remaining": [],
+          "quality": {
+            "QC6": 0,
+            "QC7": [
+              0,
+              0,
+              0
+            ],
+            "QN8": 0,
+            "QC8": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "QC9": 0,
+            "QMM": [],
+            "QC10": 0,
+            "QC11": 0,
+            "QC12": 0,
+            "QC13": 0,
+            "QC14": 0,
+            "QC15": 0,
+            "QC16": 0,
+            "QC17": 0,
+            "QC18": [
+              0,
+              0,
+              0
+            ],
+            "QC19": [
+              0,
+              0,
+              0
+            ],
+            "QC20": [
+              0,
+              0,
+              0
+            ],
+            "QC21": [
+              0,
+              0,
+              0
+            ],
+            "HE1": [
+              0
+            ],
+            "HE2": [
+              1
+            ],
+            "HO1": null,
+            "HO2": null,
+            "HO3": null,
+            "HO4": null,
+            "HO5": null,
+            "IW": null
+          },
+          "bsne": {
+            "3": 1,
+            "0": 2
+          },
+          "bsno": {},
+          "pab": false
+        }
+      ],
+      "candidatePairs": [
+        [
+          6,
+          2
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "bestPairs": [
+        [
+          6,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          3,
+          0
+        ]
+      ]
+    }
+  ]
+}
