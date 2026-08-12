@@ -20,6 +20,7 @@ final readonly class DutchShadowGlobalCoordinator
         private DutchPreliminaryRoundMatcher $preliminary = new DutchPreliminaryRoundMatcher(),
         private DutchQualityRoundGraphBuilder $qualityGraphBuilder = new DutchQualityRoundGraphBuilder(),
         private WeightedGeneralMatchingInterface $matcher = new BlossomWeightedGeneralMatcher(),
+        private DutchC9Lifecycle $c9Lifecycle = new DutchC9Lifecycle(),
     ) {
     }
 
@@ -149,6 +150,17 @@ final readonly class DutchShadowGlobalCoordinator
                 $this->freezePair(
                     $residentPairs[0], $bracketIndex, $scoreLevel, $computer,
                     $remaining, $frozenPairs, $freezeEvents,
+                );
+            }
+            $nextScoreLevel = $scoreLevels[$bracketIndex + 1] ?? null;
+            if ($nextScoreLevel !== null) {
+                $stableMatching = $computer->match((count($remaining) & 1) === 0);
+                $c9Applies = $this->c9Lifecycle->appliesInNextBracket(
+                    $pabScoreLevel,
+                    $nextScoreLevel,
+                    $remaining,
+                    $stableMatching,
+                    $graph,
                 );
             }
         }
