@@ -377,6 +377,12 @@ echo json_encode([
     'root' => $root,
     'limit' => $limit,
     'roundFilter' => $roundFilter,
+    'performanceRuntime' => [
+        'opcacheEnableCli' => (string) ini_get('opcache.enable_cli'),
+        'jit' => (string) ini_get('opcache.jit'),
+        'jitBufferSize' => (string) ini_get('opcache.jit_buffer_size'),
+        'xdebugMode' => (string) (getenv('XDEBUG_MODE') ?: ''),
+    ],
     'preliminaryGlobalAudit' => $auditPreliminaryGlobal,
     'shadowGlobalAudit' => $auditShadowGlobal,
     'elapsedSeconds' => round((hrtime(true) - $started) / 1_000_000_000, 3),

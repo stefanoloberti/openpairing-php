@@ -107,7 +107,7 @@ final class RuntimeCodeIdentity
         if (!is_array($locked)) {
             throw new \RuntimeException('Runtime identity lock is not an object.');
         }
-        foreach (['engineVersion', 'engineSha256', 'sourceTreeSha256', 'sourceFileCount'] as $field) {
+        foreach (['engineVersion', 'engineSha256', 'sourceTreeSha256', 'sourceFileCount', 'arithmeticBackend', 'gmpAvailable'] as $field) {
             if (($identity[$field] ?? null) !== ($locked[$field] ?? null)) {
                 throw new \RuntimeException(sprintf(
                     'Runtime identity lock mismatch for %s: expected %s, found %s.',

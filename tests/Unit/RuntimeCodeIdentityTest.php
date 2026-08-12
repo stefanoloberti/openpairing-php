@@ -23,6 +23,8 @@ final class RuntimeCodeIdentityTest extends TestCase
         self::assertSame(64, strlen($identity['engineSha256']));
         self::assertSame(64, strlen($identity['sourceTreeSha256']));
         self::assertGreaterThan(50, $identity['sourceFileCount']);
+        self::assertContains($identity['arithmeticBackend'], ['limbs-30', 'gmp']);
+        self::assertSame(extension_loaded('gmp'), $identity['gmpAvailable']);
     }
 
     public function testRejectsAComposerLoaderPointingAtAnotherCheckout(): void
@@ -44,6 +46,8 @@ final class RuntimeCodeIdentityTest extends TestCase
             'engineSha256' => str_repeat('0', 64),
             'sourceTreeSha256' => str_repeat('0', 64),
             'sourceFileCount' => 0,
+            'arithmeticBackend' => 'gmp',
+            'gmpAvailable' => true,
         ], JSON_THROW_ON_ERROR));
 
         try {
@@ -54,6 +58,8 @@ final class RuntimeCodeIdentityTest extends TestCase
                 'engineSha256' => str_repeat('1', 64),
                 'sourceTreeSha256' => str_repeat('1', 64),
                 'sourceFileCount' => 1,
+                'arithmeticBackend' => 'limbs-30',
+                'gmpAvailable' => false,
             ], $lock);
         } finally {
             unlink($lock);
