@@ -97,7 +97,7 @@ final readonly class DutchShadowGlobalCoordinator
                 }
                 $opponentId = $pair['left'] === $mdpId ? $pair['right'] : $pair['left'];
                 if ($graph->scoreRankByPlayerId[$opponentId] !== $scoreLevel) {
-                    return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], $remaining, null, $timings, $freezeEvents);
+                    return new DutchGlobalRoundResult(WeightedMatchingStatus::NoMatching, [], [$mdpId, $opponentId], null, $timings, $freezeEvents);
                 }
                 $this->freezePair(
                     $pair, $bracketIndex, $scoreLevel, $computer,
