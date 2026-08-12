@@ -163,7 +163,7 @@ def main() -> int:
         help="Permit a diagnostic selection that evaluates zero cases.",
     )
     parser.add_argument(
-        "--sample-set", choices=["deviations", "preliminary-bye", "shadow-oracle", "shadow-regressions"], default="deviations",
+        "--sample-set", choices=["deviations", "preliminary-bye", "shadow-oracle", "shadow-regressions", "large-field"], default="deviations",
         help="Classify production deviations, preliminary PAB counterfactuals, mandatory shadow cases or shadow regressions.",
     )
     args = parser.parse_args()
@@ -183,12 +183,14 @@ def main() -> int:
         "preliminary-bye": "preliminarySamples",
         "shadow-oracle": "shadowSamples",
         "shadow-regressions": "shadowSamples",
+        "large-field": "shadowSamples",
     }[args.sample_set]
     expected_codes = {
         "deviations": {"pairing-deviation"},
         "preliminary-bye": {"preliminary.bye_same_score"},
         "shadow-oracle": {"shadow.same-deviation", "shadow.divergent-deviation"},
         "shadow-regressions": {"shadow.candidate-regression"},
+        "large-field": {"large-field.pairing-deviation", "large-field.colour-variant"},
     }[args.sample_set]
     for sample in report.get(sample_key, []):
         if sample.get("code") not in expected_codes or not isinstance(sample.get("candidate"), dict):

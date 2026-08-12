@@ -41,7 +41,8 @@ try {
 $directory = $argv[1] ?? '';
 $limit = isset($argv[2]) ? (int) $argv[2] : 0;
 $mode = $argv[3] ?? '';
-$shadowOnly = $mode === '--shadow-only';
+$largeField = $mode === '--large-field';
+$shadowOnly = $mode === '--shadow-only' || $largeField;
 $auditShadowGlobal = $mode === '--shadow-global' || $shadowOnly;
 $auditPreliminaryGlobal = $mode === '--preliminary-global' || $auditShadowGlobal;
 $roundFilterRaw = getenv('OPENPAIRING_ROUND_ONLY');
@@ -51,7 +52,7 @@ if ($roundFilterRaw !== false && $roundFilterRaw !== '' && (!is_int($roundFilter
     exit(2);
 }
 if ($directory === '' || !is_dir($directory) || $limit < 0 || ($mode !== '' && !$auditPreliminaryGlobal)) {
-    fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--preliminary-global|--shadow-global|--shadow-only]\n");
+    fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--preliminary-global|--shadow-global|--shadow-only|--large-field]\n");
     exit(2);
 }
 $root = realpath($directory);
@@ -109,6 +110,14 @@ if ($auditShadowGlobal) {
         $counts['shadow.'.str_replace('-', '_', $category->value)] = 0;
     }
     $counts['shadow.noMatching'] = 0;
+}
+if ($largeField) {
+    $counts += [
+        'largeField.candidateExact' => 0,
+        'largeField.candidateColourVariant' => 0,
+        'largeField.candidateDeviation' => 0,
+        'largeField.candidateNoMatching' => 0,
+    ];
 }
 $diagnostics = [];
 $samples = [];
@@ -233,21 +242,43 @@ foreach ($corpus['files'] as $corpusFile) {
                 if ($shadow === null || $shadow->status !== WeightedMatchingStatus::Optimal) {
                     $allExact = false;
                     ++$counts['roundsEngineNoSolution'];
+                    if ($largeField) {
+                        ++$counts['largeField.candidateNoMatching'];
+                        sample($shadowSamples, $relative, $round, 'large-field.no-matching', 'Persistent candidate did not complete the round.');
+                    }
                     continue;
                 }
                 $generated = shadowRound($state, $shadow);
                 if ($generated['pairs'] === $reference['pairs'] && $generated['bye'] === $reference['bye']) {
                     ++$counts['roundsExact'];
+                    if ($largeField) {
+                        ++$counts['largeField.candidateExact'];
+                    }
                 } elseif (array_keys($generated['pairs']) === array_keys($reference['pairs']) && $generated['bye'] === $reference['bye']) {
                     ++$counts['roundsSamePairsColourVariant'];
                     $allExact = false;
+                    if ($largeField) {
+                        ++$counts['largeField.candidateColourVariant'];
+                        sample($shadowSamples, $relative, $round, 'large-field.colour-variant', 'Candidate has the reference opponents and PAB but different colours.', [
+                            'candidate' => pairingCandidate($generated),
+                            'reference' => pairingCandidate($reference),
+                        ]);
+                    }
                 } else {
                     ++$counts['roundsPairingDeviation'];
                     $allExact = false;
-                    sample($samples, $relative, $round, 'shadow-only.pairing-deviation', 'Persistent coordinator differs from the reference.', [
-                        'candidate' => pairingCandidate($generated),
-                        'reference' => pairingCandidate($reference),
-                    ]);
+                    if ($largeField) {
+                        sample($shadowSamples, $relative, $round, 'large-field.pairing-deviation', 'Persistent coordinator differs from the reference.', [
+                            'candidate' => pairingCandidate($generated),
+                            'reference' => pairingCandidate($reference),
+                        ]);
+                        ++$counts['largeField.candidateDeviation'];
+                    } else {
+                        sample($samples, $relative, $round, 'shadow-only.pairing-deviation', 'Persistent coordinator differs from the reference.', [
+                            'candidate' => pairingCandidate($generated),
+                            'reference' => pairingCandidate($reference),
+                        ]);
+                    }
                 }
                 continue;
             }
@@ -385,6 +416,7 @@ echo json_encode([
     ],
     'preliminaryGlobalAudit' => $auditPreliminaryGlobal,
     'shadowGlobalAudit' => $auditShadowGlobal,
+    'largeFieldAudit' => $largeField,
     'elapsedSeconds' => round((hrtime(true) - $started) / 1_000_000_000, 3),
     'runtimeIdentity' => $runtimeIdentity,
     'corpusIdentity' => $corpusIdentity,

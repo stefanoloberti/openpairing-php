@@ -8,6 +8,11 @@ Xdebug installed for isolated profiling/backend experiments; staging services
 and their PHP configuration were not changed. Runtime reports attest the
 selected arithmetic backend and whether GMP is available.
 
+Xdebug was subsequently disabled for the WSL CLI SAPI with `phpdismod -s cli
+xdebug` because a function profile generated 7.7 GB before one 80-player round
+completed and because a loaded Xdebug module disables PHP JIT. Apache/staging
+module configuration was not changed.
+
 Inspected/acquired on 2026-08-11. Nothing was installed globally.
 
 | Tool | Version | Location/use | Integrity |

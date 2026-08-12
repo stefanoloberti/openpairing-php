@@ -19,6 +19,14 @@
 - Production/staging switchover remains forbidden until criteria 2 and 3 of
   ADR 0008 close.
 
+For fields where the bounded legacy engine no longer terminates, the verifier
+uses `--large-field`. This mode compares the persistent candidate directly to
+the recorded TRF reference and reports only four operative buckets:
+`candidateExact`, `candidateColourVariant`, `candidateDeviation` and
+`candidateNoMatching`. Every non-exact completed result is exported to Gacrux
+with `--sample-set large-field`. The bounded engine remains an additional
+small-field oracle, never a prerequisite for classifying a large-field round.
+
 ## Pairing baseline epoch 2 (2026-08-12)
 
 The pairing replay baseline was reset after finding that the harness recorded a

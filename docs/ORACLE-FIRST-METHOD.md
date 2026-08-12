@@ -10,6 +10,12 @@ seconds for that tournament. The active optimization protocol changes one
 factor per checkpoint and requires limb/GMP same-seed parity, the frozen gate,
 and the 80-player differential before retention.
 
+Above the bounded enumerator's practical range, internal five-way shadow
+buckets are not the acceptance language. Large-field verification is candidate
+versus the recorded reference: exact, colour variant, deviation or no matching.
+Every non-exact completed candidate is classified by Gacrux. Legacy evidence is
+used only for rounds where the legacy engine actually terminates.
+
 ## Semantic baseline reset (historical epoch narrative)
 
 On 2026-08-12 the replay entered semantic epoch
