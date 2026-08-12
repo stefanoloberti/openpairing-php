@@ -27,6 +27,7 @@ use OpenPairing\Format\Trf\Trf2026Codec;
 $projectRoot = dirname(__DIR__);
 $loader = require $projectRoot.'/vendor/autoload.php';
 require __DIR__.'/TrfCorpusCompatibility.php';
+$harnessIdentity = harnessIdentity(__FILE__, __DIR__.'/TrfCorpusCompatibility.php');
 
 try {
     $runtimeIdentity = RuntimeCodeIdentity::capture($projectRoot, $loader, DutchPairingEngine::class, DutchPairingEngine::VERSION);
@@ -420,6 +421,9 @@ try {
     if ($endingRuntimeIdentity['sourceTreeSha256'] !== $runtimeIdentity['sourceTreeSha256']) {
         throw new RuntimeException('Runtime source tree changed during historical replay.');
     }
+    if (harnessIdentity(__FILE__, __DIR__.'/TrfCorpusCompatibility.php') !== $harnessIdentity) {
+        throw new RuntimeException('Historical replay harness changed during execution.');
+    }
 } catch (Throwable $exception) {
     fwrite(STDERR, json_encode([
         'code' => 'runtime.identity_mismatch',
@@ -445,6 +449,7 @@ echo json_encode([
     'largeFieldAudit' => $largeField,
     'elapsedSeconds' => round((hrtime(true) - $started) / 1_000_000_000, 3),
     'runtimeIdentity' => $runtimeIdentity,
+    'harnessIdentity' => $harnessIdentity,
     'corpusIdentity' => $corpusIdentity,
     'counts' => $counts,
     'diagnostics' => $diagnostics,
@@ -454,6 +459,31 @@ echo json_encode([
     'shadowTimingSamples' => $shadowTimingSamples,
     'shadowTimingAggregates' => array_values($shadowTimingAggregates),
 ], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL;
+
+/** @return array{schema: string, sha256: string, files: array<string, string>} */
+function harnessIdentity(string ...$paths): array
+{
+    $files = [];
+    foreach ($paths as $path) {
+        $resolved = realpath($path);
+        $hash = $resolved === false ? false : hash_file('sha256', $resolved);
+        if ($resolved === false || !is_string($hash)) {
+            throw new RuntimeException('Could not attest historical replay harness file '.$path.'.');
+        }
+        $files[basename($resolved)] = $hash;
+    }
+    ksort($files, SORT_STRING);
+    $context = hash_init('sha256');
+    foreach ($files as $name => $hash) {
+        hash_update($context, $name."\0".$hash."\n");
+    }
+
+    return [
+        'schema' => 'openpairing.historical-replay-harness/1',
+        'sha256' => hash_final($context),
+        'files' => $files,
+    ];
+}
 
 /** @return array<int, array<int, Score>> */
 function scoresEnteringRounds(TournamentState $state, DutchRules $rules): array
