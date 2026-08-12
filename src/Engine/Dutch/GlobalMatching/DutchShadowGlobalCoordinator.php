@@ -237,23 +237,29 @@ final readonly class DutchShadowGlobalCoordinator
     private function constraintWeightedEdges(array $edges, DutchRoundGraph $graph, int $scoreLevel, array $selectedMdpIds): array
     {
         $selectedMdpSet = array_fill_keys($selectedMdpIds, true);
+        $mdpIds = array_values(array_filter(
+            array_keys($graph->playersById),
+            static fn (int $playerId): bool => $graph->scoreRankByPlayerId[$playerId] > $scoreLevel,
+        ));
+        usort($mdpIds, static fn (int $left, int $right): int =>
+            ($graph->scoreRankByPlayerId[$right] <=> $graph->scoreRankByPlayerId[$left])
+            ?: ($graph->playersById[$left]->pairingNumber <=> $graph->playersById[$right]->pairingNumber)
+        );
 
-        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $selectedMdpSet): WeightedEdge {
-            $violation = 0;
+        return array_map(static function (WeightedEdge $edge) use ($graph, $scoreLevel, $selectedMdpSet, $mdpIds): WeightedEdge {
             $leftLevel = $graph->scoreRankByPlayerId[$edge->left];
             $rightLevel = $graph->scoreRankByPlayerId[$edge->right];
-            foreach ([[$edge->left, $leftLevel, $rightLevel], [$edge->right, $rightLevel, $leftLevel]] as [$playerId, $playerLevel, $opponentLevel]) {
-                if ($playerLevel <= $scoreLevel) {
-                    continue;
-                }
+            $violations = [];
+            foreach ($mdpIds as $playerId) {
                 $mustBeMatchedHere = isset($selectedMdpSet[$playerId]);
+                $opponentLevel = $edge->left === $playerId
+                    ? $rightLevel
+                    : ($edge->right === $playerId ? $leftLevel : null);
                 $isMatchedHere = $opponentLevel === $scoreLevel;
-                if ($mustBeMatchedHere !== $isMatchedHere) {
-                    ++$violation;
-                }
+                $violations[] = $mustBeMatchedHere !== $isMatchedHere ? -1 : 0;
             }
 
-            return new WeightedEdge($edge->left, $edge->right, [-$violation, ...$edge->weight]);
+            return new WeightedEdge($edge->left, $edge->right, [...$violations, ...$edge->weight]);
         }, $edges);
     }
 

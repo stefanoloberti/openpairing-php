@@ -12,9 +12,10 @@ $remote = '/tmp/openpairing-run-' + [Guid]::NewGuid().ToString('N') + '.sh'
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
-& ssh.exe $HostAlias wsl -d $Distribution -- bash $remote
+$remoteCommand = "wsl -d $Distribution -- bash $remote"
+& ssh.exe $HostAlias $remoteCommand
 $exitCode = $LASTEXITCODE
-& ssh.exe $HostAlias wsl -d $Distribution -- rm -f $remote | Out-Null
+& ssh.exe $HostAlias "wsl -d $Distribution -- rm -f $remote" | Out-Null
 if ($exitCode -ne 0) {
     throw "Remote WSL script failed with exit code $exitCode."
 }
