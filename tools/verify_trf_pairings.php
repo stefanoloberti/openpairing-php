@@ -265,7 +265,7 @@ foreach ($corpus['files'] as $corpusFile) {
                         sample($shadowSamples, $relative, $round, 'large-field.colour-variant', 'Candidate has the reference opponents and PAB but different colours.', [
                             'candidate' => pairingCandidate($generated),
                             'reference' => pairingCandidate($reference),
-                        ]);
+                        ], null);
                     }
                 } else {
                     ++$counts['roundsPairingDeviation'];
@@ -274,7 +274,7 @@ foreach ($corpus['files'] as $corpusFile) {
                         sample($shadowSamples, $relative, $round, 'large-field.pairing-deviation', 'Persistent coordinator differs from the reference.', [
                             'candidate' => pairingCandidate($generated),
                             'reference' => pairingCandidate($reference),
-                        ]);
+                        ], null);
                         ++$counts['largeField.candidateDeviation'];
                     } else {
                         sample($samples, $relative, $round, 'shadow-only.pairing-deviation', 'Persistent coordinator differs from the reference.', [
@@ -341,7 +341,7 @@ foreach ($corpus['files'] as $corpusFile) {
                                 'remainingVerticesAfter' => $event->remainingVerticesAfter,
                             ], $shadow->freezeEvents),
                             'firstNonReferenceFreeze' => firstNonReferenceFreeze($shadow, $reference),
-                        ]);
+                        ], null);
                     }
                 }
             }
@@ -358,7 +358,7 @@ foreach ($corpus['files'] as $corpusFile) {
                     sample($shadowSamples, $relative, $round, 'large-field.colour-variant', 'Production engine has the reference opponents and PAB but different colours.', [
                         'candidate' => pairingCandidate($generated),
                         'reference' => pairingCandidate($reference),
-                    ]);
+                    ], null);
                 }
                 sample($samples, $relative, $round, 'same-pairs-colour-variant', 'Same opponents and bye, different colour allocation.');
             } else {
@@ -369,7 +369,7 @@ foreach ($corpus['files'] as $corpusFile) {
                     sample($shadowSamples, $relative, $round, 'large-field.pairing-deviation', 'Production engine differs from the reference.', [
                         'candidate' => pairingCandidate($generated),
                         'reference' => pairingCandidate($reference),
-                    ]);
+                    ], null);
                 }
                 sample($samples, $relative, $round, 'pairing-deviation', sprintf(
                     'Reference pairs: %s, bye: %s; generated pairs: %s, bye: %s.',
@@ -747,10 +747,12 @@ function counterfactualByeCandidate(array $reference, int $referenceBye, int $pr
 /**
  * @param list<array<string, mixed>> $samples
  * @param array<string, mixed> $context
+ * @param int|null $limit Null is reserved for oracle-required evidence and
+ *        guarantees that every classifiable case is retained.
  */
-function sample(array &$samples, string $file, int $round, string $code, string $message, array $context = []): void
+function sample(array &$samples, string $file, int $round, string $code, string $message, array $context = [], ?int $limit = 100): void
 {
-    if (count($samples) < 100) {
+    if ($limit === null || count($samples) < $limit) {
         $samples[] = [...compact('file', 'round', 'code', 'message'), ...$context];
     }
 }

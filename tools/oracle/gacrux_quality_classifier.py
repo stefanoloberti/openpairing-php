@@ -230,6 +230,12 @@ def main() -> int:
         "shadow-regressions": {"shadow.candidate-regression"},
         "large-field": {"large-field.pairing-deviation", "large-field.colour-variant"},
     }[args.sample_set]
+    expected_count = None
+    if args.sample_set == "large-field":
+        report_counts = report.get("counts", {})
+        expected_count = int(report_counts.get("largeField.candidateDeviation", 0)) + int(
+            report_counts.get("largeField.candidateColourVariant", 0)
+        )
     for sample in report.get(sample_key, []):
         if sample.get("code") not in expected_codes or not isinstance(sample.get("candidate"), dict):
             continue
@@ -240,6 +246,12 @@ def main() -> int:
         result = {"file": sample["file"], "round": sample["round"], **result}
         results.append(result)
         counts[result["category"]] = counts.get(result["category"], 0) + 1
+    if expected_count is not None and len(results) != expected_count:
+        print(
+            f"oracle evidence is incomplete: selected {len(results)} of {expected_count} large-field cases",
+            file=sys.stderr,
+        )
+        return 5
     if not results and not args.allow_empty:
         print(
             f"diagnostic selected zero cases from {sample_key}; use --allow-empty only when zero is intentional",
@@ -251,6 +263,7 @@ def main() -> int:
         "sampleSet": args.sample_set,
         "sourceReport": str(report_path),
         "sourceRuntimeIdentity": report.get("runtimeIdentity"),
+        "sourceHarnessIdentity": report.get("harnessIdentity"),
         "sourceCorpusIdentity": report.get("corpusIdentity"),
         "sourceHistoricalFloatSemantics": report.get("historicalFloatSemantics"),
         "upstream": str(upstream),
