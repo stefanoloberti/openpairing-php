@@ -293,7 +293,10 @@ final readonly class DutchShadowGlobalCoordinator
                     ? $rightLevel
                     : $leftLevel;
                 $isMatchedHere = $opponentLevel === $scoreLevel;
-                $violations[] = $isMatchedHere ? ($mustBeMatchedHere ? 1 : -1) : 0;
+                // BBP rewards an MDP once its matched state is finalized; it
+                // does not forbid or penalize undecided MDPs that are also
+                // matchable in the bracket.
+                $violations[] = $isMatchedHere && $mustBeMatchedHere ? 1 : 0;
             }
 
             return new WeightedEdge($edge->left, $edge->right, [...$violations, ...$edge->weight]);
