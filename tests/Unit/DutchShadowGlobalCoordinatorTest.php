@@ -121,6 +121,26 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
         }
     }
 
+    public function testPabSelectionAddsRepeatedDownfloatComplementAtCanonicalQcPositions(): void
+    {
+        $repeat = new Player(1, 1, 'Repeat', 2200, '', '', '', true, Score::fromDecimal('2.5'), floatHistory: ['none', 'down']);
+        $fresh = new Player(2, 2, 'Fresh', 2190, '', '', '', true, Score::fromDecimal('2.5'), floatHistory: ['none', 'none']);
+        $other = new Player(3, 3, 'Other', 2180, '', '', '', true, Score::fromDecimal('3.0'));
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 5, 5, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$repeat, $fresh, $other],
+        );
+        $graph = (new DutchRoundGraphBuilder())->build($state);
+        $edges = [new WeightedEdge(1, 3, array_fill(0, 24, 0))];
+        $method = new \ReflectionMethod(DutchShadowGlobalCoordinator::class, 'pabSelectionWeightedEdges');
+        /** @var list<WeightedEdge> $weighted */
+        $weighted = $method->invoke(new DutchShadowGlobalCoordinator(), $edges, $state, $graph, 0, false, 1);
+        // Two PAB prefix fields precede the base vector. With max PSD 1,
+        // QC14 and QC16 are base positions 10 and 12 respectively.
+        self::assertSame(1, $weighted[0]->weight[12]);
+        self::assertSame(0, $weighted[0]->weight[14]);
+    }
+
     private function player(int $id, int $score): Player
     {
         return new Player($id, $id, 'P'.$id, 2200 - $id, '', '', '', true, Score::fromDecimal($score.'.0'));

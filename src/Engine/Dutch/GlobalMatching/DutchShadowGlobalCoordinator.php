@@ -233,11 +233,11 @@ final readonly class DutchShadowGlobalCoordinator
             $bsn,
             $homogeneousPairs,
         );
+        $maxPsd = max(array_map(
+            static fn (int $playerId): int => $graph->scoreRankByPlayerId[$playerId] - $scoreLevel,
+            $realRemaining,
+        ) ?: [0]);
         if ($mdpMatchRequirements !== null) {
-            $maxPsd = max(array_map(
-                static fn (int $playerId): int => $graph->scoreRankByPlayerId[$playerId] - $scoreLevel,
-                $realRemaining,
-            ) ?: [0]);
             $edges = $this->constraintWeightedEdges(
                 $edges,
                 $graph,
@@ -249,7 +249,7 @@ final readonly class DutchShadowGlobalCoordinator
             );
         }
         if ($pabScoreLevel !== null) {
-            $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies);
+            $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies, max(0, $maxPsd));
         }
         $widths = array_values(array_unique(array_map(static fn (WeightedEdge $edge): int => count($edge->weight), $edges)));
         if (count($widths) > 1) {
@@ -354,13 +354,17 @@ final readonly class DutchShadowGlobalCoordinator
      * @param list<WeightedEdge> $edges
      * @return list<WeightedEdge>
      */
-    private function pabSelectionWeightedEdges(array $edges, TournamentState $state, DutchRoundGraph $graph, int $pabScoreLevel, bool $c9Applies): array
+    private function pabSelectionWeightedEdges(array $edges, TournamentState $state, DutchRoundGraph $graph, int $pabScoreLevel, bool $c9Applies, int $maxPsd): array
     {
         $rules = new \OpenPairing\Engine\Dutch\DutchRules();
 
-        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $pabScoreLevel, $c9Applies, $rules): WeightedEdge {
+        $qc14Offset = 8 + (2 * $maxPsd);
+        $qc16Offset = $qc14Offset + 2;
+
+        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset): WeightedEdge {
             $selection = 0;
             $c9 = 0;
+            $weight = $edge->weight;
             foreach ([$edge->left, $edge->right] as $playerId) {
                 $player = $graph->playersById[$playerId];
                 $candidate = $graph->scoreRankByPlayerId[$playerId] === $pabScoreLevel
@@ -374,9 +378,20 @@ final readonly class DutchShadowGlobalCoordinator
                         }
                     }
                 }
+                if ($candidate) {
+                    // The PAB has no incident edge. Rewarding every matched
+                    // eligible endpoint at the canonical QC positions is the
+                    // complement of penalizing the sole unmatched endpoint.
+                    $last = $player->floatHistory[array_key_last($player->floatHistory)] ?? 'none';
+                    $previous = count($player->floatHistory) > 1
+                        ? $player->floatHistory[count($player->floatHistory) - 2]
+                        : 'none';
+                    $weight[$qc14Offset] += $last === 'down' ? 1 : 0;
+                    $weight[$qc16Offset] += $previous === 'down' ? 1 : 0;
+                }
             }
 
-            return new WeightedEdge($edge->left, $edge->right, [$selection, $c9, ...$edge->weight]);
+            return new WeightedEdge($edge->left, $edge->right, [$selection, $c9, ...$weight]);
         }, $edges);
     }
 
