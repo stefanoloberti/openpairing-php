@@ -45,7 +45,17 @@ final class LexicographicWeightEncoder
             if ($range < 0 || ($range !== 0 && $maxCardinality > intdiv(PHP_INT_MAX, $range))) {
                 throw new \OverflowException('A lexicographic component range is too large to encode.');
             }
-            $fieldWidths[] = $this->bitsFor($maxCardinality * $range);
+            // Subtracting the per-edge minimum introduces a cardinality-
+            // dependent offset when a non-perfect matching is allowed. The
+            // leading cardinality field handles that globally; the component
+            // fields must be sized for the complete shifted sum, including
+            // maxCardinality * -minimum, or carries can corrupt the preceding
+            // lexicographic criterion.
+            $shiftedMaximum = $maximum[$index] - min(0, $componentMinimum);
+            if ($shiftedMaximum !== 0 && $maxCardinality > intdiv(PHP_INT_MAX, $shiftedMaximum)) {
+                throw new \OverflowException('A shifted lexicographic component is too large to encode.');
+            }
+            $fieldWidths[] = $this->bitsFor($maxCardinality * $shiftedMaximum);
         }
 
         usort($edges, static fn (WeightedEdge $left, WeightedEdge $right): int =>

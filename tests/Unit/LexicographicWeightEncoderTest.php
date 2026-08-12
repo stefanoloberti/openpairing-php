@@ -60,6 +60,27 @@ final class LexicographicWeightEncoderTest extends TestCase
         );
     }
 
+    public function testSignedFieldCannotCarryIntoPrecedingCriterionWithVariableCardinality(): void
+    {
+        $problem = (new LexicographicWeightEncoder())->encode([1, 2, 3, 4, 5], [
+            new WeightedEdge(1, 2, [0, 0]),
+            new WeightedEdge(3, 4, [0, 0]),
+            new WeightedEdge(1, 3, [-1, -1]),
+            new WeightedEdge(2, 4, [0, -1]),
+            new WeightedEdge(2, 5, [0, -1]),
+        ]);
+        $weights = $this->weights($problem->edges);
+
+        // Both alternatives have two edges. The first must win on component
+        // zero even though shifting negative values makes its lower-order sum
+        // larger than the raw per-dimension range.
+        self::assertGreaterThan(
+            0,
+            $weights['1-2']->add($weights['3-4'])
+                ->compare($weights['1-3']->add($weights['2-5'])),
+        );
+    }
+
     public function testPairingNumberTieBreakIsIndependentOfInputOrder(): void
     {
         $edges = [

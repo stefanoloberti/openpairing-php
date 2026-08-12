@@ -134,11 +134,15 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
         $edges = [new WeightedEdge(1, 3, array_fill(0, 24, 0))];
         $method = new \ReflectionMethod(DutchShadowGlobalCoordinator::class, 'pabSelectionWeightedEdges');
         /** @var list<WeightedEdge> $weighted */
-        $weighted = $method->invoke(new DutchShadowGlobalCoordinator(), $edges, $state, $graph, 0, false, 1);
+        $weighted = $method->invoke(new DutchShadowGlobalCoordinator(), $edges, $state, $graph, 0, 0, false, 1);
         // Two PAB prefix fields precede the base vector. With max PSD 1,
         // QC14 and QC16 are base positions 10 and 12 respectively.
         self::assertSame(1, $weighted[0]->weight[12]);
         self::assertSame(0, $weighted[0]->weight[14]);
+
+        /** @var list<WeightedEdge> $beforePabBracket */
+        $beforePabBracket = $method->invoke(new DutchShadowGlobalCoordinator(), $edges, $state, $graph, 1, 0, false, 1);
+        self::assertSame(0, $beforePabBracket[0]->weight[12]);
     }
 
     public function testMatchedMdpConstraintUsesOnlyUnsignedIncidentBits(): void

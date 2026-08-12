@@ -96,19 +96,57 @@ def quality_by_level(brackets: list[dict[str, Any]]) -> list[tuple[int, dict[str
     return result
 
 
+def bracket_signature(bracket: dict[str, Any]) -> Any:
+    """Stable bracket outcome, excluding Gacrux's mutable edge-quality cache."""
+    pairs = sorted(
+        (
+            min(int(pair.get("ca", 0)), int(pair.get("cb", 0))),
+            max(int(pair.get("ca", 0)), int(pair.get("cb", 0))),
+            int(pair.get("w", 0)),
+            int(pair.get("b", 0)),
+        )
+        for pair in bracket.get("pairs", [])
+    )
+    return canonical({
+        "pairs": pairs,
+        "downfloaters": sorted(int(value) for value in bracket.get("downfloaters", [])),
+        "pab": bracket.get("pab"),
+    })
+
+
 def quality_comparison(candidate: list[dict[str, Any]], best: list[dict[str, Any]]) -> tuple[bool, dict[str, Any] | None]:
     left, right = quality_by_level(candidate), quality_by_level(best)
     if [level for level, _ in left] != [level for level, _ in right]:
         return False, {"criterion": "score-brackets", "candidate": [item[0] for item in left], "best": [item[0] for item in right]}
-    for index, ((level, candidate_quality), (_, best_quality)) in enumerate(zip(left, right)):
+    candidate_brackets = [bracket for bracket in candidate if bracket is not None]
+    best_brackets = [bracket for bracket in best if bracket is not None]
+    first_outcome_difference = next((
+        index for index, (candidate_bracket, best_bracket) in enumerate(zip(candidate_brackets, best_brackets))
+        if bracket_signature(candidate_bracket) != bracket_signature(best_bracket)
+    ), None)
+    indexes = [first_outcome_difference] if first_outcome_difference is not None else range(len(left))
+    for index in indexes:
+        level, candidate_quality = left[index]
+        best_quality = right[index][1]
         for key in QUALITY_KEYS:
-            if candidate_quality[key] != best_quality[key]:
+            left_value, right_value = candidate_quality[key], best_quality[key]
+            # Gacrux leaves HE/HO fields null when that refinement phase is
+            # not applicable. A candidate produced by another engine may
+            # serialize the additive identity instead. Null versus 0/[] is
+            # therefore not a quality difference; treating it as one hid the
+            # first real difference in large-field diagnostics.
+            if key.startswith(("HE", "HO")):
+                if left_value is None and right_value in (0, []):
+                    left_value = right_value
+                if right_value is None and left_value in (0, []):
+                    right_value = left_value
+            if left_value != right_value:
                 return False, {
                     "bracketIndex": index,
                     "scorelevel": level,
                     "criterion": key,
-                    "candidate": candidate_quality[key],
-                    "best": best_quality[key],
+                    "candidate": left_value,
+                    "best": right_value,
                 }
     return True, None
 

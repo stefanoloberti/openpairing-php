@@ -249,7 +249,10 @@ final readonly class DutchShadowGlobalCoordinator
             );
         }
         if ($pabScoreLevel !== null) {
-            $edges = $this->pabSelectionWeightedEdges($edges, $state, $graph, $pabScoreLevel, $c9Applies, max(0, $maxPsd));
+            $edges = $this->pabSelectionWeightedEdges(
+                $edges, $state, $graph, $scoreLevel, $pabScoreLevel,
+                $c9Applies, max(0, $maxPsd),
+            );
         }
         $widths = array_values(array_unique(array_map(static fn (WeightedEdge $edge): int => count($edge->weight), $edges)));
         if (count($widths) > 1) {
@@ -354,14 +357,14 @@ final readonly class DutchShadowGlobalCoordinator
      * @param list<WeightedEdge> $edges
      * @return list<WeightedEdge>
      */
-    private function pabSelectionWeightedEdges(array $edges, TournamentState $state, DutchRoundGraph $graph, int $pabScoreLevel, bool $c9Applies, int $maxPsd): array
+    private function pabSelectionWeightedEdges(array $edges, TournamentState $state, DutchRoundGraph $graph, int $scoreLevel, int $pabScoreLevel, bool $c9Applies, int $maxPsd): array
     {
         $rules = new \OpenPairing\Engine\Dutch\DutchRules();
 
         $qc14Offset = 8 + (2 * $maxPsd);
         $qc16Offset = $qc14Offset + 2;
 
-        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset): WeightedEdge {
+        return array_map(static function (WeightedEdge $edge) use ($state, $graph, $scoreLevel, $pabScoreLevel, $c9Applies, $rules, $qc14Offset, $qc16Offset): WeightedEdge {
             $selection = 0;
             $c9 = 0;
             $weight = $edge->weight;
@@ -378,7 +381,7 @@ final readonly class DutchShadowGlobalCoordinator
                         }
                     }
                 }
-                if ($candidate) {
+                if ($candidate && $scoreLevel === $pabScoreLevel) {
                     // The PAB has no incident edge. Rewarding every matched
                     // eligible endpoint at the canonical QC positions is the
                     // complement of penalizing the sole unmatched endpoint.
