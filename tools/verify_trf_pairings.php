@@ -44,6 +44,12 @@ $mode = $argv[3] ?? '';
 $shadowOnly = $mode === '--shadow-only';
 $auditShadowGlobal = $mode === '--shadow-global' || $shadowOnly;
 $auditPreliminaryGlobal = $mode === '--preliminary-global' || $auditShadowGlobal;
+$roundFilterRaw = getenv('OPENPAIRING_ROUND_ONLY');
+$roundFilter = is_string($roundFilterRaw) && $roundFilterRaw !== '' ? filter_var($roundFilterRaw, FILTER_VALIDATE_INT) : null;
+if ($roundFilterRaw !== false && $roundFilterRaw !== '' && (!is_int($roundFilter) || $roundFilter < 1)) {
+    fwrite(STDERR, "OPENPAIRING_ROUND_ONLY must be a positive integer.\n");
+    exit(2);
+}
 if ($directory === '' || !is_dir($directory) || $limit < 0 || ($mode !== '' && !$auditPreliminaryGlobal)) {
     fwrite(STDERR, "Usage: verify_trf_pairings.php DIRECTORY [MAX_FILES] [--preliminary-global|--shadow-global|--shadow-only]\n");
     exit(2);
@@ -129,6 +135,9 @@ foreach ($corpus['files'] as $corpusFile) {
         $roundsVerified = 0;
 
         for ($round = 1; $round <= $full->numberOfRounds; ++$round) {
+            if ($roundFilter !== null && $round !== $roundFilter) {
+                continue;
+            }
             $reference = rawRoundReference($raw, $round);
             if ($reference['pairs'] === [] && $reference['bye'] === null) {
                 continue;
@@ -367,6 +376,7 @@ echo json_encode([
     'historicalFloatSemantics' => DutchFloatClassifier::VERSION,
     'root' => $root,
     'limit' => $limit,
+    'roundFilter' => $roundFilter,
     'preliminaryGlobalAudit' => $auditPreliminaryGlobal,
     'shadowGlobalAudit' => $auditShadowGlobal,
     'elapsedSeconds' => round((hrtime(true) - $started) / 1_000_000_000, 3),

@@ -74,13 +74,14 @@ the verified Blossom core and will not replace `solveGroups()` in place. The
 bounded enumerator remains a small-field diagnostic oracle until the new path
 passes the frozen gates.
 
-Acceptance proceeds without changing the corpus:
+Acceptance proceeds without changing the corpus. Criterion 1 is formally
+satisfied by tag `epoch-2-dutch-500`; criteria 2 and 3 remain open:
 
-1. 500/500 exact on the frozen 100x7 sample, with no regression of the 455
+1. **Satisfied.** 500/500 exact on the frozen 100x7 sample, with no regression of the 455
    epoch-2 legacy-exact rounds and no unclassified shadow bucket.
-2. No resource-limit results in the existing 30/50/80-player samples, with all
+2. **Open.** No resource-limit results in the existing 30/50/80-player samples, with all
    deviations classified rather than treated as variants.
-3. Full replay of all 122,008 previously decodable non-accelerated tournaments.
+3. **Open.** Full replay of all 122,008 previously decodable non-accelerated tournaments.
 
 Runtime-identity attestation from the historical verifier is part of every gate.
 
