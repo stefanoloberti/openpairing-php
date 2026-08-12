@@ -37,7 +37,10 @@ final class DutchShadowGlobalCoordinatorTest extends TestCase
 
         self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
         self::assertSame('preliminary', $result->timings[0]->phase);
-        self::assertCount(5, $result->timings);
+        self::assertSame(
+            ['preliminary', 'quality-HE', 'quality-HO', 'quality-HE', 'quality-HO', 'quality-HE', 'quality-HO'],
+            array_map(static fn ($timing): string => $timing->phase, $result->timings),
+        );
         foreach ($result->timings as $timing) {
             self::assertGreaterThanOrEqual(0.0, $timing->milliseconds);
         }
