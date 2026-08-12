@@ -2,11 +2,11 @@
 
 | Capability | Gacrux | BBP | OpenPairing current state |
 |---|---|---|---|
-| FIDE Dutch 2026 | Yes | Yes | Bounded multi-round C1-C21 engine; full historical-corpus gate not yet passed |
+| FIDE Dutch 2026 | Yes | Yes | Public persistent whole-round C1-C21 engine; frozen 7/30/50/80-player gates exact, full historical-corpus gate open |
 | FIDE Burstein 2026 | No production engine found | Present; upstream warns of imperfections | Separate bounded C1-C8/BSN engine; official FIDE rules are normative |
-| Weighted general matching | NetworkX development dependency | Native general matcher | Pure-PHP exact DP, arbitrary graphs, 22-vertex limit |
+| Weighted general matching | NetworkX development dependency | Native general matcher | Polynomial arbitrary-width Blossom in production; 22-vertex exhaustive matcher retained as a test oracle |
 | Colour allocation | Yes | Yes | Dutch and Burstein 5.2.1-5.2.5 variants |
-| PAB/bye | Yes | Yes | Eligibility, ranking and global-completion backtracking |
+| PAB/bye | Yes | Yes | Eligibility, unmatched-vertex PAB selection and persistent global completion |
 | Scoregroups/MDP/floats | Yes | Yes | Dutch C6-C21; Burstein C5-C7 |
 | TRF-2026 read/write | Yes | Yes; parser gaps documented | Fail-closed individual subset, Dutch + Burstein + Round Robin standings |
 | JSON | ChessJSON | No canonical API | Project-owned canonical JSON v1 |
