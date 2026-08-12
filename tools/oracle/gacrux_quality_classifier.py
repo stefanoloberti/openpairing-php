@@ -145,6 +145,8 @@ def classify(upstream: Path, source: Path, round_number: int, candidate: dict[st
             "rules": envelope.get("pairingResult", {}).get("rules"),
             "checkerExact": checker_exact,
             "firstDifference": first_difference,
+            "candidateBrackets": result.get("analysis", []),
+            "bestBrackets": result.get("pairing", []),
             "candidatePairs": result.get("current", []),
             "bestPairs": result.get("pairs", []),
         }
