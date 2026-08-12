@@ -15,4 +15,6 @@ if ($LASTEXITCODE -ne 0) {
 & ssh.exe $HostAlias wsl -d $Distribution -- bash $remote
 $exitCode = $LASTEXITCODE
 & ssh.exe $HostAlias wsl -d $Distribution -- rm -f $remote | Out-Null
-exit $exitCode
+if ($exitCode -ne 0) {
+    throw "Remote WSL script failed with exit code $exitCode."
+}
