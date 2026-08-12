@@ -25,8 +25,23 @@ The first attested epoch-2 replay on the frozen 100x7 sample has corpus manifest
   deviations and 2 divergent deviations;
 - all 11 non-exact shadow rounds are Gacrux-inferior.
 
-The pairing gate remains open. The accepted small-field target is 500/500 with
-zero regressions and zero unclassified oracle-required results.
+The epoch-2 small-field gate is now closed at 500/500 exact rounds: 455
+`both-exact`, 45 `candidate-progress`, zero regressions, zero deviations and
+zero no-matchings. The attested report is
+`docs/evidence/pairing-epoch2-dutch-500.json`; source tree SHA-256 is
+`62c99333645817d956f37c3e41808561c1312d219f89fdba8061e2b400c53e4f`,
+corpus manifest SHA-256 remains
+`e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44`, and
+the checkpoint is Git tag `epoch-2-dutch-500` at commit `f419b7c`.
+
+The larger-field gate is still open for performance. Ten-tournament samples
+at 30 and 50 players completed with zero shadow no-matchings; the bounded
+legacy path hit 23 and 78 resource limits respectively. A ten-tournament
+80-player run was terminated after 48 minutes at full CPU before producing its
+first report. This confirms that polynomial matching removed the enumerator's
+correctness guard-rail, while from-scratch Blossom recomputation at every
+freeze remains too slow for the full corpus. No production switchover has been
+made.
 
 The first BBP-faithful PAB representation (the bye is the sole unmatched real
 vertex, not an edge to a virtual vertex) is checkpointed at 490/500, zero

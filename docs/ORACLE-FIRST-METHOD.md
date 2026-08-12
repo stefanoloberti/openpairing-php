@@ -32,6 +32,15 @@ the complete sample. It was reverted. Micro-corpus progress is therefore a
 diagnostic, never a checkpoint; every retained mechanism must survive the full
 frozen gate.
 
+The final convergence adds a fifth lesson. A Gacrux `HE2` first difference in
+T0056 was caused by an earlier missing QC14 endpoint contribution, not by HE
+ordering. Applying the primary-source rule to every current-bracket edge moved
+496/500 to 499/500. The last shared deviation then exposed the same
+representation issue for the sole unmatched PAB: because it has no incident
+edge, QC14/QC16 must be carried by the algebraic complement on matched eligible
+endpoints. BBP independently produced the corpus pairing. The canonical fix
+closed the frozen gate at 500/500 without regressions.
+
 OpenPairing treats a plausible explanation as a hypothesis, not a pairing
 verdict. Before changing Dutch selection logic, the smallest isolating
 counterfactual is sent to the independent Gacrux checker and the report records

@@ -1,6 +1,6 @@
 # ADR 0008: Dutch integration uses one persistent round graph
 
-Status: accepted design; persistent state computer implemented, Dutch lifecycle pending.
+Status: accepted and small-field verified; larger-field performance pending.
 
 Baseline epoch: `fide-dutch-float/2-pab-downfloat`. Every replay figure below
 that predates this marker (74, 59, legacy 441 and shadow 425/427/444/466 plus
@@ -8,11 +8,12 @@ their QC distributions) is retained only as non-gating debugging history. The
 correct frozen baseline is legacy 455/500 and shadow 489/500 with zero
 no-matchings. All 11 shadow residuals are independently Gacrux-inferior.
 
-The latest retained lifecycle checkpoint is 494/500 with zero no-matchings,
-attested by `docs/evidence/pairing-epoch2-lifecycle-c9-494.json`. Carrying BBP's
-conditional C9 state across bracket transitions removed four inferior
-regressions. Six Gacrux-inferior cases remain; production wiring is still
-forbidden.
+The completed lifecycle reaches 500/500 exact with zero no-matchings and zero
+regressions, attested by `docs/evidence/pairing-epoch2-dutch-500.json` and Git
+tag `epoch-2-dutch-500`. The final two general defects were missing QC14/QC16
+endpoint contributions on heterogeneous edges and on the genuinely unmatched
+PAB endpoint. Production wiring remains forbidden until the 80-player
+performance gate is practical and the subsequent full-corpus replay closes.
 
 The polynomial matcher must not be inserted independently into the current
 `solveGroups()` loop. Independent bracket optima cannot compare PAB choices or
