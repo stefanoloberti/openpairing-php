@@ -7,6 +7,10 @@ namespace OpenPairing\Engine\Matching;
 /** Packs vector weights into exact unsigned scalars suitable for Blossom. */
 final class LexicographicWeightEncoder
 {
+    public function __construct(private readonly bool $includeMateVector = true)
+    {
+    }
+
     /**
      * @param list<int> $vertices
      * @param list<WeightedEdge> $edges
@@ -62,8 +66,8 @@ final class LexicographicWeightEncoder
             (min($left->left, $left->right) <=> min($right->left, $right->right))
             ?: (max($left->left, $left->right) <=> max($right->left, $right->right))
         );
-        $tieFieldWidth = $this->bitsFor(count($vertices));
-        $tieBits = count($vertices) * $tieFieldWidth;
+        $tieFieldWidth = $this->includeMateVector ? $this->bitsFor(count($vertices)) : 0;
+        $tieBits = $this->includeMateVector ? count($vertices) * $tieFieldWidth : 0;
         $totalBits = array_sum($fieldWidths) + $tieBits;
         // BBP matching::Computer reserves two high guard bits for doubled
         // internal edge weights and dual arithmetic. Keep at least 128 bits.
@@ -83,10 +87,12 @@ final class LexicographicWeightEncoder
             // a matched vertex, the lower partner number wins. The complete
             // mate vector uniquely identifies a matching using O(V log V)
             // bits instead of one perturbation bit per possible edge.
-            foreach ([$edge->left => $edge->right, $edge->right => $edge->left] as $vertex => $partner) {
-                $digit = count($vertices) - $partner;
-                $position = (count($vertices) - $vertex - 1) * $tieFieldWidth;
-                $value = $value->add(DynamicUInt::fromInt($digit, $bitWidth)->shiftLeft($position));
+            if ($this->includeMateVector) {
+                foreach ([$edge->left => $edge->right, $edge->right => $edge->left] as $vertex => $partner) {
+                    $digit = count($vertices) - $partner;
+                    $position = (count($vertices) - $vertex - 1) * $tieFieldWidth;
+                    $value = $value->add(DynamicUInt::fromInt($digit, $bitWidth)->shiftLeft($position));
+                }
             }
             $encoded[] = new EncodedWeightedEdge(
                 min($edge->left, $edge->right),

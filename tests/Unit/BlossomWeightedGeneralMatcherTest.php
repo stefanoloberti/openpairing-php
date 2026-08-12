@@ -6,6 +6,7 @@ namespace OpenPairing\Tests\Unit;
 
 use OpenPairing\Engine\Matching\BlossomWeightedGeneralMatcher;
 use OpenPairing\Engine\Matching\ExactWeightedGeneralMatcher;
+use OpenPairing\Engine\Matching\LexicographicWeightEncoder;
 use OpenPairing\Engine\Matching\WeightedEdge;
 use OpenPairing\Engine\Matching\WeightedMatchingStatus;
 use PHPUnit\Framework\Attributes\Group;
@@ -56,6 +57,23 @@ final class BlossomWeightedGeneralMatcherTest extends TestCase
         self::assertSame(WeightedMatchingStatus::Optimal, $result->status);
         self::assertSame($oracle->pairs, $result->pairs);
         self::assertSame($oracle->totalWeight, $result->totalWeight);
+    }
+
+    public function testDeterministicVisitTieBreakIsIndependentOfInputOrder(): void
+    {
+        $edges = [
+            new WeightedEdge(1, 2, [0]),
+            new WeightedEdge(3, 4, [0]),
+            new WeightedEdge(1, 3, [0]),
+            new WeightedEdge(2, 4, [0]),
+        ];
+        $matcher = new BlossomWeightedGeneralMatcher(new LexicographicWeightEncoder(false));
+
+        $forward = $matcher->match([1, 2, 3, 4], $edges, true);
+        $reversed = $matcher->match([4, 3, 2, 1], array_reverse($edges), true);
+
+        self::assertSame($forward->pairs, $reversed->pairs);
+        self::assertSame($forward->totalWeight, $reversed->totalWeight);
     }
 
     #[Group('stress')]

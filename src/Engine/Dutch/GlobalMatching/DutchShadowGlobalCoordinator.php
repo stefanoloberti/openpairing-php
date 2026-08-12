@@ -6,6 +6,7 @@ namespace OpenPairing\Engine\Dutch\GlobalMatching;
 
 use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Engine\Matching\BlossomWeightedGeneralMatcher;
+use OpenPairing\Engine\Matching\LexicographicWeightEncoder;
 use OpenPairing\Engine\Matching\PersistentWeightedMatchingComputer;
 use OpenPairing\Engine\Matching\WeightedEdge;
 use OpenPairing\Engine\Matching\WeightedGeneralMatchingInterface;
@@ -19,7 +20,7 @@ final readonly class DutchShadowGlobalCoordinator
         private DutchRoundGraphBuilder $graphBuilder = new DutchRoundGraphBuilder(),
         private DutchPreliminaryRoundMatcher $preliminary = new DutchPreliminaryRoundMatcher(),
         private DutchQualityRoundGraphBuilder $qualityGraphBuilder = new DutchQualityRoundGraphBuilder(),
-        private WeightedGeneralMatchingInterface $matcher = new BlossomWeightedGeneralMatcher(),
+        private WeightedGeneralMatchingInterface $matcher = new BlossomWeightedGeneralMatcher(new LexicographicWeightEncoder(false)),
         private DutchC9Lifecycle $c9Lifecycle = new DutchC9Lifecycle(),
     ) {
     }
