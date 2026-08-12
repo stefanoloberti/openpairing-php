@@ -116,10 +116,16 @@ final readonly class DutchShadowGlobalCoordinator
             // Only after heterogeneous opponents are final does the current
             // matching define the remainder. Freeze resident-resident pairs;
             // residents matched below remain active and move to the next bracket.
+            $hoBsn = [];
+            foreach ($current as $id) {
+                if (in_array($id, $remaining, true) && $graph->scoreRankByPlayerId[$id] === $scoreLevel) {
+                    $hoBsn[$id] = count($hoBsn) + 1;
+                }
+            }
             while (count($remaining) > ($preliminaryBye === null ? 0 : 1)) {
                 $remainder = $this->rematch(
                     $state, $graph, $remaining, $remaining, $scoreLevel,
-                    $pabScoreLevel, $c9Applies, $bsn, $homogeneousPairs,
+                    $pabScoreLevel, $c9Applies, $hoBsn, $homogeneousPairs,
                     'HO-remainder', $timings, $computer, [],
                 );
                 if ($remainder->status !== WeightedMatchingStatus::Optimal) {
@@ -133,12 +139,12 @@ final readonly class DutchShadowGlobalCoordinator
                 if ($residentPairs === []) {
                     break;
                 }
-                usort($residentPairs, static function (array $left, array $right) use ($bsn): int {
-                    $leftFirst = min($bsn[$left['left']], $bsn[$left['right']]);
-                    $rightFirst = min($bsn[$right['left']], $bsn[$right['right']]);
+                usort($residentPairs, static function (array $left, array $right) use ($hoBsn): int {
+                    $leftFirst = min($hoBsn[$left['left']], $hoBsn[$left['right']]);
+                    $rightFirst = min($hoBsn[$right['left']], $hoBsn[$right['right']]);
 
                     return ($leftFirst <=> $rightFirst)
-                        ?: (max($bsn[$left['left']], $bsn[$left['right']]) <=> max($bsn[$right['left']], $bsn[$right['right']]));
+                        ?: (max($hoBsn[$left['left']], $hoBsn[$left['right']]) <=> max($hoBsn[$right['left']], $hoBsn[$right['right']]));
                 });
                 $this->freezePair(
                     $residentPairs[0], $bracketIndex, $scoreLevel, $computer,
