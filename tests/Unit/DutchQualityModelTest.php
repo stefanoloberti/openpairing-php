@@ -183,6 +183,28 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame([1, 0], $quality->components['QC20']);
     }
 
+    public function testQc11UsesAbsolutePreferenceImbalanceWhenOnlyOnePlayerHasOppositeColourRun(): void
+    {
+        $balanced = new Player(
+            1, 1, 'Balanced', 2200, '', '', '', true, Score::fromDecimal('3.0'),
+            colourHistory: [Colour::Black, Colour::Black, Colour::White, Colour::White],
+        );
+        $imbalanced = new Player(
+            2, 2, 'Imbalanced', 2190, '', '', '', true, Score::fromDecimal('3.5'),
+            colourHistory: [Colour::White, Colour::Black, Colour::White, Colour::White, Colour::Black, Colour::White],
+        );
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 7, 7, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$balanced, $imbalanced],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $balanced, $imbalanced, 0, null, [1 => 0, 2 => 0], [$balanced, $imbalanced],
+        );
+
+        self::assertSame(1, $quality->components['QC11']);
+    }
+
     private function player(int $id, int $score): Player
     {
         return new Player($id, $id, 'P'.$id, 2200 - $id, '', '', '', true, Score::fromDecimal($score.'.0'));

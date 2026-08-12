@@ -257,13 +257,32 @@ final readonly class DutchQualityModel
             if ($samePreference && count($leftHistory) >= 2 && count($rightHistory) >= 2) {
                 $leftLastTwo = array_slice($leftHistory, -2);
                 $rightLastTwo = array_slice($rightHistory, -2);
-                if ($leftLastTwo === $rightLastTwo && $leftLastTwo[0] === $leftLastTwo[1]) {
+                $oppositeRun = [$leftPreference->colour?->opposite(), $leftPreference->colour?->opposite()];
+                $leftStrength = $this->preferenceRank($leftPreference->strength);
+                $rightStrength = $this->preferenceRank($rightPreference->strength);
+                if (($leftLastTwo === $rightLastTwo && $leftLastTwo[0] === $leftLastTwo[1])
+                    || ($leftStrength > $rightStrength && $rightLastTwo === $oppositeRun)
+                    || ($rightStrength > $leftStrength && $leftLastTwo === $oppositeRun)
+                    || ($leftPreference->strength === ColourPreferenceStrength::Absolute
+                        && $rightPreference->strength === ColourPreferenceStrength::Absolute
+                        && ((abs($leftPreference->difference) > abs($rightPreference->difference) && $rightLastTwo === $oppositeRun)
+                            || (abs($rightPreference->difference) > abs($leftPreference->difference) && $leftLastTwo === $oppositeRun)))) {
                     $c11 = 1;
                 }
             }
         }
 
         return [$c10, $c11, $c12, $c13];
+    }
+
+    private function preferenceRank(ColourPreferenceStrength $strength): int
+    {
+        return match ($strength) {
+            ColourPreferenceStrength::None => 0,
+            ColourPreferenceStrength::Mild => 0,
+            ColourPreferenceStrength::Strong => 1,
+            ColourPreferenceStrength::Absolute => 2,
+        };
     }
 
     private function unplayedGames(TournamentState $state, Player $player): int
