@@ -15,6 +15,15 @@ improve when legacy moved from 441 first to 453 and then 455; the reconstructed 
 semantically correct. Every future report must attest both source/corpus hashes
 and `historicalFloatSemantics`.
 
+The conditional-C9 episode adds a distinct methodological warning: an oracle
+validates an output, not the mechanism that produced it. Applying C9 to every
+PAB improved an incomplete coordinator and did not create a new Gacrux-inferior
+case, yet the fixed BBP primary source proves C9 is conditional on the bye being
+the single downfloater. The apparent improvement was compensation for the
+missing matched/remainder/exchange lifecycle, not a valid rules interpretation.
+Mechanism claims therefore require the normative text or pinned primary source
+in addition to output parity.
+
 OpenPairing treats a plausible explanation as a hypothesis, not a pairing
 verdict. Before changing Dutch selection logic, the smallest isolating
 counterfactual is sent to the independent Gacrux checker and the report records

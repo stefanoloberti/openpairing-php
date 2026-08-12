@@ -1,0 +1,29 @@
+{
+  "schema": "openpairing.pairing-checkpoint/1",
+  "createdAt": "2026-08-12T18:00:00+02:00",
+  "gitCommit": "17a58933bf30e9414a9011d62b15fdf7d25c89d9",
+  "runtimeSourceTreeSha256": "df6762e59afc5ae709a73c9288c4c84481a72d1775da38db7138da3bc0c900bd",
+  "corpusManifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44",
+  "historicalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+  "reportSchema": "openpairing.trf-historical-pairing-verification/3",
+  "frozenSample": {
+    "tournaments": 100,
+    "rounds": 500,
+    "legacyExact": 455,
+    "shadow": {
+      "exact": 490,
+      "bothExact": 448,
+      "candidateProgress": 42,
+      "candidateRegression": 7,
+      "sameDeviation": 1,
+      "divergentDeviation": 2,
+      "noMatching": 0
+    }
+  },
+  "gacrux": {
+    "classified": 10,
+    "inferiorToCheckerOptimum": 10,
+    "infrastructureErrors": 0
+  },
+  "productionSwitchAllowed": false
+}

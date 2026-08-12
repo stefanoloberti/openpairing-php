@@ -33,6 +33,11 @@
       "@test",
       "@analyse"
     ],
+    "checkpoint": [
+      "@check",
+      "@test-stress",
+      "@test-oracles"
+    ],
     "benchmark": "@php tools/benchmark.php"
   },
   "config": {

@@ -8,10 +8,12 @@ use OpenPairing\Engine\Matching\BlossomWeightedGeneralMatcher;
 use OpenPairing\Engine\Matching\ExactWeightedGeneralMatcher;
 use OpenPairing\Engine\Matching\PersistentWeightedMatchingComputer;
 use OpenPairing\Engine\Matching\WeightedEdge;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 final class PersistentWeightedMatchingComputerTest extends TestCase
 {
+    #[Group('stress')]
     public function testOneThousandFreezeAndReweightSequencesMatchFreshAndExhaustiveSolvers(): void
     {
         for ($seed = 1; $seed <= 1_000; ++$seed) {

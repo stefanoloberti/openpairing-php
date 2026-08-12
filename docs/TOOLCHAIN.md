@@ -11,7 +11,15 @@ Inspected/acquired on 2026-08-11. Nothing was installed globally.
 | PHPUnit | 11.5.56 | Composer dev dependency | Locked in `composer.lock` |
 | PHPStan | 2.2.8 | Composer dev dependency | Locked in `composer.lock` |
 
-An optional read-only inventory found PHP 8.3.6 and Python 3.12.3 in the
-`ChessPairings-Ubuntu-24.04` WSL environment on `doppia-3090`. Only `php -v`
-was executed there; no project file, staging service or corpus was accessed.
-Project verification uses the ignored local PHP 8.4.24 runtime.
+The `ChessPairings-Ubuntu-24.04` WSL environment on `doppia-3090` supplies PHP
+8.3.6, Python 3.12.3 and Git 2.43.0. Git was confirmed/installed through the
+Ubuntu package manager on 2026-08-12. Content-addressed validation releases and
+the frozen TRF corpus live under `/tmp`; staging remains read-only until the
+500/500 shadow gate passes.
+
+`composer check` is the sub-minute edit gate: unit/contract/small differential
+tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
+the pre-replay gate and additionally executes the 1,000-graph static and
+sequential differentials, the 300-vertex capacity test and development-oracle
+tests. An official replay must use a committed tree and record its commit plus
+runtime source hash.

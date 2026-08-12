@@ -58,6 +58,7 @@ final class BlossomWeightedGeneralMatcherTest extends TestCase
         self::assertSame($oracle->totalWeight, $result->totalWeight);
     }
 
+    #[Group('stress')]
     public function testSeededSmallGraphsMatchIndependentExhaustiveOracleExactly(): void
     {
         for ($seed = 1; $seed <= 1_000; ++$seed) {

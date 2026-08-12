@@ -28,6 +28,14 @@ The first attested epoch-2 replay on the frozen 100x7 sample has corpus manifest
 The pairing gate remains open. The accepted small-field target is 500/500 with
 zero regressions and zero unclassified oracle-required results.
 
+The first BBP-faithful PAB representation (the bye is the sole unmatched real
+vertex, not an edge to a virtual vertex) is checkpointed at 490/500, zero
+no-matchings. All ten residuals are Gacrux-inferior. Its compact, versioned
+evidence is `docs/evidence/pairing-epoch2-v3-pab-unmatched-490.json`; mutable
+`build/` reports are laboratory detail rather than the documentation source of
+truth. The checkpoint remains shadow-only while the matched/remainder/exchange
+lifecycle is incomplete.
+
 Parser validation is not pairing-engine verification. The historical verifier
 reconstructs the tournament state immediately before every recorded round,
 runs the native PHP Dutch engine, then compares opponents, colours and PAB with
