@@ -51,3 +51,15 @@ Enable-ScheduledTask -TaskName '<task name>' -TaskPath '\'
 If the task definition itself ever needs restoring, re-import its XML under
 the same name/path with `Register-ScheduledTask`. No task or script is deleted
 by this cleanup.
+
+## Phase 2
+
+After an explicit owner decision, phase 2 disabled six additional historical
+one-off or mass-run definitions. `REPORT-PHASE2.md`,
+`disable-result-phase2.json` and `inventory-post-phase2.json` attest the
+operation and its independent post-query. The armed count moved from 16 to 10;
+no definition was deleted.
+
+The WSL keepalive and all nine PTC/PublicGate tasks were protected from the
+operation. `PTC-PUBLICGATE-DECISION.md` extracts their actual trigger and
+action definitions from the backed-up XML for a separate owner decision.

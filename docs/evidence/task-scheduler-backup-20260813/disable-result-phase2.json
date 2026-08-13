@@ -1,0 +1,150 @@
+﻿{
+    "schema":  "openpairing-windows-task-disable-result/v2",
+    "changedAt":  "2026-08-13T10:29:19.0759199+02:00",
+    "computer":  "DESKTOP-3OI0QHR",
+    "operation":  "Disable-ScheduledTask only",
+    "deletedTaskCount":  0,
+    "phase2":  {
+                   "disabledCount":  6,
+                   "before":  [
+                                  {
+                                      "taskName":  "ChessPairings-WebStaging-LargeSoak-20260810",
+                                      "state":  "Ready"
+                                  },
+                                  {
+                                      "taskName":  "ChessPairings-WebStaging-Overnight-KeepAlive-20260810",
+                                      "state":  "Ready"
+                                  },
+                                  {
+                                      "taskName":  "ChessPairings-WebOvernight-Validators-20260810",
+                                      "state":  "Ready"
+                                  },
+                                  {
+                                      "taskName":  "ChessPairings-SwissChess700K-Anomalies-20260810",
+                                      "state":  "Ready"
+                                  },
+                                  {
+                                      "taskName":  "ChessPairings-FIDE-200k-Gacrux",
+                                      "state":  "Ready"
+                                  },
+                                  {
+                                      "taskName":  "ChessPairings-FIDE-500k-Gacrux-Large",
+                                      "state":  "Ready"
+                                  }
+                              ],
+                   "after":  [
+                                 {
+                                     "taskName":  "ChessPairings-WebStaging-LargeSoak-20260810",
+                                     "state":  "Disabled"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-WebStaging-Overnight-KeepAlive-20260810",
+                                     "state":  "Disabled"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-WebOvernight-Validators-20260810",
+                                     "state":  "Disabled"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-SwissChess700K-Anomalies-20260810",
+                                     "state":  "Disabled"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-200k-Gacrux",
+                                     "state":  "Disabled"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-500k-Gacrux-Large",
+                                     "state":  "Disabled"
+                                 }
+                             ]
+               },
+    "protected":  {
+                      "count":  10,
+                      "before":  [
+                                     {
+                                         "taskName":  "OpenPairing-WSL-KeepAlive",
+                                         "state":  "Running"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-PTC5000-PublicGate1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-PTC5000-PublicGate-Parallel1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-ValidatePTC5000-Control1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-ValidatePTC5000-Negative1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-ArchivePTC5000-Control1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-ArchiveRTG5000-Control1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-Archive-PTC5000-PublicGate1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-5000-PublicGate1",
+                                         "state":  "Ready"
+                                     },
+                                     {
+                                         "taskName":  "ChessPairings-FIDE-50000-PreRC1",
+                                         "state":  "Ready"
+                                     }
+                                 ],
+                      "after":  [
+                                    {
+                                        "taskName":  "OpenPairing-WSL-KeepAlive",
+                                        "state":  "Running"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-PTC5000-PublicGate1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-PTC5000-PublicGate-Parallel1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-ValidatePTC5000-Control1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-ValidatePTC5000-Negative1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-ArchivePTC5000-Control1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-ArchiveRTG5000-Control1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-Archive-PTC5000-PublicGate1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-5000-PublicGate1",
+                                        "state":  "Ready"
+                                    },
+                                    {
+                                        "taskName":  "ChessPairings-FIDE-50000-PreRC1",
+                                        "state":  "Ready"
+                                    }
+                                ]
+                  },
+    "negativeControl":  "All six authorized tasks were re-queried as Disabled; all ten protected tasks were re-queried as not Disabled."
+}

@@ -153,13 +153,17 @@ inventory of relevant legacy tasks; it never changes their state.
 
 On 2026-08-13 the authorized scheduler cleanup exported all 21 armed relevant
 task definitions before changing anything, then disabled the five remaining
-0.45.5 pipeline tasks. Every changed task was re-queried as `Disabled`; no task
-was deleted. The pre/post inventories, XML rollback definitions and operation
-result are under `docs/evidence/task-scheduler-backup-20260813/`. Sixteen armed
-tasks remain pending an owner decision, including the intentionally retained
-`OpenPairing-WSL-KeepAlive`. Any new scheduled task on this machine that is
-related to ChessPairings, FIDE laboratory work or OpenPairing must be recorded
-in this section and in a refreshed inventory before it is relied upon.
+0.45.5 pipeline tasks. A separately authorized second phase disabled six
+historical one-off or competing mass-run tasks. Every changed task was
+re-queried as `Disabled`, all protected tasks were re-queried as not disabled,
+and no task was deleted. The inventories, XML rollback definitions, operation
+results and PTC/PublicGate decision table are under
+`docs/evidence/task-scheduler-backup-20260813/`. Ten armed tasks remain: the
+intentionally retained `OpenPairing-WSL-KeepAlive` and nine triggerless
+PTC/PublicGate definitions awaiting a separate owner decision. Any new
+scheduled task on this machine that is related to ChessPairings, FIDE
+laboratory work or OpenPairing must be recorded in this section and in a
+refreshed inventory before it is relied upon.
 
 The worker count was raised from 12 to 20 only after the shutdown causes were
 separated from engine load. At the scale checkpoint the WSL exposed 28 logical
