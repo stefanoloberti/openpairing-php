@@ -55,7 +55,7 @@ try {
             $inputFormat = substr($argument, strlen('--input-format='));
             continue;
         }
-        if (str_starts_with($argument, '-')) {
+        if ($argument !== '-' && str_starts_with($argument, '-')) {
             throw new InvalidTournamentState('cli.arguments', 'Unknown command-line option: '.$argument);
         }
         if ($inputPath !== '-') {

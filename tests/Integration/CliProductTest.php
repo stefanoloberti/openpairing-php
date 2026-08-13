@@ -18,6 +18,21 @@ final class CliProductTest extends TestCase
         self::assertSame('Unknown command-line option: --does-not-exist', $error['message']);
     }
 
+    public function testCanonicalJsonCanBePairedFromStandardInput(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $input = file_get_contents($root.'/examples/pairing-round-1.json');
+        self::assertIsString($input);
+        [$exit, $stdout, $stderr] = $this->runCli(['--input-format=json', '-'], $input);
+
+        self::assertSame('', $stderr);
+        self::assertSame(0, $exit);
+        $result = $this->decodeObject($stdout);
+        self::assertIsArray($result['tables']);
+        self::assertCount(1, $result['tables']);
+        self::assertSame(3, $result['byePlayerId']);
+    }
+
     public function testLegacyTrfWithoutPairingSystemReturnsActionableError(): void
     {
         $root = dirname(__DIR__, 2);
@@ -76,7 +91,7 @@ final class CliProductTest extends TestCase
      *
      * @return array{0: int, 1: string, 2: string}
      */
-    private function runCli(array $arguments): array
+    private function runCli(array $arguments, string $stdin = ''): array
     {
         $root = dirname(__DIR__, 2);
         $command = array_merge([PHP_BINARY, $root.'/bin/openpairing.php'], $arguments);
@@ -87,6 +102,7 @@ final class CliProductTest extends TestCase
             2 => ['pipe', 'w'],
         ], $pipes, $root);
         self::assertIsResource($process);
+        fwrite($pipes[0], $stdin);
         fclose($pipes[0]);
         $stdout = stream_get_contents($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
