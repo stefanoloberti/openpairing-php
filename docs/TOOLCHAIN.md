@@ -77,6 +77,18 @@ and the served runtime hash all passed before/after the switch. Its separate
 stress gate passed 5 tests/31,003 assertions (one Windows GMP skip), and the
 upstream oracle group passed 11 tests/55 assertions.
 
+Release candidate 5, tag `59e8924`, packages the same validated algorithms and
+the latest product documentation. Two clean builds are byte-identical. Source
+SHA-256 is
+`d1c214a717f3a42c96be4327230563146ec732320ee82cd8b4be5deef371bdf8`;
+runtime SHA-256 is
+`1fdb1a800c333806c85717b049c42067013d940a73bcf1099bd3c470173d19b6`.
+Its local rapid gate and separate stress gate passed; the latter executed 5
+tests and 31,003 assertions in 403.036 seconds with the expected Windows-only
+GMP skip. RC5 is not promoted to staging until its complete release gate and
+deployment evidence are closed; no further RC number is allocated merely for
+documentation or corpus progress.
+
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and
@@ -92,6 +104,12 @@ be green. Official replays never use WIP or dirty trees.
 Long corpus campaigns are installed under persistent WSL storage at
 `/srv/openpairing-validation`. The current queue uses 12 concurrent PHP/GMP
 workers and small atomic shards: p30 20,000/256, p50 30,000/384, p80
-20,000/256 and acceleration 1,000/64. System services are enabled at boot and
-linked by `OnSuccess`; every aggregate remains fail-closed on mixed identities,
-missing files or omitted oracle-required cases.
+20,000/256 and acceleration 1,000/64. A single boot-enabled
+`openpairing-full-corpus.service` supervisor invokes campaign then Gacrux
+classification for each partition in strict sequence; shell fail-fast prevents
+the next partition from starting after any non-zero gate. On reboot it starts
+again at p30, whose atomic completed shards make every stage idempotent. The
+original multi-unit `OnSuccess` graph was rejected after its `Requires=` edges
+re-entered completed oneshot services and its parallel fan-out was not truly
+fail-closed. Every aggregate remains fail-closed on mixed identities, missing
+files or omitted oracle-required cases.

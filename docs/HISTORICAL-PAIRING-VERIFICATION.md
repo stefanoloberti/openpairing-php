@@ -15,8 +15,12 @@
   proven-optimal residual cache now reuses a residual optimum only when a
   frozen edge belonged to the previous optimum and edge weights are unchanged;
   1,000 sequential stress cases compare every reused state with fresh Blossom
-  and the exhaustive oracle. The public 80-player batch still took 743.355
-  seconds for 150 rounds, so full-corpus throughput remains the open blocker.
+  and the exhaustive oracle. On the same first 80-player round, GMP+JIT with
+  the cache serves 35/36 HO-remainder calls without another Blossom run,
+  reducing HO operations from 2,228,136 to 234,256 (-89.5%) and end-to-end
+  time from 13.839 to 2.430 seconds (5.69x). The public ten-tournament batch
+  still took 743.355 seconds for 150 rounds, so full-corpus throughput remains
+  the open blocker.
 - The global matcher now backs the public Dutch engine. Staging deployment and
   reproducible release packaging are complete at release-candidate level. The
   2026-08-13 staging deployment passed its pre-switch test/static-analysis/CLI
@@ -47,11 +51,17 @@
   known corpus file missing its required record. Evidence is
   `docs/evidence/pairing-corpus-p15-sharded-14539a6.json` with aggregate shard
   manifest `ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559`.
-- In progress: the complete 20,000-tournament 30-player partition runs in 256
-  disjoint immutable shards at commit `c48fd05`. Source, corpus, shards and
-  atomically finalized reports live under persistent `/srv` storage; a system
-  service resumes only missing shards after WSL restart. No aggregate or
-  correctness claim exists until all 256 reports are complete and homogeneous.
+- Closed: the complete 20,000-tournament 30-player partition in 256 disjoint
+  immutable shards at commit `c48fd05`: 220,000/220,000 historical rounds
+  exact, with zero colour variants, deviations, no-solutions and resource
+  limits. The zero-case Gacrux post-gate is present and the aggregate is
+  homogeneous on runtime, harness and corpus identities. Evidence is
+  `docs/evidence/pairing-corpus-p30-full-c48fd05.json` with corpus shard
+  manifest `162d78844b3f04cdcff7dedc03401f95dbd629a4f8960e5f5f33257021b1fe3b`;
+  the classifier summary is
+  `docs/evidence/pairing-corpus-p30-gacrux-c48fd05.json`. Across the closed
+  p7, p9, p15 and p30 partitions, 69,998 tournaments and 609,874 historical
+  rounds are exact. The p50, p80 and acceleration pairing gates remain open.
 - Closed parser-only acceleration gate: all 1,000 `250` tournaments decode and
   complete a 100% semantic round-trip with zero diagnostics (manifest
   `11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6`;

@@ -26,8 +26,13 @@ correctness claim. The replacement public-path runs compare every round
 directly with the recorded reference; only those direct-reference reports may
 close a large-field sample.
 
-The first full corpus partition is now closed: all 49,961 rounds from 10,000
-seven-player tournaments are exact at commit `4a93b7a`. Before that run, the
+The first four corpus field-size partitions are now closed: p7, p9, p15 and
+p30 total 69,998 tournaments and 609,874 exact historical rounds, with zero
+colour variants, deviations, no-solutions and resource limits. The p30
+aggregate covers 220,000/220,000 rounds in 256 immutable shards at commit
+`c48fd05`; its zero-case Gacrux post-gate and all runtime, harness and corpus
+identities are attested. The p7 partition first closed all 49,961 rounds from
+10,000 seven-player tournaments at commit `4a93b7a`. Before that run, the
 same partition produced 37 Gacrux-inferior deviations and six no-solutions.
 The exhaustive matcher reproduced the defects, while BBP agreed with the
 reference on all 37 completed residuals. This isolated two shared-model bugs:
@@ -72,10 +77,15 @@ Two later external WSL shutdowns demonstrated that immutable source identity
 is necessary but not sufficient when corpus, shards and reports live in
 `/tmp`. Official campaigns now live under `/srv/openpairing-validation`,
 finalize each small shard report by atomic rename, and run as boot-enabled
-services with `Restart=on-failure`. Chained `OnSuccess` units launch
-classification and the next field-size partition only after the predecessor
-aggregate succeeds. A restart therefore loses at most the currently running
-small shards and can never turn a partial JSON file into evidence.
+work under a single fail-closed supervisor with `Restart=on-failure`. It runs
+campaign and classification stages strictly in sequence; only a zero exit can
+advance to the next field size. A Windows-side WSL keepalive prevents the
+distribution lifecycle from stopping systemd when the last SSH client exits.
+A restart therefore loses at most the currently running small shards and can
+never turn a partial JSON file into evidence. The earlier multi-unit
+`OnSuccess` graph is retained as a negative operational control: `Requires=`
+re-entered completed oneshots, while fan-out could start the next campaign
+before classification had passed.
 
 ## Semantic baseline reset (historical epoch narrative)
 
