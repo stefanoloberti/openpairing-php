@@ -183,6 +183,41 @@ final class DutchQualityModelTest extends TestCase
         self::assertSame([1, 0], $quality->components['QC20']);
     }
 
+    public function testFloatAgeIsMeasuredByRoundNumberAcrossMissingRounds(): void
+    {
+        $resident = new Player(
+            1, 1, 'Late return', 2200, '', '', '', true,
+            Score::fromDecimal('2.0'),
+            results: [
+                ['round' => 1, 'opponentId' => 2, 'colour' => 'white', 'result' => '1', 'played' => true],
+                ['round' => 2, 'opponentId' => 2, 'colour' => 'black', 'result' => '1', 'played' => true],
+            ],
+            floatHistory: ['none', 'up'],
+        );
+        $mdp = new Player(
+            2, 2, 'MDP', 2190, '', '', '', true,
+            Score::fromDecimal('3.0'),
+            results: [
+                ['round' => 1, 'opponentId' => 1, 'colour' => 'black', 'result' => '0', 'played' => true],
+                ['round' => 2, 'opponentId' => 1, 'colour' => 'white', 'result' => '0', 'played' => true],
+            ],
+            floatHistory: ['none', 'down'],
+        );
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 5, 7, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$resident, $mdp],
+        );
+
+        $quality = (new DutchQualityModel())->edge(
+            $state, $mdp, $resident, 0, null, [1 => 0, 2 => 1], [$mdp, $resident], [2 => 1, 1 => 2],
+        );
+
+        self::assertSame(0, $quality->components['QC15']);
+        self::assertSame(0, $quality->components['QC17']);
+        self::assertSame([0], $quality->components['QC19']);
+        self::assertSame([0], $quality->components['QC21']);
+    }
+
     public function testQc11UsesAbsolutePreferenceImbalanceWhenOnlyOnePlayerHasOppositeColourRun(): void
     {
         $balanced = new Player(

@@ -34,6 +34,7 @@ final class LegacyDutchPairingEngine implements PairingEngineInterface
     public function __construct(
         private readonly DutchRules $rules = new DutchRules(),
         private readonly ColourAllocator $colourAllocator = new ColourAllocator(),
+        private readonly DutchFloatHistory $floatHistory = new DutchFloatHistory(),
     ) {
     }
 
@@ -200,7 +201,7 @@ final class LegacyDutchPairingEngine implements PairingEngineInterface
                     $pairs,
                     $unpaired,
                     $this->quality($state, $pairs, $unpaired, $mdpIds, $residents),
-                    $this->floatScoreDifferences($pairs, $mdpIds),
+                    $this->floatScoreDifferences($state, $pairs, $mdpIds),
                     $this->heterogeneousOrderQuality($pairs, $mdpIds, $residents),
                     $this->homogeneousOrderQuality($pairs, $mdpIds, $residents),
                     $this->generation++,
@@ -266,14 +267,14 @@ final class LegacyDutchPairingEngine implements PairingEngineInterface
             $mdp = isset($mdpIds[$pair['left']->id]) ? $pair['left'] : (isset($mdpIds[$pair['right']->id]) ? $pair['right'] : null);
             if ($mdp !== null) {
                 $opponent = $mdp === $pair['left'] ? $pair['right'] : $pair['left'];
-                $c15 += $this->floatAt($opponent, 1, 'up');
-                $c17 += $this->floatAt($opponent, 2, 'up');
+                $c15 += $this->floatHistory->at($state, $opponent, 1, 'up');
+                $c17 += $this->floatHistory->at($state, $opponent, 2, 'up');
             }
         }
         foreach ($downfloaters as $downfloater) {
             if (isset($residentIds[$downfloater->id])) {
-                $c14 += $this->floatAt($downfloater, 1, 'down');
-                $c16 += $this->floatAt($downfloater, 2, 'down');
+                $c14 += $this->floatHistory->at($state, $downfloater, 1, 'down');
+                $c16 += $this->floatHistory->at($state, $downfloater, 2, 'down');
             }
         }
 
@@ -444,7 +445,7 @@ final class LegacyDutchPairingEngine implements PairingEngineInterface
      * @param array<int, true> $mdpIds
      * @return array{c18: list<\OpenPairing\Domain\Score\Score>, c19: list<\OpenPairing\Domain\Score\Score>, c20: list<\OpenPairing\Domain\Score\Score>, c21: list<\OpenPairing\Domain\Score\Score>}
      */
-    private function floatScoreDifferences(array $pairs, array $mdpIds): array
+    private function floatScoreDifferences(TournamentState $state, array $pairs, array $mdpIds): array
     {
         $differences = ['c18' => [], 'c19' => [], 'c20' => [], 'c21' => []];
         foreach ($pairs as $pair) {
@@ -454,16 +455,16 @@ final class LegacyDutchPairingEngine implements PairingEngineInterface
             }
             $opponent = $mdp === $pair['left'] ? $pair['right'] : $pair['left'];
             $difference = $mdp->pairingScore()->subtract($opponent->pairingScore());
-            if ($this->floatAt($mdp, 1, 'down') === 1) {
+            if ($this->floatHistory->at($state, $mdp, 1, 'down') === 1) {
                 $differences['c18'][] = $difference;
             }
-            if ($this->floatAt($opponent, 1, 'up') === 1) {
+            if ($this->floatHistory->at($state, $opponent, 1, 'up') === 1) {
                 $differences['c19'][] = $difference;
             }
-            if ($this->floatAt($mdp, 2, 'down') === 1) {
+            if ($this->floatHistory->at($state, $mdp, 2, 'down') === 1) {
                 $differences['c20'][] = $difference;
             }
-            if ($this->floatAt($opponent, 2, 'up') === 1) {
+            if ($this->floatHistory->at($state, $opponent, 2, 'up') === 1) {
                 $differences['c21'][] = $difference;
             }
         }
@@ -651,13 +652,6 @@ final class LegacyDutchPairingEngine implements PairingEngineInterface
         }
 
         return $sum;
-    }
-
-    private function floatAt(Player $player, int $offset, string $value): int
-    {
-        $index = count($player->floatHistory) - $offset;
-
-        return $index >= 0 && ($player->floatHistory[$index] ?? null) === $value ? 1 : 0;
     }
 
     /**

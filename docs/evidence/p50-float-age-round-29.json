@@ -1,0 +1,4045 @@
+{
+    "schema": "openpairing.trf-historical-pairing-verification/3",
+    "historicalFloatSemantics": "fide-dutch-float/3-round-indexed",
+    "root": "/tmp/p50-residual-14",
+    "limit": 0,
+    "roundFilter": 29,
+    "productionOnly": false,
+    "performanceRuntime": {
+        "opcacheEnableCli": "1",
+        "jit": "1255",
+        "jitBufferSize": "128M",
+        "xdebugMode": ""
+    },
+    "preliminaryGlobalAudit": true,
+    "shadowGlobalAudit": true,
+    "largeFieldAudit": false,
+    "elapsedSeconds": 10.939,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/srv/openpairing-validation/experiments/float-round-age",
+        "autoloadPsr4Roots": [
+            "/srv/openpairing-validation/experiments/float-round-age/src"
+        ],
+        "expectedEnginePath": "/srv/openpairing-validation/experiments/float-round-age/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/srv/openpairing-validation/experiments/float-round-age/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+        "sourceTreeSha256": "f2ea09a5d42153613bea871b67b3ecee7193f3859aeec5c3e7190cb339a3e033",
+        "sourceFileCount": 80,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "harnessIdentity": {
+        "schema": "openpairing.historical-replay-harness/1",
+        "sha256": "f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093",
+        "files": {
+            "TrfCorpusCompatibility.php": "d7f115471ad11ff26be8697027cde93216540be8a1a55e04be78d0ef37f8a60a",
+            "verify_trf_pairings.php": "08447c38f7c8405df0a7c9b67ed9242c1188ed9cc3873611fd16bee7f7ca1dda"
+        }
+    },
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-identity/1",
+        "selection": "relative-path-ordinal-v1",
+        "requestedLimit": 0,
+        "fileCount": 14,
+        "totalBytes": 284158,
+        "manifestSha256": "df17cd62573c4147d1a38f018337761173a5143224699f31e235e98cc46559ac"
+    },
+    "counts": {
+        "filesSeen": 14,
+        "decoded": 14,
+        "tournamentsVerified": 6,
+        "tournamentsAllExact": 6,
+        "roundsAttempted": 6,
+        "roundsExact": 6,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "preliminaryRoundsComplete": 6,
+        "preliminaryNoMatching": 0,
+        "preliminaryByeExact": 2,
+        "preliminaryByeScoreExact": 2,
+        "preliminaryByeDifferentWithinScoreGroup": 0,
+        "preliminaryByeWrongScoreGroup": 0,
+        "shadow.both_exact": 0,
+        "shadow.candidate_progress": 0,
+        "shadow.candidate_regression": 0,
+        "shadow.same_deviation": 0,
+        "shadow.divergent_deviation": 0,
+        "shadow.noMatching": 0
+    },
+    "diagnostics": [],
+    "samples": [],
+    "preliminarySamples": [],
+    "shadowSamples": [],
+    "shadowTimingSamples": [
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "preliminary",
+            "scoreLevel": 18,
+            "milliseconds": 228.578178,
+            "matchingOperations": 77024,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 18,
+            "milliseconds": 26.988942,
+            "matchingOperations": 15292,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 18,
+            "milliseconds": 24.033226,
+            "matchingOperations": 15292,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 17,
+            "milliseconds": 30.618495,
+            "matchingOperations": 14358,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 17,
+            "milliseconds": 27.573544,
+            "matchingOperations": 14358,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 16,
+            "milliseconds": 39.483379,
+            "matchingOperations": 18879,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 16,
+            "milliseconds": 36.598626,
+            "matchingOperations": 18879,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 15,
+            "milliseconds": 59.657758,
+            "matchingOperations": 29448,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 15,
+            "milliseconds": 52.371773,
+            "matchingOperations": 29448,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "milliseconds": 75.73646,
+            "matchingOperations": 29881,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 14,
+            "milliseconds": 72.093512,
+            "matchingOperations": 18303,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "milliseconds": 50.163393,
+            "matchingOperations": 21504,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "milliseconds": 69.149868,
+            "matchingOperations": 18725,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 13,
+            "milliseconds": 73.972653,
+            "matchingOperations": 20727,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 13,
+            "milliseconds": 75.902023,
+            "matchingOperations": 20727,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 42.917101,
+            "matchingOperations": 13802,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "milliseconds": 74.590334,
+            "matchingOperations": 18340,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 12,
+            "milliseconds": 78.917025,
+            "matchingOperations": 18717,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 78.4778,
+            "matchingOperations": 18717,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 64.383215,
+            "matchingOperations": 16462,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 50.518597,
+            "matchingOperations": 15255,
+            "remainingVertices": 40
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 29.387139,
+            "matchingOperations": 13248,
+            "remainingVertices": 38
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "milliseconds": 40.851436,
+            "matchingOperations": 12578,
+            "remainingVertices": 38
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 11,
+            "milliseconds": 42.99851,
+            "matchingOperations": 12634,
+            "remainingVertices": 38
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "milliseconds": 25.243346,
+            "matchingOperations": 11562,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "milliseconds": 32.589764,
+            "matchingOperations": 6385,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 36.896985,
+            "matchingOperations": 7373,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 28.536375,
+            "matchingOperations": 5230,
+            "remainingVertices": 34
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 22.31909,
+            "matchingOperations": 4728,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 13.245165,
+            "matchingOperations": 3745,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "milliseconds": 20.526253,
+            "matchingOperations": 1395,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 21.958979,
+            "matchingOperations": 2163,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 14.176286,
+            "matchingOperations": 1765,
+            "remainingVertices": 28
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 7.828033,
+            "matchingOperations": 1065,
+            "remainingVertices": 26
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 1.38481,
+            "matchingOperations": 0,
+            "remainingVertices": 24
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 1.182946,
+            "matchingOperations": 0,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 3.765413,
+            "matchingOperations": 196,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "milliseconds": 3.901777,
+            "matchingOperations": 390,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 4.652942,
+            "matchingOperations": 649,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 1.033418,
+            "matchingOperations": 0,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 0.919568,
+            "matchingOperations": 0,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "milliseconds": 3.384516,
+            "matchingOperations": 327,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 2.796708,
+            "matchingOperations": 232,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "milliseconds": 4.651602,
+            "matchingOperations": 562,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 4.975007,
+            "matchingOperations": 618,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 2.650407,
+            "matchingOperations": 302,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "milliseconds": 3.979578,
+            "matchingOperations": 387,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 5,
+            "milliseconds": 3.794424,
+            "matchingOperations": 387,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 5,
+            "milliseconds": 4.113481,
+            "matchingOperations": 500,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 5,
+            "milliseconds": 2.98158,
+            "matchingOperations": 274,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 1.791864,
+            "matchingOperations": 125,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "milliseconds": 2.4354,
+            "matchingOperations": 204,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 2.203927,
+            "matchingOperations": 202,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 2.396473,
+            "matchingOperations": 195,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 2.247813,
+            "matchingOperations": 195,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "milliseconds": 1.617762,
+            "matchingOperations": 63,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "milliseconds": 1.924749,
+            "matchingOperations": 82,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 3,
+            "milliseconds": 2.114313,
+            "matchingOperations": 82,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 3,
+            "milliseconds": 1.818801,
+            "matchingOperations": 82,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 1.172021,
+            "matchingOperations": 34,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "milliseconds": 1.613942,
+            "matchingOperations": 27,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 1.633994,
+            "matchingOperations": 27,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "milliseconds": 1.021337,
+            "matchingOperations": 15,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "milliseconds": 1.554424,
+            "matchingOperations": 12,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.255852,
+            "matchingOperations": 12,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "milliseconds": 0.934096,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "milliseconds": 0.866007,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 0.899164,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "preliminary",
+            "scoreLevel": 15,
+            "milliseconds": 228.598975,
+            "matchingOperations": 70119,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 15,
+            "milliseconds": 21.566593,
+            "matchingOperations": 15112,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 15,
+            "milliseconds": 22.151839,
+            "matchingOperations": 15112,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "milliseconds": 30.290327,
+            "matchingOperations": 14329,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "milliseconds": 28.47596,
+            "matchingOperations": 14329,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "milliseconds": 56.331286,
+            "matchingOperations": 38894,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 49.177611,
+            "matchingOperations": 38894,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "milliseconds": 62.883971,
+            "matchingOperations": 20021,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 65.682711,
+            "matchingOperations": 20506,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 53.179194,
+            "matchingOperations": 14968,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 35.088963,
+            "matchingOperations": 11962,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "milliseconds": 68.110135,
+            "matchingOperations": 31479,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "milliseconds": 57.776265,
+            "matchingOperations": 31460,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "milliseconds": 64.296633,
+            "matchingOperations": 12336,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 10,
+            "milliseconds": 68.734483,
+            "matchingOperations": 12363,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 10,
+            "milliseconds": 71.353758,
+            "matchingOperations": 12363,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 70.441982,
+            "matchingOperations": 12363,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 52.692171,
+            "matchingOperations": 10470,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 43.129374,
+            "matchingOperations": 9489,
+            "remainingVertices": 40
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 37.500366,
+            "matchingOperations": 8600,
+            "remainingVertices": 38
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 18.39275,
+            "matchingOperations": 7078,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "milliseconds": 34.09624,
+            "matchingOperations": 9215,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 35.427002,
+            "matchingOperations": 9272,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 29.147513,
+            "matchingOperations": 8117,
+            "remainingVertices": 34
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 25.467681,
+            "matchingOperations": 7723,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 12.583538,
+            "matchingOperations": 5413,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "milliseconds": 17.303618,
+            "matchingOperations": 2600,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 20.552407,
+            "matchingOperations": 3981,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 15.330994,
+            "matchingOperations": 3036,
+            "remainingVertices": 28
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 8.239407,
+            "matchingOperations": 1947,
+            "remainingVertices": 26
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 1.354951,
+            "matchingOperations": 0,
+            "remainingVertices": 24
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 1.188559,
+            "matchingOperations": 0,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "milliseconds": 6.506106,
+            "matchingOperations": 1425,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 6.753341,
+            "matchingOperations": 1425,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 3.304295,
+            "matchingOperations": 911,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "milliseconds": 4.83624,
+            "matchingOperations": 339,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 5.179859,
+            "matchingOperations": 404,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 3.053489,
+            "matchingOperations": 203,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 0.942778,
+            "matchingOperations": 0,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 1.805426,
+            "matchingOperations": 92,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "milliseconds": 1.656643,
+            "matchingOperations": 103,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 1.740159,
+            "matchingOperations": 103,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "milliseconds": 2.366986,
+            "matchingOperations": 207,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "milliseconds": 2.279313,
+            "matchingOperations": 207,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "milliseconds": 2.976569,
+            "matchingOperations": 213,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 2.43974,
+            "matchingOperations": 188,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "milliseconds": 3.768561,
+            "matchingOperations": 325,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "milliseconds": 4.15495,
+            "matchingOperations": 391,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "milliseconds": 4.018983,
+            "matchingOperations": 391,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 4.017418,
+            "matchingOperations": 391,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 3.221793,
+            "matchingOperations": 274,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 2.37682,
+            "matchingOperations": 134,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "milliseconds": 1.311612,
+            "matchingOperations": 47,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "milliseconds": 1.524695,
+            "matchingOperations": 53,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.661132,
+            "matchingOperations": 53,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.224595,
+            "matchingOperations": 29,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "milliseconds": 1.090522,
+            "matchingOperations": 5,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "milliseconds": 0.989986,
+            "matchingOperations": 8,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 0.922368,
+            "matchingOperations": 9,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 0.8571,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "preliminary",
+            "scoreLevel": 14,
+            "milliseconds": 101.553152,
+            "matchingOperations": 38305,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "milliseconds": 17.48247,
+            "matchingOperations": 11923,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "milliseconds": 18.228232,
+            "matchingOperations": 11923,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "milliseconds": 28.316287,
+            "matchingOperations": 10842,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 26.97212,
+            "matchingOperations": 10842,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "milliseconds": 36.41675,
+            "matchingOperations": 11203,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 27.509546,
+            "matchingOperations": 10557,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "milliseconds": 53.291385,
+            "matchingOperations": 22658,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "milliseconds": 42.591366,
+            "matchingOperations": 22632,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "milliseconds": 58.341977,
+            "matchingOperations": 16618,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 10,
+            "milliseconds": 60.056355,
+            "matchingOperations": 16618,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 10,
+            "milliseconds": 59.614821,
+            "matchingOperations": 16618,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 62.218993,
+            "matchingOperations": 16618,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 36.984433,
+            "matchingOperations": 13126,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "milliseconds": 56.154931,
+            "matchingOperations": 13593,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 42.466831,
+            "matchingOperations": 13572,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "milliseconds": 69.011283,
+            "matchingOperations": 10810,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 72.419288,
+            "matchingOperations": 10730,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 61.783464,
+            "matchingOperations": 9703,
+            "remainingVertices": 40
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 52.847339,
+            "matchingOperations": 8212,
+            "remainingVertices": 38
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 43.501168,
+            "matchingOperations": 6721,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 33.892516,
+            "matchingOperations": 5181,
+            "remainingVertices": 34
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 14.709899,
+            "matchingOperations": 4173,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "milliseconds": 23.072197,
+            "matchingOperations": 7019,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 7,
+            "milliseconds": 23.568052,
+            "matchingOperations": 7015,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 24.9308,
+            "matchingOperations": 7620,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 15.214714,
+            "matchingOperations": 6478,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "milliseconds": 26.76853,
+            "matchingOperations": 2969,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 25.530466,
+            "matchingOperations": 2602,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 19.876097,
+            "matchingOperations": 1921,
+            "remainingVertices": 28
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 14.718242,
+            "matchingOperations": 1228,
+            "remainingVertices": 26
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 10.61441,
+            "matchingOperations": 905,
+            "remainingVertices": 24
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 4.57234,
+            "matchingOperations": 391,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 0.968504,
+            "matchingOperations": 0,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 2.734631,
+            "matchingOperations": 134,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "milliseconds": 3.098476,
+            "matchingOperations": 342,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 3.408158,
+            "matchingOperations": 454,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 0.819951,
+            "matchingOperations": 0,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "milliseconds": 3.861792,
+            "matchingOperations": 458,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 5.473253,
+            "matchingOperations": 495,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 3.127114,
+            "matchingOperations": 208,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "milliseconds": 1.662981,
+            "matchingOperations": 159,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "milliseconds": 2.210551,
+            "matchingOperations": 267,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 1.8112,
+            "matchingOperations": 230,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "milliseconds": 2.487921,
+            "matchingOperations": 185,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "milliseconds": 2.641764,
+            "matchingOperations": 236,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "milliseconds": 2.584694,
+            "matchingOperations": 185,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 2.627983,
+            "matchingOperations": 185,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 2.338451,
+            "matchingOperations": 200,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 1.684043,
+            "matchingOperations": 60,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "milliseconds": 0.953635,
+            "matchingOperations": 24,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "milliseconds": 1.133332,
+            "matchingOperations": 29,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 1,
+            "milliseconds": 1.073449,
+            "matchingOperations": 29,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.063449,
+            "matchingOperations": 29,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "milliseconds": 0.827881,
+            "matchingOperations": 7,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "milliseconds": 0.869002,
+            "matchingOperations": 9,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 1.02012,
+            "matchingOperations": 9,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 0.691389,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "preliminary",
+            "scoreLevel": 15,
+            "milliseconds": 251.424272,
+            "matchingOperations": 107816,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 15,
+            "milliseconds": 24.102479,
+            "matchingOperations": 15341,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 15,
+            "milliseconds": 24.385577,
+            "matchingOperations": 15341,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "milliseconds": 45.722891,
+            "matchingOperations": 29576,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "milliseconds": 43.233486,
+            "matchingOperations": 29576,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "milliseconds": 77.747456,
+            "matchingOperations": 41622,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 70.62227,
+            "matchingOperations": 41651,
+            "remainingVertices": 49
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 4.135905,
+            "matchingOperations": 0,
+            "remainingVertices": 47
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "milliseconds": 67.368832,
+            "matchingOperations": 21233,
+            "remainingVertices": 47
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 12,
+            "milliseconds": 70.186471,
+            "matchingOperations": 21233,
+            "remainingVertices": 47
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 69.711572,
+            "matchingOperations": 21233,
+            "remainingVertices": 47
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 56.452564,
+            "matchingOperations": 18542,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 38.322005,
+            "matchingOperations": 20858,
+            "remainingVertices": 43
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 3.391629,
+            "matchingOperations": 0,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "milliseconds": 50.265346,
+            "matchingOperations": 19869,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "milliseconds": 41.060548,
+            "matchingOperations": 18253,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "milliseconds": 56.240179,
+            "matchingOperations": 16131,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 10,
+            "milliseconds": 56.816041,
+            "matchingOperations": 16131,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 57.143447,
+            "matchingOperations": 16131,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 34.178174,
+            "matchingOperations": 14327,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "milliseconds": 57.74569,
+            "matchingOperations": 15643,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 9,
+            "milliseconds": 58.296413,
+            "matchingOperations": 15039,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 58.280506,
+            "matchingOperations": 15039,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 35.827295,
+            "matchingOperations": 10693,
+            "remainingVertices": 37
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "milliseconds": 55.231634,
+            "matchingOperations": 11289,
+            "remainingVertices": 37
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 57.276381,
+            "matchingOperations": 12668,
+            "remainingVertices": 37
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 46.821338,
+            "matchingOperations": 10488,
+            "remainingVertices": 35
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 35.096739,
+            "matchingOperations": 7771,
+            "remainingVertices": 33
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 29.754338,
+            "matchingOperations": 7572,
+            "remainingVertices": 31
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 14.348597,
+            "matchingOperations": 5708,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "milliseconds": 19.421821,
+            "matchingOperations": 4441,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 7,
+            "milliseconds": 20.02219,
+            "matchingOperations": 4367,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 20.244778,
+            "matchingOperations": 4367,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 14.72919,
+            "matchingOperations": 2801,
+            "remainingVertices": 27
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 10.922986,
+            "matchingOperations": 1971,
+            "remainingVertices": 25
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 6.392795,
+            "matchingOperations": 1241,
+            "remainingVertices": 23
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "milliseconds": 10.170469,
+            "matchingOperations": 2091,
+            "remainingVertices": 23
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 10.663686,
+            "matchingOperations": 2134,
+            "remainingVertices": 23
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 7.07858,
+            "matchingOperations": 1478,
+            "remainingVertices": 21
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 1.115413,
+            "matchingOperations": 0,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "milliseconds": 7.604622,
+            "matchingOperations": 1239,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 5,
+            "milliseconds": 9.922637,
+            "matchingOperations": 1247,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 5,
+            "milliseconds": 7.765427,
+            "matchingOperations": 1246,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 5,
+            "milliseconds": 7.729652,
+            "matchingOperations": 1246,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 5.19363,
+            "matchingOperations": 970,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "milliseconds": 6.783818,
+            "matchingOperations": 931,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 7.247768,
+            "matchingOperations": 931,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 6.913061,
+            "matchingOperations": 931,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 6.914967,
+            "matchingOperations": 931,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 6.923999,
+            "matchingOperations": 931,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 5.835982,
+            "matchingOperations": 745,
+            "remainingVertices": 15
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "milliseconds": 3.424889,
+            "matchingOperations": 490,
+            "remainingVertices": 13
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "milliseconds": 4.541522,
+            "matchingOperations": 459,
+            "remainingVertices": 13
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 3.869826,
+            "matchingOperations": 501,
+            "remainingVertices": 13
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 0.92334,
+            "matchingOperations": 0,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "milliseconds": 4.023922,
+            "matchingOperations": 392,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 4.148655,
+            "matchingOperations": 392,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 2.968608,
+            "matchingOperations": 199,
+            "remainingVertices": 9
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "milliseconds": 1.910179,
+            "matchingOperations": 130,
+            "remainingVertices": 7
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "milliseconds": 2.536992,
+            "matchingOperations": 145,
+            "remainingVertices": 7
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 2.391321,
+            "matchingOperations": 119,
+            "remainingVertices": 7
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.681346,
+            "matchingOperations": 35,
+            "remainingVertices": 5
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "milliseconds": 0.880035,
+            "matchingOperations": 1,
+            "remainingVertices": 3
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "milliseconds": 0.907424,
+            "matchingOperations": 1,
+            "remainingVertices": 3
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 1.040533,
+            "matchingOperations": 1,
+            "remainingVertices": 3
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "preliminary",
+            "scoreLevel": 15,
+            "milliseconds": 162.375552,
+            "matchingOperations": 62608,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 15,
+            "milliseconds": 19.009858,
+            "matchingOperations": 13177,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 15,
+            "milliseconds": 19.566752,
+            "matchingOperations": 13177,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "milliseconds": 26.536555,
+            "matchingOperations": 14235,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "milliseconds": 24.810692,
+            "matchingOperations": 14235,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "milliseconds": 43.30179,
+            "matchingOperations": 24149,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 39.268654,
+            "matchingOperations": 24149,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "milliseconds": 47.435573,
+            "matchingOperations": 18577,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 12,
+            "milliseconds": 49.839399,
+            "matchingOperations": 18577,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 51.691697,
+            "matchingOperations": 18577,
+            "remainingVertices": 45
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "milliseconds": 43.722471,
+            "matchingOperations": 16434,
+            "remainingVertices": 43
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 28.305826,
+            "matchingOperations": 14469,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "milliseconds": 44.288843,
+            "matchingOperations": 18307,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 11,
+            "milliseconds": 45.215846,
+            "matchingOperations": 18307,
+            "remainingVertices": 41
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "milliseconds": 33.308796,
+            "matchingOperations": 15483,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "milliseconds": 49.130215,
+            "matchingOperations": 10315,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 51.435885,
+            "matchingOperations": 10315,
+            "remainingVertices": 39
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 42.010738,
+            "matchingOperations": 9129,
+            "remainingVertices": 37
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 29.052546,
+            "matchingOperations": 7385,
+            "remainingVertices": 35
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 23.751575,
+            "matchingOperations": 5436,
+            "remainingVertices": 33
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 11.735972,
+            "matchingOperations": 4168,
+            "remainingVertices": 31
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 1.572585,
+            "matchingOperations": 0,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "milliseconds": 13.451746,
+            "matchingOperations": 4301,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 12.692425,
+            "matchingOperations": 4301,
+            "remainingVertices": 29
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 1.530669,
+            "matchingOperations": 0,
+            "remainingVertices": 27
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "milliseconds": 13.686274,
+            "matchingOperations": 2931,
+            "remainingVertices": 27
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 8,
+            "milliseconds": 15.038086,
+            "matchingOperations": 3515,
+            "remainingVertices": 27
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 15.119337,
+            "matchingOperations": 3515,
+            "remainingVertices": 27
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 8.491104,
+            "matchingOperations": 2431,
+            "remainingVertices": 25
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 1.170691,
+            "matchingOperations": 0,
+            "remainingVertices": 23
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "milliseconds": 9.850647,
+            "matchingOperations": 1978,
+            "remainingVertices": 23
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 10.021628,
+            "matchingOperations": 1978,
+            "remainingVertices": 23
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 6.0602,
+            "matchingOperations": 1166,
+            "remainingVertices": 21
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "milliseconds": 8.48855,
+            "matchingOperations": 1501,
+            "remainingVertices": 21
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 6,
+            "milliseconds": 8.678012,
+            "matchingOperations": 1501,
+            "remainingVertices": 21
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "milliseconds": 8.714645,
+            "matchingOperations": 1501,
+            "remainingVertices": 21
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 5.606804,
+            "matchingOperations": 1022,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "milliseconds": 8.58043,
+            "matchingOperations": 1287,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 5,
+            "milliseconds": 8.74014,
+            "matchingOperations": 1287,
+            "remainingVertices": 19
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 5.521208,
+            "matchingOperations": 876,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "milliseconds": 7.984396,
+            "matchingOperations": 1094,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 7.960515,
+            "matchingOperations": 1070,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 7.832554,
+            "matchingOperations": 1070,
+            "remainingVertices": 17
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "milliseconds": 4.258393,
+            "matchingOperations": 575,
+            "remainingVertices": 15
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "milliseconds": 6.604696,
+            "matchingOperations": 732,
+            "remainingVertices": 15
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 3,
+            "milliseconds": 6.671416,
+            "matchingOperations": 731,
+            "remainingVertices": 15
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 3,
+            "milliseconds": 6.680931,
+            "matchingOperations": 731,
+            "remainingVertices": 15
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 3.933172,
+            "matchingOperations": 542,
+            "remainingVertices": 13
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 0.79406,
+            "matchingOperations": 0,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "milliseconds": 3.812778,
+            "matchingOperations": 355,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "milliseconds": 3.915354,
+            "matchingOperations": 355,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 3.880632,
+            "matchingOperations": 355,
+            "remainingVertices": 11
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "milliseconds": 2.071692,
+            "matchingOperations": 150,
+            "remainingVertices": 9
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "milliseconds": 2.702791,
+            "matchingOperations": 178,
+            "remainingVertices": 9
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 1,
+            "milliseconds": 2.824629,
+            "matchingOperations": 178,
+            "remainingVertices": 9
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 2.975878,
+            "matchingOperations": 178,
+            "remainingVertices": 9
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 2.163434,
+            "matchingOperations": 83,
+            "remainingVertices": 7
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.233586,
+            "matchingOperations": 16,
+            "remainingVertices": 5
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "milliseconds": 0.87214,
+            "matchingOperations": 5,
+            "remainingVertices": 3
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "milliseconds": 0.893795,
+            "matchingOperations": 5,
+            "remainingVertices": 3
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 0.881862,
+            "matchingOperations": 5,
+            "remainingVertices": 3
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "preliminary",
+            "scoreLevel": 17,
+            "milliseconds": 244.371639,
+            "matchingOperations": 90432,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 17,
+            "milliseconds": 20.06554,
+            "matchingOperations": 14577,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 17,
+            "milliseconds": 20.983829,
+            "matchingOperations": 14577,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 16,
+            "milliseconds": 29.880916,
+            "matchingOperations": 13511,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 16,
+            "milliseconds": 27.033612,
+            "matchingOperations": 13511,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 15,
+            "milliseconds": 39.029005,
+            "matchingOperations": 15436,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 15,
+            "milliseconds": 32.067922,
+            "matchingOperations": 16089,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "milliseconds": 44.609694,
+            "matchingOperations": 16827,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "milliseconds": 35.549903,
+            "matchingOperations": 16977,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "milliseconds": 54.401307,
+            "matchingOperations": 15556,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "milliseconds": 42.389787,
+            "matchingOperations": 16560,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "milliseconds": 66.854417,
+            "matchingOperations": 21096,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "milliseconds": 52.826144,
+            "matchingOperations": 21772,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "milliseconds": 74.734809,
+            "matchingOperations": 16607,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 11,
+            "milliseconds": 80.007685,
+            "matchingOperations": 18659,
+            "remainingVertices": 48
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "milliseconds": 50.709609,
+            "matchingOperations": 15441,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "milliseconds": 88.841693,
+            "matchingOperations": 28432,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "milliseconds": 90.739064,
+            "matchingOperations": 28432,
+            "remainingVertices": 46
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "milliseconds": 60.226759,
+            "matchingOperations": 23818,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "milliseconds": 99.748796,
+            "matchingOperations": 31379,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 9,
+            "milliseconds": 100.009985,
+            "matchingOperations": 31379,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 9,
+            "milliseconds": 101.260227,
+            "matchingOperations": 31379,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 103.392183,
+            "matchingOperations": 31379,
+            "remainingVertices": 44
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "milliseconds": 87.567116,
+            "matchingOperations": 26970,
+            "remainingVertices": 42
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "milliseconds": 55.133242,
+            "matchingOperations": 19797,
+            "remainingVertices": 40
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "milliseconds": 63.747472,
+            "matchingOperations": 7235,
+            "remainingVertices": 40
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 66.765868,
+            "matchingOperations": 7239,
+            "remainingVertices": 40
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 55.83767,
+            "matchingOperations": 6132,
+            "remainingVertices": 38
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 45.932537,
+            "matchingOperations": 4936,
+            "remainingVertices": 36
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 35.511566,
+            "matchingOperations": 4116,
+            "remainingVertices": 34
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 25.191124,
+            "matchingOperations": 3081,
+            "remainingVertices": 32
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "milliseconds": 19.681785,
+            "matchingOperations": 2667,
+            "remainingVertices": 30
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "milliseconds": 6.902215,
+            "matchingOperations": 2248,
+            "remainingVertices": 28
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "milliseconds": 11.597379,
+            "matchingOperations": 1268,
+            "remainingVertices": 28
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "milliseconds": 12.389138,
+            "matchingOperations": 1483,
+            "remainingVertices": 28
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 6.314772,
+            "matchingOperations": 697,
+            "remainingVertices": 26
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 1.276786,
+            "matchingOperations": 0,
+            "remainingVertices": 24
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "milliseconds": 3.84803,
+            "matchingOperations": 258,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "milliseconds": 5.088246,
+            "matchingOperations": 767,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 5.401859,
+            "matchingOperations": 870,
+            "remainingVertices": 22
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "milliseconds": 1.052555,
+            "matchingOperations": 0,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "milliseconds": 6.193528,
+            "matchingOperations": 818,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 5,
+            "milliseconds": 6.660841,
+            "matchingOperations": 818,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 5,
+            "milliseconds": 6.567178,
+            "matchingOperations": 818,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 5,
+            "milliseconds": 6.618245,
+            "matchingOperations": 818,
+            "remainingVertices": 20
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "milliseconds": 4.011948,
+            "matchingOperations": 560,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "milliseconds": 6.428971,
+            "matchingOperations": 825,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 6.864146,
+            "matchingOperations": 876,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 6.615557,
+            "matchingOperations": 863,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "milliseconds": 6.817373,
+            "matchingOperations": 876,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "milliseconds": 6.889528,
+            "matchingOperations": 885,
+            "remainingVertices": 18
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "milliseconds": 3.964632,
+            "matchingOperations": 629,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "milliseconds": 5.448327,
+            "matchingOperations": 491,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 3,
+            "milliseconds": 5.653942,
+            "matchingOperations": 491,
+            "remainingVertices": 16
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 3,
+            "milliseconds": 4.04518,
+            "matchingOperations": 266,
+            "remainingVertices": 14
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "milliseconds": 2.072558,
+            "matchingOperations": 169,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "milliseconds": 3.08866,
+            "matchingOperations": 263,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "milliseconds": 3.132808,
+            "matchingOperations": 263,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "milliseconds": 3.146935,
+            "matchingOperations": 263,
+            "remainingVertices": 12
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "milliseconds": 1.823642,
+            "matchingOperations": 130,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "milliseconds": 2.435999,
+            "matchingOperations": 155,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 2.554994,
+            "matchingOperations": 181,
+            "remainingVertices": 10
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 2.194924,
+            "matchingOperations": 138,
+            "remainingVertices": 8
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 1.537762,
+            "matchingOperations": 48,
+            "remainingVertices": 6
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "milliseconds": 0.982695,
+            "matchingOperations": 8,
+            "remainingVertices": 4
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "milliseconds": 0.773354,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "milliseconds": 0.786328,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 29,
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "milliseconds": 0.884424,
+            "matchingOperations": 1,
+            "remainingVertices": 2
+        }
+    ],
+    "shadowTimingAggregates": [
+        {
+            "phase": "preliminary",
+            "scoreLevel": 18,
+            "calls": 1,
+            "totalMilliseconds": 228.578178,
+            "maximumMilliseconds": 228.578178,
+            "matchingOperations": 77024
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 18,
+            "calls": 1,
+            "totalMilliseconds": 26.988942,
+            "maximumMilliseconds": 26.988942,
+            "matchingOperations": 15292
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 18,
+            "calls": 1,
+            "totalMilliseconds": 24.033226,
+            "maximumMilliseconds": 24.033226,
+            "matchingOperations": 15292
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 17,
+            "calls": 2,
+            "totalMilliseconds": 50.684034999999994,
+            "maximumMilliseconds": 30.618495,
+            "matchingOperations": 28935
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 17,
+            "calls": 2,
+            "totalMilliseconds": 48.557373,
+            "maximumMilliseconds": 27.573544,
+            "matchingOperations": 28935
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 16,
+            "calls": 2,
+            "totalMilliseconds": 69.364295,
+            "maximumMilliseconds": 39.483379,
+            "matchingOperations": 32390
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 16,
+            "calls": 2,
+            "totalMilliseconds": 63.632238,
+            "maximumMilliseconds": 36.598626,
+            "matchingOperations": 32390
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 15,
+            "calls": 5,
+            "totalMilliseconds": 163.36569300000002,
+            "maximumMilliseconds": 59.657758,
+            "matchingOperations": 88514
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 15,
+            "calls": 5,
+            "totalMilliseconds": 150.54386300000002,
+            "maximumMilliseconds": 52.371773,
+            "matchingOperations": 89167
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 14,
+            "calls": 6,
+            "totalMilliseconds": 240.37839699999998,
+            "maximumMilliseconds": 75.73646,
+            "matchingOperations": 116771
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 14,
+            "calls": 1,
+            "totalMilliseconds": 72.093512,
+            "maximumMilliseconds": 72.093512,
+            "matchingOperations": 18303
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 14,
+            "calls": 6,
+            "totalMilliseconds": 200.46166599999998,
+            "maximumMilliseconds": 50.163393,
+            "matchingOperations": 108544
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 13,
+            "calls": 6,
+            "totalMilliseconds": 329.24799399999995,
+            "maximumMilliseconds": 77.747456,
+            "matchingOperations": 149788
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 13,
+            "calls": 1,
+            "totalMilliseconds": 73.972653,
+            "maximumMilliseconds": 73.972653,
+            "matchingOperations": 20727
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 13,
+            "calls": 1,
+            "totalMilliseconds": 75.902023,
+            "maximumMilliseconds": 75.902023,
+            "matchingOperations": 20727
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 13,
+            "calls": 7,
+            "totalMilliseconds": 275.483448,
+            "maximumMilliseconds": 70.62227,
+            "matchingOperations": 145898
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 12,
+            "calls": 6,
+            "totalMilliseconds": 355.54987700000004,
+            "maximumMilliseconds": 74.590334,
+            "matchingOperations": 110470
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 12,
+            "calls": 3,
+            "totalMilliseconds": 198.94289500000002,
+            "maximumMilliseconds": 78.917025,
+            "matchingOperations": 58527
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 12,
+            "calls": 9,
+            "totalMilliseconds": 533.8198209999999,
+            "maximumMilliseconds": 78.4778,
+            "matchingOperations": 160694
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 12,
+            "calls": 7,
+            "totalMilliseconds": 214.83125199999998,
+            "maximumMilliseconds": 52.826144,
+            "matchingOperations": 92866
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 11,
+            "calls": 6,
+            "totalMilliseconds": 331.541954,
+            "maximumMilliseconds": 74.734809,
+            "matchingOperations": 121498
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 11,
+            "calls": 3,
+            "totalMilliseconds": 168.222041,
+            "maximumMilliseconds": 80.007685,
+            "matchingOperations": 49600
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 11,
+            "calls": 6,
+            "totalMilliseconds": 250.68992999999998,
+            "maximumMilliseconds": 57.776265,
+            "matchingOperations": 114831
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 10,
+            "calls": 6,
+            "totalMilliseconds": 349.440461,
+            "maximumMilliseconds": 88.841693,
+            "matchingOperations": 90217
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 10,
+            "calls": 14,
+            "totalMilliseconds": 647.8685909999999,
+            "maximumMilliseconds": 90.739064,
+            "matchingOperations": 151699
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 10,
+            "calls": 7,
+            "totalMilliseconds": 176.33583800000002,
+            "maximumMilliseconds": 60.226759,
+            "matchingOperations": 66262
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 9,
+            "calls": 6,
+            "totalMilliseconds": 281.723656,
+            "maximumMilliseconds": 99.748796,
+            "matchingOperations": 75526
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 9,
+            "calls": 8,
+            "totalMilliseconds": 375.417266,
+            "maximumMilliseconds": 103.392183,
+            "matchingOperations": 102428
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 9,
+            "calls": 10,
+            "totalMilliseconds": 174.39520199999998,
+            "maximumMilliseconds": 55.133242,
+            "matchingOperations": 55037
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 8,
+            "calls": 6,
+            "totalMilliseconds": 222.88205799999997,
+            "maximumMilliseconds": 69.011283,
+            "matchingOperations": 35255
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 8,
+            "calls": 11,
+            "totalMilliseconds": 63.011351,
+            "maximumMilliseconds": 14.709899,
+            "matchingOperations": 17156
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 7,
+            "calls": 6,
+            "totalMilliseconds": 73.832666,
+            "maximumMilliseconds": 23.072197,
+            "matchingOperations": 16458
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 7,
+            "calls": 8,
+            "totalMilliseconds": 45.2083,
+            "maximumMilliseconds": 15.214714,
+            "matchingOperations": 10983
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 6,
+            "calls": 6,
+            "totalMilliseconds": 60.003637,
+            "maximumMilliseconds": 26.76853,
+            "matchingOperations": 8229
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 6,
+            "calls": 8,
+            "totalMilliseconds": 100.272412,
+            "maximumMilliseconds": 25.530466,
+            "matchingOperations": 11313
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 6,
+            "calls": 12,
+            "totalMilliseconds": 36.982786,
+            "maximumMilliseconds": 7.07858,
+            "matchingOperations": 4492
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 5,
+            "calls": 6,
+            "totalMilliseconds": 31.113277,
+            "maximumMilliseconds": 8.58043,
+            "matchingOperations": 4176
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 5,
+            "calls": 5,
+            "totalMilliseconds": 34.710507,
+            "maximumMilliseconds": 9.922637,
+            "matchingOperations": 4516
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 5,
+            "calls": 5,
+            "totalMilliseconds": 30.183098,
+            "maximumMilliseconds": 8.74014,
+            "matchingOperations": 4125
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 5,
+            "calls": 7,
+            "totalMilliseconds": 22.486918,
+            "maximumMilliseconds": 5.521208,
+            "matchingOperations": 3088
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 4,
+            "calls": 6,
+            "totalMilliseconds": 29.861363,
+            "maximumMilliseconds": 7.984396,
+            "matchingOperations": 3719
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 4,
+            "calls": 9,
+            "totalMilliseconds": 53.933786999999995,
+            "maximumMilliseconds": 7.960515,
+            "matchingOperations": 6875
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 4,
+            "calls": 7,
+            "totalMilliseconds": 38.330243,
+            "maximumMilliseconds": 7.832554,
+            "matchingOperations": 4529
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 4,
+            "calls": 6,
+            "totalMilliseconds": 17.20797,
+            "maximumMilliseconds": 4.258393,
+            "matchingOperations": 2123
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 3,
+            "calls": 6,
+            "totalMilliseconds": 23.706414,
+            "maximumMilliseconds": 6.604696,
+            "matchingOperations": 2244
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 3,
+            "calls": 2,
+            "totalMilliseconds": 8.785729,
+            "maximumMilliseconds": 6.671416,
+            "matchingOperations": 813
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 3,
+            "calls": 4,
+            "totalMilliseconds": 18.198853999999997,
+            "maximumMilliseconds": 6.680931,
+            "matchingOperations": 1570
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 3,
+            "calls": 8,
+            "totalMilliseconds": 17.015916999999998,
+            "maximumMilliseconds": 3.933172,
+            "matchingOperations": 1664
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 2,
+            "calls": 6,
+            "totalMilliseconds": 18.795783999999998,
+            "maximumMilliseconds": 4.023922,
+            "matchingOperations": 1547
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 2,
+            "calls": 11,
+            "totalMilliseconds": 32.045332,
+            "maximumMilliseconds": 4.148655,
+            "matchingOperations": 2480
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 2,
+            "calls": 6,
+            "totalMilliseconds": 9.092097,
+            "maximumMilliseconds": 2.071692,
+            "matchingOperations": 496
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 1,
+            "calls": 6,
+            "totalMilliseconds": 11.888233,
+            "maximumMilliseconds": 2.702791,
+            "matchingOperations": 572
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 1,
+            "calls": 13,
+            "totalMilliseconds": 22.920968000000002,
+            "maximumMilliseconds": 2.975878,
+            "matchingOperations": 929
+        },
+        {
+            "phase": "quality-HO-remainder",
+            "scoreLevel": 1,
+            "calls": 6,
+            "totalMilliseconds": 5.3780280000000005,
+            "maximumMilliseconds": 1.090522,
+            "matchingOperations": 20
+        },
+        {
+            "phase": "quality-HE",
+            "scoreLevel": 0,
+            "calls": 6,
+            "totalMilliseconds": 5.312542,
+            "maximumMilliseconds": 0.989986,
+            "matchingOperations": 25
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 0,
+            "calls": 8,
+            "totalMilliseconds": 7.19696,
+            "maximumMilliseconds": 1.040533,
+            "matchingOperations": 28
+        },
+        {
+            "phase": "preliminary",
+            "scoreLevel": 15,
+            "calls": 3,
+            "totalMilliseconds": 642.3987989999999,
+            "maximumMilliseconds": 251.424272,
+            "matchingOperations": 240543
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 10,
+            "calls": 5,
+            "totalMilliseconds": 316.57545799999997,
+            "maximumMilliseconds": 71.353758,
+            "matchingOperations": 74093
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 8,
+            "calls": 18,
+            "totalMilliseconds": 733.3158589999999,
+            "maximumMilliseconds": 72.419288,
+            "matchingOperations": 117749
+        },
+        {
+            "phase": "quality-HO-mdp",
+            "scoreLevel": 7,
+            "calls": 7,
+            "totalMilliseconds": 99.991861,
+            "maximumMilliseconds": 24.9308,
+            "matchingOperations": 21645
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 2,
+            "calls": 6,
+            "totalMilliseconds": 20.448553000000004,
+            "maximumMilliseconds": 4.15495,
+            "matchingOperations": 1821
+        },
+        {
+            "phase": "preliminary",
+            "scoreLevel": 14,
+            "calls": 1,
+            "totalMilliseconds": 101.553152,
+            "maximumMilliseconds": 101.553152,
+            "matchingOperations": 38305
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 7,
+            "calls": 2,
+            "totalMilliseconds": 43.590242,
+            "maximumMilliseconds": 23.568052,
+            "matchingOperations": 11382
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 1,
+            "calls": 2,
+            "totalMilliseconds": 3.898078,
+            "maximumMilliseconds": 2.824629,
+            "matchingOperations": 207
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 9,
+            "calls": 3,
+            "totalMilliseconds": 259.566625,
+            "maximumMilliseconds": 101.260227,
+            "matchingOperations": 77797
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 8,
+            "calls": 1,
+            "totalMilliseconds": 15.038086,
+            "maximumMilliseconds": 15.038086,
+            "matchingOperations": 3515
+        },
+        {
+            "phase": "quality-HE-select",
+            "scoreLevel": 6,
+            "calls": 1,
+            "totalMilliseconds": 8.678012,
+            "maximumMilliseconds": 8.678012,
+            "matchingOperations": 1501
+        },
+        {
+            "phase": "preliminary",
+            "scoreLevel": 17,
+            "calls": 1,
+            "totalMilliseconds": 244.371639,
+            "maximumMilliseconds": 244.371639,
+            "matchingOperations": 90432
+        }
+    ]
+}

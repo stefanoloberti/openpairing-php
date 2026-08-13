@@ -7,6 +7,13 @@
 - Closed: direct-reference samples through the public engine at 30, 50 and 80
   players: respectively 110/110, 150/150 and 150/150 exact rounds, with zero
   no-solutions, colour variants and deviations.
+- The first 20 p50 corpus shards initially produced 14 Gacrux-inferior
+  deviations. Reduction showed that the quality models aged floats by stored
+  participation count instead of round number, so a round-28 float survived
+  two missing rounds and was incorrectly treated as UF1/DF1 in round 31. The
+  isolated round-indexed correction makes all 20 exercised tuples exact; the
+  complete p50 partition is being replayed under the new semantic identity and
+  therefore remains open until its homogeneous aggregate closes.
 - Measured at 80: one complete 15-round tournament is 15/15 exact with zero
   no-matchings in 344.667 seconds using 30-bit limbs. Versioned evidence is
   `docs/evidence/pairing-p80-one-limbs-baseline.json`, corpus manifest

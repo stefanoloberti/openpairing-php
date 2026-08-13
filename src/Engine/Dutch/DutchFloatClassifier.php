@@ -10,7 +10,7 @@ use OpenPairing\Domain\Tournament\TournamentState;
 /** Canonical Dutch float classification for both live and imported results. */
 final readonly class DutchFloatClassifier
 {
-    public const VERSION = 'fide-dutch-float/2-pab-downfloat';
+    public const VERSION = 'fide-dutch-float/3-round-indexed';
 
     public function __construct(private DutchRules $rules = new DutchRules())
     {

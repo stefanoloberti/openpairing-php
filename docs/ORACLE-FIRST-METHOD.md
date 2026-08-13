@@ -14,10 +14,18 @@ smaller size may guard against regressions but never substitutes for that gate.
 The p50 campaign was paused as soon as the early classifier proved all 14
 candidate deviations inferior. A narrow experiment that recomputed the number
 of remainder pairs from the post-MDP-freeze matching changed 0/14 results and
-was rejected. The primary BBP source contains a complete S1/S2 exchange phase;
-an isolated counter adjustment is a component candidate, not an alternative to
-porting and testing that state machine. The machine-readable negative control
-is `docs/evidence/negative-p50-remainder-pairs-recompute-20260813.json`.
+was rejected. A subsequent source-level reduction found that all 14 shared a
+different cause: players absent in rounds 29 and 30 retained a round-28 float,
+and the PHP quality models treated the last stored participation as UF1/DF1 at
+round 31. Gacrux indexes float age by round number, so that history had expired.
+The isolated round-indexed correction made all 20 exercised round tuples exact
+with zero no-solutions; the full S1/S2 experiment was not used to obtain that
+result. The three attested round-filter reports are
+`docs/evidence/p50-float-age-round-29.json` through
+`docs/evidence/p50-float-age-round-31.json`. This is another oracle-first warning: a criterion label and a plausible
+missing phase do not establish causality. The machine-readable negative control
+for the rejected counter-only experiment remains
+`docs/evidence/negative-p50-remainder-pairs-recompute-20260813.json`.
 
 The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
 `epoch-2-dutch-500`. Direct-reference public-path samples at 30, 50 and 80

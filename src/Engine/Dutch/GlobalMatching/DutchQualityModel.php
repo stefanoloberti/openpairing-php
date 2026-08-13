@@ -15,6 +15,7 @@ use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Tournament\Player;
 use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Engine\Dutch\ColourPreferenceStrength;
+use OpenPairing\Engine\Dutch\DutchFloatHistory;
 use OpenPairing\Engine\Dutch\DutchRules;
 
 /**
@@ -27,6 +28,7 @@ final readonly class DutchQualityModel
 {
     public function __construct(
         private DutchRules $rules = new DutchRules(),
+        private DutchFloatHistory $floatHistory = new DutchFloatHistory(),
     ) {
     }
 
@@ -92,14 +94,14 @@ final readonly class DutchQualityModel
             // up against an MDP). In a minimizing vector this is the negative
             // endpoint contribution. It applies to every current-bracket
             // edge, not only while selecting a PAB.
-            $components['QC14'] = -$this->floatAt($right, 1, 'down');
-            $components['QC16'] = -$this->floatAt($right, 2, 'down');
+            $components['QC14'] = -$this->floatHistory->at($state, $right, 1, 'down');
+            $components['QC16'] = -$this->floatHistory->at($state, $right, 2, 'down');
             if ($leftLevel > $rightLevel) {
-                $positionCounters['QC15'] = $components['QC15'] = $this->floatAt($right, 1, 'up');
-                $positionCounters['QC17'] = $components['QC17'] = $this->floatAt($right, 2, 'up');
+                $positionCounters['QC15'] = $components['QC15'] = $this->floatHistory->at($state, $right, 1, 'up');
+                $positionCounters['QC17'] = $components['QC17'] = $this->floatHistory->at($state, $right, 2, 'up');
             } else {
-                $components['QC14'] -= $this->floatAt($left, 1, 'down');
-                $components['QC16'] -= $this->floatAt($left, 2, 'down');
+                $components['QC14'] -= $this->floatHistory->at($state, $left, 1, 'down');
+                $components['QC16'] -= $this->floatHistory->at($state, $left, 2, 'down');
             }
         } elseif ($leftLevel >= $scoreLevel && $rightLevel < $scoreLevel) {
             $components['QC6'] = 1;
@@ -112,8 +114,8 @@ final readonly class DutchQualityModel
                 $qc7[$maxPsd - $level] = 1;
                 $components['QC7'] = array_values($qc7);
             }
-            $positionCounters['QC14'] = $this->floatAt($left, 1, 'down');
-            $positionCounters['QC16'] = $this->floatAt($left, 2, 'down');
+            $positionCounters['QC14'] = $this->floatHistory->at($state, $left, 1, 'down');
+            $positionCounters['QC16'] = $this->floatHistory->at($state, $left, 2, 'down');
             if ($leftLevel === $scoreLevel) {
                 $components['QC14'] = $positionCounters['QC14'];
                 $components['QC16'] = $positionCounters['QC16'];
@@ -297,10 +299,4 @@ final readonly class DutchQualityModel
         return max(0, ($state->round - 1) - $played);
     }
 
-    private function floatAt(Player $player, int $offset, string $direction): int
-    {
-        $index = count($player->floatHistory) - $offset;
-
-        return $index >= 0 && ($player->floatHistory[$index] ?? null) === $direction ? 1 : 0;
-    }
 }
