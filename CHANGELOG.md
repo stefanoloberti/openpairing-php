@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0-rc3 - 2026-08-13
+
+- align the downloadable documentation with the acceleration support already
+  shipped in rc2: TRF `250` import/export and legacy `XXA` import are complete;
+- state tie-break coverage unambiguously as 21 base individual/TRF codes and
+  more than 50 canonical option combinations, rather than an arbitrary count;
+- no pairing, standings or format algorithm changed from rc2.
+
 ## 0.9.0-rc2 - 2026-08-13
 
 - import/export round-indexed TRF `250` acceleration schedules and import

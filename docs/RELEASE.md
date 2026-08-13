@@ -1,12 +1,12 @@
-# Release 0.9.0-rc2
+# Release 0.9.0-rc3
 
 ## Artifacts
 
 The release process produces two archives from one committed tree:
 
-- `openpairing-php-0.9.0-rc2-source.zip`: source, tests, development tools and
+- `openpairing-php-0.9.0-rc3-source.zip`: source, tests, development tools and
   Composer lock file; run `composer install` before use;
-- `openpairing-php-0.9.0-rc2-runtime.zip`: source plus optimized production
+- `openpairing-php-0.9.0-rc3-runtime.zip`: source plus optimized production
   Composer autoload files, ready for the CLI or library.
 
 Every archive is accompanied by a `.sha256` file. The runtime archive contains
@@ -46,5 +46,6 @@ php bin/openpairing.php --standings tournament.trf
 This is a release candidate, not a FIDE certification. The public Dutch path
 has exact attested reference gates at 7, 30, 50 and 80 players. The complete
 122,008-tournament historical pairing campaign is still running; the
-4,096-player/256-round format guard-rail, TRF acceleration records 250/XXA and
-team pairing/tie-break functions remain documented limits.
+4,096-player/256-round format guard-rail and team pairing/tie-break functions
+remain documented limits. TRF `250` import/export and legacy `XXA` import are
+supported; the full accelerated pairing-corpus gate remains open.
