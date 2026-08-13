@@ -41,6 +41,16 @@ Both archives are reproducible across two clean builds of commit `ed4ddd4`;
 the runtime was additionally verified on PHP 8.3.6 with byte-identical GMP and
 limb outputs for pairing and standings examples.
 
+Release candidate 2 was subsequently deployed atomically to
+`production-current-20260813-openpairing-4243326`. Its pre-switch gate passed
+228 tests/33,056 assertions, PHPStan, syntax and CLI checks; HTTP and the served
+runtime SHA-256 were verified after the switch. RC2 source SHA-256 is
+`f46c527d17896bceea75e397eab9a1589e36dd6dd7a51c243126b426ecf20ff1` and
+runtime SHA-256 is
+`d5ba158144328b72c9805cdf0f5df09318f74c77f8c5ddcd23815b73aa424a12`.
+Two clean builds are byte-identical. PHP 8.3.6 artifact smokes additionally
+cover `XXA` import/canonicalization and a 500-player initial round.
+
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and

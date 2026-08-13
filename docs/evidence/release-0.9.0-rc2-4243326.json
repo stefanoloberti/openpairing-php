@@ -1,0 +1,42 @@
+{
+  "schema": "openpairing.release-evidence/1",
+  "version": "0.9.0-rc2",
+  "gitCommit": "42433265a71c56d0f198b558deb6423d4c5f00e8",
+  "artifacts": {
+    "source": {
+      "file": "openpairing-php-0.9.0-rc2-source.zip",
+      "bytes": 417919,
+      "sha256": "f46c527d17896bceea75e397eab9a1589e36dd6dd7a51c243126b426ecf20ff1"
+    },
+    "runtime": {
+      "file": "openpairing-php-0.9.0-rc2-runtime.zip",
+      "bytes": 183375,
+      "sha256": "d5ba158144328b72c9805cdf0f5df09318f74c77f8c5ddcd23815b73aa424a12"
+    }
+  },
+  "verification": {
+    "twoBuildsByteIdentical": true,
+    "rapidTests": 223,
+    "rapidAssertions": 1048,
+    "stressTests": 5,
+    "stressAssertions": 31003,
+    "oracleTests": 11,
+    "oracleAssertions": 55,
+    "php83RuntimeSmoke": true,
+    "gmpLimbsPairingByteIdentical": true,
+    "gmpLimbsStandingsByteIdentical": true,
+    "xxaImportCanonicalisationSmoke": true,
+    "fiveHundredPlayerArtifactSmoke": true,
+    "stagingRelease": "production-current-20260813-openpairing-4243326",
+    "stagingTests": 228,
+    "stagingAssertions": 33056,
+    "stagingPhpstan": "clean",
+    "stagingHttp": 200,
+    "stagingDownloadHashVerified": true
+  },
+  "openGates": [
+    "complete large-field historical pairing corpus replay",
+    "complete accelerated 1000-tournament historical pairing replay",
+    "advanced-round performance at thousands of players"
+  ]
+}
