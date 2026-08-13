@@ -29,12 +29,17 @@ Inspected/acquired on 2026-08-11. Nothing was installed globally.
 The `ChessPairings-Ubuntu-24.04` WSL environment on `doppia-3090` supplies PHP
 8.3.6, Python 3.12.3 and Git 2.43.0. Git was confirmed/installed through the
 Ubuntu package manager on 2026-08-12. Content-addressed validation releases and
-the frozen TRF corpus live under `/tmp`. Staging was atomically deployed on
-2026-08-13 to `production-current-20260813-openpairing-da61dad`; its pre-switch
-gate passed 214 tests/32,996 assertions, PHPStan, syntax and CLI smoke checks,
-then the live local endpoint returned HTTP 200 and runtime source identity
-`bbfbbbb3e6c62ed10252a6d0c44e41e1036bd2033da78a648eb91aa41d43bba6`
-with the GMP backend.
+the frozen TRF corpus live under `/tmp`. Staging was atomically redeployed on
+2026-08-13 to `production-current-20260813-openpairing-ed4ddd4`; its pre-switch
+gate passed 224 tests/33,047 assertions, PHPStan, syntax and CLI smoke checks,
+then the live local endpoint and the runtime ZIP download returned HTTP 200.
+The served runtime archive has SHA-256
+`5de95fa121906a1f921e1814f9a4133916c12787fc81e4c11b0adbdbf6b3fd90`.
+The source archive SHA-256 is
+`c1a9b9c9271b18bd869839a568dc897300f75cdf282bdcf9c0419c556a2e331d`.
+Both archives are reproducible across two clean builds of commit `ed4ddd4`;
+the runtime was additionally verified on PHP 8.3.6 with byte-identical GMP and
+limb outputs for pairing and standings examples.
 
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is

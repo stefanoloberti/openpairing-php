@@ -1,0 +1,35 @@
+{
+  "schema": "openpairing.release-evidence/1",
+  "version": "0.9.0-rc1",
+  "gitCommit": "ed4ddd4e5a0f855e23b6f880d1da992cc11b4efe",
+  "artifacts": {
+    "source": {
+      "file": "openpairing-php-0.9.0-rc1-source.zip",
+      "bytes": 413806,
+      "sha256": "c1a9b9c9271b18bd869839a568dc897300f75cdf282bdcf9c0419c556a2e331d"
+    },
+    "runtime": {
+      "file": "openpairing-php-0.9.0-rc1-runtime.zip",
+      "bytes": 182028,
+      "sha256": "5de95fa121906a1f921e1814f9a4133916c12787fc81e4c11b0adbdbf6b3fd90"
+    }
+  },
+  "verification": {
+    "twoBuildsByteIdentical": true,
+    "php83RuntimeSmoke": true,
+    "gmpLimbsPairingByteIdentical": true,
+    "gmpLimbsStandingsByteIdentical": true,
+    "stagingRelease": "production-current-20260813-openpairing-ed4ddd4",
+    "stagingTests": 224,
+    "stagingAssertions": 33047,
+    "stagingPhpstan": "clean",
+    "stagingHttp": 200,
+    "stagingDownloadHashVerified": true
+  },
+  "openGates": [
+    "complete large-field corpus replay",
+    "complete accelerated 1000-tournament pairing replay",
+    "legacy XXA acceleration import",
+    "fields above the public 256-player safety ceiling"
+  ]
+}
