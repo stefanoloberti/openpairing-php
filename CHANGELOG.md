@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.0-rc6 - 2026-08-13
+
+- age Dutch float history by tournament-round identity so skipped/blank rounds
+  do not keep UF/DF status alive beyond the FIDE recency window;
+- reconfirm the frozen seven-player gate at 500/500 exact under the corrected
+  historical-float semantics;
+- add an atomic per-shard Gacrux watcher that permanently stops large-field
+  campaigns on inferior pairings, fatal engine counters, incomplete oracle
+  coverage or infrastructure errors.
+
 ## 0.9.0-rc5 - 2026-08-13
 
 - correct the CLI manual for supported TRF `250`/legacy `XXA` import;

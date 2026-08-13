@@ -94,6 +94,17 @@ were verified after the switch. Versioned deployment evidence is
 `docs/evidence/release-rc5-staging-59e8924.json`. No further RC number is
 allocated merely for documentation or corpus progress.
 
+Release candidate 6, tag `b6a2c1b`, corrects float-history ageing across
+unplayed rounds. It was deployed atomically to
+`production-current-20260813-openpairing-rc6-b6a2c1b`; its PHP 8.3.6 gate
+passed 232 tests/33,070 assertions, PHPStan, lint and CLI identity checks. The
+staging root and both downloadable RC6 archives were verified over HTTP after
+the switch. Runtime SHA-256 is
+`cd4dc4c3115de8fc25e8614204175b01d495dafa161ba0cf7b7c34d16d56128e`;
+source SHA-256 is
+`1ad200fdc1bfe5cc02ab345fd9c3202d3665be391a0c0c8fde48133a3fb9a75c`.
+Versioned evidence is `docs/evidence/release-rc6-staging-b6a2c1b.json`.
+
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and

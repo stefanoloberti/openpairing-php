@@ -1,0 +1,40 @@
+{
+  "schema": "openpairing.release-staging-evidence/1",
+  "version": "0.9.0-rc6",
+  "tag": "v0.9.0-rc6",
+  "commit": "b6a2c1b3ebe660dc423bf50808132a04a78c8a49",
+  "release": "/srv/chesspairings-production-staging/releases/production-current-20260813-openpairing-rc6-b6a2c1b",
+  "package": {
+    "stagingTarSha256": "f575713875971bea63dd6301266fbe83554d43749a2f5deb53a897bbb4559494",
+    "runtimeSha256": "cd4dc4c3115de8fc25e8614204175b01d495dafa161ba0cf7b7c34d16d56128e",
+    "sourceSha256": "1ad200fdc1bfe5cc02ab345fd9c3202d3665be391a0c0c8fde48133a3fb9a75c",
+    "reproducibleBuildsByteIdentical": true
+  },
+  "preSwitchGate": {
+    "php": "8.3.6",
+    "tests": 232,
+    "assertions": 33070,
+    "phpunit": "pass",
+    "phpstan": "pass",
+    "lint": "pass",
+    "cliSmoke": "pass"
+  },
+  "runtimeIdentity": {
+    "engineVersion": "fide-dutch-2026.global/1",
+    "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+    "sourceTreeSha256": "4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74",
+    "sourceFileCount": 81,
+    "arithmeticBackend": "gmp",
+    "gmpAvailable": true
+  },
+  "postSwitch": {
+    "currentSymlinkExact": true,
+    "httpRoot": "pass",
+    "httpRootStatus": 200,
+    "cliVersion": "0.9.0-rc6",
+    "downloadIndexRecommendedVersion": "0.9.0-rc6",
+    "runtimeDownloadSha256Verified": true,
+    "sourceDownloadSha256Verified": true,
+    "historicalRuntimeLinksRetained": ["rc1", "rc2", "rc3", "rc4", "rc5"]
+  }
+}

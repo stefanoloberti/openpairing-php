@@ -1,12 +1,12 @@
-# Release 0.9.0-rc5
+# Release 0.9.0-rc6
 
 ## Artifacts
 
 The release process produces two archives from one committed tree:
 
-- `openpairing-php-0.9.0-rc5-source.zip`: source, tests, development tools and
+- `openpairing-php-0.9.0-rc6-source.zip`: source, tests, development tools and
   Composer lock file; run `composer install` before use;
-- `openpairing-php-0.9.0-rc5-runtime.zip`: source plus optimized production
+- `openpairing-php-0.9.0-rc6-runtime.zip`: source plus optimized production
   Composer autoload files, ready for the CLI or library.
 
 Every archive is accompanied by a `.sha256` file. The runtime archive contains
@@ -43,12 +43,13 @@ php bin/openpairing.php --standings tournament.trf
 
 ## Release status
 
-This is a release candidate, not a FIDE certification. The runtime algorithms
-are unchanged from rc4. The public Dutch path
-has exact attested reference gates at 7, 30, 50 and 80 players. The complete
-historical pairing campaign has closed p7, p9, p15 and p30 at 69,998
-tournaments and 609,874 exact rounds; p50, p80, p150, ten historical misc and
-accelerated pairing remain in progress, so no complete-corpus claim is made.
+This is a release candidate, not a FIDE certification. RC6 corrects
+historical-float ageing across unplayed tournament rounds. Its seven-player
+gate is reconfirmed at 500/500 exact, and the p50 campaign is being replayed
+under the corrected identity. The complete historical pairing campaign
+previously closed p7, p9, p15 and p30 at 69,998 tournaments and 609,874 exact
+rounds; a uniform-identity replay remains required before those partitions are
+combined with RC6 in a final claim. No complete-corpus claim is made.
 Separate capacity gates cover the 547 files newly admitted above the former
 256-player limit. The
 4,096-player/256-round format guard-rail and team pairing/tie-break functions
