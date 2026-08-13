@@ -94,7 +94,7 @@ final class InitialDutchPairingEngine implements PairingEngineInterface
         }
 
         $players = $state->activePlayers();
-        if (count($players) > $state->maxPlayers || count($players) > 256) {
+        if (count($players) > $state->maxPlayers) {
             throw new InvalidTournamentState('players.limit', 'Active player count exceeds the configured limit.');
         }
 

@@ -17,7 +17,7 @@
       "required": ["topColour", "maxPlayers"],
       "properties": {
         "topColour": {"enum": ["white", "black"]},
-        "maxPlayers": {"type": "integer", "minimum": 0, "maximum": 256}
+        "maxPlayers": {"type": "integer", "minimum": 0, "maximum": 4096}
       }
     },
     "scoring": {
@@ -54,7 +54,7 @@
     },
     "players": {
       "type": "array",
-      "maxItems": 256,
+      "maxItems": 4096,
       "items": {"$ref": "#/$defs/player"}
     }
   },

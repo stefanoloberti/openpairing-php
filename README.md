@@ -43,7 +43,7 @@ The public Dutch path uses the polynomial Blossom core and no longer has the
 legacy 250,000-node/8,192-candidate guard-rail. Burstein retains bounded
 exhaustive search, so difficult Burstein brackets can still return a
 machine-readable resource-limit result without a partial pairing. Canonical
-JSON and TRF currently enforce a 256-player/256-round input safety ceiling.
+JSON and TRF currently enforce a 4,096-player/256-round input safety ceiling.
 Canonical JSON and TRF record `250` support round-indexed virtual points, and
 the engines apply them to scoregroups, internal order and board order. Legacy
 per-player acceleration record `XXA` is accepted on import and normalized to

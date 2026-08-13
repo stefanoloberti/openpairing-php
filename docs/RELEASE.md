@@ -46,5 +46,5 @@ php bin/openpairing.php --standings tournament.trf
 This is a release candidate, not a FIDE certification. The public Dutch path
 has exact attested reference gates at 7, 30, 50 and 80 players. The complete
 122,008-tournament historical pairing campaign is still running; the
-256-player/256-round format guard-rail, TRF acceleration record 250/XXA and
+4,096-player/256-round format guard-rail, TRF acceleration records 250/XXA and
 team pairing/tie-break functions remain documented limits.

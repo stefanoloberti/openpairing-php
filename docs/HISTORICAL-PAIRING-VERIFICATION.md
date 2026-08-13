@@ -269,7 +269,14 @@ corpus identities into its own output.
 The corresponding evidence is
 `build/gacrux-preliminary-bye-55-final.json`.
 
-The 256-player ceiling remains a documented parser/domain safety guard-rail.
+The former 256-player ceiling was a parser/domain guard-rail, not a matcher
+dependency. It is now 4,096 players: a real 2,400-player, 21-round TRF decodes
+in 0.185 seconds and completes encode/decode in 0.343 seconds on the Windows
+laboratory runtime. Pairing performance at that scale remains a separate open
+measurement and is not implied by parser capacity. The deterministic public
+initial-round path has separately produced 1,200 valid tables for 2,400
+players, zero violations, in 0.005 seconds of pairing time; advanced-round
+Blossom performance at this scale remains unmeasured.
 The public Dutch path is polynomial and no longer inherits the bounded legacy
 enumerator's combinatorial guard, but raising the format limit requires its own
 codec, memory and latency gate and is not part of the 122,008-tournament

@@ -10,6 +10,9 @@ use OpenPairing\Domain\Score\Score;
 final readonly class TournamentState
 {
     public const SCHEMA_VERSION = 'openpairing.tournament/1';
+    public const MAX_PLAYERS = 4_096;
+    public const MAX_ROUNDS = 256;
+    public const MAX_PAIRING_NUMBER = 9_999;
 
     /**
      * @param list<Player> $players

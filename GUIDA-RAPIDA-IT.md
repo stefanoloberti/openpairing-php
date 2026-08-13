@@ -57,7 +57,7 @@ Sono implementati tutti i 17 metodi individuali obbligatori FIDE 2026, più
 ## Limiti della release candidate
 
 - prodotto individuale, non team;
-- massimo 256 giocatori e 256 round nel formato pubblico;
+- massimo 4.096 giocatori e 256 round nel formato pubblico;
 - record TRF di accelerazione `250` importato ed esportato come schedule per
   turno; il vecchio record per-giocatore `XXA` è importato e normalizzato a
   `250`; Baku è anche disponibile sullo stato JSON tramite `--baku`;

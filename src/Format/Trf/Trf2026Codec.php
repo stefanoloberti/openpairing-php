@@ -69,8 +69,8 @@ final class Trf2026Codec
         if (($records['001'] ?? []) === []) {
             throw new InvalidTournamentState('trf.players_required', 'TRF requires at least one 001 player record.');
         }
-        if (count($records['001']) > 256) {
-            throw new InvalidTournamentState('players.limit', 'TRF player count exceeds 256.');
+        if (count($records['001']) > TournamentState::MAX_PLAYERS) {
+            throw new InvalidTournamentState('players.limit', sprintf('TRF player count exceeds %d.', TournamentState::MAX_PLAYERS));
         }
         foreach (['022', '032', '042', '052', '062', '072', '092', '102', '122', '132', '162', '182', '202', '212', '222'] as $singleton) {
             if (count($records[$singleton] ?? []) > 1) {
@@ -87,8 +87,8 @@ final class Trf2026Codec
         }
         $this->ascii($name, 'tournament name');
         $numberOfRounds = $this->positiveInteger($this->recordValue($records['142'][0], '142'), '142 number of rounds');
-        if ($numberOfRounds > 256) {
-            throw new InvalidTournamentState('rounds.limit', 'TRF number of rounds exceeds 256.');
+        if ($numberOfRounds > TournamentState::MAX_ROUNDS) {
+            throw new InvalidTournamentState('rounds.limit', sprintf('TRF number of rounds exceeds %d.', TournamentState::MAX_ROUNDS));
         }
 
         $top = strtoupper($this->recordValue($records['152'][0], '152'));
@@ -184,7 +184,7 @@ final class Trf2026Codec
             topColour: $topColour,
             pointsForWin: $scores['W'],
             pointsForDraw: $scores['D'],
-            maxPlayers: 256,
+            maxPlayers: TournamentState::MAX_PLAYERS,
             players: $players,
             tournamentName: $name,
             pointsForLoss: $scores['L'],
@@ -462,7 +462,7 @@ final class Trf2026Codec
             if ($firstRound > $lastRound || $lastRound > $numberOfRounds) {
                 throw new InvalidTournamentState('trf.acceleration_round', sprintf('TRF 250 record %d has an invalid round range.', $lineNumber + 1));
             }
-            if ($firstPlayer > $lastPlayer || $lastPlayer > 256) {
+            if ($firstPlayer > $lastPlayer || $lastPlayer > TournamentState::MAX_PAIRING_NUMBER) {
                 throw new InvalidTournamentState('trf.acceleration_player', sprintf('TRF 250 record %d has an invalid competitor range.', $lineNumber + 1));
             }
             for ($player = $firstPlayer; $player <= $lastPlayer; ++$player) {
@@ -492,7 +492,7 @@ final class Trf2026Codec
                 throw new InvalidTournamentState('trf.acceleration_short', sprintf('TRF XXA record %d has no complete round value.', $lineNumber + 1));
             }
             $player = $this->positiveInteger(substr($line, 4, 4), 'XXA competitor');
-            if ($player > 256) {
+            if ($player > TournamentState::MAX_PAIRING_NUMBER) {
                 throw new InvalidTournamentState('trf.acceleration_player', sprintf('TRF XXA record %d has an invalid competitor.', $lineNumber + 1));
             }
             $schedule = [];

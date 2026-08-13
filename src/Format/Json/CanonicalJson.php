@@ -58,8 +58,8 @@ final class CanonicalJson
         }
 
         $maxPlayers = $this->integer($configuration, 'maxPlayers');
-        if ($maxPlayers < 0 || $maxPlayers > 256 || count($rawPlayers) > $maxPlayers) {
-            throw new InvalidTournamentState('players.limit', 'Player count or maxPlayers is outside 0..256.');
+        if ($maxPlayers < 0 || $maxPlayers > TournamentState::MAX_PLAYERS || count($rawPlayers) > $maxPlayers) {
+            throw new InvalidTournamentState('players.limit', sprintf('Player count or maxPlayers is outside 0..%d.', TournamentState::MAX_PLAYERS));
         }
 
         $round = $this->integer($data, 'round');

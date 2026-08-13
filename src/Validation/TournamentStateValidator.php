@@ -59,10 +59,10 @@ final class TournamentStateValidator
                 throw new InvalidTournamentState('tiebreak.not_applicable', $exception->getMessage());
             }
         }
-        if ($state->numberOfRounds < 1 || $state->numberOfRounds > 256 || $state->round < 1 || $state->round > $state->numberOfRounds + 1) {
+        if ($state->numberOfRounds < 1 || $state->numberOfRounds > TournamentState::MAX_ROUNDS || $state->round < 1 || $state->round > $state->numberOfRounds + 1) {
             throw new InvalidTournamentState('round.range', 'Round values are outside the supported tournament range.');
         }
-        if ($state->maxPlayers < 0 || $state->maxPlayers > 256 || count($state->players) > $state->maxPlayers) {
+        if ($state->maxPlayers < 0 || $state->maxPlayers > TournamentState::MAX_PLAYERS || count($state->players) > $state->maxPlayers) {
             throw new InvalidTournamentState('players.limit', 'Player count exceeds the configured limit.');
         }
 
@@ -72,7 +72,7 @@ final class TournamentStateValidator
         /** @var array<int, array<int, array{round: int, opponentId: int|null, colour: string|null, result: string, played: bool}>> $roundsByPlayer */
         $roundsByPlayer = [];
         foreach ($state->players as $player) {
-            if ($player->id < 1 || $player->pairingNumber < 1) {
+            if ($player->id < 1 || $player->pairingNumber < 1 || $player->pairingNumber > TournamentState::MAX_PAIRING_NUMBER) {
                 throw new InvalidTournamentState('player.identifier', 'Player IDs and TPNs must be positive.');
             }
             if (isset($playersById[$player->id]) || isset($pairingNumbers[$player->pairingNumber])) {

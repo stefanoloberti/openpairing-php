@@ -67,4 +67,14 @@ final class InitialDutchPairingEngineTest extends TestCase
         $this->expectException(InvalidTournamentState::class);
         (new InitialDutchPairingEngine())->pair($later);
     }
+
+    public function testPairsFiveHundredPlayersWithoutAnArchitecturalCeiling(): void
+    {
+        $state = TournamentFactory::initial(500);
+        $result = (new InitialDutchPairingEngine())->pair($state);
+
+        self::assertCount(250, $result->tables);
+        self::assertNull($result->byePlayerId);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+    }
 }

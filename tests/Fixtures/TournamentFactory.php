@@ -36,9 +36,8 @@ final class TournamentFactory
             topColour: $topColour,
             pointsForWin: new Score(2, 2),
             pointsForDraw: new Score(1, 2),
-            maxPlayers: 256,
+            maxPlayers: max(256, $players),
             players: $entries,
         );
     }
 }
-

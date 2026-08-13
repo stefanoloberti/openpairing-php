@@ -71,6 +71,29 @@ final class TournamentStateValidatorTest extends TestCase
         (new TournamentStateValidator())->validate($invalid);
     }
 
+    public function testRejectsConfiguredCapacityAbovePublicGuardRail(): void
+    {
+        $state = $this->state();
+        $invalid = new TournamentState(
+            schemaVersion: $state->schemaVersion,
+            round: $state->round,
+            numberOfRounds: $state->numberOfRounds,
+            pairingSystem: $state->pairingSystem,
+            topColour: $state->topColour,
+            pointsForWin: $state->pointsForWin,
+            pointsForDraw: $state->pointsForDraw,
+            maxPlayers: TournamentState::MAX_PLAYERS + 1,
+            players: $state->players,
+        );
+
+        try {
+            (new TournamentStateValidator())->validate($invalid);
+            self::fail('Capacity above the public guard-rail must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('players.limit', $exception->diagnosticCode);
+        }
+    }
+
     private function state(bool $badHistory = false, ?Score $acceleration = null): TournamentState
     {
         $white = new Player(
