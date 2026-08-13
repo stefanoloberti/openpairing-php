@@ -92,8 +92,10 @@ attested:
 3. **Partially satisfied.** The complete p7, p9, p15 and p30 partitions close
    at 69,998 tournaments and 609,874 exact historical rounds, with zero
    variants, deviations, no-solutions and resource limits. Full p50, p80 and
-   accelerated pairing partitions remain open; the final corpus claim is not
-   yet available.
+   p50, p80, p150, ten historical misc and accelerated pairing partitions
+   remain open; the final corpus claim is not yet available. The 122,008
+   historical denominator is the exact sum of those named non-accelerated
+   partitions, not whichever capacity sets happen to be present in a queue.
 
 Runtime-identity attestation from the historical verifier is part of every gate.
 

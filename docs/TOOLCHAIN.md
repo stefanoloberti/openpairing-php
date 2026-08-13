@@ -109,7 +109,9 @@ be green. Official replays never use WIP or dirty trees.
 Long corpus campaigns are installed under persistent WSL storage at
 `/srv/openpairing-validation`. The current queue uses 20 concurrent PHP/GMP
 workers and small atomic shards: p30 20,000/256, p50 30,000/384, p80
-20,000/256 and acceleration 1,000/64. A single boot-enabled
+20,000/256, p150 2,000/128, historical misc 10/1 and acceleration
+1,000/64. Separate post-corpus capacity gates cover the one newly accepted
+large misc tournament and 546 cases at 300-2,400 players. A single boot-enabled
 `openpairing-full-corpus.service` supervisor invokes campaign then Gacrux
 classification for each partition in strict sequence; shell fail-fast prevents
 the next partition from starting after any non-zero gate. On reboot it starts

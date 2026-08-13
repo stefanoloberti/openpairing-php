@@ -40,6 +40,14 @@ the PAB score-position complement omitted QC18/QC20, and conditional C9 was
 incorrectly encoded as a prefix that dominated QC6-QC8. The corrected field
 ordering eliminated all 43 affected tournaments without heuristic adjustment.
 
+A campaign denominator is also an oracle input. The first persistent queue
+summed to 120,998, not the documented 122,008: it omitted 2,000 p150 and ten
+historical `misc` tournaments while adding the separate 1,000 accelerated
+files. The arithmetic check caught the mismatch before a green queue could be
+misreported as a complete corpus gate. Every final campaign now declares both
+its per-partition counts and their exact reconciled sum; adjacent capacity
+sets never substitute for a missing historical partition.
+
 The next 9-player partition closes at 69,922/69,922 exact rounds. Its only
 post-C9 residual illustrates why a checker's named first difference is not a
 root-cause label: Gacrux reported QC20 after bracket reconstruction, while a

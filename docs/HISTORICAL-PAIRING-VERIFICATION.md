@@ -63,7 +63,8 @@
   the classifier summary is
   `docs/evidence/pairing-corpus-p30-gacrux-c48fd05.json`. Across the closed
   p7, p9, p15 and p30 partitions, 69,998 tournaments and 609,874 historical
-  rounds are exact. The p50, p80 and acceleration pairing gates remain open.
+  rounds are exact. The p50, p80, p150, ten historical `misc` tournaments and
+  acceleration pairing gates remain open.
 - Closed parser-only acceleration gate: all 1,000 `250` tournaments decode and
   complete a 100% semantic round-trip with zero diagnostics (manifest
   `11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6`;
@@ -80,6 +81,20 @@ directly to the recorded TRF reference and reports four operative buckets:
 `candidateNoMatching`. Every non-exact completed result is exported to Gacrux
 with `--sample-set large-field`. The bounded engine remains an additional
 small-field oracle, never a prerequisite for classifying a large-field round.
+
+The final denominator is reconciled explicitly. The original 122,008
+decodable non-accelerated corpus consists of the closed p7/p9/p15/p30
+partitions, p50 (30,000), p80 (20,000), p150 (2,000), and ten legacy `misc`
+tournaments. The initial persistent queue accidentally omitted p150 and misc
+while including the separate 1,000-file acceleration set; its possible
+120,998 result could therefore never support the 122,008 claim. The corrected
+fail-closed chain runs p150 and misc before acceleration. The raised player
+limit additionally makes 547 formerly excluded files decodable: one `misc`
+case plus 546 tournaments at 300-2,400 players. They form separate capacity
+pairing gates after the historical and acceleration campaigns. If all pass,
+the current parser/motor scope is 123,555 decodable `.trf` files out of 123,557;
+the only remaining exclusions are the source corpus's NUL-byte and
+missing-required-record files.
 
 The older shadow reports at 30 and 50 players are not large-field acceptance
 evidence: the bounded legacy path reached its resource limit on 23 and 78

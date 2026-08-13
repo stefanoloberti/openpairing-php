@@ -7,6 +7,9 @@ closed the frozen 7/30/50/80-player gates. The bounded implementation remains
 `LegacyDutchPairingEngine` as a small-field oracle. The complete p7, p9, p15
 and p30 corpus partitions are closed at 69,998 tournaments and 609,874 exact
 historical rounds; p50, p80 and accelerated pairing partitions remain open.
+The reconciled 122,008 denominator also includes p150 and ten historical misc
+tournaments; both are installed in the corrected persistent queue before the
+separate acceleration and over-256-player capacity gates.
 
 | Source studied | PHP target | Treatment | Verification |
 |---|---|---|---|
