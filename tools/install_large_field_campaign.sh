@@ -57,7 +57,8 @@ run_shard() {
         return 0
     fi
     temporary_report=\$(mktemp "\$campaign/quarantine/.\$label.report.XXXXXX")
-    cleanup_shard() { rm -f -- "\$temporary_report"; }
+    temporary_classification=\$(mktemp "\$campaign/quarantine/.\$label.classification.XXXXXX")
+    cleanup_shard() { rm -f -- "\$temporary_report" "\$temporary_classification"; }
     trap cleanup_shard RETURN
     if ! OPENPAIRING_ARITHMETIC_BACKEND=gmp php -d opcache.enable_cli=1 -d opcache.jit=1255 \\
         -d opcache.jit_buffer_size=128M "\$source_tree/tools/verify_trf_pairings.php" \\
@@ -69,12 +70,24 @@ run_shard() {
         return 33
     fi
     "\$source_tree/tools/corpus/classify_shard_fail_fast.sh" \\
-        "\$temporary_report" "\$source_tree" "\$upstream" "\$classification" "\$stop_file" "\$corpus" || {
+        "\$temporary_report" "\$source_tree" "\$upstream" "\$temporary_classification" "\$stop_file" "\$corpus" || {
             mv -f -- "\$temporary_report" "\$campaign/quarantine/\$label.json"
+            if test -s "\$temporary_classification"; then
+                mv -f -- "\$temporary_classification" "\$campaign/quarantine/\$label-classification.json"
+            fi
             trap - RETURN
             return 31
         }
     mv -f -- "\$temporary_report" "\$report"
+    php -r '
+        \$classification = json_decode(file_get_contents(\$argv[1]), true, flags: JSON_THROW_ON_ERROR);
+        \$classification["sourceReport"] = realpath(\$argv[2]);
+        \$classification["shardGateSha256"] = hash_file("sha256", \$argv[3]);
+        echo json_encode(\$classification, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), "\\n";
+    ' "\$temporary_classification" "\$report" \\
+        "\$source_tree/tools/corpus/classify_shard_fail_fast.sh" >"\$temporary_classification.final"
+    mv -f -- "\$temporary_classification.final" "\$classification"
+    rm -f -- "\$temporary_classification"
     trap - RETURN
 }
 export -f run_shard

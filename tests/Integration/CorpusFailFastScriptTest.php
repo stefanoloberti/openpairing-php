@@ -39,6 +39,9 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('verifier-infrastructure-error', $script);
         self::assertStringContainsString('aggregate_shards.php', $script);
         self::assertStringContainsString('aggregate.json.tmp', $script);
+        self::assertStringContainsString('shardGateSha256', $script);
+        self::assertStringContainsString('realpath(\\$argv[2])', $script);
+        self::assertStringContainsString('.classification.', $script);
     }
 
     public function testSupervisorDoesNotRestartAfterAConfirmedGateFailure(): void

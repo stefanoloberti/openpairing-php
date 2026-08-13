@@ -185,3 +185,6 @@ watcher introduced after the p50 partial run exposed a semantic defect long
 before the partition aggregate could be produced. The systemd supervisor uses
 `Restart=no`: a gate failure remains stopped for investigation, while the
 enabled unit still resumes the idempotent queue after a machine boot.
+Accepted classification records point to the promoted report path and include
+the SHA-256 of the shard-gate script, so the decision mechanism is part of the
+evidence rather than an unrecorded property of the host.
