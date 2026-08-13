@@ -21,7 +21,8 @@ tools/build_release.ps1
 The builder creates a production-only optimized Composer autoloader, normalizes
 runtime ZIP timestamps to the Git commit time, audits forbidden development
 paths, runs CLI and pairing smoke tests, and writes a machine-readable build
-report beside the archives.
+report beside the archives. The runtime `composer.json` is stripped of
+development dependencies, test autoloading and laboratory scripts.
 
 ## Requirements
 

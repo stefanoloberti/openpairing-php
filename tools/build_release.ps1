@@ -52,6 +52,14 @@ try {
             if (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target -Recurse -Force }
         }
 
+        $runtimeComposerPath = Join-Path $stage 'composer.json'
+        $runtimeComposer = Get-Content -Raw -LiteralPath $runtimeComposerPath | ConvertFrom-Json -AsHashtable
+        foreach ($developmentKey in @('require-dev', 'autoload-dev', 'scripts')) {
+            $runtimeComposer.Remove($developmentKey)
+        }
+        $runtimeComposer['description'] = 'Deterministic, offline FIDE pairing engine for PHP (prebuilt runtime)'
+        $runtimeComposer | ConvertTo-Json -Depth 16 | Set-Content -Encoding UTF8 $runtimeComposerPath
+
         $metadata = [ordered]@{
             schema = 'openpairing.release-metadata/1'
             package = $package
@@ -86,6 +94,12 @@ try {
         foreach ($forbidden in @('tests', 'tools', 'vendor\phpunit', 'vendor\phpstan')) {
             if (Test-Path -LiteralPath (Join-Path $runtimeRoot $forbidden)) {
                 throw "Runtime contains forbidden development path: $forbidden"
+            }
+        }
+        $verifiedComposer = Get-Content -Raw -LiteralPath (Join-Path $runtimeRoot 'composer.json') | ConvertFrom-Json -AsHashtable
+        foreach ($developmentKey in @('require-dev', 'autoload-dev', 'scripts')) {
+            if ($verifiedComposer.ContainsKey($developmentKey)) {
+                throw "Runtime composer.json retains development key: $developmentKey"
             }
         }
         & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') --help | Out-Null
