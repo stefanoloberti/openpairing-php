@@ -73,7 +73,9 @@ runtime SHA-256 is
 It was deployed atomically to
 `production-current-20260813-openpairing-59b8b9d`: 228 tests/33,056
 assertions, PHPStan, lint, PHP 8.3 GMP/limb examples, XXA normalization, HTTP
-and the served runtime hash all passed before/after the switch.
+and the served runtime hash all passed before/after the switch. Its separate
+stress gate passed 5 tests/31,003 assertions (one Windows GMP skip), and the
+upstream oracle group passed 11 tests/55 assertions.
 
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
