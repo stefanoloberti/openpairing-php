@@ -14,6 +14,14 @@ try {
     if ($branch -eq '') {
         throw 'Checkpoint push requires a named branch.'
     }
+    $branches = @($branch)
+    if ($branch -ne 'main') {
+        $mainHead = (& git rev-parse main 2>$null).Trim()
+        if ($LASTEXITCODE -ne 0 -or $mainHead -ne (& git rev-parse HEAD).Trim()) {
+            throw 'Non-main checkpoint pushes require local main at the same commit.'
+        }
+        $branches += 'main'
+    }
     $head = (& git rev-parse HEAD).Trim()
     if ($head -notmatch '^[0-9a-f]{40}$') {
         throw 'Cannot resolve the local checkpoint commit.'
@@ -24,23 +32,25 @@ try {
         if ($LASTEXITCODE -ne 0 -or -not $url) {
             throw "Required backup remote is not configured: $remote"
         }
-        & git push $remote $branch
-        if ($LASTEXITCODE -ne 0) { throw "Branch push failed: $remote/$branch" }
+        & git push $remote @branches
+        if ($LASTEXITCODE -ne 0) { throw "Branch push failed: $remote" }
         & git push $remote --tags
         if ($LASTEXITCODE -ne 0) { throw "Tag push failed: $remote" }
-        $remoteLine = & git ls-remote $remote "refs/heads/$branch"
-        if ($LASTEXITCODE -ne 0 -or -not $remoteLine) {
-            throw "Cannot attest remote branch: $remote/$branch"
-        }
-        $remoteHead = ($remoteLine -split '\s+')[0]
-        if ($remoteHead -ne $head) {
-            throw "Remote branch does not match local HEAD: $remote/$branch"
+        $verifiedBranches = foreach ($pushedBranch in $branches) {
+            $remoteLine = & git ls-remote $remote "refs/heads/$pushedBranch"
+            if ($LASTEXITCODE -ne 0 -or -not $remoteLine) {
+                throw "Cannot attest remote branch: $remote/$pushedBranch"
+            }
+            $remoteHead = ($remoteLine -split '\s+')[0]
+            if ($remoteHead -ne $head) {
+                throw "Remote branch does not match local HEAD: $remote/$pushedBranch"
+            }
+            [ordered]@{ branch = $pushedBranch; head = $remoteHead }
         }
         [ordered]@{
             remote = $remote
             url = $url.Trim()
-            branch = $branch
-            head = $remoteHead
+            branches = @($verifiedBranches)
             verified = $true
         }
     }
