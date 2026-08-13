@@ -3,8 +3,9 @@
 ## Current status (2026-08-13)
 
 The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
-`epoch-2-dutch-500`. One 80-player tournament has completed 15/15 exact, but
-medium-field classification and the full 122,008-tournament replay remain
+`epoch-2-dutch-500`. Direct-reference public-path samples at 30, 50 and 80
+players are closed at 110/110, 150/150 and 150/150 exact rounds. Complete
+medium/large corpus partitions and the full 122,008-tournament replay remain
 open. The historical limbs baseline took 344.667 seconds for one tournament;
 the retained GMP/JIT/residual-cache path later completed ten 80-player
 tournaments (150/150 exact rounds) in 743.355 seconds total. Full-corpus

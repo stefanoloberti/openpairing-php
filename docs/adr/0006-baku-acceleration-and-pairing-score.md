@@ -13,5 +13,6 @@ transformer rather than implicitly guessing acceleration from tournament size.
 - callers may store the current announced acceleration losslessly in canonical
   JSON or calculate it with the bundled Baku method;
 - late-entry GA identity is explicit;
-- unsupported TRF `250` input fails closed until its complete official exchange
-  semantics are implemented.
+- TRF `250` schedules round-trip losslessly; legacy per-player `XXA` schedules
+  are accepted on import and normalized to canonical `250` output. Conflicting,
+  out-of-range or unknown-player acceleration records fail closed.

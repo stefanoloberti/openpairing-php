@@ -57,8 +57,9 @@ vertices, solving the entire residual graph and comparing candidate plus suffix
 weight. Its regression has two locally equal choices in bracket N whose only
 difference appears in bracket N+1; the globally better continuation must win.
 An additional regression rejects a locally stronger edge that makes the suffix
-incomplete. This component remains outside production until the Dutch-specific
-weight fields and persistent coordinator are complete.
+incomplete. This component remained outside production until the Dutch-specific
+weight fields and persistent coordinator were complete; both are now on the
+public Dutch path.
 
 The high-to-low basic edge fields in `computeEdgeWeight()` are:
 
@@ -71,11 +72,10 @@ The high-to-low basic edge fields in `computeEdgeWeight()` are:
 - score-position fields for those repeated floats;
 - reserved HE/HO and exchange-order fields.
 
-The PHP integration will therefore introduce a round-graph coordinator and a
-Dutch weight builder above `BlossomWeightedGeneralMatcher`. It will not modify
-the verified Blossom core and will not replace `solveGroups()` in place. The
-bounded enumerator remains a small-field diagnostic oracle until the new path
-passes the frozen gates.
+The PHP integration introduced a round-graph coordinator and Dutch weight
+builder above `BlossomWeightedGeneralMatcher`. It did not modify the verified
+Blossom core or replace `solveGroups()` in place. The bounded enumerator remains
+a small-field diagnostic oracle after the public path passed the frozen gates.
 
 Acceptance proceeds without changing the corpus. Criterion 1 is formally
 satisfied by tag `epoch-2-dutch-500`; criteria 2 and 3 are independently
