@@ -65,6 +65,16 @@ The separate local stress gate passed 5 tests/31,003 assertions (one GMP-only
 case skipped on Windows); the upstream oracle group passed 11 tests/55
 assertions.
 
+Release candidate 4, tag `59b8b9d`, is a documentation-only successor to rc3.
+Its two builds are byte-identical; source SHA-256 is
+`da250766e47b78eda4ac8f0e00c9d3bbf549179997ad631a3940571fafbfca6a` and
+runtime SHA-256 is
+`a716dbc883f3d756b61ce186a5a61b5385f05aa058b912a75ddd6b59c7098a1f`.
+It was deployed atomically to
+`production-current-20260813-openpairing-59b8b9d`: 228 tests/33,056
+assertions, PHPStan, lint, PHP 8.3 GMP/limb examples, XXA normalization, HTTP
+and the served runtime hash all passed before/after the switch.
+
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and
