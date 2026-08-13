@@ -33,6 +33,20 @@ try {
     & git archive --format=zip "--prefix=$package/" "--output=$sourceArchive" HEAD
     if ($LASTEXITCODE -ne 0) { throw 'git archive failed.' }
 
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $sourceZip = [System.IO.Compression.ZipFile]::OpenRead($sourceArchive)
+    try {
+        foreach ($entry in $sourceZip.Entries) {
+            if ($entry.FullName -match '/(?:\.git|build|vendor|tools/runtime|tools/upstream)/') {
+                throw "Source archive contains forbidden generated/private path: $($entry.FullName)"
+            }
+            if ($entry.FullName -match '(?i)(?:^|/)(?:\.env|id_rsa|id_ed25519)$|\.(?:pem|pfx|key)$') {
+                throw "Source archive contains a credential-like path: $($entry.FullName)"
+            }
+        }
+    } finally { $sourceZip.Dispose() }
+
     $temporary = Join-Path $buildRoot ('.release-' + [Guid]::NewGuid().ToString('N'))
     $stage = Join-Path $temporary $package
     $verification = Join-Path $temporary 'verify'
@@ -79,8 +93,6 @@ try {
             [System.Text.UTF8Encoding]::new($false)
         )
 
-        Add-Type -AssemblyName System.IO.Compression
-        Add-Type -AssemblyName System.IO.Compression.FileSystem
         $stream = [System.IO.File]::Open($runtimeArchive, [System.IO.FileMode]::CreateNew)
         try {
             $zip = [System.IO.Compression.ZipArchive]::new($stream, [System.IO.Compression.ZipArchiveMode]::Create, $false)
