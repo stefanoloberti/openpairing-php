@@ -119,6 +119,25 @@ each observed field by its minimum before unsigned packing. A dedicated unit
 test proves that this translation preserves signed ordering without a borrow
 into a more significant criterion.
 
+That translation was a necessary but incomplete mitigation. The first encoder
+revision sized a packed field from the per-edge range `maximum - minimum`.
+After translation, however, a matching accumulates several non-negative edge
+components; the field must hold `maximumCardinality * shiftedMaximum`. With an
+unmatched vertex or otherwise variable matching cardinality, the narrower
+field could carry into the preceding criterion and silently reverse the Dutch
+lexicographic order. This was the root cause behind the first p7 corpus
+deviations after the global engine had passed the small frozen gate.
+
+The original exhaustive oracle did not expose the defect because it compared
+quality vectors before their scalar encoding. Blossom and exhaustive search
+could therefore agree on the vector model while both consumed a corrupted
+packed weight in the production path. The regression now compares accumulated
+encoded weights for competing matchings, including signed components and
+variable cardinality, and proves that a lower criterion cannot carry into a
+higher one. General rule: an oracle must observe the representation actually
+consumed by the system, not only a semantically cleaner representation
+upstream. A mitigation that exists is not evidence that it is complete.
+
 The later lifecycle port supplied the missing state and made conditional C9 a
 real improvement rather than compensation: the frozen replay moved from
 490/500 to 494/500 with zero no-matchings. Conversely, a partial MDP-identity
