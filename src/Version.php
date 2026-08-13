@@ -6,7 +6,7 @@ namespace OpenPairing;
 
 final class Version
 {
-    public const PACKAGE = '0.9.0-rc3';
+    public const PACKAGE = '0.9.0-rc4';
 
     private function __construct()
     {

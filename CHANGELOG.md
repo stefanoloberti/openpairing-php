@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0-rc4 - 2026-08-13
+
+- retire stale present-tense statements in the acceleration and persistent
+  Dutch ADRs and update the oracle-method status for the closed 30/50/80
+  direct-reference samples;
+- no runtime algorithm, format behavior or public API changed from rc3.
+
 ## 0.9.0-rc3 - 2026-08-13
 
 - align the downloadable documentation with the acceleration support already
