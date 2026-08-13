@@ -37,12 +37,20 @@ try {
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     $sourceZip = [System.IO.Compression.ZipFile]::OpenRead($sourceArchive)
     try {
+        $sourceEntries = @{}
         foreach ($entry in $sourceZip.Entries) {
+            $sourceEntries[$entry.FullName] = $true
             if ($entry.FullName -match '/(?:\.git|build|vendor|tools/runtime|tools/upstream)/') {
                 throw "Source archive contains forbidden generated/private path: $($entry.FullName)"
             }
             if ($entry.FullName -match '(?i)(?:^|/)(?:\.env|id_rsa|id_ed25519)$|\.(?:pem|pfx|key)$') {
                 throw "Source archive contains a credential-like path: $($entry.FullName)"
+            }
+        }
+        foreach ($required in @('LICENSE', 'NOTICE', 'docs/LICENSE-PROVENANCE.md')) {
+            $requiredEntry = "$package/$required"
+            if (-not $sourceEntries.ContainsKey($requiredEntry)) {
+                throw "Source archive is missing required licence material: $required"
             }
         }
     } finally { $sourceZip.Dispose() }
@@ -114,6 +122,11 @@ try {
         foreach ($forbidden in @('tests', 'tools', 'vendor\phpunit', 'vendor\phpstan')) {
             if (Test-Path -LiteralPath (Join-Path $runtimeRoot $forbidden)) {
                 throw "Runtime contains forbidden development path: $forbidden"
+            }
+        }
+        foreach ($required in @('LICENSE', 'NOTICE', 'docs\LICENSE-PROVENANCE.md')) {
+            if (-not (Test-Path -LiteralPath (Join-Path $runtimeRoot $required) -PathType Leaf)) {
+                throw "Runtime archive is missing required licence material: $required"
             }
         }
         $verifiedComposer = Get-Content -Raw -LiteralPath (Join-Path $runtimeRoot 'composer.json') | ConvertFrom-Json
