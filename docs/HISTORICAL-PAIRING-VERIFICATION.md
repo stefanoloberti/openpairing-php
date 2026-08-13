@@ -18,8 +18,10 @@
   and the exhaustive oracle. The public 80-player batch still took 743.355
   seconds for 150 rounds, so full-corpus throughput remains the open blocker.
 - The global matcher now backs the public Dutch engine. Staging deployment and
-  release packaging remain pending production-path replay; criterion 3 stays
-  open.
+  reproducible release packaging are complete at release-candidate level. The
+  2026-08-13 staging deployment passed its pre-switch test/static-analysis/CLI
+  gate and live HTTP/runtime-identity smoke checks. Criterion 3 and the final
+  full-corpus claim remain open.
 - Closed: the complete 10,000-tournament, 7-player corpus partition at commit
   `4a93b7a`: 49,961/49,961 historical rounds exact, zero colour variants,
   deviations, no-solutions and resource limits. The attested evidence is

@@ -5,8 +5,10 @@
 The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
 `epoch-2-dutch-500`. One 80-player tournament has completed 15/15 exact, but
 medium-field classification and the full 122,008-tournament replay remain
-open. The current blocker is performance: the limbs baseline takes 344.667
-seconds for that tournament. The active optimization protocol changes one
+open. The historical limbs baseline took 344.667 seconds for one tournament;
+the retained GMP/JIT/residual-cache path later completed ten 80-player
+tournaments (150/150 exact rounds) in 743.355 seconds total. Full-corpus
+throughput remains the current blocker. The optimization protocol changes one
 factor per checkpoint and requires limb/GMP same-seed parity, the frozen gate,
 and the 80-player differential before retention.
 

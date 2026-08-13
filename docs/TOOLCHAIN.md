@@ -1,6 +1,6 @@
 # Development toolchain inventory
 
-## Current status (2026-08-12)
+## Current status (2026-08-13)
 
 Local Windows uses the mandatory 30-bit-limb backend because ext-gmp is not
 installed. The `ChessPairings-Ubuntu-24.04` laboratory WSL has ext-gmp and
@@ -29,8 +29,12 @@ Inspected/acquired on 2026-08-11. Nothing was installed globally.
 The `ChessPairings-Ubuntu-24.04` WSL environment on `doppia-3090` supplies PHP
 8.3.6, Python 3.12.3 and Git 2.43.0. Git was confirmed/installed through the
 Ubuntu package manager on 2026-08-12. Content-addressed validation releases and
-the frozen TRF corpus live under `/tmp`; staging remains read-only until the
-medium/large and full-corpus gates pass.
+the frozen TRF corpus live under `/tmp`. Staging was atomically deployed on
+2026-08-13 to `production-current-20260813-openpairing-da61dad`; its pre-switch
+gate passed 214 tests/32,996 assertions, PHPStan, syntax and CLI smoke checks,
+then the live local endpoint returned HTTP 200 and runtime source identity
+`bbfbbbb3e6c62ed10252a6d0c44e41e1036bd2033da78a648eb91aa41d43bba6`
+with the GMP backend.
 
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
