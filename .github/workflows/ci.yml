@@ -26,7 +26,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: ${{ matrix.arithmetic == 'gmp' && 'gmp' || 'none' }}
+          extensions: ${{ matrix.arithmetic == 'gmp' && 'mbstring, gmp' || 'mbstring' }}
           coverage: none
           tools: composer:v2
 
