@@ -134,6 +134,16 @@ automation (`wmiprvse.exe` at 05:12 and an explicit sandbox credential-repair
 `shutdown.exe` at 05:33), not to OOM or the OpenPairing engine. The latter
 sandbox task is disabled.
 
+The keepalive task lives in the Windows Task Scheduler root as
+`OpenPairing-WSL-KeepAlive`, runs as the interactive `ai` account and starts at
+logon. It can be paused without deleting its definition with
+`Stop-ScheduledTask -TaskName OpenPairing-WSL-KeepAlive` followed by
+`Disable-ScheduledTask -TaskName OpenPairing-WSL-KeepAlive`; re-enable it with
+`Enable-ScheduledTask` and `Start-ScheduledTask`. Disabling it may allow WSL to
+terminate once its last Windows client exits, so the corpus service must be
+checked afterwards. `tools/audit_windows_legacy_tasks.ps1` produces a read-only
+inventory of relevant legacy tasks; it never changes their state.
+
 The worker count was raised from 12 to 20 only after the shutdown causes were
 separated from engine load. At the scale checkpoint the WSL exposed 28 logical
 CPUs, load 12.03, 45 GiB available RAM, zero swap use and roughly 60 MiB RSS

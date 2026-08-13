@@ -6,8 +6,8 @@ This product is licensed under the Apache License, Version 2.0.
 Development and verification use the following separately acquired upstreams:
 
 - Gacrux/TieBreakServer, Copyright (c) 2024 FIDE, including source code
-  developed by Otto Milvang, under the MIT License. When Gacrux-derived code is
-  incorporated, its copyright and permission notice must be retained. See
+  developed by Otto Milvang, under the MIT License. The incorporated
+  Gacrux-derived code retains its copyright and permission notice below. See
   https://www.gacrux.no/ as requested by the upstream licence.
 - BBP Pairings, Copyright 2016-2026 Jeremy Bierema, under Apache-2.0. The
   production matching core contains a modified semantic PHP port of BBP's
@@ -16,6 +16,8 @@ Development and verification use the following separately acquired upstreams:
 `DutchQualityModel` is a modified semantic PHP port of the QC/HE/HO update
 semantics in Gacrux `crosstabledutch.py` from commit 14a34a2c. The Gacrux MIT
 permission notice follows:
+
+Copyright (c) 2024 FIDE
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
