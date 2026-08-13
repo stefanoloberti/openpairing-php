@@ -17,6 +17,12 @@
 Exact oracle output is evidence, not the definition of validity. The PHP
 engines return no partial pairing on no-solution or resource exhaustion.
 
+The pinned BBP Burstein comparison agrees on opponents in the post-seeding
+synthetic fixture but reverses one Article 5.2.5 colour: both players prefer
+Black, yet BBP grants it to the lower-ranked player. OpenPairing follows the
+published FIDE rule and the differential test records this expected oracle
+divergence instead of treating BBP as normative.
+
 BBP currently requires `0000` in an unplayed `001` block and rejects the
 official `162 X` field. The development adapter performs those two translations
 only in an isolated temporary input; canonical and TRF runtime data are not
