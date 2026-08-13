@@ -166,7 +166,9 @@ try {
             verification = [ordered]@{
                 cleanCommittedTree = $true
                 sourcePrivatePathAudit = $true
+                sourceLicenceMaterialAudit = $true
                 runtimeDevelopmentPathAudit = $true
+                runtimeLicenceMaterialAudit = $true
                 runtimeComposerValidation = $true
                 cliHelpSmoke = $true
                 cliVersionSmoke = $true
