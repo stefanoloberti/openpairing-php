@@ -46,7 +46,9 @@ php bin/openpairing.php --standings tournament.trf
 This is a release candidate, not a FIDE certification. The runtime algorithms
 are unchanged from rc4. The public Dutch path
 has exact attested reference gates at 7, 30, 50 and 80 players. The complete
-122,008-tournament historical pairing campaign is still running; the
+historical pairing campaign has closed p7, p9, p15 and p30 at 69,998
+tournaments and 609,874 exact rounds; p50, p80 and accelerated pairing remain
+in progress, so no complete-corpus claim is made. The
 4,096-player/256-round format guard-rail and team pairing/tie-break functions
 remain documented limits. TRF `250` import/export and legacy `XXA` import are
 supported; the full accelerated pairing-corpus gate remains open.

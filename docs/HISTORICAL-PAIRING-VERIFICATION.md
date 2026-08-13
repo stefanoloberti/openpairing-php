@@ -34,8 +34,9 @@
   `faf0dc8e0f1618b703f9a270bfcb9ee8ad9fd26fd3a330a753cbd9dccb3445ba`).
   The corpus run exposed and closed two model defects: the unmatched PAB's
   QC18/QC20 score-position complement and conditional C9 being placed ahead
-  of QC6-QC8 instead of at its canonical position. Full p9+ replay remains
-  open, so criterion 3 is not yet closed.
+  of QC6-QC8 instead of at its canonical position. Later p9, p15 and p30
+  partitions are also closed; p50, p80 and accelerated pairing remain open,
+  so criterion 3 is not yet closed.
 - Closed: the complete 9-player partition at commit `14539a6`: 9,999/9,999
   decodable tournaments and 69,922/69,922 historical rounds exact, with zero
   variants, deviations, no-solutions and resource limits. One source file is
@@ -143,8 +144,9 @@ regressions, 1 same deviation and 2 divergent deviations). All six residuals
 are Gacrux-inferior; their first differences are three HE2 cases plus QC15,
 QC17 and QC18. The authoritative counters and identities are in
 `docs/evidence/pairing-epoch2-lifecycle-c9-494.json`; the complete oracle
-analyses are the adjacent `gacrux-lifecycle-c9-494-*.json` reports. The gate
-remains open at 500/500.
+analyses are the adjacent `gacrux-lifecycle-c9-494-*.json` reports. At that
+historical checkpoint the gate remained open; the later canonical lifecycle
+closed it at 500/500.
 
 Parser validation is not pairing-engine verification. The historical verifier
 reconstructs the tournament state immediately before every recorded round,

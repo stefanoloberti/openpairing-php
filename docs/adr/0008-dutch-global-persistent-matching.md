@@ -1,6 +1,7 @@
 # ADR 0008: Dutch integration uses one persistent round graph
 
-Status: accepted, public engine enabled; full-corpus verification pending.
+Status: accepted, public engine enabled; p7/p9/p15/p30 corpus partitions closed,
+p50/p80/accelerated verification pending.
 
 Baseline epoch: `fide-dutch-float/2-pab-downfloat`. Every replay figure below
 that predates this marker (74, 59, legacy 441 and shadow 425/427/444/466 plus
@@ -88,7 +89,11 @@ attested:
    no-solutions, colour variants or deviations. Earlier five-bucket shadow
    runs are explicitly non-gating where the bounded legacy path reached a
    resource limit; criterion 2 is based on the later direct-reference reports.
-3. **Open.** Full replay of all 122,008 previously decodable non-accelerated tournaments.
+3. **Partially satisfied.** The complete p7, p9, p15 and p30 partitions close
+   at 69,998 tournaments and 609,874 exact historical rounds, with zero
+   variants, deviations, no-solutions and resource limits. Full p50, p80 and
+   accelerated pairing partitions remain open; the final corpus claim is not
+   yet available.
 
 Runtime-identity attestation from the historical verifier is part of every gate.
 

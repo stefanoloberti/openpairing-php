@@ -1,11 +1,12 @@
 # Porting map
 
-## Current status (2026-08-12)
+## Current status (2026-08-13)
 
 The persistent Dutch lifecycle is the public `DutchPairingEngine`. It has
 closed the frozen 7/30/50/80-player gates. The bounded implementation remains
-`LegacyDutchPairingEngine` as a small-field oracle. Full-corpus replay remains
-open.
+`LegacyDutchPairingEngine` as a small-field oracle. The complete p7, p9, p15
+and p30 corpus partitions are closed at 69,998 tournaments and 609,874 exact
+historical rounds; p50, p80 and accelerated pairing partitions remain open.
 
 | Source studied | PHP target | Treatment | Verification |
 |---|---|---|---|
@@ -17,7 +18,7 @@ open.
 | Gacrux `crosstabledutch.py` | `DutchQualityVector`, `DutchQualityModel` | Semantic MIT port of complete QC/HE/HO edge-quality ordering; PHP modelling original | Unit, shadow and Gacrux historical classification |
 | Gacrux `pairingchecker.py` | Oracle bridge | Adapter only | Process/status tests and corpus |
 | Gacrux `trf2json.py` + official TRF positions | `Trf2026Codec` | Original fixed-column codec | Round-trip and malformed-input tests |
-| BBP `src/swisssystems/dutch.cpp` | Dutch persistent round-graph coordinator and weight builder | Lifecycle implemented in original PHP following the mapped architecture; public Dutch path, no source copied | Frozen 7/30/50/80-player gates exact; full corpus open |
+| BBP `src/swisssystems/dutch.cpp` | Dutch persistent round-graph coordinator and weight builder | Lifecycle implemented in original PHP following the mapped architecture; public Dutch path, no source copied | Frozen 7/30/50/80-player gates exact; p7/p9/p15/p30 full partitions exact; p50/p80/accelerated partitions open |
 | BBP `src/swisssystems/burstein.cpp` | Non-normative comparison only | Studied; no source copied | Separate Burstein differential fixture |
 | BBP `src/matching/**` | `Engine/Matching/BlossomMaximumWeight`, `DynamicUInt` | Semantic port at `8f9e3c5`; C++ pools/pointers replaced by PHP integer IDs and immutable 30-bit-limb arithmetic | 1,000 sparse sequential freeze/reweight graphs versus fresh Blossom and exhaustive oracle; odd-cycle and 80/300-vertex tests |
 | BBP `dutch.cpp` preliminary whole-round pass | `Engine/Dutch/GlobalMatching` preliminary phase | Original PHP graph model; retained as an earlier phase inside the implemented shadow lifecycle | Historical preliminary audit: 500/500 completable and 396/396 PAB score groups; final lifecycle gate: 500/500 exact |
