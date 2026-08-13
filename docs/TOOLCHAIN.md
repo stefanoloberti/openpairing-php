@@ -118,3 +118,16 @@ original multi-unit `OnSuccess` graph was rejected after its `Requires=` edges
 re-entered completed oneshot services and its parallel fan-out was not truly
 fail-closed. Every aggregate remains fail-closed on mixed identities, missing
 files or omitted oracle-required cases.
+
+`tools/install_corpus_supervisor.sh` installs the fail-closed Linux supervisor
+after verifying all eight campaign/classification stages. Because WSL may stop
+systemd when its final Windows client exits, the host also runs the
+non-privileged scheduled task installed by `tools/install_wsl_keepalive.ps1`;
+it holds one `wsl.exe ... /bin/sleep infinity` process for the laboratory
+distribution. The negative control observed p50 stop with WSL after 13-15
+seconds repeatedly; with the task running, the same service and boot remained
+active beyond the previous shutdown window. Two earlier full Windows reboots
+were independently attributed by Event 1074 to local FIDE-laboratory
+automation (`wmiprvse.exe` at 05:12 and an explicit sandbox credential-repair
+`shutdown.exe` at 05:33), not to OOM or the OpenPairing engine. The latter
+sandbox task is disabled.
