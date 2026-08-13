@@ -9,9 +9,14 @@ and corpus identity. Parser/round-trip coverage is not pairing verification.
 
 As of 2026-08-13, 69,998 of the historical 122,008 decodable tournaments are
 closed: 609,874/609,874 attempted rounds are exact, with zero colour variants,
-pairing deviations, no-solutions or resource limits. p50 is paused fail-closed
-after an early 20-shard Gacrux diagnostic proved 14/14 candidate deviations
-inferior to the checker optimum. p80, p150 and historical misc remain open.
+pairing deviations, no-solutions or resource limits. An early p50 run was
+stopped after 14/14 candidate deviations proved inferior. That diagnostic was
+then invalidated as a product verdict: the replay aged float history by stored
+participations rather than tournament-round identity. The isolated RC6 fix
+makes all 20 affected file/round tuples exact and reconfirms the small-field
+gate at 500/500. A fresh p50 replay is active under the corrected semantic
+identity and per-shard fail-closed Gacrux watcher. p80, p150 and historical
+misc remain open.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
 
@@ -25,22 +30,28 @@ baseline, not a completed p80 measurement. Evidence is
 `evidence/campaign-eta-p50-p80-20w-20260813.json` and
 `evidence/p50-partial-20-progress-20260813.json`.
 
-The same 20-shard snapshot found 14 candidate pairing deviations and zero
-no-solutions. Gacrux classified all 14 as `inferior-to-checker-optimum`; their
-first differences are HE2 (9), HO1 (3) and HO5 (2). This is a blocking early
-disproof for the attested p50 code, not a completed-partition gate. The
-orchestrator was stopped without disabling it or deleting inputs/reports; the
-p300/p600 capacity pilots remain active. Evidence is
+The historical 20-shard snapshot found 14 candidate pairing deviations and
+zero no-solutions. Gacrux classified all 14 as
+`inferior-to-checker-optimum`; their first differences were HE2 (9), HO1 (3)
+and HO5 (2). This remains a valid disproof of the old replay semantics, not of
+RC6. A narrow remainder-pair-count experiment changed 0/14 and was rejected;
+the round-indexed float fix changed all 14. Its three round-filter reports are
+`evidence/p50-float-age-round-29.json` through
+`evidence/p50-float-age-round-31.json`. The p300/p600 capacity pilots remain
+independent. Historical evidence is
 `evidence/p50-partial-20-gacrux-summary-20260813.json` and
 `evidence/p50-partial-20-gacrux-diagnostic-20260813.json`.
 
 Official replay identity for the active queue:
 
-- Git commit: `c48fd0529fd7d21bec830bebb6579e4506934761`
-- source tree SHA-256: `fb06fa59b66d4eba8e6e41b97ba42600e29c99075c057153b970f9eca2fd9ba3`
+- Git campaign-tool commit: `dcf92df7e7e8341c167c00d1d46ee0d25069bd86`
+- source tree SHA-256: `4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74`
 - harness SHA-256: `f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093`
+- float semantics: `fide-dutch-float/3-round-indexed`
 - arithmetic: GMP; OPcache CLI and JIT enabled; 20 workers
 - persistent root: `/srv/openpairing-validation`
+- shard acceptance: report plus Gacrux classification promoted atomically;
+  persistent stop on the first confirmed inferior or incomplete verdict
 
 ## Historical denominator: 122,008
 
@@ -50,7 +61,7 @@ Official replay identity for the active queue:
 | p9 | 10,000 | 9,999 | 9,999 | 69,922 / 69,922 | closed; one corrupt input | `evidence/pairing-corpus-p9-full-14539a6.json` |
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
-| p50 | 30,000 | 1,580 diagnostic | pending | 40,304 sampled; 14 inferior deviations | paused; correction required | partial evidence linked above |
+| p50 | 30,000 | pending fresh replay | pending | old 40,304-round diagnostic invalidated; 20/20 affected tuples exact after fix | active under RC6 | partial and correction evidence linked above |
 | p80 | 20,000 | pending | pending | pending | queued | aggregate pending |
 | p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |

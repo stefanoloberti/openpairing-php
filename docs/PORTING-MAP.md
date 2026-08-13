@@ -57,3 +57,33 @@ defined dense sequence of the actual remainder residents. Vector array offsets
 are allocation indices derived from those BSNs; they never renumber the
 normative bracket sequence in place. Commit `326212f` removed the earlier
 destructive resequencing that violated this distinction.
+
+## Dutch remainder/exchange map
+
+This table maps the structural exchange section of BBP `dutch.cpp`; it is not
+an assertion that output agreement alone proves line-for-line mechanism
+parity. The p50 HE2/HO1/HO5 cluster initially attributed to this section was
+instead caused upstream by participation-indexed float history. The isolated
+round-indexed fix closed all 14 cases without the experimental exchange patch.
+The map is retained because larger strata may still exercise distinctions not
+covered by the current gates.
+
+| BBP loop/concept | Inputs and value domain | Required effect | PHP point/status |
+|---|---|---|---|
+| `edgeWeightComputer` (around lines 1070-1110) | Base edge weight; dense remainder index `0..r-1`; `remainderPairs` `0..floor(r/2)` | Append unsigned fields that first minimize exchanged-player count, then exchanged BSN difference; never alter higher Dutch QC fields | `DutchQualityModel`/lexicographic encoder provide the semantic weight base; a dedicated exchange component remains the intended home for exact structural parity |
+| Stable HE matching and `matched[]` (1110-1275) | Whole persistent matching; MDP membership bit per player | Select which MDPs are matched in this bracket, then freeze their opponents one at a time while retaining suffix completability | `selectMdpIds()` plus `HO-mdp` rematch/freeze loop; implemented and covered by freeze-event and small-field gates |
+| Build `remainder` and `remainderPairs` (1282-1314) | Current-score residents left after finalized heterogeneous pairs; original/stable BSN identity | Preserve ordered remainder; derive the S1/S2 boundary from the updated stable matching, never from a stale pre-freeze count | Coordinator builds `hoBsn` from surviving residents and rematches; the rejected stale-count experiment and its 0/14 result are versioned evidence |
+| Reweight all remainder edges (1316-1341) | Every valid edge within the ordered remainder | Add exchange-count and BSN-difference ordering below the already-fixed higher criteria | Current HO rematch carries complete Dutch vectors; explicit BBP exchange-field parity is mapped, not claimed by the 14-case correction |
+| Compute `exchangeCount` (1343-1355) | Stable matching relative to the S1/S2 boundary | Count first-group players not paired across the boundary; range `0..remainderPairs` | Must be computed from the current post-freeze optimum in the future dedicated component |
+| Select lower S1 players (1357-1424) | Reverse S1 order; remaining exchange count | Test/finalize the lowest eligible S1 identities without losing a complete optimal suffix | No separate PHP component yet; current global rematch/freeze supplies completability but not claimed loop parity |
+| Select higher S2 players (1427-1512) | Forward S2 order; remaining exchange count greater than one | Test/finalize the highest eligible S2 identities with BBP restoration rules for temporary weights | No separate PHP component yet; future port must expose temporary versus frozen constraints explicitly |
+| Finalize exchanged identities (1514-1546) | Stable matching plus selected exchange membership | Permanently remove incompatible intra-group alternatives and clear temporary selection bits | Persistent graph supports edge freezing/reweighting; exact exchange-membership operation remains to be isolated and differentially tested |
+| Choose opponents and freeze (1549 onward) | Final S1 membership; reverse opponent order; valid base edges | Select opponents deterministically, freeze each pair, then validate the remaining graph before advancing | `HO-remainder` sequential rematch/freeze is implemented; a future exchange component would feed its ordered membership/constraints |
+| Validity lookahead (around 1606) | Residual validity graph after each candidate finalization | Reject any selection that prevents completion of the suffix | `PersistentWeightedMatchingComputer` plus rematch status; sequential freeze/reweight properties are checked against fresh Blossom and the exhaustive oracle |
+
+The planned component contract is therefore: ordered remainder, stable
+matching, immutable normative BSNs and valid-edge set in; finalized S1/S2
+membership plus opponent-order constraints out. It must not own float-history
+classification, score-group construction or the Dutch QC vector: those are
+upstream inputs, and conflating them is precisely what made the old p50
+diagnosis misleading.
