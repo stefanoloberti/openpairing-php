@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0-rc5 - 2026-08-13
+
+- correct the CLI manual for supported TRF `250`/legacy `XXA` import;
+- document the persistent, reboot-resumable p30/p50/p80/acceleration replay
+  queue and its fail-closed post-run Gacrux classification;
+- no runtime algorithm, format behavior or public API changed from rc4.
+
 ## 0.9.0-rc4 - 2026-08-13
 
 - retire stale present-tense statements in the acceleration and persistent

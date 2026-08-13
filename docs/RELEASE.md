@@ -1,12 +1,12 @@
-# Release 0.9.0-rc4
+# Release 0.9.0-rc5
 
 ## Artifacts
 
 The release process produces two archives from one committed tree:
 
-- `openpairing-php-0.9.0-rc4-source.zip`: source, tests, development tools and
+- `openpairing-php-0.9.0-rc5-source.zip`: source, tests, development tools and
   Composer lock file; run `composer install` before use;
-- `openpairing-php-0.9.0-rc4-runtime.zip`: source plus optimized production
+- `openpairing-php-0.9.0-rc5-runtime.zip`: source plus optimized production
   Composer autoload files, ready for the CLI or library.
 
 Every archive is accompanied by a `.sha256` file. The runtime archive contains
@@ -44,7 +44,7 @@ php bin/openpairing.php --standings tournament.trf
 ## Release status
 
 This is a release candidate, not a FIDE certification. The runtime algorithms
-are unchanged from rc3. The public Dutch path
+are unchanged from rc4. The public Dutch path
 has exact attested reference gates at 7, 30, 50 and 80 players. The complete
 122,008-tournament historical pairing campaign is still running; the
 4,096-player/256-round format guard-rail and team pairing/tie-break functions
