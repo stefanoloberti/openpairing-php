@@ -83,11 +83,16 @@ SHA-256 is
 `d1c214a717f3a42c96be4327230563146ec732320ee82cd8b4be5deef371bdf8`;
 runtime SHA-256 is
 `1fdb1a800c333806c85717b049c42067013d940a73bcf1099bd3c470173d19b6`.
-Its local rapid gate and separate stress gate passed; the latter executed 5
-tests and 31,003 assertions in 403.036 seconds with the expected Windows-only
-GMP skip. RC5 is not promoted to staging until its complete release gate and
-deployment evidence are closed; no further RC number is allocated merely for
-documentation or corpus progress.
+Its local rapid, stress and oracle gates passed; stress executed 5 tests and
+31,003 assertions in 403.036 seconds with the expected Windows-only GMP skip,
+and the oracle group executed 11 tests/55 assertions. RC5 was then deployed
+atomically to
+`production-current-20260813-openpairing-59e8924`: its PHP 8.3.6 pre-switch
+gate passed 228 tests/33,056 assertions, PHPStan, lint and CLI smoke. HTTP, the
+download index, all historical runtime links and the served RC5 runtime hash
+were verified after the switch. Versioned deployment evidence is
+`docs/evidence/release-rc5-staging-59e8924.json`. No further RC number is
+allocated merely for documentation or corpus progress.
 
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
