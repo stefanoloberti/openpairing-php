@@ -53,11 +53,11 @@ try {
         }
 
         $runtimeComposerPath = Join-Path $stage 'composer.json'
-        $runtimeComposer = Get-Content -Raw -LiteralPath $runtimeComposerPath | ConvertFrom-Json -AsHashtable
+        $runtimeComposer = Get-Content -Raw -LiteralPath $runtimeComposerPath | ConvertFrom-Json
         foreach ($developmentKey in @('require-dev', 'autoload-dev', 'scripts')) {
-            $runtimeComposer.Remove($developmentKey)
+            $runtimeComposer.PSObject.Properties.Remove($developmentKey)
         }
-        $runtimeComposer['description'] = 'Deterministic, offline FIDE pairing engine for PHP (prebuilt runtime)'
+        $runtimeComposer.description = 'Deterministic, offline FIDE pairing engine for PHP (prebuilt runtime)'
         $runtimeComposer | ConvertTo-Json -Depth 16 | Set-Content -Encoding UTF8 $runtimeComposerPath
 
         $metadata = [ordered]@{
@@ -96,9 +96,9 @@ try {
                 throw "Runtime contains forbidden development path: $forbidden"
             }
         }
-        $verifiedComposer = Get-Content -Raw -LiteralPath (Join-Path $runtimeRoot 'composer.json') | ConvertFrom-Json -AsHashtable
+        $verifiedComposer = Get-Content -Raw -LiteralPath (Join-Path $runtimeRoot 'composer.json') | ConvertFrom-Json
         foreach ($developmentKey in @('require-dev', 'autoload-dev', 'scripts')) {
-            if ($verifiedComposer.ContainsKey($developmentKey)) {
+            if ($verifiedComposer.PSObject.Properties.Name -contains $developmentKey) {
                 throw "Runtime composer.json retains development key: $developmentKey"
             }
         }
