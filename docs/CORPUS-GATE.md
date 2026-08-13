@@ -9,17 +9,30 @@ and corpus identity. Parser/round-trip coverage is not pairing verification.
 
 As of 2026-08-13, 69,998 of the historical 122,008 decodable tournaments are
 closed: 609,874/609,874 attempted rounds are exact, with zero colour variants,
-pairing deviations, no-solutions or resource limits. p50 is running with 20
-workers. p80, p150 and historical misc remain open. Acceleration and the newly
-accepted >256-player scope are tracked separately so they cannot silently
-change the historical denominator.
+pairing deviations, no-solutions or resource limits. p50 is paused fail-closed
+after an early 20-shard Gacrux diagnostic proved 14/14 candidate deviations
+inferior to the checker optimum. p80, p150 and historical misc remain open.
+Acceleration and the newly accepted >256-player scope are tracked separately
+so they cannot silently change the historical denominator.
 
-The first three completed p50 shards provide a measured 20-worker throughput
-sample of 237 tournaments: 83.677 seconds per tournament under contention.
-This projects p50 at 34.87 hours and p80 at 97.75 hours. The p80 value is a
-projection scaled from its attested ten-tournament baseline, not a completed
-p80 measurement. Evidence is
-`evidence/campaign-eta-p50-p80-20w-20260813.json`.
+The first three completed p50 shards provide the official measured 20-worker
+throughput sample of 237 tournaments: 83.677 seconds per tournament under
+contention. It projects p50 at 34.87 hours and p80 at 97.75 hours. A later
+timing-only snapshot of 20 completed shards, 1,580 tournaments and 40,304
+rounds projects p50 at 35.47 hours, confirming that the estimate is stable.
+The p80 value remains a projection scaled from its attested ten-tournament
+baseline, not a completed p80 measurement. Evidence is
+`evidence/campaign-eta-p50-p80-20w-20260813.json` and
+`evidence/p50-partial-20-progress-20260813.json`.
+
+The same 20-shard snapshot found 14 candidate pairing deviations and zero
+no-solutions. Gacrux classified all 14 as `inferior-to-checker-optimum`; their
+first differences are HE2 (9), HO1 (3) and HO5 (2). This is a blocking early
+disproof for the attested p50 code, not a completed-partition gate. The
+orchestrator was stopped without disabling it or deleting inputs/reports; the
+p300/p600 capacity pilots remain active. Evidence is
+`evidence/p50-partial-20-gacrux-summary-20260813.json` and
+`evidence/p50-partial-20-gacrux-diagnostic-20260813.json`.
 
 Official replay identity for the active queue:
 
@@ -37,7 +50,7 @@ Official replay identity for the active queue:
 | p9 | 10,000 | 9,999 | 9,999 | 69,922 / 69,922 | closed; one corrupt input | `evidence/pairing-corpus-p9-full-14539a6.json` |
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
-| p50 | 30,000 | pending | pending | pending | running | aggregate pending |
+| p50 | 30,000 | 1,580 diagnostic | pending | 40,304 sampled; 14 inferior deviations | paused; correction required | partial evidence linked above |
 | p80 | 20,000 | pending | pending | pending | queued | aggregate pending |
 | p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |
@@ -102,7 +115,9 @@ closed, the only valid corpus claim is the explicitly stated closed subtotal.
 
 - Windows legacy scheduled-task inventory:
   `evidence/task-scheduler-backup-20260813/` (pre/post inventories, 21 XML
-  rollback definitions, five authorized 0.45.5 tasks disabled, none deleted).
+  rollback definitions, eleven authorized tasks disabled across two phases,
+  none deleted; nine triggerless PTC/PublicGate definitions retained pending a
+  separate owner decision).
 - WSL keepalive and fail-closed supervisor operation: `TOOLCHAIN.md`.
 - Runtime verification method and historical epochs:
   `HISTORICAL-PAIRING-VERIFICATION.md` and `ORACLE-FIRST-METHOD.md`.

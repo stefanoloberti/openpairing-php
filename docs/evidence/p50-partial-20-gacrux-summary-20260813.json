@@ -1,0 +1,24 @@
+{
+    "schema": "openpairing.gacrux-partial-progress/1",
+    "generatedAt": "2026-08-13T08:46:58+00:00",
+    "status": "partial-not-a-corpus-gate",
+    "completedShards": 20,
+    "cases": 14,
+    "counts": {
+        "inferior-to-checker-optimum": 14
+    },
+    "reportManifestSha256": "998518b4062055791f9e51200ff9e3c4752e08dadc54a882956759ec9149ba36",
+    "classificationFiles": {
+        "s001.json": "bbb6c88028b2049ce9d26b7ecd4d530fdc101130a744fb53c911f3ee32179fd4",
+        "s005.json": "5b57b66d77e4585b88951bc0e5154a435d70f17876359bb6899a3c7efac01e89",
+        "s006.json": "1fc04417ee24663c6e9eab2812e07ae2b7b17f8f2a1106697ceaa55d8aedd668",
+        "s008.json": "097baa1fc68b9ff798c32ce57cb1ab164d2497673c268474bba0f01fa972679c",
+        "s011.json": "bb42d421666894276fd6eac2b8d352cd1b225908745eff38dba94c07d9697a75",
+        "s012.json": "9c312ea292f2fb67bb44c1051234765e13933ca16c673c699509d4ff5464c14a",
+        "s014.json": "293ca905c938f1c463f8e620bce448ad32284c0d704e57428ce2b17270be06bd",
+        "s017.json": "10f81e13e90ad5daa6ad5da88cc2a737dfec5ec215a25c2dfd9efac6c5260647",
+        "s018.json": "cced16018fa2fd1655116cc2432dcc982c4971b28052ad23707f2600523a5915",
+        "s019.json": "507770551e2e82d623c819f4a103974a09d237cdd32cdf1e6b6420bc8e4a4d6f"
+    },
+    "caveat": "Diagnostic early classification only; the complete p50 partition and fail-closed official classifier define the gate."
+}

@@ -1,0 +1,350 @@
+{
+    "schema": "openpairing.gacrux-partial-diagnostic/1",
+    "generatedAt": "2026-08-13T08:51:21+00:00",
+    "status": "blocking-partial-result-not-a-corpus-gate",
+    "sourceSummarySha256": "9db6cab490be75d68a7ed1a2c7fbb43c48b3cba4b1859a7f20ec3169b3e58032",
+    "cases": 14,
+    "categories": {
+        "inferior-to-checker-optimum": 14
+    },
+    "firstDifferenceCriteria": {
+        "HE2": 9,
+        "HO1": 3,
+        "HO5": 2
+    },
+    "firstDifferenceBracketIndexes": {
+        "3": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 3,
+        "9": 4,
+        "10": 3
+    },
+    "results": [
+        {
+            "file": "t_n31_p50_d5_s50--T7265.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 8,
+                "scorelevel": 11,
+                "criterion": "HE2",
+                "candidate": [
+                    5,
+                    4,
+                    3,
+                    1,
+                    2,
+                    6
+                ],
+                "best": [
+                    2,
+                    5,
+                    3,
+                    1,
+                    6,
+                    4
+                ]
+            },
+            "classificationFile": "s001.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8421.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 5,
+                "scorelevel": 14,
+                "criterion": "HO1",
+                "candidate": 1,
+                "best": 0
+            },
+            "classificationFile": "s005.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0742.trf",
+            "round": 29,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 6,
+                "scorelevel": 13,
+                "criterion": "HE2",
+                "candidate": [
+                    2,
+                    1,
+                    0,
+                    0,
+                    4,
+                    0,
+                    0
+                ],
+                "best": [
+                    2,
+                    1,
+                    0,
+                    4,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            "classificationFile": "s006.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T0744.trf",
+            "round": 30,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 10,
+                "scorelevel": 7,
+                "criterion": "HE2",
+                "candidate": [
+                    2
+                ],
+                "best": [
+                    1
+                ]
+            },
+            "classificationFile": "s008.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7275.trf",
+            "round": 29,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 8,
+                "scorelevel": 7,
+                "criterion": "HE2",
+                "candidate": [
+                    3,
+                    5,
+                    4,
+                    6
+                ],
+                "best": [
+                    2,
+                    1,
+                    4,
+                    5
+                ]
+            },
+            "classificationFile": "s011.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T9964.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 10,
+                "scorelevel": 8,
+                "criterion": "HO1",
+                "candidate": 2,
+                "best": 1
+            },
+            "classificationFile": "s012.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T4590.trf",
+            "round": 30,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 9,
+                "scorelevel": 11,
+                "criterion": "HE2",
+                "candidate": [
+                    6,
+                    3,
+                    5,
+                    2,
+                    4,
+                    0,
+                    7,
+                    0,
+                    0
+                ],
+                "best": [
+                    6,
+                    3,
+                    4,
+                    5,
+                    7,
+                    2,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            "classificationFile": "s014.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T4974.trf",
+            "round": 30,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 3,
+                "scorelevel": 12,
+                "criterion": "HE2",
+                "candidate": [
+                    0,
+                    0,
+                    1,
+                    3,
+                    0,
+                    0,
+                    0
+                ],
+                "best": [
+                    0,
+                    0,
+                    1,
+                    2,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            "classificationFile": "s014.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T1905.trf",
+            "round": 29,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 7,
+                "scorelevel": 9,
+                "criterion": "HE2",
+                "candidate": [
+                    3,
+                    5
+                ],
+                "best": [
+                    2,
+                    3
+                ]
+            },
+            "classificationFile": "s017.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8049.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 9,
+                "scorelevel": 9,
+                "criterion": "HO1",
+                "candidate": 1,
+                "best": 0
+            },
+            "classificationFile": "s017.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T6130.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 9,
+                "scorelevel": 10,
+                "criterion": "HE2",
+                "candidate": [
+                    3,
+                    7,
+                    6,
+                    1,
+                    4
+                ],
+                "best": [
+                    2,
+                    5,
+                    3,
+                    1,
+                    7
+                ]
+            },
+            "classificationFile": "s018.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T7666.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 10,
+                "scorelevel": 6,
+                "criterion": "HE2",
+                "candidate": [
+                    2,
+                    0,
+                    0,
+                    4,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                ],
+                "best": [
+                    2,
+                    0,
+                    0,
+                    4,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            "classificationFile": "s018.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T3059.trf",
+            "round": 31,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 8,
+                "scorelevel": 9,
+                "criterion": "HO5",
+                "candidate": [
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "best": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            "classificationFile": "s019.json"
+        },
+        {
+            "file": "t_n31_p50_d5_s50--T8819.trf",
+            "round": 30,
+            "category": "inferior-to-checker-optimum",
+            "firstDifference": {
+                "bracketIndex": 9,
+                "scorelevel": 9,
+                "criterion": "HO5",
+                "candidate": [
+                    4,
+                    0,
+                    1,
+                    0
+                ],
+                "best": [
+                    1,
+                    0,
+                    1,
+                    0
+                ]
+            },
+            "classificationFile": "s019.json"
+        }
+    ],
+    "decision": "Pause p50 before spending the projected 35 hours; reduce and correct these proven inferior pairings, then restart from preserved shard inputs.",
+    "caveat": "The official p50 corpus gate remains open. This early snapshot is sufficient to disprove a zero-inferiority outcome for the attested code, not to characterize the complete partition."
+}
