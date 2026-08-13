@@ -4,6 +4,9 @@
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
+- Reconfirmed after the round-indexed float correction: 500/500 exact under
+  RC6 with semantic identity `fide-dutch-float/3-round-indexed`; evidence is
+  `docs/evidence/pairing-rc6-n7-round-indexed.json`.
 - Closed: direct-reference samples through the public engine at 30, 50 and 80
   players: respectively 110/110, 150/150 and 150/150 exact rounds, with zero
   no-solutions, colour variants and deviations.
