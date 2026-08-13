@@ -117,9 +117,15 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Runtime composer.json validation failed.' }
         & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') --help | Out-Null
         if ($LASTEXITCODE -ne 0) { throw 'Runtime CLI help smoke test failed.' }
-        $smoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') (Join-Path $repository 'tests\Fixtures\initial-3.json')
+        $smoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') (Join-Path $runtimeRoot 'examples\pairing-round-1.json')
         if ($LASTEXITCODE -ne 0) { throw 'Runtime pairing smoke test failed.' }
         $smoke | ConvertFrom-Json | Out-Null
+        $standingsSmoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') --standings '--tie-breaks=DE/P,BH/C1/P,SB/C1' (Join-Path $runtimeRoot 'examples\standings-round-2.json')
+        if ($LASTEXITCODE -ne 0) { throw 'Runtime standings smoke test failed.' }
+        $standingsResult = $standingsSmoke | ConvertFrom-Json
+        if ($standingsResult.status -ne 'ok' -or @($standingsResult.standings).Count -ne 4) {
+            throw 'Runtime standings smoke output is incomplete.'
+        }
 
         $artifacts = foreach ($archive in @($sourceArchive, $runtimeArchive)) {
             $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash.ToLowerInvariant()

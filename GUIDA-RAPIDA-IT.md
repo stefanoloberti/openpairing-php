@@ -27,6 +27,8 @@ Con il formato JSON canonico:
 php bin/openpairing.php stato.json > abbinamento.json
 ```
 
+Un input pronto è incluso in `examples/pairing-round-1.json`.
+
 L'output include tavoli, eventuale PAB, float, diagnostica e risultato della
 validazione indipendente. Exit code `0` indica un risultato completo e valido.
 
@@ -43,6 +45,8 @@ Oppure indicarli esplicitamente:
 ```console
 php bin/openpairing.php --standings --tie-breaks=DE/P,BH/C1/P,SB/C1 torneo.trf > classifica.json
 ```
+
+Si può provare subito con `examples/standings-round-2.json`.
 
 Sono implementati tutti i 17 metodi individuali obbligatori FIDE 2026, più
 `STD`, `TPN`, `RTNG` e la chiave `PTS`, con le varianti applicabili descritte in
