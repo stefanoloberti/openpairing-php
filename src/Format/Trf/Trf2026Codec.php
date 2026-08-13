@@ -20,6 +20,7 @@ final class Trf2026Codec
     private const SUPPORTED_RECORDS = [
         '001', '012', '022', '032', '042', '052', '062', '072', '092', '102', '112', '122', '132',
         '142', '152', '162', '182', '192', '202', '212', '222',
+        '250',
     ];
 
     public function decode(string $trf): TournamentState
@@ -128,8 +129,9 @@ final class Trf2026Codec
         $players = [];
         $pairingNumbers = [];
         $maxSeenRound = 0;
+        $accelerationSchedules = $this->parseAccelerationRecords($records['250'] ?? [], $numberOfRounds);
         foreach ($records['001'] as $line) {
-            [$player, $seenRound] = $this->parsePlayer($line, $numberOfRounds);
+            [$player, $seenRound] = $this->parsePlayer($line, $numberOfRounds, $accelerationSchedules);
             if (isset($pairingNumbers[$player->pairingNumber])) {
                 throw new InvalidTournamentState('trf.player_duplicate', sprintf('Duplicate TRF starting rank %d.', $player->pairingNumber));
             }
@@ -137,8 +139,17 @@ final class Trf2026Codec
             $players[] = $player;
             $maxSeenRound = max($maxSeenRound, $seenRound);
         }
+        $players = array_map(
+            static fn (Player $player): Player => $player->withAccelerationForRound($maxSeenRound + 1),
+            $players,
+        );
 
         $known = array_fill_keys(array_map(static fn (Player $player): int => $player->pairingNumber, $players), true);
+        foreach (array_keys($accelerationSchedules) as $acceleratedPlayer) {
+            if (!isset($known[$acceleratedPlayer])) {
+                throw new InvalidTournamentState('trf.acceleration_player', sprintf('TRF 250 references unknown competitor %d.', $acceleratedPlayer));
+            }
+        }
         foreach ($players as $player) {
             foreach ($player->results as $result) {
                 if ($result['opponentId'] !== null && !isset($known[$result['opponentId']])) {
@@ -252,6 +263,10 @@ final class Trf2026Codec
         }
         $this->appendOptionalRecord($lines, '222', $state->encodedTimeControl);
 
+        foreach ($this->writeAccelerationRecords($state->players) as $record) {
+            $lines[] = $record;
+        }
+
         $players = $state->players;
         usort($players, static fn (Player $left, Player $right): int => $left->pairingNumber <=> $right->pairingNumber);
         $this->validateResults($players, [
@@ -309,8 +324,11 @@ final class Trf2026Codec
         ];
     }
 
-    /** @return array{Player, int} */
-    private function parsePlayer(string $line, int $numberOfRounds): array
+    /**
+     * @param array<int, list<Score|null>> $accelerationSchedules
+     * @return array{Player, int}
+     */
+    private function parsePlayer(string $line, int $numberOfRounds, array $accelerationSchedules): array
     {
         if (strlen($line) < 89) {
             throw new InvalidTournamentState('trf.player_short', 'TRF 001 record is shorter than 89 columns.');
@@ -386,6 +404,8 @@ final class Trf2026Codec
             $maxSeenRound = $round;
         }
 
+        $schedule = $accelerationSchedules[$tpn] ?? [];
+
         return [new Player(
             id: $tpn,
             pairingNumber: $tpn,
@@ -407,7 +427,123 @@ final class Trf2026Codec
             fideId: $fideId,
             birthDate: $birth,
             rank: $rank,
+            accelerationSchedule: $schedule,
         ), $maxSeenRound];
+    }
+
+    /**
+     * @param list<string> $lines
+     * @return array<int, list<Score|null>>
+     */
+    private function parseAccelerationRecords(array $lines, int $numberOfRounds): array
+    {
+        $schedules = [];
+        foreach ($lines as $lineNumber => $line) {
+            if (strlen($line) < 31) {
+                throw new InvalidTournamentState('trf.acceleration_short', sprintf('TRF 250 record %d is shorter than 31 columns.', $lineNumber + 1));
+            }
+            try {
+                $gamePoints = Score::fromDecimal(substr($line, 9, 4));
+            } catch (\InvalidArgumentException $exception) {
+                throw new InvalidTournamentState('trf.acceleration_score', sprintf('TRF 250 record %d has invalid game points: %s', $lineNumber + 1, $exception->getMessage()));
+            }
+            if ($gamePoints->compare(Score::zero()) < 0) {
+                throw new InvalidTournamentState('trf.acceleration_score', sprintf('TRF 250 record %d has negative game points.', $lineNumber + 1));
+            }
+            $firstRound = $this->positiveInteger(substr($line, 14, 3), '250 first round');
+            $lastRound = $this->positiveInteger(substr($line, 18, 3), '250 last round');
+            $firstPlayer = $this->positiveInteger(substr($line, 22, 4), '250 first competitor');
+            $lastPlayer = $this->positiveInteger(substr($line, 27, 4), '250 last competitor');
+            if ($firstRound > $lastRound || $lastRound > $numberOfRounds) {
+                throw new InvalidTournamentState('trf.acceleration_round', sprintf('TRF 250 record %d has an invalid round range.', $lineNumber + 1));
+            }
+            if ($firstPlayer > $lastPlayer || $lastPlayer > 256) {
+                throw new InvalidTournamentState('trf.acceleration_player', sprintf('TRF 250 record %d has an invalid competitor range.', $lineNumber + 1));
+            }
+            for ($player = $firstPlayer; $player <= $lastPlayer; ++$player) {
+                $schedules[$player] ??= [];
+                for ($round = $firstRound; $round <= $lastRound; ++$round) {
+                    $index = $round - 1;
+                    if (isset($schedules[$player][$index]) && $schedules[$player][$index]->compare($gamePoints) !== 0) {
+                        throw new InvalidTournamentState('trf.acceleration_overlap', sprintf('TRF 250 assigns conflicting virtual points to player %d in round %d.', $player, $round));
+                    }
+                    $schedules[$player][$index] = $gamePoints;
+                }
+                if ($schedules[$player] !== []) {
+                    $lastIndex = max(array_keys($schedules[$player]));
+                    for ($index = 0; $index <= $lastIndex; ++$index) {
+                        $schedules[$player][$index] ??= null;
+                    }
+                    ksort($schedules[$player]);
+                    /** @var list<Score|null> $denseSchedule */
+                    $denseSchedule = array_values($schedules[$player]);
+                    $schedules[$player] = $denseSchedule;
+                }
+            }
+        }
+
+        /** @var array<int, list<Score|null>> $result */
+        $result = [];
+        foreach ($schedules as $player => $schedule) {
+            $result[$player] = array_values($schedule);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param list<Player> $players
+     * @return list<string>
+     */
+    private function writeAccelerationRecords(array $players): array
+    {
+        usort($players, static fn (Player $left, Player $right): int => $left->pairingNumber <=> $right->pairingNumber);
+        $segments = [];
+        foreach ($players as $player) {
+            $start = 0;
+            while ($start < count($player->accelerationSchedule)) {
+                $score = $player->accelerationSchedule[$start];
+                if ($score === null) {
+                    ++$start;
+                    continue;
+                }
+                $end = $start;
+                while ($end + 1 < count($player->accelerationSchedule)
+                    && $player->accelerationSchedule[$end + 1] !== null
+                    && $player->accelerationSchedule[$end + 1]->compare($score) === 0) {
+                    ++$end;
+                }
+                $key = ($start + 1).':'.($end + 1).':'.$score->units.':'.$score->scale;
+                $segments[$key]['score'] = $score;
+                $segments[$key]['firstRound'] = $start + 1;
+                $segments[$key]['lastRound'] = $end + 1;
+                $segments[$key]['players'][] = $player->pairingNumber;
+                $start = $end + 1;
+            }
+        }
+
+        $records = [];
+        foreach ($segments as $segment) {
+            sort($segment['players']);
+            $rangeStart = $segment['players'][0];
+            $rangeEnd = $rangeStart;
+            foreach (array_slice($segment['players'], 1) as $pairingNumber) {
+                if ($pairingNumber === $rangeEnd + 1) {
+                    $rangeEnd = $pairingNumber;
+                    continue;
+                }
+                $records[] = $this->formatAccelerationRecord($segment['score'], $segment['firstRound'], $segment['lastRound'], $rangeStart, $rangeEnd);
+                $rangeStart = $rangeEnd = $pairingNumber;
+            }
+            $records[] = $this->formatAccelerationRecord($segment['score'], $segment['firstRound'], $segment['lastRound'], $rangeStart, $rangeEnd);
+        }
+
+        return $records;
+    }
+
+    private function formatAccelerationRecord(Score $score, int $firstRound, int $lastRound, int $firstPlayer, int $lastPlayer): string
+    {
+        return sprintf('250 %4s %4s %3d %3d %4d %4d', '', $score->toDecimal(1), $firstRound, $lastRound, $firstPlayer, $lastPlayer);
     }
 
     /** @param array<int, int> $idToPairingNumber */

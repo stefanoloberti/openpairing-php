@@ -155,6 +155,7 @@ function historicalState(TournamentState $full, int $round, DutchRules $rules): 
             $scores[$player->id][$round], $opponents, $colours, $previous,
             $receivedPab, $floats, $player->acceleration, $player->sex,
             $player->federation, $player->fideId, $player->birthDate, $player->rank,
+            $player->accelerationSchedule,
         );
     }
 

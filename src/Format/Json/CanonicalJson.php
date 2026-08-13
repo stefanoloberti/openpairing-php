@@ -169,7 +169,7 @@ final class CanonicalJson
             'id', 'pairingNumber', 'name', 'rating', 'title', 'team', 'club', 'active',
             'score', 'opponentHistory', 'colourHistory', 'results',
             'receivedPairingAllocatedBye', 'floatHistory', 'acceleration', 'sex',
-            'federation', 'fideId', 'birthDate', 'rank',
+            'federation', 'fideId', 'birthDate', 'rank', 'accelerationSchedule',
         ], "players[$index]");
         $this->requireKeys($data, [
             'id', 'pairingNumber', 'name', 'rating', 'title', 'team', 'club', 'active',
@@ -227,6 +227,18 @@ final class CanonicalJson
                 "players[$index].acceleration",
             );
         }
+        $accelerationSchedule = [];
+        if (isset($data['accelerationSchedule'])) {
+            $rawSchedule = $data['accelerationSchedule'];
+            if (!is_array($rawSchedule) || !array_is_list($rawSchedule) || count($rawSchedule) > 256) {
+                throw new InvalidTournamentState('acceleration.schedule_type', "players[$index].accelerationSchedule must be a list of at most 256 entries.");
+            }
+            foreach ($rawSchedule as $roundIndex => $rawVirtualPoints) {
+                $accelerationSchedule[] = $rawVirtualPoints === null
+                    ? null
+                    : $this->score($this->objectValue($rawVirtualPoints, "players[$index].accelerationSchedule[$roundIndex]"), "players[$index].accelerationSchedule[$roundIndex]");
+            }
+        }
 
         /** @var list<array{round: int, opponentId: int|null, colour: string|null, result: string, played: bool}> $typedResults */
         $typedResults = [];
@@ -264,6 +276,7 @@ final class CanonicalJson
             fideId: isset($data['fideId']) ? $this->integer($data, 'fideId') : 0,
             birthDate: isset($data['birthDate']) ? $this->boundedString($data, 'birthDate', 10) : '',
             rank: isset($data['rank']) ? $this->integer($data, 'rank') : 0,
+            accelerationSchedule: $accelerationSchedule,
         );
     }
 
@@ -294,6 +307,10 @@ final class CanonicalJson
             'fideId' => $player->fideId,
             'birthDate' => $player->birthDate,
             'rank' => $player->rank,
+            'accelerationSchedule' => array_map(
+                static fn (?Score $score): ?array => $score?->toArray(),
+                $player->accelerationSchedule,
+            ),
         ];
     }
 

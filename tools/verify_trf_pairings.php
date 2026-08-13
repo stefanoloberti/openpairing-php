@@ -564,12 +564,13 @@ function historicalState(TournamentState $full, int $round, array $scoresEnterin
             results: $previous,
             receivedPairingAllocatedBye: $receivedPab,
             floatHistory: $floats,
-            acceleration: $player->acceleration,
+            acceleration: $player->accelerationSchedule === [] ? $player->acceleration : $player->accelerationForRound($round),
             sex: $player->sex,
             federation: $player->federation,
             fideId: $player->fideId,
             birthDate: $player->birthDate,
             rank: $player->rank,
+            accelerationSchedule: $player->accelerationSchedule,
         );
     }
 

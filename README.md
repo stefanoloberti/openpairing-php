@@ -22,7 +22,7 @@ publishing pairings.
 - an isolated pure-PHP polynomial weighted Blossom core with arbitrary-width
   exact weights;
 - canonical JSON v1 and fail-closed TRF-2026 individual read/write for Dutch
-  and Burstein;
+  and Burstein, including round-indexed acceleration record `250`;
 - structured diagnostics, violations, quality vectors and deterministic trace;
 - machine-readable up/down float assignments validated against pairing scores;
 - independent tournament and pairing-result validation;
@@ -44,10 +44,10 @@ legacy 250,000-node/8,192-candidate guard-rail. Burstein retains bounded
 exhaustive search, so difficult Burstein brackets can still return a
 machine-readable resource-limit result without a partial pairing. Canonical
 JSON and TRF currently enforce a 256-player/256-round input safety ceiling.
-Canonical JSON supports virtual points and the engines apply them to scoregroups,
-internal order and board order; TRF
-record `250`, team/prohibited-pair records and team tie-breaks remain outside
-the documented individual product. See `docs/ACCELERATION.md`,
+Canonical JSON and TRF record `250` support round-indexed virtual points, and
+the engines apply them to scoregroups, internal order and board order. Legacy
+per-player acceleration record `XXA`, team/prohibited-pair records and team
+tie-breaks remain outside the documented individual product. See `docs/ACCELERATION.md`,
 `docs/TRF-2026.md`, `docs/TIE-BREAKS.md` and ADR 0003.
 
 ## Install and verify

@@ -177,6 +177,56 @@ final class Trf2026CodecTest extends TestCase
         self::assertSame('fide-burstein-2026', $codec->decode($trf)->pairingSystem);
     }
 
+    public function testRecord250RoundTripsAsRoundIndexedVirtualPoints(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = $codec->encode($this->roundTwoState());
+        $trf = str_replace(
+            "001    1",
+            "250  0.0  1.0   1   3    1    2\r\n250  0.0  0.5   4   6    1    2\r\n001    1",
+            $trf,
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('1.0', $decoded->players[0]->acceleration?->toDecimal(1));
+        self::assertSame(
+            ['1.0', '1.0', '1.0', '0.5', '0.5', '0.5'],
+            array_map(static fn (?Score $score): ?string => $score?->toDecimal(1), $decoded->players[0]->accelerationSchedule),
+        );
+        self::assertSame([], $decoded->players[2]->accelerationSchedule);
+
+        $normalised = $codec->encode($decoded);
+        self::assertStringContainsString("250       1.0   1   3    1    2\r\n", $normalised);
+        self::assertStringContainsString("250       0.5   4   6    1    2\r\n", $normalised);
+        $roundTrip = $codec->decode($normalised);
+        self::assertEquals($decoded->players[0]->accelerationSchedule, $roundTrip->players[0]->accelerationSchedule);
+    }
+
+    public function testRecord250RejectsConflictingOverlaps(): void
+    {
+        $trf = (new Trf2026Codec())->encode($this->roundTwoState());
+        $trf = "250  0.0  1.0   1   2    1    1\r\n250  0.0  0.5   2   3    1    1\r\n".$trf;
+
+        try {
+            (new Trf2026Codec())->decode($trf);
+            self::fail('Conflicting acceleration ranges must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_overlap', $exception->diagnosticCode);
+        }
+    }
+
+    public function testRecord250RejectsUnknownCompetitor(): void
+    {
+        $trf = "250  0.0  1.0   1   2    9    9\r\n".(new Trf2026Codec())->encode($this->roundTwoState());
+
+        try {
+            (new Trf2026Codec())->decode($trf);
+            self::fail('Acceleration for an unknown competitor must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_player', $exception->diagnosticCode);
+        }
+    }
+
     private function roundTwoState(): TournamentState
     {
         $players = [

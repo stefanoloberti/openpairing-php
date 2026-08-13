@@ -121,6 +121,7 @@ final class DeterministicTournamentSimulator
                 fideId: $player->fideId,
                 birthDate: $player->birthDate,
                 rank: $player->rank,
+                accelerationSchedule: $player->accelerationSchedule,
             );
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OpenPairing\Tests\Unit;
 
 use OpenPairing\Acceleration\BakuAcceleration;
+use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\InvalidTournamentState;
 use OpenPairing\Format\Json\CanonicalJson;
 use OpenPairing\Tests\Fixtures\TournamentFactory;
@@ -40,6 +41,30 @@ final class CanonicalJsonTest extends TestCase
         self::assertNotNull($decoded->players[0]->acceleration);
         self::assertSame(0, $decoded->players[0]->pairingScore()->compare($state->pointsForWin));
         self::assertNull($decoded->players[4]->acceleration);
+    }
+
+    public function testRoundTripPreservesRoundIndexedAccelerationSchedule(): void
+    {
+        $codec = new CanonicalJson();
+        $json = json_decode($codec->encode(TournamentFactory::initial(2)), true, 32, JSON_THROW_ON_ERROR);
+        self::assertIsArray($json);
+        self::assertArrayHasKey('players', $json);
+        self::assertIsArray($json['players']);
+        self::assertArrayHasKey(0, $json['players']);
+        self::assertIsArray($json['players'][0]);
+        $json['players'][0]['accelerationSchedule'] = [
+            ['units' => 1, 'scale' => 1],
+            null,
+            ['units' => 1, 'scale' => 2],
+        ];
+
+        $decoded = $codec->decode(json_encode($json, JSON_THROW_ON_ERROR));
+
+        self::assertSame(
+            ['1.0', null, '0.5'],
+            array_map(static fn (?Score $score): ?string => $score?->toDecimal(1), $decoded->players[0]->accelerationSchedule),
+        );
+        self::assertSame($codec->encode($decoded), $codec->encode($codec->decode($codec->encode($decoded))));
     }
 
     public function testRejectsUnknownPropertyInsteadOfSilentlyDroppingIt(): void

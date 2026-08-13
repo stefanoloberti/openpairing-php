@@ -54,6 +54,7 @@ final readonly class BakuAcceleration
                 fideId: $player->fideId,
                 birthDate: $player->birthDate,
                 rank: $player->rank,
+                accelerationSchedule: $player->accelerationSchedule,
             ),
             $state->players,
         );

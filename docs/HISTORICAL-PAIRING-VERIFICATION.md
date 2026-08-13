@@ -47,6 +47,14 @@
   known corpus file missing its required record. Evidence is
   `docs/evidence/pairing-corpus-p15-sharded-14539a6.json` with aggregate shard
   manifest `ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559`.
+- In progress: the complete 20,000-tournament 30-player partition is running in
+  14 disjoint immutable shards at commit `14539a6`. No aggregate or correctness
+  claim exists until every shard report is complete and homogeneous.
+- Laboratory only: TRF record `250` now has round-indexed decode/encode support.
+  One real 192-player accelerated case has an exact semantic round-trip and an
+  exact first-round pairing against its recorded reference (1/1, zero variants,
+  deviations and no-matching). The 1,000-tournament accelerated partition is
+  not yet an acceptance claim.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the public `DutchPairingEngine`

@@ -81,6 +81,14 @@ final class TournamentStateValidator
             if ($player->acceleration !== null && $player->acceleration->compare(Score::zero()) < 0) {
                 throw new InvalidTournamentState('acceleration.negative', sprintf('Player %d has negative virtual points.', $player->pairingNumber));
             }
+            if (count($player->accelerationSchedule) > $state->numberOfRounds) {
+                throw new InvalidTournamentState('acceleration.round_limit', sprintf('Player %d has virtual points beyond the tournament rounds.', $player->pairingNumber));
+            }
+            foreach ($player->accelerationSchedule as $roundIndex => $virtualPoints) {
+                if ($virtualPoints !== null && $virtualPoints->compare(Score::zero()) < 0) {
+                    throw new InvalidTournamentState('acceleration.negative', sprintf('Player %d has negative virtual points in round %d.', $player->pairingNumber, $roundIndex + 1));
+                }
+            }
             if (count($player->floatHistory) !== count($player->results)) {
                 throw new InvalidTournamentState('float_history.mismatch', sprintf('Player %d float history does not cover every completed result.', $player->pairingNumber));
             }

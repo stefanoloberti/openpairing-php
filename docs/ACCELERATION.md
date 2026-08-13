@@ -12,11 +12,17 @@ last member of GA in the previous round. This preserves the identity required
 by Article 1.3.2 even if its current TPN changes.
 
 Canonical `Player::score` contains standings points only. `acceleration`
-contains only the current virtual points, and `pairingScore()` returns their
+contains only the current virtual points, while `accelerationSchedule` stores
+the optional round-indexed schedule and `pairingScore()` returns the current
 exact sum. Dutch and Burstein use that sum for scoregroups, internal sorting,
 floater score comparisons, PAB order and board order. Burstein opposition
 evaluation and final-standing tie-breaks use the real score only.
 
-TRF-2026 record `250` remains outside the fail-closed TRF subset. Accelerated
-tournaments can be exchanged losslessly through canonical JSON; a TRF that
-contains `250` is rejected instead of silently losing virtual points.
+TRF-2026 record `250` is decoded into that schedule and encoded into canonical
+round/player ranges. Conflicting overlaps, unknown competitors, negative
+virtual points and ranges beyond the tournament fail closed. A real
+192-player Baku corpus case round-trips into the same two ranges and its first
+round pairs exactly against the recorded reference. That is a bounded
+functional check, not yet a claim over the full 1,000-tournament accelerated
+partition. Legacy record `XXA` remains outside the public subset and is
+rejected instead of silently losing virtual points.
