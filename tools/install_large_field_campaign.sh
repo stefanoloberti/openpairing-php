@@ -2,12 +2,13 @@
 
 set -euo pipefail
 
-name=${1:?Usage: install_large_field_campaign.sh NAME CORPUS SOURCE_TREE UPSTREAM SHARDS WORKERS}
+name=${1:?Usage: install_large_field_campaign.sh NAME SHARD_ROOT SOURCE_TREE UPSTREAM SHARDS WORKERS EXPECTED_FILES}
 shard_root=${2:?Missing shard root}
 source_tree=${3:?Missing source tree}
 upstream=${4:?Missing Gacrux checkout}
 shards=${5:?Missing shard count}
 workers=${6:?Missing worker count}
+expected_files=${7:?Missing expected file count}
 base=${OPENPAIRING_CAMPAIGN_BASE:-/srv/openpairing-validation}
 bin="$base/bin"
 campaign="$base/campaigns/$name"
@@ -17,6 +18,7 @@ runner="$bin/openpairing-campaign-$name.sh"
 case "$base" in /srv/openpairing-validation|/srv/openpairing-validation/*) ;; *) echo "Unsafe base: $base" >&2; exit 2 ;; esac
 [[ "$shards" =~ ^[1-9][0-9]*$ ]] || { echo "Invalid shard count: $shards" >&2; exit 2; }
 [[ "$workers" =~ ^[1-9][0-9]*$ ]] || { echo "Invalid worker count: $workers" >&2; exit 2; }
+[[ "$expected_files" =~ ^[1-9][0-9]*$ ]] || { echo "Invalid expected file count: $expected_files" >&2; exit 2; }
 test -d "$shard_root"
 test -x "$source_tree/tools/verify_trf_pairings.php"
 test -x "$source_tree/tools/corpus/classify_shard_fail_fast.sh"
@@ -37,6 +39,7 @@ upstream=$(printf %q "$upstream")
 campaign=$(printf %q "$campaign")
 shards=$shards
 workers=$workers
+expected_files=$expected_files
 stop_file=\"\$campaign/STOP\"
 
 test ! -e \"\$stop_file\" || { echo \"Campaign is stopped: \$stop_file\" >&2; exit 30; }
@@ -56,9 +59,15 @@ run_shard() {
     temporary_report=\$(mktemp \"\$campaign/quarantine/.\$label.report.XXXXXX\")
     cleanup_shard() { rm -f -- \"\$temporary_report\"; }
     trap cleanup_shard RETURN
-    OPENPAIRING_ARITHMETIC_BACKEND=gmp php -d opcache.enable_cli=1 -d opcache.jit=1255 \\
+    if ! OPENPAIRING_ARITHMETIC_BACKEND=gmp php -d opcache.enable_cli=1 -d opcache.jit=1255 \\
         -d opcache.jit_buffer_size=128M \"\$source_tree/tools/verify_trf_pairings.php\" \\
-        \"\$corpus\" 0 --large-field >\"\$temporary_report\"
+        \"\$corpus\" 0 --large-field >\"\$temporary_report\"; then
+        temporary_stop=\$(mktemp \"\$campaign/.stop.XXXXXX\")
+        printf 'OPENPAIRING_SHARD_STOP=FAIL reason=verifier-infrastructure-error shard=%s at=%s\\n' \\
+            \"\$label\" \"\$(date -Is)\" >\"\$temporary_stop\"
+        mv -f -- \"\$temporary_stop\" \"\$stop_file\"
+        return 33
+    fi
     \"\$source_tree/tools/corpus/classify_shard_fail_fast.sh\" \\
         \"\$temporary_report\" \"\$source_tree\" \"\$upstream\" \"\$classification\" \"\$stop_file\" \"\$corpus\" || {
             mv -f -- \"\$temporary_report\" \"\$campaign/quarantine/\$label.json\"
@@ -72,6 +81,10 @@ export -f run_shard
 export shard_root source_tree upstream campaign shards stop_file
 seq 0 \$((shards - 1)) | xargs -r -P \"\$workers\" -n 1 bash -c 'run_shard \"\$1\"' _
 test ! -e \"\$stop_file\" || exit 30
+test \"\$(find \"\$campaign/reports\" -maxdepth 1 -name 's*.json' -size +0c | wc -l)\" -eq \"\$shards\"
+php \"$(printf %q "$base/bin/aggregate_shards.php")\" \"\$campaign/reports\" \"\$shards\" \\
+    \"\$expected_files\" >\"\$campaign/aggregate.json.tmp\"
+mv -f -- \"\$campaign/aggregate.json.tmp\" \"\$campaign/aggregate.json\"
 printf 'OPENPAIRING_LARGE_FIELD_CAMPAIGN=PASS name=%s shards=%d at=%s\\n' \"\$name\" \"\$shards\" \"\$(date -Is)\"
 EOF
 

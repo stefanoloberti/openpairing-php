@@ -34,5 +34,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('quarantine/\\$label.json', $script);
         self::assertStringContainsString('mv -f -- \\"\\$temporary_report\\" \\"\\$report\\"', $script);
         self::assertStringContainsString('xargs -r -P', $script);
+        self::assertStringContainsString('verifier-infrastructure-error', $script);
+        self::assertStringContainsString('aggregate_shards.php', $script);
+        self::assertStringContainsString('aggregate.json.tmp', $script);
     }
 }
