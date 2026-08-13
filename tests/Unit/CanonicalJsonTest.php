@@ -57,6 +57,7 @@ final class CanonicalJsonTest extends TestCase
             null,
             ['units' => 1, 'scale' => 2],
         ];
+        $json['players'][0]['acceleration'] = ['units' => 1, 'scale' => 1];
 
         $decoded = $codec->decode(json_encode($json, JSON_THROW_ON_ERROR));
 
@@ -65,6 +66,24 @@ final class CanonicalJsonTest extends TestCase
             array_map(static fn (?Score $score): ?string => $score?->toDecimal(1), $decoded->players[0]->accelerationSchedule),
         );
         self::assertSame($codec->encode($decoded), $codec->encode($codec->decode($codec->encode($decoded))));
+    }
+
+    public function testRejectsCurrentAccelerationThatContradictsSchedule(): void
+    {
+        $codec = new CanonicalJson();
+        $json = json_decode($codec->encode(TournamentFactory::initial(2)), true, 32, JSON_THROW_ON_ERROR);
+        self::assertIsArray($json);
+        self::assertIsArray($json['players']);
+        self::assertIsArray($json['players'][0]);
+        $json['players'][0]['acceleration'] = ['units' => 1, 'scale' => 2];
+        $json['players'][0]['accelerationSchedule'] = [['units' => 1, 'scale' => 1]];
+
+        try {
+            $codec->decode(json_encode($json, JSON_THROW_ON_ERROR));
+            self::fail('Contradictory current and scheduled acceleration must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('acceleration.current_mismatch', $exception->diagnosticCode);
+        }
     }
 
     public function testRejectsUnknownPropertyInsteadOfSilentlyDroppingIt(): void

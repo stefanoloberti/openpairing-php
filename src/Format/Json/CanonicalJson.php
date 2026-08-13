@@ -62,9 +62,19 @@ final class CanonicalJson
             throw new InvalidTournamentState('players.limit', 'Player count or maxPlayers is outside 0..256.');
         }
 
+        $round = $this->integer($data, 'round');
         $players = [];
         foreach ($rawPlayers as $index => $rawPlayer) {
-            $players[] = $this->player($this->objectValue($rawPlayer, sprintf('players[%d]', $index)), $index);
+            $player = $this->player($this->objectValue($rawPlayer, sprintf('players[%d]', $index)), $index);
+            $scheduled = $player->accelerationForRound($round);
+            if ($player->accelerationSchedule !== []) {
+                if (($player->acceleration === null) !== ($scheduled === null)
+                    || ($player->acceleration !== null && $scheduled !== null && $player->acceleration->compare($scheduled) !== 0)) {
+                    throw new InvalidTournamentState('acceleration.current_mismatch', sprintf('Player %d current virtual points do not match round %d of the schedule.', $player->pairingNumber, $round));
+                }
+                $player = $player->withAccelerationForRound($round);
+            }
+            $players[] = $player;
         }
 
         $topColour = Colour::tryFrom($this->string($configuration, 'topColour'));
@@ -74,7 +84,7 @@ final class CanonicalJson
 
         $state = new TournamentState(
             schemaVersion: $schema,
-            round: $this->integer($data, 'round'),
+            round: $round,
             numberOfRounds: $this->integer($data, 'numberOfRounds'),
             pairingSystem: $this->string($data, 'pairingSystem'),
             topColour: $topColour,

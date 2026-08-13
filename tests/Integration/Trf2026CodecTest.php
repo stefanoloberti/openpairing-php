@@ -227,6 +227,35 @@ final class Trf2026CodecTest extends TestCase
         }
     }
 
+    public function testCurrentAccelerationWithoutScheduleWritesCurrentRound250(): void
+    {
+        $state = $this->roundTwoState();
+        $players = $state->players;
+        $source = $players[0];
+        $players[0] = new Player(
+            id: $source->id, pairingNumber: $source->pairingNumber, name: $source->name,
+            rating: $source->rating, title: $source->title, team: $source->team,
+            club: $source->club, active: $source->active, score: $source->score,
+            opponentHistory: $source->opponentHistory, colourHistory: $source->colourHistory,
+            results: $source->results, receivedPairingAllocatedBye: $source->receivedPairingAllocatedBye,
+            floatHistory: $source->floatHistory, acceleration: new Score(1, 2),
+            sex: $source->sex, federation: $source->federation, fideId: $source->fideId,
+            birthDate: $source->birthDate, rank: $source->rank,
+        );
+        $accelerated = new TournamentState(
+            schemaVersion: $state->schemaVersion, round: $state->round,
+            numberOfRounds: $state->numberOfRounds, pairingSystem: $state->pairingSystem,
+            topColour: $state->topColour, pointsForWin: $state->pointsForWin,
+            pointsForDraw: $state->pointsForDraw, maxPlayers: $state->maxPlayers,
+            players: $players, tournamentName: $state->tournamentName,
+        );
+
+        $trf = (new Trf2026Codec())->encode($accelerated);
+
+        self::assertStringContainsString("250       0.5   2   2    1    1\r\n", $trf);
+        self::assertSame('0.5', (new Trf2026Codec())->decode($trf)->players[0]->acceleration?->toDecimal(1));
+    }
+
     private function roundTwoState(): TournamentState
     {
         $players = [

@@ -263,7 +263,7 @@ final class Trf2026Codec
         }
         $this->appendOptionalRecord($lines, '222', $state->encodedTimeControl);
 
-        foreach ($this->writeAccelerationRecords($state->players) as $record) {
+        foreach ($this->writeAccelerationRecords($state->players, $state->round) as $record) {
             $lines[] = $record;
         }
 
@@ -495,22 +495,27 @@ final class Trf2026Codec
      * @param list<Player> $players
      * @return list<string>
      */
-    private function writeAccelerationRecords(array $players): array
+    private function writeAccelerationRecords(array $players, int $currentRound): array
     {
         usort($players, static fn (Player $left, Player $right): int => $left->pairingNumber <=> $right->pairingNumber);
         $segments = [];
         foreach ($players as $player) {
+            $schedule = $player->accelerationSchedule;
+            if ($schedule === [] && $player->acceleration !== null) {
+                $schedule = array_fill(0, $currentRound, null);
+                $schedule[$currentRound - 1] = $player->acceleration;
+            }
             $start = 0;
-            while ($start < count($player->accelerationSchedule)) {
-                $score = $player->accelerationSchedule[$start];
+            while ($start < count($schedule)) {
+                $score = $schedule[$start];
                 if ($score === null) {
                     ++$start;
                     continue;
                 }
                 $end = $start;
-                while ($end + 1 < count($player->accelerationSchedule)
-                    && $player->accelerationSchedule[$end + 1] !== null
-                    && $player->accelerationSchedule[$end + 1]->compare($score) === 0) {
+                while ($end + 1 < count($schedule)
+                    && $schedule[$end + 1] !== null
+                    && $schedule[$end + 1]->compare($score) === 0) {
                     ++$end;
                 }
                 $key = ($start + 1).':'.($end + 1).':'.$score->units.':'.$score->scale;
