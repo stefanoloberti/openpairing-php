@@ -61,6 +61,9 @@ HTTP and the served download hash were verified. Source SHA-256 is
 `b653e016357f64c59435f36584c0960dd147ec0138ed71004155875d72905b9b`;
 runtime SHA-256 is
 `3e3559239a517372d5a70933d4108f2a28d13b9e1f4bc8c6d378fb85c2a62ceb`.
+The separate local stress gate passed 5 tests/31,003 assertions (one GMP-only
+case skipped on Windows); the upstream oracle group passed 11 tests/55
+assertions.
 
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is

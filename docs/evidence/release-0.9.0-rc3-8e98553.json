@@ -18,6 +18,8 @@
     "twoBuildsByteIdentical": true,
     "rapidTests": 223,
     "rapidAssertions": 1048,
+    "stressTests": 5,
+    "stressAssertions": 31003,
     "oracleTests": 11,
     "oracleAssertions": 55,
     "php83RuntimeSmoke": true,
