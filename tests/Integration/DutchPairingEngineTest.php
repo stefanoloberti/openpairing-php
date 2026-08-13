@@ -123,6 +123,19 @@ final class DutchPairingEngineTest extends TestCase
         self::assertSame([[1, 5], [2, 6], [3, 7]], $pairs);
     }
 
+    public function testPublicEngineExpiresFloatsAcrossTwoSkippedTournamentRounds(): void
+    {
+        $engine = new DutchPairingEngine();
+        $expired = $engine->pair($this->floatGapState([1, 2]));
+        $recent = $engine->pair($this->floatGapState([3, 4]));
+
+        self::assertSame([], $expired->violations);
+        self::assertSame([], $recent->violations);
+        self::assertSame(['1-7', '2-8', '3-5', '4-6'], $this->opponentPairs($expired));
+        self::assertSame(['1-8', '2-5', '3-6', '4-7'], $this->opponentPairs($recent));
+        self::assertNotSame($this->opponentPairs($recent), $this->opponentPairs($expired));
+    }
+
     private function fourPlayerRoundTwo(): TournamentState
     {
         return $this->state([
@@ -274,6 +287,92 @@ final class DutchPairingEngineTest extends TestCase
         }
 
         return $this->state($players, 3);
+    }
+
+    /**
+     * Same played history, entered either in rounds 1/2 (expired at round 5)
+     * or rounds 3/4 (still UF1/DF1). The distinct expected pairings prove the
+     * public engine actually consumes tournament-round identity.
+     *
+     * @param array{int, int} $rounds
+     */
+    private function floatGapState(array $rounds): TournamentState
+    {
+        $games = [
+            1 => [[5, Colour::White, '0'], [6, Colour::White, '1']],
+            2 => [[6, Colour::White, '1'], [7, Colour::White, '0']],
+            3 => [[7, Colour::White, '1'], [8, Colour::White, '1']],
+            4 => [[8, Colour::White, '1'], [5, Colour::White, '1']],
+            5 => [[1, Colour::Black, '1'], [4, Colour::Black, '0']],
+            6 => [[2, Colour::Black, '0'], [1, Colour::Black, '0']],
+            7 => [[3, Colour::Black, '0'], [2, Colour::Black, '1']],
+            8 => [[4, Colour::Black, '0'], [3, Colour::Black, '0']],
+        ];
+        $scores = [1 => 1, 2 => 1, 3 => 2, 4 => 2, 5 => 1, 6 => 0, 7 => 1, 8 => 0];
+        $floats = [
+            1 => ['none', 'none'], 2 => ['none', 'down'],
+            3 => ['none', 'down'], 4 => ['none', 'none'],
+            5 => ['none', 'none'], 6 => ['none', 'none'],
+            7 => ['none', 'up'], 8 => ['none', 'up'],
+        ];
+        $players = [];
+        foreach ($games as $id => $history) {
+            $results = [];
+            $opponents = [];
+            $colours = [];
+            foreach ($history as $index => [$opponent, $colour, $result]) {
+                $results[] = [
+                    'round' => $rounds[$index],
+                    'opponentId' => $opponent,
+                    'colour' => $colour->value,
+                    'result' => $result,
+                    'played' => true,
+                ];
+                $opponents[] = $opponent;
+                $colours[] = $colour;
+            }
+            $players[] = new Player(
+                id: $id,
+                pairingNumber: $id,
+                name: 'Gap Player '.$id,
+                rating: 2400 - $id,
+                title: '',
+                team: '',
+                club: '',
+                active: true,
+                score: new Score($scores[$id], 1),
+                opponentHistory: $opponents,
+                colourHistory: $colours,
+                results: $results,
+                floatHistory: $floats[$id],
+            );
+        }
+
+        return new TournamentState(
+            schemaVersion: TournamentState::SCHEMA_VERSION,
+            round: 5,
+            numberOfRounds: 7,
+            pairingSystem: 'fide-dutch-2026',
+            topColour: Colour::White,
+            pointsForWin: new Score(1, 1),
+            pointsForDraw: new Score(1, 2),
+            maxPlayers: 256,
+            players: $players,
+        );
+    }
+
+    /** @return list<string> */
+    private function opponentPairs(\OpenPairing\Domain\Pairing\PairingResult $result): array
+    {
+        $pairs = [];
+        foreach ($result->tables as $table) {
+            $ids = [$table->whitePlayerId, $table->blackPlayerId];
+            sort($ids, SORT_NUMERIC);
+            $pairs[] = implode('-', $ids);
+        }
+        sort($pairs, SORT_STRING);
+
+        return $pairs;
     }
 
     private function player(int $id, bool $active = true): Player

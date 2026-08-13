@@ -27,6 +27,17 @@ missing phase do not establish causality. The machine-readable negative control
 for the rejected counter-only experiment remains
 `docs/evidence/negative-p50-remainder-pairs-recompute-20260813.json`.
 
+There is a distinct companion rule to “the oracle validates outputs, not
+mechanisms”: finding a phase in primary source that the implementation lacks
+does not prove that the missing phase caused the observed deviations. Source
+comparison establishes a structural difference; causality still requires a
+discriminating counterexample. In p50 the BBP exchange loops were genuinely
+absent, yet the 14 observed failures disappeared solely when upstream float
+state was corrected. The live public-engine regression
+`DutchPairingEngineTest::testPublicEngineExpiresFloatsAcrossTwoSkippedTournamentRounds`
+uses one history at two different round placements and proves that the
+production API—not only the replay harness—selects the round-indexed outcome.
+
 The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
 `epoch-2-dutch-500`. Direct-reference public-path samples at 30, 50 and 80
 players are closed at 110/110, 150/150 and 150/150 exact rounds. Complete
