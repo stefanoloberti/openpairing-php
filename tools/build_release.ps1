@@ -47,7 +47,7 @@ try {
         & $phpExecutable $composer install --working-dir=$stage --no-dev --classmap-authoritative --no-interaction --no-progress
         if ($LASTEXITCODE -ne 0) { throw 'Composer production install failed.' }
 
-        foreach ($relative in @('tests', 'tools', 'docs\evidence', 'docs\adr', 'phpstan.neon', 'phpunit.xml.dist', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md')) {
+        foreach ($relative in @('tests', 'tools', 'docs\evidence', 'docs\adr', 'composer.lock', 'phpstan.neon', 'phpunit.xml.dist', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md')) {
             $target = Join-Path $stage $relative
             if (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target -Recurse -Force }
         }
@@ -58,7 +58,11 @@ try {
             $runtimeComposer.PSObject.Properties.Remove($developmentKey)
         }
         $runtimeComposer.description = 'Deterministic, offline FIDE pairing engine for PHP (prebuilt runtime)'
-        $runtimeComposer | ConvertTo-Json -Depth 16 | Set-Content -Encoding UTF8 $runtimeComposerPath
+        [System.IO.File]::WriteAllText(
+            $runtimeComposerPath,
+            ($runtimeComposer | ConvertTo-Json -Depth 16) + "`n",
+            [System.Text.UTF8Encoding]::new($false)
+        )
 
         $metadata = [ordered]@{
             schema = 'openpairing.release-metadata/1'
@@ -69,7 +73,11 @@ try {
             minimumPhp = '8.3'
             recommendedExtension = 'ext-gmp'
         }
-        $metadata | ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 (Join-Path $stage 'RELEASE-METADATA.json')
+        [System.IO.File]::WriteAllText(
+            (Join-Path $stage 'RELEASE-METADATA.json'),
+            ($metadata | ConvertTo-Json -Depth 4) + "`n",
+            [System.Text.UTF8Encoding]::new($false)
+        )
 
         Add-Type -AssemblyName System.IO.Compression
         Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -102,6 +110,11 @@ try {
                 throw "Runtime composer.json retains development key: $developmentKey"
             }
         }
+        if (Test-Path -LiteralPath (Join-Path $runtimeRoot 'composer.lock')) {
+            throw 'Runtime retains the source development lock file.'
+        }
+        & $phpExecutable $composer validate --no-check-publish --no-interaction (Join-Path $runtimeRoot 'composer.json')
+        if ($LASTEXITCODE -ne 0) { throw 'Runtime composer.json validation failed.' }
         & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') --help | Out-Null
         if ($LASTEXITCODE -ne 0) { throw 'Runtime CLI help smoke test failed.' }
         $smoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') (Join-Path $repository 'tests\Fixtures\initial-3.json')
@@ -113,8 +126,12 @@ try {
             "$hash  $([System.IO.Path]::GetFileName($archive))" | Set-Content -Encoding ASCII ($archive + '.sha256')
             [ordered]@{ file = [System.IO.Path]::GetFileName($archive); bytes = (Get-Item $archive).Length; sha256 = $hash }
         }
-        [ordered]@{ schema = 'openpairing.release-build-report/1'; version = $Version; gitCommit = $commit; artifacts = @($artifacts) } |
-            ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 (Join-Path $output "$package-build-report.json")
+        $report = [ordered]@{ schema = 'openpairing.release-build-report/1'; version = $Version; gitCommit = $commit; artifacts = @($artifacts) }
+        [System.IO.File]::WriteAllText(
+            (Join-Path $output "$package-build-report.json"),
+            ($report | ConvertTo-Json -Depth 5) + "`n",
+            [System.Text.UTF8Encoding]::new($false)
+        )
     } finally {
         $resolvedTemporary = [System.IO.Path]::GetFullPath($temporary)
         if ($resolvedTemporary.StartsWith($buildRoot + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)) {
