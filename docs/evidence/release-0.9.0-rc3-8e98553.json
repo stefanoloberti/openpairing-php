@@ -1,0 +1,40 @@
+{
+  "schema": "openpairing.release-evidence/1",
+  "version": "0.9.0-rc3",
+  "gitCommit": "8e98553d26636b6db85fb1af1a95a213af275a67",
+  "artifacts": {
+    "source": {
+      "file": "openpairing-php-0.9.0-rc3-source.zip",
+      "bytes": 420414,
+      "sha256": "b653e016357f64c59435f36584c0960dd147ec0138ed71004155875d72905b9b"
+    },
+    "runtime": {
+      "file": "openpairing-php-0.9.0-rc3-runtime.zip",
+      "bytes": 184135,
+      "sha256": "3e3559239a517372d5a70933d4108f2a28d13b9e1f4bc8c6d378fb85c2a62ceb"
+    }
+  },
+  "verification": {
+    "twoBuildsByteIdentical": true,
+    "rapidTests": 223,
+    "rapidAssertions": 1048,
+    "oracleTests": 11,
+    "oracleAssertions": 55,
+    "php83RuntimeSmoke": true,
+    "gmpLimbsPairingByteIdentical": true,
+    "gmpLimbsStandingsByteIdentical": true,
+    "xxaImportCanonicalisationSmoke": true,
+    "fiveHundredPlayerArtifactSmoke": true,
+    "stagingRelease": "production-current-20260813-openpairing-8e98553",
+    "stagingTests": 228,
+    "stagingAssertions": 33056,
+    "stagingPhpstan": "clean",
+    "stagingHttp": 200,
+    "stagingDownloadHashVerified": true
+  },
+  "openGates": [
+    "complete large-field historical pairing corpus replay",
+    "complete accelerated 1000-tournament historical pairing replay",
+    "advanced-round performance at thousands of players"
+  ]
+}

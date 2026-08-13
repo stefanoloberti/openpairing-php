@@ -51,6 +51,17 @@ runtime SHA-256 is
 Two clean builds are byte-identical. PHP 8.3.6 artifact smokes additionally
 cover `XXA` import/canonicalization and a 500-player initial round.
 
+Release candidate 3, tagged at `8e98553`, changes package version and
+documentation only relative to the rc2 algorithms. It was built twice with
+byte-identical source/runtime archives and deployed atomically to
+`production-current-20260813-openpairing-8e98553`. The pre-switch PHP 8.3.6
+gate passed 228 tests/33,056 assertions, PHPStan, syntax and CLI checks; GMP
+and limb pairing/standings outputs, XXA canonicalization, the 500-player smoke,
+HTTP and the served download hash were verified. Source SHA-256 is
+`b653e016357f64c59435f36584c0960dd147ec0138ed71004155875d72905b9b`;
+runtime SHA-256 is
+`3e3559239a517372d5a70933d4108f2a28d13b9e1f4bc8c6d378fb85c2a62ceb`.
+
 `composer check` is the sub-minute edit gate: unit/contract/small differential
 tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and
