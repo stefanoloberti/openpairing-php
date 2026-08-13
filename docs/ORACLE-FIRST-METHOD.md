@@ -49,6 +49,24 @@ harness and corpus identities; the aggregate refuses missing oracle evidence.
 This establishes sharding as a performance mechanism only, not a change of
 input semantics.
 
+## Physical workspace isolation
+
+An immutable replay checkout must be a physical directory, not a symlink or a
+copy that preserves a symlink. Before an official campaign starts, the harness
+must bootstrap and verify its lock inside that directory; a negative isolation
+check must prove that a write in a separate laboratory checkout does not change
+the official checkout source hash.
+
+On 2026-08-13 a laboratory directory was created with `cp -a` from a `current`
+symlink. The result was another symlink, so later WIP uploads changed the source
+tree beneath a running p30 campaign. The final runtime-identity check would
+have rejected every shard, and a subsequent p50 launch did reject all 12
+workers immediately. The incomplete p30/p50 reports were quarantined and the
+campaigns restarted from a physically independent, lock-verified checkout.
+No result from the contaminated run is acceptance evidence. Use `cp -aL` (or
+archive extraction) when the source can be a symlink, then run a negative
+isolation check before spending corpus time.
+
 ## Semantic baseline reset (historical epoch narrative)
 
 On 2026-08-12 the replay entered semantic epoch

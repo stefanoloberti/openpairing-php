@@ -37,11 +37,17 @@ if test ! -d "$release"; then
     mv "$temporary_release" "$release"
 fi
 
+# Releases are physical. Only `current` is a symlink; preserving that symlink
+# in a WIP copy would let laboratory writes mutate the immutable release.
+test ! -L "$release"
+
 lock="$release/runtime-identity.lock.json"
 test -s "$lock"
 php "$release/tools/verify_runtime_identity.php" >/dev/null
 temporary="$workspace_root/.current-${archive_hash:0:16}"
 ln -s "$release" "$temporary"
 mv -Tf "$temporary" "$current"
+test -L "$current"
+test "$(readlink -f "$current")" = "$(readlink -f "$release")"
 
 printf '%s\n' "$release"
