@@ -88,3 +88,10 @@ runtime source hash.
 tree only after `composer check` succeeds. `-Wip` marks an intentionally
 incomplete branch checkpoint, but the wrapper still requires the rapid gate to
 be green. Official replays never use WIP or dirty trees.
+
+Long corpus campaigns are installed under persistent WSL storage at
+`/srv/openpairing-validation`. The current queue uses 12 concurrent PHP/GMP
+workers and small atomic shards: p30 20,000/256, p50 30,000/384, p80
+20,000/256 and acceleration 1,000/64. System services are enabled at boot and
+linked by `OnSuccess`; every aggregate remains fail-closed on mixed identities,
+missing files or omitted oracle-required cases.

@@ -68,6 +68,15 @@ No result from the contaminated run is acceptance evidence. Use `cp -aL` (or
 archive extraction) when the source can be a symlink, then run a negative
 isolation check before spending corpus time.
 
+Two later external WSL shutdowns demonstrated that immutable source identity
+is necessary but not sufficient when corpus, shards and reports live in
+`/tmp`. Official campaigns now live under `/srv/openpairing-validation`,
+finalize each small shard report by atomic rename, and run as boot-enabled
+services with `Restart=on-failure`. Chained `OnSuccess` units launch
+classification and the next field-size partition only after the predecessor
+aggregate succeeds. A restart therefore loses at most the currently running
+small shards and can never turn a partial JSON file into evidence.
+
 ## Semantic baseline reset (historical epoch narrative)
 
 On 2026-08-12 the replay entered semantic epoch

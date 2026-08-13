@@ -29,8 +29,10 @@ php bin/openpairing.php --baku --baku-ga-last-id=42 late-entry-round.json
 ```
 
 The second form preserves the canonical player identity of GA's last member
-after late entries. TRF `250` is not decoded, so `--baku` calculates the
-announced schedule from the tournament state instead of importing that record.
+after late entries. TRF `250` schedules are decoded directly (and legacy
+`XXA` schedules are normalized to that representation). `--baku` is the
+explicit alternative that calculates the official Baku schedule for JSON or
+TRF state rather than replacing an imported announced schedule implicitly.
 
 Produce final individual standings using the TRF `202` or `212` record already
 present in the input:

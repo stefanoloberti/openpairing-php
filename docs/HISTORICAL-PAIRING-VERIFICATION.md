@@ -47,9 +47,11 @@
   known corpus file missing its required record. Evidence is
   `docs/evidence/pairing-corpus-p15-sharded-14539a6.json` with aggregate shard
   manifest `ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559`.
-- In progress: the complete 20,000-tournament 30-player partition is running in
-  14 disjoint immutable shards at commit `14539a6`. No aggregate or correctness
-  claim exists until every shard report is complete and homogeneous.
+- In progress: the complete 20,000-tournament 30-player partition runs in 256
+  disjoint immutable shards at commit `c48fd05`. Source, corpus, shards and
+  atomically finalized reports live under persistent `/srv` storage; a system
+  service resumes only missing shards after WSL restart. No aggregate or
+  correctness claim exists until all 256 reports are complete and homogeneous.
 - Closed parser-only acceleration gate: all 1,000 `250` tournaments decode and
   complete a 100% semantic round-trip with zero diagnostics (manifest
   `11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6`;
@@ -151,6 +153,12 @@ another checkout. A prepared validation workspace also contains
 `runtime-identity.lock.json`; modifying or copying a source after preparation
 causes the same fail-closed result. Parallel aggregation accepts exactly one
 source-tree identity across all child reports.
+
+Official long-running campaigns use small persistent shards, atomic
+temporary-to-final report renames and boot-enabled services. This replaced
+large `/tmp` shards after two external WSL shutdowns erased in-progress reports
+without an engine or OOM failure. Recovery must re-run only missing shards;
+completed report bytes and the source/corpus identities remain unchanged.
 
 Every report also attests the exact data portion consumed: TRFs are selected in
 ordinal relative-path order, then the requested limit is applied. The corpus
