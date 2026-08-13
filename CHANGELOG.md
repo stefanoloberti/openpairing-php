@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0-rc2 - 2026-08-13
+
+- import/export round-indexed TRF `250` acceleration schedules and import
+  legacy per-player `XXA` schedules with fail-closed conflict checks;
+- raise the public player safety guard-rail from 256 to 4,096 after real
+  2,400-player TRF round-trip and initial-round capacity checks;
+- harden physical isolation of content-addressed replay workspaces.
+
 ## 0.9.0-rc1 - 2026-08-13
 
 First downloadable release candidate. The public Dutch engine is exact on the

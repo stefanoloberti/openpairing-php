@@ -1,12 +1,12 @@
-# Release 0.9.0-rc1
+# Release 0.9.0-rc2
 
 ## Artifacts
 
 The release process produces two archives from one committed tree:
 
-- `openpairing-php-0.9.0-rc1-source.zip`: source, tests, development tools and
+- `openpairing-php-0.9.0-rc2-source.zip`: source, tests, development tools and
   Composer lock file; run `composer install` before use;
-- `openpairing-php-0.9.0-rc1-runtime.zip`: source plus optimized production
+- `openpairing-php-0.9.0-rc2-runtime.zip`: source plus optimized production
   Composer autoload files, ready for the CLI or library.
 
 Every archive is accompanied by a `.sha256` file. The runtime archive contains
