@@ -144,7 +144,21 @@ try {
             "$hash  $([System.IO.Path]::GetFileName($archive))" | Set-Content -Encoding ASCII ($archive + '.sha256')
             [ordered]@{ file = [System.IO.Path]::GetFileName($archive); bytes = (Get-Item $archive).Length; sha256 = $hash }
         }
-        $report = [ordered]@{ schema = 'openpairing.release-build-report/1'; version = $Version; gitCommit = $commit; artifacts = @($artifacts) }
+        $report = [ordered]@{
+            schema = 'openpairing.release-build-report/1'
+            version = $Version
+            gitCommit = $commit
+            verification = [ordered]@{
+                cleanCommittedTree = $true
+                sourcePrivatePathAudit = $true
+                runtimeDevelopmentPathAudit = $true
+                runtimeComposerValidation = $true
+                cliHelpSmoke = $true
+                pairingExampleSmoke = $true
+                standingsExampleSmoke = $true
+            }
+            artifacts = @($artifacts)
+        }
         [System.IO.File]::WriteAllText(
             (Join-Path $output "$package-build-report.json"),
             ($report | ConvertTo-Json -Depth 5) + "`n",
