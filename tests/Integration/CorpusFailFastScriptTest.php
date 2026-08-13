@@ -35,7 +35,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('classify_shard_fail_fast.sh', $script);
         self::assertStringContainsString('quarantine/\\$label.json', $script);
         self::assertStringContainsString('mv -f -- "\\$temporary_report" "\\$report"', $script);
-        self::assertStringContainsString('xargs -r -P', $script);
+        self::assertStringContainsString('xargs -r -P "\$workers"', $script);
+        self::assertStringNotContainsString('xargs -r -P \\"\$workers\\"', $script);
         self::assertStringContainsString('verifier-infrastructure-error', $script);
         self::assertStringContainsString('aggregate_shards.php', $script);
         self::assertStringContainsString('aggregate.json.tmp', $script);
