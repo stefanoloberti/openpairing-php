@@ -181,4 +181,6 @@ file. Workers must check that file before starting the next shard. Reports with
 zero oracle-required cases receive an explicit zero-case PASS record rather
 than invoking the classifier. This per-shard gate is the permanent early-stop
 watcher introduced after the p50 partial run exposed a semantic defect long
-before the partition aggregate could be produced.
+before the partition aggregate could be produced. The systemd supervisor uses
+`Restart=no`: a gate failure remains stopped for investigation, while the
+enabled unit still resumes the idempotent queue after a machine boot.

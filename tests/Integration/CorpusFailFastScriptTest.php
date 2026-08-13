@@ -29,13 +29,23 @@ final class CorpusFailFastScriptTest extends TestCase
         $script = file_get_contents(dirname(__DIR__, 2).'/tools/install_large_field_campaign.sh');
 
         self::assertIsString($script);
-        self::assertStringContainsString('test ! -e \\"\\$stop_file\\" || return 30', $script);
+        self::assertStringContainsString('test ! -e "\\$stop_file" || return 30', $script);
         self::assertStringContainsString('classify_shard_fail_fast.sh', $script);
         self::assertStringContainsString('quarantine/\\$label.json', $script);
-        self::assertStringContainsString('mv -f -- \\"\\$temporary_report\\" \\"\\$report\\"', $script);
+        self::assertStringContainsString('mv -f -- "\\$temporary_report" "\\$report"', $script);
         self::assertStringContainsString('xargs -r -P', $script);
         self::assertStringContainsString('verifier-infrastructure-error', $script);
         self::assertStringContainsString('aggregate_shards.php', $script);
         self::assertStringContainsString('aggregate.json.tmp', $script);
+    }
+
+    public function testSupervisorDoesNotRestartAfterAConfirmedGateFailure(): void
+    {
+        $script = file_get_contents(dirname(__DIR__, 2).'/tools/install_corpus_supervisor.sh');
+
+        self::assertIsString($script);
+        self::assertStringContainsString('Restart=no', $script);
+        self::assertStringNotContainsString('Restart=on-failure', $script);
+        self::assertStringContainsString('systemctl enable', $script);
     }
 }

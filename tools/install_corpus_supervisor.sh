@@ -71,8 +71,7 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=$runner
-Restart=on-failure
-RestartSec=30
+Restart=no
 TimeoutStartSec=infinity
 
 [Install]

@@ -40,52 +40,52 @@ campaign=$(printf %q "$campaign")
 shards=$shards
 workers=$workers
 expected_files=$expected_files
-stop_file=\"\$campaign/STOP\"
+stop_file="\$campaign/STOP"
 
-test ! -e \"\$stop_file\" || { echo \"Campaign is stopped: \$stop_file\" >&2; exit 30; }
-mkdir -p -- \"\$campaign/reports\" \"\$campaign/classifications\" \"\$campaign/quarantine\"
+test ! -e "\$stop_file" || { echo "Campaign is stopped: \$stop_file" >&2; exit 30; }
+mkdir -p -- "\$campaign/reports" "\$campaign/classifications" "\$campaign/quarantine"
 
 run_shard() {
     shard=\$1
-    test ! -e \"\$stop_file\" || return 30
-    label=\$(printf 's%03d' \"\$shard\")
-    corpus=\"\$shard_root/\$label\"
-    test -d \"\$corpus\" || return 32
-    report=\"\$campaign/reports/\$label.json\"
-    classification=\"\$campaign/classifications/\$label.json\"
-    if [[ -s \"\$report\" && -s \"\$classification\" ]]; then
+    test ! -e "\$stop_file" || return 30
+    label=\$(printf 's%03d' "\$shard")
+    corpus="\$shard_root/\$label"
+    test -d "\$corpus" || return 32
+    report="\$campaign/reports/\$label.json"
+    classification="\$campaign/classifications/\$label.json"
+    if [[ -s "\$report" && -s "\$classification" ]]; then
         return 0
     fi
-    temporary_report=\$(mktemp \"\$campaign/quarantine/.\$label.report.XXXXXX\")
-    cleanup_shard() { rm -f -- \"\$temporary_report\"; }
+    temporary_report=\$(mktemp "\$campaign/quarantine/.\$label.report.XXXXXX")
+    cleanup_shard() { rm -f -- "\$temporary_report"; }
     trap cleanup_shard RETURN
     if ! OPENPAIRING_ARITHMETIC_BACKEND=gmp php -d opcache.enable_cli=1 -d opcache.jit=1255 \\
-        -d opcache.jit_buffer_size=128M \"\$source_tree/tools/verify_trf_pairings.php\" \\
-        \"\$corpus\" 0 --large-field >\"\$temporary_report\"; then
-        temporary_stop=\$(mktemp \"\$campaign/.stop.XXXXXX\")
+        -d opcache.jit_buffer_size=128M "\$source_tree/tools/verify_trf_pairings.php" \\
+        "\$corpus" 0 --large-field >"\$temporary_report"; then
+        temporary_stop=\$(mktemp "\$campaign/.stop.XXXXXX")
         printf 'OPENPAIRING_SHARD_STOP=FAIL reason=verifier-infrastructure-error shard=%s at=%s\\n' \\
-            \"\$label\" \"\$(date -Is)\" >\"\$temporary_stop\"
-        mv -f -- \"\$temporary_stop\" \"\$stop_file\"
+            "\$label" "\$(date -Is)" >"\$temporary_stop"
+        mv -f -- "\$temporary_stop" "\$stop_file"
         return 33
     fi
-    \"\$source_tree/tools/corpus/classify_shard_fail_fast.sh\" \\
-        \"\$temporary_report\" \"\$source_tree\" \"\$upstream\" \"\$classification\" \"\$stop_file\" \"\$corpus\" || {
-            mv -f -- \"\$temporary_report\" \"\$campaign/quarantine/\$label.json\"
+    "\$source_tree/tools/corpus/classify_shard_fail_fast.sh" \\
+        "\$temporary_report" "\$source_tree" "\$upstream" "\$classification" "\$stop_file" "\$corpus" || {
+            mv -f -- "\$temporary_report" "\$campaign/quarantine/\$label.json"
             trap - RETURN
             return 31
         }
-    mv -f -- \"\$temporary_report\" \"\$report\"
+    mv -f -- "\$temporary_report" "\$report"
     trap - RETURN
 }
 export -f run_shard
 export shard_root source_tree upstream campaign shards stop_file
-seq 0 \$((shards - 1)) | xargs -r -P \"\$workers\" -n 1 bash -c 'run_shard \"\$1\"' _
-test ! -e \"\$stop_file\" || exit 30
-test \"\$(find \"\$campaign/reports\" -maxdepth 1 -name 's*.json' -size +0c | wc -l)\" -eq \"\$shards\"
-php \"$(printf %q "$base/bin/aggregate_shards.php")\" \"\$campaign/reports\" \"\$shards\" \\
-    \"\$expected_files\" >\"\$campaign/aggregate.json.tmp\"
-mv -f -- \"\$campaign/aggregate.json.tmp\" \"\$campaign/aggregate.json\"
-printf 'OPENPAIRING_LARGE_FIELD_CAMPAIGN=PASS name=%s shards=%d at=%s\\n' \"\$name\" \"\$shards\" \"\$(date -Is)\"
+seq 0 \$((shards - 1)) | xargs -r -P "\$workers" -n 1 bash -c 'run_shard "\$1"' _
+test ! -e "\$stop_file" || exit 30
+test "\$(find "\$campaign/reports" -maxdepth 1 -name 's*.json' -size +0c | wc -l)" -eq "\$shards"
+php "$(printf %q "$base/bin/aggregate_shards.php")" "\$campaign/reports" "\$shards" \\
+    "\$expected_files" >"\$campaign/aggregate.json.tmp"
+mv -f -- "\$campaign/aggregate.json.tmp" "\$campaign/aggregate.json"
+printf 'OPENPAIRING_LARGE_FIELD_CAMPAIGN=PASS name=%s shards=%d at=%s\\n' "\$name" "\$shards" "\$(date -Is)"
 EOF
 
 chmod 0755 "$temporary"
