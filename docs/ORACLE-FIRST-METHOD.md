@@ -33,6 +33,13 @@ The missing absolute-preference colour-sequence branch was ported from the
 source formula; both Gacrux and BBP then agreed with the corrected PHP output,
 and the complete p7 partition remained exact.
 
+The three 15-player partitions subsequently close at 269,991/269,991 exact
+rounds over 29,999 decodable tournaments. Twenty-four deterministic hard-link
+shards cover all 30,000 source files exactly once and retain separate runtime,
+harness and corpus identities; the aggregate refuses missing oracle evidence.
+This establishes sharding as a performance mechanism only, not a change of
+input semantics.
+
 ## Semantic baseline reset (historical epoch narrative)
 
 On 2026-08-12 the replay entered semantic epoch

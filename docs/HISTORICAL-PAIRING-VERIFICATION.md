@@ -38,6 +38,13 @@
   Its sole pre-fix residual exposed an incomplete QC11 topscorer colour-sequence
   case; Gacrux and BBP both selected the recorded reference, and the correction
   retained the perfect p7 result.
+- Closed: all three 15-player partitions at commit `14539a6`, sharded into 24
+  disjoint content-attested runs: 30,000 files, 29,999 decodable tournaments,
+  and 269,991/269,991 historical rounds exact. There are zero variants,
+  deviations, no-solutions and resource limits; `T8448.trf` is the single
+  known corpus file missing its required record. Evidence is
+  `docs/evidence/pairing-corpus-p15-sharded-14539a6.json` with aggregate shard
+  manifest `ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559`.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the public `DutchPairingEngine`
