@@ -50,11 +50,13 @@
 - In progress: the complete 20,000-tournament 30-player partition is running in
   14 disjoint immutable shards at commit `14539a6`. No aggregate or correctness
   claim exists until every shard report is complete and homogeneous.
-- Laboratory only: TRF record `250` now has round-indexed decode/encode support.
-  One real 192-player accelerated case has an exact semantic round-trip and an
-  exact first-round pairing against its recorded reference (1/1, zero variants,
-  deviations and no-matching). The 1,000-tournament accelerated partition is
-  not yet an acceptance claim.
+- Closed parser-only acceleration gate: all 1,000 `250` tournaments decode and
+  complete a 100% semantic round-trip with zero diagnostics (manifest
+  `11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6`;
+  evidence `docs/evidence/acceleration-trf250-parser-1000-c48fd05.json`). One
+  real 192-player case also pairs its first round exactly against the recorded
+  reference. The complete 1,000-tournament acceleration *pairing* gate remains
+  open; `XXA` remains unsupported.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the public `DutchPairingEngine`
