@@ -31,6 +31,6 @@
   "notes": [
     "This evidence closes TRF 250 decode and semantic round-trip for this corpus only.",
     "It does not claim historical pairing equivalence across the 1000 tournaments.",
-    "Legacy per-player record XXA remains unsupported."
+    "The corpus contains no legacy per-player XXA records; later XXA support is contract-tested but not part of this corpus claim."
   ]
 }

@@ -46,8 +46,9 @@ machine-readable resource-limit result without a partial pairing. Canonical
 JSON and TRF currently enforce a 256-player/256-round input safety ceiling.
 Canonical JSON and TRF record `250` support round-indexed virtual points, and
 the engines apply them to scoregroups, internal order and board order. Legacy
-per-player acceleration record `XXA`, team/prohibited-pair records and team
-tie-breaks remain outside the documented individual product. See `docs/ACCELERATION.md`,
+per-player acceleration record `XXA` is accepted on import and normalized to
+`250`; team/prohibited-pair records and team tie-breaks remain outside the
+documented individual product. See `docs/ACCELERATION.md`,
 `docs/TRF-2026.md`, `docs/TIE-BREAKS.md` and ADR 0003.
 
 ## Install and verify

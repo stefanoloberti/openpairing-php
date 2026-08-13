@@ -59,8 +59,8 @@ Sono implementati tutti i 17 metodi individuali obbligatori FIDE 2026, più
 - prodotto individuale, non team;
 - massimo 256 giocatori e 256 round nel formato pubblico;
 - record TRF di accelerazione `250` importato ed esportato come schedule per
-  turno; il vecchio record per-giocatore `XXA` resta rifiutato; Baku è anche
-  disponibile sullo stato JSON tramite `--baku`;
+  turno; il vecchio record per-giocatore `XXA` è importato e normalizzato a
+  `250`; Baku è anche disponibile sullo stato JSON tramite `--baku`;
 - Dutch usa il matcher polinomiale; Burstein mantiene una ricerca limitata e
   può restituire `resource-limit` sui bracket difficili;
 - release candidate indipendente, non certificata o approvata dalla FIDE.

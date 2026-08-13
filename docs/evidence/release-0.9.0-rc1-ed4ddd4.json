@@ -29,7 +29,7 @@
   "openGates": [
     "complete large-field corpus replay",
     "complete accelerated 1000-tournament pairing replay",
-    "legacy XXA acceleration import",
+    "legacy XXA acceleration import in the ed4ddd4 release artifact",
     "fields above the public 256-player safety ceiling"
   ]
 }

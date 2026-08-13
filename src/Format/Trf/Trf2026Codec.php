@@ -20,7 +20,7 @@ final class Trf2026Codec
     private const SUPPORTED_RECORDS = [
         '001', '012', '022', '032', '042', '052', '062', '072', '092', '102', '112', '122', '132',
         '142', '152', '162', '182', '192', '202', '212', '222',
-        '250',
+        '250', 'XXA',
     ];
 
     public function decode(string $trf): TournamentState
@@ -129,7 +129,11 @@ final class Trf2026Codec
         $players = [];
         $pairingNumbers = [];
         $maxSeenRound = 0;
-        $accelerationSchedules = $this->parseAccelerationRecords($records['250'] ?? [], $numberOfRounds);
+        $accelerationSchedules = $this->parseAccelerationRecords(
+            $records['250'] ?? [],
+            $records['XXA'] ?? [],
+            $numberOfRounds,
+        );
         foreach ($records['001'] as $line) {
             [$player, $seenRound] = $this->parsePlayer($line, $numberOfRounds, $accelerationSchedules);
             if (isset($pairingNumbers[$player->pairingNumber])) {
@@ -432,13 +436,14 @@ final class Trf2026Codec
     }
 
     /**
-     * @param list<string> $lines
+     * @param list<string> $rangeLines
+     * @param list<string> $playerLines
      * @return array<int, list<Score|null>>
      */
-    private function parseAccelerationRecords(array $lines, int $numberOfRounds): array
+    private function parseAccelerationRecords(array $rangeLines, array $playerLines, int $numberOfRounds): array
     {
         $schedules = [];
-        foreach ($lines as $lineNumber => $line) {
+        foreach ($rangeLines as $lineNumber => $line) {
             if (strlen($line) < 31) {
                 throw new InvalidTournamentState('trf.acceleration_short', sprintf('TRF 250 record %d is shorter than 31 columns.', $lineNumber + 1));
             }
@@ -479,6 +484,53 @@ final class Trf2026Codec
                     $denseSchedule = array_values($schedules[$player]);
                     $schedules[$player] = $denseSchedule;
                 }
+            }
+        }
+
+        foreach ($playerLines as $lineNumber => $line) {
+            if (strlen($line) < 13) {
+                throw new InvalidTournamentState('trf.acceleration_short', sprintf('TRF XXA record %d has no complete round value.', $lineNumber + 1));
+            }
+            $player = $this->positiveInteger(substr($line, 4, 4), 'XXA competitor');
+            if ($player > 256) {
+                throw new InvalidTournamentState('trf.acceleration_player', sprintf('TRF XXA record %d has an invalid competitor.', $lineNumber + 1));
+            }
+            $schedule = [];
+            for ($offset = 9, $round = 1; $offset < strlen($line); $offset += 5, ++$round) {
+                if ($round > $numberOfRounds) {
+                    throw new InvalidTournamentState('trf.acceleration_round', sprintf('TRF XXA record %d has virtual points beyond the tournament rounds.', $lineNumber + 1));
+                }
+                $field = substr($line, $offset, 4);
+                if (strlen($field) < 4) {
+                    throw new InvalidTournamentState('trf.acceleration_short', sprintf('TRF XXA record %d has an incomplete round value.', $lineNumber + 1));
+                }
+                try {
+                    $score = trim($field) === '' ? Score::zero() : Score::fromDecimal($field);
+                } catch (\InvalidArgumentException $exception) {
+                    throw new InvalidTournamentState('trf.acceleration_score', sprintf('TRF XXA record %d round %d has invalid game points: %s', $lineNumber + 1, $round, $exception->getMessage()));
+                }
+                if ($score->compare(Score::zero()) < 0) {
+                    throw new InvalidTournamentState('trf.acceleration_score', sprintf('TRF XXA record %d round %d has negative game points.', $lineNumber + 1, $round));
+                }
+                $value = $score->compare(Score::zero()) === 0 ? null : $score;
+                $index = $round - 1;
+                if (array_key_exists($index, $schedules[$player] ?? [])) {
+                    $existing = $schedules[$player][$index];
+                    if (($existing === null) !== ($value === null)
+                        || ($existing !== null && $value !== null && $existing->compare($value) !== 0)) {
+                        throw new InvalidTournamentState('trf.acceleration_overlap', sprintf('TRF acceleration records conflict for player %d in round %d.', $player, $round));
+                    }
+                }
+                $schedule[] = $value;
+            }
+            if (isset($schedules[$player])) {
+                foreach ($schedule as $index => $value) {
+                    if (!array_key_exists($index, $schedules[$player])) {
+                        $schedules[$player][$index] = $value;
+                    }
+                }
+            } else {
+                $schedules[$player] = $schedule;
             }
         }
 

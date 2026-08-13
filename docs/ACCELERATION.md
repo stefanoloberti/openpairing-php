@@ -24,5 +24,8 @@ virtual points and ranges beyond the tournament fail closed. A real
 192-player Baku corpus case round-trips into the same two ranges and its first
 round pairs exactly against the recorded reference. That is a bounded
 functional check, not yet a claim over the full 1,000-tournament accelerated
-partition. Legacy record `XXA` remains outside the public subset and is
-rejected instead of silently losing virtual points.
+partition. Legacy record `XXA` is accepted on import as a per-player sequence
+and normalized to canonical `250` ranges on output. Mixed `250`/`XXA` input
+must agree round by round or fails closed. The available 1,000-tournament
+acceleration corpus contains no `XXA`, so this compatibility path is covered by
+fixed-column contract tests rather than a real-corpus claim.

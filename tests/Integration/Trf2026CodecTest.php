@@ -256,6 +256,35 @@ final class Trf2026CodecTest extends TestCase
         self::assertSame('0.5', (new Trf2026Codec())->decode($trf)->players[0]->acceleration?->toDecimal(1));
     }
 
+    public function testLegacyXxaImportsRoundValuesAndCanonicalisesTo250(): void
+    {
+        $trf = (new Trf2026Codec())->encode($this->roundTwoState());
+        $trf = "XXA    1  1.0       0.5\r\n".$trf;
+
+        $decoded = (new Trf2026Codec())->decode($trf);
+
+        self::assertSame(
+            ['1.0', null, '0.5'],
+            array_map(static fn (?Score $score): ?string => $score?->toDecimal(1), $decoded->players[0]->accelerationSchedule),
+        );
+        $normalised = (new Trf2026Codec())->encode($decoded);
+        self::assertStringNotContainsString('XXA', $normalised);
+        self::assertStringContainsString("250       1.0   1   1    1    1\r\n", $normalised);
+        self::assertStringContainsString("250       0.5   3   3    1    1\r\n", $normalised);
+    }
+
+    public function testLegacyXxaConflictingWith250FailsClosed(): void
+    {
+        $trf = "250  0.0  1.0   1   1    1    1\r\nXXA    1  0.5\r\n".(new Trf2026Codec())->encode($this->roundTwoState());
+
+        try {
+            (new Trf2026Codec())->decode($trf);
+            self::fail('Conflicting XXA and 250 records must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_overlap', $exception->diagnosticCode);
+        }
+    }
+
     private function roundTwoState(): TournamentState
     {
         $players = [
