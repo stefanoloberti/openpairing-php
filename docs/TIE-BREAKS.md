@@ -10,6 +10,10 @@ Order Descriptor syntax.
 All 17 individual methods required by the FIDE Mandatory Tie-Breaks document
 are implemented. The three additional individual descriptors in the Handbook
 (`STD`, `TPN`, `RTNG`) and the TRF standings key `PTS` are implemented too.
+That is 21 base codes. Counting canonical option combinations produces more
+than 50 accepted descriptors (and Koya's half-point limit is parameterized),
+so the project reports base methods and variants separately rather than
+marketing an arbitrary “28 tie-breaks” count.
 
 | Code | Definition | Supported variants |
 |---|---|---|

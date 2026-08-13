@@ -12,7 +12,7 @@
 | JSON | ChessJSON | No canonical API | Project-owned canonical JSON v1 |
 | Pairing checker | Yes | Yes | Independent history/C1-C3/colour/PAB/accounting checks |
 | Individual tie-breaks | Extensive | Burstein opposition values | Complete FIDE 2026 mandatory individual set, extra Handbook keys and TRF 202/212 standings |
-| Baku acceleration | Input support | Input support | Canonical schedule generator and virtual scores; TRF 250/XXA import is roadmap v1.1 |
+| Baku acceleration | Input support | Input support | Canonical schedule generator and virtual scores; TRF `250` import/export plus legacy `XXA` import normalized to `250`; full accelerated pairing corpus open |
 
 Exact oracle output is evidence, not the definition of validity. The PHP
 engines return no partial pairing on no-solution or resource exhaustion.

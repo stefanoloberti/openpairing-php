@@ -80,8 +80,9 @@ arbiter review.
 - Burstein pairing search remains explicitly bounded; Dutch uses the
   polynomial persistent matcher in production.
 - TRF team and advanced control records are outside the documented subset.
-- TRF acceleration records 250/XXA are planned for v1.1; the current parser
-  rejects them explicitly.
+- The complete 1,000-tournament accelerated *pairing* replay remains open.
+  TRF `250` is supported for import/export and legacy `XXA` is supported on
+  import with canonical normalization to `250`.
 - The historical pairing corpus gate is not yet passed. The public Dutch
   engine is exact on frozen 7/30/50/80-player samples; the complete campaign
   remains open.

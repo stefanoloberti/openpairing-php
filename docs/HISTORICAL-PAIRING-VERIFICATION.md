@@ -56,7 +56,8 @@
   evidence `docs/evidence/acceleration-trf250-parser-1000-c48fd05.json`). One
   real 192-player case also pairs its first round exactly against the recorded
   reference. The complete 1,000-tournament acceleration *pairing* gate remains
-  open; `XXA` remains unsupported.
+  open. Legacy `XXA` import is supported and normalized to canonical `250`;
+  the available 1,000-file acceleration corpus contains no real `XXA` records.
 
 For fields where the bounded legacy engine no longer terminates, the verifier
 uses `--large-field`. This mode compares the public `DutchPairingEngine`
