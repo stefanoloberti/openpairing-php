@@ -12,6 +12,7 @@ use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Format\Json\CanonicalJson;
 use OpenPairing\Format\Trf\Trf2026Codec;
 use OpenPairing\Validation\PairingResultValidator;
+use OpenPairing\Version;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
@@ -24,7 +25,19 @@ try {
     $tieBreaks = null;
     foreach (array_slice($argv, 1) as $argument) {
         if ($argument === '--help' || $argument === '-h') {
-            fwrite(STDOUT, "Usage: openpairing.php [--mode=pairing|standings|--standings] [--tie-breaks=LIST] [--input-format=json|trf|auto] [--baku [--baku-ga-last-id=ID]] [FILE|-]\n");
+            fwrite(STDOUT, "Usage: openpairing.php [--version] [--mode=pairing|standings|--standings] [--tie-breaks=LIST] [--input-format=json|trf|auto] [--baku [--baku-ga-last-id=ID]] [FILE|-]\n");
+            exit(0);
+        }
+        if ($argument === '--version') {
+            fwrite(STDOUT, json_encode([
+                'package' => 'openpairing/openpairing-php',
+                'version' => Version::PACKAGE,
+                'dutchEngine' => DutchPairingEngine::VERSION,
+                'bursteinEngine' => BursteinPairingEngine::VERSION,
+                'tieBreakEngine' => \OpenPairing\Domain\TieBreak\FideTieBreakCalculator::VERSION,
+                'schema' => \OpenPairing\Domain\Tournament\TournamentState::SCHEMA_VERSION,
+                'phpMinimum' => '8.3',
+            ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES).PHP_EOL);
             exit(0);
         }
         if ($argument === '--standings') {

@@ -129,6 +129,8 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Runtime composer.json validation failed.' }
         & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') --help | Out-Null
         if ($LASTEXITCODE -ne 0) { throw 'Runtime CLI help smoke test failed.' }
+        $versionSmoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') --version | ConvertFrom-Json
+        if ($LASTEXITCODE -ne 0 -or $versionSmoke.version -ne $Version) { throw 'Runtime CLI version smoke test failed.' }
         $smoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing.php') (Join-Path $runtimeRoot 'examples\pairing-round-1.json')
         if ($LASTEXITCODE -ne 0) { throw 'Runtime pairing smoke test failed.' }
         $smoke | ConvertFrom-Json | Out-Null
@@ -154,6 +156,7 @@ try {
                 runtimeDevelopmentPathAudit = $true
                 runtimeComposerValidation = $true
                 cliHelpSmoke = $true
+                cliVersionSmoke = $true
                 pairingExampleSmoke = $true
                 standingsExampleSmoke = $true
             }

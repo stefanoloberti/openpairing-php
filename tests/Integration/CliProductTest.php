@@ -8,6 +8,21 @@ use PHPUnit\Framework\TestCase;
 
 final class CliProductTest extends TestCase
 {
+    public function testVersionReportsPackageAndEngineContractsWithoutInput(): void
+    {
+        [$exit, $stdout, $stderr] = $this->runCli(['--version']);
+
+        self::assertSame('', $stderr);
+        self::assertSame(0, $exit);
+        $version = $this->decodeObject($stdout);
+        self::assertSame('openpairing/openpairing-php', $version['package']);
+        self::assertSame('0.9.0-rc1', $version['version']);
+        self::assertSame('fide-dutch-2026.global/1', $version['dutchEngine']);
+        self::assertSame('fide-burstein-2026.brackets/1', $version['bursteinEngine']);
+        self::assertSame('fide-tiebreak-2026.individual/1', $version['tieBreakEngine']);
+        self::assertSame('openpairing.tournament/1', $version['schema']);
+    }
+
     public function testUnknownOptionFailsWithAnArgumentDiagnostic(): void
     {
         [$exit, , $stderr] = $this->runCli(['--does-not-exist']);

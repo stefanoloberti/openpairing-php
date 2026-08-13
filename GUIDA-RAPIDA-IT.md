@@ -9,6 +9,8 @@
 Lo ZIP `runtime` contiene già l'autoload Composer ottimizzato. Dopo averlo
 estratto, aprire un terminale nella cartella del programma.
 
+Verificare la versione installata con `php bin/openpairing.php --version`.
+
 ## Generare il prossimo abbinamento
 
 Con un torneo TRF-2026 individuale:
