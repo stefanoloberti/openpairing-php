@@ -24,7 +24,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-read -r required fatal < <(php -r '
+read -r required fatal evaluated < <(php -r '
     $report = json_decode(file_get_contents($argv[1]), true, flags: JSON_THROW_ON_ERROR);
     $counts = $report["counts"] ?? [];
     $required = (int) ($counts["largeField.candidateDeviation"] ?? 0)
@@ -32,7 +32,12 @@ read -r required fatal < <(php -r '
     $fatal = (int) ($counts["largeField.candidateNoMatching"] ?? 0)
         + (int) ($counts["roundsEngineNoSolution"] ?? 0)
         + (int) ($counts["roundsEngineResourceLimit"] ?? 0);
-    printf("%d %d\n", $required, $fatal);
+    $evaluated = min(
+        (int) ($counts["filesSeen"] ?? 0),
+        (int) ($counts["decoded"] ?? 0),
+        (int) ($counts["roundsAttempted"] ?? 0),
+    );
+    printf("%d %d %d\n", $required, $fatal, $evaluated);
 ' "$report")
 
 stop() {
@@ -45,6 +50,9 @@ stop() {
     exit "$exit_code"
 }
 
+if (( evaluated < 1 )); then
+    stop "zero-evaluated-cases" 19
+fi
 if (( fatal > 0 )); then
     stop "engine-fatal-count-$fatal" 20
 fi

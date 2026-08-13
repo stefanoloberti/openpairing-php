@@ -178,6 +178,7 @@ classifies every retained deviation with Gacrux. A confirmed inferior result,
 an incomplete classification, a no-solution/resource-limit result or an
 oracle infrastructure error creates an atomically written persistent stop
 file. Workers must check that file before starting the next shard. Reports with
+zero evaluated files/rounds are rejected; reports with evaluated rounds but
 zero oracle-required cases receive an explicit zero-case PASS record rather
 than invoking the classifier. This per-shard gate is the permanent early-stop
 watcher introduced after the p50 partial run exposed a semantic defect long

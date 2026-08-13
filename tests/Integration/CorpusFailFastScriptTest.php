@@ -19,6 +19,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('largeField.candidateNoMatching', $script);
         self::assertStringContainsString('roundsEngineNoSolution', $script);
         self::assertStringContainsString('roundsEngineResourceLimit', $script);
+        self::assertStringContainsString('zero-evaluated-cases', $script);
+        self::assertStringContainsString('"roundsAttempted"', $script);
         self::assertStringContainsString('mv -f -- "$temporary_stop" "$stop_file"', $script);
         self::assertStringContainsString('mv -f -- "$temporary_output" "$output"', $script);
         self::assertStringNotContainsString('--allow-empty', $script);
