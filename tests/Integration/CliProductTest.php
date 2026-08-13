@@ -40,6 +40,27 @@ final class CliProductTest extends TestCase
         self::assertSame([], $result['validationViolations']);
     }
 
+    public function testStandingsModeProducesRankedRowsAndExactTieBreakValues(): void
+    {
+        $root = dirname(__DIR__, 2);
+        [$exit, $stdout, $stderr] = $this->runCli([
+            '--standings',
+            '--tie-breaks=DE/P,BH/C1/P,SB/C1',
+            $root.'/tests/Fixtures/round-2-four.json',
+        ]);
+
+        self::assertSame('', $stderr);
+        self::assertSame(0, $exit);
+        $result = $this->decodeObject($stdout);
+        self::assertSame('ok', $result['status']);
+        self::assertSame('standings', $result['mode']);
+        self::assertSame('PTS,DE/P,BH/C1/P,SB/C1', $result['rankOrder']);
+        self::assertIsArray($result['standings']);
+        self::assertCount(4, $result['standings']);
+        self::assertIsArray($result['ranking']);
+        self::assertArrayHasKey('evaluations', $result['ranking']);
+    }
+
     /**
      * @param list<string> $arguments
      *
