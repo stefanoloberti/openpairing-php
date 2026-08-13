@@ -131,10 +131,14 @@ try {
     echo json_encode($output, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL;
     exit($violations === [] && $result->violations === [] ? 0 : 1);
 } catch (InvalidTournamentState $exception) {
+    $message = $exception->getMessage();
+    if ($exception->diagnosticCode === 'trf.record_required' && str_contains($message, '192 record')) {
+        $message .= ' Legacy TRFs must declare the pairing system explicitly, for example: 192 FIDE_DUTCH_2025.';
+    }
     fwrite(STDERR, json_encode([
         'status' => 'error',
         'code' => $exception->diagnosticCode,
-        'message' => $exception->getMessage(),
+        'message' => $message,
     ], JSON_UNESCAPED_SLASHES).PHP_EOL);
     exit(3);
 } catch (Throwable $exception) {

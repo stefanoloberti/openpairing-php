@@ -14,6 +14,13 @@ php bin/openpairing.php --input-format=trf tournament.trf
 php bin/openpairing.php tournament.trf
 ```
 
+The public codec is intentionally fail-closed and requires record `192` to
+declare the pairing system. Older Dutch TRFs that omit it must be upgraded
+explicitly, for example by adding `192 FIDE_DUTCH_2025`; the CLI does not guess
+the pairing system. The historical laboratory verifier has a separately
+attested compatibility normalizer for legacy corpora and is not the public
+import contract.
+
 Apply the official Baku virtual-point schedule before pairing:
 
 ```console
