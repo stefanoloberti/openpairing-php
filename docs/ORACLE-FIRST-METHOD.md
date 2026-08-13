@@ -2,6 +2,23 @@
 
 ## Current status (2026-08-13)
 
+A closed gate certifies semantics only on the distribution it exercised. The
+500/500 seven-player gate remains valid, but it established only that the
+retained lifecycle was sufficient for those small fields. The first 20 p50
+shards exercised deeper brackets and exposed 14 Gacrux-inferior pairings whose
+first differences are HE2 (9), HO1 (3) and HO5 (2). Scale is therefore a
+semantic probe, not merely a performance variable. Every new field-size stratum
+must be allowed to falsify lifecycle completeness independently; success at a
+smaller size may guard against regressions but never substitutes for that gate.
+
+The p50 campaign was paused as soon as the early classifier proved all 14
+candidate deviations inferior. A narrow experiment that recomputed the number
+of remainder pairs from the post-MDP-freeze matching changed 0/14 results and
+was rejected. The primary BBP source contains a complete S1/S2 exchange phase;
+an isolated counter adjustment is a component candidate, not an alternative to
+porting and testing that state machine. The machine-readable negative control
+is `docs/evidence/negative-p50-remainder-pairs-recompute-20260813.json`.
+
 The epoch-2 frozen Dutch gate is closed at 500/500 exact under tag
 `epoch-2-dutch-500`. Direct-reference public-path samples at 30, 50 and 80
 players are closed at 110/110, 150/150 and 150/150 exact rounds. Complete

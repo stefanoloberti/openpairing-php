@@ -1,0 +1,15 @@
+{
+  "schema": "openpairing.negative-remainder-pairs-recompute/1",
+  "generatedAt": "2026-08-13T11:27:00+02:00",
+  "baseCommit": "2ed46af6f942a3e2273aa5c24f4e2a08e87b1cc6",
+  "hypothesis": "Recomputing homogeneousPairs from the stable post-MDP-freeze matching is sufficient to resolve the 14 p50 inferiorities.",
+  "change": "Recompute homogeneousPairs from the current persistent matching immediately before HO-remainder.",
+  "evaluatedCases": 14,
+  "buckets": [
+    { "round": 29, "cases": 3, "exact": 0, "deviation": 3, "noSolution": 0, "elapsedSeconds": 94.557 },
+    { "round": 30, "cases": 4, "exact": 0, "deviation": 4, "noSolution": 0, "elapsedSeconds": 73.58 },
+    { "round": 31, "cases": 7, "exact": 0, "deviation": 7, "noSolution": 0, "elapsedSeconds": 181.09 }
+  ],
+  "result": "rejected-no-improvement",
+  "conclusion": "The post-freeze remainder-pair count is only one component of BBP exchange; isolated recomputation does not replace S1/S2 exchange selection."
+}
