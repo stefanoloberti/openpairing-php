@@ -106,6 +106,13 @@ tree only after `composer check` succeeds. `-Wip` marks an intentionally
 incomplete branch checkpoint, but the wrapper still requires the rapid gate to
 be green. Official replays never use WIP or dirty trees.
 
+`tools/push_checkpoint.ps1` is the gate-close backup step. It requires a clean
+named branch, pushes the current branch and all tags to both the private GitHub
+`origin` and the OneDrive bare `offsite` remote, then fails unless each remote
+branch resolves to the exact local commit. Run it after every official gate
+commit; the remote verification is part of the checkpoint, not a best-effort
+copy.
+
 Long corpus campaigns are installed under persistent WSL storage at
 `/srv/openpairing-validation`. The current queue uses 20 concurrent PHP/GMP
 workers and small atomic shards: p30 20,000/256, p50 30,000/384, p80
