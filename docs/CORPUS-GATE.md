@@ -14,6 +14,13 @@ workers. p80, p150 and historical misc remain open. Acceleration and the newly
 accepted >256-player scope are tracked separately so they cannot silently
 change the historical denominator.
 
+The first three completed p50 shards provide a measured 20-worker throughput
+sample of 237 tournaments: 83.677 seconds per tournament under contention.
+This projects p50 at 34.87 hours and p80 at 97.75 hours. The p80 value is a
+projection scaled from its attested ten-tournament baseline, not a completed
+p80 measurement. Evidence is
+`evidence/campaign-eta-p50-p80-20w-20260813.json`.
+
 Official replay identity for the active queue:
 
 - Git commit: `c48fd0529fd7d21bec830bebb6579e4506934761`
@@ -94,8 +101,8 @@ closed, the only valid corpus claim is the explicitly stated closed subtotal.
 ## Operations and safety evidence
 
 - Windows legacy scheduled-task inventory:
-  `evidence/windows-legacy-task-inventory-20260813.json` (read-only; no tasks
-  modified).
+  `evidence/task-scheduler-backup-20260813/` (pre/post inventories, 21 XML
+  rollback definitions, five authorized 0.45.5 tasks disabled, none deleted).
 - WSL keepalive and fail-closed supervisor operation: `TOOLCHAIN.md`.
 - Runtime verification method and historical epochs:
   `HISTORICAL-PAIRING-VERIFICATION.md` and `ORACLE-FIRST-METHOD.md`.

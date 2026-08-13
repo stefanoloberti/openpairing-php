@@ -1,0 +1,59 @@
+﻿{
+    "schema":  "openpairing-windows-task-disable-result/v1",
+    "changedAt":  "2026-08-13T09:35:20.6515044+02:00",
+    "computer":  "DESKTOP-3OI0QHR",
+    "operation":  "Disable-ScheduledTask only",
+    "deletedTaskCount":  0,
+    "bandA":  {
+                  "disabledCount":  5,
+                  "before":  [
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-0455-Acceptance5000-1",
+                                     "state":  "Ready"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke-1",
+                                     "state":  "Ready"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke6-1",
+                                     "state":  "Ready"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke12-1",
+                                     "state":  "Ready"
+                                 },
+                                 {
+                                     "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke12-2",
+                                     "state":  "Ready"
+                                 }
+                             ],
+                  "after":  [
+                                {
+                                    "taskName":  "ChessPairings-FIDE-0455-Acceptance5000-1",
+                                    "state":  "Disabled"
+                                },
+                                {
+                                    "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke-1",
+                                    "state":  "Disabled"
+                                },
+                                {
+                                    "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke6-1",
+                                    "state":  "Disabled"
+                                },
+                                {
+                                    "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke12-1",
+                                    "state":  "Disabled"
+                                },
+                                {
+                                    "taskName":  "ChessPairings-FIDE-0455-ArchivePipelineSmoke12-2",
+                                    "state":  "Disabled"
+                                }
+                            ]
+              },
+    "bandB":  {
+                  "disabledCount":  0,
+                  "reason":  "No missing target or repeated-failure evidence."
+              },
+    "negativeControl":  "All authorized tasks were re-queried and reported Disabled."
+}
