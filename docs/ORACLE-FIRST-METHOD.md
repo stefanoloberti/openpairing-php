@@ -1,5 +1,45 @@
 # Oracle-first development method
 
+## Compact operating rules
+
+1. A closed gate certifies only the distribution it exercised; every new scale
+   or tournament shape is a fresh semantic probe. See [current campaign
+   lessons](#current-status-2026-08-13).
+2. An oracle validates outputs, not mechanisms; a mechanism claim also needs
+   the normative text or a pinned primary source. See [semantic baseline
+   history](#semantic-baseline-reset-historical-epoch-narrative).
+3. A phase present upstream but absent locally is a structural difference, not
+   proof that it caused the observed deviation. See [the p50 float-age
+   counterexample](#current-status-2026-08-13).
+4. A checker's first differing criterion identifies where quality first becomes
+   measurable, not necessarily the decision that caused the error. See [the p9
+   QC20/QC11 case](#current-status-2026-08-13).
+5. Every diagnostic and oracle must report a non-zero evaluated-case count and
+   fail closed on an empty selection. See [historical diagnostic
+   controls](#semantic-baseline-reset-historical-epoch-narrative).
+6. Evidence must attest the source, harness, corpus, semantic epoch and runtime
+   backend; mixed identities must never be aggregated. See [workspace
+   isolation](#physical-workspace-isolation).
+7. Official runs use a clean, committed, physically independent checkout whose
+   isolation is negatively tested before computation begins. See [workspace
+   isolation](#physical-workspace-isolation).
+8. The denominator is an input to the oracle: partitions and exclusions must
+   reconcile exactly before a corpus claim can close. See [the campaign
+   reconciliation](#current-status-2026-08-13).
+9. Change one semantic or performance factor per checkpoint, measure it, and
+   retain negative experiments as evidence rather than compensating patches.
+   See [semantic baseline history](#semantic-baseline-reset-historical-epoch-narrative).
+10. Above the legacy engine's practical range, compare directly with the
+    recorded reference and classify every non-exact result; absence of a legacy
+    comparison is never success. See [large-field verification](#current-status-2026-08-13).
+11. State semantics reconstructed by a historical harness must also be proven
+    through the live public API with a discriminating regression. See [the
+    round-indexed float test](#current-status-2026-08-13).
+12. Fail closed at every boundary: no silent infrastructure errors, convenient
+    "equivalent" bucket, partial aggregate, automatic retry after a semantic
+    failure, or claim ahead of its evidence. See [workspace
+    isolation](#physical-workspace-isolation).
+
 ## Current status (2026-08-13)
 
 A closed gate certifies semantics only on the distribution it exercised. The
@@ -120,10 +160,12 @@ isolation check before spending corpus time.
 Two later external WSL shutdowns demonstrated that immutable source identity
 is necessary but not sufficient when corpus, shards and reports live in
 `/tmp`. Official campaigns now live under `/srv/openpairing-validation`,
-finalize each small shard report by atomic rename, and run as boot-enabled
-work under a single fail-closed supervisor with `Restart=on-failure`. It runs
-campaign and classification stages strictly in sequence; only a zero exit can
-advance to the next field size. A Windows-side WSL keepalive prevents the
+finalize each small shard report by atomic rename, and run as boot-enabled work
+under a single fail-closed supervisor with `Restart=no`. The unit resumes at
+machine boot, but a failed campaign remains stopped for diagnosis instead of
+entering an automatic retry loop. It runs campaign and classification stages
+strictly in sequence; only a zero exit can advance to the next field size. A
+Windows-side WSL keepalive prevents the
 distribution lifecycle from stopping systemd when the last SSH client exits.
 A restart therefore loses at most the currently running small shards and can
 never turn a partial JSON file into evidence. The earlier multi-unit
