@@ -36,7 +36,9 @@ arbiter review.
   first-round colour alternation when the highest TPN is absent.
 - Pure-PHP polynomial weighted Blossom core with arbitrary-width exact weights,
   BBP provenance, 1,000-graph exhaustive differential gate and 300-vertex stress
-  coverage. Dutch integration remains pending its complete quality function.
+  coverage. At that historical checkpoint Dutch integration still awaited its
+  complete quality function; the later public-engine item below records its
+  completion.
 - Exact Dutch HE1-HE2 and HO1-HO5 local bracket ordering, including a minimized
   Gacrux regression; the frozen 100x7 replay improved from 426/500 to 441/500
   exact rounds and has no residual fixed-bracket HE/HO deviation.
