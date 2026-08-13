@@ -1,0 +1,21 @@
+{
+  "schema": "openpairing.large-player-parser-evidence/1",
+  "featureCommit": "1aa970e",
+  "guardRailPlayers": 4096,
+  "roundTripEvery": 1,
+  "totals": {
+    "files": 546,
+    "decoded": 546,
+    "roundTrip": 546,
+    "diagnostics": 0,
+    "elapsedSeconds": 527.724
+  },
+  "partitions": [
+    {"name":"t_n61_p300_d2_s50","players":300,"files":200,"bytes":42109800,"manifestSha256":"2783a15f831c23e1f360867e1830f7dfcc984f21190306c52e8d91124c1c9d2f","elapsedSeconds":163.694},
+    {"name":"t_n31_p600_d1_s50","players":600,"files":200,"bytes":48169800,"manifestSha256":"711596c47a320f11022eadad4831d1482f58a5eff5effd00291c6fd8162817ca","elapsedSeconds":170.373},
+    {"name":"t_n21_p1200_d0_s200","players":1200,"files":88,"bytes":31807776,"manifestSha256":"5c6b32ef8982df22f4ecde62f0de341ce728fc6a8866bcf8f426a405feeccca8","elapsedSeconds":91.697},
+    {"name":"t_n21_p1800_d0_s200","players":1800,"files":41,"bytes":22224132,"manifestSha256":"e304e873db1777687570113eb262b7ac24621c2439d14714e06c5abf1e68d345","elapsedSeconds":68.816},
+    {"name":"t_n21_p2400_d0_s200","players":2400,"files":17,"bytes":12285084,"manifestSha256":"3d9e63e2be9068a44ac30418341acf92a112e09ee376bbe26b9d6c0c21777db6","elapsedSeconds":33.144}
+  ],
+  "pairingGate": "open for advanced rounds at this scale"
+}

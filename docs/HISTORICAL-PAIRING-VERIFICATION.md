@@ -277,6 +277,10 @@ measurement and is not implied by parser capacity. The deterministic public
 initial-round path has separately produced 1,200 valid tables for 2,400
 players, zero violations, in 0.005 seconds of pairing time; advanced-round
 Blossom performance at this scale remains unmeasured.
+The full formerly-excluded large-player parser corpus is now closed separately:
+546/546 tournaments at 300, 600, 1,200, 1,800 and 2,400 players decode and
+complete a 100% round-trip with zero diagnostics. Evidence and per-partition
+manifests are in `docs/evidence/large-player-parser-546-1aa970e.json`.
 The public Dutch path is polynomial and no longer inherits the bounded legacy
 enumerator's combinatorial guard, but raising the format limit requires its own
 codec, memory and latency gate and is not part of the 122,008-tournament
