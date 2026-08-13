@@ -107,7 +107,7 @@ incomplete branch checkpoint, but the wrapper still requires the rapid gate to
 be green. Official replays never use WIP or dirty trees.
 
 Long corpus campaigns are installed under persistent WSL storage at
-`/srv/openpairing-validation`. The current queue uses 12 concurrent PHP/GMP
+`/srv/openpairing-validation`. The current queue uses 20 concurrent PHP/GMP
 workers and small atomic shards: p30 20,000/256, p50 30,000/384, p80
 20,000/256 and acceleration 1,000/64. A single boot-enabled
 `openpairing-full-corpus.service` supervisor invokes campaign then Gacrux
@@ -131,3 +131,10 @@ were independently attributed by Event 1074 to local FIDE-laboratory
 automation (`wmiprvse.exe` at 05:12 and an explicit sandbox credential-repair
 `shutdown.exe` at 05:33), not to OOM or the OpenPairing engine. The latter
 sandbox task is disabled.
+
+The worker count was raised from 12 to 20 only after the shutdown causes were
+separated from engine load. At the scale checkpoint the WSL exposed 28 logical
+CPUs, load 12.03, 45 GiB available RAM, zero swap use and roughly 60 MiB RSS
+per verifier. Twenty workers leave eight logical CPUs for the host, staging and
+classification; every campaign script uses the same value so reboot recovery
+does not silently change concurrency.

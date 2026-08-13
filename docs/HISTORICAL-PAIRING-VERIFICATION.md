@@ -20,7 +20,8 @@
   reducing HO operations from 2,228,136 to 234,256 (-89.5%) and end-to-end
   time from 13.839 to 2.430 seconds (5.69x). The public ten-tournament batch
   still took 743.355 seconds for 150 rounds, so full-corpus throughput remains
-  the open blocker.
+  the open blocker. The controlled measurement and both runtime identities are
+  recorded in `docs/evidence/performance-residual-cache-p80-round1.json`.
 - The global matcher now backs the public Dutch engine. Staging deployment and
   reproducible release packaging are complete at release-candidate level. The
   2026-08-13 staging deployment passed its pre-switch test/static-analysis/CLI
