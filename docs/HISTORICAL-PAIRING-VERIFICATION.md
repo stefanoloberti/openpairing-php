@@ -54,6 +54,15 @@ directly to the recorded TRF reference and reports four operative buckets:
 with `--sample-set large-field`. The bounded engine remains an additional
 small-field oracle, never a prerequisite for classifying a large-field round.
 
+The older shadow reports at 30 and 50 players are not large-field acceptance
+evidence: the bounded legacy path reached its resource limit on 23 and 78
+rounds respectively, and one 50-player `same-deviation` still required oracle
+classification in that obsolete comparison mode. Those gaps motivated the
+direct-reference protocol above. They do not occur in the later attested
+public-path reports (`pairing-public-p30-gmp-jit.json` and
+`pairing-public-p50-gmp-jit.json`), where every attempted round is compared
+directly with the TRF reference and all 260 are exact.
+
 ## Pairing baseline epoch 2 (2026-08-12)
 
 The pairing replay baseline was reset after finding that the harness recorded a

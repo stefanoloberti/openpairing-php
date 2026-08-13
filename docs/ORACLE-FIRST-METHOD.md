@@ -16,6 +16,13 @@ versus the recorded reference: exact, colour variant, deviation or no matching.
 Every non-exact completed candidate is classified by Gacrux. Legacy evidence is
 used only for rounds where the legacy engine actually terminates.
 
+This distinction was introduced after the first 30/50-player shadow runs left
+23 and 78 rounds without a legacy comparison and retained one unclassified
+50-player `same-deviation`. “Zero shadow no-matching” was therefore not a
+correctness claim. The replacement public-path runs compare every round
+directly with the recorded reference; only those direct-reference reports may
+close a large-field sample.
+
 The first full corpus partition is now closed: all 49,961 rounds from 10,000
 seven-player tournaments are exact at commit `4a93b7a`. Before that run, the
 same partition produced 37 Gacrux-inferior deviations and six no-solutions.

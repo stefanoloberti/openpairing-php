@@ -85,7 +85,9 @@ attested:
    epoch-2 legacy-exact rounds and no unclassified shadow bucket.
 2. **Satisfied.** Exact direct-to-reference public-engine results: 110/110
    rounds at 30 players, 150/150 at 50 and 150/150 at 80, with zero
-   no-solutions, colour variants or deviations.
+   no-solutions, colour variants or deviations. Earlier five-bucket shadow
+   runs are explicitly non-gating where the bounded legacy path reached a
+   resource limit; criterion 2 is based on the later direct-reference reports.
 3. **Open.** Full replay of all 122,008 previously decodable non-accelerated tournaments.
 
 Runtime-identity attestation from the historical verifier is part of every gate.
