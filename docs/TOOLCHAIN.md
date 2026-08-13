@@ -171,3 +171,14 @@ CPUs, load 12.03, 45 GiB available RAM, zero swap use and roughly 60 MiB RSS
 per verifier. Twenty workers leave eight logical CPUs for the host, staging and
 classification; every campaign script uses the same value so reboot recovery
 does not silently change concurrency.
+
+Before a large-field campaign accepts a completed shard,
+`tools/corpus/classify_shard_fail_fast.sh` checks fatal engine counters and
+classifies every retained deviation with Gacrux. A confirmed inferior result,
+an incomplete classification, a no-solution/resource-limit result or an
+oracle infrastructure error creates an atomically written persistent stop
+file. Workers must check that file before starting the next shard. Reports with
+zero oracle-required cases receive an explicit zero-case PASS record rather
+than invoking the classifier. This per-shard gate is the permanent early-stop
+watcher introduced after the p50 partial run exposed a semantic defect long
+before the partition aggregate could be produced.
