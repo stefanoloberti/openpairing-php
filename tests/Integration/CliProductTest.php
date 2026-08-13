@@ -8,6 +8,16 @@ use PHPUnit\Framework\TestCase;
 
 final class CliProductTest extends TestCase
 {
+    public function testUnknownOptionFailsWithAnArgumentDiagnostic(): void
+    {
+        [$exit, , $stderr] = $this->runCli(['--does-not-exist']);
+
+        self::assertSame(3, $exit);
+        $error = $this->decodeObject($stderr);
+        self::assertSame('cli.arguments', $error['code']);
+        self::assertSame('Unknown command-line option: --does-not-exist', $error['message']);
+    }
+
     public function testLegacyTrfWithoutPairingSystemReturnsActionableError(): void
     {
         $root = dirname(__DIR__, 2);
