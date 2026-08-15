@@ -26,10 +26,10 @@ final class SubmissionReadinessVerifierTest extends TestCase
 
     public function testRepositoryLedgerIsTruthfullyNoGo(): void
     {
-        [$exit, $stdout, $stderr] = $this->run(dirname(__DIR__, 2).'/docs/schema/submission-readiness-0.9.json');
+        [$exit, $stdout, $stderr] = $this->runVerifier(dirname(__DIR__, 2).'/docs/schema/submission-readiness-0.9.json');
 
         self::assertSame(1, $exit, $stderr);
-        $report = json_decode($stdout, true, flags: JSON_THROW_ON_ERROR);
+        $report = $this->decodeReport($stdout);
         self::assertSame('NO_GO', $report['status']);
         self::assertGreaterThan(0, $report['counts']['blocking']);
         self::assertGreaterThan(0, $report['counts']['evidenceFilesVerified']);
@@ -38,12 +38,14 @@ final class SubmissionReadinessVerifierTest extends TestCase
     public function testAllClosedLedgerPassesWithExactEvidenceHash(): void
     {
         $evidence = dirname(__DIR__, 2).'/docs/API-STABILITY.md';
-        $manifest = $this->writeManifest('closed', hash_file('sha256', $evidence));
+        $hash = hash_file('sha256', $evidence);
+        self::assertIsString($hash);
+        $manifest = $this->writeManifest('closed', $hash);
 
-        [$exit, $stdout, $stderr] = $this->run($manifest);
+        [$exit, $stdout, $stderr] = $this->runVerifier($manifest);
 
         self::assertSame(0, $exit, $stderr);
-        $report = json_decode($stdout, true, flags: JSON_THROW_ON_ERROR);
+        $report = $this->decodeReport($stdout);
         self::assertSame('GO', $report['status']);
         self::assertSame(0, $report['counts']['blocking']);
     }
@@ -52,7 +54,7 @@ final class SubmissionReadinessVerifierTest extends TestCase
     {
         $manifest = $this->writeManifest('closed', str_repeat('0', 64));
 
-        [$exit, , $stderr] = $this->run($manifest);
+        [$exit, , $stderr] = $this->runVerifier($manifest);
 
         self::assertSame(2, $exit);
         self::assertStringContainsString('evidence SHA-256 mismatch', $stderr);
@@ -78,8 +80,20 @@ final class SubmissionReadinessVerifierTest extends TestCase
         return $manifest;
     }
 
+    /** @return array{status: string, counts: array{blocking: int, evidenceFilesVerified: int}} */
+    private function decodeReport(string $json): array
+    {
+        $report = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+        if (!is_array($report)) {
+            self::fail('Submission-readiness verifier did not return a JSON object.');
+        }
+
+        /** @var array{status: string, counts: array{blocking: int, evidenceFilesVerified: int}} $report */
+        return $report;
+    }
+
     /** @return array{int, string, string} */
-    private function run(string $manifest): array
+    private function runVerifier(string $manifest): array
     {
         $root = dirname(__DIR__, 2);
         $process = proc_open([
