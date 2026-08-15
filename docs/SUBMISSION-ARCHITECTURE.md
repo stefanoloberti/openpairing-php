@@ -53,3 +53,6 @@ product identity:
 
 No previous Desktop or OpenPairing count may silently replace one of these
 exact-candidate checks.
+
+The fail-closed state, transaction, identity and evidence boundary for such a
+candidate is specified in `THP-INTEGRATION-CONTRACT.md`.

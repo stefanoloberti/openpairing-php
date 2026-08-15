@@ -76,7 +76,8 @@
       "status": "open",
       "evidence": [
         {"path": "docs/FIDE-SUBMISSION-READINESS.md"},
-        {"path": "docs/SHADOW-VALIDATION.md"}
+        {"path": "docs/SHADOW-VALIDATION.md"},
+        {"path": "docs/THP-INTEGRATION-CONTRACT.md"}
       ]
     },
     {

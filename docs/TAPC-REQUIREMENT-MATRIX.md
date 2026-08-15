@@ -58,6 +58,8 @@ identity must not be combined silently.
 
 - `FIDE-SUBMISSION-READINESS.md`: fail-closed readiness ledger and blockers.
 - `SUBMISSION-ARCHITECTURE.md`: product-identity boundary and sequencing.
+- `THP-INTEGRATION-CONTRACT.md`: exact adapter, transaction and fail-closed
+  product boundary.
 - `TEC-SCOPE-ENQUIRY-DRAFT.md`: owner-review questions for TEC.
 - `CORPUS-GATE.md`: immutable corpus identities and partition status.
 - `TRF26-INDIVIDUAL-GAP-AUDIT.md`: declared codec surface and record `299` decision.
@@ -67,4 +69,3 @@ identity must not be combined silently.
 - `schema/submission-readiness-0.9.json`: machine-readable authoritative
   readiness status; `php tools/verify_submission_readiness.php` must continue
   to report `NO_GO` until every required gate is genuinely closed.
-
