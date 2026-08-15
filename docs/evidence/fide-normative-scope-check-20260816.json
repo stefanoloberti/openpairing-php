@@ -18,6 +18,13 @@
       "url": "https://www.cognitoforms.com/FIDE/TECMenu",
       "title": "TEC Online Forms",
       "role": "Application entry point referenced by the FIDE Handbook"
+    },
+    {
+      "url": "https://handbook.fide.com/chapter/C0407202602",
+      "title": "FIDE Handbook C.04.7 - Accelerated Systems",
+      "effectiveFrom": "2026-02-01",
+      "observedArticles": ["0", "1.1", "1.2", "1.3", "1.4", "1.5"],
+      "observedCurrentMethods": ["Baku Acceleration Method"]
     }
   ],
   "confirmedScope": {
@@ -28,6 +35,7 @@
     "ratingListImportRequired": true,
     "declaredFideSwissSystemRequired": true,
     "allFideAccelerationMethodsRequired": true,
+    "currentPublishedAccelerationMethodsObserved": ["Baku Acceleration Method"],
     "mandatoryTieBreaksRequired": true,
     "englishFideModeAndManualRequired": true,
     "latestTrfAndBackwardCompatibilityRequired": true,
