@@ -3,6 +3,14 @@
 Audited on 2026-08-15 against the FIDE rules effective in 2026. This document
 is a fail-closed readiness ledger, not a certification claim.
 
+The machine-readable companion is
+`schema/submission-readiness-0.9.json`. Run
+`php tools/verify_submission_readiness.php`; exit `1` and status `NO_GO` are
+the expected result while any required gate remains open or external. A gate
+may be changed to `closed` only with existing hash-pinned evidence. Missing or
+changed evidence is an infrastructure error (exit `2`), preventing a prose
+update from manufacturing a submission-ready verdict.
+
 ## Correct submission target
 
 The controlling process from 1 March 2026 is the FIDE Technical Commission

@@ -1,0 +1,101 @@
+{
+  "schema": "openpairing.submission-readiness/1",
+  "target": "OpenPairingPHP 1.0 or exact THP integration accepted by FIDE TEC",
+  "asOf": "2026-08-16",
+  "gates": [
+    {
+      "id": "tec-product-scope",
+      "description": "TEC confirms the applicable assessment route or an exact ChessPairings THP integration is selected.",
+      "required": true,
+      "status": "external",
+      "evidence": [
+        {"path": "docs/SUBMISSION-ARCHITECTURE.md"},
+        {"path": "docs/TEC-SCOPE-ENQUIRY-DRAFT.md"}
+      ]
+    },
+    {
+      "id": "public-api-freeze",
+      "description": "The supported library API is frozen and mechanically verified.",
+      "required": true,
+      "status": "closed",
+      "evidence": [
+        {"path": "docs/schema/public-api-0.9.json", "sha256": "de3cae95c62f4971d128a789150c4b5f956c4064238df8cda57eb1b91512af87"},
+        {"path": "docs/API-STABILITY.md", "sha256": "40954c054d5b9deb2b0e612e633679178accbfc2fa62f4f949d62712133a2691"}
+      ]
+    },
+    {
+      "id": "rc8-reproducible-package-checkpoint",
+      "description": "The current RC8 source/runtime package checkpoint is reproducible and identity-scoped.",
+      "required": true,
+      "status": "closed",
+      "evidence": [
+        {"path": "docs/evidence/rc8-trf26-and-p80-realignment-20260815.json", "sha256": "282bd1016d142709a88ef548b86d0deaa548e611e4e868179a4f81686f3da850"}
+      ]
+    },
+    {
+      "id": "dutch-corpus",
+      "description": "All historical corpus partitions close under one immutable final identity with every non-exact case classified.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/CORPUS-GATE.md"}
+      ]
+    },
+    {
+      "id": "accelerated-corpus",
+      "description": "The Baku/accelerated corpus closes under the same final identity.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/FIDE-SUBMISSION-READINESS.md"}
+      ]
+    },
+    {
+      "id": "public-ptc-rtg-final-package",
+      "description": "PTC and RTG are included in and reproduced from the exact final non-RC distribution.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/evidence/rc7-public-tools-gate-20260815.json"}
+      ]
+    },
+    {
+      "id": "trf26-declared-scope",
+      "description": "The final product claim explicitly resolves generic individual record 299 and any TEC-required backward formats.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/TRF26-INDIVIDUAL-GAP-AUDIT.md"}
+      ]
+    },
+    {
+      "id": "complete-thp-workflow",
+      "description": "The exact submitted product proves rating import, tournament/player/result workflow, FIDE mode, recovery and English UI.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/FIDE-SUBMISSION-READINESS.md"},
+        {"path": "docs/SHADOW-VALIDATION.md"}
+      ]
+    },
+    {
+      "id": "controlled-final-environment",
+      "description": "A TEC-accessible controlled environment reproduces the exact final product, PTC and RTG.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/CONTROLLED-ENVIRONMENT.md"}
+      ]
+    },
+    {
+      "id": "stable-release-identity",
+      "description": "One clean non-RC product/source/runtime identity is frozen, signed or checksummed and published without mixed evidence.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/PACKAGING.md"},
+        {"path": "docs/RELEASE.md"}
+      ]
+    }
+  ]
+}
