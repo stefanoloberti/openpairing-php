@@ -107,13 +107,15 @@ final class ShadowEvidenceVerifierTest extends TestCase
 
     public function testUnclassifiedNonExactTurnIsNoGo(): void
     {
+        $variant = $this->event('event-black', 'black', 'legal-variant', [
+            'even-field', 'scheduled-bye', 'accelerated',
+        ], 'c');
+        $variant['primaryOutputSha256'] = str_repeat('d', 64);
         $events = [
             $this->event('event-white', 'white', 'exact', [
                 'odd-field', 'withdrawal', 'pab', 'forfeit',
             ], 'b'),
-            $this->event('event-black', 'black', 'legal-variant', [
-                'even-field', 'scheduled-bye', 'accelerated',
-            ], 'c'),
+            $variant,
         ];
         [$manifest, $stream] = $this->writeBatch($events);
 
@@ -138,6 +140,42 @@ final class ShadowEvidenceVerifierTest extends TestCase
 
         self::assertSame(2, $exit);
         self::assertStringContainsString('Personal-data key is forbidden', $stderr);
+    }
+
+    public function testLocalViolationIsRepresentedAsNoGo(): void
+    {
+        $event = $this->event('event-local-violation', 'white', 'local-violation', [
+            'odd-field', 'even-field', 'withdrawal', 'pab', 'forfeit',
+            'scheduled-bye', 'accelerated',
+        ], 'b');
+        $event['validatorOutcome'] = 'fail';
+        $event['classificationReference'] = 'validator-report-sha256:'.str_repeat('4', 64);
+        $event['reproductionReference'] = 'fixture-sha256:'.str_repeat('5', 64);
+        [$manifest, $stream] = $this->writeBatch([$event]);
+
+        [$exit, $stdout, $stderr] = $this->runVerifier($manifest, $stream, 1);
+
+        self::assertSame(1, $exit, $stderr);
+        $report = $this->decodeReport($stdout);
+        self::assertSame('NO_GO', $report['status']);
+        self::assertSame('blocking-outcomes', $report['blockers'][0]['code']);
+        self::assertSame(0, $report['counts']['unclassifiedNonExact']);
+    }
+
+    public function testNonExactStatusCannotReuseExactFunctionalHash(): void
+    {
+        $event = $this->event('event-false-variant', 'black', 'legal-variant', [
+            'odd-field', 'even-field', 'withdrawal', 'pab', 'forfeit',
+            'scheduled-bye', 'accelerated',
+        ], 'd');
+        $event['classificationReference'] = 'classification-sha256:'.str_repeat('4', 64);
+        $event['reproductionReference'] = 'fixture-sha256:'.str_repeat('5', 64);
+        [$manifest, $stream] = $this->writeBatch([$event]);
+
+        [$exit, , $stderr] = $this->runVerifier($manifest, $stream, 1);
+
+        self::assertSame(2, $exit);
+        self::assertStringContainsString('identical functional hashes', $stderr);
     }
 
     /**
@@ -218,7 +256,7 @@ final class ShadowEvidenceVerifierTest extends TestCase
         return [$manifest, $stream];
     }
 
-    /** @return array{status: string, counts: array{attempted: int, observed: int}, blockers: list<array{code: string}>} */
+    /** @return array{status: string, counts: array{attempted: int, observed: int, unclassifiedNonExact: int}, blockers: list<array{code: string}>} */
     private function decodeReport(string $json): array
     {
         $report = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
@@ -226,7 +264,7 @@ final class ShadowEvidenceVerifierTest extends TestCase
             self::fail('Shadow evidence verifier did not return a JSON object.');
         }
 
-        /** @var array{status: string, counts: array{attempted: int, observed: int}, blockers: list<array{code: string}>} $report */
+        /** @var array{status: string, counts: array{attempted: int, observed: int, unclassifiedNonExact: int}, blockers: list<array{code: string}>} $report */
         return $report;
     }
 

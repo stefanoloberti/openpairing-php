@@ -24,6 +24,20 @@ const SHADOW_OBSERVED_STATUSES = [
     'no-solution',
     'resource-limit',
 ];
+const SHADOW_VALID_OUTPUT_STATUSES = [
+    'exact',
+    'same-pairs-colour-variant',
+    'legal-variant',
+    'inferior',
+];
+const SHADOW_NON_EXACT_OBSERVED_STATUSES = [
+    'same-pairs-colour-variant',
+    'legal-variant',
+    'inferior',
+    'local-violation',
+    'no-solution',
+    'resource-limit',
+];
 const SHADOW_BLOCKING_STATUSES = [
     'inferior',
     'local-violation',
@@ -188,14 +202,28 @@ try {
             if ($primaryHash === null) {
                 throw new RuntimeException(sprintf('Observed shadow event %d lacks a primary functional hash.', $events));
             }
-            $shadowHash = requireSha256($event['shadowOutputSha256'], sprintf('event %d shadowOutputSha256', $events));
-            if ($validatorOutcome !== 'pass') {
-                throw new RuntimeException(sprintf('Observed shadow event %d lacks a passing local validator.', $events));
+            $shadowHash = nullableSha256($event['shadowOutputSha256'], sprintf('event %d shadowOutputSha256', $events));
+            if (in_array($status, SHADOW_VALID_OUTPUT_STATUSES, true)) {
+                if ($shadowHash === null) {
+                    throw new RuntimeException(sprintf('Shadow event %d lacks a functional output hash.', $events));
+                }
+                if ($validatorOutcome !== 'pass') {
+                    throw new RuntimeException(sprintf('Valid-output shadow event %d lacks a passing local validator.', $events));
+                }
+            } elseif ($status === 'local-violation') {
+                if ($shadowHash === null || $validatorOutcome !== 'fail') {
+                    throw new RuntimeException(sprintf('Local-violation shadow event %d must carry an output hash and a failing validator.', $events));
+                }
             }
             if ($status === 'exact' && !hash_equals($primaryHash, $shadowHash)) {
                 throw new RuntimeException(sprintf('Exact shadow event %d has different functional hashes.', $events));
             }
-            if (in_array($status, ['same-pairs-colour-variant', 'legal-variant'], true)
+            if (in_array($status, ['same-pairs-colour-variant', 'legal-variant', 'inferior'], true)
+                && $shadowHash !== null
+                && hash_equals($primaryHash, $shadowHash)) {
+                throw new RuntimeException(sprintf('Non-exact shadow event %d has identical functional hashes.', $events));
+            }
+            if (in_array($status, SHADOW_NON_EXACT_OBSERVED_STATUSES, true)
                 && (!is_string($event['classificationReference'] ?? null)
                     || trim($event['classificationReference']) === ''
                     || !is_string($event['reproductionReference'] ?? null)
