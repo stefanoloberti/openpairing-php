@@ -7,16 +7,17 @@ campaign. A partition is closed only when its committed evidence records the
 complete denominator, exact/reference comparison, source tree, replay harness
 and corpus identity. Parser/round-trip coverage is not pairing verification.
 
-As of 2026-08-13, 69,998 of the historical 122,008 decodable tournaments are
-closed: 609,874/609,874 attempted rounds are exact, with zero colour variants,
+As of 2026-08-15, 99,998 of the historical 122,008 decodable tournaments are
+closed: 1,378,198/1,378,198 attempted rounds are exact, with zero colour variants,
 pairing deviations, no-solutions or resource limits. An early p50 run was
 stopped after 14/14 candidate deviations proved inferior. That diagnostic was
 then invalidated as a product verdict: the replay aged float history by stored
 participations rather than tournament-round identity. The isolated RC6 fix
 makes all 20 affected file/round tuples exact and reconfirms the small-field
-gate at 500/500. A fresh p50 replay is active under the corrected semantic
-identity and per-shard fail-closed Gacrux watcher. p80, p150 and historical
-misc remain open.
+gate at 500/500. The fresh p50 replay closed at 30,000/30,000 tournaments and
+768,324/768,324 exact rounds under the corrected semantic identity and
+per-shard fail-closed Gacrux watcher. p80 epoch 2 is active; p150 and historical
+misc remain queued behind it.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
 
@@ -44,9 +45,9 @@ independent. Historical evidence is
 
 Official replay identity for the active queue:
 
-- Git campaign-tool commit: `dcf92df7e7e8341c167c00d1d46ee0d25069bd86`
+- Git campaign-tool commit: `94065712e2157341e41642067131089632cb74fe`
 - source tree SHA-256: `4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74`
-- harness SHA-256: `f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093`
+- harness SHA-256: `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c`
 - float semantics: `fide-dutch-float/3-round-indexed`
 - arithmetic: GMP; OPcache CLI and JIT enabled; 20 workers
 - persistent root: `/srv/openpairing-validation`
@@ -63,8 +64,8 @@ fails closed if inference is impossible. A backward scan found zero inference
 mismatches against 34,791 explicit records and zero indeducible files; all 217
 observed variants replay exact. The public codec continues to reject a missing
 152 explicitly. p80 may restart only under a newly committed campaign-tool
-identity with the source-tree lock checked at installation and before every
-shard, and with per-shard classification. Evidence is
+identity with the campaign commit, source-tree and harness lock checked at
+installation and before every shard, and with per-shard classification. Evidence is
 `evidence/p80-initial-colour-provenance-20260815.json`.
 
 ## Historical denominator: 122,008
@@ -75,11 +76,11 @@ shard, and with per-shard classification. Evidence is
 | p9 | 10,000 | 9,999 | 9,999 | 69,922 / 69,922 | closed; one corrupt input | `evidence/pairing-corpus-p9-full-14539a6.json` |
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
-| p50 | 30,000 | pending fresh replay | pending | old 40,304-round diagnostic invalidated; 20/20 affected tuples exact after fix | active under RC6 | partial and correction evidence linked above |
-| p80 | 20,000 | pending | pending | pending | queued | aggregate pending |
+| p50 | 30,000 | 30,000 | 30,000 | 768,324 / 768,324 | closed | `evidence/p50-full-dcf92df-20260815.json` |
+| p80 | 20,000 | pending | pending | pending | active epoch 2 under `9406571` | aggregate pending |
 | p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |
-| **Total** | **122,010 read** | **122,008 expected decodable** | **69,998 closed** | **609,874 / 609,874 closed** | **open** | — |
+| **Total** | **122,010 read** | **122,008 expected decodable** | **99,998 closed** | **1,378,198 / 1,378,198 closed** | **open** | — |
 
 The two read/decoded differences are corrupt corpus records, not engine
 rejections. The 122,008 denominator is the historical pairing gate used before

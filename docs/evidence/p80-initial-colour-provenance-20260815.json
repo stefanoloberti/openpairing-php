@@ -69,9 +69,23 @@
     }
   },
   "failClosedControls": {
-    "wrongIdentity": {"exitCode": 4, "runnerCreated": false},
+    "wrongSourceIdentity": {"exitCode": 4, "runnerCreated": false},
+    "wrongHarnessIdentity": {"exitCode": 4, "runnerCreated": false},
+    "wrongCampaignCommit": {"exitCode": 4, "runnerCreated": false},
     "incompleteReport": {"exitCode": 25, "stopReason": "incomplete-evaluation"},
     "diagnosticReport": {"exitCode": 26, "stopReason": "report-diagnostics-1"}
+  },
+  "replacementQueue": {
+    "campaignToolCommit": "94065712e2157341e41642067131089632cb74fe",
+    "sourceTreeSha256": "4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "release": "/srv/openpairing-validation/releases/9406571",
+    "campaign": "/srv/openpairing-validation/campaigns/p80-epoch2-9406571",
+    "startedAt": "2026-08-15T20:56:17+02:00",
+    "workers": 20,
+    "shards": 256,
+    "expectedFiles": 20000,
+    "perShardClassification": true
   },
   "conclusion": "The engine is unchanged. The variants were produced by replay input normalization, not Dutch pairing or forfeit colour history."
 }

@@ -203,18 +203,26 @@ evidence rather than an unrecorded property of the host.
 Product-release identity and campaign-tool identity are intentionally distinct.
 For an active replay, monitoring and acceptance compare the runtime lock with
 the campaign identity declared in `CORPUS-GATE.md`, not with the product tag in
-`RELEASE.md`. The RC6 product commit `b6a2c1b` is an ancestor of the active
-campaign-tool commit `dcf92df`; that checkout has source-tree SHA-256
+`RELEASE.md`. The RC6 product commit `b6a2c1b` is an ancestor of the campaign
+tooling. The p50 checkout was `dcf92df`; the p80 epoch-2 queue is
+`94065712e2157341e41642067131089632cb74fe`. Both have source-tree SHA-256
 `4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74`
-and float semantics `fide-dutch-float/3-round-indexed`. Comparing it directly
-with the RC6 tag caused and then disproved a monitoring false positive on
-2026-08-13.
+and float semantics `fide-dutch-float/3-round-indexed`, while their harness
+hashes differ. Comparing a campaign checkout directly with the RC6 tag caused
+and then disproved a monitoring false positive on 2026-08-13.
 
 The same launch exposed a quoting defect in the first generated p50 runner:
 literal quotes reached `xargs -P` as `"20"`, causing six fail/restart cycles
 between 13:36:32 and 13:39:20. Commit `eabc29e` corrected the generator before
 the immutable `dcf92df` campaign checkout was installed. The installed p50
-runner now contains `xargs -r -P "$workers"`, passes `bash -n`, and the queued
-p80 runner uses the already-valid fixed integer form `-P20`. The integration
-gate asserts both the required generated form and absence of the escaped-quote
-regression.
+runner contains `xargs -r -P "$workers"` and passed `bash -n`.
+
+The first p80 transition later selected the old `c48fd05` runner. It was
+stopped and quarantined after 17 reports. Epoch 2 uses four distinct campaign
+directories (`p80`, `p150`, `misc` and `accel`, all suffixed
+`epoch2-9406571`) and a supervisor containing only those identity-scoped
+stages. Installation and every shard now verify a three-part campaign lock:
+Git campaign-tool commit, runtime source-tree SHA-256 and replay-harness
+SHA-256. Negative controls independently changed each field; every mismatch
+exited before a runner was created. The integration gate also asserts the
+required generated xargs form and absence of the escaped-quote regression.
