@@ -13,13 +13,15 @@ expected_host=${8:?Missing expected source host}
 expected_source=${9:?Missing expected source-tree SHA-256}
 expected_harness=${10:?Missing expected harness SHA-256}
 expected_commit=${11:?Missing expected campaign commit}
+importer_dir=$(cd -- "$(dirname -- "$0")" && pwd -P)
+validator="$importer_dir/validate_cross_worker_import.php"
 
 [[ "$shard" =~ ^s[0-9]{3}$ ]] || { echo "Unsafe shard label: $shard" >&2; exit 2; }
 case "$campaign" in /srv/openpairing-validation/campaigns/*) ;; *) echo "Unsafe campaign root: $campaign" >&2; exit 2 ;; esac
 test -s "$report"
 test -s "$attestation"
 test -d "$corpus_root"
-test -x "$source_tree/tools/corpus/validate_cross_worker_import.php"
+test -x "$validator"
 test -x "$source_tree/tools/corpus/classify_shard_fail_fast.sh"
 test -x "$upstream/venv/bin/python"
 
@@ -58,7 +60,7 @@ temporary_classification="$temporary/classification.json"
 install -m 0644 -- "$report" "$temporary_report"
 install -m 0644 -- "$attestation" "$temporary_attestation"
 
-if ! "$source_tree/tools/corpus/validate_cross_worker_import.php" \
+if ! "$validator" \
     "$temporary_report" "$temporary_attestation" "$corpus_root" "$shard" \
     "$expected_host" "$expected_source" "$expected_harness" "$expected_commit" \
     >"$temporary_validation"; then
