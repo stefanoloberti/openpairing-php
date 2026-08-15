@@ -113,6 +113,10 @@ php bin/openpairing-rtg.php --players=80 --rounds=9 --seed=20260815 > tournament
 Dutch, Burstein, both initial colours and Baku acceleration are selectable.
 See `docs/RTG.md`.
 
+The complete English operating guide is `docs/USER-MANUAL.md`. The frozen
+package reproduction procedure and its explicit THP boundary are in
+`docs/CONTROLLED-ENVIRONMENT.md`.
+
 ## Library
 
 ```php

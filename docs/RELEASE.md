@@ -25,6 +25,9 @@ report beside the archives. The runtime `composer.json` is stripped of
 development dependencies, test autoloading and laboratory scripts.
 The source development lock file is omitted from the prebuilt runtime so it
 cannot conflict with that production-only metadata.
+The extracted-runtime verification procedure is documented in
+`CONTROLLED-ENVIRONMENT.md`; user operation and incident handling are in
+`USER-MANUAL.md`.
 
 ## Requirements
 
