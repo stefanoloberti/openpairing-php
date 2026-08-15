@@ -8,6 +8,7 @@ use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\Player;
 use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\ScheduledBye;
 use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Format\Trf\Trf2026Codec;
@@ -60,6 +61,34 @@ final class TrfPairingCheckerTest extends TestCase
                 return implode('-', $ids);
             }, $pairing->tables),
         );
+    }
+
+    public function testHistoricalReplayHonoursRecord240ScheduledBye(): void
+    {
+        $initial = DeterministicTournamentSimulator::initial(4, 1);
+        $scheduled = new TournamentState(
+            schemaVersion: $initial->schemaVersion,
+            round: $initial->round,
+            numberOfRounds: $initial->numberOfRounds,
+            pairingSystem: $initial->pairingSystem,
+            topColour: $initial->topColour,
+            pointsForWin: $initial->pointsForWin,
+            pointsForDraw: $initial->pointsForDraw,
+            maxPlayers: $initial->maxPlayers,
+            players: $initial->players,
+            tournamentName: 'Record 240 replay fixture',
+            pointsForPairingAllocatedBye: $initial->pairingAllocatedByeScore(),
+            scheduledByes: [new ScheduledBye('F', 1, [4])],
+        );
+        $pairing = (new DutchPairingEngine())->pair($scheduled);
+        $completed = DeterministicTournamentSimulator::advance($scheduled, $pairing);
+
+        $report = (new TrfPairingChecker())->check((new Trf2026Codec())->encode($completed));
+
+        self::assertSame('exact', $report['status']);
+        self::assertSame(1, $report['counts']['roundsExact']);
+        self::assertTrue($completed->isPlayerScheduledBye(4, 1));
+        self::assertSame('F', $completed->players[3]->results[0]['result']);
     }
 
     public function testReportsSamePairsColourVariantAsDiscrepancy(): void

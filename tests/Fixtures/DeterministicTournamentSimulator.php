@@ -72,6 +72,25 @@ final class DeterministicTournamentSimulator
                 'points' => $state->pairingAllocatedByeScore(),
             ];
         }
+        foreach ($state->scheduledByes as $scheduledBye) {
+            if ($scheduledBye->round !== $state->round) {
+                continue;
+            }
+            $points = match ($scheduledBye->type) {
+                'F' => $state->pointsForWin,
+                'H' => $state->pointsForDraw,
+                'Z' => $state->zeroPointByeScore(),
+                default => throw new \LogicException('Unsupported scheduled-bye type.'),
+            };
+            foreach ($scheduledBye->playerIds as $playerId) {
+                $updates[$playerId] = [
+                    'opponent' => null,
+                    'colour' => null,
+                    'code' => $scheduledBye->type,
+                    'points' => $points,
+                ];
+            }
+        }
 
         $floatById = [];
         foreach ($pairing->floatAssignments as $assignment) {
@@ -90,7 +109,7 @@ final class DeterministicTournamentSimulator
                 $floatHistory[] = $floatById[$player->id] ?? 'none';
             } else {
                 $floatHistory[] = $floatById[$player->id] ?? 'none';
-                $receivedPab = true;
+                $receivedPab = $receivedPab || $update['code'] === 'U';
             }
             $results = $player->results;
             $results[] = [
