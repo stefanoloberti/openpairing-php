@@ -82,12 +82,12 @@
     "acceptance": "quarantine-only"
   },
   "wslContinuity": {
-    "stabilizedAtEuropeRome": "2026-08-15T23:40:56+02:00",
+    "stabilizedAtEuropeRome": "2026-08-15T23:46:47+02:00",
     "windowsKeepAliveProcess": "wsl.exe -d Ubuntu --exec /srv/openpairing-cross-worker/bin/openpairing-cross-wsl-keepalive.sh",
     "scheduledTask": "OpenPairing-CrossWorker-WSL-KeepAlive-20260815",
     "scheduledTaskTrigger": "interactive user logon",
     "scheduledTaskHidden": true,
-    "singleInstanceLock": "/run/openpairing-cross-wsl-keepalive.lock",
+    "singleInstanceLock": "/tmp/openpairing-cross-wsl-keepalive.lock",
     "note": "Transient WSL bootstrap cycles before this timestamp produced no report or provenance sidecar. The enabled fail-closed systemd service resumes only whole unpromoted shards. A reboot without an interactive user logon cannot start a per-user WSL distribution and therefore remains a detectable infrastructure pause, not accepted evidence."
   },
   "promotionProtocol": {
