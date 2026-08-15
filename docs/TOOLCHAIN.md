@@ -220,6 +220,19 @@ classifier and atomic acceptor. Bootstrap parity, the 500/500 production n=7
 gate and the negative identity test are in
 `docs/evidence/cross-worker-python69-bootstrap-20260815.json`.
 
+Cross-host output is accepted only through
+`tools/corpus/import_cross_worker_shard.sh`. The transport first lands the
+report and `openpairing.cross-worker-provenance/1` sidecar in primary
+quarantine. `validate_cross_worker_import.php` then recomputes the raw and
+canonical hashes, locks host/source/harness/commit/backend, and captures the
+original 3090 shard manifest. Integrity failures do not stop the primary
+queue; they remain non-evidence. Only after that check does the 3090 run its
+own fail-closed Gacrux classifier. A semantic failure stops the campaign and
+is preserved, while a PASS promotes the provenance, validation receipt,
+report and classification with the classification last. The importer refuses
+an existing/incomplete primary pair or a shard already being computed by the
+primary verifier.
+
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash
 that excludes elapsed-time diagnostics and trace prose. The first loaded-host

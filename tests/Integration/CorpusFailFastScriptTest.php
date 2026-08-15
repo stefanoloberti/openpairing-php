@@ -71,4 +71,25 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('stages=("${@:3}")', $script);
         self::assertStringContainsString('Unsafe campaign stage', $script);
     }
+
+    public function testCrossWorkerImporterValidatesBeforePrimarySemanticGateAndPromotesClassificationLast(): void
+    {
+        $script = file_get_contents(dirname(__DIR__, 2).'/tools/corpus/import_cross_worker_shard.sh');
+
+        self::assertIsString($script);
+        self::assertStringContainsString('set -Eeuo pipefail', $script);
+        self::assertStringContainsString('flock -n 9', $script);
+        self::assertStringContainsString('validate_cross_worker_import.php', $script);
+        self::assertStringContainsString('classify_shard_fail_fast.sh', $script);
+        self::assertStringContainsString('integrity validation failed without stopping the primary campaign', $script);
+        self::assertStringContainsString('Primary verifier is already computing', $script);
+        self::assertStringContainsString('crossWorkerImport', $script);
+        self::assertStringContainsString('importerSha256', $script);
+        self::assertStringContainsString('mv -- "$temporary_report" "$final_report"', $script);
+        self::assertStringContainsString('mv -- "$temporary_final_classification" "$final_classification"', $script);
+        self::assertLessThan(
+            strpos($script, 'mv -- "$temporary_final_classification" "$final_classification"'),
+            strpos($script, 'mv -- "$temporary_report" "$final_report"'),
+        );
+    }
 }
