@@ -60,6 +60,19 @@ final class SubmissionReadinessVerifierTest extends TestCase
         self::assertStringContainsString('evidence SHA-256 mismatch', $stderr);
     }
 
+    public function testMissingManifestIsMachineReadableInfrastructureError(): void
+    {
+        [$exit, $stdout, $stderr] = $this->runVerifier($this->temporary.'/missing.json');
+
+        self::assertSame(2, $exit);
+        self::assertSame('', $stdout);
+        $report = json_decode($stderr, true, flags: JSON_THROW_ON_ERROR);
+        self::assertIsArray($report);
+        /** @var array{status: string, code: string} $report */
+        self::assertSame('ERROR', $report['status']);
+        self::assertSame('submission_readiness.infrastructure', $report['code']);
+    }
+
     private function writeManifest(string $status, string $hash): string
     {
         $manifest = $this->temporary.'/manifest.json';

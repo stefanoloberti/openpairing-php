@@ -7,7 +7,14 @@ $projectRoot = dirname(__DIR__);
 $manifestPath = $argv[1] ?? $projectRoot.'/docs/schema/submission-readiness-0.9.json';
 
 try {
-    $manifest = json_decode((string) file_get_contents($manifestPath), true, 64, JSON_THROW_ON_ERROR);
+    if (!is_file($manifestPath)) {
+        throw new RuntimeException('Submission-readiness manifest does not exist.');
+    }
+    $contents = file_get_contents($manifestPath);
+    if (!is_string($contents)) {
+        throw new RuntimeException('Submission-readiness manifest could not be read.');
+    }
+    $manifest = json_decode($contents, true, 64, JSON_THROW_ON_ERROR);
     if (!is_array($manifest) || ($manifest['schema'] ?? null) !== 'openpairing.submission-readiness/1') {
         throw new RuntimeException('Submission-readiness manifest has an unsupported schema.');
     }
