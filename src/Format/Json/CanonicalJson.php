@@ -9,6 +9,8 @@ use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\InvalidTournamentState;
 use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\ScheduledBye;
 use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Validation\TournamentStateValidator;
 
@@ -31,7 +33,7 @@ final class CanonicalJson
         $data = $this->objectValue($data, 'Canonical JSON root');
         $this->onlyKeys($data, [
             'schema', 'tournamentName', 'round', 'numberOfRounds', 'pairingSystem',
-            'configuration', 'scoring', 'metadata', 'players',
+            'configuration', 'scoring', 'metadata', 'prohibitedPairings', 'scheduledByes', 'players',
         ], 'Canonical JSON root');
         $this->requireKeys($data, ['schema', 'round', 'numberOfRounds', 'pairingSystem', 'configuration', 'scoring', 'players'], 'Canonical JSON root');
 
@@ -81,6 +83,12 @@ final class CanonicalJson
         if ($topColour === null) {
             throw new InvalidTournamentState('colour.invalid', 'topColour must be white or black.');
         }
+        $prohibitedPairings = isset($data['prohibitedPairings'])
+            ? $this->prohibitedPairings($data['prohibitedPairings'])
+            : [];
+        $scheduledByes = isset($data['scheduledByes'])
+            ? $this->scheduledByes($data['scheduledByes'])
+            : [];
 
         $state = new TournamentState(
             schemaVersion: $schema,
@@ -110,6 +118,8 @@ final class CanonicalJson
             tieBreaksRecord: isset($metadata['tieBreaksRecord']) ? $this->string($metadata, 'tieBreaksRecord') : '',
             tieBreaks: isset($metadata['tieBreaks']) ? $this->string($metadata, 'tieBreaks') : '',
             encodedTimeControl: isset($metadata['encodedTimeControl']) ? $this->string($metadata, 'encodedTimeControl') : '',
+            prohibitedPairingGroups: $prohibitedPairings,
+            scheduledByes: $scheduledByes,
         );
         (new TournamentStateValidator())->validate($state);
 
@@ -158,6 +168,14 @@ final class CanonicalJson
                 'tieBreaks' => $state->tieBreaks,
                 'encodedTimeControl' => $state->encodedTimeControl,
             ],
+            'prohibitedPairings' => array_map(
+                static fn (ProhibitedPairingGroup $group): array => $group->toArray(),
+                $state->prohibitedPairingGroups,
+            ),
+            'scheduledByes' => array_map(
+                static fn (ScheduledBye $scheduledBye): array => $scheduledBye->toArray(),
+                $state->scheduledByes,
+            ),
             'players' => array_map($this->encodePlayer(...), $players),
         ];
 
@@ -446,6 +464,70 @@ final class CanonicalJson
         }
 
         return $strings;
+    }
+
+    /** @return list<ProhibitedPairingGroup> */
+    private function prohibitedPairings(mixed $value): array
+    {
+        if (!is_array($value) || !array_is_list($value) || count($value) > TournamentState::MAX_PLAYERS) {
+            throw new InvalidTournamentState('prohibited.type', 'prohibitedPairings must be a bounded array.');
+        }
+        $groups = [];
+        foreach ($value as $index => $rawGroup) {
+            $group = $this->objectValue($rawGroup, "prohibitedPairings[$index]");
+            $this->onlyKeys($group, ['firstRound', 'lastRound', 'playerIds'], "prohibitedPairings[$index]");
+            $this->requireKeys($group, ['firstRound', 'lastRound', 'playerIds'], "prohibitedPairings[$index]");
+            $rawPlayerIds = $group['playerIds'];
+            if (!is_array($rawPlayerIds) || !array_is_list($rawPlayerIds) || count($rawPlayerIds) > TournamentState::MAX_PLAYERS) {
+                throw new InvalidTournamentState('prohibited.player_ids', "prohibitedPairings[$index].playerIds must be a bounded array.");
+            }
+            $playerIds = [];
+            foreach ($rawPlayerIds as $playerId) {
+                if (!is_int($playerId)) {
+                    throw new InvalidTournamentState('prohibited.player_ids', "prohibitedPairings[$index].playerIds must contain only integers.");
+                }
+                $playerIds[] = $playerId;
+            }
+            $groups[] = new ProhibitedPairingGroup(
+                $this->integer($group, 'firstRound'),
+                $this->integer($group, 'lastRound'),
+                $playerIds,
+            );
+        }
+
+        return $groups;
+    }
+
+    /** @return list<ScheduledBye> */
+    private function scheduledByes(mixed $value): array
+    {
+        if (!is_array($value) || !array_is_list($value) || count($value) > TournamentState::MAX_ROUNDS * 3) {
+            throw new InvalidTournamentState('scheduled_bye.type', 'scheduledByes must be a bounded array.');
+        }
+        $scheduledByes = [];
+        foreach ($value as $index => $rawScheduledBye) {
+            $scheduledBye = $this->objectValue($rawScheduledBye, "scheduledByes[$index]");
+            $this->onlyKeys($scheduledBye, ['type', 'round', 'playerIds'], "scheduledByes[$index]");
+            $this->requireKeys($scheduledBye, ['type', 'round', 'playerIds'], "scheduledByes[$index]");
+            $rawPlayerIds = $scheduledBye['playerIds'];
+            if (!is_array($rawPlayerIds) || !array_is_list($rawPlayerIds) || count($rawPlayerIds) > TournamentState::MAX_PLAYERS) {
+                throw new InvalidTournamentState('scheduled_bye.player_ids', "scheduledByes[$index].playerIds must be a bounded array.");
+            }
+            $playerIds = [];
+            foreach ($rawPlayerIds as $playerId) {
+                if (!is_int($playerId)) {
+                    throw new InvalidTournamentState('scheduled_bye.player_ids', "scheduledByes[$index].playerIds must contain only integers.");
+                }
+                $playerIds[] = $playerId;
+            }
+            $scheduledByes[] = new ScheduledBye(
+                $this->string($scheduledBye, 'type'),
+                $this->integer($scheduledBye, 'round'),
+                $playerIds,
+            );
+        }
+
+        return $scheduledByes;
     }
 
     /**

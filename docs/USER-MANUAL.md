@@ -1,6 +1,6 @@
 # OpenPairingPHP user manual
 
-Version covered: 0.9.0-rc7. Language: English.
+Version covered: 0.9.0-rc8. Language: English.
 
 OpenPairingPHP is an offline individual pairing and standings engine. It is
 not a complete Tournament Handler Program and is not FIDE approved. The
@@ -13,7 +13,7 @@ for medium and large fields; the pure-PHP exact fallback is functionally
 equivalent but slower.
 
 1. Verify the archive against its adjacent `.sha256` file.
-2. Extract `openpairing-php-0.9.0-rc7-runtime.zip` into a new directory.
+2. Extract `openpairing-php-0.9.0-rc8-runtime.zip` into a new directory.
 3. From that directory run `php bin/openpairing.php --version`.
 4. Run the positive and negative checks in `docs/PTC.md` before tournament
    use.
@@ -111,4 +111,3 @@ for standings only. Team tournaments, team tie-breaks, national-rating records
 and the unsupported TRF26 records listed in `docs/TRF-2026.md` are outside
 this release. Exact limits and open corpus gates are in `README.md`,
 `docs/RELEASE.md` and `docs/FIDE-SUBMISSION-READINESS.md`.
-

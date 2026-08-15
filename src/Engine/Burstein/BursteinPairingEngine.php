@@ -247,7 +247,7 @@ final class BursteinPairingEngine implements PairingEngineInterface
             foreach ($remaining as $leftIndex => $left) {
                 for ($rightIndex = $leftIndex + 1; $rightIndex < count($remaining); ++$rightIndex) {
                     $right = $remaining[$rightIndex];
-                    if (!$this->rules->canMeet($left, $right)) {
+                    if (!$this->rules->canMeet($state, $left, $right)) {
                         continue;
                     }
                     $pair = [['left' => $left, 'right' => $right]];
@@ -375,7 +375,7 @@ final class BursteinPairingEngine implements PairingEngineInterface
 
         $first = array_shift($remaining);
         foreach ($remaining as $opponentIndex => $opponent) {
-            if (!$this->rules->canMeet($first, $opponent)) {
+            if (!$this->rules->canMeet($state, $first, $opponent)) {
                 continue;
             }
             $next = $remaining;
@@ -733,6 +733,8 @@ final class BursteinPairingEngine implements PairingEngineInterface
             tieBreaksRecord: $state->tieBreaksRecord,
             tieBreaks: $state->tieBreaks,
             encodedTimeControl: $state->encodedTimeControl,
+            prohibitedPairingGroups: $state->prohibitedPairingGroups,
+            scheduledByes: $state->scheduledByes,
         );
     }
 }

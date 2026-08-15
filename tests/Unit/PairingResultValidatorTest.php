@@ -7,6 +7,8 @@ namespace OpenPairing\Tests\Unit;
 use OpenPairing\Diagnostics\Diagnostic;
 use OpenPairing\Domain\Pairing\PairingResult;
 use OpenPairing\Domain\Pairing\PairingTable;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Tests\Fixtures\DeterministicTournamentSimulator;
 use OpenPairing\Tests\Fixtures\TournamentFactory;
@@ -43,6 +45,31 @@ final class PairingResultValidatorTest extends TestCase
 
         self::assertContains(
             'pair.repeat',
+            array_map(static fn (Diagnostic $diagnostic): string => $diagnostic->code, (new PairingResultValidator())->validate($state, $result)),
+        );
+    }
+
+    public function testRejectsAProhibitedPairingWithSpecificDiagnostic(): void
+    {
+        $base = TournamentFactory::initial(2);
+        $left = $base->players[0]->id;
+        $right = $base->players[1]->id;
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            prohibitedPairingGroups: [new ProhibitedPairingGroup(1, 1, [$left, $right])],
+        );
+        $result = $this->pairingResult([new PairingTable(1, $left, $right)]);
+
+        self::assertContains(
+            'pair.prohibited',
             array_map(static fn (Diagnostic $diagnostic): string => $diagnostic->code, (new PairingResultValidator())->validate($state, $result)),
         );
     }

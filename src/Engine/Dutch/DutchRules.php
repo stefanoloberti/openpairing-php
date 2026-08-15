@@ -64,7 +64,9 @@ final class DutchRules
 
     public function canMeet(TournamentState $state, Player $left, Player $right): bool
     {
-        if ($left->id === $right->id || in_array($right->id, $left->opponentHistory, true)) {
+        if ($left->id === $right->id
+            || in_array($right->id, $left->opponentHistory, true)
+            || $state->isPairingProhibited($left->id, $right->id)) {
             return false;
         }
 

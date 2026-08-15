@@ -8,6 +8,8 @@ use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\InvalidTournamentState;
 use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\ScheduledBye;
 use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Validation\TournamentStateValidator;
 
@@ -20,7 +22,7 @@ final class Trf2026Codec
     private const SUPPORTED_RECORDS = [
         '001', '012', '022', '032', '042', '052', '062', '072', '092', '102', '112', '122', '132',
         '142', '152', '162', '182', '192', '202', '212', '222',
-        '250', 'XXA',
+        '240', '250', '260', 'XXA',
     ];
 
     public function decode(string $trf): TournamentState
@@ -144,6 +146,8 @@ final class Trf2026Codec
         );
 
         $known = array_fill_keys(array_map(static fn (Player $player): int => $player->pairingNumber, $players), true);
+        $scheduledByes = $this->parseScheduledByeRecords($records['240'] ?? [], $numberOfRounds);
+        $prohibitedPairings = $this->parseProhibitedPairingRecords($records['260'] ?? [], $numberOfRounds);
         foreach (array_keys($accelerationSchedules) as $acceleratedPlayer) {
             if (!isset($known[$acceleratedPlayer])) {
                 throw new InvalidTournamentState('trf.acceleration_player', sprintf('TRF 250 references unknown competitor %d.', $acceleratedPlayer));
@@ -203,6 +207,8 @@ final class Trf2026Codec
             tieBreaksRecord: $tieBreaksRecord,
             tieBreaks: $tieBreaks,
             encodedTimeControl: $encodedTimeControl,
+            prohibitedPairingGroups: $prohibitedPairings,
+            scheduledByes: $scheduledByes,
         );
         (new TournamentStateValidator())->validate($state);
 
@@ -266,10 +272,6 @@ final class Trf2026Codec
         }
         $this->appendOptionalRecord($lines, '222', $state->encodedTimeControl);
 
-        foreach ($this->writeAccelerationRecords($state->players, $state->round) as $record) {
-            $lines[] = $record;
-        }
-
         $players = $state->players;
         usort($players, static fn (Player $left, Player $right): int => $left->pairingNumber <=> $right->pairingNumber);
         $this->validateResults($players, [
@@ -286,6 +288,17 @@ final class Trf2026Codec
                 throw new InvalidTournamentState('player.duplicate', 'Player IDs must be unique when writing TRF.');
             }
             $idToPairingNumber[$player->id] = $player->pairingNumber;
+        }
+        $scheduledByes = $state->scheduledByes;
+        usort($scheduledByes, static fn (ScheduledBye $left, ScheduledBye $right): int => [$left->round, $left->type] <=> [$right->round, $right->type]);
+        foreach ($scheduledByes as $scheduledBye) {
+            $lines[] = $this->writeScheduledByeRecord($scheduledBye, $idToPairingNumber);
+        }
+        foreach ($this->writeAccelerationRecords($state->players, $state->round) as $record) {
+            $lines[] = $record;
+        }
+        foreach ($state->prohibitedPairingGroups as $group) {
+            $lines[] = $this->writeProhibitedPairingRecord($group, $idToPairingNumber);
         }
         foreach ($players as $player) {
             $lines[] = $this->writePlayer($player, $idToPairingNumber);
@@ -657,6 +670,105 @@ final class Trf2026Codec
     private function formatAccelerationRecord(Score $score, int $firstRound, int $lastRound, int $firstPlayer, int $lastPlayer): string
     {
         return sprintf('250 %4s %4s %3d %3d %4d %4d', '', $score->toDecimal(1), $firstRound, $lastRound, $firstPlayer, $lastPlayer);
+    }
+
+    /**
+     * @param list<string> $lines
+     * @return list<ScheduledBye>
+     */
+    private function parseScheduledByeRecords(array $lines, int $numberOfRounds): array
+    {
+        $scheduledByes = [];
+        foreach ($lines as $lineNumber => $line) {
+            if (strlen($line) < 14) {
+                throw new InvalidTournamentState('trf.scheduled_bye_short', sprintf('TRF 240 record %d is shorter than 14 columns.', $lineNumber + 1));
+            }
+            $type = strtoupper(substr($line, 4, 1));
+            if (!in_array($type, ['F', 'H', 'Z'], true)) {
+                throw new InvalidTournamentState('trf.scheduled_bye_type', sprintf('TRF 240 record %d has an unsupported bye type.', $lineNumber + 1));
+            }
+            $round = $this->positiveInteger(substr($line, 6, 3), '240 round');
+            if ($round > $numberOfRounds) {
+                throw new InvalidTournamentState('trf.scheduled_bye_round', sprintf('TRF 240 record %d has an invalid round.', $lineNumber + 1));
+            }
+            $playerIds = [];
+            for ($offset = 10; $offset < strlen($line); $offset += 5) {
+                $field = substr($line, $offset, 4);
+                if (trim($field) === '') {
+                    continue;
+                }
+                if (strlen($field) < 4) {
+                    throw new InvalidTournamentState('trf.scheduled_bye_short', sprintf('TRF 240 record %d has an incomplete competitor field.', $lineNumber + 1));
+                }
+                $playerIds[] = $this->positiveInteger($field, '240 competitor');
+            }
+            if ($playerIds === []) {
+                throw new InvalidTournamentState('trf.scheduled_bye_players', sprintf('TRF 240 record %d must list at least one competitor.', $lineNumber + 1));
+            }
+            $scheduledByes[] = new ScheduledBye($type, $round, $playerIds);
+        }
+
+        return $scheduledByes;
+    }
+
+    /** @param array<int, int> $idToPairingNumber */
+    private function writeScheduledByeRecord(ScheduledBye $scheduledBye, array $idToPairingNumber): string
+    {
+        $line = sprintf('240 %s %03d', $scheduledBye->type, $scheduledBye->round);
+        foreach ($scheduledBye->playerIds as $playerId) {
+            $pairingNumber = $idToPairingNumber[$playerId] ?? throw new InvalidTournamentState('trf.scheduled_bye_player', sprintf('TRF 240 references unknown player ID %d.', $playerId));
+            $line .= sprintf(' %4d', $pairingNumber);
+        }
+
+        return $line;
+    }
+
+    /**
+     * @param list<string> $lines
+     * @return list<ProhibitedPairingGroup>
+     */
+    private function parseProhibitedPairingRecords(array $lines, int $numberOfRounds): array
+    {
+        $groups = [];
+        foreach ($lines as $lineNumber => $line) {
+            if (strlen($line) < 16) {
+                throw new InvalidTournamentState('trf.prohibited_short', sprintf('TRF 260 record %d is shorter than 16 columns.', $lineNumber + 1));
+            }
+            $firstRound = $this->positiveInteger(substr($line, 4, 3), '260 first round');
+            $lastRound = $this->positiveInteger(substr($line, 8, 3), '260 last round');
+            if ($firstRound > $lastRound || $lastRound > $numberOfRounds) {
+                throw new InvalidTournamentState('trf.prohibited_round', sprintf('TRF 260 record %d has an invalid round range.', $lineNumber + 1));
+            }
+            $playerIds = [];
+            for ($offset = 12; $offset < strlen($line); $offset += 5) {
+                $field = substr($line, $offset, 4);
+                if (trim($field) === '') {
+                    continue;
+                }
+                if (strlen($field) < 4) {
+                    throw new InvalidTournamentState('trf.prohibited_short', sprintf('TRF 260 record %d has an incomplete competitor field.', $lineNumber + 1));
+                }
+                $playerIds[] = $this->positiveInteger($field, '260 competitor');
+            }
+            if (count($playerIds) < 2) {
+                throw new InvalidTournamentState('trf.prohibited_players', sprintf('TRF 260 record %d must list at least two competitors.', $lineNumber + 1));
+            }
+            $groups[] = new ProhibitedPairingGroup($firstRound, $lastRound, $playerIds);
+        }
+
+        return $groups;
+    }
+
+    /** @param array<int, int> $idToPairingNumber */
+    private function writeProhibitedPairingRecord(ProhibitedPairingGroup $group, array $idToPairingNumber): string
+    {
+        $line = sprintf('260 %03d %03d', $group->firstRound, $group->lastRound);
+        foreach ($group->playerIds as $playerId) {
+            $pairingNumber = $idToPairingNumber[$playerId] ?? throw new InvalidTournamentState('trf.prohibited_player', sprintf('TRF 260 references unknown player ID %d.', $playerId));
+            $line .= sprintf(' %4d', $pairingNumber);
+        }
+
+        return $line;
     }
 
     /** @param array<int, int> $idToPairingNumber */

@@ -111,6 +111,65 @@ final class TournamentStateValidator
             }
         }
 
+        foreach ($state->prohibitedPairingGroups as $index => $group) {
+            if ($group->firstRound < 1
+                || $group->firstRound > $group->lastRound
+                || $group->lastRound > $state->numberOfRounds) {
+                throw new InvalidTournamentState('prohibited.round_range', sprintf('Prohibited-pairing group %d has an invalid round range.', $index + 1));
+            }
+            if (count($group->playerIds) < 2 || count($group->playerIds) > TournamentState::MAX_PLAYERS) {
+                throw new InvalidTournamentState('prohibited.player_count', sprintf('Prohibited-pairing group %d must contain 2..%d players.', $index + 1, TournamentState::MAX_PLAYERS));
+            }
+            if (count(array_unique($group->playerIds)) !== count($group->playerIds)) {
+                throw new InvalidTournamentState('prohibited.player_duplicate', sprintf('Prohibited-pairing group %d contains a duplicate player.', $index + 1));
+            }
+            foreach ($group->playerIds as $playerId) {
+                if (!isset($playersById[$playerId])) {
+                    throw new InvalidTournamentState('prohibited.player_unknown', sprintf('Prohibited-pairing group %d references unknown player %d.', $index + 1, $playerId));
+                }
+            }
+        }
+
+        $scheduledByeKeys = [];
+        $scheduledPlayersByRound = [];
+        foreach ($state->scheduledByes as $index => $scheduledBye) {
+            if (!in_array($scheduledBye->type, ['F', 'H', 'Z'], true)) {
+                throw new InvalidTournamentState('scheduled_bye.type', sprintf('Scheduled-bye record %d has an unsupported type.', $index + 1));
+            }
+            if ($scheduledBye->round < 1 || $scheduledBye->round > $state->numberOfRounds) {
+                throw new InvalidTournamentState('scheduled_bye.round', sprintf('Scheduled-bye record %d has an invalid round.', $index + 1));
+            }
+            if ($scheduledBye->playerIds === [] || count($scheduledBye->playerIds) > TournamentState::MAX_PLAYERS) {
+                throw new InvalidTournamentState('scheduled_bye.player_count', sprintf('Scheduled-bye record %d must contain 1..%d players.', $index + 1, TournamentState::MAX_PLAYERS));
+            }
+            if (count(array_unique($scheduledBye->playerIds)) !== count($scheduledBye->playerIds)) {
+                throw new InvalidTournamentState('scheduled_bye.player_duplicate', sprintf('Scheduled-bye record %d contains a duplicate player.', $index + 1));
+            }
+            $recordKey = $scheduledBye->round.':'.$scheduledBye->type;
+            if (isset($scheduledByeKeys[$recordKey])) {
+                throw new InvalidTournamentState('scheduled_bye.record_duplicate', sprintf('Round %d has more than one scheduled-bye record of type %s.', $scheduledBye->round, $scheduledBye->type));
+            }
+            $scheduledByeKeys[$recordKey] = true;
+            foreach ($scheduledBye->playerIds as $playerId) {
+                if (!isset($playersById[$playerId])) {
+                    throw new InvalidTournamentState('scheduled_bye.player_unknown', sprintf('Scheduled-bye record %d references unknown player %d.', $index + 1, $playerId));
+                }
+                if (isset($scheduledPlayersByRound[$scheduledBye->round][$playerId])) {
+                    throw new InvalidTournamentState('scheduled_bye.player_conflict', sprintf('Player %d has more than one scheduled bye in round %d.', $playerId, $scheduledBye->round));
+                }
+                $scheduledPlayersByRound[$scheduledBye->round][$playerId] = true;
+                if ($scheduledBye->round < $state->round) {
+                    $completedResult = $roundsByPlayer[$playerId][$scheduledBye->round] ?? null;
+                    if ($scheduledBye->type === 'Z' && $completedResult === null) {
+                        continue;
+                    }
+                    if ($completedResult === null || strtoupper($completedResult['result']) !== $scheduledBye->type || $completedResult['opponentId'] !== null) {
+                        throw new InvalidTournamentState('scheduled_bye.result_mismatch', sprintf('Player %d scheduled bye in completed round %d does not match result history.', $playerId, $scheduledBye->round));
+                    }
+                }
+            }
+        }
+
         foreach ($state->players as $player) {
             $calculatedScore = Score::zero();
             $opponentHistory = [];

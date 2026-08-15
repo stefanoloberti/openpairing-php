@@ -40,7 +40,9 @@ final readonly class DutchPairingEngine implements PairingEngineInterface
         if ($state->round > $state->numberOfRounds) {
             throw new InvalidTournamentState('round.complete', 'All configured rounds have already been completed.');
         }
-        if ($state->round === 1 && !$this->hasVirtualPoints($state->players)) {
+        if ($state->round === 1
+            && !$this->hasVirtualPoints($state->players)
+            && !$state->hasProhibitedPairingsInRound()) {
             return (new InitialDutchPairingEngine())->pair($state);
         }
 

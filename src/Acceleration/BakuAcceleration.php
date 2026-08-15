@@ -87,6 +87,8 @@ final readonly class BakuAcceleration
             tieBreaksRecord: $state->tieBreaksRecord,
             tieBreaks: $state->tieBreaks,
             encodedTimeControl: $state->encodedTimeControl,
+            prohibitedPairingGroups: $state->prohibitedPairingGroups,
+            scheduledByes: $state->scheduledByes,
         );
     }
 

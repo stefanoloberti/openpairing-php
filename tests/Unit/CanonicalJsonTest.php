@@ -7,6 +7,9 @@ namespace OpenPairing\Tests\Unit;
 use OpenPairing\Acceleration\BakuAcceleration;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\InvalidTournamentState;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\ScheduledBye;
+use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Format\Json\CanonicalJson;
 use OpenPairing\Tests\Fixtures\TournamentFactory;
 use PHPUnit\Framework\TestCase;
@@ -28,6 +31,54 @@ final class CanonicalJsonTest extends TestCase
         $json = str_replace('openpairing.tournament/1', 'openpairing.tournament/999', (new CanonicalJson())->encode(TournamentFactory::initial(2)));
         $this->expectException(InvalidTournamentState::class);
         (new CanonicalJson())->decode($json);
+    }
+
+    public function testRoundTripPreservesProhibitedPairingGroups(): void
+    {
+        $base = TournamentFactory::initial(4);
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            prohibitedPairingGroups: [new ProhibitedPairingGroup(1, 3, [1001, 1003])],
+        );
+        $codec = new CanonicalJson();
+
+        $decoded = $codec->decode($codec->encode($state));
+
+        self::assertTrue($decoded->isPairingProhibited(1001, 1003, 2));
+        self::assertFalse($decoded->isPairingProhibited(1001, 1003, 4));
+        self::assertSame($codec->encode($state), $codec->encode($decoded));
+    }
+
+    public function testRoundTripPreservesScheduledIndividualByes(): void
+    {
+        $base = TournamentFactory::initial(4);
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            scheduledByes: [new ScheduledBye('H', 1, [1002])],
+        );
+        $codec = new CanonicalJson();
+
+        $decoded = $codec->decode($codec->encode($state));
+
+        self::assertTrue($decoded->isPlayerScheduledBye(1002));
+        self::assertSame([1001, 1003, 1004], array_map(static fn ($player): int => $player->id, $decoded->activePlayers()));
+        self::assertSame($codec->encode($state), $codec->encode($decoded));
     }
 
     public function testRoundTripPreservesVirtualPointsSeparatelyFromStandingsScore(): void

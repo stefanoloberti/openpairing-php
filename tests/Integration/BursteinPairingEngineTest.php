@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OpenPairing\Tests\Integration;
 
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Engine\Burstein\BursteinPairingEngine;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Tests\Fixtures\DeterministicTournamentSimulator;
@@ -34,6 +36,24 @@ final class BursteinPairingEngineTest extends TestCase
 
         self::assertSame(7, $result->byePlayerId);
         self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+    }
+
+    public function testInitialRoundHonoursDeclaredProhibitedPairing(): void
+    {
+        $base = DeterministicTournamentSimulator::initial(4, 1, 'fide-burstein-2026');
+        $state = $this->withProhibitedGroups($base, [new ProhibitedPairingGroup(1, 1, [1, 4])]);
+
+        $result = (new BursteinPairingEngine())->pair($state);
+        $pairs = array_map(static function ($table): string {
+            $ids = [$table->whitePlayerId, $table->blackPlayerId];
+            sort($ids);
+
+            return implode('-', $ids);
+        }, $result->tables);
+
+        self::assertSame([], $result->violations);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+        self::assertNotContains('1-4', $pairs);
     }
 
     public function testConfiguredSeedingRoundsAreExactlyDutch(): void
@@ -96,5 +116,22 @@ final class BursteinPairingEngineTest extends TestCase
         self::assertSame([], $result->tables);
         self::assertCount(24, $result->unpairedPlayerIds);
         self::assertSame('engine.resource_limit', $result->violations[0]->code);
+    }
+
+    /** @param list<ProhibitedPairingGroup> $groups */
+    private function withProhibitedGroups(TournamentState $state, array $groups): TournamentState
+    {
+        return new TournamentState(
+            schemaVersion: $state->schemaVersion,
+            round: $state->round,
+            numberOfRounds: $state->numberOfRounds,
+            pairingSystem: $state->pairingSystem,
+            topColour: $state->topColour,
+            pointsForWin: $state->pointsForWin,
+            pointsForDraw: $state->pointsForDraw,
+            maxPlayers: $state->maxPlayers,
+            players: $state->players,
+            prohibitedPairingGroups: $groups,
+        );
     }
 }

@@ -8,7 +8,10 @@ use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\InvalidTournamentState;
 use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\ScheduledBye;
 use OpenPairing\Domain\Tournament\TournamentState;
+use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Format\Trf\Trf2026Codec;
 use PHPUnit\Framework\TestCase;
 
@@ -87,6 +90,148 @@ final class Trf2026CodecTest extends TestCase
         $this->expectException(InvalidTournamentState::class);
         $this->expectExceptionMessage('outside the supported subset');
         (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRecord240RoundTripsAndExcludesFutureByeRecipientFromPairing(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "240 H 002    1\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        $pairing = (new DutchPairingEngine())->pair($decoded);
+        $pairedIds = [];
+        foreach ($pairing->tables as $table) {
+            $pairedIds[] = $table->whitePlayerId;
+            $pairedIds[] = $table->blackPlayerId;
+        }
+
+        self::assertTrue($decoded->isPlayerScheduledBye(1));
+        self::assertNotContains(1, $pairedIds);
+        self::assertNotSame(1, $pairing->byePlayerId);
+        self::assertStringContainsString("240 H 002    1\n", $codec->encode($decoded));
+        self::assertSame($codec->encode($decoded), $codec->encode($codec->decode($codec->encode($decoded))));
+    }
+
+    public function testRecord240RejectsConflictingByeTypesForSamePlayerAndRound(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "240 F 002    1\n240 H 002    1\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('A player cannot receive two scheduled-bye types in one round.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('scheduled_bye.player_conflict', $exception->diagnosticCode);
+        }
+    }
+
+    public function testRecord240MustAgreeWithCompletedRoundHistory(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "240 H 001    1\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('A completed scheduled-bye record must agree with the 001 round history.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('scheduled_bye.result_mismatch', $exception->diagnosticCode);
+        }
+    }
+
+    public function testWriterEmitsCanonicalRecord240(): void
+    {
+        $codec = new Trf2026Codec();
+        $base = $this->roundTwoState();
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            tournamentName: $base->tournamentName,
+            pointsForLoss: $base->lossScore(),
+            pointsForZeroPointBye: $base->zeroPointByeScore(),
+            pointsForPairingAllocatedBye: $base->pairingAllocatedByeScore(),
+            pointsForUnknown: $base->unknownScore(),
+            scheduledByes: [new ScheduledBye('Z', 3, [2, 4])],
+        );
+
+        self::assertStringContainsString("240 Z 003    2    4\n", $codec->encode($state));
+    }
+
+    public function testRecord260RoundTripsAsRoundRangedProhibitedPairings(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "260 001 003    1    2    4\r\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+
+        self::assertCount(1, $decoded->prohibitedPairingGroups);
+        self::assertTrue($decoded->isPairingProhibited(1, 4, 2));
+        self::assertFalse($decoded->isPairingProhibited(1, 3, 4));
+        self::assertStringContainsString("260 001 003    1    2    4\r\n", $codec->encode($decoded));
+        self::assertSame($codec->encode($decoded), $codec->encode($codec->decode($codec->encode($decoded))));
+    }
+
+    public function testRecord260RejectsUnknownCompetitor(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "260 001 003    1    9\r\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('A prohibited-pairing group with an unknown competitor must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('prohibited.player_unknown', $exception->diagnosticCode);
+        }
+    }
+
+    public function testWriterEmitsCanonicalRecord260(): void
+    {
+        $base = $this->roundTwoState();
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            tournamentName: $base->tournamentName,
+            pointsForLoss: $base->lossScore(),
+            pointsForZeroPointBye: $base->zeroPointByeScore(),
+            pointsForPairingAllocatedBye: $base->pairingAllocatedByeScore(),
+            pointsForUnknown: $base->unknownScore(),
+            prohibitedPairingGroups: [new ProhibitedPairingGroup(2, 4, [1, 4])],
+        );
+
+        self::assertStringContainsString("260 002 004    1    4\r\n", (new Trf2026Codec())->encode($state));
     }
 
     public function testPublicImportInfersMissingInitialColourFromHighestRankedPairedParticipant(): void

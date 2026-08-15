@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.9.0-rc8 - 2026-08-15
+
+- import/export TRF26 record `240` individual future byes and exclude their
+  recipients from the declared round without fabricating results;
+- import/export and enforce round-ranged TRF26 record `260` prohibited-pairing
+  groups in Dutch, Burstein, validators and historical PTC replay;
+- expose both constraints in canonical JSON with fail-closed validation and
+  preserve them through every state transformation;
+- keep generic record `299` bonus/penalty points explicitly unsupported until
+  pairing scores and every affected standing/tie-break can be reconciled.
+
 ## 0.9.0-rc7 - 2026-08-15
 
 - ship free offline PTC and deterministic parameterised RTG CLIs;

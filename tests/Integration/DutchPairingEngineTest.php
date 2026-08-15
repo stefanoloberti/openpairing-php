@@ -7,6 +7,7 @@ namespace OpenPairing\Tests\Integration;
 use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
 use OpenPairing\Domain\Tournament\TournamentState;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Engine\Burstein\BursteinPairingEngine;
@@ -15,6 +16,39 @@ use PHPUnit\Framework\TestCase;
 
 final class DutchPairingEngineTest extends TestCase
 {
+    public function testRoundOneHonoursDeclaredProhibitedPairing(): void
+    {
+        $state = $this->state([
+            $this->player(1),
+            $this->player(2),
+            $this->player(3),
+            $this->player(4),
+        ], 1, [new ProhibitedPairingGroup(1, 1, [1, 3])]);
+
+        $result = (new DutchPairingEngine())->pair($state);
+
+        self::assertSame([], $result->violations);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+        self::assertNotContains('1-3', $this->opponentPairs($result));
+        self::assertSame(['1-4', '2-3'], $this->opponentPairs($result));
+    }
+
+    public function testProhibitedGroupCanMakeRoundExplicitlyUnpairable(): void
+    {
+        $state = $this->state([
+            $this->player(1),
+            $this->player(2),
+            $this->player(3),
+            $this->player(4),
+        ], 1, [new ProhibitedPairingGroup(1, 1, [1, 2, 3, 4])]);
+
+        $result = (new DutchPairingEngine())->pair($state);
+
+        self::assertSame([], $result->tables);
+        self::assertSame([1, 2, 3, 4], $result->unpairedPlayerIds);
+        self::assertSame('engine.no_solution', $result->violations[0]->code);
+    }
+
     public function testInitialColoursFollowCurrentS1OrderWhenTopSeedIsInactive(): void
     {
         $state = $this->state([
@@ -390,8 +424,11 @@ final class DutchPairingEngineTest extends TestCase
         );
     }
 
-    /** @param list<Player> $players */
-    private function state(array $players, int $round = 2): TournamentState
+    /**
+     * @param list<Player> $players
+     * @param list<ProhibitedPairingGroup> $prohibitedPairings
+     */
+    private function state(array $players, int $round = 2, array $prohibitedPairings = []): TournamentState
     {
         return new TournamentState(
             schemaVersion: TournamentState::SCHEMA_VERSION,
@@ -404,6 +441,7 @@ final class DutchPairingEngineTest extends TestCase
             maxPlayers: 256,
             players: $players,
             pointsForPairingAllocatedBye: new Score(1, 1),
+            prohibitedPairingGroups: $prohibitedPairings,
         );
     }
 }

@@ -18,6 +18,8 @@ final readonly class TournamentState
      * @param list<Player> $players
      * @param list<string> $deputyArbiters
      * @param list<string> $roundDates
+     * @param list<ProhibitedPairingGroup> $prohibitedPairingGroups
+     * @param list<ScheduledBye> $scheduledByes
      */
     public function __construct(
         public string $schemaVersion,
@@ -47,6 +49,8 @@ final readonly class TournamentState
         public string $tieBreaksRecord = '',
         public string $tieBreaks = '',
         public string $encodedTimeControl = '',
+        public array $prohibitedPairingGroups = [],
+        public array $scheduledByes = [],
     ) {
     }
 
@@ -70,12 +74,48 @@ final readonly class TournamentState
         return $this->pointsForUnknown ?? $this->pointsForDraw;
     }
 
+    public function isPairingProhibited(int $leftPlayerId, int $rightPlayerId, ?int $round = null): bool
+    {
+        $round ??= $this->round;
+        foreach ($this->prohibitedPairingGroups as $group) {
+            if ($group->prohibits($round, $leftPlayerId, $rightPlayerId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasProhibitedPairingsInRound(?int $round = null): bool
+    {
+        $round ??= $this->round;
+        foreach ($this->prohibitedPairingGroups as $group) {
+            if ($round >= $group->firstRound && $round <= $group->lastRound) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isPlayerScheduledBye(int $playerId, ?int $round = null): bool
+    {
+        $round ??= $this->round;
+        foreach ($this->scheduledByes as $scheduledBye) {
+            if ($scheduledBye->includes($round, $playerId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /** @return list<Player> */
     public function activePlayers(): array
     {
         return array_values(array_filter(
             $this->players,
-            static fn (Player $player): bool => $player->active,
+            fn (Player $player): bool => $player->active && !$this->isPlayerScheduledBye($player->id),
         ));
     }
 }

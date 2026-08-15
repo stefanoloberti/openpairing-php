@@ -58,10 +58,13 @@ final class PairingResultValidator
                 continue;
             }
             $canMeet = $state->pairingSystem === 'fide-burstein-2026'
-                ? $bursteinRules->canMeet($white, $black)
+                ? $bursteinRules->canMeet($state, $white, $black)
                 : $dutchRules->canMeet($state, $white, $black);
             if (!$canMeet) {
-                $violations[] = new Diagnostic('pair.absolute_colour', 'A table violates the absolute colour-preference criterion.', 'error', [
+                $prohibited = $state->isPairingProhibited($white->id, $black->id);
+                $violations[] = new Diagnostic($prohibited ? 'pair.prohibited' : 'pair.absolute_colour', $prohibited
+                    ? 'A table violates a declared prohibited-pairing constraint.'
+                    : 'A table violates the absolute colour-preference criterion.', 'error', [
                     'whitePlayerId' => $white->id,
                     'blackPlayerId' => $black->id,
                 ]);

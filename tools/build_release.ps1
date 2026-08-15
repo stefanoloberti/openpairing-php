@@ -1,5 +1,5 @@
 param(
-    [string] $Version = '0.9.0-rc7',
+    [string] $Version = '0.9.0-rc8',
     [string] $Php = (Join-Path $PSScriptRoot 'runtime\php\php.exe'),
     [string] $ComposerPhar = (Join-Path $PSScriptRoot '..\build\composer.phar'),
     [string] $OutputDirectory = (Join-Path $PSScriptRoot '..\build\release')

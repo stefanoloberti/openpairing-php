@@ -259,6 +259,21 @@ final readonly class TrfPairingChecker
             pointsForZeroPointBye: $full->pointsForZeroPointBye,
             pointsForPairingAllocatedBye: $full->pointsForPairingAllocatedBye,
             pointsForUnknown: $full->pointsForUnknown,
+            city: $full->city,
+            federation: $full->federation,
+            startDate: $full->startDate,
+            endDate: $full->endDate,
+            tournamentType: $full->tournamentType,
+            chiefArbiter: $full->chiefArbiter,
+            deputyArbiters: $full->deputyArbiters,
+            timeControlDescription: $full->timeControlDescription,
+            roundDates: $full->roundDates,
+            pairingController: $full->pairingController,
+            tieBreaksRecord: $full->tieBreaksRecord,
+            tieBreaks: $full->tieBreaks,
+            encodedTimeControl: $full->encodedTimeControl,
+            prohibitedPairingGroups: $full->prohibitedPairingGroups,
+            scheduledByes: $full->scheduledByes,
         );
     }
 

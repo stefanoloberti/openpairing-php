@@ -7,8 +7,11 @@ namespace OpenPairing\Tests\Integration;
 use OpenPairing\Domain\Colour\Colour;
 use OpenPairing\Domain\Score\Score;
 use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
 use OpenPairing\Domain\Tournament\TournamentState;
+use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Format\Trf\Trf2026Codec;
+use OpenPairing\Tests\Fixtures\DeterministicTournamentSimulator;
 use OpenPairing\Verification\TrfPairingChecker;
 use PHPUnit\Framework\TestCase;
 
@@ -23,6 +26,40 @@ final class TrfPairingCheckerTest extends TestCase
         self::assertSame(1, $report['counts']['roundsExact']);
         self::assertSame('exact', $report['tieBreaks']['status']);
         self::assertSame(5, $report['caseCount']);
+    }
+
+    public function testHistoricalReplayHonoursRecord260Constraints(): void
+    {
+        $initial = DeterministicTournamentSimulator::initial(4, 1);
+        $constrained = new TournamentState(
+            schemaVersion: $initial->schemaVersion,
+            round: $initial->round,
+            numberOfRounds: $initial->numberOfRounds,
+            pairingSystem: $initial->pairingSystem,
+            topColour: $initial->topColour,
+            pointsForWin: $initial->pointsForWin,
+            pointsForDraw: $initial->pointsForDraw,
+            maxPlayers: $initial->maxPlayers,
+            players: $initial->players,
+            tournamentName: 'Record 260 replay fixture',
+            prohibitedPairingGroups: [new ProhibitedPairingGroup(1, 1, [1, 3])],
+        );
+        $pairing = (new DutchPairingEngine())->pair($constrained);
+        $completed = DeterministicTournamentSimulator::advance($constrained, $pairing);
+
+        $report = (new TrfPairingChecker())->check((new Trf2026Codec())->encode($completed));
+
+        self::assertSame('exact', $report['status']);
+        self::assertSame(1, $report['counts']['roundsExact']);
+        self::assertNotContains(
+            '1-3',
+            array_map(static function ($table): string {
+                $ids = [$table->whitePlayerId, $table->blackPlayerId];
+                sort($ids);
+
+                return implode('-', $ids);
+            }, $pairing->tables),
+        );
     }
 
     public function testReportsSamePairsColourVariantAsDiscrepancy(): void
