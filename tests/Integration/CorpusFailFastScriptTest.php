@@ -62,5 +62,7 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('Restart=no', $script);
         self::assertStringNotContainsString('Restart=on-failure', $script);
         self::assertStringContainsString('systemctl enable', $script);
+        self::assertStringContainsString('stages=("${@:3}")', $script);
+        self::assertStringContainsString('Unsafe campaign stage', $script);
     }
 }

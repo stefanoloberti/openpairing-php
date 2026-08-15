@@ -18,17 +18,26 @@ esac
 }
 test -d "$bin"
 
-stages=(
-    openpairing-campaign-p30.sh
-    openpairing-classify-p30.sh
-    openpairing-campaign-p50.sh
-    openpairing-classify-p50.sh
-    openpairing-campaign-p80.sh
-    openpairing-classify-p80.sh
-    openpairing-campaign-accel.sh
-    openpairing-classify-accel.sh
-)
+if (( $# > 2 )); then
+    stages=("${@:3}")
+else
+    stages=(
+        openpairing-campaign-p30.sh
+        openpairing-classify-p30.sh
+        openpairing-campaign-p50.sh
+        openpairing-classify-p50.sh
+        openpairing-campaign-p80.sh
+        openpairing-classify-p80.sh
+        openpairing-campaign-accel.sh
+        openpairing-classify-accel.sh
+    )
+fi
+(( ${#stages[@]} > 0 )) || { echo "At least one campaign stage is required" >&2; exit 2; }
 for stage in "${stages[@]}"; do
+    [[ "$stage" =~ ^openpairing-[a-z0-9-]+\.sh$ ]] || {
+        echo "Unsafe campaign stage: $stage" >&2
+        exit 2
+    }
     test -x "$bin/$stage" || {
         echo "Missing executable campaign stage: $bin/$stage" >&2
         exit 3
