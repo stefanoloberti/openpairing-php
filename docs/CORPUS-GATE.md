@@ -66,6 +66,18 @@ are disabled for future boots without stopping their current processes. The
 incident and exact runner hashes are recorded in
 `evidence/future-runner-backend-hardening-20260816.json`.
 
+The collector had already copied the completed p300 result atomically to the
+Windows evidence staging area before the reboot. Its exact archived payload is
+now preserved as `evidence/capacity-pilot-p300-20260815.json` (SHA-256
+`fa293a6c6f2e94d790c4be0ad726afbd2843156361a425d3af3b87b508f56147`)
+with the matching GNU time record in
+`evidence/capacity-pilot-p300-20260815.time.txt` (SHA-256
+`967e166290c6e2501d3e02056ad67b0e66362c4248bc06ddd52aeb449ccc6be2`).
+That capacity-only identity verified one 300-player tournament and 61/61
+rounds exactly, with zero colour variants, deviations, no-solutions or
+resource limits, in 84,894.272 seconds and 1,459,748 KiB maximum RSS. It is not
+relabelled as evidence for the active RC8 corpus identity.
+
 The queued p150, misc and accelerated runners were regenerated without
 touching the active p80 runner. They now lock the effective
 `OPENPAIRING_BIGINT_BACKEND=gmp`, reject completed reports whose production,

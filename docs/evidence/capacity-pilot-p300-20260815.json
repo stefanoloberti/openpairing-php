@@ -1,0 +1,71 @@
+{
+    "schema": "openpairing.trf-historical-pairing-verification/3",
+    "historicalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+    "root": "/srv/openpairing-validation/pilots/p300/input",
+    "limit": 0,
+    "roundFilter": null,
+    "productionOnly": true,
+    "performanceRuntime": {
+        "opcacheEnableCli": "1",
+        "jit": "1255",
+        "jitBufferSize": "128M",
+        "xdebugMode": ""
+    },
+    "preliminaryGlobalAudit": false,
+    "shadowGlobalAudit": false,
+    "largeFieldAudit": true,
+    "elapsedSeconds": 84894.272,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/srv/openpairing-validation/releases/capacity-ce04851",
+        "autoloadPsr4Roots": [
+            "/srv/openpairing-validation/releases/capacity-ce04851/src"
+        ],
+        "expectedEnginePath": "/srv/openpairing-validation/releases/capacity-ce04851/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/srv/openpairing-validation/releases/capacity-ce04851/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+        "sourceTreeSha256": "8242492e22c16bb6faa754763eed74ffff3dbed3f44bf85ae6684817b68f5f49",
+        "sourceFileCount": 80,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "harnessIdentity": {
+        "schema": "openpairing.historical-replay-harness/1",
+        "sha256": "f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093",
+        "files": {
+            "TrfCorpusCompatibility.php": "d7f115471ad11ff26be8697027cde93216540be8a1a55e04be78d0ef37f8a60a",
+            "verify_trf_pairings.php": "08447c38f7c8405df0a7c9b67ed9242c1188ed9cc3873611fd16bee7f7ca1dda"
+        }
+    },
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-identity/1",
+        "selection": "relative-path-ordinal-v1",
+        "requestedLimit": 0,
+        "fileCount": 1,
+        "totalBytes": 210549,
+        "manifestSha256": "f4c65128f49b9bd38ff405ebf39a663d1b9c9e265dd13a1d71c7352e4161b4e2"
+    },
+    "counts": {
+        "filesSeen": 1,
+        "decoded": 1,
+        "tournamentsVerified": 1,
+        "tournamentsAllExact": 1,
+        "roundsAttempted": 61,
+        "roundsExact": 61,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 61,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 0,
+        "largeField.candidateNoMatching": 0
+    },
+    "diagnostics": [],
+    "samples": [],
+    "preliminarySamples": [],
+    "shadowSamples": [],
+    "shadowTimingSamples": [],
+    "shadowTimingAggregates": []
+}
