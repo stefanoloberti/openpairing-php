@@ -53,7 +53,7 @@
     },
     {
       "id": "public-ptc-rtg-final-package",
-      "description": "PTC and RTG are included in and reproduced from the exact final non-RC distribution.",
+      "description": "PTC and RTG are reproduced from the exact final non-RC THP distribution; the candidate PTC closes 50,000 external-RTG tournaments and the candidate RTG closes 50,000 tournaments through one or more available independent PTCs.",
       "required": true,
       "status": "open",
       "evidence": [

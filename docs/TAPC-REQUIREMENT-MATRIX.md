@@ -8,6 +8,8 @@ is a complete Tournament Handler Program (THP).
 Normative source: FIDE Handbook, *Chess Equipment with Electronic Components*,
 Articles 7.1-7.3:
 <https://handbook.fide.com/chapter/ChessEquipmentWithElectronicComponenets032026>.
+The complementary current process is in TEC Manual 1.24:
+<https://tec.fide.com/wp-content/uploads/2026/03/FIDE-TEC-Manual-01.24-1.pdf>.
 The current application route is linked from the FIDE TEC Online Forms:
 <https://www.cognitoforms.com/FIDE/TECMenu>.
 
@@ -40,8 +42,8 @@ identity must not be combined silently.
 | 7.1.2 | Declare the pairing systems for which compliance is requested | Proposed scope: individual Dutch; Burstein retained outside the initial claim until owner/TEC decision | external | Freeze the declaration in the application and product FIDE mode |
 | 7.1.3(a) | Provide an English FIDE-mode interface and complete user help/manual | English engine CLI and `USER-MANUAL.md` | partial | Document and test the complete English THP operator workflow |
 | 7.1.3(b), 7.2.1-7.2.2 | Import/export the latest TRF and retain required older-format compatibility | Fail-closed individual TRF26 subset; legacy `XXA` acceleration import | partial | Resolve record `299`, document the declared subset, and prove the TEC-required TRF16/TRF06 paths |
-| 7.1.3(c), 7.2.3 | Make a free embedded PTC available using the product engines | Public offline `openpairing-ptc.php` and fixtures | partial | Reproduce PTC from the exact final THP distribution and confirm acceptable embedding with TEC |
-| 7.1.3(c), 7.2.4 | Make a free embedded configurable RTG available | Public deterministic `openpairing-rtg.php` and RTG-to-PTC control | partial | Reproduce RTG and round trip from the exact final THP distribution |
+| 7.1.3(c), 7.2.3; Manual 3.9.4 | Make a free embedded PTC available using the product engines and test it on the prescribed external RTG volume | Public offline `openpairing-ptc.php` and fixtures | partial | Reproduce PTC from the exact final THP distribution; process 50,000 tournaments from an external available RTG and classify every discrepancy |
+| 7.1.3(c), 7.2.4; Manual 3.9.4 | Make a free embedded configurable RTG available and cross-check its output independently | Public deterministic `openpairing-rtg.php` and internal RTG-to-PTC control | partial | Reproduce RTG from the exact final THP distribution; generate 50,000 tournaments and verify them with one or more available PTCs |
 | 7.1.3(d) | Supply a controlled tester environment | Reproducible engine runtime instructions for Windows limbs and Ubuntu GMP | partial | Freeze a TEC-accessible environment for the exact submitted THP |
 | 7.1.4 | Extra features must not compromise declared FIDE systems | Engine/CLI fail-closed controls; provisional public API freeze | partial | Test FIDE-mode isolation and non-bypass behavior in the exact THP |
 
@@ -51,6 +53,7 @@ identity must not be combined silently.
 |---|---|---|
 | Exact submitted version and identity | RC8 is reproducible; no stable product identity selected | Freeze one non-RC THP/source/runtime identity after technical gates close |
 | Current TEC route and checklist | Scope enquiry drafted but not sent | Owner supplies legal/vendor/contact data, approves the enquiry, and TEC confirms the route |
+| SDPC before TAPC | Not started | Obtain SDPC, then keep the TAPC candidate byte-for-byte on that exact SDPC version or restart the administrative identity process |
 | Forms, fees and tester coordination | Not started | Use the current TEC forms and administrative instructions; do not submit before technical sign-off |
 | Public claims | Repository states NO-GO while required gates are open | Keep all wording limited to implemented/verified component evidence until FIDE issues a decision |
 

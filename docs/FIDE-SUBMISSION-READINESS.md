@@ -56,6 +56,8 @@ alone as TAPC-ready.
   <https://handbook.fide.com/chapter/C0407202602>
 - Current online application entry point:
   <https://www.cognitoforms.com/FIDE/TECMenu>
+- FIDE TEC Policies and Procedures Manual 1.24, dated 7 March 2026:
+  <https://tec.fide.com/wp-content/uploads/2026/03/FIDE-TEC-Manual-01.24-1.pdf>
 
 The 2026-08-16 read-only source check and the remaining interpretation
 questions are recorded in
@@ -80,8 +82,8 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
 | English interface and manual | English CLI plus `USER-MANUAL.md` for the engine package | Partial | Add the complete English THP GUI/FIDE-mode workflow for the exact submitted product |
 | FIDE mode | CLI exposes only declared FIDE engines but has no named THP mode | Missing product evidence | Make FIDE mode default or explicit in ChessPairings and test prohibited features are isolated |
 | Latest TRF import/export | Fail-closed individual TRF26 subset; conditional `142`/`152`, scheduled forfeits, unusual results, future individual byes (`240`) and prohibited-pairing groups (`260`) covered | Partial | Decide the generic individual `299` score-adjustment claim in `TRF26-INDIVIDUAL-GAP-AUDIT.md`, add backward-compatibility tests and decide any TEC-required TRF16 scope |
-| Pairings and Tie-Breaks Checker (PTC) | Public offline `openpairing-ptc.php`, non-vacuous JSON report, embedded Dutch/Burstein replay, declared-rank checks and published positive/negative fixtures | Implemented; release gate open | Include the fixtures in the frozen runtime and verify the ChessPairings download path |
-| Random Tournament Generator (RTG) | Public offline `openpairing-rtg.php`; deterministic seed; Dutch/Burstein, colour, draw-rate and Baku parameters; complete TRF26 output; byte-stable RTG-to-PTC control published | Implemented; release gate open | Include the control in the frozen runtime and verify it from the delivered ChessPairings package |
+| Pairings and Tie-Breaks Checker (PTC) | Public offline `openpairing-ptc.php`, non-vacuous JSON report, embedded Dutch/Burstein replay, declared-rank checks and published positive/negative fixtures | Implemented; release/cross-test gate open | Reproduce it from the exact THP package, then process the TEC-required 50,000 tournaments from an external available RTG and classify every discrepancy |
+| Random Tournament Generator (RTG) | Public offline `openpairing-rtg.php`; deterministic seed; Dutch/Burstein, colour, draw-rate and Baku parameters; complete TRF26 output; byte-stable RTG-to-PTC control published | Implemented; release/cross-test gate open | Reproduce it from the exact THP package, generate the TEC-required 50,000 tournaments and have one or more available PTCs verify them |
 | Controlled test environment | Reproducible engine ZIP procedure and two arithmetic profiles in `CONTROLLED-ENVIRONMENT.md` | Partial | Freeze and publish a TEC-accessible environment for the exact non-RC THP candidate |
 | Player/result/tournament management | Outside this library | Missing engine-alone | Demonstrate the full ChessPairings THP workflow with player data, results, byes and recovery |
 | Online forms, fees and manufacturer registration | Not a code task | Not started | Register manufacturer, obtain current forms/fees, complete SDPC/TAPC inputs without submitting before technical sign-off |
@@ -93,7 +95,9 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    accelerated queue without mixed identities.
 2. Freeze and publish the implemented PTC and RTG in the final runtime, with
    positive/negative machine-readable examples and a deterministic RTG-to-PTC
-   round trip.
+   round trip. Then close the two distinct 50,000-tournament cross-tests in TEC
+   Manual 1.24 Article 3.9.4: external RTG to candidate PTC, and candidate RTG
+   to one or more available PTCs.
 3. Implement the non-mutating product observer defined in
    `SHADOW-VALIDATION.md` once an exact integrated candidate is selected; the
    pairing API inventory is frozen provisionally in `API-STABILITY.md`.
@@ -103,6 +107,17 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
 6. Only then populate the live TEC forms and pay testing fees.
+
+The historical 122,008-tournament replay and the official PTC/RTG cross-tests
+answer different questions. The former verifies behavior against preserved
+TRF reference rounds; it must not be reported as if it fulfilled either
+50,000-tournament TEC cross-test. Likewise, an internal RTG-to-PTC round trip
+is a non-vacuity/reproducibility control, not an independent cross-check.
+
+The administrative order is also identity-sensitive: the TEC Manual requires
+a successful SDPC before TAPC and says TAPC can cover only the exact product
+version that received the SDPC. Freezing or rebuilding after SDPC therefore
+requires owner/TEC handling rather than relabelling evidence.
 
 ## Submission evidence package
 

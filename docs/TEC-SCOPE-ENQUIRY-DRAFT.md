@@ -32,6 +32,9 @@ Before selecting an application category, could you please clarify:
    adjustments, or is support mandatory in FIDE mode?
 7. Which current SDPC/TAPC form and technical checklist should be used for this
    product class?
+8. For the two 50,000-tournament cross-tests in TEC Manual 1.24 Article 3.9.4,
+   which accepted/available RTG and PTC implementations should applicants use,
+   and may the exchange be arranged before the exact THP SDPC is filed?
 
 We will not describe the product as FIDE approved or endorsed before a formal
 decision. We can provide the exact version, source/runtime hashes, English

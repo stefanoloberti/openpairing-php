@@ -25,6 +25,13 @@
       "effectiveFrom": "2026-02-01",
       "observedArticles": ["0", "1.1", "1.2", "1.3", "1.4", "1.5"],
       "observedCurrentMethods": ["Baku Acceleration Method"]
+    },
+    {
+      "url": "https://tec.fide.com/wp-content/uploads/2026/03/FIDE-TEC-Manual-01.24-1.pdf",
+      "title": "FIDE Technical Commission Policies and Procedures Manual",
+      "version": "1.24",
+      "dated": "2026-03-07",
+      "observedArticles": ["1.1", "2.1", "2.2", "3.1", "3.2", "3.9.1", "3.9.4"]
     }
   ],
   "confirmedScope": {
@@ -42,7 +49,12 @@
     "publicPtcAndRtgRequiredUnlessTecExempts": true,
     "controlledTestEnvironmentRequired": true,
     "ptcDescribedAsEmbeddedCliTool": true,
-    "rtgDescribedAsEmbeddedFreeTool": true
+    "rtgDescribedAsEmbeddedFreeTool": true,
+    "sdpcRequiredBeforeTapc": true,
+    "tapcVersionMustEqualSdpcVersion": true,
+    "candidatePtcExternalRtgTournamentCount": 50000,
+    "candidateRtgRequiresAvailablePtcCrossCheck": true,
+    "historicalCorpusDoesNotReplaceTecPtcRtgCrossTesting": true
   },
   "openClarifications": [
     "Whether a standalone pairing library can be assessed separately from a complete THP.",
