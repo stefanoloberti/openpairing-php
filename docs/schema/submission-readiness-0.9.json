@@ -57,7 +57,11 @@
       "required": true,
       "status": "open",
       "evidence": [
-        {"path": "docs/evidence/rc7-public-tools-gate-20260815.json"}
+        {"path": "docs/evidence/rc7-public-tools-gate-20260815.json"},
+        {"path": "docs/TEC-CROSS-TEST.md"},
+        {"path": "docs/schema/tec-cross-test-batch-1.schema.json"},
+        {"path": "docs/schema/tec-cross-test-case-1.schema.json"},
+        {"path": "docs/evidence/tec-cross-test-verifier-checkpoint-20260816.json"}
       ]
     },
     {

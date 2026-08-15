@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/tec-cross-test-batch-1.schema.json",
+  "title": "OpenPairing TEC cross-test batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "direction", "candidateIdentity", "counterpart", "attemptedTournaments", "eventsSha256"],
+  "properties": {
+    "schema": {"const": "openpairing.tec-cross-test-batch/1"},
+    "direction": {"enum": ["external-rtg-to-candidate-ptc", "candidate-rtg-to-external-ptc"]},
+    "candidateIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["productVersion", "productBuildSha256", "packageVersion", "engineVersion", "sourceTreeSha256", "runtimeArchiveSha256", "ptcVersion", "ptcSha256", "rtgVersion", "rtgSha256"],
+      "properties": {
+        "productVersion": {"type": "string", "minLength": 1},
+        "productBuildSha256": {"$ref": "#/$defs/sha256"},
+        "packageVersion": {"type": "string", "minLength": 1},
+        "engineVersion": {"type": "string", "minLength": 1},
+        "sourceTreeSha256": {"$ref": "#/$defs/sha256"},
+        "runtimeArchiveSha256": {"$ref": "#/$defs/sha256"},
+        "ptcVersion": {"type": "string", "minLength": 1},
+        "ptcSha256": {"$ref": "#/$defs/sha256"},
+        "rtgVersion": {"type": "string", "minLength": 1},
+        "rtgSha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "counterpart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "name", "version", "artifactSha256", "acceptanceReference"],
+      "properties": {
+        "role": {"enum": ["external-rtg", "external-ptc"]},
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "artifactSha256": {"$ref": "#/$defs/sha256"},
+        "acceptanceReference": {"type": "string", "minLength": 1}
+      }
+    },
+    "attemptedTournaments": {"type": "integer", "minimum": 0},
+    "eventsSha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
+

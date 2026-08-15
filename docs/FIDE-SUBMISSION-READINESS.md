@@ -119,6 +119,10 @@ a successful SDPC before TAPC and says TAPC can cover only the exact product
 version that received the SDPC. Freezing or rebuilding after SDPC therefore
 requires owner/TEC handling rather than relabelling evidence.
 
+The strict batch/event format and fail-closed local verifier for preserving
+those future cross-tests are documented in `TEC-CROSS-TEST.md`. Tooling
+readiness does not close either external cross-test.
+
 ## Submission evidence package
 
 The final package should contain:
