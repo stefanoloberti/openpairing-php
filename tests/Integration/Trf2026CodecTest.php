@@ -89,6 +89,21 @@ final class Trf2026CodecTest extends TestCase
         (new Trf2026Codec())->decode($trf);
     }
 
+    public function testPublicImportRejectsMissingInitialColourRecord(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = preg_replace('/^152.*\r\n/m', '', $codec->encode($this->roundTwoState()));
+        self::assertIsString($trf);
+
+        try {
+            $codec->decode($trf);
+            self::fail('Public TRF import must not infer a missing initial colour.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.record_required', $exception->diagnosticCode);
+            self::assertStringContainsString('152', $exception->getMessage());
+        }
+    }
+
     public function testRejectsOversizedInputBeforeRecordParsing(): void
     {
         try {

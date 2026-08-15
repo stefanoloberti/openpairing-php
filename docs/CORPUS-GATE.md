@@ -53,6 +53,20 @@ Official replay identity for the active queue:
 - shard acceptance: report plus Gacrux classification promoted atomically;
   persistent stop on the first confirmed inferior or incomplete verdict
 
+The first p80 launch on 2026-08-15 is quarantined and is not official evidence.
+Its supervisor selected release `c48fd05` instead of the identity above, and
+the old replay harness silently supplied `152 W` when a TRF omitted the initial
+colour. It stopped after 17 promoted reports with 217 colour variants and zero
+pairing deviations. The fixed harness infers the value only from a played
+round-one board, attests `record-152` or `inferred-round-one` per file, and
+fails closed if inference is impossible. A backward scan found zero inference
+mismatches against 34,791 explicit records and zero indeducible files; all 217
+observed variants replay exact. The public codec continues to reject a missing
+152 explicitly. p80 may restart only under a newly committed campaign-tool
+identity with the source-tree lock checked at installation and before every
+shard, and with per-shard classification. Evidence is
+`evidence/p80-initial-colour-provenance-20260815.json`.
+
 ## Historical denominator: 122,008
 
 | Partition | Files | Decoded | Exact tournaments | Exact / attempted rounds | Status | Attested evidence |

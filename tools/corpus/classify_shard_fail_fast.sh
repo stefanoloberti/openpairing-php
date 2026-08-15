@@ -24,7 +24,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-read -r required fatal evaluated < <(php -r '
+read -r required fatal evaluated incomplete diagnostics < <(php -r '
     $report = json_decode(file_get_contents($argv[1]), true, flags: JSON_THROW_ON_ERROR);
     $counts = $report["counts"] ?? [];
     $required = (int) ($counts["largeField.candidateDeviation"] ?? 0)
@@ -37,7 +37,10 @@ read -r required fatal evaluated < <(php -r '
         (int) ($counts["decoded"] ?? 0),
         (int) ($counts["roundsAttempted"] ?? 0),
     );
-    printf("%d %d %d\n", $required, $fatal, $evaluated);
+    $incomplete = (int) (($counts["filesSeen"] ?? 0) !== ($counts["decoded"] ?? 0)
+        || ($counts["decoded"] ?? 0) !== ($counts["tournamentsVerified"] ?? 0));
+    $diagnostics = array_sum(array_map("intval", $report["diagnostics"] ?? []));
+    printf("%d %d %d %d %d\n", $required, $fatal, $evaluated, $incomplete, $diagnostics);
 ' "$report")
 
 stop() {
@@ -52,6 +55,12 @@ stop() {
 
 if (( evaluated < 1 )); then
     stop "zero-evaluated-cases" 19
+fi
+if (( incomplete > 0 )); then
+    stop "incomplete-evaluation" 25
+fi
+if (( diagnostics > 0 )); then
+    stop "report-diagnostics-$diagnostics" 26
 fi
 if (( fatal > 0 )); then
     stop "engine-fatal-count-$fatal" 20

@@ -271,6 +271,16 @@ This rule has prevented four reasonable but false conclusions:
 4. Pairing replay treated a PAB as no historical float. Re-reading a minimized
    TRF against Gacrux proved it is a downfloat for the next round and invalidated
    every prior pairing baseline.
+5. The first p80 colour variants plausibly looked like the colour-history side
+   of the earlier forfeit-with-opponent defect. That hypothesis was proposed in
+   the independent Fable 5 review and rejected before any engine change: the
+   codec already marks `+`/`-` games as unplayed, the replay compatibility layer
+   clears their legacy colours, and a controlled T4857 replay changed only the
+   missing initial-colour record (`152 B`). Both rounds 1 and 2 then became
+   exact. Replaying all 217 observed variants with attested inference made
+   217/217 exact. The defect was the verifier's silent `152 W` fallback, not
+   forfeit history or Dutch colour allocation. Evidence is
+   `evidence/p80-initial-colour-provenance-20260815.json`.
 
 Consequences for implementation:
 

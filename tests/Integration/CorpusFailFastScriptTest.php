@@ -20,6 +20,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('roundsEngineNoSolution', $script);
         self::assertStringContainsString('roundsEngineResourceLimit', $script);
         self::assertStringContainsString('zero-evaluated-cases', $script);
+        self::assertStringContainsString('incomplete-evaluation', $script);
+        self::assertStringContainsString('report-diagnostics-', $script);
         self::assertStringContainsString('"roundsAttempted"', $script);
         self::assertStringContainsString('mv -f -- "$temporary_stop" "$stop_file"', $script);
         self::assertStringContainsString('mv -f -- "$temporary_output" "$output"', $script);
@@ -43,6 +45,13 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('shardGateSha256', $script);
         self::assertStringContainsString('realpath(\\$argv[2])', $script);
         self::assertStringContainsString('.classification.', $script);
+        self::assertStringContainsString('EXPECTED_SOURCE_TREE_SHA256', $script);
+        self::assertStringContainsString('expected_source_tree_sha256', $script);
+        self::assertStringContainsString('expected_harness_sha256', $script);
+        self::assertStringContainsString('expected_campaign_commit', $script);
+        self::assertStringContainsString('campaign-identity.lock.json', $script);
+        self::assertStringContainsString('runtime-identity.lock.json', $script);
+        self::assertStringContainsString('assert_campaign_identity', $script);
     }
 
     public function testSupervisorDoesNotRestartAfterAConfirmedGateFailure(): void

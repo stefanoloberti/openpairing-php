@@ -128,6 +128,7 @@ $preliminarySamples = [];
 $shadowSamples = [];
 $shadowTimingSamples = [];
 $shadowTimingAggregates = [];
+$topColourProvenance = [];
 $started = hrtime(true);
 
 foreach ($corpus['files'] as $corpusFile) {
@@ -139,8 +140,9 @@ foreach ($corpus['files'] as $corpusFile) {
             throw new RuntimeException('Could not read file.');
         }
         CorpusIdentity::assertRawFileMatches($corpusFile, $raw);
-        [$normalized] = TrfCorpusCompatibility::normalize($raw);
+        [$normalized, , $fileTopColourProvenance] = TrfCorpusCompatibility::normalize($raw);
         $full = $codec->decode($normalized);
+        $topColourProvenance[$relative] = $fileTopColourProvenance;
         ++$counts['decoded'];
         $scoresEntering = scoresEnteringRounds($full, $rules);
         $allExact = true;
@@ -395,6 +397,9 @@ foreach ($corpus['files'] as $corpusFile) {
                 ++$counts['tournamentsAllExact'];
             }
         }
+    } catch (UnexpectedValueException $exception) {
+        $diagnostics['compatibility.initial_colour'] = ($diagnostics['compatibility.initial_colour'] ?? 0) + 1;
+        sample($samples, $relative, 0, 'compatibility.initial_colour', $exception->getMessage());
     } catch (RuntimeException $exception) {
         if (str_starts_with($exception->getMessage(), 'Corpus file changed during replay:')) {
             fwrite(STDERR, json_encode([
@@ -451,6 +456,7 @@ echo json_encode([
     'runtimeIdentity' => $runtimeIdentity,
     'harnessIdentity' => $harnessIdentity,
     'corpusIdentity' => $corpusIdentity,
+    'topColourProvenance' => topColourProvenanceAttestation($topColourProvenance),
     'counts' => $counts,
     'diagnostics' => $diagnostics,
     'samples' => $samples,
@@ -459,6 +465,28 @@ echo json_encode([
     'shadowTimingSamples' => $shadowTimingSamples,
     'shadowTimingAggregates' => array_values($shadowTimingAggregates),
 ], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL;
+
+/**
+ * @param array<string, array{source: string, colour: string, basis: array{pairingNumber: int, rankIndex: int, recordedColour: string}|null}> $files
+ * @return array{schema: string, sha256: string, counts: array<string, int>, files: array<string, array{source: string, colour: string, basis: array{pairingNumber: int, rankIndex: int, recordedColour: string}|null}>}
+ */
+function topColourProvenanceAttestation(array $files): array
+{
+    ksort($files, SORT_STRING);
+    $counts = [];
+    foreach ($files as $provenance) {
+        $counts[$provenance['source']] = ($counts[$provenance['source']] ?? 0) + 1;
+    }
+    ksort($counts, SORT_STRING);
+    $encoded = json_encode($files, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+
+    return [
+        'schema' => 'openpairing.top-colour-provenance/1',
+        'sha256' => hash('sha256', $encoded),
+        'counts' => $counts,
+        'files' => $files,
+    ];
+}
 
 /** @return array{schema: string, sha256: string, files: array<string, string>} */
 function harnessIdentity(string ...$paths): array

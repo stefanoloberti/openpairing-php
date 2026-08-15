@@ -2,13 +2,16 @@
 
 set -euo pipefail
 
-name=${1:?Usage: install_large_field_campaign.sh NAME SHARD_ROOT SOURCE_TREE UPSTREAM SHARDS WORKERS EXPECTED_FILES}
+name=${1:?Usage: install_large_field_campaign.sh NAME SHARD_ROOT SOURCE_TREE UPSTREAM SHARDS WORKERS EXPECTED_FILES EXPECTED_SOURCE_TREE_SHA256 EXPECTED_HARNESS_SHA256 EXPECTED_CAMPAIGN_COMMIT}
 shard_root=${2:?Missing shard root}
 source_tree=${3:?Missing source tree}
 upstream=${4:?Missing Gacrux checkout}
 shards=${5:?Missing shard count}
 workers=${6:?Missing worker count}
 expected_files=${7:?Missing expected file count}
+expected_source_tree_sha256=${8:?Missing expected source-tree SHA-256}
+expected_harness_sha256=${9:?Missing expected replay-harness SHA-256}
+expected_campaign_commit=${10:?Missing expected campaign-tool commit}
 base=${OPENPAIRING_CAMPAIGN_BASE:-/srv/openpairing-validation}
 bin="$base/bin"
 campaign="$base/campaigns/$name"
@@ -19,10 +22,45 @@ case "$base" in /srv/openpairing-validation|/srv/openpairing-validation/*) ;; *)
 [[ "$shards" =~ ^[1-9][0-9]*$ ]] || { echo "Invalid shard count: $shards" >&2; exit 2; }
 [[ "$workers" =~ ^[1-9][0-9]*$ ]] || { echo "Invalid worker count: $workers" >&2; exit 2; }
 [[ "$expected_files" =~ ^[1-9][0-9]*$ ]] || { echo "Invalid expected file count: $expected_files" >&2; exit 2; }
+[[ "$expected_source_tree_sha256" =~ ^[0-9a-f]{64}$ ]] || { echo "Invalid expected source-tree SHA-256" >&2; exit 2; }
+[[ "$expected_harness_sha256" =~ ^[0-9a-f]{64}$ ]] || { echo "Invalid expected replay-harness SHA-256" >&2; exit 2; }
+[[ "$expected_campaign_commit" =~ ^[0-9a-f]{40}$ ]] || { echo "Invalid expected campaign-tool commit" >&2; exit 2; }
 test -d "$shard_root"
 test -x "$source_tree/tools/verify_trf_pairings.php"
 test -x "$source_tree/tools/corpus/classify_shard_fail_fast.sh"
 test -x "$upstream/venv/bin/python"
+assert_campaign_identity() {
+    php -r '
+        [$runtimePath, $campaignPath, $expectedSource, $expectedHarness, $expectedCommit, $verifier, $compatibility] = array_slice($argv, 1);
+        $runtime = json_decode(file_get_contents($runtimePath), true, flags: JSON_THROW_ON_ERROR);
+        $campaign = json_decode(file_get_contents($campaignPath), true, flags: JSON_THROW_ON_ERROR);
+        $files = [basename($verifier) => hash_file("sha256", $verifier), basename($compatibility) => hash_file("sha256", $compatibility)];
+        ksort($files, SORT_STRING);
+        $context = hash_init("sha256");
+        foreach ($files as $name => $hash) {
+            hash_update($context, $name."\0".$hash."\n");
+        }
+        $observed = [
+            "source" => strtolower((string) ($runtime["sourceTreeSha256"] ?? "")),
+            "harness" => hash_final($context),
+            "commit" => strtolower((string) ($campaign["gitCommit"] ?? "")),
+            "campaignSource" => strtolower((string) ($campaign["sourceTreeSha256"] ?? "")),
+            "campaignHarness" => strtolower((string) ($campaign["harnessSha256"] ?? "")),
+        ];
+        $expected = ["source" => $expectedSource, "harness" => $expectedHarness, "commit" => $expectedCommit];
+        if (!hash_equals($expected["source"], $observed["source"])
+            || !hash_equals($expected["harness"], $observed["harness"])
+            || !hash_equals($expected["commit"], $observed["commit"])
+            || !hash_equals($expected["source"], $observed["campaignSource"])
+            || !hash_equals($expected["harness"], $observed["campaignHarness"])) {
+            fwrite(STDERR, "Campaign identity mismatch: expected ".json_encode($expected).", observed ".json_encode($observed).".\n");
+            exit(4);
+        }
+    ' "$source_tree/runtime-identity.lock.json" "$source_tree/campaign-identity.lock.json" \
+        "$expected_source_tree_sha256" "$expected_harness_sha256" "$expected_campaign_commit" \
+        "$source_tree/tools/verify_trf_pairings.php" "$source_tree/tools/TrfCorpusCompatibility.php"
+}
+assert_campaign_identity
 
 mkdir -p -- "$bin" "$campaign/reports" "$campaign/classifications" "$campaign/quarantine"
 temporary=$(mktemp "$bin/.openpairing-campaign-$name.XXXXXX")
@@ -40,14 +78,51 @@ campaign=$(printf %q "$campaign")
 shards=$shards
 workers=$workers
 expected_files=$expected_files
+expected_source_tree_sha256=$(printf %q "$expected_source_tree_sha256")
+expected_harness_sha256=$(printf %q "$expected_harness_sha256")
+expected_campaign_commit=$(printf %q "$expected_campaign_commit")
 stop_file="\$campaign/STOP"
 
+assert_campaign_identity() {
+    php -r '
+        [\$runtimePath, \$campaignPath, \$expectedSource, \$expectedHarness, \$expectedCommit, \$verifier, \$compatibility] = array_slice(\$argv, 1);
+        \$runtime = json_decode(file_get_contents(\$runtimePath), true, flags: JSON_THROW_ON_ERROR);
+        \$campaignIdentity = json_decode(file_get_contents(\$campaignPath), true, flags: JSON_THROW_ON_ERROR);
+        \$files = [basename(\$verifier) => hash_file("sha256", \$verifier), basename(\$compatibility) => hash_file("sha256", \$compatibility)];
+        ksort(\$files, SORT_STRING);
+        \$context = hash_init("sha256");
+        foreach (\$files as \$name => \$hash) {
+            hash_update(\$context, \$name."\\0".\$hash."\\n");
+        }
+        \$observed = [
+            "source" => strtolower((string) (\$runtime["sourceTreeSha256"] ?? "")),
+            "harness" => hash_final(\$context),
+            "commit" => strtolower((string) (\$campaignIdentity["gitCommit"] ?? "")),
+            "campaignSource" => strtolower((string) (\$campaignIdentity["sourceTreeSha256"] ?? "")),
+            "campaignHarness" => strtolower((string) (\$campaignIdentity["harnessSha256"] ?? "")),
+        ];
+        \$expected = ["source" => \$expectedSource, "harness" => \$expectedHarness, "commit" => \$expectedCommit];
+        if (!hash_equals(\$expected["source"], \$observed["source"])
+            || !hash_equals(\$expected["harness"], \$observed["harness"])
+            || !hash_equals(\$expected["commit"], \$observed["commit"])
+            || !hash_equals(\$expected["source"], \$observed["campaignSource"])
+            || !hash_equals(\$expected["harness"], \$observed["campaignHarness"])) {
+            fwrite(STDERR, "Campaign identity mismatch: expected ".json_encode(\$expected).", observed ".json_encode(\$observed).".\\n");
+            exit(4);
+        }
+    ' "\$source_tree/runtime-identity.lock.json" "\$source_tree/campaign-identity.lock.json" \
+        "\$expected_source_tree_sha256" "\$expected_harness_sha256" "\$expected_campaign_commit" \
+        "\$source_tree/tools/verify_trf_pairings.php" "\$source_tree/tools/TrfCorpusCompatibility.php"
+}
+
 test ! -e "\$stop_file" || { echo "Campaign is stopped: \$stop_file" >&2; exit 30; }
+assert_campaign_identity
 mkdir -p -- "\$campaign/reports" "\$campaign/classifications" "\$campaign/quarantine"
 
 run_shard() {
     shard=\$1
     test ! -e "\$stop_file" || return 30
+    assert_campaign_identity || return 34
     label=\$(printf 's%03d' "\$shard")
     corpus="\$shard_root/\$label"
     test -d "\$corpus" || return 32
@@ -91,7 +166,8 @@ run_shard() {
     trap - RETURN
 }
 export -f run_shard
-export shard_root source_tree upstream campaign shards stop_file
+export -f assert_campaign_identity
+export shard_root source_tree upstream campaign shards stop_file expected_source_tree_sha256 expected_harness_sha256 expected_campaign_commit
 seq 0 \$((shards - 1)) | xargs -r -P "\$workers" -n 1 bash -c 'run_shard "\$1"' _
 test ! -e "\$stop_file" || exit 30
 test "\$(find "\$campaign/reports" -maxdepth 1 -name 's*.json' -size +0c | wc -l)" -eq "\$shards"
