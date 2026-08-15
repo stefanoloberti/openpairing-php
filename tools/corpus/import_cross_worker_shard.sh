@@ -60,7 +60,7 @@ temporary_classification="$temporary/classification.json"
 install -m 0644 -- "$report" "$temporary_report"
 install -m 0644 -- "$attestation" "$temporary_attestation"
 
-if ! "$validator" \
+if ! OPENPAIRING_IMPORT_AUTOLOAD="$source_tree/vendor/autoload.php" "$validator" \
     "$temporary_report" "$temporary_attestation" "$corpus_root" "$shard" \
     "$expected_host" "$expected_source" "$expected_harness" "$expected_commit" \
     >"$temporary_validation"; then

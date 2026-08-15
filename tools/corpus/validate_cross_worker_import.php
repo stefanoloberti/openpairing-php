@@ -5,7 +5,15 @@ declare(strict_types=1);
 
 use OpenPairing\Diagnostics\CorpusIdentity;
 
-require dirname(__DIR__, 2).'/vendor/autoload.php';
+$autoload = getenv('OPENPAIRING_IMPORT_AUTOLOAD');
+if (!is_string($autoload) || $autoload === '') {
+    $autoload = dirname(__DIR__, 2).'/vendor/autoload.php';
+}
+if (!is_file($autoload)) {
+    fwrite(STDERR, 'CROSS_WORKER_IMPORT_REJECTED Composer autoload is unavailable.'."\n");
+    exit(4);
+}
+require $autoload;
 
 /** @return array<string, mixed> */
 function readJsonObject(string $path, string $label): array

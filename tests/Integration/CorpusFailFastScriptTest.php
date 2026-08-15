@@ -80,6 +80,7 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('set -Eeuo pipefail', $script);
         self::assertStringContainsString('flock -n 9', $script);
         self::assertStringContainsString('validate_cross_worker_import.php', $script);
+        self::assertStringContainsString('OPENPAIRING_IMPORT_AUTOLOAD="$source_tree/vendor/autoload.php"', $script);
         self::assertStringContainsString('classify_shard_fail_fast.sh', $script);
         self::assertStringContainsString('integrity validation failed without stopping the primary campaign', $script);
         self::assertStringContainsString('Primary verifier is already computing', $script);
