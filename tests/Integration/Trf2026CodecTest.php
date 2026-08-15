@@ -89,19 +89,135 @@ final class Trf2026CodecTest extends TestCase
         (new Trf2026Codec())->decode($trf);
     }
 
-    public function testPublicImportRejectsMissingInitialColourRecord(): void
+    public function testPublicImportInfersMissingInitialColourFromHighestRankedPairedParticipant(): void
     {
         $codec = new Trf2026Codec();
         $trf = preg_replace('/^152.*\r\n/m', '', $codec->encode($this->roundTwoState()));
         self::assertIsString($trf);
 
+        self::assertSame(Colour::White, $codec->decode($trf)->topColour);
+    }
+
+    public function testPublicImportRequires152WhenInitialColourCannotBeInferred(): void
+    {
+        $codec = new Trf2026Codec();
+        $lines = explode("\r\n", $codec->encode($this->roundTwoState()));
+        $lines = array_values(array_filter($lines, static fn (string $line): bool => !str_starts_with($line, '152 ')));
+        foreach ($lines as &$line) {
+            if (str_starts_with($line, '001 ')) {
+                $line = substr_replace(substr($line, 0, 89), ' 0.0', 80, 4);
+            }
+        }
+        unset($line);
+
         try {
-            $codec->decode($trf);
-            self::fail('Public TRF import must not infer a missing initial colour.');
+            $codec->decode(implode("\r\n", $lines));
+            self::fail('A pre-round-one TRF without 152 must fail closed.');
         } catch (InvalidTournamentState $exception) {
-            self::assertSame('trf.record_required', $exception->diagnosticCode);
+            self::assertSame('trf.initial_colour_required', $exception->diagnosticCode);
             self::assertStringContainsString('152', $exception->getMessage());
         }
+    }
+
+    public function testPublicImportInfersMissingRoundCountFromPlayerRecords(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = preg_replace('/^142.*\r\n/m', '', $codec->encode($this->roundTwoState()));
+        self::assertIsString($trf);
+
+        self::assertSame(1, $codec->decode($trf)->numberOfRounds);
+    }
+
+    public function testScheduledForfeitColoursRoundTripButDoNotEnterColourHistory(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            ['   3 w 1', '   1 b 0'],
+            ['   3 w +', '   1 b -'],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame([], $decoded->players[0]->opponentHistory);
+        self::assertSame([], $decoded->players[0]->colourHistory);
+        self::assertSame('white', $decoded->players[0]->results[0]['colour']);
+        self::assertFalse($decoded->players[0]->results[0]['played']);
+        self::assertSame($trf, $codec->encode($decoded));
+    }
+
+    public function testScheduledForfeitColoursMustBeReciprocalWhenPresent(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            ['   3 w 1', '   1 b 0'],
+            ['   3 w +', '   1 w -'],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('Equal scheduled colours for a forfeit must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.colour_incompatible', $exception->diagnosticCode);
+        }
+    }
+
+    public function testUnusualHalfZeroResultIsAcceptedAndRoundTrips(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            [' 1.0    1', '   3 w 1'],
+            [' 0.5    1', '   3 w ='],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('=', $decoded->players[0]->results[0]['result']);
+        self::assertSame('0', $decoded->players[2]->results[0]['result']);
+        self::assertSame($trf, $codec->encode($decoded));
+    }
+
+    public function testDoubleForfeitIsAcceptedAndRoundTrips(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            [' 1.0    1', '   3 w 1', '   1 b 0'],
+            [' 0.0    1', '   3 w -', '   1 b -'],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('-', $decoded->players[0]->results[0]['result']);
+        self::assertSame('-', $decoded->players[2]->results[0]['result']);
+        self::assertSame($trf, $codec->encode($decoded));
+    }
+
+    public function testInconsistentWinDrawResultIsRejected(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace('   1 b 0', '   1 b =', $codec->encode($this->roundTwoState()));
+
+        try {
+            $codec->decode($trf);
+            self::fail('A 1-1/2 result must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.result_incompatible', $exception->diagnosticCode);
+        }
+    }
+
+    public function testBlankByeResultImportsAsCanonicalZeroPointBye(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            [' 1.0    1', '   3 w 1', '   1 b 0'],
+            [' 0.0    1', '   0 -  ', '   0 -  '],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('Z', $decoded->players[0]->results[0]['result']);
+        self::assertNull($decoded->players[0]->results[0]['opponentId']);
+        self::assertStringContainsString('   0 - Z', $codec->encode($decoded));
     }
 
     public function testRejectsOversizedInputBeforeRecordParsing(): void

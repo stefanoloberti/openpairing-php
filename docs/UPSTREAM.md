@@ -15,6 +15,8 @@ immediately after acquisition.
 | FIDE play-off and tie-break regulations | https://handbook.fide.com/chapter/TieBreakRegulations032026 | effective 2026-03-01 | Official live page inspected 2026-08-12; mandatory descriptor PDF snapshot | FIDE publication; reference only |
 | FIDE rating tables | https://handbook.fide.com/chapter/B022024 | effective 2024-03-01, current tables inspected 2026-08-12 | Official live page, tables 8.1.1-8.1.2 | FIDE publication; reference only |
 | FIDE-approved accelerated systems | https://handbook.fide.com/chapter/C0407202602 | effective 2026-02-01 | Official live page inspected 2026-08-12; local snapshot unavailable during network restriction | FIDE publication; reference only |
+| FIDE electronic equipment and THP technical specifications | https://handbook.fide.com/chapter/ChessEquipmentWithElectronicComponenets032026 | effective 2026-03-01 | Official live page inspected 2026-08-15 | FIDE publication; reference only |
+| FIDE general product acceptance regulations | https://handbook.fide.com/chapter/GeneralRulesAndRegulations032026 | effective 2026-03-01 | Official live page inspected 2026-08-15 | FIDE publication; reference only |
 | TRF-2026 | https://tec.fide.com/wp-content/uploads/2025/04/TRF-2026.pdf | downloaded 2026-08-11 | PDF snapshot | FIDE TEC publication; reference only |
 | TRF26 tournament-type table | https://tec.fide.com/wp-content/uploads/2025/01/TournamentTypeCodeTable192_jan_2025.pdf | downloaded 2026-08-11 | PDF snapshot | FIDE TEC publication; reference only |
 

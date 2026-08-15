@@ -21,6 +21,12 @@ the pairing system. The historical laboratory verifier has a separately
 attested compatibility normalizer for legacy corpora and is not the public
 import contract.
 
+TRF26 records `142` and `152` are conditionally optional. For a completed
+report the CLI can infer the round count from `001` blocks and the initial
+colour from the highest-ranked participant paired in round one. It fails
+closed when either value cannot be inferred, such as an ITDX file before the
+first round.
+
 Apply the official Baku virtual-point schedule before pairing:
 
 ```console
@@ -66,3 +72,29 @@ JSON in standings mode. Structured errors go to standard error. Exit codes are:
 - `3`: invalid, oversized or unsupported input/arguments.
 
 The production CLI performs no network calls and invokes no upstream process.
+
+## Public Pairing Test Checker
+
+Replay all populated rounds of a completed TRF26 file and verify any declared
+`202`/`212` ranking with the embedded engines:
+
+```console
+php bin/openpairing-ptc.php tournament.trf
+php bin/openpairing-ptc.php - < tournament.trf
+```
+
+The checker returns schema `openpairing.ptc-report/1`, distinguishes colour
+variants from pairing deviations, and fails closed if it observes no pairing
+or ranking case. See `docs/PTC.md` for the report and exit-code contract.
+
+## Public Random Tournament Generator
+
+Create a complete deterministic TRF26 tournament from a reproducible seed:
+
+```console
+php bin/openpairing-rtg.php --players=80 --rounds=9 --seed=20260815 > tournament.trf
+php bin/openpairing-rtg.php --players=80 --rounds=9 --seed=42 --baku --top-colour=B > accelerated.trf
+```
+
+The RTG supports Dutch, Burstein, both initial colours, a configurable draw
+rate and the Baku virtual-point schedule. See `docs/RTG.md`.

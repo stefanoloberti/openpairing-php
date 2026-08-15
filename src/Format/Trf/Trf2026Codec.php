@@ -61,7 +61,7 @@ final class Trf2026Codec
             $records[$code][] = $line;
         }
 
-        foreach (['012', '142', '152', '192'] as $required) {
+        foreach (['012', '192'] as $required) {
             if (count($records[$required] ?? []) !== 1) {
                 throw new InvalidTournamentState('trf.record_required', sprintf('TRF requires exactly one %s record in this subset.', $required));
             }
@@ -72,7 +72,7 @@ final class Trf2026Codec
         if (count($records['001']) > TournamentState::MAX_PLAYERS) {
             throw new InvalidTournamentState('players.limit', sprintf('TRF player count exceeds %d.', TournamentState::MAX_PLAYERS));
         }
-        foreach (['022', '032', '042', '052', '062', '072', '092', '102', '122', '132', '162', '182', '202', '212', '222'] as $singleton) {
+        foreach (['022', '032', '042', '052', '062', '072', '092', '102', '122', '132', '142', '152', '162', '182', '202', '212', '222'] as $singleton) {
             if (count($records[$singleton] ?? []) > 1) {
                 throw new InvalidTournamentState('trf.record_duplicate', sprintf('TRF contains more than one %s record.', $singleton));
             }
@@ -86,17 +86,12 @@ final class Trf2026Codec
             throw new InvalidTournamentState('trf.name_required', 'TRF tournament name is empty.');
         }
         $this->ascii($name, 'tournament name');
-        $numberOfRounds = $this->positiveInteger($this->recordValue($records['142'][0], '142'), '142 number of rounds');
+        $numberOfRounds = isset($records['142'])
+            ? $this->positiveInteger($this->recordValue($records['142'][0], '142'), '142 number of rounds')
+            : $this->inferNumberOfRounds($records['001']);
         if ($numberOfRounds > TournamentState::MAX_ROUNDS) {
             throw new InvalidTournamentState('rounds.limit', sprintf('TRF number of rounds exceeds %d.', TournamentState::MAX_ROUNDS));
         }
-
-        $top = strtoupper($this->recordValue($records['152'][0], '152'));
-        $topColour = match ($top) {
-            'W' => Colour::White,
-            'B' => Colour::Black,
-            default => throw new InvalidTournamentState('trf.initial_colour', 'TRF 152 must contain W or B.'),
-        };
 
         $type = strtoupper($this->recordValue($records['192'][0], '192'));
         if (!in_array($type, ['FIDE_DUTCH', 'FIDE_DUTCH_2025', 'FIDE_BURSTEIN', 'FIDE_ROUNDROBIN'], true)) {
@@ -171,6 +166,10 @@ final class Trf2026Codec
         }
 
         $this->validateResults($players, $scores);
+
+        $topColour = isset($records['152'])
+            ? $this->parseInitialColour($records['152'][0])
+            : $this->inferInitialColour($players);
 
         $state = new TournamentState(
             schemaVersion: TournamentState::SCHEMA_VERSION,
@@ -328,6 +327,62 @@ final class Trf2026Codec
         ];
     }
 
+    /** @param list<string> $playerLines */
+    private function inferNumberOfRounds(array $playerLines): int
+    {
+        $numberOfRounds = 0;
+        foreach ($playerLines as $line) {
+            $tail = rtrim(substr($line, 89));
+            if ($tail === '') {
+                continue;
+            }
+            $numberOfRounds = max($numberOfRounds, intdiv(strlen($tail) + 9, 10));
+        }
+        if ($numberOfRounds < 1) {
+            throw new InvalidTournamentState(
+                'trf.round_count_required',
+                'TRF 142 is required before round one or when the number of rounds cannot be inferred from 001 records.',
+            );
+        }
+
+        return $numberOfRounds;
+    }
+
+    private function parseInitialColour(string $line): Colour
+    {
+        return match (strtoupper($this->recordValue($line, '152'))) {
+            'W' => Colour::White,
+            'B' => Colour::Black,
+            default => throw new InvalidTournamentState('trf.initial_colour', 'TRF 152 must contain W or B.'),
+        };
+    }
+
+    /** @param list<Player> $players */
+    private function inferInitialColour(array $players): Colour
+    {
+        usort($players, static fn (Player $left, Player $right): int => $left->pairingNumber <=> $right->pairingNumber);
+        foreach ($players as $player) {
+            foreach ($player->results as $result) {
+                if ($result['round'] !== 1 || $result['opponentId'] === null) {
+                    continue;
+                }
+                return match ($result['colour']) {
+                    Colour::White->value => Colour::White,
+                    Colour::Black->value => Colour::Black,
+                    default => throw new InvalidTournamentState(
+                        'trf.initial_colour_required',
+                        sprintf('TRF 152 is required because the highest-ranked participant paired in round one (%d) has no scheduled colour.', $player->pairingNumber),
+                    ),
+                };
+            }
+        }
+
+        throw new InvalidTournamentState(
+            'trf.initial_colour_required',
+            'TRF 152 is required before round one or when no round-one scheduled colour can be inferred.',
+        );
+    }
+
     /**
      * @param array<int, list<Score|null>> $accelerationSchedules
      * @return array{Player, int}
@@ -378,7 +433,8 @@ final class Trf2026Codec
             if (!in_array($colourCode, ['w', 'b', '-', ' '], true)) {
                 throw new InvalidTournamentState('trf.round_colour', sprintf('TRF player %d round %d has invalid colour.', $tpn, $round));
             }
-            $resultCode = strtoupper(substr($block, 9, 1));
+            $resultField = substr($block, 9, 1);
+            $resultCode = $resultField === ' ' ? 'Z' : strtoupper($resultField);
             if (!in_array($resultCode, ['-', '+', 'W', 'D', 'L', '1', '=', '0', 'H', 'F', 'U', 'Z'], true)) {
                 throw new InvalidTournamentState('trf.round_result', sprintf('TRF player %d round %d has invalid result.', $tpn, $round));
             }
@@ -818,10 +874,10 @@ final class Trf2026Codec
                     }
                     $expected = match ($code) {
                         '1', 'W' => ['0', 'L'],
-                        '0', 'L' => ['1', 'W'],
-                        '=', 'D' => ['=', 'D'],
+                        '0', 'L' => ['1', 'W', '=', 'D', '0', 'L'],
+                        '=', 'D' => ['=', 'D', '0', 'L'],
                         '+' => ['-'],
-                        '-' => ['+'],
+                        '-' => ['+', '-'],
                         default => throw new InvalidTournamentState('trf.round_result', sprintf('Player %d round %d has unsupported result.', $player->pairingNumber, $round)),
                     };
                     if (!in_array(strtoupper($reciprocal['result']), $expected, true)) {
@@ -831,8 +887,11 @@ final class Trf2026Codec
                         if ($colour === null || $reciprocal['colour'] === null || $colour === $reciprocal['colour']) {
                             throw new InvalidTournamentState('trf.colour_incompatible', sprintf('Players %d and %d have incompatible colours in round %d.', $player->pairingNumber, $byId[$opponentId]->pairingNumber, $round));
                         }
-                    } elseif ($colour !== null || $reciprocal['colour'] !== null) {
-                        throw new InvalidTournamentState('trf.forfeit_colour', sprintf('Players %d and %d must not have colours for an unplayed game in round %d.', $player->pairingNumber, $byId[$opponentId]->pairingNumber, $round));
+                    } else {
+                        if (($colour === null) !== ($reciprocal['colour'] === null)
+                            || ($colour !== null && $colour === $reciprocal['colour'])) {
+                            throw new InvalidTournamentState('trf.colour_incompatible', sprintf('Players %d and %d have incompatible scheduled colours for a forfeit in round %d.', $player->pairingNumber, $byId[$opponentId]->pairingNumber, $round));
+                        }
                     }
                 }
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0-rc7 - 2026-08-15
+
+- ship free offline PTC and deterministic parameterised RTG CLIs;
+- replay Dutch/Burstein pairings and declared TRF26 tie-break ranks publicly;
+- infer conditional TRF26 records `142`/`152` with fail-closed ambiguity;
+- preserve scheduled colours on forfeits and accept the TRF26 unusual-result
+  combinations, including blank-result `Z`;
+- make accelerated PTC replay reconstruct historical pairing scores correctly.
+
 ## 0.9.0-rc6 - 2026-08-13
 
 - age Dutch float history by tournament-round identity so skipped/blank rounds

@@ -22,7 +22,9 @@
     }
   },
   "bin": [
-    "bin/openpairing.php"
+    "bin/openpairing.php",
+    "bin/openpairing-ptc.php",
+    "bin/openpairing-rtg.php"
   ],
   "scripts": {
     "test": "@php vendor/phpunit/phpunit/phpunit --exclude-group oracle --exclude-group stress",

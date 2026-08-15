@@ -1,5 +1,5 @@
 param(
-    [string] $Version = '0.9.0-rc6',
+    [string] $Version = '0.9.0-rc7',
     [string] $Php = (Join-Path $PSScriptRoot 'runtime\php\php.exe'),
     [string] $ComposerPhar = (Join-Path $PSScriptRoot '..\build\composer.phar'),
     [string] $OutputDirectory = (Join-Path $PSScriptRoot '..\build\release')
@@ -153,6 +153,26 @@ try {
         if ($standingsResult.status -ne 'ok' -or @($standingsResult.standings).Count -ne 4) {
             throw 'Runtime standings smoke output is incomplete.'
         }
+        & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-ptc.php') --help | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw 'Runtime PTC help smoke test failed.' }
+        $ptcVersion = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-ptc.php') --version | ConvertFrom-Json
+        if ($LASTEXITCODE -ne 0 -or $ptcVersion.checkerSchema -ne 'openpairing.ptc-report/1') {
+            throw 'Runtime PTC version smoke test failed.'
+        }
+        $ptcSmoke = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-ptc.php') (Join-Path $runtimeRoot 'examples\ptc-completed-round-1.trf') | ConvertFrom-Json
+        if ($LASTEXITCODE -ne 0 -or $ptcSmoke.status -ne 'exact' -or $ptcSmoke.caseCount -lt 1) {
+            throw 'Runtime PTC example smoke test failed.'
+        }
+        & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') --help | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw 'Runtime RTG help smoke test failed.' }
+        $rtgVersion = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') --version | ConvertFrom-Json
+        if ($LASTEXITCODE -ne 0 -or $rtgVersion.generatorSchema -ne 'openpairing.rtg/1') {
+            throw 'Runtime RTG version smoke test failed.'
+        }
+        $rtgOutput = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') '--players=8' '--rounds=4' '--seed=42' '--baku'
+        if ($LASTEXITCODE -ne 0 -or -not ($rtgOutput -join "`n").StartsWith('012 OpenPairing RTG')) {
+            throw 'Runtime RTG generation smoke test failed.'
+        }
 
         $artifacts = foreach ($archive in @($sourceArchive, $runtimeArchive)) {
             $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash.ToLowerInvariant()
@@ -174,6 +194,12 @@ try {
                 cliVersionSmoke = $true
                 pairingExampleSmoke = $true
                 standingsExampleSmoke = $true
+                ptcHelpSmoke = $true
+                ptcVersionSmoke = $true
+                ptcExampleSmoke = $true
+                rtgHelpSmoke = $true
+                rtgVersionSmoke = $true
+                rtgGenerationSmoke = $true
             }
             artifacts = @($artifacts)
         }

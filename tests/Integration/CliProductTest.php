@@ -16,7 +16,7 @@ final class CliProductTest extends TestCase
         self::assertSame(0, $exit);
         $version = $this->decodeObject($stdout);
         self::assertSame('openpairing/openpairing-php', $version['package']);
-        self::assertSame('0.9.0-rc6', $version['version']);
+        self::assertSame('0.9.0-rc7', $version['version']);
         self::assertSame('fide-dutch-2026.global/1', $version['dutchEngine']);
         self::assertSame('fide-burstein-2026.brackets/1', $version['bursteinEngine']);
         self::assertSame('fide-tiebreak-2026.individual/1', $version['tieBreakEngine']);

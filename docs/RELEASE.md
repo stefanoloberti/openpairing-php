@@ -1,12 +1,12 @@
-# Release 0.9.0-rc6
+# Release 0.9.0-rc7
 
 ## Artifacts
 
 The release process produces two archives from one committed tree:
 
-- `openpairing-php-0.9.0-rc6-source.zip`: source, tests, development tools and
+- `openpairing-php-0.9.0-rc7-source.zip`: source, tests, development tools and
   Composer lock file; run `composer install` before use;
-- `openpairing-php-0.9.0-rc6-runtime.zip`: source plus optimized production
+- `openpairing-php-0.9.0-rc7-runtime.zip`: source plus optimized production
   Composer autoload files, ready for the CLI or library.
 
 Every archive is accompanied by a `.sha256` file. The runtime archive contains
@@ -39,19 +39,19 @@ Unpack the runtime archive and check the CLI:
 php bin/openpairing.php --help
 php bin/openpairing.php tournament.trf
 php bin/openpairing.php --standings tournament.trf
+php bin/openpairing-ptc.php examples/ptc-completed-round-1.trf
+php bin/openpairing-rtg.php --players=8 --rounds=4 --seed=42 > generated.trf
 ```
 
 ## Release status
 
-This is a release candidate, not a FIDE certification. RC6 corrects
-historical-float ageing across unplayed tournament rounds. Its seven-player
-gate is reconfirmed at 500/500 exact, and the p50 campaign is being replayed
-under the corrected identity. The complete historical pairing campaign
-previously closed p7, p9, p15 and p30 at 69,998 tournaments and 609,874 exact
-rounds; a uniform-identity replay remains required before those partitions are
-combined with RC6 in a final claim. No complete-corpus claim is made.
-Separate capacity gates cover the 547 files newly admitted above the former
-256-player limit. The
-4,096-player/256-round format guard-rail and team pairing/tie-break functions
-remain documented limits. TRF `250` import/export and legacy `XXA` import are
-supported; the full accelerated pairing-corpus gate remains open.
+This is a release candidate, not a FIDE certification. RC7 retains the RC6
+pairing engines and adds the public PTC and RTG, fail-closed TRF26 inference
+for conditional records `142`/`152`, scheduled forfeit colours and unusual
+result combinations. Historical p7 through p50 are closed at 99,998
+tournaments and 1,378,198 exact rounds; p80 and the later partitions remain
+open under an RC7-aligned immutable identity. No complete-corpus claim is
+made. Separate capacity gates cover the 547 files above the former 256-player
+limit. The 4,096-player/256-round format guard-rail and team pairing/tie-break
+functions remain documented limits. TRF `250` import/export and legacy `XXA`
+import are supported; the full accelerated pairing-corpus gate remains open.

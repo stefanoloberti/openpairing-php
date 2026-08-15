@@ -94,6 +94,25 @@ php bin/openpairing.php --standings tournament.trf
 php bin/openpairing.php --standings --tie-breaks=DE/P,BH/C1/P,SB/C1 state.json
 ```
 
+The free offline Pairing Test Checker replays a completed TRF26 tournament and
+checks its declared final ranking:
+
+```console
+php bin/openpairing-ptc.php examples/ptc-completed-round-1.trf
+```
+
+It produces a machine-readable `openpairing.ptc-report/1` report. See
+`docs/PTC.md`.
+
+The free offline RTG creates reproducible complete TRF26 acceptance inputs:
+
+```console
+php bin/openpairing-rtg.php --players=80 --rounds=9 --seed=20260815 > tournament.trf
+```
+
+Dutch, Burstein, both initial colours and Baku acceleration are selectable.
+See `docs/RTG.md`.
+
 ## Library
 
 ```php

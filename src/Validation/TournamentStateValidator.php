@@ -172,10 +172,10 @@ final class TournamentStateValidator
         $code = strtoupper($result['result']);
         $expected = match ($code) {
             '1', 'W' => ['0', 'L'],
-            '0', 'L' => ['1', 'W'],
-            '=', 'D' => ['=', 'D'],
+            '0', 'L' => ['1', 'W', '=', 'D', '0', 'L'],
+            '=', 'D' => ['=', 'D', '0', 'L'],
             '+' => ['-'],
-            '-' => ['+'],
+            '-' => ['+', '-'],
             default => throw new InvalidTournamentState('result.code', sprintf('Player %d round %d has an unsupported result.', $player->pairingNumber, $round)),
         };
         if (!in_array(strtoupper($reciprocal['result']), $expected, true)) {
@@ -185,8 +185,9 @@ final class TournamentStateValidator
             if ($result['colour'] === null || $reciprocal['colour'] === null || $result['colour'] === $reciprocal['colour']) {
                 throw new InvalidTournamentState('result.colour', sprintf('Players %d and %d have incompatible colours.', $player->pairingNumber, $opponent->pairingNumber));
             }
-        } elseif ($result['colour'] !== null || $reciprocal['colour'] !== null) {
-            throw new InvalidTournamentState('result.forfeit_colour', 'Unplayed games must not have colours.');
+        } elseif (($result['colour'] === null) !== ($reciprocal['colour'] === null)
+            || ($result['colour'] !== null && $result['colour'] === $reciprocal['colour'])) {
+            throw new InvalidTournamentState('result.colour', sprintf('Players %d and %d have incompatible scheduled colours for a forfeit.', $player->pairingNumber, $opponent->pairingNumber));
         }
     }
 }
