@@ -1,0 +1,60 @@
+{
+  "schema": "openpairing.shadow-evidence-verifier-checkpoint/2",
+  "recordedAtEuropeRome": "2026-08-16T01:23:28+02:00",
+  "validatedCommit": "612e71f170ac9193f1fd1b1a7b18bad5c924ad10",
+  "runtime": {
+    "host": "DESKTOP-3OI0QHR",
+    "os": "Windows",
+    "php": "8.4.24",
+    "arithmeticProfile": "limbs-30"
+  },
+  "files": {
+    "tools/verify_shadow_evidence.php": "2c8ac4ebdc0cdf4e9879371c84e37203ce462c6f6dd048834dce68dd13d65e48",
+    "tests/Integration/ShadowEvidenceVerifierTest.php": "baec5d1c96eb0994c1d5e31ec2df3513ab64da9898cdbffcfc2cfbe3bfbd0968",
+    "docs/schema/shadow-evidence-batch-1.schema.json": "8f1db19082f38724d4b731b131210e911fbdfd213f3835ab914d3c981065e906",
+    "docs/schema/shadow-turn-1.schema.json": "7a22f23bbaf96a44551b23f198cdc21bc474ea4c57d245ec2d6eaf62b29686d1",
+    "docs/SHADOW-VALIDATION.md": "192e7874660ba8c5ea23ee07ae1d97034ac05c6cca51c2224c3883ea150ffb01"
+  },
+  "checks": {
+    "shadowVerifier": {
+      "status": "PASS",
+      "tests": 8,
+      "assertions": 65,
+      "addedDecisions": [
+        "local validator violation is a blocking NO_GO rather than infrastructure ERROR",
+        "non-exact status cannot reuse an exact functional output hash"
+      ]
+    },
+    "repositorySuite": {
+      "status": "PASS",
+      "tests": 291,
+      "assertions": 1432,
+      "skipped": 1,
+      "excludedGroups": ["oracle", "stress"]
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "publicApi": {
+      "status": "PASS",
+      "methods": 13,
+      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerified": 16
+    }
+  },
+  "boundary": {
+    "engineSemanticsChanged": false,
+    "campaignIdentityChanged": false,
+    "productionShadowEnabled": false,
+    "productionMutationPerformed": false,
+    "realTournamentEvidenceProduced": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_TOOLING_SEMANTICS_CORRECTED_SHADOW_GATE_REMAINS_OPEN"
+}

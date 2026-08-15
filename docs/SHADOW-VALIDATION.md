@@ -50,6 +50,12 @@ personal-data keys, identity drift, unclassified non-exact turns, missing
 coverage and product-budget overruns. It does not enable a production shadow
 path or authorize a product switch.
 
+A locally detected output violation is recorded as a blocking `NO_GO` with a
+failing validator, not misreported as an infrastructure error. Conversely,
+an `exact` result must have equal functional hashes and a non-exact valid
+result must not reuse that same hash. The executable semantics checkpoint is
+`evidence/shadow-evidence-verifier-semantics-checkpoint-20260816.json`.
+
 ## Classification
 
 Every observed turn belongs to exactly one category:
