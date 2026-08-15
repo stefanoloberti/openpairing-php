@@ -10,7 +10,8 @@
       "status": "external",
       "evidence": [
         {"path": "docs/SUBMISSION-ARCHITECTURE.md"},
-        {"path": "docs/TEC-SCOPE-ENQUIRY-DRAFT.md"}
+        {"path": "docs/TEC-SCOPE-ENQUIRY-DRAFT.md"},
+        {"path": "docs/TAPC-REQUIREMENT-MATRIX.md"}
       ]
     },
     {

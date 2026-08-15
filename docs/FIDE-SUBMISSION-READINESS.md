@@ -62,6 +62,9 @@ questions are recorded in
 `evidence/fide-normative-scope-check-20260816.json`. No form or enquiry was
 submitted by that check.
 
+The article-by-article working response, with explicit component/product
+boundaries and closure conditions, is in `TAPC-REQUIREMENT-MATRIX.md`.
+
 The older C.04.A/FE-1 and VCL19 documents remain useful historical controls,
 but they must not be assumed to replace the current TEC forms or TAPC process.
 
