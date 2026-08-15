@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.org/schema/shadow-evidence-batch-1.schema.json",
+  "title": "OpenPairing product shadow-evidence batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "identity", "attemptedTurns", "eventsSha256", "budgets", "fixtureEvidence"],
+  "properties": {
+    "schema": {"const": "openpairing.shadow-evidence-batch/1"},
+    "identity": {"$ref": "#/$defs/identity"},
+    "attemptedTurns": {"type": "integer", "minimum": 0},
+    "eventsSha256": {"$ref": "#/$defs/sha256"},
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maximumShadowElapsedMs", "maximumShadowPeakMemoryBytes"],
+      "properties": {
+        "maximumShadowElapsedMs": {"type": "number", "exclusiveMinimum": 0},
+        "maximumShadowPeakMemoryBytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "fixtureEvidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["feature", "path", "sha256"],
+        "properties": {
+          "feature": {"$ref": "#/$defs/feature"},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "feature": {
+      "enum": [
+        "initial-white",
+        "initial-black",
+        "odd-field",
+        "even-field",
+        "withdrawal",
+        "pab",
+        "forfeit",
+        "scheduled-bye",
+        "accelerated"
+      ]
+    },
+    "observedFeature": {
+      "enum": [
+        "odd-field",
+        "even-field",
+        "withdrawal",
+        "pab",
+        "forfeit",
+        "scheduled-bye",
+        "accelerated"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "productVersion",
+        "productBuildSha256",
+        "packageVersion",
+        "engineVersion",
+        "sourceTreeSha256",
+        "runtimeArchiveSha256",
+        "algorithmVersion",
+        "stateSchemaVersion",
+        "arithmeticBackend"
+      ],
+      "properties": {
+        "productVersion": {"type": "string", "minLength": 1},
+        "productBuildSha256": {"$ref": "#/$defs/sha256"},
+        "packageVersion": {"type": "string", "minLength": 1},
+        "engineVersion": {"type": "string", "minLength": 1},
+        "sourceTreeSha256": {"$ref": "#/$defs/sha256"},
+        "runtimeArchiveSha256": {"$ref": "#/$defs/sha256"},
+        "algorithmVersion": {"type": "string", "minLength": 1},
+        "stateSchemaVersion": {"type": "string", "minLength": 1},
+        "arithmeticBackend": {"enum": ["gmp", "limbs"]}
+      }
+    }
+  }
+}

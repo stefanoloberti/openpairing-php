@@ -33,6 +33,23 @@ Reproduction fixtures leaving it must be minimized and pseudonymized.
 Functional hashes exclude elapsed-time diagnostics and trace prose; they cover
 boards, colours, PAB, float assignments, quality vector and violations.
 
+The transport formats are pinned by
+`schema/shadow-turn-1.schema.json` and
+`schema/shadow-evidence-batch-1.schema.json`. A batch manifest records the
+exact identity, event-stream SHA-256, attempted-turn denominator, product
+budgets and hash-pinned fixture coverage. The corresponding event stream is
+newline-delimited JSON so it can be appended atomically without retaining raw
+personal state.
+
+Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
+gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
+synthetic/staging checks. Exit `0` is `GO`, exit `1` is an honest `NO_GO`, and
+exit `2` is malformed, incomplete or identity-mixed infrastructure evidence.
+The verifier rejects duplicate event IDs, denominator/hash mismatches,
+personal-data keys, identity drift, unclassified non-exact turns, missing
+coverage and product-budget overruns. It does not enable a production shadow
+path or authorize a product switch.
+
 ## Classification
 
 Every observed turn belongs to exactly one category:
