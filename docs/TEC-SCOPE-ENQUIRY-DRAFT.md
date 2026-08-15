@@ -29,7 +29,9 @@ Before selecting an application category, could you please clarify:
    and what minimum TRF16/TRF06 backward-compatibility surface is required?
 6. For generic individual TRF26 record `299`, may a first application reject
    the record fail-closed if the submitted product does not claim manual score
-   adjustments, or is support mandatory in FIDE mode?
+   adjustments, or is support mandatory in FIDE mode? If it is mandatory,
+   when do one-round and all-round adjustments become active for subsequent
+   pairing scores, and which tie-break operands must include them?
 7. Which current SDPC/TAPC form and technical checklist should be used for this
    product class?
 8. For the two 50,000-tournament cross-tests in TEC Manual 1.24 Article 3.9.4,

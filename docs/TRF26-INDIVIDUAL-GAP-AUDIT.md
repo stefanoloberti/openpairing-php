@@ -37,3 +37,35 @@ semantics reach the pairing/standings output and negative controls. Any such
 source change creates a new candidate identity; the official corpus queue must
 then be restarted or explicitly retained as evidence for the older component
 identity, never relabelled.
+
+## Record `299` implementation contract (not implemented)
+
+The official TRF26 layout makes the individual form more than a single bonus
+field. With abnormal-assignment type blank, columns 14-17 contain a possibly
+negative exact point value; columns 20-22 identify one round (`000` or blank
+means all rounds); and the repeated four-column fields from column 24 identify
+individual TPNs (`000` or blank in the first field means all individuals).
+The match-points field is team-only and must not be repurposed for an
+individual tournament.
+
+A complete implementation therefore needs a first-class, exact
+`ScoreAdjustment` domain value rather than parser metadata. It must validate
+round and recipient ranges, reject gaps/duplicates/unknown TPNs and preserve
+the distinction between one-round and all-round scope. The adjustment must be
+visible consistently to reported-score reconciliation, pairing scores,
+standings and every affected tie-break while remaining absent from opponent,
+colour, float and played-game history.
+
+One interpretation remains external: TRF26 describes modifications to points
+in the standings and supplies a round scope, but the submission contract must
+confirm precisely when a round-scoped or all-round adjustment becomes active
+for subsequent pairing scores and which tie-break operands consume it. The
+owner-review TEC enquiry asks this explicitly. Until the answer and tests
+exist, accepting `299` as ignored metadata would be worse than the current
+typed rejection.
+
+Required regression groups for the eventual new identity are: positive and
+negative values; one/all rounds; one/multiple/all players; adjustments before
+and after a pairing round; score reconciliation; direct encounter, Buchholz,
+Sonneborn-Berger and points-based ordering; duplicate/overlapping records;
+unknown players; nonblank individual match points; and round-trip stability.
