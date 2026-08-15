@@ -70,7 +70,9 @@
       "required": true,
       "status": "open",
       "evidence": [
-        {"path": "docs/TRF26-INDIVIDUAL-GAP-AUDIT.md"}
+        {"path": "docs/TRF26-INDIVIDUAL-GAP-AUDIT.md"},
+        {"path": "docs/LEGACY-TRF-COMPATIBILITY.md"},
+        {"path": "docs/evidence/legacy-trf-layout-audit-20260816.json"}
       ]
     },
     {

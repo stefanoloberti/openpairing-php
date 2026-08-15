@@ -1,0 +1,42 @@
+{
+  "schema": "openpairing.legacy-trf-layout-audit/1",
+  "auditedAt": "2026-08-16T01:54:31+02:00",
+  "method": "Visual inspection of every page of the official fixed-column annexes, followed by comparison with Trf2026Codec and the public PTC contract.",
+  "sources": [
+    {
+      "version": "TRF06",
+      "url": "https://tec.fide.com/wp-content/uploads/2025/10/Annexure-B-TRF06-%E2%80%93-Version-2006.pdf",
+      "sha256": "bfbe460665a65df8472c4a5bfa421679e5e1481243d8d1c7a595866116c02605",
+      "bytes": 6434,
+      "pagesInspected": 2
+    },
+    {
+      "version": "TRF16",
+      "url": "https://tec.fide.com/wp-content/uploads/2025/10/Annexure-C-TRF06-%E2%80%93-Version-2016.pdf",
+      "sha256": "78acb5fb09f2f8798d836e1f7725bbb23a051fddbbcfb98b6230c26d10da9b58",
+      "bytes": 52114,
+      "pagesInspected": 2
+    }
+  ],
+  "observed": {
+    "sharedPlayerColumns": {
+      "record": "001",
+      "tpn": "5-8",
+      "score": "81-84",
+      "rank": "86-89",
+      "firstRound": {"opponent": "92-95", "colour": "97", "result": "99"},
+      "roundStrideColumns": 10
+    },
+    "trf06Results": ["1", "=", "0", "+", "-", "blank"],
+    "trf16AdditionalResults": ["W", "D", "L", "H", "F", "U", "Z"],
+    "legacyPairingSystemRecordPresent": false,
+    "currentPublicPtcAcceptsRawLegacy": false
+  },
+  "classification": "OPEN_PRODUCT_FORMAT_GATE",
+  "campaignImpact": {
+    "pairingEngineDefectObserved": false,
+    "activeRc8CorpusChanged": false,
+    "legacyImplementationDeferredToNewExactPackageIdentity": true
+  },
+  "tecAcceptanceDeclared": false
+}

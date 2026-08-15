@@ -41,7 +41,7 @@ identity must not be combined silently.
 | 7.1.1(c) | Produce final standings using every mandatory FIDE tie-break | Exact-arithmetic individual tie-break implementation and PTC | partial | Publish final-package PTC evidence and verify the exact THP standings workflow |
 | 7.1.2 | Declare the pairing systems for which compliance is requested | Proposed scope: individual Dutch; Burstein retained outside the initial claim until owner/TEC decision | external | Freeze the declaration in the application and product FIDE mode |
 | 7.1.3(a) | Provide an English FIDE-mode interface and complete user help/manual | English engine CLI and `USER-MANUAL.md` | partial | Document and test the complete English THP operator workflow |
-| 7.1.3(b), 7.2.1-7.2.2 | Import/export the latest TRF and retain required older-format compatibility | Fail-closed individual TRF26 subset; legacy `XXA` acceleration import | partial | Resolve record `299`, document the declared subset, and prove the TEC-required TRF16/TRF06 paths |
+| 7.1.3(b), 7.2.1-7.2.2 | Import/export the latest TRF and retain required older-format compatibility | Fail-closed individual TRF26 subset; legacy `XXA` acceleration import; official TRF06/TRF16 layouts audited in `LEGACY-TRF-COMPATIBILITY.md` | partial | Resolve record `299` and implement or obtain TEC acceptance for the explicit, fail-closed TRF16/TRF06 paths on the exact candidate |
 | 7.1.3(c), 7.2.3; Manual 3.9.4 | Make a free embedded PTC available using the product engines and test it on the prescribed external RTG volume | Public offline `openpairing-ptc.php` and fixtures | partial | Reproduce PTC from the exact final THP distribution; process 50,000 tournaments from an external available RTG and classify every discrepancy |
 | 7.1.3(c), 7.2.4; Manual 3.9.4 | Make a free embedded configurable RTG available and cross-check its output independently | Public deterministic `openpairing-rtg.php` and internal RTG-to-PTC control | partial | Reproduce RTG from the exact final THP distribution; generate 50,000 tournaments and verify them with one or more available PTCs |
 | 7.1.3(d) | Supply a controlled tester environment | Reproducible engine runtime instructions for Windows limbs and Ubuntu GMP | partial | Freeze a TEC-accessible environment for the exact submitted THP |
@@ -66,6 +66,8 @@ identity must not be combined silently.
 - `TEC-SCOPE-ENQUIRY-DRAFT.md`: owner-review questions for TEC.
 - `CORPUS-GATE.md`: immutable corpus identities and partition status.
 - `TRF26-INDIVIDUAL-GAP-AUDIT.md`: declared codec surface and record `299` decision.
+- `LEGACY-TRF-COMPATIBILITY.md`: official TRF06/TRF16 layout audit and
+  non-guessing compatibility contract.
 - `SHADOW-VALIDATION.md`: non-mutating exact-product observation gate.
 - `CONTROLLED-ENVIRONMENT.md`: release-candidate reproduction boundary.
 - `PACKAGING.md` and `RELEASE.md`: distribution and stable-identity gate.
