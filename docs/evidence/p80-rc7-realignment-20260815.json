@@ -1,0 +1,51 @@
+{
+  "schema": "openpairing.campaign-realignment/1",
+  "observedAt": "2026-08-15T21:32:52+02:00",
+  "reason": "The RC7 source adds the public PTC/RTG and completes conditional TRF26 handling. The p80 queue was realigned before accepting a shard so the candidate source and official replay identity cannot diverge.",
+  "supersededEpoch": {
+    "campaign": "/srv/openpairing-validation/campaigns/p80-epoch2-9406571",
+    "release": "/srv/openpairing-validation/releases/9406571",
+    "startedAt": "2026-08-15T20:56:17+02:00",
+    "stoppedAt": "2026-08-15T21:32:52+02:00",
+    "reportsAccepted": 0,
+    "classificationsAccepted": 0,
+    "stopPresent": false,
+    "disposition": "preserved, non-evidence"
+  },
+  "activeEpoch": {
+    "campaign": "/srv/openpairing-validation/campaigns/p80-epoch3-c759bd9",
+    "release": "/srv/openpairing-validation/releases/c759bd9",
+    "startedAt": "2026-08-15T21:32:52+02:00",
+    "campaignToolCommit": "c759bd9a97a5639bc8cec38029b6ad4e1a40b58c",
+    "sourceTreeSha256": "353317beb2fb3c0135e149a104db6333ab1681f7e82a1e12e605d907810338e9",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineVersion": "fide-dutch-2026.global/1",
+    "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+    "arithmeticBackend": "gmp",
+    "workersObserved": 20,
+    "serviceActive": true,
+    "stopPresent": false
+  },
+  "rapidGate": {
+    "tests": 255,
+    "assertions": 1203,
+    "skipped": 1,
+    "phpstanFiles": 134,
+    "phpstanErrors": 0
+  },
+  "releaseArtifacts": {
+    "sourceZipSha256": "4c1fd1b11a2ecd713462115033cf32fa4cfa2f31b14d1c849adf938759e0e641",
+    "runtimeZipSha256": "3e75e9eb3bd6bb976fbccf1c42543e78534dc49267179813559af857686dd52d",
+    "runtimeSmoke": {
+      "pairing": true,
+      "standings": true,
+      "ptc": true,
+      "rtg": true
+    }
+  },
+  "independentPilots": {
+    "p300": "closed-pass",
+    "p600": "left running and untouched"
+  },
+  "productionMutation": false
+}

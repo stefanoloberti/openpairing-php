@@ -16,7 +16,7 @@ participations rather than tournament-round identity. The isolated RC6 fix
 makes all 20 affected file/round tuples exact and reconfirms the small-field
 gate at 500/500. The fresh p50 replay closed at 30,000/30,000 tournaments and
 768,324/768,324 exact rounds under the corrected semantic identity and
-per-shard fail-closed Gacrux watcher. p80 epoch 2 is active; p150 and historical
+per-shard fail-closed Gacrux watcher. p80 epoch 3 is active; p150 and historical
 misc remain queued behind it.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
@@ -45,8 +45,8 @@ independent. Historical evidence is
 
 Official replay identity for the active queue:
 
-- Git campaign-tool commit: `94065712e2157341e41642067131089632cb74fe`
-- source tree SHA-256: `4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74`
+- Git campaign-tool commit: `c759bd9a97a5639bc8cec38029b6ad4e1a40b58c`
+- source tree SHA-256: `353317beb2fb3c0135e149a104db6333ab1681f7e82a1e12e605d907810338e9`
 - harness SHA-256: `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c`
 - float semantics: `fide-dutch-float/3-round-indexed`
 - arithmetic: GMP; OPcache CLI and JIT enabled; 20 workers
@@ -62,11 +62,18 @@ pairing deviations. The fixed harness infers the value only from a played
 round-one board, attests `record-152` or `inferred-round-one` per file, and
 fails closed if inference is impossible. A backward scan found zero inference
 mismatches against 34,791 explicit records and zero indeducible files; all 217
-observed variants replay exact. The public codec continues to reject a missing
-152 explicitly. p80 may restart only under a newly committed campaign-tool
-identity with the campaign commit, source-tree and harness lock checked at
-installation and before every shard, and with per-shard classification. Evidence is
-`evidence/p80-initial-colour-provenance-20260815.json`.
+observed variants replay exact. The public codec now applies the same TRF26
+conditional rule: it infers `152` from a scheduled round-one board and fails
+closed when that is impossible.
+
+The intermediate `9406571` epoch closed the launch-control gaps but was stopped
+before accepting any shard when RC7 added the public PTC/RTG and completed the
+TRF26 codec. This was a deliberate candidate-identity realignment, not a
+verdict or campaign failure. Epoch 3 started at 21:32:52 Europe/Rome under
+`c759bd9`, preserving the unchanged Dutch engine hash, three-part lock,
+per-shard classification and 20-worker policy. Evidence is
+`evidence/p80-initial-colour-provenance-20260815.json` and
+`evidence/p80-rc7-realignment-20260815.json`.
 
 ## Historical denominator: 122,008
 
@@ -77,7 +84,7 @@ installation and before every shard, and with per-shard classification. Evidence
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
 | p50 | 30,000 | 30,000 | 30,000 | 768,324 / 768,324 | closed | `evidence/p50-full-dcf92df-20260815.json` |
-| p80 | 20,000 | pending | pending | pending | active epoch 2 under `9406571` | aggregate pending |
+| p80 | 20,000 | pending | pending | pending | active epoch 3 under `c759bd9` | aggregate pending |
 | p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |
 | **Total** | **122,010 read** | **122,008 expected decodable** | **99,998 closed** | **1,378,198 / 1,378,198 closed** | **open** | — |
