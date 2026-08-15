@@ -57,3 +57,11 @@ workers were running concurrently under an eight-CPU service quota, and the
 benchmark process used nice level 15; this is therefore a conservative capacity
 observation, not an idle production latency promise. The exact report is
 `evidence/turn-benchmark-p80-r7-python69-20260815.json`.
+
+The identity-attested Windows fallback control measured a deterministic
+50-player Dutch round 7 at 5.582/5.634/5.675 seconds and 14 MiB peak memory on
+PHP 8.4.24 without GMP. Its engine and `src/` hashes are exactly those of the
+active RC8 campaign; the tooling commit is recorded separately. This is a
+local planning observation, not a product SLA or a substitute for the shadow
+gate. The exact report is
+`evidence/turn-benchmark-p50-r7-windows-limbs-20260816.json`.

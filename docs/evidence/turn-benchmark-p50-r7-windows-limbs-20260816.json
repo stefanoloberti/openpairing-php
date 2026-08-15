@@ -1,0 +1,54 @@
+{
+  "schema": "openpairing.turn-benchmark/1",
+  "generatedAtUtc": "2026-08-15T23:29:25+00:00",
+  "toolingCommit": "ae232881ff95d27c11519b4c83ed3dfe3986447f",
+  "environment": {
+    "host": "DESKTOP-3OI0QHR",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900H",
+    "cpuCores": 14,
+    "cpuLogicalProcessors": 20,
+    "php": "8.4.24",
+    "os": "Windows 10.0 AMD64",
+    "arithmeticBackend": "limbs-30",
+    "opcacheEnableCli": "",
+    "jit": "",
+    "jitBufferSize": ""
+  },
+  "runtimeIdentity": {
+    "schema": "openpairing.runtime-code-identity/1",
+    "projectRoot": "C:/Users/stefa/tornei/engines/openpairing-php",
+    "autoloadPsr4Roots": [
+      "C:/Users/stefa/tornei/engines/openpairing-php/src"
+    ],
+    "expectedEnginePath": "C:/Users/stefa/tornei/engines/openpairing-php/src/Engine/Dutch/DutchPairingEngine.php",
+    "loadedEnginePath": "C:/Users/stefa/tornei/engines/openpairing-php/src/Engine/Dutch/DutchPairingEngine.php",
+    "engineVersion": "fide-dutch-2026.global/1",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "sourceFileCount": 85,
+    "arithmeticBackend": "limbs-30",
+    "gmpAvailable": false
+  },
+  "scenario": {
+    "system": "fide-dutch-2026",
+    "players": 50,
+    "round": 7,
+    "numberOfRounds": 9,
+    "fixture": "deterministic-simulator/1",
+    "repetitions": 3
+  },
+  "preparationMilliseconds": 23146.851,
+  "pairingMilliseconds": {
+    "minimum": 5582.339,
+    "median": 5634.207,
+    "maximum": 5674.903,
+    "samples": [5582.339, 5634.207, 5674.903]
+  },
+  "peakMemoryBytes": 14680064,
+  "functionalResultSha256": "3c80d97d50d841ac0f7738c2dd636e2edd10beebacada9f6bccd48ef28037ac9",
+  "measurementContext": {
+    "remoteCampaignCpuUsed": false,
+    "interpretation": "Local pure-PHP fallback observation for one deterministic mid-tournament turn; not a product SLA or corpus result."
+  },
+  "status": "valid"
+}
