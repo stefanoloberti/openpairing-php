@@ -18,6 +18,21 @@ try {
     if (!is_array($manifest) || ($manifest['schema'] ?? null) !== 'openpairing.submission-readiness/1') {
         throw new RuntimeException('Submission-readiness manifest has an unsupported schema.');
     }
+    $unexpectedManifestKeys = array_values(array_diff(array_keys($manifest), ['schema', 'target', 'asOf', 'gates']));
+    if ($unexpectedManifestKeys !== []) {
+        throw new RuntimeException(sprintf('Submission-readiness manifest contains unexpected fields: %s.', implode(', ', $unexpectedManifestKeys)));
+    }
+    if (!is_string($manifest['target'] ?? null) || trim($manifest['target']) === '') {
+        throw new RuntimeException('Submission-readiness manifest has no target.');
+    }
+    $asOf = $manifest['asOf'] ?? null;
+    if (!is_string($asOf) || preg_match('/^\d{4}-\d{2}-\d{2}$/', $asOf) !== 1) {
+        throw new RuntimeException('Submission-readiness manifest has an invalid asOf date.');
+    }
+    $parsedAsOf = DateTimeImmutable::createFromFormat('!Y-m-d', $asOf);
+    if ($parsedAsOf === false || $parsedAsOf->format('Y-m-d') !== $asOf) {
+        throw new RuntimeException('Submission-readiness manifest has an invalid asOf date.');
+    }
     if (!is_array($manifest['gates'] ?? null) || $manifest['gates'] === []) {
         throw new RuntimeException('Submission-readiness manifest has no gates.');
     }
@@ -30,7 +45,12 @@ try {
         if (!is_array($gate)) {
             throw new RuntimeException('Submission-readiness manifest contains a non-object gate.');
         }
+        $unexpectedGateKeys = array_values(array_diff(array_keys($gate), ['id', 'description', 'required', 'status', 'evidence']));
+        if ($unexpectedGateKeys !== []) {
+            throw new RuntimeException(sprintf('Submission-readiness gate contains unexpected fields: %s.', implode(', ', $unexpectedGateKeys)));
+        }
         $id = $gate['id'] ?? null;
+        $description = $gate['description'] ?? null;
         $status = $gate['status'] ?? null;
         $required = $gate['required'] ?? null;
         if (!is_string($id) || !preg_match('/^[a-z0-9][a-z0-9.-]*$/', $id)) {
@@ -40,6 +60,9 @@ try {
             throw new RuntimeException(sprintf('Duplicate submission gate: %s.', $id));
         }
         $seen[$id] = true;
+        if (!is_string($description) || trim($description) === '') {
+            throw new RuntimeException(sprintf('Submission gate %s has no description.', $id));
+        }
         if (!in_array($status, ['closed', 'open', 'external'], true) || !is_bool($required)) {
             throw new RuntimeException(sprintf('Submission gate %s has invalid status or required flag.', $id));
         }
@@ -55,8 +78,15 @@ try {
             if (!is_array($record) || !is_string($record['path'] ?? null)) {
                 throw new RuntimeException(sprintf('Submission gate %s has an invalid evidence record.', $id));
             }
+            $unexpectedEvidenceKeys = array_values(array_diff(array_keys($record), ['path', 'sha256']));
+            if ($unexpectedEvidenceKeys !== []) {
+                throw new RuntimeException(sprintf('Submission gate %s evidence contains unexpected fields: %s.', $id, implode(', ', $unexpectedEvidenceKeys)));
+            }
             $relative = str_replace('\\', '/', $record['path']);
-            if ($relative === '' || str_starts_with($relative, '/') || preg_match('#(^|/)\.\.(/|$)#', $relative)) {
+            if ($relative === ''
+                || str_starts_with($relative, '/')
+                || preg_match('/^[a-zA-Z]:\//', $relative) === 1
+                || preg_match('#(^|/)\.\.(/|$)#', $relative)) {
                 throw new RuntimeException(sprintf('Submission gate %s has an unsafe evidence path.', $id));
             }
             $absolute = $projectRoot.'/'.$relative;

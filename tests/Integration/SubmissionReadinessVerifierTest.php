@@ -73,18 +73,44 @@ final class SubmissionReadinessVerifierTest extends TestCase
         self::assertSame('submission_readiness.infrastructure', $report['code']);
     }
 
-    private function writeManifest(string $status, string $hash): string
+    public function testUnexpectedManifestFieldIsInfrastructureError(): void
+    {
+        $manifest = $this->writeManifest('open', str_repeat('0', 64));
+        $payload = json_decode((string) file_get_contents($manifest), true, flags: JSON_THROW_ON_ERROR);
+        self::assertIsArray($payload);
+        $payload['claimedReady'] = true;
+        self::assertIsInt(file_put_contents($manifest, json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)));
+
+        [$exit, , $stderr] = $this->runVerifier($manifest);
+
+        self::assertSame(2, $exit);
+        self::assertStringContainsString('unexpected fields', $stderr);
+    }
+
+    public function testWindowsAbsoluteEvidencePathIsInfrastructureError(): void
+    {
+        $manifest = $this->writeManifest('open', str_repeat('0', 64), 'C:\\outside\\evidence.json');
+
+        [$exit, , $stderr] = $this->runVerifier($manifest);
+
+        self::assertSame(2, $exit);
+        self::assertStringContainsString('unsafe evidence path', $stderr);
+    }
+
+    private function writeManifest(string $status, string $hash, string $evidencePath = 'docs/API-STABILITY.md'): string
     {
         $manifest = $this->temporary.'/manifest.json';
         self::assertIsInt(file_put_contents($manifest, json_encode([
             'schema' => 'openpairing.submission-readiness/1',
             'target' => 'test',
+            'asOf' => '2026-08-16',
             'gates' => [[
                 'id' => 'test-gate',
+                'description' => 'Test gate.',
                 'required' => true,
                 'status' => $status,
                 'evidence' => [[
-                    'path' => 'docs/API-STABILITY.md',
+                    'path' => $evidencePath,
                     'sha256' => $hash,
                 ]],
             ]],
