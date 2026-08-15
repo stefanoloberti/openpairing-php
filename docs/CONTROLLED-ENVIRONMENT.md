@@ -15,6 +15,21 @@ For the recorded RC7 public-tools gate:
   `a404b5159adf7487efc8fbc6f3f605e50d605f46d06d5ac9dcc41f1681f0c2b3`;
 - build evidence: `evidence/rc7-public-tools-gate-20260815.json`.
 
+For the recorded RC8 TRF26/campaign gate:
+
+- product commit: `86ec9d9c003d68468906bddf12c69fbcaaf750ac`;
+- source archive SHA-256:
+  `68a17c06109e42146183ec5e91fddb32e21d2df0b031d36eed5f7cc021677b4f`;
+- runtime archive SHA-256:
+  `cf34b82bbcfa5551cf98e3ac8e11e8f6880d70e0745f82ea5853e9dbf81517e4`;
+- campaign source tree SHA-256:
+  `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884`;
+- campaign harness SHA-256:
+  `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c`;
+- two independent release builds were byte-identical;
+- build/campaign evidence:
+  `evidence/rc8-trf26-and-p80-realignment-20260815.json`.
+
 The builder was reproduced twice from the same commit and both ZIP files were
 byte-identical. The source and runtime archives are distinct deliverables and
 must not be interchanged.
@@ -62,7 +77,7 @@ Expected outcomes:
 `tools/build_release.ps1` performs these checks against the extracted runtime,
 audits forbidden development paths and validates the production Composer
 metadata. An official final candidate must repeat this procedure from its own
-non-RC commit and record new hashes; RC7 hashes must never be reused.
+non-RC commit and record new hashes; recorded RC hashes must never be reused.
 
 ## Evidence boundary
 
@@ -71,4 +86,3 @@ coherent and reproducible. It does not prove rating-list import, GUI FIDE mode,
 result-entry workflow, recovery or other complete-THP requirements. Those
 must be exercised on the exact submitted ChessPairings binary or on another
 product scope accepted in writing by TEC.
-

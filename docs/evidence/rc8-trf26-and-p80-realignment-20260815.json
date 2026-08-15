@@ -1,0 +1,74 @@
+{
+  "schema": "openpairing.release-campaign-checkpoint/1",
+  "recordedAt": "2026-08-15T22:22:58+02:00",
+  "version": "0.9.0-rc8",
+  "productCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+  "scope": {
+    "implemented": [
+      "TRF26 individual scheduled byes (record 240)",
+      "TRF26 round-ranged prohibited-pairing groups (record 260)"
+    ],
+    "explicitlyUnsupported": [
+      "TRF26 generic individual bonus/penalty points (record 299)",
+      "team records and team pairing"
+    ]
+  },
+  "gates": {
+    "rapid": {
+      "tests": 271,
+      "assertions": 1255,
+      "skipped": 1,
+      "phpstanFiles": 136,
+      "status": "pass"
+    },
+    "stress": {
+      "tests": 5,
+      "assertions": 31003,
+      "skipped": 1,
+      "status": "pass"
+    },
+    "oracles": {
+      "tests": 11,
+      "assertions": 55,
+      "status": "pass"
+    }
+  },
+  "releaseArtifacts": {
+    "twoBuildsByteIdentical": true,
+    "source": {
+      "file": "openpairing-php-0.9.0-rc8-source.zip",
+      "bytes": 608531,
+      "sha256": "68a17c06109e42146183ec5e91fddb32e21d2df0b031d36eed5f7cc021677b4f"
+    },
+    "runtime": {
+      "file": "openpairing-php-0.9.0-rc8-runtime.zip",
+      "bytes": 232373,
+      "sha256": "cf34b82bbcfa5551cf98e3ac8e11e8f6880d70e0745f82ea5853e9dbf81517e4"
+    }
+  },
+  "campaignRuntime": {
+    "releasePath": "/srv/openpairing-validation/releases/86ec9d9-r2",
+    "gitCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "engineVersion": "fide-dutch-2026.global/1",
+    "arithmeticBackend": "gmp",
+    "workers": 20,
+    "negativeIdentityTestExitCode": 4,
+    "startedAt": "2026-08-15T22:22:42+02:00"
+  },
+  "realignment": {
+    "supersededCampaign": "p80-epoch3-c759bd9",
+    "supersededAcceptedReports": 0,
+    "supersededAcceptedClassifications": 0,
+    "activeCampaign": "p80-epoch4-86ec9d9",
+    "activeReportsAtCheckpoint": 0,
+    "activeClassificationsAtCheckpoint": 0,
+    "p600ProcessesBefore": 3,
+    "p600ProcessesAfter": 3,
+    "p600Restarted": false,
+    "unusedPackagingAttempt": "/srv/openpairing-validation/releases/86ec9d9",
+    "unusedPackagingReason": "Git archive produced on Windows did not preserve executable modes; launch-control preflight rejected it before service mutation. The directory was not modified or used."
+  }
+}

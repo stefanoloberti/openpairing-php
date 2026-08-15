@@ -205,7 +205,7 @@ For an active replay, monitoring and acceptance compare the runtime lock with
 the campaign identity declared in `CORPUS-GATE.md`, not with the product tag in
 `RELEASE.md`. The RC6 product commit `b6a2c1b` is an ancestor of the campaign
 tooling. The p50 checkout was `dcf92df`; the short-lived p80 launch-control
-epoch was `9406571`, and the RC7-aligned active queue is
+epoch was `9406571`, the RC7-aligned queue was
 `c759bd9a97a5639bc8cec38029b6ad4e1a40b58c`, with source-tree SHA-256
 `353317beb2fb3c0135e149a104db6333ab1681f7e82a1e12e605d907810338e9`.
 All retain float semantics `fide-dutch-float/3-round-indexed` and the same
@@ -220,10 +220,15 @@ runner contains `xargs -r -P "$workers"` and passed `bash -n`.
 
 The first p80 transition later selected the old `c48fd05` runner. It was
 stopped and quarantined after 17 reports. The corrected architecture uses four
-distinct campaign directories (`p80`, `p150`, `misc` and `accel`); the active
-set is suffixed `epoch3-c759bd9`, and the supervisor contains only those
+distinct campaign directories (`p80`, `p150`, `misc` and `accel`); the RC7
+set was suffixed `epoch3-c759bd9`, and its supervisor contained only those
 identity-scoped stages. The intermediate `epoch2-9406571` set accepted zero
 shards before the RC7 realignment and remains preserved as non-evidence.
+RC8 then superseded epoch 3 with zero accepted reports. The active queue is
+`p80-epoch4-86ec9d9`, using the executable-mode-verified immutable runtime
+`/srv/openpairing-validation/releases/86ec9d9-r2`; the first RC8 packaging
+attempt is preserved unused because launch preflight rejected its missing
+Unix executable modes.
 Installation and every shard now verify a three-part campaign lock:
 Git campaign-tool commit, runtime source-tree SHA-256 and replay-harness
 SHA-256. Negative controls independently changed each field; every mismatch

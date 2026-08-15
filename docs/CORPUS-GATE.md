@@ -45,8 +45,8 @@ independent. Historical evidence is
 
 Official replay identity for the active queue:
 
-- Git campaign-tool commit: `c759bd9a97a5639bc8cec38029b6ad4e1a40b58c`
-- source tree SHA-256: `353317beb2fb3c0135e149a104db6333ab1681f7e82a1e12e605d907810338e9`
+- Git campaign-tool commit: `86ec9d9c003d68468906bddf12c69fbcaaf750ac`
+- source tree SHA-256: `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884`
 - harness SHA-256: `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c`
 - float semantics: `fide-dutch-float/3-round-indexed`
 - arithmetic: GMP; OPcache CLI and JIT enabled; 20 workers
@@ -75,6 +75,16 @@ per-shard classification and 20-worker policy. Evidence is
 `evidence/p80-initial-colour-provenance-20260815.json` and
 `evidence/p80-rc7-realignment-20260815.json`.
 
+Epoch 3 was subsequently superseded with zero accepted reports and zero
+accepted classifications when RC8 added end-to-end TRF26 records `240` and
+`260`. The launch preflight rejected an initial RC8 packaging attempt whose
+Unix executable modes were absent, before any service mutation. The corrected
+immutable runtime is `/srv/openpairing-validation/releases/86ec9d9-r2`.
+Epoch 4 started at 22:22:42 Europe/Rome after a deliberate wrong-identity test
+failed with exit code 4; its 20 workers use the identity above. The independent
+p600 pilot retained the same three processes across the rollover. Evidence is
+`evidence/rc8-trf26-and-p80-realignment-20260815.json`.
+
 ## Historical denominator: 122,008
 
 | Partition | Files | Decoded | Exact tournaments | Exact / attempted rounds | Status | Attested evidence |
@@ -84,7 +94,7 @@ per-shard classification and 20-worker policy. Evidence is
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
 | p50 | 30,000 | 30,000 | 30,000 | 768,324 / 768,324 | closed | `evidence/p50-full-dcf92df-20260815.json` |
-| p80 | 20,000 | pending | pending | pending | active epoch 3 under `c759bd9` | aggregate pending |
+| p80 | 20,000 | pending | pending | pending | active epoch 4 under `86ec9d9` | aggregate pending |
 | p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |
 | **Total** | **122,010 read** | **122,008 expected decodable** | **99,998 closed** | **1,378,198 / 1,378,198 closed** | **open** | — |

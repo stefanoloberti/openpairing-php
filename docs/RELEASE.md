@@ -29,6 +29,13 @@ The extracted-runtime verification procedure is documented in
 `CONTROLLED-ENVIRONMENT.md`; user operation and incident handling are in
 `USER-MANUAL.md`.
 
+The recorded RC8 artifacts are byte-identical across two clean builds. Their
+SHA-256 values are
+`68a17c06109e42146183ec5e91fddb32e21d2df0b031d36eed5f7cc021677b4f`
+for the source archive and
+`cf34b82bbcfa5551cf98e3ac8e11e8f6880d70e0745f82ea5853e9dbf81517e4`
+for the runtime archive.
+
 ## Requirements
 
 - PHP 8.3 or later;
