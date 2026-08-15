@@ -16,7 +16,7 @@ participations rather than tournament-round identity. The isolated RC6 fix
 makes all 20 affected file/round tuples exact and reconfirms the small-field
 gate at 500/500. The fresh p50 replay closed at 30,000/30,000 tournaments and
 768,324/768,324 exact rounds under the corrected semantic identity and
-per-shard fail-closed Gacrux watcher. p80 epoch 3 is active; p150 and historical
+per-shard fail-closed Gacrux watcher. p80 epoch 4 is active; p150 and historical
 misc remain queued behind it.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.

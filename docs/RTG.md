@@ -35,3 +35,16 @@ FIDE certification. Its output can be checked immediately with the public PTC:
 ```console
 php bin/openpairing-ptc.php tournament.trf
 ```
+
+The distributed deterministic control is
+`examples/rtg-p8-r3-seed20260815.trf`. It is 1,160 bytes with SHA-256
+`f7bdaf8164a38d7cb73f682490c8a0fefe5c8b5cd80aa5d2f6ad994c2bc3ad79`
+and is reproduced by:
+
+```console
+php bin/openpairing-rtg.php --players=8 --rounds=3 --seed=20260815 --system=dutch --top-colour=B --draw-permille=300
+```
+
+Two independent invocations must be byte-identical. Passing that fixture to
+the PTC produces `examples/rtg-p8-r3-seed20260815-ptc-report.json`, with three
+exact rounds and an exact declared ranking.

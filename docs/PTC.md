@@ -40,9 +40,17 @@ Run the distributed example with:
 php bin/openpairing-ptc.php examples/ptc-completed-round-1.trf
 ```
 
+Its expected machine-readable output is
+`examples/ptc-exact-report.json`.
+
 The distributed negative control must return exit code `1` and status
 `discrepancy`:
 
 ```console
 php bin/openpairing-ptc.php examples/ptc-colour-variant.trf
 ```
+
+Its expected machine-readable output is
+`examples/ptc-discrepancy-report.json`. These paired input/output fixtures make
+both the success and discrepancy paths reviewable without interpreting console
+prose.

@@ -1,0 +1,47 @@
+{
+    "schema": "openpairing.ptc-report/1",
+    "status": "exact",
+    "pairingSystem": "fide-dutch-2026",
+    "tournamentName": "OpenPairing RTG p8 r3 seed20260815",
+    "caseCount": 11,
+    "counts": {
+        "roundsChecked": 3,
+        "roundsExact": 3,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineFailure": 0
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "status": "exact",
+            "referencePairCount": 4,
+            "generatedPairCount": 4,
+            "referenceByePlayerId": null,
+            "generatedByePlayerId": null
+        },
+        {
+            "round": 2,
+            "status": "exact",
+            "referencePairCount": 4,
+            "generatedPairCount": 4,
+            "referenceByePlayerId": null,
+            "generatedByePlayerId": null
+        },
+        {
+            "round": 3,
+            "status": "exact",
+            "referencePairCount": 4,
+            "generatedPairCount": 4,
+            "referenceByePlayerId": null,
+            "generatedByePlayerId": null
+        }
+    ],
+    "tieBreaks": {
+        "status": "exact",
+        "record": "202",
+        "rankOrder": "BH",
+        "playersChecked": 8,
+        "mismatches": []
+    }
+}

@@ -161,6 +161,25 @@ final class TrfPairingCheckerTest extends TestCase
         self::assertSame(1, $report['counts']['roundsSamePairsColourVariant']);
     }
 
+    public function testPublishedPositiveAndNegativeReportsMatchTheCli(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $cases = [
+            ['ptc-completed-round-1.trf', 'ptc-exact-report.json', 0],
+            ['ptc-colour-variant.trf', 'ptc-discrepancy-report.json', 1],
+        ];
+
+        foreach ($cases as [$input, $expectedReport, $expectedExit]) {
+            [$exitCode, $stdout, $stderr] = $this->runCli([$root.'/examples/'.$input]);
+            self::assertSame($expectedExit, $exitCode, $stderr);
+            self::assertSame('', $stderr);
+            self::assertSame(
+                json_decode((string) file_get_contents($root.'/examples/'.$expectedReport), true, 32, JSON_THROW_ON_ERROR),
+                json_decode($stdout, true, 32, JSON_THROW_ON_ERROR),
+            );
+        }
+    }
+
     public function testPublishedReportSchemaDeclaresCurrentContract(): void
     {
         $root = dirname(__DIR__, 2);

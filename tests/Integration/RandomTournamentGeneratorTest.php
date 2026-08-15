@@ -82,6 +82,33 @@ final class RandomTournamentGeneratorTest extends TestCase
         self::assertSame('rtg.arguments', $error['code']);
     }
 
+    public function testPublishedDeterministicControlMatchesRtgAndPtc(): void
+    {
+        $root = dirname(__DIR__, 2);
+        [$exit, $stdout, $stderr] = $this->runCli([
+            '--players=8',
+            '--rounds=3',
+            '--seed=20260815',
+            '--system=dutch',
+            '--top-colour=B',
+            '--draw-permille=300',
+        ]);
+
+        self::assertSame(0, $exit, $stderr);
+        self::assertSame('', $stderr);
+        self::assertSame((string) file_get_contents($root.'/examples/rtg-p8-r3-seed20260815.trf'), $stdout);
+        self::assertSame('f7bdaf8164a38d7cb73f682490c8a0fefe5c8b5cd80aa5d2f6ad994c2bc3ad79', hash('sha256', $stdout));
+        self::assertSame(
+            json_decode(
+                (string) file_get_contents($root.'/examples/rtg-p8-r3-seed20260815-ptc-report.json'),
+                true,
+                32,
+                JSON_THROW_ON_ERROR,
+            ),
+            (new TrfPairingChecker())->check($stdout),
+        );
+    }
+
     /**
      * @param list<string> $arguments
      * @return array{0: int, 1: string, 2: string}

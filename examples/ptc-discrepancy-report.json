@@ -1,0 +1,47 @@
+{
+    "schema": "openpairing.ptc-report/1",
+    "status": "discrepancy",
+    "pairingSystem": "fide-dutch-2026",
+    "tournamentName": "PTC colour-variant fixture",
+    "caseCount": 5,
+    "counts": {
+        "roundsChecked": 1,
+        "roundsExact": 0,
+        "roundsSamePairsColourVariant": 1,
+        "roundsPairingDeviation": 0,
+        "roundsEngineFailure": 0
+    },
+    "rounds": [
+        {
+            "round": 1,
+            "status": "same-pairs-colour-variant",
+            "referencePairCount": 2,
+            "generatedPairCount": 2,
+            "referenceByePlayerId": null,
+            "generatedByePlayerId": null,
+            "reference": {
+                "pairs": {
+                    "1-3": "3>1",
+                    "2-4": "4>2"
+                },
+                "bye": null
+            },
+            "generated": {
+                "pairs": {
+                    "1-3": "1>3",
+                    "2-4": "4>2"
+                },
+                "bye": null
+            },
+            "violations": [],
+            "unpairedPlayerIds": []
+        }
+    ],
+    "tieBreaks": {
+        "status": "exact",
+        "record": "202",
+        "rankOrder": "BH",
+        "playersChecked": 4,
+        "mismatches": []
+    }
+}
