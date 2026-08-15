@@ -259,3 +259,13 @@ Git campaign-tool commit, runtime source-tree SHA-256 and replay-harness
 SHA-256. Negative controls independently changed each field; every mismatch
 exited before a runner was created. The integration gate also asserts the
 required generated xargs form and absence of the escaped-quote regression.
+
+The 3090 WSL lifetime is held by the existing Windows scheduled task
+`OpenPairing-WSL-KeepAlive`. On 2026-08-16 its old `--exec /bin/sleep
+infinity` action was observed exiting with result 1, so systemd oneshots were
+being relaunched on each transient WSL boot. The task action was corrected to
+`wsl.exe -d ChessPairings-Ubuntu-24.04 -- /bin/sleep infinity` and verified
+running. The p300 and p600 oneshots were disabled for future boots while their
+current processes were left untouched: they remove their target report at
+startup and have no checkpoint, so automatic boot replay is unsafe evidence
+lifecycle even though it is deterministic computation.

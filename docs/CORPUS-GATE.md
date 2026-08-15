@@ -54,6 +54,24 @@ Official replay identity for the active queue:
 - shard acceptance: report plus Gacrux classification promoted atomically;
   persistent stop on the first confirmed inferior or incomplete verdict
 
+At 00:01-00:04 Europe/Rome on 2026-08-16, the existing Windows WSL
+keep-alive task was found to have a failing action. Transient WSL sessions
+therefore produced four short boot cycles. No p80 report or classification had
+been promoted, so the active evidence denominator remains unchanged. The
+non-checkpointable p600 pilot had no promoted report and restarted from zero;
+the already closed p300 capacity result remains historical evidence, while its
+boot-triggered rerun is a fresh, unaccepted computation. The existing
+keep-alive task now holds the distribution open, and both capacity oneshots
+are disabled for future boots without stopping their current processes. The
+incident and exact runner hashes are recorded in
+`evidence/future-runner-backend-hardening-20260816.json`.
+
+The queued p150, misc and accelerated runners were regenerated without
+touching the active p80 runner. They now lock the effective
+`OPENPAIRING_BIGINT_BACKEND=gmp`, reject completed reports whose production,
+backend, source or harness identity differs, and record both the campaign
+runner and shard-classifier hashes in each accepted classification.
+
 The first p80 launch on 2026-08-15 is quarantined and is not official evidence.
 Its supervisor selected release `c48fd05` instead of the identity above, and
 the old replay harness silently supplied `152 W` when a TRF omitted the initial

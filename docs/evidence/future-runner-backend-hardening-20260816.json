@@ -1,0 +1,83 @@
+{
+  "schema": "openpairing.future-runner-hardening-evidence/1",
+  "recordedAtEuropeRome": "2026-08-16T00:06:46+02:00",
+  "repositoryCommit": "70631f696728a5858c33870666258de9aada9cd9",
+  "ci": {
+    "workflow": "CI",
+    "runId": 31910869902,
+    "status": "PASS"
+  },
+  "campaignIdentity": {
+    "productCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "arithmeticBackend": "gmp"
+  },
+  "installer": {
+    "localAndRemoteSha256": "15c97d717c75ee00c698d969fe56fe524aa285df4f92965e7ef1ba20f20bdab4",
+    "remotePath": "/srv/openpairing-validation/bin/install_large_field_campaign-70631f6.sh",
+    "negativeIdentityTest": {
+      "status": "PASS",
+      "note": "A first invocation with incomplete identity values was rejected before runner creation."
+    }
+  },
+  "activeP80": {
+    "runner": "/srv/openpairing-validation/bin/openpairing-campaign-p80-epoch4-86ec9d9.sh",
+    "sha256BeforeAndAfter": "13535fa0b329135229da2a305f4ce2cf0be6df96fecf41c2fdb9bac3afa5454d",
+    "modified": false,
+    "reportsAtCheckpoint": 0,
+    "classificationsAtCheckpoint": 0
+  },
+  "futureRunners": {
+    "p150": {
+      "oldSha256": "097481488d0cd5114c7e370260244f7423f63c6a1ad88233570223372deef43a",
+      "newSha256": "dc29b45df5d38b8fc065834b0121ab9936b00860ed6db51a59057e03ccab8ee3"
+    },
+    "misc": {
+      "oldSha256": "c60fa2f7e858b9a627971cd386cf187bd52f5615af37fbc701701a8ca7e9979c",
+      "newSha256": "179293fcce7355fe5e8db13163d91d6b2e01fe97c5e4611d5a534a592b2a1f55"
+    },
+    "accelerated": {
+      "oldSha256": "1713c5d50a6119e6b434269902e9f7616dfbec6cae46f9d26e678505eafc23e8",
+      "newSha256": "81f4e3913c6990171d85f55f9a90aae94938ef82072e939bf6e4b4b80b14b985"
+    },
+    "syntax": "PASS",
+    "controls": [
+      "OPENPAIRING_BIGINT_BACKEND=gmp",
+      "completed report productionOnly and runtime identity gate before classification",
+      "classification records campaignRunnerSha256 and shardGateSha256"
+    ]
+  },
+  "wslContinuityIncident": {
+    "status": "CONTAINED_AND_MONITORED",
+    "cause": "The existing Windows OpenPairing-WSL-KeepAlive task used a failing action and was Ready with LastTaskResult 1, so the distribution could terminate after transient WSL sessions.",
+    "observedBootCyclesEuropeRome": [
+      "2026-08-16T00:01:46+02:00",
+      "2026-08-16T00:02:44+02:00",
+      "2026-08-16T00:03:15+02:00",
+      "2026-08-16T00:04:56+02:00"
+    ],
+    "impact": {
+      "p80AcceptedEvidenceLost": false,
+      "p80ReportsAtIncident": 0,
+      "p600PromotedReportExisted": false,
+      "p600PartialRunRestartedBySystemd": true,
+      "p300CompletedReportWasRemovedByItsBootRunner": true,
+      "note": "The capacity services are non-checkpointable oneshots whose ExecStart removes the target report before recomputation. Their boot behavior is infrastructure evidence, not an accepted product verdict."
+    },
+    "containment": {
+      "existingTask": "OpenPairing-WSL-KeepAlive",
+      "newAction": "wsl.exe -d ChessPairings-Ubuntu-24.04 -- /bin/sleep infinity",
+      "taskState": "Running",
+      "lastTaskResult": 267009,
+      "stableServiceStartCheckpoint": "2026-08-16T00:04:56+02:00",
+      "capacityServicesDisabledForFutureBoots": [
+        "openpairing-capacity-pilot-p300.service",
+        "openpairing-capacity-pilot-p600.service"
+      ],
+      "capacityProcessesStopped": false,
+      "note": "Disabling removed only future boot activation. The current p300 and p600 computations were not stopped or restarted."
+    }
+  },
+  "status": "PASS_FOR_FUTURE_RUNNERS_WITH_INFRASTRUCTURE_INCIDENT_RECORDED"
+}
