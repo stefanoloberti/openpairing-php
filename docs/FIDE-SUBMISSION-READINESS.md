@@ -10,6 +10,10 @@ the expected result while any required gate remains open or external. A gate
 may be changed to `closed` only with existing hash-pinned evidence. Missing or
 changed evidence is an infrastructure error (exit `2`), preventing a prose
 update from manufacturing a submission-ready verdict.
+The first executable checkpoint of this ledger is preserved in
+`evidence/submission-readiness-ledger-checkpoint-20260816.json`; it validates
+the fail-closed behavior and records `NO_GO`, without closing a corpus or
+product gate.
 
 ## Correct submission target
 
