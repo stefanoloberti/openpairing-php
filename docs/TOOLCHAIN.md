@@ -232,6 +232,10 @@ is preserved, while a PASS promotes the provenance, validation receipt,
 report and classification with the classification last. The importer refuses
 an existing/incomplete primary pair or a shard already being computed by the
 primary verifier.
+`transfer_cross_worker_shard.ps1` is the monitoring-host transport wrapper:
+it accepts only s192-s255, moves Base64 over the two existing SSH aliases,
+verifies each SHA-256 before the intake rename, and invokes the versioned
+importer on the 3090. It never runs Gacrux or promotes evidence on python-69.
 
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash

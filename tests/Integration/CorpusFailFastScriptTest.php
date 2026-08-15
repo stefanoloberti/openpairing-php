@@ -93,4 +93,20 @@ final class CorpusFailFastScriptTest extends TestCase
             strpos($script, 'mv -- "$temporary_report" "$final_report"'),
         );
     }
+
+    public function testCrossWorkerTransportIsHashVerifiedAndInvokesOnlyThePrimaryImporter(): void
+    {
+        $script = file_get_contents(dirname(__DIR__, 2).'/tools/corpus/transfer_cross_worker_shard.ps1');
+
+        self::assertIsString($script);
+        self::assertStringContainsString("[ValidatePattern('^s(19[2-9]|2[0-4][0-9]|25[0-5])$')]", $script);
+        self::assertStringContainsString("'python-69'", $script);
+        self::assertStringContainsString("'doppia-3090'", $script);
+        self::assertStringContainsString("'base64', '-w', '0'", $script);
+        self::assertStringContainsString('sha256sum', $script);
+        self::assertStringContainsString('temporary_destination="$destination.tmp.$$"', $script);
+        self::assertStringContainsString('mv -- "$temporary_destination" "$destination"', $script);
+        self::assertStringContainsString('tooling/511904e/corpus/import_cross_worker_shard.sh', $script);
+        self::assertStringNotContainsString('scp ', $script);
+    }
 }
