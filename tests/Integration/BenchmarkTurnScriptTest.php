@@ -39,6 +39,18 @@ final class BenchmarkTurnScriptTest extends TestCase
         self::assertIsArray($report);
         self::assertSame('openpairing.turn-benchmark/1', $report['schema']);
         self::assertSame('valid', $report['status']);
+        $runtimeIdentity = $report['runtimeIdentity'];
+        self::assertIsArray($runtimeIdentity);
+        self::assertSame('fide-dutch-2026.global/1', $runtimeIdentity['engineVersion']);
+        $engineHash = $runtimeIdentity['engineSha256'];
+        self::assertIsString($engineHash);
+        self::assertMatchesRegularExpression('/^[0-9a-f]{64}$/D', $engineHash);
+        $sourceTreeHash = $runtimeIdentity['sourceTreeSha256'];
+        self::assertIsString($sourceTreeHash);
+        self::assertMatchesRegularExpression('/^[0-9a-f]{64}$/D', $sourceTreeHash);
+        $sourceFileCount = $runtimeIdentity['sourceFileCount'];
+        self::assertIsInt($sourceFileCount);
+        self::assertGreaterThan(0, $sourceFileCount);
         $scenario = $report['scenario'];
         self::assertIsArray($scenario);
         self::assertSame(8, $scenario['players']);

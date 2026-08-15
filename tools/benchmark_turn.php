@@ -4,12 +4,14 @@
 declare(strict_types=1);
 
 use OpenPairing\Application\PairingEngineInterface;
+use OpenPairing\Diagnostics\RuntimeCodeIdentity;
 use OpenPairing\Engine\Burstein\BursteinPairingEngine;
 use OpenPairing\Engine\Dutch\DutchPairingEngine;
 use OpenPairing\Engine\Matching\DynamicUInt;
 use OpenPairing\Tests\Fixtures\DeterministicTournamentSimulator;
 
-require dirname(__DIR__).'/vendor/autoload.php';
+$projectRoot = dirname(__DIR__);
+$loader = require $projectRoot.'/vendor/autoload.php';
 
 try {
     $options = parseOptions(array_slice($argv, 1));
@@ -26,7 +28,16 @@ try {
         'burstein' => 'fide-burstein-2026',
         default => throw new InvalidArgumentException('--system must be dutch or burstein.'),
     };
-    $engine = $system === 'fide-dutch-2026' ? new DutchPairingEngine() : new BursteinPairingEngine();
+    if ($system === 'fide-dutch-2026') {
+        $engine = new DutchPairingEngine();
+        $engineClass = DutchPairingEngine::class;
+        $engineVersion = DutchPairingEngine::VERSION;
+    } else {
+        $engine = new BursteinPairingEngine();
+        $engineClass = BursteinPairingEngine::class;
+        $engineVersion = BursteinPairingEngine::VERSION;
+    }
+    $runtimeIdentity = RuntimeCodeIdentity::capture($projectRoot, $loader, $engineClass, $engineVersion);
 
     $preparationStarted = hrtime(true);
     $state = DeterministicTournamentSimulator::initial($players, $rounds, $system);
@@ -69,6 +80,7 @@ try {
             'jit' => (string) ini_get('opcache.jit'),
             'jitBufferSize' => (string) ini_get('opcache.jit_buffer_size'),
         ],
+        'runtimeIdentity' => $runtimeIdentity,
         'scenario' => [
             'system' => $system,
             'players' => $players,

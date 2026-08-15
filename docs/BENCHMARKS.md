@@ -17,7 +17,8 @@ composer benchmark-turn -- --players=150 --round=9 --rounds=11 --system=dutch --
 `tools/benchmark_turn.php` first advances a deterministic synthetic tournament
 to the requested round, then pairs the same immutable state repeatedly. Its
 JSON separates preparation time from minimum/median/maximum turn latency,
-records peak memory, backend and one deterministic functional-result hash.
+records peak memory, backend, the complete runtime/source/engine identity and
+one deterministic functional-result hash.
 Timing diagnostics and trace prose are deliberately excluded from that hash.
 The setup time is not production latency; the measured pairing call is. A synthetic fixture
 is a reproducible capacity control, not a substitute for the historical corpus
