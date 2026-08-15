@@ -1,6 +1,6 @@
 # FIDE submission readiness
 
-Audited on 2026-08-15 against the FIDE rules effective in 2026. This document
+Audited on 2026-08-16 against the FIDE rules effective in 2026. This document
 is a fail-closed readiness ledger, not a certification claim.
 
 The machine-readable companion is
@@ -57,6 +57,11 @@ alone as TAPC-ready.
 - Current online application entry point:
   <https://www.cognitoforms.com/FIDE/TECMenu>
 
+The 2026-08-16 read-only source check and the remaining interpretation
+questions are recorded in
+`evidence/fide-normative-scope-check-20260816.json`. No form or enquiry was
+submitted by that check.
+
 The older C.04.A/FE-1 and VCL19 documents remain useful historical controls,
 but they must not be assumed to replace the current TEC forms or TAPC process.
 
@@ -72,7 +77,7 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
 | English interface and manual | English CLI plus `USER-MANUAL.md` for the engine package | Partial | Add the complete English THP GUI/FIDE-mode workflow for the exact submitted product |
 | FIDE mode | CLI exposes only declared FIDE engines but has no named THP mode | Missing product evidence | Make FIDE mode default or explicit in ChessPairings and test prohibited features are isolated |
 | Latest TRF import/export | Fail-closed individual TRF26 subset; conditional `142`/`152`, scheduled forfeits, unusual results, future individual byes (`240`) and prohibited-pairing groups (`260`) covered | Partial | Decide the generic individual `299` score-adjustment claim in `TRF26-INDIVIDUAL-GAP-AUDIT.md`, add backward-compatibility tests and decide any TEC-required TRF16 scope |
-| Pairing and Tie-Break Checker (PTC) | Public offline `openpairing-ptc.php`, non-vacuous JSON report, embedded Dutch/Burstein replay, declared-rank checks and published positive/negative fixtures | Implemented; release gate open | Include the fixtures in the frozen runtime and verify the ChessPairings download path |
+| Pairings and Tie-Breaks Checker (PTC) | Public offline `openpairing-ptc.php`, non-vacuous JSON report, embedded Dutch/Burstein replay, declared-rank checks and published positive/negative fixtures | Implemented; release gate open | Include the fixtures in the frozen runtime and verify the ChessPairings download path |
 | Random Tournament Generator (RTG) | Public offline `openpairing-rtg.php`; deterministic seed; Dutch/Burstein, colour, draw-rate and Baku parameters; complete TRF26 output; byte-stable RTG-to-PTC control published | Implemented; release gate open | Include the control in the frozen runtime and verify it from the delivered ChessPairings package |
 | Controlled test environment | Reproducible engine ZIP procedure and two arithmetic profiles in `CONTROLLED-ENVIRONMENT.md` | Partial | Freeze and publish a TEC-accessible environment for the exact non-RC THP candidate |
 | Player/result/tournament management | Outside this library | Missing engine-alone | Demonstrate the full ChessPairings THP workflow with player data, results, byes and recovery |

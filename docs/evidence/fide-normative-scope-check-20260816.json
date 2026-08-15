@@ -1,0 +1,52 @@
+{
+  "schema": "openpairing.fide-normative-scope-check/1",
+  "checkedAtEuropeRome": "2026-08-16T01:18:00+02:00",
+  "sources": [
+    {
+      "url": "https://handbook.fide.com/chapter/GeneralRulesAndRegulations032026",
+      "title": "General Regulations",
+      "effectiveFrom": "2026-03-01",
+      "observedArticles": ["4.2.9", "5.1", "5.3", "5.8", "5.9", "7.1", "7.3.6", "7.4.10"]
+    },
+    {
+      "url": "https://handbook.fide.com/chapter/ChessEquipmentWithElectronicComponenets032026",
+      "title": "Chess Equipment with Electronic Components",
+      "effectiveFrom": "2026-03-01",
+      "observedArticles": ["7.1.1", "7.1.2", "7.1.3", "7.1.4", "7.2.1", "7.2.2", "7.2.3", "7.2.4", "7.3"]
+    },
+    {
+      "url": "https://www.cognitoforms.com/FIDE/TECMenu",
+      "title": "TEC Online Forms",
+      "role": "Application entry point referenced by the FIDE Handbook"
+    }
+  ],
+  "confirmedScope": {
+    "productClass": "Tournament Handler Program",
+    "softwareCategory": "equipment with electronic components",
+    "exactSubmittedVersionRequired": true,
+    "versioningRequired": true,
+    "ratingListImportRequired": true,
+    "declaredFideSwissSystemRequired": true,
+    "allFideAccelerationMethodsRequired": true,
+    "mandatoryTieBreaksRequired": true,
+    "englishFideModeAndManualRequired": true,
+    "latestTrfAndBackwardCompatibilityRequired": true,
+    "publicPtcAndRtgRequiredUnlessTecExempts": true,
+    "controlledTestEnvironmentRequired": true,
+    "ptcDescribedAsEmbeddedCliTool": true,
+    "rtgDescribedAsEmbeddedFreeTool": true
+  },
+  "openClarifications": [
+    "Whether a standalone pairing library can be assessed separately from a complete THP.",
+    "Whether a CLI distributed in the exact THP installer/runtime is considered embedded without a UI launcher.",
+    "The minimum TRF16/TRF06 backward-compatibility surface for the intended product scope.",
+    "Whether generic individual TRF26 record 299 may remain fail-closed when score adjustments are outside the declared FIDE-mode scope."
+  ],
+  "actions": {
+    "tecFormSubmitted": false,
+    "externalMessageSent": false,
+    "feePaid": false,
+    "draftUpdatedForOwnerReview": true
+  },
+  "status": "CURRENT_RULES_CONFIRMED_EXTERNAL_SCOPE_CLARIFICATION_PENDING"
+}

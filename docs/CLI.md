@@ -73,7 +73,7 @@ JSON in standings mode. Structured errors go to standard error. Exit codes are:
 
 The production CLI performs no network calls and invokes no upstream process.
 
-## Public Pairing Test Checker
+## Public Pairings and Tie-Breaks Checker
 
 Replay all populated rounds of a completed TRF26 file and verify any declared
 `202`/`212` ranking with the embedded engines:

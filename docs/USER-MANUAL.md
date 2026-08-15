@@ -65,7 +65,7 @@ The result contains competition ranks, unresolved tied groups and exact
 rational values. Rating-based methods reject unrated-player inputs instead of
 inventing a local policy.
 
-## Pairing Test Checker
+## Pairings and Tie-Breaks Checker
 
 The PTC replays every populated round and, when declared, the final standings:
 

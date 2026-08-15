@@ -1,6 +1,6 @@
-# Pairing Test Checker (PTC)
+# Pairings and Tie-Breaks Checker (PTC)
 
-`bin/openpairing-ptc.php` is the public, free and offline Pairing Test Checker
+`bin/openpairing-ptc.php` is the public, free and offline Pairings and Tie-Breaks Checker
 for OpenPairingPHP. It accepts a completed TRF26 individual tournament and
 replays every populated round with the embedded Dutch or Burstein engine.
 It also recomputes the final ranking when record `202` or `212` is present.

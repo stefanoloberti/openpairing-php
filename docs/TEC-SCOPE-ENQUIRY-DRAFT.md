@@ -9,9 +9,9 @@ Dear FIDE Technical Commission,
 We are preparing OpenPairingPHP, an offline deterministic implementation of
 the FIDE Dutch and Burstein 2026 pairing systems, individual tie-breaks, Baku
 acceleration and TRF26. The package is a PHP library and command-line tool. It
-also includes a free public Pairing Test Checker and deterministic Random
-Tournament Generator. It is not currently a complete operator-facing
-Tournament Handler Program.
+also includes a free public Pairings and Tie-Breaks Checker (PTC) and
+deterministic Random Tournament Generator (RTG). It is not currently a
+complete operator-facing Tournament Handler Program.
 
 Before selecting an application category, could you please clarify:
 
@@ -21,12 +21,16 @@ Before selecting an application category, could you please clarify:
    THP version that embeds it?
 3. May an initial application declare individual FIDE Dutch only, while
    retaining Burstein and team functionality outside the submitted FIDE mode?
-4. For the public PTC and RTG, are command-line tools acceptable, and may they
-   use the same embedded production engine provided their purpose and limits
-   are disclosed?
+4. Articles 7.2.3 and 7.2.4 describe PTC and RTG as embedded in the THP. Is a
+   free CLI distributed in the exact same installer/runtime and using the same
+   production engine acceptable, or must it also be launched from the THP UI?
 5. Is fail-closed import of a declared individual TRF26 surface acceptable
-   when unsupported/non-applicable team or NRS records are rejected explicitly?
-6. Which current SDPC/TAPC form and technical checklist should be used for this
+   when unsupported/non-applicable team or NRS records are rejected explicitly,
+   and what minimum TRF16/TRF06 backward-compatibility surface is required?
+6. For generic individual TRF26 record `299`, may a first application reject
+   the record fail-closed if the submitted product does not claim manual score
+   adjustments, or is support mandatory in FIDE mode?
+7. Which current SDPC/TAPC form and technical checklist should be used for this
    product class?
 
 We will not describe the product as FIDE approved or endorsed before a formal

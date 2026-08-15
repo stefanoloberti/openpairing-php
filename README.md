@@ -97,7 +97,7 @@ php bin/openpairing.php --standings tournament.trf
 php bin/openpairing.php --standings --tie-breaks=DE/P,BH/C1/P,SB/C1 state.json
 ```
 
-The free offline Pairing Test Checker replays a completed TRF26 tournament and
+The free offline Pairings and Tie-Breaks Checker replays a completed TRF26 tournament and
 checks its declared final ranking:
 
 ```console
