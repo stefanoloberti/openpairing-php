@@ -21,7 +21,13 @@ not a complete THP. Therefore one of these must be resolved before filing:
    separate product and identify the applicable form/checklist.
 
 Until TEC confirms option 2, option 1 is the working submission architecture.
-No public claim should describe OpenPairingPHP alone as TAPC-ready.
+However, the inspected ChessPairings Desktop checkpoint does not currently
+embed OpenPairingPHP. Integrating it would create a new candidate identity and
+invalidate exact-product evidence, so it is not an automatic continuation of
+the current Desktop dossier. The sequencing decision and an owner-review TEC
+enquiry are in `SUBMISSION-ARCHITECTURE.md` and
+`TEC-SCOPE-ENQUIRY-DRAFT.md`. No public claim should describe OpenPairingPHP
+alone as TAPC-ready.
 
 ## Normative sources
 

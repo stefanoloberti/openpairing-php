@@ -19,6 +19,8 @@ The JSON report uses schema `openpairing.ptc-report/1` and separates:
 - engine failures or unpaired competitors;
 - exact or mismatching declared final ranks.
 
+The formal JSON Schema is `docs/schema/ptc-report-v1.schema.json`.
+
 Exit code `0` means every observed case is exact. Exit code `1` means the
 checker completed and found a discrepancy, `3` means invalid or unsupported
 input, and `2` is reserved for an infrastructure failure. A report with no
@@ -36,4 +38,11 @@ Run the distributed example with:
 
 ```console
 php bin/openpairing-ptc.php examples/ptc-completed-round-1.trf
+```
+
+The distributed negative control must return exit code `1` and status
+`discrepancy`:
+
+```console
+php bin/openpairing-ptc.php examples/ptc-colour-variant.trf
 ```

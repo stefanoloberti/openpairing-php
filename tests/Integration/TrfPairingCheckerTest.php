@@ -81,6 +81,40 @@ final class TrfPairingCheckerTest extends TestCase
         self::assertSame('trf.record_required', $error['code']);
     }
 
+    public function testDistributedNegativeControlReturnsColourVariantExitCode(): void
+    {
+        $root = dirname(__DIR__, 2);
+        [$exitCode, $stdout, $stderr] = $this->runCli([$root.'/examples/ptc-colour-variant.trf']);
+
+        self::assertSame(1, $exitCode, $stderr);
+        self::assertSame('', $stderr);
+        $report = json_decode($stdout, true, 32, JSON_THROW_ON_ERROR);
+        self::assertIsArray($report);
+        self::assertIsArray($report['counts']);
+        self::assertSame('discrepancy', $report['status']);
+        self::assertSame(1, $report['counts']['roundsSamePairsColourVariant']);
+    }
+
+    public function testPublishedReportSchemaDeclaresCurrentContract(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $schema = json_decode(
+            (string) file_get_contents($root.'/docs/schema/ptc-report-v1.schema.json'),
+            true,
+            32,
+            JSON_THROW_ON_ERROR,
+        );
+
+        self::assertIsArray($schema);
+        self::assertIsArray($schema['properties']);
+        self::assertIsArray($schema['properties']['schema']);
+        self::assertIsArray($schema['properties']['caseCount']);
+        self::assertIsArray($schema['required']);
+        self::assertSame('openpairing.ptc-report/1', $schema['properties']['schema']['const']);
+        self::assertContains('caseCount', $schema['required']);
+        self::assertSame(1, $schema['properties']['caseCount']['minimum']);
+    }
+
     /**
      * @param list<string> $arguments
      * @return array{0: int, 1: string, 2: string}

@@ -163,6 +163,10 @@ try {
         if ($LASTEXITCODE -ne 0 -or $ptcSmoke.status -ne 'exact' -or $ptcSmoke.caseCount -lt 1) {
             throw 'Runtime PTC example smoke test failed.'
         }
+        $ptcNegative = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-ptc.php') (Join-Path $runtimeRoot 'examples\ptc-colour-variant.trf') | ConvertFrom-Json
+        if ($LASTEXITCODE -ne 1 -or $ptcNegative.status -ne 'discrepancy' -or $ptcNegative.counts.roundsSamePairsColourVariant -ne 1) {
+            throw 'Runtime PTC negative-control smoke test failed.'
+        }
         & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') --help | Out-Null
         if ($LASTEXITCODE -ne 0) { throw 'Runtime RTG help smoke test failed.' }
         $rtgVersion = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') --version | ConvertFrom-Json
@@ -172,6 +176,16 @@ try {
         $rtgOutput = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') '--players=8' '--rounds=4' '--seed=42' '--baku'
         if ($LASTEXITCODE -ne 0 -or -not ($rtgOutput -join "`n").StartsWith('012 OpenPairing RTG')) {
             throw 'Runtime RTG generation smoke test failed.'
+        }
+        $rtgTwin = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-rtg.php') '--players=8' '--rounds=4' '--seed=42' '--baku'
+        if ($LASTEXITCODE -ne 0 -or ($rtgTwin -join "`n") -cne ($rtgOutput -join "`n")) {
+            throw 'Runtime RTG deterministic twin smoke test failed.'
+        }
+        $rtgSmokePath = Join-Path $verification 'rtg-smoke.trf'
+        [System.IO.File]::WriteAllText($rtgSmokePath, ($rtgOutput -join "`n") + "`n", [System.Text.UTF8Encoding]::new($false))
+        $rtgPtc = & $phpExecutable (Join-Path $runtimeRoot 'bin\openpairing-ptc.php') $rtgSmokePath | ConvertFrom-Json
+        if ($LASTEXITCODE -ne 0 -or $rtgPtc.status -ne 'exact' -or $rtgPtc.counts.roundsExact -ne 4) {
+            throw 'Runtime RTG-to-PTC round-trip smoke test failed.'
         }
 
         $artifacts = foreach ($archive in @($sourceArchive, $runtimeArchive)) {
@@ -197,9 +211,12 @@ try {
                 ptcHelpSmoke = $true
                 ptcVersionSmoke = $true
                 ptcExampleSmoke = $true
+                ptcNegativeControlSmoke = $true
                 rtgHelpSmoke = $true
                 rtgVersionSmoke = $true
                 rtgGenerationSmoke = $true
+                rtgDeterministicTwinSmoke = $true
+                rtgPtcRoundTripSmoke = $true
             }
             artifacts = @($artifacts)
         }
