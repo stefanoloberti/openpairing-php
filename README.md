@@ -1,5 +1,7 @@
 # OpenPairingPHP
 
+[![CI](https://github.com/stefanoloberti/openpairing-php/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanoloberti/openpairing-php/actions/workflows/ci.yml)
+
 OpenPairingPHP is an independent, deterministic and offline FIDE pairing
 library and CLI for PHP 8.3+. It is a new project, not a modification of Clever
 Chicken, and it does not implement USCF pairing rules.
@@ -118,6 +120,11 @@ The complete English operating guide is `docs/USER-MANUAL.md`. The frozen
 package reproduction procedure and its explicit THP boundary are in
 `docs/CONTROLLED-ENVIRONMENT.md`.
 
+The intended 1.0 compatibility surface is inventoried in
+`docs/API-STABILITY.md`; implementation matching classes are not public API
+merely because PHP visibility permits instantiation. Composer/Packagist release
+controls are in `docs/PACKAGING.md`.
+
 ## Library
 
 ```php
@@ -149,6 +156,16 @@ $rows = $ranking->standings($state);
 
 ## Verification
 
+| Gate | Current recorded status |
+|---|---|
+| Rapid offline suite / static analysis | PASS for RC8; exact counts are recorded in the RC8 evidence file |
+| GMP versus pure-PHP limbs | PASS on deterministic stress sequences; CI locks and proves both backends |
+| Historical p7-p50 | PASS: 99,998 tournaments and 1,378,198 exact rounds |
+| Historical p80/p150/misc | OPEN under the immutable RC8 campaign identity |
+| Accelerated corpus | OPEN under the RC8 campaign identity |
+| Public PTC/RTG controls | PASS for deterministic positive, negative and round-trip fixtures |
+| Complete THP/TAPC product | NO-GO: product-level requirements remain open |
+
 Independent validators check player accounting, self/repeat pairings, C3,
 colour priority, bye eligibility, histories, reciprocal results and exact
 scores before differential output is classified. Oracle comparisons distinguish
@@ -156,6 +173,10 @@ exact, colour variant, legitimate variant, oracle deviation, local violation,
 invalid inputs and infrastructure/resource failures. Reproduction data belongs
 in `tests/Regression` with schema, input hash, upstream versions and fixed seed.
 The coverage map and reproduction commands are in `docs/CORPUS.md`.
+
+The future product-level observer and its non-mutating acceptance categories
+are specified in `docs/SHADOW-VALIDATION.md`. It is not evidence until an exact
+ChessPairings/OpenPairing candidate is selected and observed.
 
 The 123,557-file external TRF scan is parser evidence only: 122,008 legacy
 files were decoded, but that number must not be presented as pairing-engine

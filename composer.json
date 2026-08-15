@@ -3,6 +3,18 @@
   "description": "Deterministic, offline FIDE pairing engine for PHP",
   "type": "library",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/stefanoloberti/openpairing-php",
+  "keywords": [
+    "chess",
+    "fide",
+    "pairing",
+    "swiss-system",
+    "tournament"
+  ],
+  "support": {
+    "issues": "https://github.com/stefanoloberti/openpairing-php/issues",
+    "source": "https://github.com/stefanoloberti/openpairing-php"
+  },
   "require": {
     "php": "^8.3"
   },
@@ -33,14 +45,17 @@
     "analyse": "@php vendor/phpstan/phpstan/phpstan analyse --memory-limit=512M",
     "check": [
       "@test",
-      "@analyse"
+      "@analyse",
+      "@check-api"
     ],
+    "check-api": "@php tools/verify_public_api.php",
     "checkpoint": [
       "@check",
       "@test-stress",
       "@test-oracles"
     ],
-    "benchmark": "@php tools/benchmark.php"
+    "benchmark": "@php tools/benchmark.php",
+    "benchmark-turn": "@php tools/benchmark_turn.php"
   },
   "config": {
     "sort-packages": true,

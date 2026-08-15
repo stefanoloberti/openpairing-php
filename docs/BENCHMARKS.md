@@ -6,6 +6,23 @@ Run:
 composer benchmark
 ```
 
+For the latency and memory of one pairing turn, excluding fixture preparation,
+run for example:
+
+```console
+composer benchmark-turn -- --players=80 --round=7 --rounds=9 --system=dutch --repetitions=3
+composer benchmark-turn -- --players=150 --round=9 --rounds=11 --system=dutch --repetitions=3
+```
+
+`tools/benchmark_turn.php` first advances a deterministic synthetic tournament
+to the requested round, then pairs the same immutable state repeatedly. Its
+JSON separates preparation time from minimum/median/maximum turn latency,
+records peak memory, backend and one deterministic functional-result hash.
+Timing diagnostics and trace prose are deliberately excluded from that hash.
+The setup time is not production latency; the measured pairing call is. A synthetic fixture
+is a reproducible capacity control, not a substitute for the historical corpus
+or live shadow evidence.
+
 `tools/benchmark.php` emits JSON containing UTC time, PHP version, OS/CPU
 architecture, elapsed milliseconds, peak memory, search nodes, candidates,
 backtracks and matching time where applicable. It covers initial Dutch and
@@ -31,3 +48,11 @@ On the inspected PHP 8.4.24 Windows x64 run, 16-player post-seeding fixtures
 completed in about 1.7 ms (Dutch) and 1.6 ms (Burstein), exploring respectively
 197 and 104 nodes. Initial 256-player fixtures completed below 1 ms. These are
 single illustrative local measurements; fresh JSON is authoritative per host.
+
+An additional loaded-host observation on PHP 8.3.6/GMP measured a deterministic
+80-player Dutch round 7 at 12.420/13.112/13.434 seconds
+(minimum/median/maximum) and about 52 MiB peak memory. Ten quarantined p80
+workers were running concurrently under an eight-CPU service quota, and the
+benchmark process used nice level 15; this is therefore a conservative capacity
+observation, not an idle production latency promise. The exact report is
+`evidence/turn-benchmark-p80-r7-python69-20260815.json`.

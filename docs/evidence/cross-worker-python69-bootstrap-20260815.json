@@ -1,0 +1,102 @@
+{
+  "schema": "openpairing.cross-worker-bootstrap-evidence/1",
+  "observedAtEuropeRome": "2026-08-15T23:23:47+02:00",
+  "purpose": "Quarantined disjoint p80 verification capacity; doppia-3090 remains the sole classifier and acceptor.",
+  "identity": {
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "engineVersion": "fide-dutch-2026.global/1",
+    "floatSemantics": "fide-dutch-float/3-round-indexed",
+    "arithmeticBackend": "gmp"
+  },
+  "transfer": {
+    "archive": "p80-epoch4-86ec9d9-s192-s255.tar.gz",
+    "bytes": 48335876,
+    "sha256": "2c094e317e17845eadea9ee69679e6f6383adfbc456be6931d70725abcfe9d5c",
+    "shards": {
+      "first": 192,
+      "last": 255,
+      "count": 64
+    }
+  },
+  "host": {
+    "sshAlias": "python-69",
+    "windowsHost": "DESKTOP-EF1C0NB",
+    "windowsCpu": "Intel Core i9-10900, 10 cores, 20 logical processors",
+    "windowsMemoryGiB": 63.7,
+    "wslDistribution": "Ubuntu 24.04.3",
+    "wslKernel": "6.18.33.2-microsoft-standard-WSL2",
+    "wslVisibleMemoryGiB": 31,
+    "php": "8.3.6",
+    "gmp": true
+  },
+  "prerequisites": {
+    "gmpLimbParity": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 32003,
+      "sequentialSeeds": 1000
+    },
+    "frozenN7Production": {
+      "status": "PASS",
+      "productionOnly": true,
+      "corpusManifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44",
+      "tournaments": 100,
+      "roundsAttempted": 500,
+      "roundsExact": 500,
+      "colourVariants": 0,
+      "pairingDeviations": 0,
+      "diagnostics": 0,
+      "rawReportSha2563090": "475aee48a3e832b856528ee05a7c05e2978dc47d40a9de28b37884abfde9c95a",
+      "rawReportSha256Python69": "d0cf91ca374f045490ccc93161b0c84778ab3433009a6626cbb959568b09402f",
+      "canonicalSemanticSha256": "1932c4dc2afc90d654e0025d24d366d9c6754af3274667b5e020fa0863babd61",
+      "environmentFieldsExcludedFromCanonicalDigest": [
+        "root",
+        "elapsedSeconds",
+        "runtimeIdentity.projectRoot",
+        "runtimeIdentity.autoloadPsr4Roots",
+        "runtimeIdentity.expectedEnginePath",
+        "runtimeIdentity.loadedEnginePath"
+      ]
+    },
+    "negativeIdentity": {
+      "status": "PASS",
+      "probe": "Expected source-tree hash deliberately replaced by 64 zeroes.",
+      "exitCode": 4,
+      "runnerCreatedEvidence": false
+    }
+  },
+  "service": {
+    "unit": "openpairing-cross-p80.service",
+    "enabled": true,
+    "active": true,
+    "workers": 10,
+    "nice": 10,
+    "cpuQuotaPercent": 800,
+    "memoryHighBytes": 25769803776,
+    "memoryMaxBytes": 30064771072,
+    "restartPolicy": "no",
+    "outputRoot": "/srv/openpairing-cross-worker/work/p80-epoch4-86ec9d9-python69/quarantine",
+    "acceptance": "quarantine-only"
+  },
+  "wslContinuity": {
+    "stabilizedAtEuropeRome": "2026-08-15T23:40:56+02:00",
+    "windowsKeepAliveProcess": "wsl.exe -d Ubuntu --exec /srv/openpairing-cross-worker/bin/openpairing-cross-wsl-keepalive.sh",
+    "scheduledTask": "OpenPairing-CrossWorker-WSL-KeepAlive-20260815",
+    "scheduledTaskTrigger": "interactive user logon",
+    "scheduledTaskHidden": true,
+    "singleInstanceLock": "/run/openpairing-cross-wsl-keepalive.lock",
+    "note": "Transient WSL bootstrap cycles before this timestamp produced no report or provenance sidecar. The enabled fail-closed systemd service resumes only whole unpromoted shards. A reboot without an interactive user logon cannot start a per-user WSL distribution and therefore remains a detectable infrastructure pause, not accepted evidence."
+  },
+  "promotionProtocol": {
+    "primaryHost": "doppia-3090",
+    "requiresProvenanceSidecar": true,
+    "requiresOriginalShardManifestMatch": true,
+    "requiresNoExistingPrimaryReportOrClassification": true,
+    "requiresPrimaryGacruxClassification": true,
+    "promotion": "atomic-after-pass"
+  },
+  "status": "PASS_TO_COMPUTE_NOT_ACCEPTED_EVIDENCE"
+}

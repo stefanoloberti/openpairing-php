@@ -74,12 +74,15 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
 2. Freeze and publish the implemented PTC and RTG in the final runtime, with
    positive/negative machine-readable examples and a deterministic RTG-to-PTC
    round trip.
-3. Audit the complete ChessPairings product for rating-list import, English
+3. Implement the non-mutating product observer defined in
+   `SHADOW-VALIDATION.md` once an exact integrated candidate is selected; the
+   pairing API inventory is frozen provisionally in `API-STABILITY.md`.
+4. Audit the complete ChessPairings product for rating-list import, English
    FIDE mode, result/byes workflow, recovery, TRF import/export and public
    download packaging.
-4. Freeze one non-RC source/product/runtime identity, reproduce all gates from
+5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
-5. Only then populate the live TEC forms and pay testing fees.
+6. Only then populate the live TEC forms and pay testing fees.
 
 ## Submission evidence package
 

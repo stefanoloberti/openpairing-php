@@ -33,14 +33,24 @@ jobs:
       - name: Install development dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
+      - name: Validate Composer metadata
+        run: composer validate --strict
+
       - name: Lock arithmetic backend
         shell: bash
         run: |
           if [[ "${{ matrix.arithmetic }}" == gmp ]]; then
-            echo 'OPENPAIRING_ARITHMETIC_BACKEND=gmp' >> "$GITHUB_ENV"
+            echo 'OPENPAIRING_BIGINT_BACKEND=gmp' >> "$GITHUB_ENV"
           else
-            echo 'OPENPAIRING_ARITHMETIC_BACKEND=limbs-30' >> "$GITHUB_ENV"
+            echo 'OPENPAIRING_BIGINT_BACKEND=limbs' >> "$GITHUB_ENV"
           fi
+
+      - name: Prove arithmetic backend
+        run: |
+          observed=$(php -r 'require "vendor/autoload.php"; $class = "OpenPairing\\Engine\\Matching\\DynamicUInt"; echo $class::backendName();')
+          expected="${{ matrix.arithmetic }}"
+          if [[ "$expected" == limbs ]]; then expected=limbs-30; fi
+          test "$observed" = "$expected"
 
       - name: Rapid correctness gate
         run: composer check
@@ -49,6 +59,9 @@ jobs:
         run: |
           php bin/openpairing.php --version
           php bin/openpairing.php examples/pairing-round-1.json
+          php bin/openpairing-ptc.php examples/ptc-completed-round-1.trf
+          php bin/openpairing-rtg.php --players=8 --rounds=4 --seed=42 > "$RUNNER_TEMP/rtg.trf"
+          php bin/openpairing-ptc.php "$RUNNER_TEMP/rtg.trf"
 
   release-source-audit:
     runs-on: ubuntu-latest

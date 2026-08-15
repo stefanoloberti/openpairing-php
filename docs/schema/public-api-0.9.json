@@ -1,0 +1,109 @@
+{
+  "schema": "openpairing.public-api-manifest/1",
+  "packageVersion": "0.9.0-rc8",
+  "methods": [
+    {
+      "method": "OpenPairing\\Application\\PairingEngineInterface::pair",
+      "return": "OpenPairing\\Domain\\Pairing\\PairingResult",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Engine\\Dutch\\DutchPairingEngine::pair",
+      "return": "OpenPairing\\Domain\\Pairing\\PairingResult",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Engine\\Burstein\\BursteinPairingEngine::pair",
+      "return": "OpenPairing\\Domain\\Pairing\\PairingResult",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Format\\Json\\CanonicalJson::decode",
+      "return": "OpenPairing\\Domain\\Tournament\\TournamentState",
+      "params": [
+        {"name": "json", "type": "string", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Format\\Json\\CanonicalJson::encode",
+      "return": "string",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null},
+        {"name": "pretty", "type": "bool", "optional": true, "default": false}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Format\\Trf\\Trf2026Codec::decode",
+      "return": "OpenPairing\\Domain\\Tournament\\TournamentState",
+      "params": [
+        {"name": "trf", "type": "string", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Format\\Trf\\Trf2026Codec::encode",
+      "return": "string",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Acceleration\\BakuAcceleration::apply",
+      "return": "OpenPairing\\Domain\\Tournament\\TournamentState",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null},
+        {"name": "gaLastPlayerId", "type": "?int", "optional": true, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Domain\\TieBreak\\FideTieBreakRanker::rank",
+      "return": "OpenPairing\\Domain\\TieBreak\\TieBreakRanking",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null},
+        {"name": "definitions", "type": "array", "optional": false, "default": null},
+        {"name": "playerIds", "type": "?array", "optional": true, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Domain\\TieBreak\\FideTieBreakRanker::rankByCriteria",
+      "return": "OpenPairing\\Domain\\TieBreak\\TieBreakRanking",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null},
+        {"name": "definitions", "type": "array", "optional": false, "default": null},
+        {"name": "playerIds", "type": "?array", "optional": true, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Domain\\TieBreak\\FideTieBreakRanker::rankFromTournamentRecord",
+      "return": "OpenPairing\\Domain\\TieBreak\\TieBreakRanking",
+      "params": [
+        {"name": "state", "type": "OpenPairing\\Domain\\Tournament\\TournamentState", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Verification\\TrfPairingChecker::check",
+      "return": "array",
+      "params": [
+        {"name": "trf", "type": "string", "optional": false, "default": null}
+      ]
+    },
+    {
+      "method": "OpenPairing\\Simulation\\RandomTournamentGenerator::generate",
+      "return": "OpenPairing\\Domain\\Tournament\\TournamentState",
+      "params": [
+        {"name": "playerCount", "type": "int", "optional": false, "default": null},
+        {"name": "rounds", "type": "int", "optional": false, "default": null},
+        {"name": "seed", "type": "int", "optional": false, "default": null},
+        {"name": "pairingSystem", "type": "string", "optional": true, "default": "fide-dutch-2026"},
+        {"name": "topColour", "type": "OpenPairing\\Domain\\Colour\\Colour", "optional": true, "default": "white"},
+        {"name": "drawPermille", "type": "int", "optional": true, "default": 300},
+        {"name": "baku", "type": "bool", "optional": true, "default": false}
+      ]
+    }
+  ]
+}

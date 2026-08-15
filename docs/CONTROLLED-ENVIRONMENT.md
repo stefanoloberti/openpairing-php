@@ -78,6 +78,9 @@ Expected outcomes:
 audits forbidden development paths and validates the production Composer
 metadata. An official final candidate must repeat this procedure from its own
 non-RC commit and record new hashes; recorded RC hashes must never be reused.
+The source checkout additionally runs `composer check-api` to reflect the
+supported signatures against `docs/schema/public-api-0.9.json`; the runtime
+smoke commands above prove the packaged entry points remain callable.
 
 ## Evidence boundary
 

@@ -29,6 +29,11 @@ The extracted-runtime verification procedure is documented in
 `CONTROLLED-ENVIRONMENT.md`; user operation and incident handling are in
 `USER-MANUAL.md`.
 
+Composer metadata and the pre-publication checklist are in `PACKAGING.md`.
+The intended stable library surface is frozen in `API-STABILITY.md` and its
+machine-readable signature manifest; publication to Packagist remains an
+explicit post-gate account action.
+
 The recorded RC8 artifacts are byte-identical across two clean builds. Their
 SHA-256 values are
 `68a17c06109e42146183ec5e91fddb32e21d2df0b031d36eed5f7cc021677b4f`

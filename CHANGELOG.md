@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+- freeze the intended 1.0 pairing/format/tie-break entry points in a reflected
+  machine-readable API manifest;
+- add a deterministic single-turn latency/memory benchmark with a functional
+  result hash that excludes timing diagnostics;
+- make CI lock and prove the real GMP/limb backend variable, validate Composer
+  metadata strictly and smoke-test the public PTC/RTG controls;
+- specify the future non-mutating ChessPairings shadow-evidence contract and
+  prepare Composer/Packagist metadata without publishing a stable package;
+- attest a quarantined, identity-checked p80 cross-worker whose results can be
+  accepted only after classification on the primary validation host.
+
 ## 0.9.0-rc8 - 2026-08-15
 
 - import/export TRF26 record `240` individual future byes and exclude their
@@ -69,7 +82,7 @@ the library and offline CLI. The full 122,008-tournament pairing replay remains
 open, so this release is not presented as a verified 1.0 or as a substitute for
 arbiter review.
 
-## Unreleased
+## Historical development record
 
 ### Added
 

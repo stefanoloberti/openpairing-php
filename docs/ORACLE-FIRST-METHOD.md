@@ -39,6 +39,8 @@
     "equivalent" bucket, partial aggregate, automatic retry after a semantic
     failure, or claim ahead of its evidence. See [workspace
     isolation](#physical-workspace-isolation).
+13. Comparator mode is part of evidence identity. A production gate must prove
+    it invoked the production engine rather than a retained legacy/shadow path.
 
 ## Current status (2026-08-13)
 
@@ -281,6 +283,14 @@ This rule has prevented four reasonable but false conclusions:
    217/217 exact. The defect was the verifier's silent `152 W` fallback, not
    forfeit history or Dutch colour allocation. Evidence is
    `evidence/p80-initial-colour-provenance-20260815.json`.
+6. A cross-host n=7 prerequisite appeared to regress from 500/500 to 455/500
+   even though source, harness and corpus hashes matched the frozen report. The
+   diagnostic command had omitted `--production` and therefore selected the
+   retained legacy engine; the frozen report explicitly had
+   `productionOnly: true`. Repeating the correct command produced 500/500 on
+   both hosts and one identical canonical semantic digest. No engine change was
+   made. The primitive, identity and negative-launch controls are recorded in
+   `evidence/cross-worker-python69-bootstrap-20260815.json`.
 
 Consequences for implementation:
 

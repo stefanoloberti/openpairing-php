@@ -1,6 +1,6 @@
 # Development toolchain inventory
 
-## Current status (2026-08-13)
+## Current status (2026-08-15)
 
 Local Windows uses the mandatory 30-bit-limb backend because ext-gmp is not
 installed. The `ChessPairings-Ubuntu-24.04` laboratory WSL has ext-gmp and
@@ -106,7 +106,11 @@ source SHA-256 is
 Versioned evidence is `docs/evidence/release-rc6-staging-b6a2c1b.json`.
 
 `composer check` is the sub-minute edit gate: unit/contract/small differential
-tests plus PHPStan, excluding `oracle` and `stress`. `composer checkpoint` is
+tests plus PHPStan and the reflected public-API manifest, excluding `oracle`
+and `stress`. CI sets the actual engine variable
+`OPENPAIRING_BIGINT_BACKEND` and proves the observed backend before testing;
+the former `OPENPAIRING_ARITHMETIC_BACKEND`-only declaration was not a backend
+lock and has been removed from CI. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and
 sequential differentials, the 300-vertex capacity test and development-oracle
 tests. An official replay must use a committed tree and record its commit plus
@@ -199,6 +203,22 @@ enabled unit still resumes the idempotent queue after a machine boot.
 Accepted classification records point to the promoted report path and include
 the SHA-256 of the shard-gate script, so the decision mechanism is part of the
 evidence rather than an unrecorded property of the host.
+
+An additional quarantined verifier is installed on the Windows host reached by
+`ssh python-69`. Its Ubuntu 24.04 WSL provides PHP 8.3.6/GMP and Composer 2.7.1;
+the Windows i9-10900 has 10 physical/20 logical cores. The enabled
+`openpairing-cross-p80.service` may calculate only whole p80 shards s192-s255
+under Nice 10, an 800% CPU quota and a 28 GiB memory ceiling. Every output is
+paired with a host/environment sidecar below `/srv/openpairing-cross-worker`
+and is explicitly quarantine-only. `doppia-3090` remains the only Gacrux
+classifier and atomic acceptor. Bootstrap parity, the 500/500 production n=7
+gate and the negative identity test are in
+`docs/evidence/cross-worker-python69-bootstrap-20260815.json`.
+
+`tools/benchmark_turn.php` measures one immutable pairing state separately
+from deterministic fixture preparation. It reports a functional-result hash
+that excludes elapsed-time diagnostics and trace prose. The first loaded-host
+p80/r7 measurement is retained as capacity evidence, not a latency promise.
 
 Product-release identity and campaign-tool identity are intentionally distinct.
 For an active replay, monitoring and acceptance compare the runtime lock with
