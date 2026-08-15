@@ -8,6 +8,8 @@
   result hash that excludes timing diagnostics;
 - make CI lock and prove the real GMP/limb backend variable, validate Composer
   metadata strictly and smoke-test the public PTC/RTG controls;
+- make future corpus runners lock that same effective backend, reject a report
+  whose recorded identity/backend drifts, and attest the runner hash per shard;
 - specify the future non-mutating ChessPairings shadow-evidence contract and
   prepare Composer/Packagist metadata without publishing a stable package;
 - attest a quarantined, identity-checked p80 cross-worker whose results can be

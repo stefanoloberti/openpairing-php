@@ -118,6 +118,7 @@ assert_campaign_identity() {
 test ! -e "\$stop_file" || { echo "Campaign is stopped: \$stop_file" >&2; exit 30; }
 assert_campaign_identity
 mkdir -p -- "\$campaign/reports" "\$campaign/classifications" "\$campaign/quarantine"
+campaign_runner_sha256=\$(sha256sum "\$0" | awk '{print \$1}')
 
 run_shard() {
     shard=\$1
@@ -135,7 +136,8 @@ run_shard() {
     temporary_classification=\$(mktemp "\$campaign/quarantine/.\$label.classification.XXXXXX")
     cleanup_shard() { rm -f -- "\$temporary_report" "\$temporary_classification"; }
     trap cleanup_shard RETURN
-    if ! OPENPAIRING_ARITHMETIC_BACKEND=gmp php -d opcache.enable_cli=1 -d opcache.jit=1255 \\
+    if ! OPENPAIRING_BIGINT_BACKEND=gmp OPENPAIRING_ARITHMETIC_BACKEND=gmp \\
+        php -d opcache.enable_cli=1 -d opcache.jit=1255 \\
         -d opcache.jit_buffer_size=128M "\$source_tree/tools/verify_trf_pairings.php" \\
         "\$corpus" 0 --large-field >"\$temporary_report"; then
         temporary_stop=\$(mktemp "\$campaign/.stop.XXXXXX")
@@ -143,6 +145,26 @@ run_shard() {
             "\$label" "\$(date -Is)" >"\$temporary_stop"
         mv -f -- "\$temporary_stop" "\$stop_file"
         return 33
+    fi
+    if ! php -r '
+        [\$reportPath, \$expectedSource, \$expectedHarness] = array_slice(\$argv, 1);
+        \$report = json_decode(file_get_contents(\$reportPath), true, flags: JSON_THROW_ON_ERROR);
+        \$runtime = \$report["runtimeIdentity"] ?? [];
+        \$harness = \$report["harnessIdentity"] ?? [];
+        if ((\$report["productionOnly"] ?? false) !== true
+            || (\$report["largeFieldAudit"] ?? false) !== true
+            || !hash_equals(\$expectedSource, strtolower((string) (\$runtime["sourceTreeSha256"] ?? "")))
+            || !hash_equals(\$expectedHarness, strtolower((string) (\$harness["sha256"] ?? "")))
+            || (\$runtime["arithmeticBackend"] ?? "") !== "gmp") {
+            fwrite(STDERR, "Shard report identity/backend mismatch.\\n");
+            exit(4);
+        }
+    ' "\$temporary_report" "\$expected_source_tree_sha256" "\$expected_harness_sha256"; then
+        temporary_stop=\$(mktemp "\$campaign/.stop.XXXXXX")
+        printf 'OPENPAIRING_SHARD_STOP=FAIL reason=report-identity-backend-mismatch shard=%s at=%s\\n' \\
+            "\$label" "\$(date -Is)" >"\$temporary_stop"
+        mv -f -- "\$temporary_stop" "\$stop_file"
+        return 37
     fi
     "\$source_tree/tools/corpus/classify_shard_fail_fast.sh" \\
         "\$temporary_report" "\$source_tree" "\$upstream" "\$temporary_classification" "\$stop_file" "\$corpus" || {
@@ -158,16 +180,18 @@ run_shard() {
         \$classification = json_decode(file_get_contents(\$argv[1]), true, flags: JSON_THROW_ON_ERROR);
         \$classification["sourceReport"] = realpath(\$argv[2]);
         \$classification["shardGateSha256"] = hash_file("sha256", \$argv[3]);
+        \$classification["campaignRunnerSha256"] = \$argv[4];
         echo json_encode(\$classification, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), "\\n";
     ' "\$temporary_classification" "\$report" \\
-        "\$source_tree/tools/corpus/classify_shard_fail_fast.sh" >"\$temporary_classification.final"
+        "\$source_tree/tools/corpus/classify_shard_fail_fast.sh" \\
+        "\$campaign_runner_sha256" >"\$temporary_classification.final"
     mv -f -- "\$temporary_classification.final" "\$classification"
     rm -f -- "\$temporary_classification"
     trap - RETURN
 }
 export -f run_shard
 export -f assert_campaign_identity
-export shard_root source_tree upstream campaign shards stop_file expected_source_tree_sha256 expected_harness_sha256 expected_campaign_commit
+export shard_root source_tree upstream campaign shards stop_file expected_source_tree_sha256 expected_harness_sha256 expected_campaign_commit campaign_runner_sha256
 seq 0 \$((shards - 1)) | xargs -r -P "\$workers" -n 1 bash -c 'run_shard "\$1"' _
 test ! -e "\$stop_file" || exit 30
 test "\$(find "\$campaign/reports" -maxdepth 1 -name 's*.json' -size +0c | wc -l)" -eq "\$shards"

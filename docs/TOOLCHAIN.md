@@ -110,7 +110,12 @@ tests plus PHPStan and the reflected public-API manifest, excluding `oracle`
 and `stress`. CI sets the actual engine variable
 `OPENPAIRING_BIGINT_BACKEND` and proves the observed backend before testing;
 the former `OPENPAIRING_ARITHMETIC_BACKEND`-only declaration was not a backend
-lock and has been removed from CI. `composer checkpoint` is
+lock and has been removed from CI. The large-field runner generator now sets
+the effective variable too, checks the backend/source/harness recorded by every
+completed shard before Gacrux, and embeds both the shard-gate and campaign-runner
+hashes in the classification. An already-running shard is never restarted just
+to acquire this tooling hardening: its report remains admissible only if the
+recorded backend and identities match the campaign lock. `composer checkpoint` is
 the pre-replay gate and additionally executes the 1,000-graph static and
 sequential differentials, the 300-vertex capacity test and development-oracle
 tests. An official replay must use a committed tree and record its commit plus

@@ -43,6 +43,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('aggregate_shards.php', $script);
         self::assertStringContainsString('aggregate.json.tmp', $script);
         self::assertStringContainsString('shardGateSha256', $script);
+        self::assertStringContainsString('campaignRunnerSha256', $script);
+        self::assertStringContainsString('campaign_runner_sha256', $script);
         self::assertStringContainsString('realpath(\\$argv[2])', $script);
         self::assertStringContainsString('.classification.', $script);
         self::assertStringContainsString('EXPECTED_SOURCE_TREE_SHA256', $script);
@@ -52,6 +54,10 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('campaign-identity.lock.json', $script);
         self::assertStringContainsString('runtime-identity.lock.json', $script);
         self::assertStringContainsString('assert_campaign_identity', $script);
+        self::assertStringContainsString('OPENPAIRING_BIGINT_BACKEND=gmp', $script);
+        self::assertStringContainsString('"arithmeticBackend"', $script);
+        self::assertStringContainsString('report-identity-backend-mismatch', $script);
+        self::assertStringContainsString('(\$report["productionOnly"] ?? false) !== true', $script);
     }
 
     public function testSupervisorDoesNotRestartAfterAConfirmedGateFailure(): void
