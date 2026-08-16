@@ -35,6 +35,21 @@ roles are the product installer, OpenPairing runtime archive, PTC and RTG.
 Its `PASS` means only that one internally consistent byte identity was
 observed; it never declares the product submission-ready or TEC-accepted.
 
+Before that identity is created, freeze the exact product worktree and every
+source-controlled migration path with:
+
+```console
+php tools/verify_thp_source_freeze.php PRODUCT_ROOT MIGRATION_PATH [MIGRATION_PATH ...]
+```
+
+The source-freeze verifier requires the exact root of one clean Git worktree,
+a full commit, no untracked files, no tracked symbolic links or missing files,
+at least one tracked file under every declared migration path, and a passing
+value-redacting distribution secret scan. It emits deterministic source and
+migration manifest hashes and then rechecks the commit and cleanliness. Its
+`PASS` is read-only evidence for building a candidate identity; it does not
+inspect a database, create an identity, deploy a build or authorize a release.
+
 ## Immutable input boundary
 
 Before pairing, ChessPairings must construct one immutable canonical snapshot
@@ -147,7 +162,8 @@ the same packaged engines. The controlled environment must reproduce:
 
 ## Evidence and rollout
 
-1. Freeze an exact candidate and its adapter mapping.
+1. Freeze an exact clean product source/migration snapshot, then create and
+   verify the candidate identity and adapter mapping from that snapshot.
 2. Run synthetic end-to-end fixtures with the existing product output kept
    authoritative.
 3. Start the isolated observer described by `SHADOW-VALIDATION.md`; validate

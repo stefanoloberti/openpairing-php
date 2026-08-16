@@ -6,7 +6,8 @@ declare(strict_types=1);
 const SECRET_SCAN_MAX_FILE_BYTES = 4_194_304;
 const SECRET_SCAN_EXTENSIONS = [
     'bat', 'cmd', 'conf', 'config', 'env', 'inc', 'ini', 'js', 'json', 'key',
-    'pem', 'php', 'phtml', 'properties', 'ps1', 'sh', 'ts', 'xml', 'yaml', 'yml',
+    'lock', 'md', 'pem', 'php', 'phtml', 'properties', 'ps1', 'sh', 'sql',
+    'toml', 'ts', 'txt', 'xml', 'yaml', 'yml',
 ];
 const SECRET_SCAN_EXCLUDED_DIRECTORIES = [
     '.git', '.idea', '.vscode', 'build', 'node_modules', 'vendor',

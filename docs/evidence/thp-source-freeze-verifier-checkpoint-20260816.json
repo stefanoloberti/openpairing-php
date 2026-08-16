@@ -1,0 +1,64 @@
+{
+  "schema": "openpairing.thp-source-freeze-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T03:39:06+02:00",
+  "baseCommit": "db420a1299570843d0193367f82aa30a2608e2a0",
+  "files": {
+    "tools/verify_thp_source_freeze.php": "05a5564070463c83cefba007ff51e42eee1467bd0a2a35372e28737814b8016e",
+    "tools/scan_distribution_secrets.php": "d469491ec697cdb6973835415bdacdc6b792aac2eb06792df66bc06749640472",
+    "tests/Integration/ThpSourceFreezeVerifierTest.php": "ce248caad140234112f04743be23007b7ce28a13dfc5aa847c06cde7aa0acd97",
+    "tests/Integration/DistributionSecretScannerTest.php": "35f55978a2a6e5febbaac4042139ddbca21460f5dcc9180f99287901bdf0e35b",
+    "docs/THP-INTEGRATION-CONTRACT.md": "69c7dc978512f4c3bc6f02179ff31173d95cbacf605c4a2f9398cdda079bfd24",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "bc8d44a9727f2e3a73e1c889ad8b9e5d804af7647487adf016304404286472e7"
+  },
+  "checks": {
+    "targetedWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 11,
+      "assertions": 144
+    },
+    "expandedRepositorySecretScan": {
+      "status": "PASS",
+      "filesScanned": 367,
+      "binaryFilesSkipped": 21,
+      "findings": 0,
+      "secretValuesEmitted": false
+    },
+    "repositorySuiteWindows": {
+      "status": "PASS",
+      "tests": 329,
+      "assertions": 1971,
+      "skipped": 1
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerifiedBeforeThisCheckpointWasFinalized": 37
+    },
+    "coveredBehaviours": [
+      "the exact Git worktree root and full source commit are required",
+      "dirty tracked files and untracked files fail closed",
+      "every declared migration path contains at least one tracked file",
+      "tracked symbolic links and missing files fail closed",
+      "source and migration manifest hashes are deterministic",
+      "the expanded redacting scan covers source, configuration, migration and documentation extensions",
+      "a committed secret finding stops the freeze without emitting its value",
+      "PASS performs no source, database, deployment, production or candidate-identity mutation"
+    ]
+  },
+  "boundary": {
+    "chessPairingsSourceFrozen": false,
+    "candidateIdentityCreated": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "campaignIdentityChanged": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_SOURCE_AND_MIGRATION_FREEZE_GATE_READY_PRODUCT_CANDIDATE_REMAINS_OPEN"
+}

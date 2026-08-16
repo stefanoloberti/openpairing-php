@@ -18,6 +18,7 @@ OpenPairing change starts a new identity and a new evidence stream.
 | MAP-001 | Snapshot | The same product state produces byte-identical canonical JSON regardless of database row order or locale | Reject unknown, missing or ambiguous state |
 | MAP-002 | Semantics | Played/unplayed results, forfeits, PAB, withdrawals, scheduled byes, acceleration and prohibited groups survive the mapping exactly | Reject any lossy or guessed mapping |
 | MAP-003 | Initial colour | The first-round colour is persisted before request creation and is identical on retry | Reject an absent or indeducible value; never redraw |
+| ID-000 | Source freeze | `tools/verify_thp_source_freeze.php` attests the exact clean product commit, all tracked source and declared migration files, and a passing redacted secret scan | Reject dirty/untracked source, missing migration coverage, symlinks or a secret finding before candidate creation |
 | ID-001 | Candidate | Request, response, PTC, RTG and shadow all carry the expected candidate-identity SHA-256 | Reject identity drift before any write |
 | ID-002 | Input | `tools/verify_thp_pairing_request.php` passes the request envelope and exact canonical snapshot | Reject hash, revision, path or derived-metadata mismatch |
 | ID-003 | Output identity | `tools/verify_thp_pairing_result.php` binds the result to that request, the closed candidate artifacts and the declared engine version/hash | Reject stale job/revision/input, candidate drift or functional-hash mismatch |
@@ -59,7 +60,9 @@ product state, not against a legacy transport's permissiveness.
 
 ## Execution order
 
-1. Freeze a source-controlled ChessPairings candidate and migrations.
+1. Run the read-only source-freeze verifier on the exact ChessPairings Git
+   root and every migration path, then build the candidate identity only from
+   the emitted commit and manifest hashes.
 2. Close MAP and pre-call ID checks with no engine call and no database mutation.
 3. Close the post-call identity and OUT checks against synthetic in-memory or
    disposable-database data; verifier `GO` must still leave product state
