@@ -3,9 +3,11 @@
 This began as a read-only inventory of the local ChessPairings web checkout on
 16 August 2026. The active web-lab release itself did not expose a usable Git
 identity, so a sanitized copy was frozen separately as non-deployed candidate
-`5.21.0-rc.19`; the isolated attempt ledger is frozen as rc.20 and the
-synthetic observation coordinator as rc.21. No production request, database
-write or deployment was made.
+`5.21.0-rc.19`; the isolated attempt ledger was frozen as rc.20, the
+synthetic observation coordinator as rc.21, the Team staging line progressed
+independently through rc.30, and the initial-colour correction is frozen as
+source-only rc.31. No production request was made; rc.31 changed neither a
+database nor staging.
 
 The exact inspected file hashes and findings are recorded in
 `evidence/chesspairings-pairing-path-inventory-20260816.json`. The isolated
@@ -21,16 +23,20 @@ The broader rating-import, operator, FIDE-mode, recovery, TRF, English UI and
 package audit is frozen in `CHESSPAIRINGS-PRODUCT-WORKFLOW-AUDIT.md` and
 `evidence/chesspairings-product-workflow-audit-20260816.json`. That audit is a
 complete inventory, not a closed product gate.
+The rc.31 record-`152`, one-time-colour and atomic-start source checkpoint is
+recorded in
+`evidence/chesspairings-initial-colour-checkpoint-20260816.json`.
 
 The current isolated candidate is commit
-`0544d6b65db547060d6a5563af2ff0085b803241`, derived from frozen rc.20
-commit `17a8cc7fd69bd8bc5cce03c95ff73f6e778620a4`. The rc.21 bundle SHA-256 is
-`07780b6dcc805a7cbd747a6e9d7438bb24d52d3c919ff56f7ea588961a61979d`.
-The source-freeze verifier reports 607 tracked files, source-manifest SHA-256
-`dfb1d289ff3618e3c0a6ef5b614b0294439c0e53e4657ce7afadcef18e970b2f`,
-92 migration files and zero secret-scan findings. Two credentials embedded in
-the parent distribution were removed from the candidate; owner-side rotation
-of the old value remains required and is not claimed by this repository.
+`6554280292fc2668c78a30a4933aa40d5d4ee299`, derived from the exact clean
+rc.30 commit `30330a7c804d54e69211f50f1675b5e32c3c0a83`. The rc.31 bundle SHA-256 is
+`bd7c62457a1037cf71a17be1ef29770cd254235e1a1091cd893dc1c47338a5a7`;
+the source archive is reproduced three ways at SHA-256
+`b612a18e574f00c601441a5b1c72ad939f57f87bd10fb875888f39ec0637601e`.
+The archive has 666 entries, no environment config or symlink, and the
+distribution scan examined 496 text files with zero findings. Owner-side
+rotation of the credential removed earlier remains required and is not
+claimed by this repository.
 
 ## Current seam
 
@@ -78,10 +84,10 @@ engine:
    exactly once, IDs are unique and reciprocal, the count matches the declared
    output or all hard constraints remain valid. Draft warnings are explicitly
    non-blocking.
-6. **First-round random colour is not frozen.** Before a saved first round, a
-   retry can draw a new random initial colour while generating the TRF. The
-   selected value must be persisted before the engine call and included in the
-   canonical input identity.
+6. **First-round source correction is not yet runtime-proved.** Rc.31 now
+   persists one row-locked draw and record-`152` provenance before TPN
+   assignment inside the atomic start boundary. Migration, concurrent-start
+   and rollback behavior still need exact-candidate isolated-staging probes.
 7. **No live FIDE-path request/result attestation.** The isolated adapter now
    returns canonical input/output hashes and exact runtime identity without
    personal fields. The candidate can build a fail-closed versioned event and
@@ -113,7 +119,7 @@ path, never an in-place production switch. It must:
 
 ## Safe implementation order
 
-1. **Done:** freeze a source-controlled ChessPairings candidate and its 92-file
+1. **Done:** freeze a source-controlled ChessPairings candidate and its 94-file
    database migration set.
 2. **Partial:** the product TRF26 codec maps directly into OpenPairing with an
    executable golden fixture; an immutable request and portable precommit guard
@@ -124,9 +130,12 @@ path, never an in-place production switch. It must:
    unclassified differences, but no shadow call site is enabled.
 4. Prove stale-revision and injected-failure rollback tests before any live
    observation.
-5. Bind every shadow event to the exact identity manifest and validate batches
+5. **Source complete, runtime open:** rc.31 freezes individual initial-colour
+   provenance and atomic start; apply migration 111 only to isolated staging
+   and retain the concurrent-start/rollback evidence.
+6. Bind every shadow event to the exact identity manifest and validate batches
    with `tools/verify_shadow_evidence.php`.
-6. Only after the shadow and complete THP workflow gates close, create a new
+7. Only after the shadow and complete THP workflow gates close, create a new
    separately authorised release candidate. No step here authorises a
    production change.
 

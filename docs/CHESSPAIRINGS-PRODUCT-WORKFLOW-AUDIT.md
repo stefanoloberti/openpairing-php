@@ -1,16 +1,20 @@
 # ChessPairings product-workflow audit
 
-This is a source-level audit of the isolated ChessPairings Web candidate
-`5.21.0-rc.21`, commit
-`0544d6b65db547060d6a5563af2ff0085b803241`. It was performed on 16 August
-2026 without connecting to a product database, staging or production. The
-candidate is not FIDE approved or endorsed and this audit does not close the
-`complete-thp-workflow` gate.
+This is a source-level audit of the isolated ChessPairings Web line. The
+original complete inventory used rc.21; the individual initial-colour and
+atomic-start findings were subsequently corrected in source-only candidate
+`5.21.0-rc.31`, commit
+`6554280292fc2668c78a30a4933aa40d5d4ee299`. No product database, staging or
+production was changed by that correction. The candidate is not FIDE approved
+or endorsed and this audit does not close the `complete-thp-workflow` gate.
 
 The inspected source is useful: it narrows the remaining work from a generic
 "complete product" requirement to concrete, testable product gaps. Findings
 and exact inspected-file hashes are frozen in
 `evidence/chesspairings-product-workflow-audit-20260816.json`.
+The follow-up source identities, tests and still-open runtime boundary are
+frozen in
+`evidence/chesspairings-initial-colour-checkpoint-20260816.json`.
 
 ## Verdict
 
@@ -22,11 +26,11 @@ workflow required for submission. The gate therefore remains **NO-GO**.
 | --- | --- | --- |
 | FIDE rating-list import | Admin-only HTTPS download from `ratings.fide.com`, TLS verification, temporary download publication and transactional 500-row batches exist | Partial; no source hash/version attestation, whole-import rollback or exact-candidate probe |
 | Tournament/player/result workflow | Ownership checks, FIDE result codes, byes, withdrawals and round persistence exist | Partial; the bulk-result endpoint can commit a prefix, return `success=true` and report later row errors |
-| Individual FIDE mode | Server-side profile locks Dutch/BBP6, disables manual pairing and verifies BBP6 plus Gacrux identities | Partial; OpenPairing is not a product route, the initial random colour is not frozen at start, and start mutations are not one transaction |
+| Individual FIDE mode | Server-side profile locks Dutch/BBP6, disables manual pairing and verifies BBP6 plus Gacrux identities; rc.31 serializes and persists one initial-colour draw inside the atomic start boundary | Partial; OpenPairing is not a product route and the new migration/rollback/concurrency path has not run on isolated staging |
 | Recovery | Deleted-tournament snapshots and several pairing paths use transactions | Partial; snapshot restore deliberately skips failed child rows and pairing/result recovery probes have not run on the exact candidate |
-| TRF import/export | Individual TRF import is previewed, hash-bound, fail-closed on modeled semantics and transactional; FIDE export is canonical | Partial; absent record `152` is silent and becomes `random`, export may omit `152`, record `299` remains outside the lossless profile |
+| TRF import/export | Individual TRF import is previewed, hash-bound, transactional and now records explicit/inferred/pending record-`152` provenance | Partial; the exact candidate still needs a database round trip and record `299` remains outside the lossless profile |
 | English UI/manual | English is the default language and the English catalogue has 3,126 keys | NO-GO; 59 Italian catalogue keys have no English entry, the FIDE rating-import page is hard-coded Italian, and an English packaged operator manual is unproved |
-| Public package/download | The isolated bundle is reproducible and off-site backed up | NO-GO; `release.json` says RC/not approved, no public final download is present, and the bundled third-party notice still identifies rc.6 |
+| Public package/download | The rc.31 source archive is reproduced three ways, its Git bundle is off-site backed up and its notice matches rc.31 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
 
 ## Detailed findings
 
@@ -68,18 +72,17 @@ engine to BBP6, disables manual pairing, constrains rounds and acceleration,
 and protects scoring. Tournament start verifies exact BBP6 and Gacrux
 identities before changing state.
 
-Two gaps remain material:
+Rc.31 closes the two previously identified source gaps. It validates and
+persists record-`152` provenance, takes a row lock before resolving a random
+initial colour, and includes the colour write, TPN assignment, Baku boundary
+and start-state mutation in one transaction or caller savepoint. The attested
+colour is then immutable. The deterministic policy/codec/source test passes
+21/21 on PHP 8.2 and PHP 8.3/GMP.
 
-1. individual start leaves `initial_color=random`; TRF generation can draw a
-   new value before a first round is saved, so retries do not have one stable
-   canonical input;
-2. start assigns TPNs, freezes Baku state and changes tournament state through
-   separate mutations rather than one rollback boundary.
-
-The team FIDE path already demonstrates the intended shape by resolving and
-persisting the initial colour before pairing. The individual implementation
-should adopt an equivalent one-time persisted value, within the same start
-transaction, before a final candidate is frozen.
+This remains a source checkpoint: migration 111 has not been applied and the
+database-backed concurrent-start, failure-injection and rollback probes have
+not run on an isolated rc.31 staging release. Those runtime probes, rather
+than the former source implementation task, are now the blocker.
 
 The rc.21 OpenPairing shadow coordinator remains synthetic and read-only. It
 does not make OpenPairing a selectable production engine and must not be used
@@ -93,14 +96,13 @@ and commits the tournament, players, history, games, tie-breaks, acceleration
 and prohibited pairings within a transaction or savepoint. Legacy TRF06/16
 requires an explicit Dutch-2026 interpretation.
 
-Record `152` is optional in the codec. If absent, the importer silently stores
-`initial_color=random`; the canonical exporter may then omit `152` when the
-first colour cannot be inferred. This is not a pairing-engine defect, but it
-is an operator/input-identity gap. Preview and import must report the origin of
-the value (`record 152`, inferred from a played first board, or explicit
-override) and fail closed when it cannot be determined for a state that needs
-replay. Record `299` and the declared legacy contract remain separate open
-scope decisions.
+Rc.31 makes record `152` provenance explicit in preview/import. A played
+history without the record is inferred only from TPN 1 round 1 and otherwise
+fails closed; an empty history exposes a pending one-time draw which must be
+persisted at start. Invalid record values are rejected. A database-backed
+import/export replay of the exact rc.31 archive is still required, while
+record `299` and the declared legacy contract remain separate open scope
+decisions.
 
 ### Recovery
 
@@ -126,22 +128,22 @@ messages.
 The exact final English workflow and manual therefore require both catalogue
 completion and visual execution evidence. Source presence alone is not enough.
 
-The frozen rc.21 bundle is a sound internal checkpoint, not a public package.
-Its metadata still says `release-candidate` and `officialRecognition: none`;
-there is no final public download route, signature/checksum page or controlled
-installer. `docs/THIRD_PARTY_NOTICES_EN.md` still names rc.6 and must be
-regenerated for the final identity.
+The frozen rc.31 source archive and bundle are sound internal checkpoints, not
+a public package. Their metadata still says `release-candidate` and
+`officialRecognition: none`; there is no final public download route,
+signature/checksum page or controlled installer. The third-party notice now
+matches rc.31 but must be regenerated again for the final identity.
 
 ## Required closure order
 
-1. Freeze the one-time individual initial colour and make tournament start
-   atomic; add negative and rollback tests.
+1. Apply migration 111 only to isolated staging and prove concurrent start,
+   failure injection and complete rollback on the exact rc.31 archive.
 2. Make bulk result submission atomic and revision-bound; execute the operator
    and recovery probe batches.
 3. Attest rating-list source identity and prove idempotent, malformed, stale
    and rollback cases.
-4. Make missing TRF `152` provenance explicit and fail closed when neither
-   record, inference nor operator override is available.
+4. Execute an exact-candidate database TRF round trip and retain the explicit
+   record-`152` provenance evidence.
 5. Complete the English catalogue and run the complete English GUI/manual
    workflow on the exact candidate.
 6. Connect the already-frozen OpenPairing shadow observer only in an isolated

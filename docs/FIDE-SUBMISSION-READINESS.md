@@ -110,13 +110,16 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    source-frozen and portable-tested against the same runtime/engine identity
    consumed by the denominator join. The live database revision reread,
    isolated product call site, owner/privacy review and transaction probes
-   remain product work; none of this enables production.
-4. The source-level audit of the complete ChessPairings rc.21 workflow is now
-   frozen in `CHESSPAIRINGS-PRODUCT-WORKFLOW-AUDIT.md`. It confirms useful
-   implementations but keeps the gate open: individual initial colour/start
-   atomicity, rating-import attestation, atomic result batches, recovery
-   probes, missing-`152` provenance, complete English UI/manual and a public
-   final package remain required.
+   remain product work; none of this enables production. Rc.31 carries those
+   primitives forward without connecting a live route.
+4. The source-level audit is frozen in
+   `CHESSPAIRINGS-PRODUCT-WORKFLOW-AUDIT.md`. Rc.31 now closes the source
+   implementation for record-`152` provenance, a row-locked one-time initial
+   colour and atomic tournament start; its source archive is reproduced three
+   ways and is not deployed. The gate remains open because migration 111 and
+   concurrent-start/rollback probes have not run on isolated staging, while
+   rating-import attestation, atomic result batches, recovery probes, complete
+   English UI/manual and a public final package also remain required.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
 6. Only then populate the live TEC forms and pay testing fees.
