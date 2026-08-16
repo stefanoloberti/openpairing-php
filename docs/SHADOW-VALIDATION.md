@@ -82,6 +82,15 @@ laboratory fixtures, but is not proof of a live attempt denominator. The PHP
 8.3 regression checkpoint for this fail-closed join is
 `evidence/shadow-attempt-denominator-checkpoint-20260816.json`.
 
+The matching isolated ChessPairings rc.20 primitive reserves that attempt
+before invoking the engine, exposes the already verified combined identity,
+and rejects duplicate IDs, identity drift and invalid feature labels. Its
+source-freeze, portable integration test and bundle are attested in
+`evidence/chesspairings-shadow-attempt-ledger-checkpoint-20260816.json`.
+That checkpoint does not connect a live call site or start official shadow
+evidence; those remain subject to the owner/privacy review and rollout steps
+below.
+
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
 synthetic/staging checks. Exit `0` is `GO`, exit `1` is an honest `NO_GO`, and
