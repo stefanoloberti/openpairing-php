@@ -1,0 +1,79 @@
+{
+  "schema": "openpairing.chesspairings-shadow-attempt-ledger-checkpoint/1",
+  "status": "PASS",
+  "generatedAtUtc": "2026-08-16T06:44:26Z",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.20",
+    "candidateId": "web-fide-candidate-20260816-am-shadow-attempt-ledger",
+    "sourceCommit": "691c1db515783f5e20952461ef92686a600acf54",
+    "parentSourceCommit": "d63de7759c59c13cb9168a5befac51f70e84149c",
+    "officialRecognition": "none"
+  },
+  "contract": {
+    "attemptSchema": "openpairing.shadow-attempt/1",
+    "reservationPrecedesEngineExecution": true,
+    "candidateIdentityAvailableBeforeExecution": true,
+    "atomicNoOverwritePublication": true,
+    "duplicateAttemptRejected": true,
+    "invalidFeatureRejected": true,
+    "identityMismatchRejected": true,
+    "personalDataPersisted": false,
+    "crashAfterReservationVisibleToDenominator": true
+  },
+  "verification": {
+    "adapterIntegration": {
+      "status": "PASS",
+      "checksPassed": 25,
+      "checksTotal": 25,
+      "runtimeHost": "python-69",
+      "phpVersion": "8.3.6",
+      "arithmeticBackend": "gmp",
+      "runtimeIdentityLockSha256": "4d9ae2656b46fcdd6e009dce5432049100f987cfb4a6275de9a5a1edd7bc28b1",
+      "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+      "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884"
+    },
+    "lint": {
+      "status": "PASS",
+      "files": 3
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "tool": "PHPStan 2.2.8",
+      "level": "max",
+      "files": [
+        "classes/OpenPairingShadowAttemptSink.php"
+      ],
+      "errors": 0
+    },
+    "sourceFreeze": {
+      "status": "PASS",
+      "trackedFileCount": 605,
+      "sourceManifestSha256": "37d154e37696168d0b25917ded668a3e49f859430f204121093b268be4f9d988",
+      "migrationPath": "database",
+      "migrationFileCount": 92,
+      "migrationManifestSha256": "30614859629f4e9208f4cc5c35aa5b19dfecefd5924715c93396f7166968fab6",
+      "secretFilesScanned": 480,
+      "secretFindings": 0
+    }
+  },
+  "bundle": {
+    "path": "fide_submission_2026/staging-artifacts/chesspairings-web-rc20-691c1db-20260816.bundle",
+    "offsiteCopy": "OneDrive/OpenPairing Backups/chesspairings-candidates/chesspairings-web-rc20-691c1db-20260816.bundle",
+    "bytes": 40926781,
+    "sha256": "d53fd05132afecfdba8bd7aaba763240577d1ff51a7aad9ac2367cede1e9b691",
+    "bundleVerify": "PASS",
+    "completeHistory": true
+  },
+  "boundary": {
+    "liveCallSiteConnected": false,
+    "officialShadowEvidenceProduced": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "deployed": false,
+    "fideApprovedOrEndorsed": false,
+    "note": "PASS freezes and verifies the isolated attempt-ledger primitive. A separately reviewed call site, privacy review and live shadow gate remain required."
+  }
+}
