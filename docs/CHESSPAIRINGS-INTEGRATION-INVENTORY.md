@@ -6,7 +6,9 @@ identity, so a sanitized copy was frozen separately as non-deployed candidate
 `5.21.0-rc.19`. No production request, database write or deployment was made.
 
 The exact inspected file hashes and findings are recorded in
-`evidence/chesspairings-pairing-path-inventory-20260816.json`.
+`evidence/chesspairings-pairing-path-inventory-20260816.json`. The isolated
+freeze, TRF correction and executable adapter checkpoint are recorded in
+`evidence/chesspairings-shadow-adapter-bootstrap-20260816.json`.
 
 The isolated candidate is commit
 `ea1d71306c5b5603a911e999e2ffbcbbaaa77597`, derived from the rc.18 archive

@@ -1,0 +1,100 @@
+{
+  "schema": "openpairing.chesspairings-shadow-adapter-bootstrap/1",
+  "completedAtUtc": "2026-08-16T04:51:46Z",
+  "status": "PASS_ISOLATED_NOT_ENABLED",
+  "openPairing": {
+    "sourceCommit": "8b8a5ec8bf9056c767b624cd1f93dee31a4683b5",
+    "packageVersion": "0.9.0-rc8",
+    "ordinarySuite": {
+      "status": "PASS",
+      "tests": 404,
+      "assertions": 4261,
+      "phpVersion": "8.3.6"
+    },
+    "stressSuite": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 32003
+    },
+    "staticAnalysis": "PASS",
+    "publicApi": {
+      "status": "PASS",
+      "methods": 13,
+      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+    },
+    "distributionSecretScan": {
+      "status": "PASS",
+      "findings": 0
+    },
+    "oracleSuiteObservation": {
+      "status": "NOT_RUN_IN_TEMPORARY_CHECKOUT",
+      "reason": "The ignored upstream Gacrux checkout was deliberately absent from the temporary PHP 8.3 verification tree; existing identity-scoped oracle and corpus evidence was not relabelled."
+    }
+  },
+  "chessPairings": {
+    "candidateVersion": "5.21.0-rc.19",
+    "candidateId": "web-fide-candidate-20260816-al-openpairing-shadow",
+    "sourceCommit": "ea1d71306c5b5603a911e999e2ffbcbbaaa77597",
+    "parentCandidate": "web-fide-candidate-20260815-ak-team-gacrux299-failclosed",
+    "parentArchiveSha256": "75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953",
+    "sourceFreeze": {
+      "status": "PASS",
+      "trackedFileCount": 599,
+      "sourceManifestSha256": "56782995e3ffa81b4baf2ccca341e326b3882544df5e6454de398dc843cc1385",
+      "migrationFileCount": 92,
+      "migrationManifestSha256": "b79a029354f093110e157d9d27b76a8481e907d6e6b6f44289d6bc8ea5d70e49",
+      "secretFindings": 0
+    },
+    "trf26TypeCodes": {
+      "canonicalDutch": "FIDE_DUTCH_2025",
+      "canonicalBaku": "FIDE_DUTCH_2025_BAKU",
+      "acceptedAliases": [
+        "FIDE_DUTCH",
+        "FIDE_DUTCH_BAKU"
+      ],
+      "bakuRequiresRecord250": true,
+      "blankOptionalRecordsOmitted": true
+    },
+    "internalServiceCredentials": {
+      "embeddedValuesRemoved": true,
+      "headerOnlyAuthentication": true,
+      "queryStringCredentialRejected": true,
+      "ownerRotationPerformed": false
+    }
+  },
+  "adapter": {
+    "class": "OpenPairingShadowAdapter",
+    "input": "ChessPairings FideTrfCodec TRF26 output",
+    "runtimeIdentityLockRequired": true,
+    "candidateIdentityManifestRequired": true,
+    "tamperedIdentityRejected": true,
+    "independentPairingValidator": true,
+    "privacyChecks": {
+      "playerNamesAbsent": true,
+      "tournamentNameAbsent": true,
+      "fideIdsAbsent": true
+    },
+    "executableFixture": {
+      "status": "PASS",
+      "checks": 7
+    },
+    "applicationCallSiteEnabled": false,
+    "officialShadowEvidenceProduced": false
+  },
+  "boundaries": {
+    "productionContacted": false,
+    "productionMutationPerformed": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "candidateDeployed": false,
+    "fideApprovalClaimed": false
+  },
+  "remainingBlockers": [
+    "freeze final combined installer/runtime/PTC/RTG candidate identity",
+    "add immutable tournament revision and canonical request envelope",
+    "add isolated incumbent/shadow comparison and atomic evidence sink",
+    "prove stale-revision and injected-failure rollback",
+    "complete owner-side rotation of the removed internal credential",
+    "obtain owner/privacy approval before any live read-only cohort"
+  ]
+}
