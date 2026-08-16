@@ -62,8 +62,11 @@ try {
             }
             foreach ($matches[0] ?? [] as $match) {
                 $matchedText = $match[0];
-                if ($rule === 'generic-secret-assignment' && secretScanIsPlaceholder($matchedText)) {
-                    continue;
+                if ($rule === 'generic-secret-assignment') {
+                    if (secretScanIsPlaceholder($matchedText)
+                        || !secretScanIsLikelyCredentialAssignment($matchedText)) {
+                        continue;
+                    }
                 }
                 $line = substr_count(substr($contents, 0, $match[1]), "\n") + 1;
                 $findings[] = [
@@ -128,6 +131,25 @@ function secretScanIsPlaceholder(string $match): bool
         return false;
     }
     return preg_match('/^(?:change[-_ ]?me|dummy|example|placeholder|sample|test(?:ing)?|x{8,}|your[-_ ].*)$/iD', $value[1]) === 1;
+}
+
+function secretScanIsLikelyCredentialAssignment(string $match): bool
+{
+    if (preg_match('/["\']([^"\'\r\n]+)["\']\s*$/D', $match, $value) !== 1) {
+        return false;
+    }
+    $literal = $value[1];
+
+    // Natural-language validation/help strings and PHP concatenation fragments
+    // are common beside keys named "password" or header labels named
+    // "api-key". They are not embedded credential literals. Provider-specific
+    // tokens, authorization headers, credential URIs and private keys remain
+    // covered by the stronger independent rules above.
+    if (strlen($literal) < 12 || preg_match('/\s/', $literal) === 1) {
+        return false;
+    }
+
+    return preg_match('/^[\x21-\x7E]+$/D', $literal) === 1;
 }
 
 function secretScanRelativePath(string $path, string $root): string

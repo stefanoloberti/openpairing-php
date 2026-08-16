@@ -13,7 +13,13 @@
 - specify the future non-mutating ChessPairings shadow-evidence contract and
   prepare Composer/Packagist metadata without publishing a stable package;
 - attest a quarantined, identity-checked p80 cross-worker whose results can be
-  accepted only after classification on the primary validation host.
+  accepted only after classification on the primary validation host;
+- accept the official ETT26 Dutch/Baku record-192 names and aliases, while
+  requiring record 250 for every Baku-labelled input;
+- harden distribution-secret scanning against natural-language false
+  positives without weakening compact credential detection;
+- freeze an isolated ChessPairings rc.19 source candidate and verify its
+  fail-closed, privacy-minimised OpenPairing shadow bridge on PHP 8.3/GMP.
 
 ## 0.9.0-rc8 - 2026-08-15
 

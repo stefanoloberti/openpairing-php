@@ -478,6 +478,39 @@ final class Trf2026CodecTest extends TestCase
         self::assertEquals($decoded->players[0]->accelerationSchedule, $roundTrip->players[0]->accelerationSchedule);
     }
 
+    public function testOfficialBakuTypeWithRecord250DecodesAsDutch(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            ["192 FIDE_DUTCH_2025\r\n", "001    1"],
+            ["192 FIDE_DUTCH_2025_BAKU\r\n", "250  0.0  1.0   1   3    1    2\r\n001    1"],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        self::assertSame('fide-dutch-2026', $codec->decode($trf)->pairingSystem);
+        self::assertSame(
+            'fide-dutch-2026',
+            $codec->decode(str_replace('FIDE_DUTCH_2025_BAKU', 'FIDE_DUTCH_BAKU', $trf))->pairingSystem,
+        );
+    }
+
+    public function testOfficialBakuTypeWithoutRecord250FailsClosed(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "192 FIDE_DUTCH_2025\r\n",
+            "192 FIDE_DUTCH_2025_BAKU\r\n",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('Baku type without record 250 must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_required', $exception->diagnosticCode);
+        }
+    }
+
     public function testRecord250RejectsConflictingOverlaps(): void
     {
         $trf = (new Trf2026Codec())->encode($this->roundTwoState());

@@ -96,9 +96,10 @@ final class Trf2026Codec
         }
 
         $type = strtoupper($this->recordValue($records['192'][0], '192'));
-        if (!in_array($type, ['FIDE_DUTCH', 'FIDE_DUTCH_2025', 'FIDE_BURSTEIN', 'FIDE_ROUNDROBIN'], true)) {
+        if (!in_array($type, ['FIDE_DUTCH', 'FIDE_DUTCH_2025', 'FIDE_DUTCH_BAKU', 'FIDE_DUTCH_2025_BAKU', 'FIDE_BURSTEIN', 'FIDE_ROUNDROBIN'], true)) {
             throw new InvalidTournamentState('trf.pairing_system', sprintf('TRF tournament type %s is not supported.', $type));
         }
+        $bakuType = in_array($type, ['FIDE_DUTCH_BAKU', 'FIDE_DUTCH_2025_BAKU'], true);
 
         $scores = isset($records['162']) ? $this->parseScoring($records['162'][0]) : $this->defaultScoring();
         $city = $this->optionalRecordValue($records, '022');
@@ -131,6 +132,12 @@ final class Trf2026Codec
             $records['XXA'] ?? [],
             $numberOfRounds,
         );
+        if ($bakuType && ($records['250'] ?? []) === []) {
+            throw new InvalidTournamentState(
+                'trf.acceleration_required',
+                sprintf('TRF tournament type %s requires at least one record 250.', $type),
+            );
+        }
         foreach ($records['001'] as $line) {
             [$player, $seenRound] = $this->parsePlayer($line, $numberOfRounds, $accelerationSchedules);
             if (isset($pairingNumbers[$player->pairingNumber])) {

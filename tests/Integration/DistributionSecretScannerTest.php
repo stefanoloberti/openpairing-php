@@ -90,6 +90,37 @@ final class DistributionSecretScannerTest extends TestCase
         self::assertSame('PASS', $this->decodeObject($stdout)['status']);
     }
 
+    public function testNaturalLanguageAndDynamicHeaderAreNotCredentials(): void
+    {
+        file_put_contents(
+            $this->temporary.'/translations.php',
+            "<?php\nreturn ['password' => 'Password must contain at least eight characters.'];\n",
+        );
+        file_put_contents(
+            $this->temporary.'/mail.php',
+            "<?php\nreturn ['api-key: ' . \$apiKey . '', 'Accept: application/json'];\n",
+        );
+
+        [$exit, $stdout, $stderr] = $this->runScanner();
+
+        self::assertSame(0, $exit, $stderr);
+        self::assertSame('PASS', $this->decodeObject($stdout)['status']);
+    }
+
+    public function testCompactGenericCredentialRemainsDetected(): void
+    {
+        $credential = 'opaque$token.'.'1234567890abcdef';
+        file_put_contents($this->temporary.'/settings.php', "<?php\n\$password = '$credential';\n");
+
+        [$exit, $stdout] = $this->runScanner();
+
+        self::assertSame(1, $exit);
+        self::assertStringNotContainsString($credential, $stdout);
+        $report = $this->decodeObject($stdout);
+        self::assertSame('REVIEW_REQUIRED', $report['status']);
+        self::assertCount(1, $this->findings($report));
+    }
+
     public function testVendorAndBinaryFilesAreNotInterpretedAsProductConfiguration(): void
     {
         self::assertTrue(mkdir($this->temporary.'/vendor'));
