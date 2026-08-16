@@ -50,6 +50,11 @@ independent fail-closed reader are implemented and verified by
 writer and runner integration remain future-epoch work; the active p80 runner
 and identity were not changed.
 
+The 17:00 Europe/Rome autonomy-window handoff is recorded in
+`evidence/autonomy-closeout-1700-20260816.json`. It leaves both p80 services
+running and enabled, records zero promoted epoch-4 shards at close, and keeps
+submission readiness at `NO_GO`.
+
 The historical 20-shard snapshot found 14 candidate pairing deviations and
 zero no-solutions. Gacrux classified all 14 as
 `inferior-to-checker-optimum`; their first differences were HE2 (9), HO1 (3)
