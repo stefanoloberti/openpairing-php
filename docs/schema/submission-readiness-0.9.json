@@ -91,13 +91,16 @@
         {"path": "docs/schema/thp-pairing-request-1.schema.json"},
         {"path": "docs/schema/thp-pairing-result-1.schema.json"},
         {"path": "docs/schema/thp-precommit-observation-1.schema.json"},
+        {"path": "docs/schema/thp-transaction-probe-batch-1.schema.json"},
         {"path": "tools/verify_thp_pairing_result.php"},
         {"path": "tools/verify_thp_precommit_guard.php"},
+        {"path": "tools/verify_thp_transaction_probes.php"},
         {"path": "docs/evidence/thp-candidate-identity-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-source-freeze-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-pairing-request-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-pairing-result-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-precommit-guard-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-transaction-probe-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/chesspairings-pairing-path-inventory-20260816.json"}
       ]
     },

@@ -27,8 +27,8 @@ OpenPairing change starts a new identity and a new evidence stream.
 | OUT-003 | Post-processing | Requested byes and withdrawals are either part of canonical engine I/O or one separately hash-attested deterministic transform | Reject unowned append/remove behavior |
 | CAS-001 | Stale revision | `tools/verify_thp_precommit_guard.php` rejects a re-observed product revision that differs from the original request | Discard the whole result and request a fresh snapshot |
 | CAS-002 | Stale hash | The same guard rejects a changed fresh canonical-input hash even when the revision did not advance | Treat as an integrity error; perform no write |
-| TX-001 | Atomic success | Games, histories, points, round state, bye resets and request/result attestations commit together | No partial observable state |
-| TX-002 | Injected failure | A failure injected after each individual write rolls back every write in the transaction | Original tournament remains byte/logically identical |
+| TX-001 | Atomic success | The exact product harness records one complete commit in `openpairing.thp-transaction-probe-batch/1`; `tools/verify_thp_transaction_probes.php` verifies all six write stages | No partial observable state |
+| TX-002 | Injected failure | The same batch contains one failure after every write stage, each with zero commits and the exact baseline revision/state hash restored | Original tournament remains byte/logically identical |
 | MODE-001 | FIDE allow-list | FIDE mode selects only the declared engine/system and rejects unknown identifiers | No legacy/manual fallback |
 | MODE-002 | Unsupported input | Team state, record `299` and any undeclared feature stop before the individual engine call | Explicit unsupported-input diagnostic |
 | ASYNC-001 | Durable job | Restarting a worker preserves the opaque job, input hash, revision and candidate identity | No duplicate publication or anonymous retry |
@@ -67,7 +67,8 @@ product state, not against a legacy transport's permissiveness.
 3. Close the post-call identity, OUT and portable pre-commit guard checks against synthetic in-memory or
    disposable-database data; verifier `GO` must still leave product state
    untouched.
-4. Exercise CAS and every TX failure injection in an isolated database.
+4. Exercise CAS and every TX failure injection in an isolated database, then
+   validate the identity-bound probe batch without exporting personal data.
 5. Close FIDE-mode, asynchronous restart and recovery behavior.
 6. Run exact-candidate staging fixtures and the product budget.
 7. Start the non-mutating observer in `SHADOW-VALIDATION.md` only after owner,

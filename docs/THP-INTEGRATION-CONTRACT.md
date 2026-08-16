@@ -143,6 +143,24 @@ does not read the product database or prove that the supplied observation is
 live. Even `GO` authorizes no write: the exact product adapter must produce the
 observation from an immediate database reread and own the atomic transaction.
 
+The isolated product transaction harness records one success and one injected
+failure after each required write stage using
+`docs/schema/thp-transaction-probe-batch-1.schema.json`. Validate its
+identity, denominator, ordered write prefixes and before/after state hashes
+with:
+
+```console
+php tools/verify_thp_transaction_probes.php transaction-probes.json
+```
+
+The required write stages are games, history, points, round state, bye resets
+and the request/result attestation. Every failure probe must restore the exact
+baseline revision and logical-state hash with zero commits; the success probe
+must apply the complete set exactly once. The verifier rejects personal-data
+keys and distinguishes incomplete/malformed evidence from an honest `NO_GO`.
+It validates supplied records only: the exact product harness must derive the
+hashes from a disposable database and perform the fault injections.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.
