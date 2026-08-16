@@ -78,7 +78,9 @@ identity, tournament, canonical input or feature set differs from the reserved
 attempt. A reservation without an outcome becomes an explicit `not-observed`
 event, which makes the normal gate `NO_GO` instead of silently improving the
 observation rate. The event-only builder remains useful for deterministic
-laboratory fixtures, but is not proof of a live attempt denominator.
+laboratory fixtures, but is not proof of a live attempt denominator. The PHP
+8.3 regression checkpoint for this fail-closed join is
+`evidence/shadow-attempt-denominator-checkpoint-20260816.json`.
 
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
