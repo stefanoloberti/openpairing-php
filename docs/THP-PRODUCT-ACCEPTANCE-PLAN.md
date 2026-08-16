@@ -87,3 +87,15 @@ product state, not against a legacy transport's permissiveness.
 The current offline corpus may continue in parallel. Historical equality does
 not waive any product test above, and product acceptance does not replace the
 TEC PTC/RTG cross-tests.
+
+## Isolated implementation checkpoint
+
+ChessPairings candidate `d24e979dc402055df1d73b2eeac8ed0bfb64e0a9`
+implements the portable MAP/ID/CAS/SHD building blocks without an application
+call site or database access. Its 21-check executable fixture proves canonical
+request binding, exact and colour-variant comparison, rejection of incomplete
+or unclassified output, stale revision/hash `NO_GO`, privacy minimisation and
+immutable atomic event publication. This is implementation evidence only: the
+corresponding rows above stay open until the exact submitted product supplies
+live revision reads, transaction/recovery probes, denominators and owner/privacy
+approval.

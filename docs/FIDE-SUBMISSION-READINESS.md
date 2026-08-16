@@ -100,9 +100,12 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    to one or more available PTCs.
 3. Implement the non-mutating product observer defined in
    `SHADOW-VALIDATION.md` once an exact integrated candidate is selected; the
-   pairing API inventory is frozen provisionally in `API-STABILITY.md`. The
-   immutable pre-call envelope and fail-closed verifier are ready; the actual
-   ChessPairings mapping and transaction remain product work.
+   pairing API inventory is frozen provisionally in `API-STABILITY.md`. An
+   isolated ChessPairings rc.19 candidate now has an executable TRF-to-engine
+   mapping, complete incumbent comparator, immutable request, portable stale
+   revision/hash guard, versioned privacy-minimised event and atomic file sink.
+   The live revision reread, attempt denominator, isolated product call site
+   and transaction probes remain product work; none of this enables production.
 4. Audit the complete ChessPairings product for rating-list import, English
    FIDE mode, result/byes workflow, recovery, TRF import/export and public
    download packaging.
