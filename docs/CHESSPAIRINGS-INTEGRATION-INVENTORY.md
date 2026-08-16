@@ -17,6 +17,10 @@ recorded in
 The rc.21 coordinator and its still-open live transaction boundary are
 recorded in
 `evidence/chesspairings-shadow-observation-coordinator-checkpoint-20260816.json`.
+The broader rating-import, operator, FIDE-mode, recovery, TRF, English UI and
+package audit is frozen in `CHESSPAIRINGS-PRODUCT-WORKFLOW-AUDIT.md` and
+`evidence/chesspairings-product-workflow-audit-20260816.json`. That audit is a
+complete inventory, not a closed product gate.
 
 The current isolated candidate is commit
 `0544d6b65db547060d6a5563af2ff0085b803241`, derived from frozen rc.20

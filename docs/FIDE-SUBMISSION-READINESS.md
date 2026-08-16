@@ -111,9 +111,12 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    consumed by the denominator join. The live database revision reread,
    isolated product call site, owner/privacy review and transaction probes
    remain product work; none of this enables production.
-4. Audit the complete ChessPairings product for rating-list import, English
-   FIDE mode, result/byes workflow, recovery, TRF import/export and public
-   download packaging.
+4. The source-level audit of the complete ChessPairings rc.21 workflow is now
+   frozen in `CHESSPAIRINGS-PRODUCT-WORKFLOW-AUDIT.md`. It confirms useful
+   implementations but keeps the gate open: individual initial colour/start
+   atomicity, rating-import attestation, atomic result batches, recovery
+   probes, missing-`152` provenance, complete English UI/manual and a public
+   final package remain required.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
 6. Only then populate the live TEC forms and pay testing fees.
