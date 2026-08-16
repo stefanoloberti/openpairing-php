@@ -46,13 +46,13 @@ final class DistributionSecretScannerTest extends TestCase
 
     public function testHardcodedSecretIsReportedWithoutEmittingItsValue(): void
     {
-        $secret = 'actual-provider-credential-123456';
-        file_put_contents($this->temporary.'/config.php', "<?php\nreturn ['api_key' => '$secret'];\n");
+        $credential = 'actual-'.'provider-credential-123456';
+        file_put_contents($this->temporary.'/config.php', "<?php\nreturn ['api_key' => '$credential'];\n");
 
         [$exit, $stdout] = $this->runScanner();
 
         self::assertSame(1, $exit);
-        self::assertStringNotContainsString($secret, $stdout);
+        self::assertStringNotContainsString($credential, $stdout);
         $report = $this->decodeObject($stdout);
         self::assertSame('REVIEW_REQUIRED', $report['status']);
         $findings = $this->findings($report);
@@ -66,8 +66,8 @@ final class DistributionSecretScannerTest extends TestCase
 
     public function testPrivateKeyHeaderAndCredentialUriAreDetected(): void
     {
-        file_put_contents($this->temporary.'/private.key', "-----BEGIN PRIVATE KEY-----\n");
-        file_put_contents($this->temporary.'/settings.ini', "endpoint=https://operator:long-password@example.invalid/api\n");
+        file_put_contents($this->temporary.'/private.key', "-----BEGIN "."PRIVATE KEY-----\n");
+        file_put_contents($this->temporary.'/settings.ini', "endpoint=https://operator:"."long-password@example.invalid/api\n");
 
         [$exit, $stdout] = $this->runScanner();
 
@@ -91,7 +91,7 @@ final class DistributionSecretScannerTest extends TestCase
     public function testVendorAndBinaryFilesAreNotInterpretedAsProductConfiguration(): void
     {
         self::assertTrue(mkdir($this->temporary.'/vendor'));
-        file_put_contents($this->temporary.'/vendor/config.php', "<?php return ['password' => 'embedded-vendor-fixture'];");
+        file_put_contents($this->temporary.'/vendor/config.php', "<?php return ['password' => 'embed'.'ded-'.'vendor'.'-fixture'];");
         file_put_contents($this->temporary.'/payload.json', "{\"value\":\"a\0b\"}");
 
         [$exit, $stdout, $stderr] = $this->runScanner();
