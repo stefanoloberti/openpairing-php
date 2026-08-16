@@ -1,0 +1,45 @@
+{
+  "schema": "openpairing.chesspairings-rc36-source-freeze-checkpoint/1",
+  "generatedAtUtc": "2026-08-16T10:13:00Z",
+  "status": "SOURCE_FREEZE_PASS",
+  "submissionGateStatus": "NO_GO",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.36",
+    "candidateId": "web-fide-candidate-20260816-bc-english-operator-manual",
+    "sourceCommit": "9cf3f47ff1919be8c1d935480f2173c8e72049af",
+    "sourceTree": "3a6695ee67394794444445a602044b42f1c63fb5",
+    "sourceArchiveSha256": "237c1e58916eeff945fe51d0a88747fde225e1816eaa01c251efa810bac73954",
+    "bundleSha256": "5551f207495118b04b987b5a7f69fcc52000bb0d05463204e30e969ac9c8edfd",
+    "officialRecognition": "none"
+  },
+  "sourceFreezeVerification": {
+    "schema": "openpairing.thp-source-freeze-verification/1",
+    "status": "PASS",
+    "trackedFileCount": 632,
+    "sourceManifestSha256": "0b518bb370a4ce0b162b8911dea64ad35aaaa83dfa18bba310e6c043836e053e",
+    "migrationPaths": ["database", "database/migrations"],
+    "migrationFileCount": 94,
+    "migrationManifestSha256": "0ba7c93c92be464f35519b49a979d12140db688fee20b6e69c8044d1cbbd69fe",
+    "secretScan": {
+      "status": "PASS",
+      "filesScanned": 503,
+      "binaryFilesSkipped": 0,
+      "findings": 0,
+      "secretValuesEmitted": false
+    }
+  },
+  "boundary": {
+    "sourceModified": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionRequestPerformed": false,
+    "productionMutationPerformed": false,
+    "candidateIdentityCreated": false,
+    "deployed": false,
+    "gateClosed": false,
+    "fideApprovedOrEndorsed": false,
+    "note": "This records the official source-freeze verifier result. It does not build or accept a THP candidate identity and cannot close the complete product workflow."
+  }
+}
