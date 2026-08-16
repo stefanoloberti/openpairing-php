@@ -1,5 +1,9 @@
 # FIDE submission readiness
 
+Status reporting follows `SUBMISSION-STATUS-LANES.md` so component evidence,
+ChessPairings THP evidence and external TEC decisions are never presented as
+one interchangeable gate.
+
 Audited on 2026-08-16 against the FIDE rules effective in 2026. This document
 is a fail-closed readiness ledger, not a certification claim.
 

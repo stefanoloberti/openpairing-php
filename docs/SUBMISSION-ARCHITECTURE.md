@@ -3,6 +3,10 @@
 Decision date: 2026-08-15. This record prevents evidence from two different
 products from being combined accidentally.
 
+Operational reports must also keep component/corpus, THP candidate and TEC
+procedure status in the separate lanes defined by
+`SUBMISSION-STATUS-LANES.md`.
+
 ## Observed product boundary
 
 OpenPairingPHP is a PHP library and three offline CLIs: pairing/standings, PTC
