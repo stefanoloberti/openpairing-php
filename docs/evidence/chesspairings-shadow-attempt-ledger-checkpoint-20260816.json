@@ -6,7 +6,7 @@
     "product": "ChessPairings Web",
     "version": "5.21.0-rc.20",
     "candidateId": "web-fide-candidate-20260816-am-shadow-attempt-ledger",
-    "sourceCommit": "691c1db515783f5e20952461ef92686a600acf54",
+    "sourceCommit": "b247db5a37bc497acac5b128a752ba70a1c7ba23",
     "parentSourceCommit": "d63de7759c59c13cb9168a5befac51f70e84149c",
     "officialRecognition": "none"
   },
@@ -42,14 +42,15 @@
       "tool": "PHPStan 2.2.8",
       "level": "max",
       "files": [
-        "classes/OpenPairingShadowAttemptSink.php"
+        "classes/OpenPairingShadowAttemptSink.php",
+        "classes/OpenPairingShadowAdapter.php"
       ],
       "errors": 0
     },
     "sourceFreeze": {
       "status": "PASS",
       "trackedFileCount": 605,
-      "sourceManifestSha256": "37d154e37696168d0b25917ded668a3e49f859430f204121093b268be4f9d988",
+      "sourceManifestSha256": "86d938467014d87d2dbdc1d8226a9acfd01d3ae81d136e0b0c4057cad458bd30",
       "migrationPath": "database",
       "migrationFileCount": 92,
       "migrationManifestSha256": "30614859629f4e9208f4cc5c35aa5b19dfecefd5924715c93396f7166968fab6",
@@ -58,10 +59,10 @@
     }
   },
   "bundle": {
-    "path": "fide_submission_2026/staging-artifacts/chesspairings-web-rc20-691c1db-20260816.bundle",
-    "offsiteCopy": "OneDrive/OpenPairing Backups/chesspairings-candidates/chesspairings-web-rc20-691c1db-20260816.bundle",
-    "bytes": 40926781,
-    "sha256": "d53fd05132afecfdba8bd7aaba763240577d1ff51a7aad9ac2367cede1e9b691",
+    "path": "fide_submission_2026/staging-artifacts/chesspairings-web-rc20-b247db5-20260816.bundle",
+    "offsiteCopy": "OneDrive/OpenPairing Backups/chesspairings-candidates/chesspairings-web-rc20-b247db5-20260816.bundle",
+    "bytes": 40927785,
+    "sha256": "a6345a75077f334aa3e0010ea865d718f9c98f4c288969a04ee54945c9e3c982",
     "bundleVerify": "PASS",
     "completeHistory": true
   },
