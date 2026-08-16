@@ -85,7 +85,8 @@ path, never an in-place production switch. It must:
 1. Freeze a source-controlled ChessPairings candidate branch and its database
    migration set.
 2. Implement the canonical snapshot and golden mapping fixtures without an
-   engine call.
+   engine call, then validate each envelope with
+   `tools/verify_thp_pairing_request.php`.
 3. Add the local OpenPairing adapter and product-side validator behind an
    isolated shadow-only flag.
 4. Prove stale-revision and injected-failure rollback tests before any live

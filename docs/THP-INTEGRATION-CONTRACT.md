@@ -55,6 +55,22 @@ display names and transport timestamps must not affect it. Ambiguous missing
 state, including an indeducible initial colour, is an input error rather than
 a default.
 
+The pre-call envelope uses
+`docs/schema/thp-pairing-request-1.schema.json`. Once a product adapter emits
+the canonical JSON snapshot and envelope, verify their identity and derived
+round metadata without calling the engine or changing the database:
+
+```console
+php tools/verify_thp_pairing_request.php request.json snapshot.json
+```
+
+This gate requires an opaque job ID, a product tournament revision and the
+exact candidate-identity hash; checks the snapshot bytes, round, pairing
+system, initial colour and player denominators; and rejects valid but
+non-canonical JSON. Passing it is only the immutable pre-call boundary. The
+same revision and input hash still have to be re-read immediately before the
+atomic product commit.
+
 ## Call and failure semantics
 
 The adapter calls only the supported surface in `API-STABILITY.md`. A success
