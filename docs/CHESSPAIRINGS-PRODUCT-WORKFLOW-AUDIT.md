@@ -5,9 +5,9 @@ original complete inventory used rc.21. The individual initial-colour,
 atomic-start and result-batch findings were subsequently corrected through
 source-only candidate rc.32. English catalogue parity, rating-import
 translation/browser-key hygiene, the English operator manual and isolated
-rating-import state are carried by current source-only candidate
-`5.21.0-rc.37`, commit
-`95c3e6e20d335db3aee5bc34d6a0f6d38b3cdccf`. No product database, staging or
+rating-import state and confined ZIP extraction are carried by current source-only candidate
+`5.21.0-rc.38`, commit
+`68abe8d707967b2ac5260dcddc03c0553c6c710e`. No product database, staging or
 production was changed by those corrections. The candidate is not FIDE approved
 or endorsed and this audit does not close the `complete-thp-workflow` gate.
 
@@ -24,6 +24,8 @@ The English catalogue follow-up is frozen in
 `evidence/chesspairings-english-catalogue-checkpoint-20260816.json`.
 The current import-isolation/source-freeze follow-up is frozen in
 `evidence/chesspairings-rating-import-isolation-checkpoint-20260816.json`.
+The current ZIP-boundary/source-freeze follow-up is frozen in
+`evidence/chesspairings-rating-import-zip-boundary-checkpoint-20260816.json`.
 
 ## Verdict
 
@@ -33,13 +35,13 @@ workflow required for submission. The gate therefore remains **NO-GO**.
 
 | Area | Source finding | Submission status |
 | --- | --- | --- |
-| FIDE rating-list import | Admin-only HTTPS download from `ratings.fide.com`, TLS verification, temporary download publication, transactional 500-row batches and rc.37 per-admin/CSRF/token/lock isolation exist | Partial; no downloaded-list SHA-256 attestation, whole-import rollback or exact-candidate database probe |
+| FIDE rating-list import | Admin-only HTTPS download from `ratings.fide.com`, TLS verification, temporary download publication, transactional 500-row batches, rc.37 per-admin/CSRF/token/lock isolation and rc.38 confined single-XML streamed ZIP extraction exist | Partial; no downloaded-list SHA-256 attestation, whole-import rollback or exact-candidate database probe |
 | Tournament/player/result workflow | Ownership checks, FIDE result codes, byes, withdrawals and round persistence exist; rc.32 makes the individual bulk endpoint all-or-nothing and stale-client aware | Partial; exact-candidate database concurrency, failure-injection and rollback probes remain open |
 | Individual FIDE mode | Server-side profile locks Dutch/BBP6, disables manual pairing and verifies BBP6 plus Gacrux identities; rc.31 serializes and persists one initial-colour draw inside the atomic start boundary | Partial; OpenPairing is not a product route and the new migration/rollback/concurrency path has not run on isolated staging |
 | Recovery | Deleted-tournament snapshots and several pairing paths use transactions | Partial; snapshot restore deliberately skips failed child rows and pairing/result recovery probes have not run on the exact candidate |
 | TRF import/export | Individual TRF import is previewed, hash-bound, transactional and now records explicit/inferred/pending record-`152` provenance | Partial; the exact candidate still needs a database round trip and record `299` remains outside the lossless profile |
-| English UI/manual | English is the default language, rc.37 has complete 3,249/3,249 catalogue-key parity, the rating-import page is translated and an identity-bound English manual is packaged | NO-GO; the complete exact-candidate English visual workflow remains unproved |
-| Public package/download | The rc.37 source archive is reproduced four ways, its Git bundle is off-site backed up and its notice matches rc.37 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
+| English UI/manual | English is the default language, rc.38 has complete 3,259/3,259 catalogue-key parity, the rating-import page is translated and an identity-bound English manual is packaged | NO-GO; the complete exact-candidate English visual workflow remains unproved |
+| Public package/download | The rc.38 source archive is reproduced four ways, its Git bundle is off-site backed up and its notice matches rc.38 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
 
 ## Detailed findings
 
@@ -54,6 +56,10 @@ Rc.37 adds a private `0700` workspace per real administrator. Every mutation
 requires POST/CSRF and one non-blocking lock, while each resumable run is bound
 to its owner and a 32-byte session token. Persisted state contains only a
 strictly validated XML basename, and progress JSON is atomically promoted.
+Rc.38 additionally replaces bulk ZIP extraction with a streamed boundary that
+accepts exactly one flat XML member, enforces declared and written sizes,
+publishes through an exclusive random temporary file inside the verified
+destination, and removes partial output on failure.
 
 These are good operational controls, but the submitted workflow still needs:
 
@@ -134,7 +140,7 @@ prove unchanged canonical state or a complete committed state.
 ### English interface and package
 
 The language subsystem defaults to English and exposes seven PHP catalogues.
-Rc.37 supplies all 3,249 Italian catalogue keys in English, including the
+Rc.38 supplies all 3,259 Italian catalogue keys in English, including the
 rating-import page and its fail-closed security states. The deterministic
 parity and page-key tests pass on the exact PHP 8.3/GMP source checkpoint.
 An identity-bound English operator manual is packaged with the same release.
@@ -142,11 +148,11 @@ An identity-bound English operator manual is packaged with the same release.
 The exact final English workflow and manual therefore require both catalogue
 completion and visual execution evidence. Source presence alone is not enough.
 
-The frozen rc.37 source archive and bundle are sound internal checkpoints, not
+The frozen rc.38 source archive and bundle are sound internal checkpoints, not
 a public package. Their metadata still says `release-candidate` and
 `officialRecognition: none`; there is no final public download route,
 signature/checksum page or controlled installer. The third-party notice now
-matches rc.37 but must be regenerated again for the final identity.
+matches rc.38 but must be regenerated again for the final identity.
 
 ## Required closure order
 
@@ -154,7 +160,7 @@ matches rc.37 but must be regenerated again for the final identity.
    failure injection and complete rollback on the exact rc.32 archive.
 2. Execute rc.32 concurrent-submit, stale-client and injected-failure rollback
    probes together with the operator and recovery probe batches.
-3. On disposable infrastructure, execute rc.37 concurrent-admin,
+3. On disposable infrastructure, execute rc.38 concurrent-admin,
    interruption, idempotent reimport, malformed/stale input and rollback
    probes; attest the downloaded list's source identity and SHA-256.
 4. Execute an exact-candidate database TRF round trip and retain the explicit

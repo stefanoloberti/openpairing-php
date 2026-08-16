@@ -8,8 +8,8 @@ synthetic observation coordinator as rc.21, the Team staging line progressed
 independently through rc.30, and the initial-colour correction is frozen as
 source-only rc.31. The atomic individual result-batch correction is frozen as
 source-only rc.32. English catalogue parity, rating-import translation and
-browser-key hygiene, the English operator manual and isolated rating-import
-state are frozen through source-only rc.37. No production request was made;
+browser-key hygiene, the English operator manual, isolated rating-import
+state and confined ZIP extraction are frozen through source-only rc.38. No production request was made;
 none of these corrections changed a
 database or staging.
 
@@ -37,15 +37,18 @@ The rc.33 zero-missing-key English catalogue checkpoint is recorded in
 `evidence/chesspairings-english-catalogue-checkpoint-20260816.json`.
 The rc.37 import isolation and exact source freeze are recorded in
 `evidence/chesspairings-rating-import-isolation-checkpoint-20260816.json`.
+The rc.38 streamed ZIP-extraction boundary and exact source freeze are
+recorded in
+`evidence/chesspairings-rating-import-zip-boundary-checkpoint-20260816.json`.
 
 The current isolated candidate is commit
-`95c3e6e20d335db3aee5bc34d6a0f6d38b3cdccf`, derived from the exact clean
-rc.36 commit `9cf3f47ff1919be8c1d935480f2173c8e72049af`. The rc.37 bundle SHA-256 is
-`625aec1962a62f6b05533157d7a7fcd31ca1e1e87203e5d2e9cccefab2b4300e`;
+`68abe8d707967b2ac5260dcddc03c0553c6c710e`, derived from the exact clean
+rc.37 commit `95c3e6e20d335db3aee5bc34d6a0f6d38b3cdccf`. The rc.38 bundle SHA-256 is
+`b1a7584858b80cb7db708641e28f9ca2f980ea7d1f9499062e2c6616ddc4c7f0`;
 the source archive is reproduced four ways at SHA-256
-`6c8a2271e948829e40f7429839e3f89ebbe44ca6046923004d0785dd4f6a1a8d`.
-The archive has 675 entries, no environment config or symlink, and the
-distribution scan examined 504 text files with zero findings. Owner-side
+`1915f034c97aa2f1337860119793545462c448e925210f9150af8b27ff27c256`.
+The archive has 677 entries, no environment config or symlink, and the
+distribution scan examined 506 text files with zero findings. Owner-side
 rotation of the browser key removed earlier remains required and is not
 claimed by this repository.
 
@@ -147,9 +150,10 @@ path, never an in-place production switch. It must:
 6. **Source complete, runtime open:** rc.32 makes individual result batches
    all-or-nothing, round-bound and per-board revision-bound; retain stale-client,
    concurrent-submit and injected-failure rollback evidence on isolated staging.
-7. **Source complete, runtime/visual workflow open:** rc.37 carries complete
+7. **Source complete, runtime/visual workflow open:** rc.38 carries complete
    English catalogue parity, translated rating import, an English manual and
-   per-admin import isolation. Execute its disposable-database import,
+   per-admin import isolation plus a streamed, size-checked, flat single-XML
+   ZIP boundary. Execute its disposable-database import,
    concurrency, interruption and rollback probes and retain exact-candidate
    English visual/manual evidence.
 8. Bind every shadow event to the exact identity manifest and validate batches

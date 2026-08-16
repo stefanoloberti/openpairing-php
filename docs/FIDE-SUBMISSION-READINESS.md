@@ -127,8 +127,9 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    rc.36 packages an identity-bound English operator manual, and rc.37
    isolates each administrator's rating-import workspace behind POST/CSRF,
    an owner/session run token, one non-blocking lock, validated basenames and
-   atomically promoted progress. The exact rc.37 source freeze passes with
-   3,249/3,249 catalogue keys, but disposable-database import/concurrency/
+   atomically promoted progress. Rc.38 adds single-entry, flat-name, streamed
+   and size-checked ZIP extraction with fail-closed cleanup. The exact rc.38
+   source freeze passes with 3,259/3,259 catalogue keys, but disposable-database import/concurrency/
    rollback probes, English visual execution and owner-side browser-key
    rotation remain open. The complete product gate stays `NO_GO`.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
