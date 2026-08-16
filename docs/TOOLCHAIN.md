@@ -236,6 +236,9 @@ primary verifier.
 it accepts only s192-s255, moves Base64 over the two existing SSH aliases,
 verifies each SHA-256 before the intake rename, and invokes the versioned
 importer on the 3090. It never runs Gacrux or promotes evidence on python-69.
+The PHP 8.3/GMP regression covering raw mutation, corpus drift, provenance
+drift and non-empty diagnostics is recorded in
+`docs/evidence/cross-worker-import-regression-checkpoint-20260816.json`.
 
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash

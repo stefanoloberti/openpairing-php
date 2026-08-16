@@ -1,0 +1,46 @@
+{
+  "schema": "openpairing.cross-worker-import-regression-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T07:51:17+02:00",
+  "commitContainingRegression": "9a5c29e70649695ef4095f9b45916430a2067f60",
+  "files": {
+    "tools/corpus/validate_cross_worker_import.php": "b753eff26fe6e1e7f661cff65370ee2ab00b19979dd67adfe64bc193116250b7",
+    "tests/Integration/CrossWorkerImportValidatorTest.php": "f6c3fc371562720c48cf32aec21ecdc2fd390268f00c30708c3b7ca14f9b83d4"
+  },
+  "runtime": {
+    "host": "DESKTOP-EF1C0NB",
+    "wslDistribution": "Ubuntu",
+    "php": "8.3.6",
+    "arithmeticBackend": "gmp",
+    "executionPriority": "nice 19",
+    "temporaryRootRemovedAfterTest": true
+  },
+  "checks": {
+    "phpunit": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 49
+    },
+    "phpstan": {
+      "status": "PASS",
+      "level": "max",
+      "errors": 0
+    },
+    "coveredBehaviours": [
+      "valid quarantine report matches the primary corpus",
+      "raw report mutation is rejected",
+      "changed primary corpus identity is rejected",
+      "altered provenance host identity is rejected",
+      "non-empty diagnostics are rejected even when report and semantic hashes are internally consistent"
+    ]
+  },
+  "boundary": {
+    "crossWorkerReportImported": false,
+    "campaignEvidencePromoted": false,
+    "campaignServiceChanged": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "productionContacted": false,
+    "productionMutationPerformed": false
+  },
+  "status": "PASS_IMPORT_GATE_REGRESSION_NO_SHARD_IMPORTED"
+}
