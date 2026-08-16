@@ -1,0 +1,61 @@
+{
+  "schema": "openpairing.thp-pairing-result-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T03:19:02+02:00",
+  "baseCommit": "35bdc45a6358d7af68bd8dc7fc168787fdf9f99d",
+  "files": {
+    "docs/schema/thp-pairing-result-1.schema.json": "c1df4f39956c151097da0e4d4fb61d5c1b9bd6c26008bb3809818f4f58ceee82",
+    "tools/verify_thp_pairing_result.php": "1da29431357e9e7750e59abbaf1d00b6af542c8b197cd2c49383daaec9fcf48e",
+    "tests/Integration/ThpPairingResultVerifierTest.php": "61a7c4f582d46e53888bd57d529cf5fa08728aa1ec97d52ac4278d4e3b504962",
+    "docs/THP-INTEGRATION-CONTRACT.md": "3fb77ab94ab95b049fea83ab4191db0e18fb5bd3901b7f8ff45b03bb5fc683f2",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "82ceeacd2820c067a2abb7f9f07b6753e3ababedb48c61994a45f558abbf50ff"
+  },
+  "checks": {
+    "targetedWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 7,
+      "assertions": 189
+    },
+    "targetedLinux": {
+      "status": "PASS",
+      "hostRole": "secondary-quarantined-validation-host",
+      "php": "8.3.6",
+      "arithmeticBackend": "gmp",
+      "tests": 7,
+      "assertions": 189
+    },
+    "repositorySuiteWindows": {
+      "status": "PASS",
+      "tests": 339,
+      "assertions": 32932,
+      "skipped": 2
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerifiedBeforeThisCheckpoint": 33
+    },
+    "coveredBehaviours": [
+      "candidate, request, revision and canonical-input identity are replayed and cross-bound",
+      "engine version and engine SHA-256 must match the verified candidate",
+      "functional-output hash drift is an infrastructure error",
+      "missing players and engine violations are honest NO_GO outcomes",
+      "a result from another tournament revision cannot be reused",
+      "GO does not call the engine, mutate a database, recheck the live revision or authorize publication"
+    ]
+  },
+  "boundary": {
+    "engineSemanticsChanged": false,
+    "campaignIdentityChanged": false,
+    "chessPairingsAdapterImplemented": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_POSTCALL_IDENTITY_AND_ACCOUNTING_GATE_READY_PRODUCT_COMMIT_REMAINS_OPEN"
+}

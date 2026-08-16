@@ -20,6 +20,7 @@ OpenPairing change starts a new identity and a new evidence stream.
 | MAP-003 | Initial colour | The first-round colour is persisted before request creation and is identical on retry | Reject an absent or indeducible value; never redraw |
 | ID-001 | Candidate | Request, response, PTC, RTG and shadow all carry the expected candidate-identity SHA-256 | Reject identity drift before any write |
 | ID-002 | Input | `tools/verify_thp_pairing_request.php` passes the request envelope and exact canonical snapshot | Reject hash, revision, path or derived-metadata mismatch |
+| ID-003 | Output identity | `tools/verify_thp_pairing_result.php` binds the result to that request, the closed candidate artifacts and the declared engine version/hash | Reject stale job/revision/input, candidate drift or functional-hash mismatch |
 | OUT-001 | Accounting | Every eligible participant appears exactly once as paired or PAB; no ineligible participant appears | Reject partial, duplicate or extra output |
 | OUT-002 | Reciprocal state | Opponents, colours, board numbers, PAB and all hard constraints pass an independent product-side validator | Reject the complete result, not individual boards |
 | OUT-003 | Post-processing | Requested byes and withdrawals are either part of canonical engine I/O or one separately hash-attested deterministic transform | Reject unowned append/remove behavior |
@@ -59,8 +60,10 @@ product state, not against a legacy transport's permissiveness.
 ## Execution order
 
 1. Freeze a source-controlled ChessPairings candidate and migrations.
-2. Close MAP and ID checks with no engine call and no database mutation.
-3. Close OUT checks against synthetic in-memory or disposable-database data.
+2. Close MAP and pre-call ID checks with no engine call and no database mutation.
+3. Close the post-call identity and OUT checks against synthetic in-memory or
+   disposable-database data; verifier `GO` must still leave product state
+   untouched.
 4. Exercise CAS and every TX failure injection in an isolated database.
 5. Close FIDE-mode, asynchronous restart and recovery behavior.
 6. Run exact-candidate staging fixtures and the product budget.

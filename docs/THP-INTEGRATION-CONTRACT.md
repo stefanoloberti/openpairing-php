@@ -71,6 +71,22 @@ non-canonical JSON. Passing it is only the immutable pre-call boundary. The
 same revision and input hash still have to be re-read immediately before the
 atomic product commit.
 
+The post-call envelope uses
+`docs/schema/thp-pairing-result-1.schema.json`. Verify the complete result
+against the same request, snapshot and closed candidate artifacts with:
+
+```console
+php tools/verify_thp_pairing_result.php request.json snapshot.json candidate-identity.json artifacts/ result.json
+```
+
+This second gate independently replays the candidate and request identity
+checks; binds the result to the same job, revision and canonical input; checks
+the engine version and hash; recomputes a trace-independent functional-output
+hash; and runs `PairingResultValidator` against the canonical snapshot. A
+locally invalid or incomplete result is an honest `NO_GO`; an identity or hash
+drift is an infrastructure error. `GO` still does not re-read the live product
+revision or authorize a database write.
+
 ## Call and failure semantics
 
 The adapter calls only the supported surface in `API-STABILITY.md`. A success

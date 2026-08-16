@@ -88,8 +88,11 @@
         {"path": "docs/CHESSPAIRINGS-INTEGRATION-INVENTORY.md"},
         {"path": "docs/schema/thp-candidate-identity-1.schema.json"},
         {"path": "docs/schema/thp-pairing-request-1.schema.json"},
+        {"path": "docs/schema/thp-pairing-result-1.schema.json"},
+        {"path": "tools/verify_thp_pairing_result.php"},
         {"path": "docs/evidence/thp-candidate-identity-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-pairing-request-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-pairing-result-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/chesspairings-pairing-path-inventory-20260816.json"}
       ]
     },

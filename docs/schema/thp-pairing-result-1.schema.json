@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-pairing-result-1.schema.json",
+  "title": "OpenPairing THP identity-bound pairing result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "jobId", "tournamentRevision", "candidateIdentitySha256",
+    "canonicalInputSha256", "completedAtUtc", "engineVersion", "engineSha256",
+    "functionalOutputSha256", "status", "result"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-pairing-result/1"},
+    "jobId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+    "tournamentRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+    "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+    "canonicalInputSha256": {"$ref": "#/$defs/sha256"},
+    "completedAtUtc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "engineVersion": {"type": "string", "minLength": 1},
+    "engineSha256": {"$ref": "#/$defs/sha256"},
+    "functionalOutputSha256": {"$ref": "#/$defs/sha256"},
+    "status": {"const": "success"},
+    "result": {"$ref": "#/$defs/result"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "severity", "context"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1, "maxLength": 128},
+        "message": {"type": "string", "maxLength": 4096},
+        "severity": {"type": "string", "minLength": 1, "maxLength": 32},
+        "context": {
+          "oneOf": [
+            {"type": "object"},
+            {"type": "array", "maxItems": 0}
+          ]
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithmVersion", "tables", "byePlayerId", "unpairedPlayerIds",
+        "diagnostics", "violations", "qualityVector", "trace", "floatAssignments"
+      ],
+      "properties": {
+        "algorithmVersion": {"type": "string", "minLength": 1},
+        "tables": {
+          "type": "array",
+          "maxItems": 2048,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["board", "whitePlayerId", "blackPlayerId"],
+            "properties": {
+              "board": {"type": "integer", "minimum": 1},
+              "whitePlayerId": {"type": "integer", "minimum": 1},
+              "blackPlayerId": {"type": "integer", "minimum": 1}
+            }
+          }
+        },
+        "byePlayerId": {
+          "oneOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]
+        },
+        "unpairedPlayerIds": {
+          "type": "array",
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 1}
+        },
+        "diagnostics": {"type": "array", "maxItems": 4096, "items": {"$ref": "#/$defs/diagnostic"}},
+        "violations": {"type": "array", "maxItems": 4096, "items": {"$ref": "#/$defs/diagnostic"}},
+        "qualityVector": {"type": "array", "maxItems": 4096, "items": {"type": "integer"}},
+        "trace": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["step", "code", "detail"],
+            "properties": {
+              "step": {"type": "integer", "minimum": 0},
+              "code": {"type": "string", "minLength": 1, "maxLength": 128},
+              "detail": {"type": "string", "maxLength": 4096}
+            }
+          }
+        },
+        "floatAssignments": {
+          "type": "array",
+          "maxItems": 4096,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["playerId", "direction"],
+            "properties": {
+              "playerId": {"type": "integer", "minimum": 1},
+              "direction": {"enum": ["up", "down"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}
