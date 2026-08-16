@@ -101,14 +101,16 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
 3. Implement the non-mutating product observer defined in
    `SHADOW-VALIDATION.md` once an exact integrated candidate is selected; the
    pairing API inventory is frozen provisionally in `API-STABILITY.md`. An
-   isolated ChessPairings rc.20 candidate now has an executable TRF-to-engine
+   isolated ChessPairings rc.21 candidate now has an executable TRF-to-engine
    mapping, complete incumbent comparator, immutable request, portable stale
    revision/hash guard, versioned privacy-minimised event, atomic event sink and
-   pre-execution immutable attempt reservation. The candidate-side attempt
-   ledger is source-frozen and portable-tested against the same combined
-   product/runtime/engine identity consumed by the denominator join. The live
-   revision reread, isolated product call site, owner/privacy review and
-   transaction probes remain product work; none of this enables production.
+   pre-execution immutable attempt reservation. Its isolated coordinator also
+   proves that stale or unreadable post-compute snapshots leave the attempt in
+   the denominator without an event. The candidate-side primitives are
+   source-frozen and portable-tested against the same runtime/engine identity
+   consumed by the denominator join. The live database revision reread,
+   isolated product call site, owner/privacy review and transaction probes
+   remain product work; none of this enables production.
 4. Audit the complete ChessPairings product for rating-list import, English
    FIDE mode, result/byes workflow, recovery, TRF import/export and public
    download packaging.

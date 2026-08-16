@@ -91,6 +91,16 @@ That checkpoint does not connect a live call site or start official shadow
 evidence; those remain subject to the owner/privacy review and rollout steps
 below.
 
+The follow-up isolated ChessPairings rc.21 coordinator now composes request,
+attempt, engine call, comparison, post-compute fresh-snapshot callback,
+precommit guard and immutable event sink. Its 34-check PHP 8.3/GMP regression,
+PHPStan-max pass and reproducible source bundle are attested in
+`evidence/chesspairings-shadow-observation-coordinator-checkpoint-20260816.json`.
+A stale revision, changed canonical input or reread failure leaves the attempt
+visible without an event. The callback is still synthetic: the checkpoint
+does not prove a database read, transaction rollback or live product call site
+and does not start official shadow evidence.
+
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
 synthetic/staging checks. Exit `0` is `GO`, exit `1` is an honest `NO_GO`, and

@@ -1,0 +1,89 @@
+{
+  "schema": "openpairing.chesspairings-shadow-observation-coordinator-checkpoint/1",
+  "status": "PASS",
+  "generatedAtUtc": "2026-08-16T08:25:18Z",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.21",
+    "candidateId": "web-fide-candidate-20260816-an-shadow-observation-coordinator",
+    "sourceCommit": "0544d6b65db547060d6a5563af2ff0085b803241",
+    "parentSourceCommit": "17a8cc7fd69bd8bc5cce03c95ff73f6e778620a4",
+    "officialRecognition": "none"
+  },
+  "contract": {
+    "attemptReservationPrecedesEngine": true,
+    "reservedCanonicalInputMatchesComputedInput": true,
+    "freshSnapshotReadOccursAfterComparison": true,
+    "staleRevisionWritesEvent": false,
+    "staleCanonicalInputWritesEvent": false,
+    "freshReaderFailureWritesEvent": false,
+    "failedObservationRemainsInAttemptDenominator": true,
+    "duplicateAttemptReachesFreshReader": false,
+    "primaryPairingInputMutated": false,
+    "personalDataPersistedOrReturned": false,
+    "databaseReadImplemented": false,
+    "databaseMutationImplemented": false,
+    "publicationImplemented": false
+  },
+  "verification": {
+    "integration": {
+      "status": "PASS",
+      "checksPassed": 34,
+      "checksTotal": 34,
+      "runtimeHost": "python-69",
+      "phpVersion": "8.3.6",
+      "arithmeticBackend": "gmp",
+      "runtimeIdentityLockSha256": "4d9ae2656b46fcdd6e009dce5432049100f987cfb4a6275de9a5a1edd7bc28b1",
+      "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+      "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884"
+    },
+    "lint": {
+      "status": "PASS",
+      "phpVersion": "8.3.6",
+      "files": [
+        "classes/OpenPairingShadowObservationCoordinator.php",
+        "scripts/test_openpairing_shadow_adapter.php"
+      ]
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "tool": "PHPStan 2.2.8",
+      "level": "max",
+      "files": 8,
+      "errors": 0
+    },
+    "sourceFreeze": {
+      "status": "PASS",
+      "trackedFileCount": 607,
+      "sourceManifestSha256": "dfb1d289ff3618e3c0a6ef5b614b0294439c0e53e4657ce7afadcef18e970b2f",
+      "bundleCloneTrackedFileCount": 607,
+      "bundleCloneSourceManifestSha256": "dfb1d289ff3618e3c0a6ef5b614b0294439c0e53e4657ce7afadcef18e970b2f",
+      "bundleCloneMatchesWorktree": true,
+      "trackedFileByteDifferences": 0,
+      "migrationPath": "database",
+      "migrationFileCount": 92,
+      "migrationManifestSha256": "30614859629f4e9208f4cc5c35aa5b19dfecefd5924715c93396f7166968fab6",
+      "secretFilesScanned": 481,
+      "secretFindings": 0
+    }
+  },
+  "bundle": {
+    "path": "fide_submission_2026/staging-artifacts/chesspairings-web-rc21-0544d6b-20260816.bundle",
+    "offsiteCopy": "OneDrive/OpenPairing Backups/chesspairings-candidates/chesspairings-web-rc21-0544d6b-20260816.bundle",
+    "bytes": 40929936,
+    "sha256": "07780b6dcc805a7cbd747a6e9d7438bb24d52d3c919ff56f7ea588961a61979d",
+    "bundleVerify": "PASS",
+    "completeHistory": true
+  },
+  "boundary": {
+    "liveCallSiteConnected": false,
+    "officialShadowEvidenceProduced": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "deployed": false,
+    "fideApprovedOrEndorsed": false,
+    "note": "PASS freezes the isolated synthetic coordinator. The real transaction reread, product call site, rollback probes, privacy review and official live cohort remain blocking."
+  }
+}

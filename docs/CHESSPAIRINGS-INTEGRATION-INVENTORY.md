@@ -3,8 +3,9 @@
 This began as a read-only inventory of the local ChessPairings web checkout on
 16 August 2026. The active web-lab release itself did not expose a usable Git
 identity, so a sanitized copy was frozen separately as non-deployed candidate
-`5.21.0-rc.19`; the isolated attempt-ledger refinement is frozen as rc.20. No
-production request, database write or deployment was made.
+`5.21.0-rc.19`; the isolated attempt ledger is frozen as rc.20 and the
+synthetic observation coordinator as rc.21. No production request, database
+write or deployment was made.
 
 The exact inspected file hashes and findings are recorded in
 `evidence/chesspairings-pairing-path-inventory-20260816.json`. The isolated
@@ -13,14 +14,16 @@ freeze, TRF correction and executable adapter checkpoint are recorded in
 The rc.20 pre-execution attempt ledger, portable test and source freeze are
 recorded in
 `evidence/chesspairings-shadow-attempt-ledger-checkpoint-20260816.json`.
+The rc.21 coordinator and its still-open live transaction boundary are
+recorded in
+`evidence/chesspairings-shadow-observation-coordinator-checkpoint-20260816.json`.
 
 The current isolated candidate is commit
-`b247db5a37bc497acac5b128a752ba70a1c7ba23`, derived from rc.19 commit
-`d63de7759c59c13cb9168a5befac51f70e84149c`, itself derived from the rc.18 archive
-whose SHA-256 is
-`75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953`.
-The source-freeze verifier reports 604 tracked files, source-manifest SHA-256
-`11affb80a854536aeee4477f6669bd123e76cf18b8af466365561cce57cc7271`,
+`0544d6b65db547060d6a5563af2ff0085b803241`, derived from frozen rc.20
+commit `17a8cc7fd69bd8bc5cce03c95ff73f6e778620a4`. The rc.21 bundle SHA-256 is
+`07780b6dcc805a7cbd747a6e9d7438bb24d52d3c919ff56f7ea588961a61979d`.
+The source-freeze verifier reports 607 tracked files, source-manifest SHA-256
+`dfb1d289ff3618e3c0a6ef5b614b0294439c0e53e4657ce7afadcef18e970b2f`,
 92 migration files and zero secret-scan findings. Two credentials embedded in
 the parent distribution were removed from the candidate; owner-side rotation
 of the old value remains required and is not claimed by this repository.
@@ -32,8 +35,9 @@ TRF snapshot, selects one of four HTTP pairing services, submits synchronous
 or asynchronous work, parses a compact text response and writes games and
 history. OpenPairingPHP is not one of the selectable engines in the active
 snapshot. The isolated rc.19 candidate now contains a direct, read-only
-`OpenPairingShadowAdapter` and a pre-execution immutable attempt sink, but no
-application call site enables either one.
+`OpenPairingShadowAdapter`, a pre-execution immutable attempt sink and a
+synthetic coordinator with a fresh-snapshot callback, but no application call
+site or real transaction implements that callback.
 The existing code already models requested byes, withdrawals, initial colour,
 record `142`, draft pairings and product ownership checks; those are useful
 inputs to a future adapter, not proof that the adapter exists.
@@ -48,7 +52,7 @@ and Desktop identities are interchangeable.
 These are product integration gaps, not defects attributed to the OpenPairing
 engine:
 
-1. **No final combined integration identity.** The rc.20 source and migrations
+1. **No final combined integration identity.** The rc.21 source and migrations
    are now frozen, and the adapter verifies an exact OpenPairing lock plus THP
    candidate manifest. The final installer/runtime/PTC/RTG artifact hashes do
    not exist yet, so this is not the submitted identity.
@@ -57,9 +61,10 @@ engine:
    FIDE mode needs an explicit allow-list and must not silently select another
    engine or permit a fallback into accepted evidence.
 3. **No live immutable input/revision check.** The candidate can build the
-   canonical request and reject a stale supplied revision or hash, but the
-   asynchronous product path still stores no attested database revision and
-   does not perform the required immediate live reread.
+   canonical request and reject a stale supplied revision or hash. The
+   coordinator proves the required ordering around an explicit callback, but
+   the asynchronous product path still stores no attested database revision
+   and does not implement the required immediate live reread.
 4. **No atomic commit boundary.** Pairing, game/history writes, point updates,
    round advancement and bye resets are separate operations. Some paths delete
    existing rows before calculation or validation. The submitted path needs a
@@ -110,9 +115,9 @@ path, never an in-place production switch. It must:
    executable golden fixture; an immutable request and portable precommit guard
    exist, while live revision acquisition and persistence remain.
 3. **Partial:** the local adapter, comparator, event envelope, atomic event
-   sink and pre-execution attempt ledger exist and fail closed on identity
-   drift, duplicate reservations or unclassified differences, but no shadow
-   call site is enabled.
+   sink, pre-execution attempt ledger and synthetic coordinator exist and fail
+   closed on identity drift, duplicate reservations, stale rereads or
+   unclassified differences, but no shadow call site is enabled.
 4. Prove stale-revision and injected-failure rollback tests before any live
    observation.
 5. Bind every shadow event to the exact identity manifest and validate batches
