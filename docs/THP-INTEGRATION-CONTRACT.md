@@ -161,6 +161,22 @@ keys and distinguishes incomplete/malformed evidence from an honest `NO_GO`.
 It validates supplied records only: the exact product harness must derive the
 hashes from a disposable database and perform the fault injections.
 
+The asynchronous boundary has a separate four-scenario evidence batch in
+`docs/schema/thp-recovery-probe-batch-1.schema.json`. Validate it with:
+
+```console
+php tools/verify_thp_recovery_probes.php recovery-probes.json
+```
+
+The batch must demonstrate a crash before commit, a crash after commit, a
+late result for a superseded revision and duplicate delivery of an already
+accepted result. Recovery is accepted only when the durable job identity is
+reloaded, the observed logical-state hashes remain exactly on the permitted
+baseline/committed/newer states, and commit/publication counts prove at-most-
+once application. A second recovery pass must be idempotent. The verifier
+validates supplied, privacy-minimised evidence; it neither restarts a worker
+nor accesses a database, so `GO` is not a product acceptance verdict.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.

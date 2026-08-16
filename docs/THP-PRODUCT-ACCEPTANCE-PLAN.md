@@ -31,9 +31,9 @@ OpenPairing change starts a new identity and a new evidence stream.
 | TX-002 | Injected failure | The same batch contains one failure after every write stage, each with zero commits and the exact baseline revision/state hash restored | Original tournament remains byte/logically identical |
 | MODE-001 | FIDE allow-list | FIDE mode selects only the declared engine/system and rejects unknown identifiers | No legacy/manual fallback |
 | MODE-002 | Unsupported input | Team state, record `299` and any undeclared feature stop before the individual engine call | Explicit unsupported-input diagnostic |
-| ASYNC-001 | Durable job | Restarting a worker preserves the opaque job, input hash, revision and candidate identity | No duplicate publication or anonymous retry |
-| ASYNC-002 | Late completion | A superseded job cannot commit after a newer tournament revision or accepted job | Mark stale and preserve the newer state |
-| REC-001 | Recovery | Crash before commit, during rollback and after commit has one documented, idempotent recovery outcome | No half-round and no double application |
+| ASYNC-001 | Durable job | The exact product harness records worker restart/reload in `openpairing.thp-recovery-probe-batch/1`; `tools/verify_thp_recovery_probes.php` binds the four scenarios to the same candidate/source/migration identity | No duplicate publication or anonymous retry |
+| ASYNC-002 | Late completion | The same batch proves a superseded job leaves the newer revision and logical-state hash unchanged with zero commits/publications | Mark stale and preserve the newer state |
+| REC-001 | Recovery | The same batch proves crash-before-commit, crash-after-commit and duplicate delivery have exact, idempotent state/commit/publication outcomes | No half-round and no double application |
 | SHD-001 | Isolation | Shadow timeout, crash or non-exact result cannot change the primary response, publication or retry path | Observation is recorded separately or not observed |
 | SHD-002 | Privacy | Exported NDJSON contains only the allowed pseudonymous fields and hashes | Verifier returns infrastructure error and evidence is quarantined |
 | SEC-001 | Distribution secrets | The exact source, installer and runtime contain no embedded provider credential, token, private key or environment-specific secret | Stop packaging, rotate the exposed credential through the owner and rebuild a new candidate identity |
@@ -69,7 +69,9 @@ product state, not against a legacy transport's permissiveness.
    untouched.
 4. Exercise CAS and every TX failure injection in an isolated database, then
    validate the identity-bound probe batch without exporting personal data.
-5. Close FIDE-mode, asynchronous restart and recovery behavior.
+5. Exercise crash/restart, late-completion and duplicate-delivery scenarios in
+   the isolated product environment, then validate the recovery probe batch;
+   close FIDE-mode behavior separately.
 6. Run exact-candidate staging fixtures and the product budget.
 7. Start the non-mutating observer in `SHADOW-VALIDATION.md` only after owner,
    privacy and operational review.

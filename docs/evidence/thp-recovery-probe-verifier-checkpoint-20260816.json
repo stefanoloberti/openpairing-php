@@ -1,0 +1,61 @@
+{
+  "schema": "openpairing.thp-recovery-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T04:09:37+02:00",
+  "baseCommit": "644e457d8fa88081f7d6b15891bd2a3a36a171aa",
+  "files": {
+    "docs/schema/thp-recovery-probe-batch-1.schema.json": "aa7e7b30712bce218bc9f76c95f6d3f5aacad7f643cd15392b6456750929856a",
+    "tools/verify_thp_recovery_probes.php": "e47fd843ff6479f0e4221749e19c5d8f28d91ebdf2b7552af0f8f9bd718ddbd2",
+    "tests/Integration/ThpRecoveryProbeVerifierTest.php": "519f36a2f6b5a60ec387e57e70377aa49e1509330724991ef619509b585e58e4",
+    "docs/THP-INTEGRATION-CONTRACT.md": "c547ac100740dcb62b48de936d39cd29095e3dc99994ee8953f8b5b7ed8fd203",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "bc03b219136a81246b0b63e6a319404cb90b8aa3021d700a2988e21a9a69484c"
+  },
+  "checks": {
+    "targetedWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 9,
+      "assertions": 147
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "expandedRepositorySecretScan": {
+      "status": "PASS",
+      "filesScanned": 381,
+      "binaryFilesSkipped": 21,
+      "findings": 0
+    },
+    "repositorySuiteWindows": {
+      "status": "PASS",
+      "tests": 356,
+      "assertions": 2280,
+      "skipped": 1
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerified": 47
+    },
+    "coveredBehaviours": [
+      "exactly four identity-bound scenarios cover crash before commit, crash after commit, late completion and duplicate delivery",
+      "crash before commit preserves the baseline with zero commits and publications across repeated recovery",
+      "crash after commit recognizes one durable commit/publication without a second application",
+      "late completion preserves the newer revision state with zero commits and publications",
+      "duplicate delivery is deduplicated with exactly one total commit/publication",
+      "all recovery actions are required to be idempotent and durable job identity must reload where applicable",
+      "malformed denominators and personal-data keys are infrastructure errors",
+      "GO does not claim a worker restart, database access, independent hash derivation or executed product recovery"
+    ]
+  },
+  "boundary": {
+    "chessPairingsRecoveryImplemented": false,
+    "isolatedDatabaseRecoveryProbesExecuted": false,
+    "workerRestartPerformed": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_RECOVERY_EVIDENCE_GATE_READY_PRODUCT_RECOVERY_EXECUTION_REMAINS_OPEN"
+}
