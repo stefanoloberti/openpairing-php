@@ -11,11 +11,11 @@ freeze, TRF correction and executable adapter checkpoint are recorded in
 `evidence/chesspairings-shadow-adapter-bootstrap-20260816.json`.
 
 The isolated candidate is commit
-`0ea27919d5175d54dade0e1fef8d2d7bad59deb5`, derived from the rc.18 archive
+`d24e979dc402055df1d73b2eeac8ed0bfb64e0a9`, derived from the rc.18 archive
 whose SHA-256 is
 `75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953`.
-The source-freeze verifier reports 602 tracked files, source-manifest SHA-256
-`7a08f1f70ad3437167cd79859b4b53d06d9dca0a65936357b7a2d07fa5ef2ba1`,
+The source-freeze verifier reports 604 tracked files, source-manifest SHA-256
+`b5849bba70f1c7f378c7e83136b939a34baed6162b92d37de5e0ca234eccc3ed`,
 92 migration files and zero secret-scan findings. Two credentials embedded in
 the parent distribution were removed from the candidate; owner-side rotation
 of the old value remains required and is not claimed by this repository.
@@ -50,10 +50,10 @@ engine:
    legacy engine port and manual pairing remains a product option. A future
    FIDE mode needs an explicit allow-list and must not silently select another
    engine or permit a fallback into accepted evidence.
-3. **No immutable input/revision check.** The asynchronous state file stores
-   tournament data and TRF but no canonical input hash, product/engine identity
-   or database revision. Completion does not prove the tournament is unchanged
-   since submission.
+3. **No live immutable input/revision check.** The candidate can build the
+   canonical request and reject a stale supplied revision or hash, but the
+   asynchronous product path still stores no attested database revision and
+   does not perform the required immediate live reread.
 4. **No atomic commit boundary.** Pairing, game/history writes, point updates,
    round advancement and bye resets are separate operations. Some paths delete
    existing rows before calculation or validation. The submitted path needs a
@@ -99,8 +99,9 @@ path, never an in-place production switch. It must:
 
 1. **Done:** freeze a source-controlled ChessPairings candidate and its 92-file
    database migration set.
-2. **Partial:** the product TRF26 codec now maps directly into OpenPairing with
-   an executable golden fixture; request/revision envelope persistence remains.
+2. **Partial:** the product TRF26 codec maps directly into OpenPairing with an
+   executable golden fixture; an immutable request and portable precommit guard
+   exist, while live revision acquisition and persistence remain.
 3. **Partial:** the local adapter, comparator, event envelope and atomic file
    sink exist and fail closed on identity drift or unclassified differences,
    but no shadow call site is enabled.

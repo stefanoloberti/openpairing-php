@@ -1,6 +1,6 @@
 {
   "schema": "openpairing.chesspairings-shadow-adapter-bootstrap/1",
-  "completedAtUtc": "2026-08-16T05:12:00Z",
+  "completedAtUtc": "2026-08-16T05:35:00Z",
   "status": "PASS_ISOLATED_NOT_ENABLED",
   "openPairing": {
     "sourceCommit": "9de82825963a448e5c9b25fd7ef265e5a840a370",
@@ -34,14 +34,14 @@
   "chessPairings": {
     "candidateVersion": "5.21.0-rc.19",
     "candidateId": "web-fide-candidate-20260816-al-openpairing-shadow",
-    "sourceCommit": "0ea27919d5175d54dade0e1fef8d2d7bad59deb5",
-    "sourceBundleSha256": "e287d112a14ca46fe1352f3171cee6d4e9347af38f07ffd99e6bc28a53fd11e7",
+    "sourceCommit": "d24e979dc402055df1d73b2eeac8ed0bfb64e0a9",
+    "sourceBundleSha256": "3159afa226d12249bcb05ebac9eb864ee3af2029e865616408a4882d1aa616dc",
     "parentCandidate": "web-fide-candidate-20260815-ak-team-gacrux299-failclosed",
     "parentArchiveSha256": "75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953",
     "sourceFreeze": {
       "status": "PASS",
-      "trackedFileCount": 602,
-      "sourceManifestSha256": "7a08f1f70ad3437167cd79859b4b53d06d9dca0a65936357b7a2d07fa5ef2ba1",
+      "trackedFileCount": 604,
+      "sourceManifestSha256": "b5849bba70f1c7f378c7e83136b939a34baed6162b92d37de5e0ca234eccc3ed",
       "migrationFileCount": 92,
       "migrationManifestSha256": "32bd6dcdd8b1c86bd0632e7e86aea45302401e371306e40b0c40fbad645fc455",
       "secretFindings": 0
@@ -84,6 +84,16 @@
       "atomicImmutableFileSink": true,
       "duplicateEventRejected": true
     },
+    "immutableRequestBoundary": {
+      "requestSchema": "openpairing.thp-pairing-request/1",
+      "canonicalInputBound": true,
+      "tournamentRevisionBound": true,
+      "freshRevisionAndInputGo": true,
+      "staleRevisionNoGo": true,
+      "staleInputNoGo": true,
+      "databaseReadPerformed": false,
+      "publicationAuthorized": false
+    },
     "privacyChecks": {
       "playerNamesAbsent": true,
       "tournamentNameAbsent": true,
@@ -91,7 +101,7 @@
     },
     "executableFixture": {
       "status": "PASS",
-      "checks": 17
+      "checks": 21
     },
     "applicationCallSiteEnabled": false,
     "officialShadowEvidenceProduced": false
@@ -106,8 +116,7 @@
   },
   "remainingBlockers": [
     "freeze final combined installer/runtime/PTC/RTG candidate identity",
-    "add immutable tournament revision and canonical request envelope",
-    "connect the isolated incumbent/shadow observer without publication or database writes",
+    "connect the isolated incumbent/shadow observer to a live revision reread without publication or database writes",
     "prove stale-revision and injected-failure rollback",
     "complete owner-side rotation of the removed internal credential",
     "obtain owner/privacy approval before any live read-only cohort"
