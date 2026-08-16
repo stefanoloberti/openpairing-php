@@ -1,0 +1,64 @@
+{
+  "schema": "openpairing.release-dry-run-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T03:33:00+02:00",
+  "validatedCommit": "1862318cabd6ec6f65387459755294757ab34a57",
+  "embeddedVersion": "0.9.0-rc8",
+  "builds": {
+    "count": 2,
+    "byteIdentical": true,
+    "artifacts": {
+      "openpairing-php-0.9.0-rc8-source.zip": {
+        "bytes": 734256,
+        "sha256": "165776e1823399b9d9bd84e8d0fcaca441c6b3e4717f5e1b7a58372d28663ba7"
+      },
+      "openpairing-php-0.9.0-rc8-runtime.zip": {
+        "bytes": 273820,
+        "sha256": "93ee7af7d80c04e996a2977021b915001445975705612fe4a85a7d8a38c052d5"
+      },
+      "openpairing-php-0.9.0-rc8-build-report.json": {
+        "bytes": 1200,
+        "sha256": "8c5db91d9732202d1de1129ba1fe5b5bcddcfa33ae57422d76f91c13b7b345a0"
+      }
+    }
+  },
+  "buildVerification": {
+    "status": "PASS",
+    "failedChecks": 0,
+    "includes": [
+      "clean committed tree",
+      "source private-path and licence audit",
+      "runtime development-path and licence audit",
+      "runtime Composer validation",
+      "CLI pairing and standings smoke",
+      "PTC positive and negative controls",
+      "RTG deterministic twin and RTG-to-PTC round trip"
+    ]
+  },
+  "distributionSecretScans": {
+    "source": {
+      "status": "PASS",
+      "filesScanned": 283,
+      "binaryFilesSkipped": 21,
+      "findings": 0
+    },
+    "runtime": {
+      "status": "PASS",
+      "filesScanned": 107,
+      "binaryFilesSkipped": 0,
+      "findings": 0
+    },
+    "secretValuesEmitted": false,
+    "manualReviewStillRequired": true
+  },
+  "boundary": {
+    "officialRelease": false,
+    "gitTagCreated": false,
+    "githubReleaseCreated": false,
+    "packagistPublished": false,
+    "campaignIdentityChanged": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false,
+    "note": "This is a reproducibility and packaging dry run from one committed checkpoint, not the final non-RC THP distribution."
+  },
+  "status": "PASS_REPRODUCIBLE_SECRET_SCAN_CLEAN_DRY_RUN_FINAL_RELEASE_GATE_REMAINS_OPEN"
+}

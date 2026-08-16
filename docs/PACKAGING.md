@@ -4,6 +4,9 @@ The Composer package name is `openpairing/openpairing-php`. Metadata, PSR-4
 autoloading and the three binary entry points are prepared for Packagist, but
 the package has not been declared published by this repository and no stable
 tag should be created while the submission ledger is NO-GO.
+The latest non-published reproducibility and redacted-secret-scan dry run is
+recorded in `evidence/release-dry-run-1862318-20260816.json`; it keeps the
+stable-release gate open because it is neither a frozen THP nor a non-RC tag.
 
 ## Pre-publication gate
 
