@@ -31,6 +31,19 @@ baseline, not a completed p80 measurement. Evidence is
 `evidence/campaign-eta-p50-p80-20w-20260813.json` and
 `evidence/p50-partial-20-progress-20260813.json`.
 
+A 16 August read-only throughput diagnostic compared the active first wave
+with all 17 preserved reports from the superseded p80 run. Those reports took
+70,549-71,873 seconds per shard (19.60-19.96 hours); s000 alone took
+71,521 seconds for 79 tournaments and 2,589 rounds. The active s000 worker was
+at 99.9% CPU with GMP and OPcache JIT both active, so zero promoted reports at
+13 hours was consistent with the measured baseline. The first primary
+completion window remains approximately 19:40-20:05 Europe/Rome on 16 August,
+before inline classification time. The current verifier emits its JSON only
+at shard completion and has no identity-bound intermediate round counter;
+that observability gap must be fixed before a future epoch, not retrofitted
+into this one. Evidence is
+`evidence/p80-throughput-diagnostic-20260816.json`.
+
 The historical 20-shard snapshot found 14 candidate pairing deviations and
 zero no-solutions. Gacrux classified all 14 as
 `inferior-to-checker-optimum`; their first differences were HE2 (9), HO1 (3)

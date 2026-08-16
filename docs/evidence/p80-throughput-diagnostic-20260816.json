@@ -1,0 +1,70 @@
+{
+  "schema": "openpairing.p80-throughput-diagnostic/1",
+  "generatedAtUtc": "2026-08-16T11:13:47Z",
+  "status": "NO_REGRESSION_OBSERVED",
+  "activeCampaign": {
+    "epoch": "p80-epoch4-86ec9d9",
+    "serviceStartedAtEuropeRome": "2026-08-16T00:04:56+02:00",
+    "worker": "s000",
+    "pid": 447,
+    "sampleElapsedSeconds": 47111,
+    "cpuPercent": 99.9,
+    "residentKiB": 106900,
+    "backendEnvironment": "gmp",
+    "gmpExtensionLoaded": true,
+    "opcacheJitEnabled": true,
+    "opcacheJitOn": true,
+    "opcacheJitKind": 5,
+    "opcacheJitOptLevel": 5,
+    "reportBytesBeforeCompletion": 0,
+    "stopPresent": false,
+    "nonEmptyError": false
+  },
+  "historicalBaseline": {
+    "source": "/srv/openpairing-validation/campaigns/p80/reports/s000.json through s019.json",
+    "reportsObserved": 17,
+    "minimumElapsedSeconds": 70549.453,
+    "maximumElapsedSeconds": 71873.398,
+    "s000": {
+      "runtimeRelease": "c48fd05",
+      "elapsedSeconds": 71521.205,
+      "tournamentsVerified": 79,
+      "roundsAttempted": 2589,
+      "roundsExact": 2589
+    },
+    "derivedFirstWaveWallHours": {
+      "minimum": 19.597,
+      "maximum": 19.965
+    }
+  },
+  "activeIdentity": {
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "change": "Add TRF26 scheduled-bye and prohibited-pairing support",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "runtimeIdentityLockSha256": "4d9ae2656b46fcdd6e009dce5432049100f987cfb4a6275de9a5a1edd7bc28b1",
+    "s000ProhibitedPairingRecords": 0,
+    "note": "The engine hash changed intentionally with the declared RC8 semantics. The changed prohibited-pairing path is not exercised by s000."
+  },
+  "projection": {
+    "firstPrimaryCompletionWindowEuropeRome": "2026-08-16T19:40:00+02:00/2026-08-16T20:05:00+02:00",
+    "classificationTimeIncluded": false,
+    "officialCampaignEtaAvailable": false,
+    "reason": "An official whole-campaign ETA remains pending until an epoch-4 shard is accepted and classified."
+  },
+  "observability": {
+    "intermediateRoundCounterAvailable": false,
+    "temporaryReportIsStreaming": false,
+    "gap": "The verifier emits one JSON document only after the shard completes, so a mid-shard round count cannot be attested without changing the active identity.",
+    "futureAction": "Add an identity-bound atomic heartbeat/progress channel before a future campaign epoch; do not retrofit the active epoch."
+  },
+  "boundary": {
+    "activeProcessAttachedOrInterrupted": false,
+    "runnerModified": false,
+    "campaignRestarted": false,
+    "evidenceAccepted": false,
+    "productionMutationPerformed": false,
+    "note": "This is a read-only throughput diagnostic, not a corpus verdict."
+  }
+}
