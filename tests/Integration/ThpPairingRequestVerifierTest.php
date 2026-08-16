@@ -119,6 +119,25 @@ final class ThpPairingRequestVerifierTest extends TestCase
         self::assertStringContainsString('candidateIdentitySha256 must be', $stderr);
     }
 
+    public function testDeclaredSnapshotPathCannotAliasAnotherFileWithSameBasename(): void
+    {
+        [$manifest, $snapshot] = $this->writeRequest();
+        $other = sys_get_temp_dir().'/openpairing-thp-request-alias-'.bin2hex(random_bytes(6));
+        self::assertTrue(mkdir($other));
+        $aliased = $other.'/snapshot.json';
+        self::assertTrue(copy($snapshot, $aliased));
+
+        try {
+            [$exit, , $stderr] = $this->runVerifier($manifest, $aliased);
+
+            self::assertSame(2, $exit);
+            self::assertStringContainsString('snapshot.path does not identify', $stderr);
+        } finally {
+            unlink($aliased);
+            rmdir($other);
+        }
+    }
+
     /** @return array{string, string} */
     private function writeRequest(): array
     {

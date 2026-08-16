@@ -31,14 +31,16 @@ try {
         'path', 'sha256', 'schema', 'round', 'pairingSystem', 'initialColour', 'playerCount', 'eligiblePlayerCount',
     ], 'snapshot');
     $declaredPath = thpRequestRequireRelativePath($snapshot['path'] ?? null, 'snapshot.path');
-    if (basename($snapshotPath) !== basename($declaredPath)) {
+    $manifestRoot = realpath(dirname($manifestPath));
+    $suppliedSnapshot = realpath($snapshotPath);
+    $declaredSnapshot = $manifestRoot === false
+        ? false
+        : realpath($manifestRoot.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $declaredPath));
+    if ($manifestRoot === false || $suppliedSnapshot === false || $declaredSnapshot === false || $suppliedSnapshot !== $declaredSnapshot) {
         throw new RuntimeException('snapshot.path does not identify the supplied snapshot file.');
     }
     $expectedHash = thpRequestRequireSha256($snapshot['sha256'] ?? null, 'snapshot.sha256');
-    if (!is_file($snapshotPath)) {
-        throw new RuntimeException('Snapshot does not exist.');
-    }
-    $snapshotBytes = file_get_contents($snapshotPath);
+    $snapshotBytes = file_get_contents($suppliedSnapshot);
     if (!is_string($snapshotBytes)) {
         throw new RuntimeException('Snapshot could not be read.');
     }
