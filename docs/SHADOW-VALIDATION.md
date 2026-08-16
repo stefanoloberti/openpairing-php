@@ -19,6 +19,7 @@ infrastructure observation, never permission to substitute its output.
 Each attempted turn records one `openpairing.shadow-turn/1` envelope containing:
 
 - opaque event ID, UTC time and exact ChessPairings product/build identity;
+- SHA-256 of the validated `openpairing.thp-candidate-identity/1` manifest;
 - OpenPairing package, engine, source-tree and runtime archive SHA-256 values;
 - algorithm/schema versions and arithmetic backend;
 - tournament mode, pairing system, round, player count and declared initial

@@ -324,6 +324,7 @@ function requireIdentity(mixed $value, string $label): array
 {
     $identity = requireObject($value, $label.' identity');
     $required = [
+        'candidateIdentitySha256',
         'productVersion',
         'productBuildSha256',
         'packageVersion',
@@ -339,10 +340,10 @@ function requireIdentity(mixed $value, string $label): array
     foreach ($required as $field) {
         $normalized[$field] = requireNonEmptyString($identity[$field] ?? null, $label.' identity.'.$field);
     }
-    foreach (['productBuildSha256', 'sourceTreeSha256', 'runtimeArchiveSha256'] as $field) {
+    foreach (['candidateIdentitySha256', 'productBuildSha256', 'sourceTreeSha256', 'runtimeArchiveSha256'] as $field) {
         requireSha256($normalized[$field], $label.' identity.'.$field);
     }
-    if (!in_array($normalized['arithmeticBackend'], ['gmp', 'limbs'], true)) {
+    if (!in_array($normalized['arithmeticBackend'], ['gmp', 'limbs-30'], true)) {
         throw new RuntimeException(sprintf('%s identity has an unsupported arithmetic backend.', $label));
     }
 

@@ -63,6 +63,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "candidateIdentitySha256",
         "productVersion",
         "productBuildSha256",
         "packageVersion",
@@ -74,6 +75,7 @@
         "arithmeticBackend"
       ],
       "properties": {
+        "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
         "productVersion": {"type": "string", "minLength": 1},
         "productBuildSha256": {"$ref": "#/$defs/sha256"},
         "packageVersion": {"type": "string", "minLength": 1},
@@ -82,7 +84,7 @@
         "runtimeArchiveSha256": {"$ref": "#/$defs/sha256"},
         "algorithmVersion": {"type": "string", "minLength": 1},
         "stateSchemaVersion": {"type": "string", "minLength": 1},
-        "arithmeticBackend": {"enum": ["gmp", "limbs"]}
+        "arithmeticBackend": {"enum": ["gmp", "limbs-30"]}
       }
     }
   }
