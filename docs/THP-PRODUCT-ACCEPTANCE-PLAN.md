@@ -41,7 +41,7 @@ OpenPairing change starts a new identity and a new evidence stream.
 | SHD-001 | Isolation | Shadow timeout, crash or non-exact result cannot change the primary response, publication or retry path | Observation is recorded separately or not observed |
 | SHD-002 | Privacy | Exported NDJSON contains only the allowed pseudonymous fields and hashes | Verifier returns infrastructure error and evidence is quarantined |
 | SEC-001 | Distribution secrets | The exact source, installer and runtime contain no embedded provider credential, token, private key or environment-specific secret | Stop packaging, rotate the exposed credential through the owner and rebuild a new candidate identity |
-| SEC-002 | Runtime configuration | Required secrets are injected through documented deployment configuration with least privilege and are absent from diagnostics/evidence | FIDE mode and submission packaging remain disabled |
+| SEC-002 | Runtime configuration | `tools/verify_thp_runtime_configuration_probes.php` binds every required slot to external injection, one declared scope and zero exposure, plus missing/scope/redaction failure cases | FIDE mode and submission packaging remain disabled on missing configuration, scope drift or disclosure |
 | PERF-001 | Budget | `tools/verify_thp_performance_probes.php` checks the complete candidate-declared system/size matrix, repeated deterministic output, zero writes and every-sample latency/memory budgets | Product gate remains open on any overrun, missing probe or non-deterministic output |
 
 ## Mandatory fixture families

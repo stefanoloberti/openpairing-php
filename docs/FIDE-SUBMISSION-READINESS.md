@@ -136,6 +136,8 @@ The final package should contain:
 - PTC and RTG commands with deterministic positive and negative examples;
 - a value-redacting source/installer/runtime secret-scan report, followed by
   private review and rotation of every finding before the candidate freeze;
+- an identity-bound runtime-configuration batch proving external injection,
+  least-privilege scope, fail-closed missing/scope handling and zero exposure;
 - complete corpus, acceleration, capacity and tie-break reports with preserved
   denominators and classifications;
 - controlled-environment reproduction steps;

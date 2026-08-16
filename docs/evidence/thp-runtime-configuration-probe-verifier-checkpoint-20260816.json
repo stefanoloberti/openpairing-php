@@ -1,0 +1,39 @@
+{
+  "schema": "openpairing.thp-runtime-configuration-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T05:45:21+02:00",
+  "baseCommit": "96b10e2cb9d0006d89de80db2a39831e82a1fa32",
+  "files": {
+    "docs/schema/thp-runtime-configuration-probe-batch-1.schema.json": "2801b3e3addd68bc5b16761d1a0f023e7312086b4286b82c784eabe771fcdf43",
+    "tools/verify_thp_runtime_configuration_probes.php": "72d52a5e084b18254df774d2d656886e2c9de06d7603f32ef238f7381df7cd6a",
+    "tests/Integration/ThpRuntimeConfigurationProbeVerifierTest.php": "eaf10c53dfbd1afefd27948a5bd25b6ed0f81d7b8fed6cb47385b43876f32700",
+    "docs/THP-INTEGRATION-CONTRACT.md": "1a6e4a9e4121696e4ac4415d0cba5fcda5e1583207e65df0fe1a02211be4468b",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "f6fd3096ac52f532fbfab63fca867a7e6981e1a6817f167f9a6245de392645e6"
+  },
+  "checks": {
+    "targetedWindows": {"status": "PASS", "php": "8.4.24", "tests": 8, "assertions": 332},
+    "staticAnalysis": {"status": "PASS", "errors": 0},
+    "expandedRepositorySecretScan": {"status": "PASS", "filesScanned": 403, "binaryFilesSkipped": 21, "findings": 0},
+    "repositorySuiteWindows": {"status": "PASS", "tests": 416, "assertions": 35295, "skipped": 2},
+    "submissionReadiness": {"status": "NO_GO", "closedGates": 2, "blockingGates": 8, "evidenceFilesVerified": 62},
+    "coveredBehaviours": [
+      "the batch is bound to the verified candidate, product source and migration set",
+      "every declared configuration slot has exactly one environment or secret-store injection probe",
+      "network use is constrained to none, local-only or one hash-identified destination",
+      "raw values occur zero times in artifacts, logs, evidence, diagnostics and responses",
+      "successful configuration probes are read-only and produce no diagnostic",
+      "missing configuration and invalid scope fail before network access or writes",
+      "a deliberately triggered failure proves diagnostics remain redacted",
+      "evidence contains slot identifiers and hashes but no configuration values",
+      "GO does not claim that the verifier injected, inspected or rotated a product credential"
+    ]
+  },
+  "boundary": {
+    "chessPairingsConfigured": false,
+    "sensitiveValuesRead": false,
+    "credentialRotationPerformed": false,
+    "networkAccessPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_RUNTIME_CONFIGURATION_EVIDENCE_GATE_READY_EXACT_PRODUCT_EXECUTION_REMAINS_OPEN"
+}

@@ -247,6 +247,24 @@ no step may use a legacy/manual fallback or publish live output. This verifier
 checks supplied harness evidence and does not render the UI or operate the
 product itself.
 
+Runtime configuration and disclosure controls are recorded in
+`docs/schema/thp-runtime-configuration-probe-batch-1.schema.json` and checked
+with:
+
+```console
+php tools/verify_thp_runtime_configuration_probes.php runtime-config.json candidate.json artifact-root
+```
+
+Every required configuration slot must be injected by the environment or an
+operating-system secret store, read exactly once in the probe and constrained
+to no network, local-only traffic or one hash-identified endpoint. Raw values
+must appear zero times in artifacts, logs, evidence, diagnostics and
+responses. Missing configuration, invalid scope and a deliberately triggered
+redaction failure must all stop before network access or writes. Slot IDs and
+destination hashes are evidence; values are forbidden. The verifier does not
+read or rotate credentials and cannot close the exact-product requirement by
+itself.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.
