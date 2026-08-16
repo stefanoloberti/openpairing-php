@@ -63,6 +63,11 @@ alone as TAPC-ready.
 - FIDE TEC Policies and Procedures Manual 1.24, dated 7 March 2026:
   <https://tec.fide.com/wp-content/uploads/2026/03/FIDE-TEC-Manual-01.24-1.pdf>
 
+The 16 August availability/hash refresh of these official sources is recorded
+in `evidence/tec-official-source-refresh-20260816.json`. It confirms the source
+basis but does not close the external product-scope gate or submit an
+application.
+
 The 2026-08-16 read-only source check and the remaining interpretation
 questions are recorded in
 `evidence/fide-normative-scope-check-20260816.json`. No form or enquiry was
