@@ -1,0 +1,185 @@
+{
+  "schema": "openpairing.autonomy-window-handoff/1",
+  "status": "CHECKPOINT_SUBMISSION_REMAINS_NO_GO",
+  "sampledAt": "2026-08-16T10:00:39+02:00",
+  "window": {
+    "requestedEnd": "2026-08-16T10:00:00+02:00",
+    "actualFinalSample": "2026-08-16T10:00:39+02:00",
+    "purpose": "Time-bounded autonomous stewardship toward a future FIDE submission",
+    "submissionDeclaredReady": false
+  },
+  "campaignIdentity": {
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "runtimeIdentityLockSha256": "4d9ae2656b46fcdd6e009dce5432049100f987cfb4a6275de9a5a1edd7bc28b1",
+    "arithmeticBackend": "gmp",
+    "primaryRelease": "/srv/openpairing-validation/releases/86ec9d9-r2"
+  },
+  "corpus": {
+    "p50": {
+      "status": "CLOSED_PASS",
+      "shardsAccepted": 384,
+      "shardsTotal": 384,
+      "tournamentsVerified": 30000,
+      "roundsExact": 768324
+    },
+    "p80": {
+      "epoch": "p80-epoch4-86ec9d9",
+      "shardsTotal": 256,
+      "primary": {
+        "host": "doppia-3090",
+        "service": "openpairing-full-corpus.service",
+        "state": "active-running",
+        "workers": 20,
+        "currentShards": "s000-s019",
+        "reportsPromoted": 0,
+        "classificationsPromoted": 0,
+        "restartCount": 0
+      },
+      "secondary": {
+        "host": "python-69",
+        "service": "openpairing-cross-p80.service",
+        "state": "active-running",
+        "workers": 10,
+        "currentShards": "s192-s201",
+        "reportsQuarantined": 0,
+        "attestationsQuarantined": 0,
+        "acceptedOnSecondary": 0,
+        "restartCount": 0
+      },
+      "stopPresent": false,
+      "nonEmptyErrors": false,
+      "officialEta": null,
+      "officialEtaReason": "No epoch-4 shard has yet completed and passed classification.",
+      "operationalEstimate": {
+        "firstPromotedShardExpected": "2026-08-16T19:40:00+02:00/2026-08-16T20:05:00+02:00",
+        "p80CompletionExpected": "2026-08-23/2026-08-24",
+        "confidence": "low-until-first-classified-shard",
+        "basis": "Historical p80 shard duration and effective 20+10 disjoint workers"
+      }
+    }
+  },
+  "capacityPilots": {
+    "p300": {
+      "historicalEvidence": "CLOSED_PASS_61_OF_61_ROUNDS",
+      "currentBootRerun": "running-unaccepted",
+      "currentBootElapsedSeconds": 35690,
+      "enabledForFutureBoot": false
+    },
+    "p600": {
+      "currentBootRerun": "running-from-zero-unaccepted",
+      "currentBootElapsedSeconds": 35690,
+      "reportPromoted": false,
+      "enabledForFutureBoot": false
+    }
+  },
+  "stewardshipResults": {
+    "continuityIncident": {
+      "observedAt": "2026-08-16T00:01:46+02:00",
+      "containedAt": "2026-08-16T00:04:56+02:00",
+      "cause": "The pre-existing Windows WSL keep-alive action did not hold the distribution lifetime.",
+      "containment": "The installed task now runs wsl.exe -d ChessPairings-Ubuntu-24.04 -- /bin/sleep infinity and remains Running.",
+      "acceptedCorpusEvidenceLost": false,
+      "p600PartialComputationLost": true,
+      "p600PromotedEvidenceLost": false
+    },
+    "campaignHardening": {
+      "futureP150MiscAcceleratedRunnersFailClosed": true,
+      "activeP80RunnerChangedAfterStart": false,
+      "crossWorkerDisjointShards": true,
+      "crossWorkerAcceptanceAuthority": "doppia-3090-only",
+      "crossWorkerPreflight": "GMP stress, n=7 differential, semantic digest and negative identity test PASS"
+    },
+    "toolingPrepared": [
+      "TEC cross-test verifier",
+      "THP source-freeze and precommit guard",
+      "THP transaction, recovery, mode, performance, rating-import, operator-workflow and runtime-configuration probes",
+      "THP evidence execution runbook",
+      "ChessPairings pairing-path inventory and isolated shadow primitives"
+    ]
+  },
+  "productCheckpoint": {
+    "chessPairingsVersion": "5.21.0-rc.20",
+    "candidateCommit": "17a8cc7fd69bd8bc5cce03c95ff73f6e778620a4",
+    "attemptLedgerChecks": "25/25 PASS",
+    "phpStan": "2.2.8 level max, 0 errors",
+    "trackedFiles": 606,
+    "sourceManifestSha256": "c63acb0ebd4f1ccd91db52154af9880e891c2e36e2cc0ff20873bd6da9a599ca",
+    "bundleSha256": "4bc1a666b3abe1289903f0ea1e885dca03a710a08e6b2903abe201b9abdad2bb",
+    "bundleCloneMatchesWorktree": true,
+    "trackedFileByteDifferences": 0,
+    "liveCallSiteConnected": false,
+    "deployed": false
+  },
+  "repositoryVerification": {
+    "publishedBaseCommit": "defaa1b6700128bc41b134a8dfe1ef956a349f13",
+    "gitObjectCheck": "PASS",
+    "jsonDocumentsParsed": true,
+    "diffCheck": "PASS",
+    "officialComposerCheckpoint": "PASS",
+    "rapidGate": {
+      "status": "PASS",
+      "runtime": "PHP 8.4.24 Windows limb backend",
+      "tests": 418,
+      "assertions": 4394,
+      "expectedSkipped": 1,
+      "phpStanFiles": 156,
+      "phpStanErrors": 0,
+      "publicApiStatus": "PASS",
+      "publicApiMethods": 13,
+      "distributionSecretFilesScanned": 416,
+      "distributionSecretFindings": 0
+    },
+    "stressGate": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 31003,
+      "expectedSkipped": 1,
+      "elapsedSeconds": 577.833
+    },
+    "oracleGate": {
+      "status": "PASS",
+      "tests": 11,
+      "assertions": 55,
+      "elapsedSeconds": 15.563
+    },
+    "readinessVerifierExit": 1,
+    "readinessVerifierMeaning": "Expected honest NO_GO",
+    "latestPublishedChangesAreDocumentationOnly": true
+  },
+  "submissionReadiness": {
+    "status": "NO_GO",
+    "gates": 10,
+    "closed": 2,
+    "blocking": 8,
+    "evidenceFilesVerified": 64,
+    "manifestSha256": "4ebb6d82bf5c5910060fcbdb3a95265c33d7ad14e71bf02ef53767b47ebbbab2",
+    "blockingGateIds": [
+      "tec-product-scope",
+      "dutch-corpus",
+      "accelerated-corpus",
+      "public-ptc-rtg-final-package",
+      "trf26-declared-scope",
+      "complete-thp-workflow",
+      "controlled-final-environment",
+      "stable-release-identity"
+    ]
+  },
+  "boundaries": {
+    "productionMutationPerformed": false,
+    "databaseMutationPerformed": false,
+    "officialGateFabricated": false,
+    "healthyCampaignsLeftRunning": true,
+    "dirtyConcurrentRc19WorktreePreserved": true,
+    "p600RestartedBySteward": false
+  },
+  "nextActions": [
+    "Continue p80 through per-shard classification and cross-worker import on the primary host.",
+    "Continue p150, misc and accelerated corpus partitions under the same immutable identity.",
+    "Complete external TEC product-scope and cross-test gates.",
+    "Review and connect the ChessPairings live shadow call site only after privacy and transaction review.",
+    "Close the controlled final environment, stable identity and public package gates before submission."
+  ]
+}
