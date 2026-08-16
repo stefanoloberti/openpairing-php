@@ -1,0 +1,38 @@
+{
+  "schema": "openpairing.thp-operator-workflow-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T05:30:21+02:00",
+  "baseCommit": "579f103319094b06bbfcaf47eb84accd9a5a80c3",
+  "files": {
+    "docs/schema/thp-operator-workflow-probe-batch-1.schema.json": "c067a99f00094c560bdb4e6701cec4c1acdf264576fa245f073822c6ae4aeb24",
+    "tools/verify_thp_operator_workflow_probes.php": "4f1713c8abede1ef800544acc3d709f94e184ec02b606acce2e52239cbda042a",
+    "tests/Integration/ThpOperatorWorkflowProbeVerifierTest.php": "8e433a5e5594c1ed4cbe6a1c7cebce6b71490671fbccdb14c3f31ac71a386211",
+    "docs/THP-INTEGRATION-CONTRACT.md": "bdbd1e300b5a7a742d27b7808cb2553978111b508dcd0cb6a771d37f472f8e1b",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "f0756bbe897bd728af9b7bb5451fd2e289a511f785a0cea6c76e25672ca44827"
+  },
+  "checks": {
+    "targetedWindows": {"status": "PASS", "php": "8.4.24", "tests": 9, "assertions": 466},
+    "staticAnalysis": {"status": "PASS", "errors": 0},
+    "expandedRepositorySecretScan": {"status": "PASS", "filesScanned": 399, "binaryFilesSkipped": 21, "findings": 0},
+    "repositorySuiteWindows": {"status": "PASS", "tests": 408, "assertions": 34963, "skipped": 2},
+    "submissionReadiness": {"status": "NO_GO", "closedGates": 2, "blockingGates": 8, "evidenceFilesVerified": 59},
+    "coveredBehaviours": [
+      "the nine-step workflow is bound to the verified candidate, product source and migration set",
+      "the selected FIDE mode, pairing system and TRF version must be declared by the candidate",
+      "every required screen has English-label assertions and identity hashes for its screen and help topic",
+      "the workflow state hash is continuous from FIDE-mode activation through recovery",
+      "only rating import, tournament creation, player registration, pairing and result entry may commit",
+      "only pairing generation may call the declared engine and no step may use a legacy or manual fallback",
+      "standings, export and recovery are read-only in this synthetic acceptance path",
+      "no step may publish live output and no personal identifiers are accepted in the evidence batch",
+      "GO does not claim that the verifier executed or visually inspected the product"
+    ]
+  },
+  "boundary": {
+    "chessPairingsWorkflowExecuted": false,
+    "englishUiVisuallyReviewed": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_OPERATOR_WORKFLOW_EVIDENCE_GATE_READY_EXACT_PRODUCT_EXECUTION_REMAINS_OPEN"
+}

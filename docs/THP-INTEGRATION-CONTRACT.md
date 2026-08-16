@@ -230,6 +230,23 @@ player records or FIDE IDs. The verifier checks supplied product-harness
 evidence only: it does not download a list, access ChessPairings or close the
 product requirement by itself.
 
+The complete synthetic operator route is recorded in
+`docs/schema/thp-operator-workflow-probe-batch-1.schema.json` and checked with:
+
+```console
+php tools/verify_thp_operator_workflow_probes.php operator-workflow.json candidate.json artifact-root
+```
+
+Its fixed English-language sequence activates the declared FIDE mode, imports
+the rating list, creates a tournament, registers synthetic players, generates
+a pairing, enters results, calculates standings, exports the declared TRF
+version and reloads the workflow. Every step carries screen/help hashes,
+English-label assertions and a continuous logical-state hash. Only the five
+state-changing steps may commit; only pairing generation may call the engine;
+no step may use a legacy/manual fallback or publish live output. This verifier
+checks supplied harness evidence and does not render the UI or operate the
+product itself.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.
