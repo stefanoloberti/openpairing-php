@@ -3,15 +3,20 @@
 This began as a read-only inventory of the local ChessPairings web checkout on
 16 August 2026. The active web-lab release itself did not expose a usable Git
 identity, so a sanitized copy was frozen separately as non-deployed candidate
-`5.21.0-rc.19`. No production request, database write or deployment was made.
+`5.21.0-rc.19`; the isolated attempt-ledger refinement is frozen as rc.20. No
+production request, database write or deployment was made.
 
 The exact inspected file hashes and findings are recorded in
 `evidence/chesspairings-pairing-path-inventory-20260816.json`. The isolated
 freeze, TRF correction and executable adapter checkpoint are recorded in
 `evidence/chesspairings-shadow-adapter-bootstrap-20260816.json`.
+The rc.20 pre-execution attempt ledger, portable test and source freeze are
+recorded in
+`evidence/chesspairings-shadow-attempt-ledger-checkpoint-20260816.json`.
 
-The isolated candidate is commit
-`d63de7759c59c13cb9168a5befac51f70e84149c`, derived from the rc.18 archive
+The current isolated candidate is commit
+`b247db5a37bc497acac5b128a752ba70a1c7ba23`, derived from rc.19 commit
+`d63de7759c59c13cb9168a5befac51f70e84149c`, itself derived from the rc.18 archive
 whose SHA-256 is
 `75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953`.
 The source-freeze verifier reports 604 tracked files, source-manifest SHA-256
@@ -27,7 +32,8 @@ TRF snapshot, selects one of four HTTP pairing services, submits synchronous
 or asynchronous work, parses a compact text response and writes games and
 history. OpenPairingPHP is not one of the selectable engines in the active
 snapshot. The isolated rc.19 candidate now contains a direct, read-only
-`OpenPairingShadowAdapter`, but no application call site enables it.
+`OpenPairingShadowAdapter` and a pre-execution immutable attempt sink, but no
+application call site enables either one.
 The existing code already models requested byes, withdrawals, initial colour,
 record `142`, draft pairings and product ownership checks; those are useful
 inputs to a future adapter, not proof that the adapter exists.
@@ -42,7 +48,7 @@ and Desktop identities are interchangeable.
 These are product integration gaps, not defects attributed to the OpenPairing
 engine:
 
-1. **No final combined integration identity.** The rc.19 source and migrations
+1. **No final combined integration identity.** The rc.20 source and migrations
    are now frozen, and the adapter verifies an exact OpenPairing lock plus THP
    candidate manifest. The final installer/runtime/PTC/RTG artifact hashes do
    not exist yet, so this is not the submitted identity.
@@ -70,8 +76,9 @@ engine:
 7. **No live FIDE-path request/result attestation.** The isolated adapter now
    returns canonical input/output hashes and exact runtime identity without
    personal fields. The candidate can build a fail-closed versioned event and
-   publish it as one immutable atomic file, but no call site yet records the
-   incumbent hash, revision or attempt denominator.
+   publish it as one immutable atomic file and reserve every selected attempt
+   before execution, but no live call site yet invokes those primitives or
+   records the incumbent hash and revision.
 8. **Post-engine transformations need ownership.** Requested byes and withdrawn
    players are removed from or appended to the engine output. The final
    candidate must either model these in the canonical engine input/output or
@@ -102,9 +109,10 @@ path, never an in-place production switch. It must:
 2. **Partial:** the product TRF26 codec maps directly into OpenPairing with an
    executable golden fixture; an immutable request and portable precommit guard
    exist, while live revision acquisition and persistence remain.
-3. **Partial:** the local adapter, comparator, event envelope and atomic file
-   sink exist and fail closed on identity drift or unclassified differences,
-   but no shadow call site is enabled.
+3. **Partial:** the local adapter, comparator, event envelope, atomic event
+   sink and pre-execution attempt ledger exist and fail closed on identity
+   drift, duplicate reservations or unclassified differences, but no shadow
+   call site is enabled.
 4. Prove stale-revision and injected-failure rollback tests before any live
    observation.
 5. Bind every shadow event to the exact identity manifest and validate batches
