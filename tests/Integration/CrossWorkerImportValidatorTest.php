@@ -51,6 +51,50 @@ final class CrossWorkerImportValidatorTest extends TestCase
         self::assertStringContainsString('raw report SHA-256 mismatch', $stderr);
     }
 
+    public function testChangedPrimaryCorpusIsRejected(): void
+    {
+        [$report, $attestation, $source, $harness, $commit] = $this->writeEvidence();
+        self::assertIsInt(file_put_contents($this->temporary.'/corpus/case.trf', "012 changed\n"));
+
+        [$exit, , $stderr] = $this->runValidator($report, $attestation, $source, $harness, $commit);
+
+        self::assertSame(4, $exit);
+        self::assertStringContainsString('Primary corpus identity differs', $stderr);
+    }
+
+    public function testAlteredProvenanceIdentityIsRejected(): void
+    {
+        [$report, $attestation, $source, $harness, $commit] = $this->writeEvidence();
+        $provenance = json_decode((string) file_get_contents($attestation), true, flags: JSON_THROW_ON_ERROR);
+        self::assertIsArray($provenance);
+        $provenance['host'] = 'unexpected-host';
+        self::assertIsInt(file_put_contents($attestation, json_encode($provenance, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)));
+
+        [$exit, , $stderr] = $this->runValidator($report, $attestation, $source, $harness, $commit);
+
+        self::assertSame(4, $exit);
+        self::assertStringContainsString('provenance identity mismatch', $stderr);
+    }
+
+    public function testNonEmptyDiagnosticsAreRejectedWithInternallyConsistentHashes(): void
+    {
+        [$report, $attestation, $source, $harness, $commit] = $this->writeEvidence();
+        $this->rewriteReportAndAttestation(
+            $report,
+            $attestation,
+            static function (array $data): array {
+                $data['diagnostics'] = ['compatibility.error' => 1];
+
+                return $data;
+            },
+        );
+
+        [$exit, , $stderr] = $this->runValidator($report, $attestation, $source, $harness, $commit);
+
+        self::assertSame(4, $exit);
+        self::assertStringContainsString('incomplete or contains infrastructure/fatal diagnostics', $stderr);
+    }
+
     /** @return array{string, string, string, string, string} */
     private function writeEvidence(): array
     {
@@ -117,6 +161,31 @@ final class CrossWorkerImportValidatorTest extends TestCase
         self::assertIsInt(file_put_contents($attestation, json_encode($attestationData, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)));
 
         return [$report, $attestation, $source, $harness, $commit];
+    }
+
+    /** @param callable(array<mixed>): array<mixed> $mutate */
+    private function rewriteReportAndAttestation(string $report, string $attestation, callable $mutate): void
+    {
+        $reportData = json_decode((string) file_get_contents($report), true, flags: JSON_THROW_ON_ERROR);
+        self::assertIsArray($reportData);
+        /** @var array<string, mixed> $reportData */
+        $reportData = $mutate($reportData);
+        self::assertIsInt(file_put_contents($report, json_encode($reportData, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)));
+
+        $semantic = $reportData;
+        unset($semantic['root'], $semantic['elapsedSeconds']);
+        $runtime = $semantic['runtimeIdentity'] ?? null;
+        self::assertIsArray($runtime);
+        unset($runtime['projectRoot'], $runtime['autoloadPsr4Roots'], $runtime['expectedEnginePath'], $runtime['loadedEnginePath']);
+        $semantic['runtimeIdentity'] = $runtime;
+        $provenance = json_decode((string) file_get_contents($attestation), true, flags: JSON_THROW_ON_ERROR);
+        self::assertIsArray($provenance);
+        $provenance['reportSha256'] = hash_file('sha256', $report);
+        $provenance['canonicalSemanticSha256'] = hash(
+            'sha256',
+            json_encode($semantic, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+        );
+        self::assertIsInt(file_put_contents($attestation, json_encode($provenance, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)));
     }
 
     /** @return array{int, string, string} */
