@@ -34,6 +34,8 @@ OpenPairing change starts a new identity and a new evidence stream.
 | REC-001 | Recovery | Crash before commit, during rollback and after commit has one documented, idempotent recovery outcome | No half-round and no double application |
 | SHD-001 | Isolation | Shadow timeout, crash or non-exact result cannot change the primary response, publication or retry path | Observation is recorded separately or not observed |
 | SHD-002 | Privacy | Exported NDJSON contains only the allowed pseudonymous fields and hashes | Verifier returns infrastructure error and evidence is quarantined |
+| SEC-001 | Distribution secrets | The exact source, installer and runtime contain no embedded provider credential, token, private key or environment-specific secret | Stop packaging, rotate the exposed credential through the owner and rebuild a new candidate identity |
+| SEC-002 | Runtime configuration | Required secrets are injected through documented deployment configuration with least privilege and are absent from diagnostics/evidence | FIDE mode and submission packaging remain disabled |
 | PERF-001 | Budget | Exact delivered build stays within declared per-turn latency and memory budgets across supported sizes | Product gate remains open on an overrun |
 
 ## Mandatory fixture families
