@@ -134,6 +134,8 @@ The final package should contain:
 - operating-system and PHP/GMP requirements;
 - English installation, FIDE-mode, PTC and RTG manuals;
 - PTC and RTG commands with deterministic positive and negative examples;
+- a value-redacting source/installer/runtime secret-scan report, followed by
+  private review and rotation of every finding before the candidate freeze;
 - complete corpus, acceleration, capacity and tie-break reports with preserved
   denominators and classifications;
 - controlled-environment reproduction steps;

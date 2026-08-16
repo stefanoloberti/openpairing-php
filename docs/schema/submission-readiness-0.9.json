@@ -109,7 +109,9 @@
       "status": "open",
       "evidence": [
         {"path": "docs/PACKAGING.md"},
-        {"path": "docs/RELEASE.md"}
+        {"path": "docs/RELEASE.md"},
+        {"path": "tools/scan_distribution_secrets.php"},
+        {"path": "docs/evidence/distribution-secret-scanner-checkpoint-20260816.json"}
       ]
     }
   ]

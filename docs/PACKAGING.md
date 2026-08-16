@@ -12,11 +12,15 @@ tag should be created while the submission ledger is NO-GO.
 3. `tools/build_release.ps1` reproduces byte-identical source/runtime archives.
 4. The runtime archive contains the supported API and public PTC/RTG controls,
    and contains no development oracle or corpus.
-5. `API-STABILITY.md`, licence/provenance, changelog, support links and the
+5. The exact THP source, installer and extracted runtime have no unresolved
+   credential findings. Run `php tools/scan_distribution_secrets.php ROOT` as
+   a value-redacting heuristic preflight; a finding requires private owner
+   review and credential rotation, while a PASS does not replace manual review.
+6. `API-STABILITY.md`, licence/provenance, changelog, support links and the
    limitations statement match the tag.
-6. A non-RC version is selected only after the applicable corpus, acceleration,
+7. A non-RC version is selected only after the applicable corpus, acceleration,
    product and controlled-environment gates close.
-7. The Git tag, GitHub release, archive checksums and Packagist version all
+8. The Git tag, GitHub release, archive checksums and Packagist version all
    identify the same commit. Packagist publication remains an explicit account
    action and is not performed by the automated campaign steward.
 
