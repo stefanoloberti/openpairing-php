@@ -120,9 +120,10 @@ try {
         }
         ++$events;
         $event = json_decode($line, true, 64, JSON_THROW_ON_ERROR);
-        if (!is_array($event)) {
+        if (!is_array($event) || array_is_list($event)) {
             throw new RuntimeException(sprintf('Shadow event %d is not an object.', $events));
         }
+        /** @var array<string, mixed> $event */
         rejectPersonalData($event, sprintf('event %d', $events));
         if (($event['schema'] ?? null) !== 'openpairing.shadow-turn/1') {
             throw new RuntimeException(sprintf('Shadow event %d has an unsupported schema.', $events));
@@ -219,7 +220,6 @@ try {
                 throw new RuntimeException(sprintf('Exact shadow event %d has different functional hashes.', $events));
             }
             if (in_array($status, ['same-pairs-colour-variant', 'legal-variant', 'inferior'], true)
-                && $shadowHash !== null
                 && hash_equals($primaryHash, $shadowHash)) {
                 throw new RuntimeException(sprintf('Non-exact shadow event %d has identical functional hashes.', $events));
             }
@@ -285,7 +285,7 @@ try {
             'memoryBudgetExceeded' => $memoryExceeded,
         ],
         'coverage' => [
-            'covered' => array_values(array_keys($coverage)),
+            'covered' => array_keys($coverage),
             'missing' => $missingCoverage,
         ],
         'blockers' => $blockers,
@@ -302,20 +302,20 @@ function decodeObjectFile(string $path, string $label): array
         throw new RuntimeException(sprintf('%s does not exist.', ucfirst($label)));
     }
     $decoded = json_decode((string) file_get_contents($path), true, 64, JSON_THROW_ON_ERROR);
-    if (!is_array($decoded)) {
+    if (!is_array($decoded) || array_is_list($decoded)) {
         throw new RuntimeException(sprintf('%s is not an object.', ucfirst($label)));
     }
-
+    /** @var array<string, mixed> $decoded */
     return $decoded;
 }
 
 /** @return array<string, mixed> */
 function requireObject(mixed $value, string $label): array
 {
-    if (!is_array($value)) {
+    if (!is_array($value) || array_is_list($value)) {
         throw new RuntimeException(sprintf('%s must be an object.', $label));
     }
-
+    /** @var array<string, mixed> $value */
     return $value;
 }
 
@@ -329,6 +329,7 @@ function requireIdentity(mixed $value, string $label): array
         'productBuildSha256',
         'packageVersion',
         'engineVersion',
+        'engineSha256',
         'sourceTreeSha256',
         'runtimeArchiveSha256',
         'algorithmVersion',
@@ -340,7 +341,7 @@ function requireIdentity(mixed $value, string $label): array
     foreach ($required as $field) {
         $normalized[$field] = requireNonEmptyString($identity[$field] ?? null, $label.' identity.'.$field);
     }
-    foreach (['candidateIdentitySha256', 'productBuildSha256', 'sourceTreeSha256', 'runtimeArchiveSha256'] as $field) {
+    foreach (['candidateIdentitySha256', 'productBuildSha256', 'engineSha256', 'sourceTreeSha256', 'runtimeArchiveSha256'] as $field) {
         requireSha256($normalized[$field], $label.' identity.'.$field);
     }
     if (!in_array($normalized['arithmeticBackend'], ['gmp', 'limbs-30'], true)) {
@@ -462,7 +463,7 @@ function requireKeys(array $value, array $required, string $label): void
     }
 }
 
-/** @param array<string, mixed> $value */
+/** @param array<array-key, mixed> $value */
 function rejectPersonalData(array $value, string $path): void
 {
     foreach ($value as $key => $item) {

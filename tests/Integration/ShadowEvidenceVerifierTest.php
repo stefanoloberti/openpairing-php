@@ -123,6 +123,24 @@ final class ShadowEvidenceVerifierTest extends TestCase
         self::assertStringContainsString('candidateIdentitySha256', $stderr);
     }
 
+    public function testEngineHashIsMandatory(): void
+    {
+        $event = $this->event('event-white', 'white', 'exact', [
+            'odd-field', 'even-field', 'withdrawal', 'pab', 'forfeit',
+            'scheduled-bye', 'accelerated',
+        ], 'b');
+        $identity = $event['identity'] ?? null;
+        self::assertIsArray($identity);
+        unset($identity['engineSha256']);
+        $event['identity'] = $identity;
+        [$manifest, $stream] = $this->writeBatch([$event]);
+
+        [$exit, , $stderr] = $this->runVerifier($manifest, $stream, 1);
+
+        self::assertSame(2, $exit);
+        self::assertStringContainsString('engineSha256', $stderr);
+    }
+
     public function testUnclassifiedNonExactTurnIsNoGo(): void
     {
         $variant = $this->event('event-black', 'black', 'legal-variant', [
@@ -237,6 +255,7 @@ final class ShadowEvidenceVerifierTest extends TestCase
             'productBuildSha256' => str_repeat('1', 64),
             'packageVersion' => '1.0.0',
             'engineVersion' => 'fide-dutch-2026.global/1',
+            'engineSha256' => str_repeat('8', 64),
             'sourceTreeSha256' => str_repeat('2', 64),
             'runtimeArchiveSha256' => str_repeat('3', 64),
             'algorithmVersion' => 'fide-dutch-2026',

@@ -218,6 +218,7 @@ final class ShadowObservationStreamBuilderTest extends TestCase
             'productBuildSha256' => str_repeat('1', 64),
             'packageVersion' => '1.0.0',
             'engineVersion' => 'fide-dutch-2026.global/1',
+            'engineSha256' => str_repeat('8', 64),
             'sourceTreeSha256' => str_repeat('2', 64),
             'runtimeArchiveSha256' => str_repeat('3', 64),
             'algorithmVersion' => 'fide-dutch-2026',
