@@ -22,6 +22,19 @@ OpenPairing source and algorithm identity. Copying equivalent source into a
 different directory or rebuilding one executable independently is a new
 identity until byte and semantic equivalence are re-proved.
 
+The exact record uses `docs/schema/thp-candidate-identity-1.schema.json` and
+is checked against a closed artifact directory with:
+
+```console
+php tools/verify_thp_candidate_identity.php candidate-identity.json artifacts/
+```
+
+The verifier rejects missing or extra identity fields, duplicate artifact
+roles, unsafe paths, missing files and hash drift. The mandatory artifact
+roles are the product installer, OpenPairing runtime archive, PTC and RTG.
+Its `PASS` means only that one internally consistent byte identity was
+observed; it never declares the product submission-ready or TEC-accepted.
+
 ## Immutable input boundary
 
 Before pairing, ChessPairings must construct one immutable canonical snapshot
@@ -118,4 +131,3 @@ the same packaged engines. The controlled environment must reproduce:
 Any source, mapping, engine, runtime or product change after step 1 creates a
 new candidate identity and invalidates only the identity-dependent evidence;
 historical artifacts remain preserved and accurately labelled.
-
