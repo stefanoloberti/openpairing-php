@@ -19,7 +19,11 @@
 - harden distribution-secret scanning against natural-language false
   positives without weakening compact credential detection;
 - freeze an isolated ChessPairings rc.19 source candidate and verify its
-  fail-closed, privacy-minimised OpenPairing shadow bridge on PHP 8.3/GMP.
+  fail-closed, privacy-minimised OpenPairing shadow bridge on PHP 8.3/GMP;
+- bind isolated shadow requests to a canonical input and product revision,
+  reject stale revision/hash observations, require independent references for
+  non-exact results, publish immutable event files atomically and close them
+  into a deterministic NDJSON stream without enabling a product call site.
 
 ## 0.9.0-rc8 - 2026-08-15
 
