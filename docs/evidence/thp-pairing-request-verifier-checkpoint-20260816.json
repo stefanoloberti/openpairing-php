@@ -1,0 +1,59 @@
+{
+  "schema": "openpairing.thp-pairing-request-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T02:35:07+02:00",
+  "validatedCommit": "e30405b5ae9a82c58187bfaac9de2ef745d3c1fa",
+  "runtime": {
+    "host": "DESKTOP-EF1C0NB",
+    "role": "secondary-quarantined-validation-host",
+    "os": "Ubuntu on WSL",
+    "php": "8.3.6",
+    "arithmeticBackend": "gmp"
+  },
+  "files": {
+    "docs/schema/thp-pairing-request-1.schema.json": "027b5b8f82329a60d133ae2e9721effdcb9501d9a2738b22d6039a6527315aaf",
+    "tools/verify_thp_pairing_request.php": "6912241c3bcc0a1c3d7b4b3fe09123e5f18a3be5cd8fa130500d28c5e8d6c1ed",
+    "tests/Integration/ThpPairingRequestVerifierTest.php": "a1a29d67a3bbae6d676a54d515a44cf0996e14f256672b80ebcf20cd81924ee5",
+    "docs/THP-INTEGRATION-CONTRACT.md": "db11f178dba5b465af52e43ddb501ff07386c07b1d854a7ba2187bac0314518d",
+    "docs/CHESSPAIRINGS-INTEGRATION-INVENTORY.md": "f61967561ee0a65914621b37826219b23e45c0e0ed1927d83491e79d4ba1c2d7"
+  },
+  "checks": {
+    "targetedVerifier": {
+      "status": "PASS",
+      "tests": 6,
+      "assertions": 59,
+      "covers": [
+        "exact candidate identity hash is mandatory",
+        "tournament revision is mandatory",
+        "snapshot SHA-256 drift fails closed",
+        "valid but non-canonical JSON fails closed",
+        "derived initial colour mismatch fails closed",
+        "passing verification does not call the engine or authorize mutation"
+      ]
+    },
+    "repositorySuite": {
+      "status": "PASS",
+      "tests": 310,
+      "assertions": 1635,
+      "excludedGroups": ["oracle", "stress"]
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerified": 28
+    }
+  },
+  "boundary": {
+    "engineSemanticsChanged": false,
+    "campaignIdentityChanged": false,
+    "chessPairingsAdapterImplemented": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_PRECALL_IDENTITY_GATE_READY_PRODUCT_INTEGRATION_REMAINS_OPEN"
+}
