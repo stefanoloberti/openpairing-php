@@ -59,6 +59,9 @@ unexpected names, filename/event-ID disagreement and an existing output. It
 sorts event filenames, recursively normalises object keys, flushes the complete
 stream and publishes it atomically. Its `eventsSha256` is the value to place in
 the batch manifest before running the independent verifier.
+The permanent builder regression and its PHP 8.3/GMP execution checkpoint are
+recorded in
+`evidence/shadow-event-stream-regression-checkpoint-20260816.json`.
 
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
