@@ -118,8 +118,10 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    colour and atomic tournament start; its source archive is reproduced three
    ways and is not deployed. The gate remains open because migration 111 and
    concurrent-start/rollback probes have not run on isolated staging, while
-   rating-import attestation, atomic result batches, recovery probes, complete
-   English UI/manual and a public final package also remain required.
+   rating-import attestation, recovery probes, complete English UI/manual and
+   a public final package also remain required. Rc.32 now implements atomic,
+   round-bound and per-board revision-bound result batches in source, but its
+   concurrent-submit and rollback behavior still needs isolated-staging proof.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
 6. Only then populate the live TEC forms and pay testing fees.

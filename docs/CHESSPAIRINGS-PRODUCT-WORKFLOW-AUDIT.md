@@ -1,11 +1,11 @@
 # ChessPairings product-workflow audit
 
 This is a source-level audit of the isolated ChessPairings Web line. The
-original complete inventory used rc.21; the individual initial-colour and
-atomic-start findings were subsequently corrected in source-only candidate
-`5.21.0-rc.31`, commit
-`6554280292fc2668c78a30a4933aa40d5d4ee299`. No product database, staging or
-production was changed by that correction. The candidate is not FIDE approved
+original complete inventory used rc.21. The individual initial-colour,
+atomic-start and result-batch findings were subsequently corrected through
+source-only candidate `5.21.0-rc.32`, commit
+`7a6c4d315410d2c8f0b63199ae460448ce93e250`. No product database, staging or
+production was changed by those corrections. The candidate is not FIDE approved
 or endorsed and this audit does not close the `complete-thp-workflow` gate.
 
 The inspected source is useful: it narrows the remaining work from a generic
@@ -15,6 +15,8 @@ and exact inspected-file hashes are frozen in
 The follow-up source identities, tests and still-open runtime boundary are
 frozen in
 `evidence/chesspairings-initial-colour-checkpoint-20260816.json`.
+The atomic result-batch follow-up is frozen in
+`evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json`.
 
 ## Verdict
 
@@ -25,12 +27,12 @@ workflow required for submission. The gate therefore remains **NO-GO**.
 | Area | Source finding | Submission status |
 | --- | --- | --- |
 | FIDE rating-list import | Admin-only HTTPS download from `ratings.fide.com`, TLS verification, temporary download publication and transactional 500-row batches exist | Partial; no source hash/version attestation, whole-import rollback or exact-candidate probe |
-| Tournament/player/result workflow | Ownership checks, FIDE result codes, byes, withdrawals and round persistence exist | Partial; the bulk-result endpoint can commit a prefix, return `success=true` and report later row errors |
+| Tournament/player/result workflow | Ownership checks, FIDE result codes, byes, withdrawals and round persistence exist; rc.32 makes the individual bulk endpoint all-or-nothing and stale-client aware | Partial; exact-candidate database concurrency, failure-injection and rollback probes remain open |
 | Individual FIDE mode | Server-side profile locks Dutch/BBP6, disables manual pairing and verifies BBP6 plus Gacrux identities; rc.31 serializes and persists one initial-colour draw inside the atomic start boundary | Partial; OpenPairing is not a product route and the new migration/rollback/concurrency path has not run on isolated staging |
 | Recovery | Deleted-tournament snapshots and several pairing paths use transactions | Partial; snapshot restore deliberately skips failed child rows and pairing/result recovery probes have not run on the exact candidate |
 | TRF import/export | Individual TRF import is previewed, hash-bound, transactional and now records explicit/inferred/pending record-`152` provenance | Partial; the exact candidate still needs a database round trip and record `299` remains outside the lossless profile |
 | English UI/manual | English is the default language and the English catalogue has 3,126 keys | NO-GO; 59 Italian catalogue keys have no English entry, the FIDE rating-import page is hard-coded Italian, and an English packaged operator manual is unproved |
-| Public package/download | The rc.31 source archive is reproduced three ways, its Git bundle is off-site backed up and its notice matches rc.31 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
+| Public package/download | The rc.32 source archive is reproduced four ways, its Git bundle is off-site backed up and its notice matches rc.32 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
 
 ## Detailed findings
 
@@ -58,12 +60,15 @@ played/forfeit/bye result codes, scheduled absences, requested byes and
 withdrawals. Pairing publication paths persist games, history, evidence and
 round advancement inside transactions in important automatic paths.
 
-The AJAX bulk-result endpoint is not atomic: it calls `inserisciRisultato()`
-once per row, catches errors, continues and returns `success=true`. An
-interruption or invalid later row can therefore leave a committed prefix. The
-final workflow needs an all-or-nothing batch, an expected tournament revision,
-duplicate/stale-submit protection, and failure-injection tests proving that
-scores, history and standings remain aligned.
+Rc.32 replaces the prefix-commit AJAX loop with one transaction or caller
+savepoint. It validates the complete batch first, locks and re-reads the
+tournament, requires the expected current round, locks every requested
+published game and compares its stored result with the value observed by the
+client before the first mutation. Duplicate, cross-round and stale-client
+batches fail as a whole; success cannot include row errors. The remaining
+blocker is runtime evidence: concurrent-submit, stale-round and injected-
+failure probes must prove that games, history and standings all roll back on
+the exact isolated candidate.
 
 ### FIDE mode and first-round identity
 
@@ -81,7 +86,7 @@ colour is then immutable. The deterministic policy/codec/source test passes
 
 This remains a source checkpoint: migration 111 has not been applied and the
 database-backed concurrent-start, failure-injection and rollback probes have
-not run on an isolated rc.31 staging release. Those runtime probes, rather
+not run on an isolated rc.32 staging release. Those runtime probes, rather
 than the former source implementation task, are now the blocker.
 
 The rc.21 OpenPairing shadow coordinator remains synthetic and read-only. It
@@ -100,7 +105,7 @@ Rc.31 makes record `152` provenance explicit in preview/import. A played
 history without the record is inferred only from TPN 1 round 1 and otherwise
 fails closed; an empty history exposes a pending one-time draw which must be
 persisted at start. Invalid record values are rejected. A database-backed
-import/export replay of the exact rc.31 archive is still required, while
+import/export replay of the exact rc.32 archive is still required, while
 record `299` and the declared legacy contract remain separate open scope
 decisions.
 
@@ -128,18 +133,18 @@ messages.
 The exact final English workflow and manual therefore require both catalogue
 completion and visual execution evidence. Source presence alone is not enough.
 
-The frozen rc.31 source archive and bundle are sound internal checkpoints, not
+The frozen rc.32 source archive and bundle are sound internal checkpoints, not
 a public package. Their metadata still says `release-candidate` and
 `officialRecognition: none`; there is no final public download route,
 signature/checksum page or controlled installer. The third-party notice now
-matches rc.31 but must be regenerated again for the final identity.
+matches rc.32 but must be regenerated again for the final identity.
 
 ## Required closure order
 
 1. Apply migration 111 only to isolated staging and prove concurrent start,
-   failure injection and complete rollback on the exact rc.31 archive.
-2. Make bulk result submission atomic and revision-bound; execute the operator
-   and recovery probe batches.
+   failure injection and complete rollback on the exact rc.32 archive.
+2. Execute rc.32 concurrent-submit, stale-client and injected-failure rollback
+   probes together with the operator and recovery probe batches.
 3. Attest rating-list source identity and prove idempotent, malformed, stale
    and rollback cases.
 4. Execute an exact-candidate database TRF round trip and retain the explicit

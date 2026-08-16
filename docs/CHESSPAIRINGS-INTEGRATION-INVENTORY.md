@@ -6,8 +6,9 @@ identity, so a sanitized copy was frozen separately as non-deployed candidate
 `5.21.0-rc.19`; the isolated attempt ledger was frozen as rc.20, the
 synthetic observation coordinator as rc.21, the Team staging line progressed
 independently through rc.30, and the initial-colour correction is frozen as
-source-only rc.31. No production request was made; rc.31 changed neither a
-database nor staging.
+source-only rc.31. The atomic individual result-batch correction is frozen as
+source-only rc.32. No production request was made; neither correction changed
+a database or staging.
 
 The exact inspected file hashes and findings are recorded in
 `evidence/chesspairings-pairing-path-inventory-20260816.json`. The isolated
@@ -26,15 +27,18 @@ complete inventory, not a closed product gate.
 The rc.31 record-`152`, one-time-colour and atomic-start source checkpoint is
 recorded in
 `evidence/chesspairings-initial-colour-checkpoint-20260816.json`.
+The rc.32 all-or-nothing, round-bound and per-board revision checkpoint is
+recorded in
+`evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json`.
 
 The current isolated candidate is commit
-`6554280292fc2668c78a30a4933aa40d5d4ee299`, derived from the exact clean
-rc.30 commit `30330a7c804d54e69211f50f1675b5e32c3c0a83`. The rc.31 bundle SHA-256 is
-`bd7c62457a1037cf71a17be1ef29770cd254235e1a1091cd893dc1c47338a5a7`;
-the source archive is reproduced three ways at SHA-256
-`b612a18e574f00c601441a5b1c72ad939f57f87bd10fb875888f39ec0637601e`.
-The archive has 666 entries, no environment config or symlink, and the
-distribution scan examined 496 text files with zero findings. Owner-side
+`7a6c4d315410d2c8f0b63199ae460448ce93e250`, derived from the exact clean
+rc.31 commit `6554280292fc2668c78a30a4933aa40d5d4ee299`. The rc.32 bundle SHA-256 is
+`dfc4be8da57b46f49275f46b227e26c3ae1a40199ca548f38f1fec054b622f90`;
+the source archive is reproduced four ways at SHA-256
+`094b4f5f791b64f207fb2fa22c2c4b8b59b31f0209a55e383487fc7aa1ded8ca`.
+The archive has 668 entries, no environment config or symlink, and the
+distribution scan examined 498 text files with zero findings. Owner-side
 rotation of the credential removed earlier remains required and is not
 claimed by this repository.
 
@@ -133,9 +137,12 @@ path, never an in-place production switch. It must:
 5. **Source complete, runtime open:** rc.31 freezes individual initial-colour
    provenance and atomic start; apply migration 111 only to isolated staging
    and retain the concurrent-start/rollback evidence.
-6. Bind every shadow event to the exact identity manifest and validate batches
+6. **Source complete, runtime open:** rc.32 makes individual result batches
+   all-or-nothing, round-bound and per-board revision-bound; retain stale-client,
+   concurrent-submit and injected-failure rollback evidence on isolated staging.
+7. Bind every shadow event to the exact identity manifest and validate batches
    with `tools/verify_shadow_evidence.php`.
-7. Only after the shadow and complete THP workflow gates close, create a new
+8. Only after the shadow and complete THP workflow gates close, create a new
    separately authorised release candidate. No step here authorises a
    production change.
 
