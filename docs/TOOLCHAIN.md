@@ -97,7 +97,10 @@ allocated merely for documentation or corpus progress.
 Long-running future corpus epochs must also follow
 `CORPUS-SHARD-OBSERVABILITY.md`. The heartbeat described there is operational
 telemetry, not accepted evidence, and cannot be added to an already running
-identity.
+identity. Its schema and standalone reader are available as
+`docs/schema/corpus-shard-heartbeat-1.schema.json` and
+`tools/verify_corpus_shard_heartbeat.php`; they do not implement the writer or
+alter an active runner.
 
 Release candidate 6, tag `b6a2c1b`, corrects float-history ageing across
 unplayed rounds. It was deployed atomically to

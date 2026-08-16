@@ -44,7 +44,11 @@ that observability gap must be fixed before a future epoch, not retrofitted
 into this one. Evidence is
 `evidence/p80-throughput-diagnostic-20260816.json`.
 The required privacy-minimised, atomic and explicitly non-evidentiary channel
-is specified in `CORPUS-SHARD-OBSERVABILITY.md`.
+is specified in `CORPUS-SHARD-OBSERVABILITY.md`. Its frozen JSON envelope and
+independent fail-closed reader are implemented and verified by
+`evidence/corpus-shard-heartbeat-verifier-checkpoint-20260816.json`. The
+writer and runner integration remain future-epoch work; the active p80 runner
+and identity were not changed.
 
 The historical 20-shard snapshot found 14 candidate pairing deviations and
 zero no-solutions. Gacrux classified all 14 as
