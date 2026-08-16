@@ -129,7 +129,8 @@
         {"path": "docs/evidence/chesspairings-english-catalogue-checkpoint-20260816.json", "sha256": "881a3492ccd5ffdbfd67754d194b9bf8bf395a6a1487bbec81da80cbceca5404"},
         {"path": "docs/evidence/chesspairings-rating-import-i18n-key-hygiene-checkpoint-20260816.json", "sha256": "2dc2c496e4673d1124dc45cf3810edf2c2f7cf9fdba4eba25c40ffea89fd3be4"},
         {"path": "docs/evidence/chesspairings-english-operator-manual-checkpoint-20260816.json", "sha256": "d2b3ab20acaaa4cfc5cbaa7f0d42db8971aeab226a568cabe04ba17465032767"},
-        {"path": "docs/evidence/chesspairings-rc36-source-freeze-checkpoint-20260816.json", "sha256": "13e2da556f68dc0c0e3ea686c02e32500f3b29d848c28ad300ff5eb59521f007"}
+        {"path": "docs/evidence/chesspairings-rc36-source-freeze-checkpoint-20260816.json", "sha256": "13e2da556f68dc0c0e3ea686c02e32500f3b29d848c28ad300ff5eb59521f007"},
+        {"path": "docs/evidence/chesspairings-rating-import-isolation-checkpoint-20260816.json", "sha256": "e50c4906c9237f6e0bd70f037aae834fcdf9902d685db4c4c6f6cc0a9e13cf7a"}
       ]
     },
     {
