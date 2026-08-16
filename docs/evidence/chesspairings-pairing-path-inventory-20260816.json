@@ -1,0 +1,36 @@
+{
+  "schema": "openpairing.chesspairings-integration-inventory/1",
+  "observedAt": "2026-08-16T02:15:52+02:00",
+  "scope": "Read-only inspection of the local ChessPairings web pairing path; no production request, database mutation or deployment.",
+  "productSnapshot": {
+    "latestChangelogVersion": "5.20.5",
+    "unreleasedChangesPresent": true,
+    "sourceCommitAvailable": false,
+    "submissionIdentityFrozen": false
+  },
+  "files": {
+    "classes/Abbinamenti.php": "e8b12abd906c76d4c2265a0199212ed5d8f3586f4002a550ccd87ecd123db06f",
+    "classes/Torneo.php": "fbb0b717c24bbf282aa88e0e8355d83eb92c9d7bad2f5664d3266d869454738e",
+    "includes/desktop_native_sync.php": "03cec0644d0e5326b07feb90567226701dbd1d74839a77d1c997aa4ce46042c9",
+    "database/089_desktop_sync_v2.sql": "716b9320423a433bafcf9d2154ff40edd8eec46eb7f92372d9556b35031843ee"
+  },
+  "observations": [
+    {"code": "openpairing-not-integrated", "severity": "blocking", "location": "classes/Abbinamenti.php:24", "detail": "The selectable engine map does not contain OpenPairingPHP."},
+    {"code": "engine-default-fallback", "severity": "blocking", "location": "classes/Abbinamenti.php:48", "detail": "An unknown engine key defaults to the legacy bbp port instead of failing closed."},
+    {"code": "precalculation-destructive-writes", "severity": "blocking", "location": "classes/Abbinamenti.php:156", "detail": "The synchronous path deletes current-round rows and changes derived state before pairing is complete."},
+    {"code": "initial-colour-rerolled", "severity": "blocking", "location": "classes/Abbinamenti.php:447", "detail": "A first-round random initial colour is drawn during TRF generation and is not proven persisted before retry."},
+    {"code": "permissive-output-parser", "severity": "blocking", "location": "classes/Abbinamenti.php:837", "detail": "Missing/short pair lines can be skipped and complete eligible-player accounting is not enforced by the parser."},
+    {"code": "non-atomic-persistence", "severity": "blocking", "location": "classes/Abbinamenti.php:1175", "detail": "Game, history and point writes are not wrapped in the required pairing transaction."},
+    {"code": "async-state-unattested", "severity": "blocking", "location": "classes/Abbinamenti.php:2392", "detail": "The asynchronous state record lacks a canonical input hash, revision and candidate identity."},
+    {"code": "async-stale-state-not-rejected", "severity": "blocking", "location": "classes/Abbinamenti.php:2490", "detail": "Completion does not compare current tournament state with the submitted snapshot before writes."},
+    {"code": "draft-warnings-nonblocking", "severity": "blocking", "location": "classes/Abbinamenti.php:3384", "detail": "Repeat, colour and unpaired-player findings are warnings rather than a FIDE-mode commit gate."},
+    {"code": "desktop-revision-concept-available", "severity": "reusable", "location": "database/089_desktop_sync_v2.sql:58", "detail": "A revision counter exists in the separate desktop sync model and can inform, but not substitute for, the pairing transaction boundary."}
+  ],
+  "classification": "OPEN_THP_INTEGRATION_GATE",
+  "boundary": {
+    "openPairingEngineDefectObserved": false,
+    "productionChanged": false,
+    "databaseChanged": false,
+    "submissionReadyDeclared": false
+  }
+}
