@@ -120,7 +120,8 @@
         {"path": "docs/RELEASE.md"},
         {"path": "tools/scan_distribution_secrets.php"},
         {"path": "docs/evidence/distribution-secret-scanner-checkpoint-20260816.json"},
-        {"path": "docs/evidence/release-dry-run-1862318-20260816.json"}
+        {"path": "docs/evidence/release-dry-run-1862318-20260816.json"},
+        {"path": "docs/evidence/release-dry-run-b30d3e3-20260816.json"}
       ]
     }
   ]
