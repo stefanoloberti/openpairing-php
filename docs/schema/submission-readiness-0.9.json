@@ -121,7 +121,7 @@
         {"path": "docs/evidence/thp-operator-workflow-probe-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-runtime-configuration-probe-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/chesspairings-pairing-path-inventory-20260816.json"},
-        {"path": "docs/evidence/chesspairings-shadow-attempt-ledger-checkpoint-20260816.json", "sha256": "89b9bc5608361323c080c1f977173422e795c20d7e1c077189a1893730365b6f"}
+        {"path": "docs/evidence/chesspairings-shadow-attempt-ledger-checkpoint-20260816.json", "sha256": "cfd9ff502b97dd3f9604c0bb2eea496580ee02c0bbfbc754e4f8674f9f3156f2"}
       ]
     },
     {

@@ -1,12 +1,12 @@
 {
   "schema": "openpairing.chesspairings-shadow-attempt-ledger-checkpoint/1",
   "status": "PASS",
-  "generatedAtUtc": "2026-08-16T06:44:26Z",
+  "generatedAtUtc": "2026-08-16T07:16:38Z",
   "candidate": {
     "product": "ChessPairings Web",
     "version": "5.21.0-rc.20",
     "candidateId": "web-fide-candidate-20260816-am-shadow-attempt-ledger",
-    "sourceCommit": "b247db5a37bc497acac5b128a752ba70a1c7ba23",
+    "sourceCommit": "17a8cc7fd69bd8bc5cce03c95ff73f6e778620a4",
     "parentSourceCommit": "d63de7759c59c13cb9168a5befac51f70e84149c",
     "officialRecognition": "none"
   },
@@ -49,8 +49,12 @@
     },
     "sourceFreeze": {
       "status": "PASS",
-      "trackedFileCount": 605,
-      "sourceManifestSha256": "86d938467014d87d2dbdc1d8226a9acfd01d3ae81d136e0b0c4057cad458bd30",
+      "trackedFileCount": 606,
+      "sourceManifestSha256": "c63acb0ebd4f1ccd91db52154af9880e891c2e36e2cc0ff20873bd6da9a599ca",
+      "bundleCloneTrackedFileCount": 606,
+      "bundleCloneSourceManifestSha256": "c63acb0ebd4f1ccd91db52154af9880e891c2e36e2cc0ff20873bd6da9a599ca",
+      "bundleCloneMatchesWorktree": true,
+      "trackedFileByteDifferences": 0,
       "migrationPath": "database",
       "migrationFileCount": 92,
       "migrationManifestSha256": "30614859629f4e9208f4cc5c35aa5b19dfecefd5924715c93396f7166968fab6",
@@ -59,10 +63,10 @@
     }
   },
   "bundle": {
-    "path": "fide_submission_2026/staging-artifacts/chesspairings-web-rc20-b247db5-20260816.bundle",
-    "offsiteCopy": "OneDrive/OpenPairing Backups/chesspairings-candidates/chesspairings-web-rc20-b247db5-20260816.bundle",
-    "bytes": 40927785,
-    "sha256": "a6345a75077f334aa3e0010ea865d718f9c98f4c288969a04ee54945c9e3c982",
+    "path": "fide_submission_2026/staging-artifacts/chesspairings-web-rc20-17a8cc7-20260816.bundle",
+    "offsiteCopy": "OneDrive/OpenPairing Backups/chesspairings-candidates/chesspairings-web-rc20-17a8cc7-20260816.bundle",
+    "bytes": 40929422,
+    "sha256": "4bc1a666b3abe1289903f0ea1e885dca03a710a08e6b2903abe201b9abdad2bb",
     "bundleVerify": "PASS",
     "completeHistory": true
   },
