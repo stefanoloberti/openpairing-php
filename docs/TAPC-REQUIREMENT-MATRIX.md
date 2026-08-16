@@ -12,6 +12,8 @@ The complementary current process is in TEC Manual 1.24:
 <https://tec.fide.com/wp-content/uploads/2026/03/FIDE-TEC-Manual-01.24-1.pdf>.
 The current application route is linked from the FIDE TEC Online Forms:
 <https://www.cognitoforms.com/FIDE/TECMenu>.
+The retrieval hashes and availability check are recorded in
+`evidence/tec-official-source-refresh-20260816.json`.
 
 Status vocabulary:
 
@@ -31,6 +33,11 @@ it is not that complete workflow. Unless TEC confirms a separate route in
 writing, the exact submitted target must therefore be a ChessPairings THP that
 embeds this engine. Evidence for the library and evidence for another product
 identity must not be combined silently.
+
+TEC Manual 1.24 Article 3.9.4 discusses an external-engine exemption only for
+an engine already integrated into another FIDE-accepted THP, with its inputs
+available to TEC. OpenPairingPHP does not currently meet or claim that
+condition; it remains a question for the written scope enquiry.
 
 ## Conditions of compliance
 
