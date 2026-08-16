@@ -14,6 +14,13 @@ non-evidentiary heartbeat without weakening terminal report promotion.
 
 ## Required heartbeat
 
+The machine-readable envelope is frozen as
+`docs/schema/corpus-shard-heartbeat-1.schema.json`. The independent reader
+`tools/verify_corpus_shard_heartbeat.php` enforces the schema boundary,
+campaign identity and monotonic continuity between two snapshots. Neither the
+schema nor the reader is a writer, and adding them does not alter the active
+runner.
+
 Each worker must atomically replace one private heartbeat JSON file after each
 completed tournament and at least once every five minutes while work is
 continuing. The file must contain:
