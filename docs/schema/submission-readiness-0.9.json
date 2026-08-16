@@ -127,7 +127,8 @@
         {"path": "docs/evidence/chesspairings-initial-colour-checkpoint-20260816.json", "sha256": "dddcf275ce9505cde94d339128c26ab572eeeb6b51acbfa1fd320f20fd19d764"},
         {"path": "docs/evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json", "sha256": "bd08abf401ab25775b4102d3fe71ba163b1006e3474930f46da40112f4d191a4"},
         {"path": "docs/evidence/chesspairings-english-catalogue-checkpoint-20260816.json", "sha256": "881a3492ccd5ffdbfd67754d194b9bf8bf395a6a1487bbec81da80cbceca5404"},
-        {"path": "docs/evidence/chesspairings-rating-import-i18n-key-hygiene-checkpoint-20260816.json", "sha256": "2dc2c496e4673d1124dc45cf3810edf2c2f7cf9fdba4eba25c40ffea89fd3be4"}
+        {"path": "docs/evidence/chesspairings-rating-import-i18n-key-hygiene-checkpoint-20260816.json", "sha256": "2dc2c496e4673d1124dc45cf3810edf2c2f7cf9fdba4eba25c40ffea89fd3be4"},
+        {"path": "docs/evidence/chesspairings-english-operator-manual-checkpoint-20260816.json", "sha256": "d2b3ab20acaaa4cfc5cbaa7f0d42db8971aeab226a568cabe04ba17465032767"}
       ]
     },
     {
