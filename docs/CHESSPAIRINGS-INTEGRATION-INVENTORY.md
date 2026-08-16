@@ -11,11 +11,11 @@ freeze, TRF correction and executable adapter checkpoint are recorded in
 `evidence/chesspairings-shadow-adapter-bootstrap-20260816.json`.
 
 The isolated candidate is commit
-`961851704ed46e8ee74b1c0a956ad0a325c3dc6b`, derived from the rc.18 archive
+`0ea27919d5175d54dade0e1fef8d2d7bad59deb5`, derived from the rc.18 archive
 whose SHA-256 is
 `75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953`.
-The source-freeze verifier reports 600 tracked files, source-manifest SHA-256
-`9cd141303a25eb1131cbe71f8052a19fe83d3596fdab9ea717bf2f73bb36aebf`,
+The source-freeze verifier reports 602 tracked files, source-manifest SHA-256
+`7a08f1f70ad3437167cd79859b4b53d06d9dca0a65936357b7a2d07fa5ef2ba1`,
 92 migration files and zero secret-scan findings. Two credentials embedded in
 the parent distribution were removed from the candidate; owner-side rotation
 of the old value remains required and is not claimed by this repository.
@@ -69,8 +69,9 @@ engine:
    canonical input identity.
 7. **No live FIDE-path request/result attestation.** The isolated adapter now
    returns canonical input/output hashes and exact runtime identity without
-   personal fields. No call site yet records the incumbent hash, revision,
-   attempt denominator or atomic evidence stream.
+   personal fields. The candidate can build a fail-closed versioned event and
+   publish it as one immutable atomic file, but no call site yet records the
+   incumbent hash, revision or attempt denominator.
 8. **Post-engine transformations need ownership.** Requested byes and withdrawn
    players are removed from or appended to the engine output. The final
    candidate must either model these in the canonical engine input/output or
@@ -100,8 +101,9 @@ path, never an in-place production switch. It must:
    database migration set.
 2. **Partial:** the product TRF26 codec now maps directly into OpenPairing with
    an executable golden fixture; request/revision envelope persistence remains.
-3. **Partial:** the local adapter and independent OpenPairing validator exist
-   and fail closed on identity drift, but no shadow call site is enabled.
+3. **Partial:** the local adapter, comparator, event envelope and atomic file
+   sink exist and fail closed on identity drift or unclassified differences,
+   but no shadow call site is enabled.
 4. Prove stale-revision and injected-failure rollback tests before any live
    observation.
 5. Bind every shadow event to the exact identity manifest and validate batches

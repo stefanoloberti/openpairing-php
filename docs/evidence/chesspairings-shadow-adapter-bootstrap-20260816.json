@@ -1,9 +1,9 @@
 {
   "schema": "openpairing.chesspairings-shadow-adapter-bootstrap/1",
-  "completedAtUtc": "2026-08-16T04:51:46Z",
+  "completedAtUtc": "2026-08-16T05:12:00Z",
   "status": "PASS_ISOLATED_NOT_ENABLED",
   "openPairing": {
-    "sourceCommit": "8b8a5ec8bf9056c767b624cd1f93dee31a4683b5",
+    "sourceCommit": "9de82825963a448e5c9b25fd7ef265e5a840a370",
     "packageVersion": "0.9.0-rc8",
     "ordinarySuite": {
       "status": "PASS",
@@ -34,16 +34,16 @@
   "chessPairings": {
     "candidateVersion": "5.21.0-rc.19",
     "candidateId": "web-fide-candidate-20260816-al-openpairing-shadow",
-    "sourceCommit": "961851704ed46e8ee74b1c0a956ad0a325c3dc6b",
-    "sourceBundleSha256": "c141b02d9929a20aac668b480238771220baac6555329c6e7dc3fdb16aeb9280",
+    "sourceCommit": "0ea27919d5175d54dade0e1fef8d2d7bad59deb5",
+    "sourceBundleSha256": "e287d112a14ca46fe1352f3171cee6d4e9347af38f07ffd99e6bc28a53fd11e7",
     "parentCandidate": "web-fide-candidate-20260815-ak-team-gacrux299-failclosed",
     "parentArchiveSha256": "75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953",
     "sourceFreeze": {
       "status": "PASS",
-      "trackedFileCount": 600,
-      "sourceManifestSha256": "9cd141303a25eb1131cbe71f8052a19fe83d3596fdab9ea717bf2f73bb36aebf",
+      "trackedFileCount": 602,
+      "sourceManifestSha256": "7a08f1f70ad3437167cd79859b4b53d06d9dca0a65936357b7a2d07fa5ef2ba1",
       "migrationFileCount": 92,
-      "migrationManifestSha256": "b79a029354f093110e157d9d27b76a8481e907d6e6b6f44289d6bc8ea5d70e49",
+      "migrationManifestSha256": "32bd6dcdd8b1c86bd0632e7e86aea45302401e371306e40b0c40fbad645fc455",
       "secretFindings": 0
     },
     "trf26TypeCodes": {
@@ -77,6 +77,13 @@
       "nonExactRequiresIndependentClassification": true,
       "incompletePrimaryRejected": true
     },
+    "eventEnvelope": {
+      "schema": "openpairing.shadow-turn/1",
+      "unclassifiedDifferenceRejected": true,
+      "classificationAndReproductionReferencesRequired": true,
+      "atomicImmutableFileSink": true,
+      "duplicateEventRejected": true
+    },
     "privacyChecks": {
       "playerNamesAbsent": true,
       "tournamentNameAbsent": true,
@@ -84,7 +91,7 @@
     },
     "executableFixture": {
       "status": "PASS",
-      "checks": 12
+      "checks": 17
     },
     "applicationCallSiteEnabled": false,
     "officialShadowEvidenceProduced": false
@@ -100,7 +107,7 @@
   "remainingBlockers": [
     "freeze final combined installer/runtime/PTC/RTG candidate identity",
     "add immutable tournament revision and canonical request envelope",
-    "add isolated incumbent/shadow comparison and atomic evidence sink",
+    "connect the isolated incumbent/shadow observer without publication or database writes",
     "prove stale-revision and injected-failure rollback",
     "complete owner-side rotation of the removed internal credential",
     "obtain owner/privacy approval before any live read-only cohort"
