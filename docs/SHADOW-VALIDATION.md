@@ -63,6 +63,23 @@ The permanent builder regression and its PHP 8.3/GMP execution checkpoint are
 recorded in
 `evidence/shadow-event-stream-regression-checkpoint-20260816.json`.
 
+For a live cohort, event files alone do not prove the denominator: a process
+could fail before writing one. Every selected turn must first reserve one
+immutable `openpairing.shadow-attempt/1` record conforming to
+`schema/shadow-attempt-1.schema.json`. Build the official observation stream
+with:
+
+```console
+php tools/build_shadow_observation_stream.php attempts/ events/ shadow-events.ndjson
+```
+
+This builder rejects outcomes without a reservation and outcomes whose
+identity, tournament, canonical input or feature set differs from the reserved
+attempt. A reservation without an outcome becomes an explicit `not-observed`
+event, which makes the normal gate `NO_GO` instead of silently improving the
+observation rate. The event-only builder remains useful for deterministic
+laboratory fixtures, but is not proof of a live attempt denominator.
+
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
 synthetic/staging checks. Exit `0` is `GO`, exit `1` is an honest `NO_GO`, and
