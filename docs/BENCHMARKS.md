@@ -65,3 +65,11 @@ active RC8 campaign; the tooling commit is recorded separately. This is a
 local planning observation, not a product SLA or a substitute for the shadow
 gate. The exact report is
 `evidence/turn-benchmark-p50-r7-windows-limbs-20260816.json`.
+
+The same Windows fallback profile measured a deterministic 80-player Dutch
+round 7 at 27.832/29.251/29.698 seconds and 52 MiB peak memory. Fixture
+preparation took 103.310 seconds and is reported separately from the three
+pairing calls. The engine and source-tree hashes exactly match the active RC8
+campaign. This is a conservative portability/capacity observation rather than
+an SLA; the exact report is
+`evidence/turn-benchmark-p80-r7-windows-limbs-20260816.json`.
