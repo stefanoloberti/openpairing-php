@@ -125,6 +125,10 @@ The strict batch/event format and fail-closed local verifier for preserving
 those future cross-tests are documented in `TEC-CROSS-TEST.md`. Tooling
 readiness does not close either external cross-test.
 
+The exact-candidate execution order, atomic report-promotion rule and abort/
+resume boundary for all THP evidence are fixed in
+`THP-EVIDENCE-EXECUTION-RUNBOOK.md`.
+
 ## Submission evidence package
 
 The final package should contain:

@@ -86,6 +86,7 @@
         {"path": "docs/THP-INTEGRATION-CONTRACT.md"},
         {"path": "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md"},
         {"path": "docs/CHESSPAIRINGS-INTEGRATION-INVENTORY.md"},
+        {"path": "docs/THP-EVIDENCE-EXECUTION-RUNBOOK.md"},
         {"path": "docs/schema/thp-candidate-identity-1.schema.json"},
         {"path": "tools/verify_thp_source_freeze.php"},
         {"path": "docs/schema/thp-pairing-request-1.schema.json"},
