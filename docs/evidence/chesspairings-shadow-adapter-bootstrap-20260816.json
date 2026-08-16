@@ -34,13 +34,14 @@
   "chessPairings": {
     "candidateVersion": "5.21.0-rc.19",
     "candidateId": "web-fide-candidate-20260816-al-openpairing-shadow",
-    "sourceCommit": "ea1d71306c5b5603a911e999e2ffbcbbaaa77597",
+    "sourceCommit": "961851704ed46e8ee74b1c0a956ad0a325c3dc6b",
+    "sourceBundleSha256": "c141b02d9929a20aac668b480238771220baac6555329c6e7dc3fdb16aeb9280",
     "parentCandidate": "web-fide-candidate-20260815-ak-team-gacrux299-failclosed",
     "parentArchiveSha256": "75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953",
     "sourceFreeze": {
       "status": "PASS",
-      "trackedFileCount": 599,
-      "sourceManifestSha256": "56782995e3ffa81b4baf2ccca341e326b3882544df5e6454de398dc843cc1385",
+      "trackedFileCount": 600,
+      "sourceManifestSha256": "9cd141303a25eb1131cbe71f8052a19fe83d3596fdab9ea717bf2f73bb36aebf",
       "migrationFileCount": 92,
       "migrationManifestSha256": "b79a029354f093110e157d9d27b76a8481e907d6e6b6f44289d6bc8ea5d70e49",
       "secretFindings": 0
@@ -69,6 +70,13 @@
     "candidateIdentityManifestRequired": true,
     "tamperedIdentityRejected": true,
     "independentPairingValidator": true,
+    "primaryComparison": {
+      "completePlayerAccountingRequired": true,
+      "exactDetected": true,
+      "samePairsColourVariantDetected": true,
+      "nonExactRequiresIndependentClassification": true,
+      "incompletePrimaryRejected": true
+    },
     "privacyChecks": {
       "playerNamesAbsent": true,
       "tournamentNameAbsent": true,
@@ -76,7 +84,7 @@
     },
     "executableFixture": {
       "status": "PASS",
-      "checks": 7
+      "checks": 12
     },
     "applicationCallSiteEnabled": false,
     "officialShadowEvidenceProduced": false
