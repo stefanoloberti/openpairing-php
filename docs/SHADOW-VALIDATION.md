@@ -90,6 +90,9 @@ The verifier rejects duplicate event IDs, denominator/hash mismatches,
 personal-data keys, identity drift, unclassified non-exact turns, missing
 coverage and product-budget overruns. It does not enable a production shadow
 path or authorize a product switch.
+The identity includes the exact `engineSha256`; the adapter, schema and
+verifier alignment is exercised in
+`evidence/shadow-engine-identity-contract-checkpoint-20260816.json`.
 
 A locally detected output violation is recorded as a blocking `NO_GO` with a
 failing validator, not misreported as an infrastructure error. Conversely,
