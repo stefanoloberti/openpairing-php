@@ -95,12 +95,14 @@
         {"path": "docs/schema/thp-recovery-probe-batch-1.schema.json"},
         {"path": "docs/schema/thp-mode-probe-batch-1.schema.json"},
         {"path": "docs/schema/thp-performance-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-rating-import-probe-batch-1.schema.json"},
         {"path": "tools/verify_thp_pairing_result.php"},
         {"path": "tools/verify_thp_precommit_guard.php"},
         {"path": "tools/verify_thp_transaction_probes.php"},
         {"path": "tools/verify_thp_recovery_probes.php"},
         {"path": "tools/verify_thp_mode_probes.php"},
         {"path": "tools/verify_thp_performance_probes.php"},
+        {"path": "tools/verify_thp_rating_import_probes.php"},
         {"path": "docs/evidence/thp-candidate-identity-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-source-freeze-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-pairing-request-verifier-checkpoint-20260816.json"},
@@ -110,6 +112,7 @@
         {"path": "docs/evidence/thp-recovery-probe-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-mode-probe-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/thp-performance-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-rating-import-probe-verifier-checkpoint-20260816.json"},
         {"path": "docs/evidence/chesspairings-pairing-path-inventory-20260816.json"}
       ]
     },

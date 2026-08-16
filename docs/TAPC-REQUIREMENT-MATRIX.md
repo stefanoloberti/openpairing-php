@@ -36,7 +36,7 @@ identity must not be combined silently.
 
 | Article | Requirement, paraphrased | Current evidence | Status | Exact closure condition |
 |---|---|---|---|---|
-| 7.1.1(a) | Import current FIDE rating lists | Outside the library boundary | open | Demonstrate update/import, reconciliation, and failure handling in the exact submitted THP |
+| 7.1.1(a) | Import current FIDE rating lists | Outside the library boundary; identity-bound evidence schema and fail-closed verifier are ready | open | Run `tools/verify_thp_rating_import_probes.php` on current import, identical reimport and failure scenarios produced by the exact submitted THP |
 | 7.1.1(b) | Implement at least one declared FIDE Swiss system and every FIDE-defined acceleration method | Dutch and Burstein engines; Baku implementation; immutable corpus workflow | partial | Close Dutch and accelerated corpus gates under the final identity, then exercise the packaged THP path |
 | 7.1.1(c) | Produce final standings using every mandatory FIDE tie-break | Exact-arithmetic individual tie-break implementation and PTC | partial | Publish final-package PTC evidence and verify the exact THP standings workflow |
 | 7.1.2 | Declare the pairing systems for which compliance is requested | Proposed scope: individual Dutch; Burstein retained outside the initial claim until owner/TEC decision | external | Freeze the declaration in the application and product FIDE mode |

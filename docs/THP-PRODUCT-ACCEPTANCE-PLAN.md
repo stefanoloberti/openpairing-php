@@ -31,6 +31,8 @@ OpenPairing change starts a new identity and a new evidence stream.
 | TX-002 | Injected failure | The same batch contains one failure after every write stage, each with zero commits and the exact baseline revision/state hash restored | Original tournament remains byte/logically identical |
 | MODE-001 | FIDE allow-list | `tools/verify_thp_mode_probes.php` checks one identity-bound successful route per candidate-declared system plus an unknown-system rejection, with counted engine/fallback/write calls | No legacy/manual fallback |
 | MODE-002 | Unsupported input | The same batch proves team state, record `299` and another undeclared feature stop before the individual engine call with stable diagnostics | Explicit unsupported-input diagnostic and zero writes |
+| RATING-001 | Current FIDE list | `tools/verify_thp_rating_import_probes.php` binds a non-empty current-period import and its reconciliation counters to the exact candidate | Reject an empty, stale, malformed, duplicate-ID or unaccounted import |
+| RATING-002 | Idempotence and failure | The same batch proves byte-identical reimport performs zero writes and an injected persistence failure restores the exact logical state | No partial rating-list update and no silent reprocessing drift |
 | ASYNC-001 | Durable job | The exact product harness records worker restart/reload in `openpairing.thp-recovery-probe-batch/1`; `tools/verify_thp_recovery_probes.php` binds the four scenarios to the same candidate/source/migration identity | No duplicate publication or anonymous retry |
 | ASYNC-002 | Late completion | The same batch proves a superseded job leaves the newer revision and logical-state hash unchanged with zero commits/publications | Mark stale and preserve the newer state |
 | REC-001 | Recovery | The same batch proves crash-before-commit, crash-after-commit and duplicate delivery have exact, idempotent state/commit/publication outcomes | No half-round and no double application |
@@ -63,7 +65,9 @@ product state, not against a legacy transport's permissiveness.
 1. Run the read-only source-freeze verifier on the exact ChessPairings Git
    root and every migration path, then build the candidate identity only from
    the emitted commit and manifest hashes.
-2. Close MAP and pre-call ID checks with no engine call and no database mutation.
+2. Close MAP and pre-call ID checks with no engine call and no database mutation;
+   exercise the current rating-list import, identical reimport, stale/malformed
+   rejection and injected persistence rollback in the isolated product database.
 3. Close the post-call identity, OUT and portable pre-commit guard checks against synthetic in-memory or
    disposable-database data; verifier `GO` must still leave product state
    untouched.

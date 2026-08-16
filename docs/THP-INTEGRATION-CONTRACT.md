@@ -212,6 +212,24 @@ the product harness and must include snapshot mapping, the engine call and
 independent result validation. The verifier does not execute or time that
 route itself, so its `GO` is an evidence-format verdict only.
 
+The product-owned FIDE rating-list workflow has a separate identity-bound
+batch in `docs/schema/thp-rating-import-probe-batch-1.schema.json`. Validate
+it with:
+
+```console
+php tools/verify_thp_rating_import_probes.php rating-import-probes.json candidate.json artifact-root
+```
+
+The five required scenarios are a non-empty current-period import, an
+identical idempotent reimport, malformed-source rejection, stale-period
+rejection and an injected database failure. Reconciliation counters must
+account for every decoded row, the successful state transition and every
+persisted write. Rejected inputs must stop before a transaction; the injected
+failure must roll back to the exact logical-state hash. The batch contains no
+player records or FIDE IDs. The verifier checks supplied product-harness
+evidence only: it does not download a list, access ChessPairings or close the
+product requirement by itself.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.

@@ -1,0 +1,37 @@
+{
+  "schema": "openpairing.thp-rating-import-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T05:22:13+02:00",
+  "baseCommit": "07f8ea520e6be49c1077a12212cd53e83d34e5b8",
+  "files": {
+    "docs/schema/thp-rating-import-probe-batch-1.schema.json": "2dd733815dd931369379fb05e952e1c338ab529a7a107752c646f65a4c99fc83",
+    "tools/verify_thp_rating_import_probes.php": "038650adf03d0e0559c0683998920445aed288e8d1361c6b425a6ef343d81299",
+    "tests/Integration/ThpRatingImportProbeVerifierTest.php": "b69afa75e39e52b35eefba2c0f30956df3ec3a3c858853216629e31268ef053e",
+    "docs/THP-INTEGRATION-CONTRACT.md": "8d539d899b5a617d326d287c023c859b8e106307f26afed4d9328fd483e8413e",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "fe688fc4accaffa8508f10159cf2cb0843d94f1d7f0c5b81c0670a2146300ea6"
+  },
+  "checks": {
+    "targetedWindows": {"status": "PASS", "php": "8.4.24", "tests": 9, "assertions": 455},
+    "staticAnalysis": {"status": "PASS", "errors": 0},
+    "expandedRepositorySecretScan": {"status": "PASS", "filesScanned": 395, "binaryFilesSkipped": 21, "findings": 0},
+    "repositorySuiteWindows": {"status": "PASS", "tests": 399, "assertions": 34497, "skipped": 2},
+    "submissionReadiness": {"status": "NO_GO", "closedGates": 2, "blockingGates": 8, "evidenceFilesVerified": 56},
+    "coveredBehaviours": [
+      "the batch is bound to the verified candidate, product source and migration set",
+      "a successful current-period import has a non-zero denominator and complete decode/reconciliation/write accounting",
+      "an identical reimport uses the same source artifact and produces zero writes and an unchanged logical-state hash",
+      "malformed and stale sources stop before a transaction with stable diagnostics and no state change",
+      "an injected database failure attempts a write, commits none, rolls back once and restores the exact logical state",
+      "duplicate FIDE identifiers are rejected by the acceptance verdict without exporting individual identifiers",
+      "missing scenarios and candidate-identity drift are infrastructure errors",
+      "GO does not claim that the verifier downloaded a list or executed the ChessPairings import route"
+    ]
+  },
+  "boundary": {
+    "fideRatingListDownloaded": false,
+    "chessPairingsImportExecuted": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_RATING_IMPORT_EVIDENCE_GATE_READY_EXACT_PRODUCT_EXECUTION_REMAINS_OPEN"
+}
