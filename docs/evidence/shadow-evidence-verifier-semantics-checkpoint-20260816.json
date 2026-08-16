@@ -1,35 +1,36 @@
 {
-  "schema": "openpairing.shadow-evidence-verifier-checkpoint/2",
-  "recordedAtEuropeRome": "2026-08-16T01:23:28+02:00",
-  "validatedCommit": "612e71f170ac9193f1fd1b1a7b18bad5c924ad10",
+  "schema": "openpairing.shadow-evidence-verifier-checkpoint/3",
+  "recordedAtEuropeRome": "2026-08-16T02:22:40+02:00",
+  "validatedCommit": "23dcc0db675aa37960ac637f709a358fb5dee81c",
   "runtime": {
-    "host": "DESKTOP-3OI0QHR",
-    "os": "Windows",
-    "php": "8.4.24",
-    "arithmeticProfile": "limbs-30"
+    "host": "DESKTOP-EF1C0NB",
+    "role": "secondary-quarantined-validation-host",
+    "os": "Ubuntu on WSL",
+    "php": "8.3.6",
+    "arithmeticProfile": "gmp"
   },
   "files": {
-    "tools/verify_shadow_evidence.php": "2c8ac4ebdc0cdf4e9879371c84e37203ce462c6f6dd048834dce68dd13d65e48",
-    "tests/Integration/ShadowEvidenceVerifierTest.php": "baec5d1c96eb0994c1d5e31ec2df3513ab64da9898cdbffcfc2cfbe3bfbd0968",
-    "docs/schema/shadow-evidence-batch-1.schema.json": "8f1db19082f38724d4b731b131210e911fbdfd213f3835ab914d3c981065e906",
+    "tools/verify_shadow_evidence.php": "6f594407bb3b1e34adbad64eb09c529873e7a65475acb0c77978f11647b44fe6",
+    "tests/Integration/ShadowEvidenceVerifierTest.php": "d6db5f2f8522a6acf15daaf523af32e7f5460f0fa6f3bc2a8263cdce0b1c2236",
+    "docs/schema/shadow-evidence-batch-1.schema.json": "02e06013e2a3c14d1e82b6e11bc97065ff21b29f2a0fce90aadad64428cb80f2",
     "docs/schema/shadow-turn-1.schema.json": "7a22f23bbaf96a44551b23f198cdc21bc474ea4c57d245ec2d6eaf62b29686d1",
-    "docs/SHADOW-VALIDATION.md": "192e7874660ba8c5ea23ee07ae1d97034ac05c6cca51c2224c3883ea150ffb01"
+    "docs/SHADOW-VALIDATION.md": "f90869f74dbe4842a5d90fb58a530c83c0c112e742d24d1b33073be59f6b1490"
   },
   "checks": {
     "shadowVerifier": {
       "status": "PASS",
-      "tests": 8,
-      "assertions": 65,
+      "tests": 9,
+      "assertions": 73,
       "addedDecisions": [
-        "local validator violation is a blocking NO_GO rather than infrastructure ERROR",
-        "non-exact status cannot reuse an exact functional output hash"
+        "every accepted shadow batch is bound to the SHA-256 identity of the exact THP candidate manifest",
+        "the shadow evidence arithmetic profile uses the normalized limbs-30 spelling when GMP is not selected"
       ]
     },
     "repositorySuite": {
       "status": "PASS",
-      "tests": 291,
-      "assertions": 1432,
-      "skipped": 1,
+      "tests": 280,
+      "assertions": 1333,
+      "skipped": 0,
       "excludedGroups": ["oracle", "stress"]
     },
     "staticAnalysis": {
@@ -37,15 +38,14 @@
       "errors": 0
     },
     "publicApi": {
-      "status": "PASS",
-      "methods": 13,
-      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+      "status": "NOT_RERUN_NO_SRC_IMPACT",
+      "reason": "This checkpoint changes only shadow evidence tooling, schemas, tests, and documentation."
     },
     "submissionReadiness": {
       "status": "NO_GO",
       "closedGates": 2,
       "blockingGates": 8,
-      "evidenceFilesVerified": 16
+      "evidenceFilesVerified": 26
     }
   },
   "boundary": {
