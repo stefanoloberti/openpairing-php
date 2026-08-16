@@ -17,6 +17,9 @@ Before selecting an application category, could you please clarify:
 
 1. Can a standalone pairing engine/library be assessed under TAPC or another
    current TEC procedure, or must the submitted product be a complete THP?
+   We understand that TEC Manual 1.24 Article 3.9.4 describes an external-engine
+   exemption only when that engine is already integrated into another
+   FIDE-accepted THP; OpenPairingPHP does not claim that exemption.
 2. If it must be part of a THP, is the engine assessed only through the exact
    THP version that embeds it?
 3. May an initial application declare individual FIDE Dutch only, while
@@ -48,3 +51,16 @@ Kind regards,
 [OWNER LEGAL NAME]
 [MANUFACTURER/VENDOR NAME]
 [CONTACT DETAILS]
+
+## Owner checklist before sending
+
+- Confirm the legal applicant and manufacturer/vendor names and one monitored
+  contact address.
+- Confirm whether the intended application is the exact ChessPairings THP or a
+  request for a separately assessable OpenPairingPHP component route.
+- Attach no corpus, source archive or personal tournament data to the initial
+  scope question unless TEC requests it through an agreed channel.
+- Do not quote RC8, RC38 or any later release candidate as the submitted
+  product version; the stable SDPC/TAPC identity has not been frozen.
+- Preserve the sent message and written reply as external gate evidence. A
+  verbal or inferred answer cannot close `tec-product-scope`.
