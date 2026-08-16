@@ -1,0 +1,92 @@
+{
+  "schema": "openpairing.chesspairings-rating-import-i18n-key-hygiene-checkpoint/1",
+  "generatedAtUtc": "2026-08-16T10:03:17Z",
+  "status": "SOURCE_CHECKPOINT_PASS",
+  "submissionGateStatus": "NO_GO",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.35",
+    "candidateId": "web-fide-candidate-20260816-bb-browser-key-hygiene",
+    "parentVersion": "5.21.0-rc.34",
+    "parentCommit": "a3fd659acdb7121f0b254a0a85e94f912564c366",
+    "sourceCommit": "be7eda26b6083758afb1469e449826698cea3a85",
+    "sourceTree": "10477ce6c97aaf54fe987ae394a2246d1d5d434a",
+    "sourceArchiveSha256": "f0c3bdca3bdb7ff162d9c183c1c3669ecd592ab88a6c91f3102f6d4bf4d1ccaf",
+    "sourceArchiveBytes": 40899954,
+    "bundleSha256": "abacb3efe56d01c1e8ca0604e797cdf747b8e54f280e30ca0a62c7efd9581a16",
+    "bundleBytes": 40964770,
+    "offsiteBundleMatches": true,
+    "officialRecognition": "none"
+  },
+  "implementedBoundary": {
+    "ratingImportUserVisibleKeys": 64,
+    "newCatalogueKeysPerLanguage": 62,
+    "italianCatalogueKeys": 3243,
+    "englishCatalogueKeys": 3243,
+    "missingOrEmptyEnglishKeys": 0,
+    "authenticatedLanguageInitialisedBeforeAjax": true,
+    "manualRefreshDocumentLanguageDynamic": true,
+    "ajaxAndJavascriptMessagesLocalised": true,
+    "embeddedGoogleBrowserKeyRemoved": true,
+    "environmentOwnedGooglePlacesConstantUsed": true
+  },
+  "verification": {
+    "windowsPhpVersion": "8.2.12",
+    "linuxPhpVersion": "8.3.6",
+    "linuxArithmeticBackend": "gmp",
+    "ratingImportI18nTest": "PASS on PHP 8.2 and PHP 8.3/GMP",
+    "browserKeyGuard": "PASS on PHP 8.2 and PHP 8.3/GMP",
+    "catalogueParity": "3243/3243; 0 missing; 0 empty; PASS on both runtimes",
+    "atomicResultBatchRegression": "18/18 PASS",
+    "individualInitialColourRegression": "21/21 PASS",
+    "individualTypeCodeRegression": "PASS",
+    "publishedRatingPolicyRegression": "PASS",
+    "publishedRatingTrfRegression": "PASS",
+    "shadowAdapterRegression": "PASS on PHP 8.3/GMP",
+    "teamFideModeAssertions": 36,
+    "teamTrf26CodecAssertions": 35,
+    "teamMtb26Assertions": 229,
+    "teamWizardAssertions": 12,
+    "sourceArchiveIndependentBuilds": 4,
+    "sourceArchiveBuildsMatch": true,
+    "sourceArchiveEntries": 672,
+    "trackedFiles": 630,
+    "forbiddenEnvironmentPaths": 0,
+    "symbolicLinks": 0,
+    "secretScanFiles": 630,
+    "secretScanFindingFiles": 0,
+    "bundleCloneCommitMatches": true,
+    "bundleCloneTreeMatches": true
+  },
+  "inspectedFiles": [
+    {"path": "import_fide.php", "bytes": 24194, "sha256": "6108fe994736ad3c839f5826ccb032eda3e79e27e9fc302a09394d1348c89209"},
+    {"path": "test_places.php", "bytes": 3758, "sha256": "c409aaa8ddeb15044b677243681cd66f26c1cc01311c1e055a2ff13d55ced1d3"},
+    {"path": "lang/en.php", "bytes": 231763, "sha256": "e9e617fb0fded371dd404236cf42a22fe504a44a791cac2d221f0258525fa22c"},
+    {"path": "lang/it.php", "bytes": 241752, "sha256": "f1b3c0cecd9a96374ea4a22651afdb11a890667f961524e5d18dd826441c50fe"},
+    {"path": "scripts/test_fide_import_i18n.php", "bytes": 1777, "sha256": "0604f96ae14312c149abef1950a4e8aff390b4c8bf31f71e0b3f749450ca1c8d"},
+    {"path": "scripts/test_no_embedded_browser_api_key.php", "bytes": 746, "sha256": "239c14124840530f8c053865713737b209805c7d66cc27e5ef9d7d65f373bfd7"},
+    {"path": "release.json", "bytes": 436, "sha256": "4380b1de0f41fa76992e8afb10838a9b3fcc70ee4d9afeedd294db704ab8a814"},
+    {"path": "SOURCE_PROVENANCE.md", "bytes": 8513, "sha256": "010821751a523ff445ceeff0ede33763bcea1a2ab943af3f0099b4e3eee11af2"},
+    {"path": "docs/THIRD_PARTY_NOTICES_EN.md", "bytes": 3870, "sha256": "91ff75dd5658be837638d221115a8e4e308b738c7cae1f3b82d4f87ecb035d29"}
+  ],
+  "remainingEnglishWorkflow": [
+    "execute the complete operator workflow with the English locale on the exact isolated candidate",
+    "capture visual evidence for every required screen and error state",
+    "package and verify the final English operator manual"
+  ],
+  "externalOperationalRequirement": {
+    "previousBrowserKeyRotationRequired": true,
+    "rotationProvedByThisCheckpoint": false,
+    "reason": "The repository can remove the tracked value but cannot revoke or rotate the previously published Google API key."
+  },
+  "boundary": {
+    "sourceCheckpointOnly": true,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionRequestPerformed": false,
+    "productionMutationPerformed": false,
+    "deployed": false,
+    "gateClosed": false,
+    "fideApprovedOrEndorsed": false
+  }
+}
