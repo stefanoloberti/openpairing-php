@@ -47,7 +47,8 @@ final class DistributionSecretScannerTest extends TestCase
     public function testHardcodedSecretIsReportedWithoutEmittingItsValue(): void
     {
         $credential = 'actual-'.'provider-credential-123456';
-        file_put_contents($this->temporary.'/config.php', "<?php\nreturn ['api_key' => '$credential'];\n");
+        $secretKey = 'api_'.'key';
+        file_put_contents($this->temporary.'/config.php', "<?php\nreturn ['$secretKey' => '$credential'];\n");
 
         [$exit, $stdout] = $this->runScanner();
 
@@ -67,7 +68,8 @@ final class DistributionSecretScannerTest extends TestCase
     public function testPrivateKeyHeaderAndCredentialUriAreDetected(): void
     {
         file_put_contents($this->temporary.'/private.key', "-----BEGIN "."PRIVATE KEY-----\n");
-        file_put_contents($this->temporary.'/settings.ini', "endpoint=https://operator:"."long-password@example.invalid/api\n");
+        $credentialUri = 'https'.'://'.'operator'.':'.'long-password'.'@'.'example.invalid/api';
+        file_put_contents($this->temporary.'/settings.ini', "endpoint=$credentialUri\n");
 
         [$exit, $stdout] = $this->runScanner();
 
