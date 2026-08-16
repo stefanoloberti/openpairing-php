@@ -11,11 +11,11 @@ freeze, TRF correction and executable adapter checkpoint are recorded in
 `evidence/chesspairings-shadow-adapter-bootstrap-20260816.json`.
 
 The isolated candidate is commit
-`d24e979dc402055df1d73b2eeac8ed0bfb64e0a9`, derived from the rc.18 archive
+`d63de7759c59c13cb9168a5befac51f70e84149c`, derived from the rc.18 archive
 whose SHA-256 is
 `75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953`.
 The source-freeze verifier reports 604 tracked files, source-manifest SHA-256
-`b5849bba70f1c7f378c7e83136b939a34baed6162b92d37de5e0ca234eccc3ed`,
+`11affb80a854536aeee4477f6669bd123e76cf18b8af466365561cce57cc7271`,
 92 migration files and zero secret-scan findings. Two credentials embedded in
 the parent distribution were removed from the candidate; owner-side rotation
 of the old value remains required and is not claimed by this repository.

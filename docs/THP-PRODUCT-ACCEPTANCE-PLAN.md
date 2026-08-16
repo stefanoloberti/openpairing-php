@@ -90,7 +90,7 @@ TEC PTC/RTG cross-tests.
 
 ## Isolated implementation checkpoint
 
-ChessPairings candidate `d24e979dc402055df1d73b2eeac8ed0bfb64e0a9`
+ChessPairings candidate `d63de7759c59c13cb9168a5befac51f70e84149c`
 implements the portable MAP/ID/CAS/SHD building blocks without an application
 call site or database access. Its 21-check executable fixture proves canonical
 request binding, exact and colour-variant comparison, rejection of incomplete

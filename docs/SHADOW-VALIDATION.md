@@ -47,6 +47,19 @@ batch deterministically orders those files and builds the newline-delimited
 JSON stream; evidence is never accepted from a partial append and raw personal
 state is not retained in the stream.
 
+Close a directory of immutable event files into one new, deterministic stream
+without overwriting an earlier batch:
+
+```console
+php tools/build_shadow_event_stream.php events/ shadow-events.ndjson
+```
+
+The builder rejects an empty directory, symbolic links, hidden temporary files,
+unexpected names, filename/event-ID disagreement and an existing output. It
+sorts event filenames, recursively normalises object keys, flushes the complete
+stream and publishes it atomically. Its `eventsSha256` is the value to place in
+the batch manifest before running the independent verifier.
+
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
 synthetic/staging checks. Exit `0` is `GO`, exit `1` is an honest `NO_GO`, and
