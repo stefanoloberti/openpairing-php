@@ -129,6 +129,20 @@ pairing is then written atomically with its input/output hashes and identities.
 If the revision changed, the result is discarded and recalculated from a new
 snapshot; it is never patched board by board.
 
+The portable half of that boundary is represented by
+`docs/schema/thp-precommit-observation-1.schema.json` and can be checked with:
+
+```console
+php tools/verify_thp_precommit_guard.php request.json original-snapshot.json observation.json fresh-snapshot.json
+```
+
+The guard replays the original request gate, binds the observation to the same
+job and candidate identity, verifies the fresh canonical snapshot, and returns
+an honest `NO_GO` if either the revision or canonical-input hash changed. It
+does not read the product database or prove that the supplied observation is
+live. Even `GO` authorizes no write: the exact product adapter must produce the
+observation from an immediate database reread and own the atomic transaction.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.

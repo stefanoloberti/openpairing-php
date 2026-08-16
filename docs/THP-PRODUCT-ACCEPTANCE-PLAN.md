@@ -25,8 +25,8 @@ OpenPairing change starts a new identity and a new evidence stream.
 | OUT-001 | Accounting | Every eligible participant appears exactly once as paired or PAB; no ineligible participant appears | Reject partial, duplicate or extra output |
 | OUT-002 | Reciprocal state | Opponents, colours, board numbers, PAB and all hard constraints pass an independent product-side validator | Reject the complete result, not individual boards |
 | OUT-003 | Post-processing | Requested byes and withdrawals are either part of canonical engine I/O or one separately hash-attested deterministic transform | Reject unowned append/remove behavior |
-| CAS-001 | Stale revision | Changing any relevant tournament row while the engine runs makes the pre-commit revision comparison fail | Discard the whole result and request a fresh snapshot |
-| CAS-002 | Stale hash | A state change that does not advance the revision is still detected by recomputing the canonical input hash | Treat as an integrity error; perform no write |
+| CAS-001 | Stale revision | `tools/verify_thp_precommit_guard.php` rejects a re-observed product revision that differs from the original request | Discard the whole result and request a fresh snapshot |
+| CAS-002 | Stale hash | The same guard rejects a changed fresh canonical-input hash even when the revision did not advance | Treat as an integrity error; perform no write |
 | TX-001 | Atomic success | Games, histories, points, round state, bye resets and request/result attestations commit together | No partial observable state |
 | TX-002 | Injected failure | A failure injected after each individual write rolls back every write in the transaction | Original tournament remains byte/logically identical |
 | MODE-001 | FIDE allow-list | FIDE mode selects only the declared engine/system and rejects unknown identifiers | No legacy/manual fallback |
@@ -64,7 +64,7 @@ product state, not against a legacy transport's permissiveness.
    root and every migration path, then build the candidate identity only from
    the emitted commit and manifest hashes.
 2. Close MAP and pre-call ID checks with no engine call and no database mutation.
-3. Close the post-call identity and OUT checks against synthetic in-memory or
+3. Close the post-call identity, OUT and portable pre-commit guard checks against synthetic in-memory or
    disposable-database data; verifier `GO` must still leave product state
    untouched.
 4. Exercise CAS and every TX failure injection in an isolated database.

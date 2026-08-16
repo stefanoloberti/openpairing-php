@@ -1,0 +1,60 @@
+{
+  "schema": "openpairing.thp-precommit-guard-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T03:47:30+02:00",
+  "baseCommit": "00832bf7b1059fb872301c4a84b7e2eb0e7d0c22",
+  "files": {
+    "docs/schema/thp-precommit-observation-1.schema.json": "cc6352d9a7b6d8964edd73bbad89ce118e42287b328ebdcc67598ea8f050b1ae",
+    "tools/verify_thp_precommit_guard.php": "b19facb5b7b11e8460dee0c7fbef28cb7ea1cc058bf620266e57592d9634f7d9",
+    "tests/Integration/ThpPrecommitGuardVerifierTest.php": "087ef62341839c62e6e65e50eada23b917c6b89af5ca3fe9f289ab2613970347",
+    "docs/THP-INTEGRATION-CONTRACT.md": "d3f8ee560900c55504a2d4eb9457775b06172cb34d0e7702e644c01037895da2",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "d0599468ca70b1f6bc48b5cb3c53a1ae99dd2661766507c37cbab411b9a00f9a"
+  },
+  "checks": {
+    "targetedWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 15,
+      "assertions": 133
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "expandedRepositorySecretScan": {
+      "status": "PASS",
+      "filesScanned": 371,
+      "binaryFilesSkipped": 21,
+      "findings": 0
+    },
+    "repositorySuiteWindows": {
+      "status": "PASS",
+      "tests": 337,
+      "assertions": 2037,
+      "skipped": 1
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerifiedBeforeThisCheckpointWasFinalized": 40
+    },
+    "coveredBehaviours": [
+      "the original request gate is replayed before any comparison",
+      "job and candidate identity drift are infrastructure errors",
+      "a changed tournament revision is an honest NO_GO",
+      "a changed canonical input is an honest NO_GO even when the revision is unchanged",
+      "fresh-snapshot hash drift and non-canonical input fail closed",
+      "an observation cannot predate its request",
+      "GO does not claim a live database reread or authorize mutation, commit or publication"
+    ]
+  },
+  "boundary": {
+    "chessPairingsAdapterImplemented": false,
+    "liveDatabaseRereadProven": false,
+    "databaseMutationPerformed": false,
+    "atomicTransactionImplemented": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_PORTABLE_PRECOMMIT_GUARD_READY_LIVE_REREAD_AND_TRANSACTION_REMAIN_OPEN"
+}
