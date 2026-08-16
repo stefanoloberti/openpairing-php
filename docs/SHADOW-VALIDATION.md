@@ -30,17 +30,22 @@ Each attempted turn records one `openpairing.shadow-turn/1` envelope containing:
 - validator outcome and, when needed, the independent classification reference.
 
 Raw states containing personal data remain inside the controlled environment.
-Reproduction fixtures leaving it must be minimized and pseudonymized.
-Functional hashes exclude elapsed-time diagnostics and trace prose; they cover
-boards, colours, PAB, float assignments, quality vector and violations.
+Reproduction fixtures leaving it must be minimized and pseudonymized. The two
+comparison hashes cover the publishable product pairing projection: ordered
+boards, colours and PAB. OpenPairing's isolated result additionally hashes its
+float assignments, quality vector and violations for local validation, but that
+engine-internal hash cannot be compared with an incumbent product that exposes
+only pairings and is not exported as if it were the same projection.
 
 The transport formats are pinned by
 `schema/shadow-turn-1.schema.json` and
 `schema/shadow-evidence-batch-1.schema.json`. A batch manifest records the
 exact identity, event-stream SHA-256, attempted-turn denominator, product
-budgets and hash-pinned fixture coverage. The corresponding event stream is
-newline-delimited JSON so it can be appended atomically without retaining raw
-personal state.
+budgets and hash-pinned fixture coverage. Each observation is first published
+as one flushed immutable file by atomic same-filesystem promotion. A closed
+batch deterministically orders those files and builds the newline-delimited
+JSON stream; evidence is never accepted from a partial append and raw personal
+state is not retained in the stream.
 
 Run `php tools/verify_shadow_evidence.php MANIFEST EVENTS_NDJSON`. The default
 gate requires 10,000 observed turns; a lower `--minimum-turns=N` is only for
@@ -74,9 +79,11 @@ Every observed turn belongs to exactly one category:
 8. `infrastructure-error` or `not-observed`.
 
 A difference is not accepted from equality alone and is not rejected merely
-because an incumbent engine chose another legal optimum. Non-exact results
-require the same Gacrux/oracle-first classification policy used by the corpus
-gate, with the normative FIDE rule taking precedence over an oracle defect.
+because an incumbent engine chose another legal optimum. Every non-exact
+result, including a colour-only variant, requires classification and a
+minimized reproduction reference under the same Gacrux/oracle-first policy
+used by the corpus gate; a local violation requires its reproduction. The
+normative FIDE rule takes precedence over an oracle defect.
 
 ## Acceptance gate
 
