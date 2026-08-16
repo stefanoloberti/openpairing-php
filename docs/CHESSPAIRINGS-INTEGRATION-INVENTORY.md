@@ -7,8 +7,10 @@ identity, so a sanitized copy was frozen separately as non-deployed candidate
 synthetic observation coordinator as rc.21, the Team staging line progressed
 independently through rc.30, and the initial-colour correction is frozen as
 source-only rc.31. The atomic individual result-batch correction is frozen as
-source-only rc.32, and English catalogue parity is frozen as source-only
-rc.33. No production request was made; none of these corrections changed a
+source-only rc.32. English catalogue parity, rating-import translation and
+browser-key hygiene, the English operator manual and isolated rating-import
+state are frozen through source-only rc.37. No production request was made;
+none of these corrections changed a
 database or staging.
 
 The exact inspected file hashes and findings are recorded in
@@ -33,16 +35,18 @@ recorded in
 `evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json`.
 The rc.33 zero-missing-key English catalogue checkpoint is recorded in
 `evidence/chesspairings-english-catalogue-checkpoint-20260816.json`.
+The rc.37 import isolation and exact source freeze are recorded in
+`evidence/chesspairings-rating-import-isolation-checkpoint-20260816.json`.
 
 The current isolated candidate is commit
-`7baabc4abdd714d719d4de1a5417407fc6bcd2cc`, derived from the exact clean
-rc.32 commit `7a6c4d315410d2c8f0b63199ae460448ce93e250`. The rc.33 bundle SHA-256 is
-`2a927babf61cc086f1920a57880765166227bc882875afda1431bab20fc1b25d`;
+`95c3e6e20d335db3aee5bc34d6a0f6d38b3cdccf`, derived from the exact clean
+rc.36 commit `9cf3f47ff1919be8c1d935480f2173c8e72049af`. The rc.37 bundle SHA-256 is
+`625aec1962a62f6b05533157d7a7fcd31ca1e1e87203e5d2e9cccefab2b4300e`;
 the source archive is reproduced four ways at SHA-256
-`31c7075ce82bc51c747e4aa7a5736b9ff81cbc1fc8d5216eb9b8a5e16c1eb31a`.
-The archive has 669 entries, no environment config or symlink, and the
-distribution scan examined 499 text files with zero findings. Owner-side
-rotation of the credential removed earlier remains required and is not
+`6c8a2271e948829e40f7429839e3f89ebbe44ca6046923004d0785dd4f6a1a8d`.
+The archive has 675 entries, no environment config or symlink, and the
+distribution scan examined 504 text files with zero findings. Owner-side
+rotation of the browser key removed earlier remains required and is not
 claimed by this repository.
 
 ## Current seam
@@ -143,9 +147,11 @@ path, never an in-place production switch. It must:
 6. **Source complete, runtime open:** rc.32 makes individual result batches
    all-or-nothing, round-bound and per-board revision-bound; retain stale-client,
    concurrent-submit and injected-failure rollback evidence on isolated staging.
-7. **Source complete, visual workflow open:** rc.33 supplies every Italian
-   catalogue key in English; translate the hard-coded rating-import page and
-   retain exact-candidate English visual/manual evidence.
+7. **Source complete, runtime/visual workflow open:** rc.37 carries complete
+   English catalogue parity, translated rating import, an English manual and
+   per-admin import isolation. Execute its disposable-database import,
+   concurrency, interruption and rollback probes and retain exact-candidate
+   English visual/manual evidence.
 8. Bind every shadow event to the exact identity manifest and validate batches
    with `tools/verify_shadow_evidence.php`.
 9. Only after the shadow and complete THP workflow gates close, create a new

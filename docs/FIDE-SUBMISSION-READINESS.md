@@ -122,9 +122,15 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    a public final package also remain required. Rc.32 now implements atomic,
    round-bound and per-board revision-bound result batches in source, but its
    concurrent-submit and rollback behavior still needs isolated-staging proof.
-   Rc.33 also reaches 3,181/3,181 Italian-to-English catalogue-key parity;
-   the hard-coded rating-import page, English visual execution and packaged
-   operator manual remain open and the complete product gate stays `NO_GO`.
+   Rc.33 reaches complete Italian-to-English catalogue-key parity. Rc.34
+   translates the rating-import page, rc.35 removes its embedded browser key,
+   rc.36 packages an identity-bound English operator manual, and rc.37
+   isolates each administrator's rating-import workspace behind POST/CSRF,
+   an owner/session run token, one non-blocking lock, validated basenames and
+   atomically promoted progress. The exact rc.37 source freeze passes with
+   3,249/3,249 catalogue keys, but disposable-database import/concurrency/
+   rollback probes, English visual execution and owner-side browser-key
+   rotation remain open. The complete product gate stays `NO_GO`.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
 6. Only then populate the live TEC forms and pay testing fees.
