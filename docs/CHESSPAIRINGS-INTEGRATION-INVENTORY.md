@@ -96,3 +96,6 @@ path, never an in-place production switch. It must:
 6. Only after the shadow and complete THP workflow gates close, create a new
    separately authorised release candidate. No step here authorises a
    production change.
+
+The executable acceptance sequence and required synthetic fixture families
+are enumerated in `THP-PRODUCT-ACCEPTANCE-PLAN.md`.

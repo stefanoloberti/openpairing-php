@@ -84,6 +84,7 @@
         {"path": "docs/FIDE-SUBMISSION-READINESS.md"},
         {"path": "docs/SHADOW-VALIDATION.md"},
         {"path": "docs/THP-INTEGRATION-CONTRACT.md"},
+        {"path": "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md"},
         {"path": "docs/CHESSPAIRINGS-INTEGRATION-INVENTORY.md"},
         {"path": "docs/schema/thp-candidate-identity-1.schema.json"},
         {"path": "docs/schema/thp-pairing-request-1.schema.json"},

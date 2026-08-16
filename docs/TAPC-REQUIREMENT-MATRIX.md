@@ -63,6 +63,8 @@ identity must not be combined silently.
 - `SUBMISSION-ARCHITECTURE.md`: product-identity boundary and sequencing.
 - `THP-INTEGRATION-CONTRACT.md`: exact adapter, transaction and fail-closed
   product boundary.
+- `THP-PRODUCT-ACCEPTANCE-PLAN.md`: product mapping, transaction, recovery,
+  FIDE-mode and shadow-isolation acceptance checks.
 - `TEC-SCOPE-ENQUIRY-DRAFT.md`: owner-review questions for TEC.
 - `CORPUS-GATE.md`: immutable corpus identities and partition status.
 - `TRF26-INDIVIDUAL-GAP-AUDIT.md`: declared codec surface and record `299` decision.
