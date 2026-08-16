@@ -94,6 +94,11 @@ were verified after the switch. Versioned deployment evidence is
 `docs/evidence/release-rc5-staging-59e8924.json`. No further RC number is
 allocated merely for documentation or corpus progress.
 
+Long-running future corpus epochs must also follow
+`CORPUS-SHARD-OBSERVABILITY.md`. The heartbeat described there is operational
+telemetry, not accepted evidence, and cannot be added to an already running
+identity.
+
 Release candidate 6, tag `b6a2c1b`, corrects float-history ageing across
 unplayed rounds. It was deployed atomically to
 `production-current-20260813-openpairing-rc6-b6a2c1b`; its PHP 8.3.6 gate
