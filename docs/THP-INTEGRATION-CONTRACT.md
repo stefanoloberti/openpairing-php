@@ -177,6 +177,23 @@ once application. A second recovery pass must be idempotent. The verifier
 validates supplied, privacy-minimised evidence; it neither restarts a worker
 nor accesses a database, so `GO` is not a product acceptance verdict.
 
+FIDE-mode routing is recorded separately in
+`docs/schema/thp-mode-probe-batch-1.schema.json` and checked against the exact
+candidate identity with:
+
+```console
+php tools/verify_thp_mode_probes.php mode-probes.json candidate.json artifact-root
+```
+
+There must be one successful route for every pairing system declared by the
+candidate and exactly four fail-closed routes: unknown system, team input,
+individual TRF record `299`, and another undeclared feature. Rejected routes
+must make zero OpenPairing, legacy or manual-fallback calls and zero writes;
+successful routes must call the selected declared system exactly once and
+still make no write during this pre-transaction probe. The exact product
+harness must count calls at the real GUI/API routing seam. The verifier only
+validates the supplied, identity-bound and privacy-minimised call record.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.
