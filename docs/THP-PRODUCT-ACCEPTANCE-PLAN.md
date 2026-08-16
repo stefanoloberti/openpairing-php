@@ -38,7 +38,7 @@ OpenPairing change starts a new identity and a new evidence stream.
 | SHD-002 | Privacy | Exported NDJSON contains only the allowed pseudonymous fields and hashes | Verifier returns infrastructure error and evidence is quarantined |
 | SEC-001 | Distribution secrets | The exact source, installer and runtime contain no embedded provider credential, token, private key or environment-specific secret | Stop packaging, rotate the exposed credential through the owner and rebuild a new candidate identity |
 | SEC-002 | Runtime configuration | Required secrets are injected through documented deployment configuration with least privilege and are absent from diagnostics/evidence | FIDE mode and submission packaging remain disabled |
-| PERF-001 | Budget | Exact delivered build stays within declared per-turn latency and memory budgets across supported sizes | Product gate remains open on an overrun |
+| PERF-001 | Budget | `tools/verify_thp_performance_probes.php` checks the complete candidate-declared system/size matrix, repeated deterministic output, zero writes and every-sample latency/memory budgets | Product gate remains open on any overrun, missing probe or non-deterministic output |
 
 ## Mandatory fixture families
 
@@ -72,7 +72,8 @@ product state, not against a legacy transport's permissiveness.
 5. Exercise crash/restart, late-completion and duplicate-delivery scenarios in
    the isolated product environment, then validate the recovery probe batch;
    close FIDE-mode behavior separately.
-6. Run exact-candidate staging fixtures and the product budget.
+6. Run exact-candidate staging fixtures, measure the complete pre-write product
+   route, and validate its identity-bound performance probe batch.
 7. Start the non-mutating observer in `SHADOW-VALIDATION.md` only after owner,
    privacy and operational review.
 

@@ -194,6 +194,24 @@ still make no write during this pre-transaction probe. The exact product
 harness must count calls at the real GUI/API routing seam. The verifier only
 validates the supplied, identity-bound and privacy-minimised call record.
 
+The full pre-write product route has its own performance matrix in
+`docs/schema/thp-performance-probe-batch-1.schema.json`. Validate the matrix
+against the exact candidate with:
+
+```console
+php tools/verify_thp_performance_probes.php performance-probes.json candidate.json artifact-root
+```
+
+The batch declares the supported player range, explicit time/memory budgets
+and at least three increasing player counts including the supported maximum.
+Every declared pairing system must have one probe at every required size, with
+at least three complete samples from the identical immutable input. Every
+sample must finish within both budgets and return the same functional hash;
+the pre-write probe must make zero writes. The measured interval belongs to
+the product harness and must include snapshot mapping, the engine call and
+independent result validation. The verifier does not execute or time that
+route itself, so its `GO` is an evidence-format verdict only.
+
 Publication remains a separate operator action. Shadow output cannot enter
 this transaction, alter the primary result or trigger a retry of the primary
 action.

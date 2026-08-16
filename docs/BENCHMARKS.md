@@ -73,3 +73,12 @@ pairing calls. The engine and source-tree hashes exactly match the active RC8
 campaign. This is a conservative portability/capacity observation rather than
 an SLA; the exact report is
 `evidence/turn-benchmark-p80-r7-windows-limbs-20260816.json`.
+
+At 150 players and round 9, the same fallback profile needed 218.123 seconds
+for one pairing call and about 184 MiB peak memory; preparing the deterministic
+eight-round history took 1,273.147 seconds. This single repetition is a
+planning measurement, not a statistically closed product budget. It shows
+that 150 players cannot be advertised under a 30--60 second portable fallback
+budget: an exact product claim at that size must require the GMP profile or
+declare a slower service level. The exact report is
+`evidence/turn-benchmark-p150-r9-windows-limbs-20260816.json`.

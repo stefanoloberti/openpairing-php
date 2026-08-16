@@ -1,0 +1,38 @@
+{
+  "schema": "openpairing.thp-performance-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T04:59:51+02:00",
+  "baseCommit": "b2164ae5cd1219e432888624c392b03ccb7e37b6",
+  "files": {
+    "docs/schema/thp-performance-probe-batch-1.schema.json": "b1f87686319772d1787660df526ffcf52946059f86d86c6d0c07e345c34686f1",
+    "tools/verify_thp_performance_probes.php": "00f9ce504a7e3326f50cf3486792331fb322d0e2296f0f6d10fa5b1c6ff4d4a6",
+    "tests/Integration/ThpPerformanceProbeVerifierTest.php": "0c94647aaee27a816893e49f4e3a2e4375afc0817c68360ef31ba260c4d085c6",
+    "docs/THP-INTEGRATION-CONTRACT.md": "0cd5cf49f5e679774d9ffea7f49a7e79420dcf8060b9cdc4a349cc0a75999d68",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "8cb606fd5de35ae3f3cf6697ccadfcb83b786b200672392586a5a30be854b4d9"
+  },
+  "checks": {
+    "targetedWindows": {"status": "PASS", "php": "8.4.24", "tests": 9, "assertions": 467},
+    "staticAnalysis": {"status": "PASS", "errors": 0},
+    "expandedRepositorySecretScan": {"status": "PASS", "filesScanned": 391, "binaryFilesSkipped": 21, "findings": 0},
+    "repositorySuiteWindows": {"status": "PASS", "tests": 374, "assertions": 2984, "skipped": 1},
+    "submissionReadiness": {"status": "NO_GO", "closedGates": 2, "blockingGates": 8, "evidenceFilesVerified": 53},
+    "coveredBehaviours": [
+      "the batch is bound to the verified candidate, product source, migration set and arithmetic backend",
+      "at least three increasing player counts are required and must include the declared supported maximum",
+      "every candidate-declared pairing system is measured at every required player count",
+      "every probe has at least three samples and its repetition denominator must be exact",
+      "every sample must succeed within both declared latency and peak-memory budgets",
+      "repeated immutable-input samples must have one deterministic functional-output hash",
+      "the complete pre-write performance route must record zero writes",
+      "missing matrix cells and malformed denominators are infrastructure errors; overruns are honest NO_GO outcomes",
+      "GO does not claim the verifier executed or timed the product route"
+    ]
+  },
+  "boundary": {
+    "chessPairingsProductRouteMeasured": false,
+    "productPerformanceMatrixExecuted": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_PRODUCT_PERFORMANCE_EVIDENCE_GATE_READY_EXACT_PRODUCT_MEASUREMENTS_REMAIN_OPEN"
+}
