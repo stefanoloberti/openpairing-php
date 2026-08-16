@@ -46,9 +46,11 @@
     "check": [
       "@test",
       "@analyse",
-      "@check-api"
+      "@check-api",
+      "@check-secrets"
     ],
     "check-api": "@php tools/verify_public_api.php",
+    "check-secrets": "@php tools/scan_distribution_secrets.php .",
     "checkpoint": [
       "@check",
       "@test-stress",

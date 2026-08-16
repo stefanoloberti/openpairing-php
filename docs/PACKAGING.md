@@ -19,6 +19,9 @@ stable-release gate open because it is neither a frozen THP nor a non-RC tag.
    credential findings. Run `php tools/scan_distribution_secrets.php ROOT` as
    a value-redacting heuristic preflight; a finding requires private owner
    review and credential rotation, while a PASS does not replace manual review.
+   The repository-level scan is also part of `composer check` and therefore of
+   every PHP/backend CI cell; extracted installers and archives still require
+   their separate release-time scans.
 6. `API-STABILITY.md`, licence/provenance, changelog, support links and the
    limitations statement match the tag.
 7. A non-RC version is selected only after the applicable corpus, acceleration,
