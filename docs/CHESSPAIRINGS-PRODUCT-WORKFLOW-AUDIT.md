@@ -3,8 +3,9 @@
 This is a source-level audit of the isolated ChessPairings Web line. The
 original complete inventory used rc.21. The individual initial-colour,
 atomic-start and result-batch findings were subsequently corrected through
-source-only candidate `5.21.0-rc.32`, commit
-`7a6c4d315410d2c8f0b63199ae460448ce93e250`. No product database, staging or
+source-only candidate rc.32; English catalogue parity is added by current
+source-only candidate `5.21.0-rc.33`, commit
+`7baabc4abdd714d719d4de1a5417407fc6bcd2cc`. No product database, staging or
 production was changed by those corrections. The candidate is not FIDE approved
 or endorsed and this audit does not close the `complete-thp-workflow` gate.
 
@@ -17,6 +18,8 @@ frozen in
 `evidence/chesspairings-initial-colour-checkpoint-20260816.json`.
 The atomic result-batch follow-up is frozen in
 `evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json`.
+The English catalogue follow-up is frozen in
+`evidence/chesspairings-english-catalogue-checkpoint-20260816.json`.
 
 ## Verdict
 
@@ -31,8 +34,8 @@ workflow required for submission. The gate therefore remains **NO-GO**.
 | Individual FIDE mode | Server-side profile locks Dutch/BBP6, disables manual pairing and verifies BBP6 plus Gacrux identities; rc.31 serializes and persists one initial-colour draw inside the atomic start boundary | Partial; OpenPairing is not a product route and the new migration/rollback/concurrency path has not run on isolated staging |
 | Recovery | Deleted-tournament snapshots and several pairing paths use transactions | Partial; snapshot restore deliberately skips failed child rows and pairing/result recovery probes have not run on the exact candidate |
 | TRF import/export | Individual TRF import is previewed, hash-bound, transactional and now records explicit/inferred/pending record-`152` provenance | Partial; the exact candidate still needs a database round trip and record `299` remains outside the lossless profile |
-| English UI/manual | English is the default language and the English catalogue has 3,126 keys | NO-GO; 59 Italian catalogue keys have no English entry, the FIDE rating-import page is hard-coded Italian, and an English packaged operator manual is unproved |
-| Public package/download | The rc.32 source archive is reproduced four ways, its Git bundle is off-site backed up and its notice matches rc.32 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
+| English UI/manual | English is the default language and rc.33 has complete 3,181/3,181 catalogue-key parity | NO-GO; the FIDE rating-import page is still hard-coded Italian, and the exact English visual workflow plus packaged operator manual are unproved |
+| Public package/download | The rc.33 source archive is reproduced four ways, its Git bundle is off-site backed up and its notice matches rc.33 | NO-GO; metadata still says RC/not approved and no controlled final public download is present |
 
 ## Detailed findings
 
@@ -124,20 +127,20 @@ prove unchanged canonical state or a complete committed state.
 ### English interface and package
 
 The language subsystem defaults to English and exposes seven PHP catalogues.
-A mechanical catalogue comparison found 3,126 English keys and 3,185 Italian
-keys: 59 keys present in Italian are absent from English. Most are tie-break
-explanations, which are directly relevant to an arbiter workflow. The FIDE
-rating-import page also emits Italian HTML and hard-coded Italian status/error
-messages.
+Rc.33 supplies all 3,181 Italian catalogue keys in English, including the
+complete public tiebreak guide and the missing round-robin result-selection
+message. The deterministic parity test passes on PHP 8.2 and PHP 8.3/GMP.
+The FIDE rating-import page still emits Italian HTML and hard-coded Italian
+status/error messages.
 
 The exact final English workflow and manual therefore require both catalogue
 completion and visual execution evidence. Source presence alone is not enough.
 
-The frozen rc.32 source archive and bundle are sound internal checkpoints, not
+The frozen rc.33 source archive and bundle are sound internal checkpoints, not
 a public package. Their metadata still says `release-candidate` and
 `officialRecognition: none`; there is no final public download route,
 signature/checksum page or controlled installer. The third-party notice now
-matches rc.32 but must be regenerated again for the final identity.
+matches rc.33 but must be regenerated again for the final identity.
 
 ## Required closure order
 
@@ -149,8 +152,8 @@ matches rc.32 but must be regenerated again for the final identity.
    and rollback cases.
 4. Execute an exact-candidate database TRF round trip and retain the explicit
    record-`152` provenance evidence.
-5. Complete the English catalogue and run the complete English GUI/manual
-   workflow on the exact candidate.
+5. Translate the remaining hard-coded rating-import page and run the complete
+   English GUI/manual workflow on the exact candidate.
 6. Connect the already-frozen OpenPairing shadow observer only in an isolated
    authorised environment, then collect a denominator-preserving cohort.
 7. Freeze a non-RC combined identity and publish the controlled package,

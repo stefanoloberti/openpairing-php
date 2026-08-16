@@ -122,6 +122,9 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
    a public final package also remain required. Rc.32 now implements atomic,
    round-bound and per-board revision-bound result batches in source, but its
    concurrent-submit and rollback behavior still needs isolated-staging proof.
+   Rc.33 also reaches 3,181/3,181 Italian-to-English catalogue-key parity;
+   the hard-coded rating-import page, English visual execution and packaged
+   operator manual remain open and the complete product gate stays `NO_GO`.
 5. Freeze one non-RC source/product/runtime identity, reproduce all gates from
    it, and assemble the controlled environment plus English manual.
 6. Only then populate the live TEC forms and pay testing fees.

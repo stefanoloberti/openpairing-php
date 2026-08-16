@@ -125,7 +125,8 @@
         {"path": "docs/evidence/chesspairings-shadow-observation-coordinator-checkpoint-20260816.json", "sha256": "a8f4d7a070c7a2e3d78e76e1ee0736cb2ab447bbce12e64d20c0002cf4aba8b7"},
         {"path": "docs/evidence/chesspairings-product-workflow-audit-20260816.json", "sha256": "7a0b442837169bd02a5b05265d5a80ed337ed349c0d7fe1d38edd87b27629c3b"},
         {"path": "docs/evidence/chesspairings-initial-colour-checkpoint-20260816.json", "sha256": "dddcf275ce9505cde94d339128c26ab572eeeb6b51acbfa1fd320f20fd19d764"},
-        {"path": "docs/evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json", "sha256": "bd08abf401ab25775b4102d3fe71ba163b1006e3474930f46da40112f4d191a4"}
+        {"path": "docs/evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json", "sha256": "bd08abf401ab25775b4102d3fe71ba163b1006e3474930f46da40112f4d191a4"},
+        {"path": "docs/evidence/chesspairings-english-catalogue-checkpoint-20260816.json", "sha256": "881a3492ccd5ffdbfd67754d194b9bf8bf395a6a1487bbec81da80cbceca5404"}
       ]
     },
     {
