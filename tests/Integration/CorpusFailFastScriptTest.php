@@ -86,6 +86,14 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('Primary verifier is already computing', $script);
         self::assertStringContainsString('crossWorkerImport', $script);
         self::assertStringContainsString('importerSha256', $script);
+        self::assertStringContainsString(
+            '"$temporary_classification" "$final_report" "$temporary_final_attestation" "$temporary_final_validation"',
+            $script,
+        );
+        self::assertStringNotContainsString(
+            '"$temporary_classification" "$final_report" "$final_attestation" "$final_validation"',
+            $script,
+        );
         self::assertStringContainsString('mv -- "$temporary_report" "$final_report"', $script);
         self::assertStringContainsString('mv -- "$temporary_final_classification" "$final_classification"', $script);
         self::assertLessThan(
@@ -106,6 +114,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('sha256sum', $script);
         self::assertStringContainsString('temporary_destination="$destination.tmp.$$"', $script);
         self::assertStringContainsString('mv -- "$temporary_destination" "$destination"', $script);
+        self::assertStringContainsString('$process.StandardInput.Close()', $script);
+        self::assertStringContainsString('& wsl.exe -d ChessPairings-Ubuntu-24.04 -- bash $linuxScriptTemporary', $script);
         self::assertStringContainsString('tooling/511904e/corpus/import_cross_worker_shard.sh', $script);
         self::assertStringNotContainsString('scp ', $script);
     }

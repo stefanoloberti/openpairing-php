@@ -71,31 +71,67 @@ sha256sum "$destination"
     $bashBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($bashTemplate))
     $remoteScript = @'
 $ErrorActionPreference = 'Stop'
-$payload = [Console]::In.ReadToEnd()
+$payload = [Console]::In.ReadLine()
+if ([string]::IsNullOrWhiteSpace($payload)) { throw 'empty Base64 payload' }
 $temporary = Join-Path $env:USERPROFILE '__TEMP__'
 [IO.File]::WriteAllText($temporary, $payload, [Text.Encoding]::ASCII)
-$linuxTemporary = (& wsl.exe -d ChessPairings-Ubuntu-24.04 -- wslpath -a $temporary).Trim()
+$qualifiedTemporary = [IO.Path]::GetFullPath($temporary)
+$drive = $qualifiedTemporary.Substring(0, 1).ToLowerInvariant()
+$linuxTemporary = "/mnt/$drive$($qualifiedTemporary.Substring(2).Replace('\', '/'))"
 $bash = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('__BASH_BASE64__')).Replace('__LINUX_TEMPORARY__', $linuxTemporary)
+$scriptTemporary = "$temporary.sh"
 try {
-    & wsl.exe -d ChessPairings-Ubuntu-24.04 -- bash -lc $bash
+    [IO.File]::WriteAllText($scriptTemporary, $bash, (New-Object Text.UTF8Encoding($false)))
+    $qualifiedScriptTemporary = [IO.Path]::GetFullPath($scriptTemporary)
+    $scriptDrive = $qualifiedScriptTemporary.Substring(0, 1).ToLowerInvariant()
+    $linuxScriptTemporary = "/mnt/$scriptDrive$($qualifiedScriptTemporary.Substring(2).Replace('\', '/'))"
+    & wsl.exe -d ChessPairings-Ubuntu-24.04 -- bash $linuxScriptTemporary
     if ($LASTEXITCODE -ne 0) { throw "Primary intake failed with exit code $LASTEXITCODE." }
 } finally {
-    Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $temporary, $scriptTemporary -Force -ErrorAction SilentlyContinue
 }
 '@
     $remoteScript = $remoteScript.Replace('__TEMP__', "openpairing-$Shard-$Kind.b64")
-        .Replace('__BASH_BASE64__', $bashBase64)
+    $remoteScript = $remoteScript.Replace('__BASH_BASE64__', $bashBase64)
     $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($remoteScript))
-    $base64 | & ssh $primaryAlias powershell.exe -NoProfile -NonInteractive -EncodedCommand $encoded
-    if ($LASTEXITCODE -ne 0) {
-        throw "Verified transfer failed for $Kind with exit code $LASTEXITCODE."
+
+    $startInfo = New-Object Diagnostics.ProcessStartInfo
+    $startInfo.FileName = 'ssh.exe'
+    $startInfo.Arguments = "$primaryAlias powershell.exe -NoProfile -NonInteractive -EncodedCommand $encoded"
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.RedirectStandardInput = $true
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $process = [Diagnostics.Process]::Start($startInfo)
+    try {
+        $process.StandardInput.WriteLine($base64)
+        $process.StandardInput.Close()
+        $standardOutput = $process.StandardOutput.ReadToEnd()
+        $standardError = $process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        $exitCode = $process.ExitCode
+    } finally {
+        if (-not $process.HasExited) {
+            $process.Kill()
+        }
+        $process.Dispose()
+    }
+    if ($standardOutput.Length -gt 0) {
+        Write-Output $standardOutput.Trim()
+    }
+    if ($standardError.Length -gt 0) {
+        [Console]::Error.Write($standardError)
+    }
+    if ($exitCode -ne 0) {
+        throw "Verified transfer failed for $Kind with exit code $exitCode."
     }
 }
 
 $sourceReport = "$sourceRoot/reports/$Shard.json"
 $sourceAttestation = "$sourceRoot/attestations/$Shard.json"
-$reportSha = (Get-RemoteText $sourceAlias @('wsl.exe', '-d', $sourceDistribution, '--', 'sha256sum', $sourceReport) -split '\s+')[0]
-$attestationSha = (Get-RemoteText $sourceAlias @('wsl.exe', '-d', $sourceDistribution, '--', 'sha256sum', $sourceAttestation) -split '\s+')[0]
+$reportSha = ((Get-RemoteText $sourceAlias @('wsl.exe', '-d', $sourceDistribution, '--', 'sha256sum', $sourceReport)) -split '\s+')[0]
+$attestationSha = ((Get-RemoteText $sourceAlias @('wsl.exe', '-d', $sourceDistribution, '--', 'sha256sum', $sourceAttestation)) -split '\s+')[0]
 if ($reportSha -notmatch '^[0-9a-f]{64}$' -or $attestationSha -notmatch '^[0-9a-f]{64}$') {
     throw 'Source report or attestation hash is invalid.'
 }

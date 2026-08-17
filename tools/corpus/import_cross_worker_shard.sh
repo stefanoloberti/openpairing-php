@@ -115,7 +115,7 @@ php -r '
         "primaryAcceptor" => gethostname(),
     ];
     echo json_encode($classification, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), "\n";
-' "$temporary_classification" "$final_report" "$final_attestation" "$final_validation" \
+' "$temporary_classification" "$final_report" "$temporary_final_attestation" "$temporary_final_validation" \
     "$source_tree/tools/corpus/classify_shard_fail_fast.sh" "$0" \
     >"$temporary_final_classification"
 
