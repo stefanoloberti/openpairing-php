@@ -71,7 +71,7 @@ sha256sum "$destination"
     $bashBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($bashTemplate))
     $remoteScript = @'
 $ErrorActionPreference = 'Stop'
-$payload = [Console]::In.ReadLine()
+$payload = [Console]::In.ReadToEnd()
 if ([string]::IsNullOrWhiteSpace($payload)) { throw 'empty Base64 payload' }
 $temporary = Join-Path $env:USERPROFILE '__TEMP__'
 [IO.File]::WriteAllText($temporary, $payload, [Text.Encoding]::ASCII)
