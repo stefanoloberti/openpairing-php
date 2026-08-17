@@ -55,6 +55,17 @@ The 17:00 Europe/Rome autonomy-window handoff is recorded in
 running and enabled, records zero promoted epoch-4 shards at close, and keeps
 submission readiness at `NO_GO`.
 
+The first accepted epoch-4 wave closed on 17 August with 30/256 shard pairs:
+20 computed on the primary and 10 whole, disjoint shards (`s192`-`s201`)
+computed on `python-69` and accepted only after primary integrity validation
+and Gacrux classification. The combined snapshot covers 2,360 tournaments and
+77,664/77,664 exact rounds, with zero colour variants, deviations,
+no-solutions or resource limits. All 30 classifications are
+`PASS_NO_ORACLE_CASES`; no STOP exists. The cross-host path initially failed
+closed during importer/transport commissioning and promoted no partial final
+pair. Its immutable importer and first accepted wave are recorded in
+`evidence/cross-worker-first-accepted-import-20260817.json`.
+
 The historical 20-shard snapshot found 14 candidate pairing deviations and
 zero no-solutions. Gacrux classified all 14 as
 `inferior-to-checker-optimum`; their first differences were HE2 (9), HO1 (3)
@@ -148,7 +159,7 @@ p600 pilot retained the same three processes across the rollover. Evidence is
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
 | p50 | 30,000 | 30,000 | 30,000 | 768,324 / 768,324 | closed | `evidence/p50-full-dcf92df-20260815.json` |
-| p80 | 20,000 | pending | pending | pending | active epoch 4 under `86ec9d9` | aggregate pending |
+| p80 | 20,000 | 2,360 partial | 2,360 partial | 77,664 / 77,664 partial | active epoch 4 under `86ec9d9`; 30/256 shards | aggregate pending |
 | p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |
 | **Total** | **122,010 read** | **122,008 expected decodable** | **99,998 closed** | **1,378,198 / 1,378,198 closed** | **open** | — |

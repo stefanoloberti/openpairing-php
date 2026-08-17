@@ -248,6 +248,18 @@ The PHP 8.3/GMP regression covering raw mutation, corpus drift, provenance
 drift and non-empty diagnostics is recorded in
 `docs/evidence/cross-worker-import-regression-checkpoint-20260816.json`.
 
+The first production-like cross-host intake on 17 August exposed only
+orchestration defects, all before final promotion: premature references to
+final provenance paths and an unreliable long stdin payload through the
+Windows OpenSSH/PowerShell bridge. The immutable importer is now installed at
+`/srv/openpairing-validation/tooling/911bbab/corpus`; transport compresses and
+frames the payload, verifies the decompressed SHA-256 on the primary and still
+leaves semantic acceptance exclusively to the primary classifier. Shards
+`s192`-`s201` then passed end to end: 780 tournaments and 25,740/25,740 exact
+rounds, zero anomalies. Combined with the primary wave, epoch 4 reached 30/256
+accepted shard pairs and 77,664 exact rounds. Evidence is
+`docs/evidence/cross-worker-first-accepted-import-20260817.json`.
+
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash
 that excludes elapsed-time diagnostics and trace prose. The first loaded-host
