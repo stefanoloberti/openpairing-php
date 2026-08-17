@@ -105,11 +105,13 @@ try {
     $startInfo.RedirectStandardError = $true
     $process = [Diagnostics.Process]::Start($startInfo)
     try {
+        $standardOutputTask = $process.StandardOutput.ReadToEndAsync()
+        $standardErrorTask = $process.StandardError.ReadToEndAsync()
         $process.StandardInput.WriteLine($base64)
         $process.StandardInput.Close()
-        $standardOutput = $process.StandardOutput.ReadToEnd()
-        $standardError = $process.StandardError.ReadToEnd()
         $process.WaitForExit()
+        $standardOutput = $standardOutputTask.GetAwaiter().GetResult()
+        $standardError = $standardErrorTask.GetAwaiter().GetResult()
         $exitCode = $process.ExitCode
     } finally {
         if (-not $process.HasExited) {
