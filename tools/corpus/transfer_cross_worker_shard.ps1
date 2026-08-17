@@ -40,13 +40,27 @@ function Copy-VerifiedBase64 {
         [string] $Kind
     )
 
-    $base64 = Get-RemoteText $sourceAlias @(
+    $sourceBase64 = Get-RemoteText $sourceAlias @(
         'wsl.exe', '-d', $sourceDistribution, '--',
         'base64', '-w', '0', $SourcePath
     )
-    if ($base64.Length -lt 4) {
+    if ($sourceBase64.Length -lt 4) {
         throw "Empty Base64 payload for $Kind."
     }
+    $sourceBytes = [Convert]::FromBase64String($sourceBase64)
+    $compressed = [IO.MemoryStream]::new()
+    $gzip = [IO.Compression.GZipStream]::new(
+        $compressed,
+        [IO.Compression.CompressionMode]::Compress,
+        $true
+    )
+    try {
+        $gzip.Write($sourceBytes, 0, $sourceBytes.Length)
+    } finally {
+        $gzip.Dispose()
+    }
+    $base64 = [Convert]::ToBase64String($compressed.ToArray())
+    $compressed.Dispose()
 
     $bashTemplate = @'
 set -Eeuo pipefail
@@ -59,7 +73,7 @@ if test -e "$destination"; then
 else
     temporary_destination="$destination.tmp.$$"
     trap 'rm -f -- "$temporary_destination"' EXIT
-    base64 -d '__LINUX_TEMPORARY__' >"$temporary_destination"
+    base64 -d '__LINUX_TEMPORARY__' | gzip -dc >"$temporary_destination"
     observed=$(sha256sum "$temporary_destination" | awk '{print $1}')
     test "$observed" = "$expected"
     mv -- "$temporary_destination" "$destination"
