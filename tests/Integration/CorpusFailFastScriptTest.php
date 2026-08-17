@@ -116,7 +116,7 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('mv -- "$temporary_destination" "$destination"', $script);
         self::assertStringContainsString('$process.StandardInput.Close()', $script);
         self::assertStringContainsString('& wsl.exe -d ChessPairings-Ubuntu-24.04 -- bash $linuxScriptTemporary', $script);
-        self::assertStringContainsString('tooling/511904e/corpus/import_cross_worker_shard.sh', $script);
+        self::assertStringContainsString('tooling/911bbab/corpus/import_cross_worker_shard.sh', $script);
         self::assertStringNotContainsString('scp ', $script);
     }
 }
