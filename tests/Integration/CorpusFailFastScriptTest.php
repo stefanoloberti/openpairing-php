@@ -116,7 +116,7 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('mv -- "$temporary_destination" "$destination"', $script);
         self::assertStringContainsString('$process.StandardOutput.ReadToEndAsync()', $script);
         self::assertStringContainsString('$process.StandardError.ReadToEndAsync()', $script);
-        self::assertStringContainsString('$payload = [Console]::In.ReadToEnd()', $script);
+        self::assertStringContainsString("\$payload = ([Console]::In.ReadToEnd() -replace '\\s', '')", $script);
         self::assertStringContainsString('$offset += 1024', $script);
         self::assertStringContainsString('$base64.Substring($offset, $length)', $script);
         self::assertStringContainsString('$process.StandardInput.Close()', $script);
