@@ -1,7 +1,9 @@
 param(
     [Parameter(Mandatory = $true)]
     [ValidatePattern('^s(19[2-9]|2[0-4][0-9]|25[0-5])$')]
-    [string] $Shard
+    [string] $Shard,
+
+    [switch] $NegativeIntegrityTest
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,7 +12,12 @@ $sourceDistribution = 'Ubuntu'
 $primaryAlias = 'doppia-3090'
 $primaryDistribution = 'ChessPairings-Ubuntu-24.04'
 $sourceRoot = '/srv/openpairing-cross-worker/work/p80-epoch4-86ec9d9-python69/quarantine'
-$campaign = '/srv/openpairing-validation/campaigns/p80-epoch4-86ec9d9'
+$activeCampaign = '/srv/openpairing-validation/campaigns/p80-epoch4-86ec9d9'
+$campaign = $activeCampaign
+if ($NegativeIntegrityTest) {
+    $negativeTestId = Get-Date -Format 'yyyyMMddTHHmmssfff'
+    $campaign = "/srv/openpairing-validation/campaigns/cross-worker-negative-$negativeTestId"
+}
 $intake = "$campaign/quarantine/cross-intake/$Shard"
 $sourceTree = '/srv/openpairing-validation/releases/86ec9d9-r2'
 $upstream = '/srv/chesspairings-engine-staging/releases/production-engines-20260810/gacrux'
@@ -29,6 +36,39 @@ function Get-RemoteText {
     }
 
     return (($result -join "`n").Trim())
+}
+
+function Invoke-PrimaryTemporaryBash {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Script,
+        [Parameter(Mandatory = $true)]
+        [ValidatePattern('^[A-Za-z0-9._-]+$')]
+        [string] $Name
+    )
+
+    $bashBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($Script))
+    $remoteScript = @'
+$ErrorActionPreference = 'Stop'
+$temporary = Join-Path $env:USERPROFILE '__NAME__.sh'
+$bash = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('__BASH_BASE64__'))
+try {
+    [IO.File]::WriteAllText($temporary, $bash, (New-Object Text.UTF8Encoding($false)))
+    $qualified = [IO.Path]::GetFullPath($temporary)
+    $drive = $qualified.Substring(0, 1).ToLowerInvariant()
+    $linuxTemporary = "/mnt/$drive$($qualified.Substring(2).Replace('\', '/'))"
+    & wsl.exe -d ChessPairings-Ubuntu-24.04 -- bash $linuxTemporary
+    if ($LASTEXITCODE -ne 0) { throw "Primary temporary script failed with exit code $LASTEXITCODE." }
+} finally {
+    Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+}
+'@
+    $remoteScript = $remoteScript.Replace('__NAME__', $Name).Replace('__BASH_BASE64__', $bashBase64)
+    $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($remoteScript))
+    & ssh $primaryAlias powershell.exe -NoProfile -NonInteractive -EncodedCommand $encoded
+    if ($LASTEXITCODE -ne 0) {
+        throw "Primary temporary Bash execution failed with exit code $LASTEXITCODE."
+    }
 }
 
 function Copy-VerifiedBase64 {
@@ -160,6 +200,15 @@ $intakeAttestation = "$intake/attestation.json"
 Copy-VerifiedBase64 $sourceReport $intakeReport $reportSha 'report'
 Copy-VerifiedBase64 $sourceAttestation $intakeAttestation $attestationSha 'attestation'
 
+if ($NegativeIntegrityTest) {
+    $mutationScript = @"
+set -Eeuo pipefail
+printf '\n' >>'$intakeReport'
+sha256sum '$intakeReport'
+"@
+    Invoke-PrimaryTemporaryBash $mutationScript "openpairing-$Shard-negative-mutation"
+}
+
 $primaryCorpus = "/srv/openpairing-validation/campaigns/p80/shards/$Shard"
 $importArguments = @(
     'wsl.exe', '-d', $primaryDistribution, '--', $importer,
@@ -168,7 +217,27 @@ $importArguments = @(
     $expectedSource, $expectedHarness, $expectedCommit
 )
 & ssh $primaryAlias @importArguments
-if ($LASTEXITCODE -ne 0) {
+$importExitCode = $LASTEXITCODE
+if ($NegativeIntegrityTest) {
+    if ($importExitCode -ne 13) {
+        throw "Negative integrity control expected importer exit 13, observed $importExitCode."
+    }
+    $assertionScript = @"
+set -Eeuo pipefail
+test -s '$intakeReport'
+test -s '$intakeAttestation'
+test ! -e '$campaign/reports/$Shard.json'
+test ! -e '$campaign/classifications/$Shard.json'
+test ! -e '$campaign/provenance/$Shard.json'
+test ! -e '$campaign/validations/$Shard.json'
+test ! -e '$campaign/STOP'
+test ! -e '$activeCampaign/STOP'
+"@
+    Invoke-PrimaryTemporaryBash $assertionScript "openpairing-$Shard-negative-assertion"
+    Write-Output "OPENPAIRING_CROSS_NEGATIVE_INTEGRITY=PASS shard=$Shard importerExit=13 campaign=$campaign originalReportSha256=$reportSha"
+    exit 0
+}
+if ($importExitCode -ne 0) {
     throw "Primary import gate failed with exit code $LASTEXITCODE."
 }
 

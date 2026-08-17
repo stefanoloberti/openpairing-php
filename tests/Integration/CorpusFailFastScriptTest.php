@@ -113,6 +113,11 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString("'base64', '-w', '0'", $script);
         self::assertStringContainsString('[IO.Compression.GZipStream]::new(', $script);
         self::assertStringContainsString("gzip -dc >\"\$temporary_destination\"", $script);
+        self::assertStringContainsString('[switch] $NegativeIntegrityTest', $script);
+        self::assertStringContainsString('Invoke-PrimaryTemporaryBash', $script);
+        self::assertStringContainsString("printf '\\n' >>'\$intakeReport'", $script);
+        self::assertStringContainsString('$importExitCode -ne 13', $script);
+        self::assertStringContainsString('OPENPAIRING_CROSS_NEGATIVE_INTEGRITY=PASS', $script);
         self::assertStringContainsString('sha256sum', $script);
         self::assertStringContainsString('temporary_destination="$destination.tmp.$$"', $script);
         self::assertStringContainsString('mv -- "$temporary_destination" "$destination"', $script);
