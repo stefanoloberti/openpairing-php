@@ -260,6 +260,26 @@ rounds, zero anomalies. Combined with the primary wave, epoch 4 reached 30/256
 accepted shard pairs and 77,664 exact rounds. Evidence is
 `docs/evidence/cross-worker-first-accepted-import-20260817.json`.
 
+The supported Windows-to-WSL remote-execution rule is now singular: never pass
+multiline Bash through nested Windows, SSH and WSL argument parsing. Encode the
+script, write a uniquely named temporary `.sh` file on the remote Windows
+profile, translate its fully qualified drive path to `/mnt/<drive>/...`, run
+`wsl.exe -d <distribution> -- bash <temporary-script>` and remove the file in
+the PowerShell `finally` block. Bulk artifacts use the same boundary with
+GZip-compressed, framed stdin and are SHA-256 checked after decompression and
+before the intake rename. Inline shell strings, `wslpath` applied after Windows
+has consumed backslashes, and unframed long stdin are unsupported. New remote
+orchestration must reuse this pattern instead of adding another quoting path.
+
+The final channel also has an executable negative control. It transports a
+valid quarantined report through the production GZip/intake path, appends one
+byte only inside a new laboratory campaign, and requires the immutable
+importer to exit 13 on the raw SHA-256 mismatch. The first run preserved the
+mutated intake, promoted no report/classification/provenance/validation,
+created no STOP and left the official denominator at 30 report/classification
+pairs. Evidence is
+`docs/evidence/cross-worker-final-channel-negative-20260817.json`.
+
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash
 that excludes elapsed-time diagnostics and trace prose. The first loaded-host

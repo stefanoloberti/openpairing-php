@@ -1,0 +1,63 @@
+{
+  "schema": "openpairing.cross-worker-final-channel-negative/1",
+  "capturedAt": "2026-08-17T08:23:53+02:00",
+  "purpose": "Prove that the final GZip, intake and immutable-importer chain rejects a deliberately corrupted artifact before any official promotion.",
+  "wrapper": {
+    "commit": "9e21ee6fcbbb9914b63455cf46a12cfaf2d798df",
+    "sha256": "a3cd3088609ac36ec89131f2d61ccfa3e5e786ec8026c9c80e8a1b98753ab348",
+    "command": "tools/corpus/transfer_cross_worker_shard.ps1 -Shard s192 -NegativeIntegrityTest",
+    "transport": "source bytes encoded on python-69, decoded locally, GZip-compressed, Base64-framed over SSH stdin, decompressed and SHA-256 verified before primary intake rename"
+  },
+  "importer": {
+    "path": "/srv/openpairing-validation/tooling/911bbab/corpus/import_cross_worker_shard.sh",
+    "sha256": "ed2e4da0aa0c5cbc807b867b53c6a4e55fb7f5654ca3796abc68e766d82f3c73",
+    "expectedIntegrityFailureExit": 13,
+    "observedExit": 13
+  },
+  "isolatedCampaign": {
+    "path": "/srv/openpairing-validation/campaigns/cross-worker-negative-20260817T081545019",
+    "officialEvidence": false,
+    "sourceShard": "s192",
+    "mutation": "one LF byte appended after verified intake and before immutable importer invocation",
+    "originalReportSha256": "ff675218a6ff452e3c84b17a7b9373d0a35a81490d265968560f401ea01962fb",
+    "mutatedReportSha256": "cca53d128fd614fff7ecd744c2032cf2862bb8a63ef585af05d1a652e13890fa",
+    "attestationSha256": "61fa9f54fff6952a10153be0d09ac8a12500ff20872ec7b1e98e0b3254e5ab07",
+    "rejection": "CROSS_WORKER_IMPORT_REJECTED Cross-worker raw report SHA-256 mismatch."
+  },
+  "failClosedAssertions": {
+    "intakeReportPreserved": true,
+    "intakeAttestationPreserved": true,
+    "finalReportPromoted": false,
+    "finalClassificationPromoted": false,
+    "finalProvenancePromoted": false,
+    "finalValidationPromoted": false,
+    "laboratoryStopCreated": false,
+    "activeCampaignStopCreated": false,
+    "activeReportsBeforeAndAfter": 30,
+    "activeClassificationsBeforeAndAfter": 30,
+    "sentinel": "OPENPAIRING_CROSS_NEGATIVE_INTEGRITY=PASS"
+  },
+  "runtimeHealthAfterControl": {
+    "primaryService": "active/running",
+    "primaryWorkers": 20,
+    "primaryRestarts": 0,
+    "secondaryService": "active/running",
+    "secondaryWorkers": 10,
+    "secondaryRestarts": 0
+  },
+  "verification": {
+    "targeted": "10 tests, 134 assertions, PASS",
+    "rapid": "426 tests, 4502 assertions, PASS",
+    "phpstan": "PASS, no errors",
+    "publicApi": "PASS, 13 methods",
+    "secretScan": "PASS, 437 files, 0 findings",
+    "runtime": "Ubuntu 24.04 WSL laboratory, PHP 8.3.6 with GMP"
+  },
+  "scope": {
+    "activeCampaignMutated": false,
+    "productionMutated": false,
+    "stagingMutated": false,
+    "databaseMutated": false,
+    "servicesRestarted": false
+  }
+}

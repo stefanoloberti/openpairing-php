@@ -66,6 +66,14 @@ closed during importer/transport commissioning and promoted no partial final
 pair. Its immutable importer and first accepted wave are recorded in
 `evidence/cross-worker-first-accepted-import-20260817.json`.
 
+The definitive negative control then transported `s192` through the same
+GZip and intake path, altered the laboratory copy by one byte and observed the
+immutable importer reject it with exit 13 for a raw SHA-256 mismatch. No final
+artifact or STOP was created and the active 30/30 report/classification
+denominator remained unchanged. This closes the transport-integrity control;
+the preserved laboratory path and hashes are in
+`evidence/cross-worker-final-channel-negative-20260817.json`.
+
 The historical 20-shard snapshot found 14 candidate pairing deviations and
 zero no-solutions. Gacrux classified all 14 as
 `inferior-to-checker-optimum`; their first differences were HE2 (9), HO1 (3)
