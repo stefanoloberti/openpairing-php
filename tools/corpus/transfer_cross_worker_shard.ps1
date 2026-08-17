@@ -107,7 +107,10 @@ try {
     try {
         $standardOutputTask = $process.StandardOutput.ReadToEndAsync()
         $standardErrorTask = $process.StandardError.ReadToEndAsync()
-        $process.StandardInput.WriteLine($base64)
+        for ($offset = 0; $offset -lt $base64.Length; $offset += 1024) {
+            $length = [Math]::Min(1024, $base64.Length - $offset)
+            $process.StandardInput.WriteLine($base64.Substring($offset, $length))
+        }
         $process.StandardInput.Close()
         $process.WaitForExit()
         $standardOutput = $standardOutputTask.GetAwaiter().GetResult()

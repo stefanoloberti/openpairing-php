@@ -117,6 +117,8 @@ final class CorpusFailFastScriptTest extends TestCase
         self::assertStringContainsString('$process.StandardOutput.ReadToEndAsync()', $script);
         self::assertStringContainsString('$process.StandardError.ReadToEndAsync()', $script);
         self::assertStringContainsString('$payload = [Console]::In.ReadToEnd()', $script);
+        self::assertStringContainsString('$offset += 1024', $script);
+        self::assertStringContainsString('$base64.Substring($offset, $length)', $script);
         self::assertStringContainsString('$process.StandardInput.Close()', $script);
         self::assertStringContainsString('& wsl.exe -d ChessPairings-Ubuntu-24.04 -- bash $linuxScriptTemporary', $script);
         self::assertStringContainsString('tooling/911bbab/corpus/import_cross_worker_shard.sh', $script);
