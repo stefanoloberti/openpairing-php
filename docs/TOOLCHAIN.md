@@ -294,6 +294,19 @@ host limits are recorded in
 `docs/evidence/cross-worker-icq-p150-bootstrap-20260826.json`. That checkpoint
 authorizes computation only and contains no accepted p150 result.
 
+The closed python-69 p80 service and its 64 report/attestation pairs remain
+immutable. A separate `openpairing-cross-p150-python69.service` reuses the
+same release identity but a disjoint p150 corpus (`s080`-`s111`), ten workers
+and a distinct quarantine below
+`/srv/openpairing-cross-worker/work/p150-epoch4-86ec9d9-python69`.
+`tools/corpus/transfer_python69_p150_shard.ps1` is the only supported import
+wrapper for this range; it retains the existing primary importer, original
+corpus comparison and Gacrux classification-last boundary. The archive
+transport hash, negative identity control, installed hashes and launch health
+are recorded in
+`docs/evidence/cross-worker-python69-p150-bootstrap-20260826.json`. No p150
+output was accepted at that checkpoint.
+
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash
 that excludes elapsed-time diagnostics and trace prose. The first loaded-host

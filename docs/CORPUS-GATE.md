@@ -27,6 +27,12 @@ the original shard corpus and identity, runs Gacrux and promotes the
 classification last. The bootstrap checkpoint is
 `evidence/cross-worker-icq-p150-bootstrap-20260826.json`; it records no
 accepted p150 evidence and therefore does not change the denominator.
+A second disjoint p150 worker on `python-69` computes only `s080`-`s111`
+with ten workers, in a new service and quarantine that do not alter its
+preserved 64/64 p80 cross-host result. Its bootstrap checkpoint is
+`evidence/cross-worker-python69-p150-bootstrap-20260826.json`; like the ICQ
+checkpoint, it authorizes computation but contributes nothing until primary
+validation, Gacrux classification and classification-last promotion succeed.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
 
