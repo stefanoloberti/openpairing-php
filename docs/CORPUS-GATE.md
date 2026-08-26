@@ -20,7 +20,13 @@ gate at 500/500. The fresh p50 replay closed at 30,000/30,000 tournaments and
 per-shard fail-closed Gacrux watcher. p80 epoch 4 then closed at 20,000/20,000
 tournaments and 660,000/660,000 exact rounds. Its 256 report/classification
 pairs are complete and all classifications are `PASS_NO_ORACLE_CASES`. p150 is
-active and historical misc remains queued behind it.
+active and historical misc remains queued behind it. A disjoint ICQ worker is
+computing only whole p150 shards `s112`-`s127` with eight workers; its output
+is quarantine-only and is not historical evidence until the 3090 validates
+the original shard corpus and identity, runs Gacrux and promotes the
+classification last. The bootstrap checkpoint is
+`evidence/cross-worker-icq-p150-bootstrap-20260826.json`; it records no
+accepted p150 evidence and therefore does not change the denominator.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
 

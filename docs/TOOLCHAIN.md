@@ -280,6 +280,20 @@ created no STOP and left the official denominator at 30 report/classification
 pairs. Evidence is
 `docs/evidence/cross-worker-final-channel-negative-20260817.json`.
 
+A second Linux cross-worker is installed on `stefano@icq.local` for the
+active p150 epoch. It may calculate only whole shards `s112`-`s127` with PHP
+8.3/GMP, eight workers, Nice 10, an 800% CPU quota and fail-closed identity
+preflight. `tools/corpus/run_icq_p150_worker.sh` writes report/attestation
+pairs only below `/srv/openpairing-icq-worker/.../quarantine`; the systemd
+unit has `Restart=no`. `tools/corpus/transfer_icq_p150_shard.ps1` uses the
+same immutable primary importer as the python-69 channel and refuses partial,
+active, already accepted or identity-mismatched shards. Gacrux classification
+and classification-last promotion remain exclusive to `doppia-3090`. Rapid
+tests, GMP stress, negative identity control, transport hashes and the exact
+host limits are recorded in
+`docs/evidence/cross-worker-icq-p150-bootstrap-20260826.json`. That checkpoint
+authorizes computation only and contains no accepted p150 result.
+
 `tools/benchmark_turn.php` measures one immutable pairing state separately
 from deterministic fixture preparation. It reports a functional-result hash
 that excludes elapsed-time diagnostics and trace prose. The first loaded-host

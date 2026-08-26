@@ -1,0 +1,130 @@
+{
+  "schema": "openpairing.cross-worker-bootstrap-evidence/2",
+  "observedAtEuropeRome": "2026-08-26T12:20:18+02:00",
+  "purpose": "Quarantined, disjoint p150 verification capacity; doppia-3090 remains the sole Gacrux classifier and atomic acceptor.",
+  "campaignIdentity": {
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "engineVersion": "fide-dutch-2026.global/1",
+    "floatSemantics": "fide-dutch-float/3-round-indexed",
+    "arithmeticBackend": "gmp"
+  },
+  "tooling": {
+    "repositoryCommit": "041b9f2e6004ebcc4b0d6399234e10e336e5db67",
+    "remotesAligned": true,
+    "runner": {
+      "path": "tools/corpus/run_icq_p150_worker.sh",
+      "sha256": "0f34ff4c2ddff72df02a6b80a85522db5a9251c9e0980f4023c4c52046959966"
+    },
+    "installer": {
+      "path": "tools/corpus/install_icq_p150_worker.sh",
+      "sha256": "65cc00c18ef62cd1ed2ee76879666de65b98e6bba6e80d86a5dff25237621a36"
+    },
+    "unit": {
+      "path": "tools/corpus/openpairing-cross-p150-icq.service",
+      "sha256": "dd9ca62fa4eebf9b0c66e2d3aecbdf3b3da8eff4729bef7cf3cfd480a586111c"
+    },
+    "transferWrapper": {
+      "path": "tools/corpus/transfer_icq_p150_shard.ps1",
+      "sha256": "6159b35fa5b2ce8716c2260c51de3a14917d0094da5ffd7120a3fc33c47e6e0c",
+      "primaryImporter": "/srv/openpairing-validation/tooling/911bbab/corpus/import_cross_worker_shard.sh",
+      "primaryImporterSha256": "ed2e4da0aa0c5cbc807b867b53c6a4e55fb7f5654ca3796abc68e766d82f3c73"
+    }
+  },
+  "transport": {
+    "archive": "openpairing-icq-p150-s112-s127.tar.gz",
+    "bytes": 21305507,
+    "sha256Primary": "37762e20f623d4a84d02284b83ff7e7f8e358da2da174265044b4438c401ae8a",
+    "sha256Local": "37762e20f623d4a84d02284b83ff7e7f8e358da2da174265044b4438c401ae8a",
+    "sha256Icq": "37762e20f623d4a84d02284b83ff7e7f8e358da2da174265044b4438c401ae8a",
+    "contents": [
+      "immutable release 86ec9d9-r2",
+      "whole p150 shards s112-s127"
+    ],
+    "shards": {
+      "first": 112,
+      "last": 127,
+      "count": 16,
+      "overlapWithPrimaryAtLaunch": 0,
+      "primaryActiveAtLaunch": ["s000", "s001", "s002", "s003", "s004", "s005", "s006", "s007", "s008", "s009", "s010", "s011", "s012", "s013", "s014", "s015", "s016", "s017", "s018", "s019"]
+    }
+  },
+  "host": {
+    "sshAlias": "icq",
+    "host": "icq",
+    "operatingSystem": "Ubuntu 24.04.4 LTS",
+    "kernel": "Linux 6.8.0-136-generic x86_64",
+    "cpu": "12th Gen Intel Core i7-12650H",
+    "physicalCores": 10,
+    "logicalProcessors": 16,
+    "memoryBytes": 16535150592,
+    "swapBytes": 4294967296,
+    "diskBytes": 500235124736,
+    "php": "8.3.6-0ubuntu0.24.04.10",
+    "gmp": true,
+    "opcache": true
+  },
+  "prerequisites": {
+    "runtimeIdentityPreflight": {
+      "status": "PASS",
+      "sentinel": "OPENPAIRING_ICQ_PREFLIGHT=PASS",
+      "shards": "s112-s127",
+      "workers": 8
+    },
+    "negativeIdentity": {
+      "status": "PASS",
+      "mutation": "Expected source-tree SHA-256 replaced by 64 zeroes in a temporary runner copy.",
+      "exitCode": 4,
+      "reportCountAfter": 0,
+      "attestationCountAfter": 0,
+      "stopCreated": false
+    },
+    "rapidGate": {
+      "status": "PASS",
+      "tests": 271,
+      "assertions": 1260,
+      "phpstan": "PASS"
+    },
+    "gmpStress": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 32003,
+      "elapsedSeconds": 20.560,
+      "peakMemoryMiB": 66
+    }
+  },
+  "service": {
+    "unit": "openpairing-cross-p150-icq.service",
+    "enabled": true,
+    "stateAtCheckpoint": "activating/start",
+    "mainPid": 817714,
+    "nRestarts": 0,
+    "workers": 8,
+    "activeShards": ["s112", "s113", "s114", "s115", "s116", "s117", "s118", "s119"],
+    "nice": 10,
+    "cpuQuotaPercent": 800,
+    "memoryHighBytes": 12884901888,
+    "memoryMaxBytes": 15032385536,
+    "restartPolicy": "no",
+    "outputRoot": "/srv/openpairing-icq-worker/work/p150-epoch4-86ec9d9-icq/quarantine",
+    "acceptance": "quarantine-only",
+    "stopPresent": false
+  },
+  "promotionProtocol": {
+    "primaryHost": "doppia-3090",
+    "sourceHost": "icq",
+    "requiresWholeReportAttestationPair": true,
+    "requiresRawAndCanonicalHashValidation": true,
+    "requiresOriginalPrimaryShardCorpusMatch": true,
+    "requiresNoExistingOrActivePrimaryShard": true,
+    "requiresPrimaryGacruxClassification": true,
+    "promotion": "classification-last-after-pass"
+  },
+  "claims": {
+    "bootstrap": "PASS_TO_COMPUTE_NOT_ACCEPTED_EVIDENCE",
+    "p150EvidenceAtCheckpoint": "NONE",
+    "eta": "NOT_YET_DEFENSIBLE"
+  }
+}
