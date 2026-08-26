@@ -1,0 +1,19 @@
+[Unit]
+Description=OpenPairing p150 quarantined cross-worker on python-69
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=stefano
+Group=stefano
+ExecStart=/srv/openpairing-cross-worker/bin/run_python69_p150_worker.sh
+Nice=10
+CPUQuota=1000%
+MemoryHigh=24G
+MemoryMax=28G
+Restart=no
+TimeoutStartSec=infinity
+
+[Install]
+WantedBy=multi-user.target
