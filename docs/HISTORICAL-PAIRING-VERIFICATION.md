@@ -1,6 +1,6 @@
 # Historical pairing verification
 
-## Current status (2026-08-13)
+## Current status (2026-08-26)
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
@@ -14,9 +14,10 @@
   deviations. Reduction showed that the quality models aged floats by stored
   participation count instead of round number, so a round-28 float survived
   two missing rounds and was incorrectly treated as UF1/DF1 in round 31. The
-  isolated round-indexed correction makes all 20 exercised tuples exact; the
-  complete p50 partition is being replayed under the new semantic identity and
-  therefore remains open until its homogeneous aggregate closes.
+  isolated round-indexed correction makes all 20 exercised tuples exact. The
+  subsequent homogeneous p50 replay closed at 30,000/30,000 tournaments and
+  768,324/768,324 exact rounds; evidence is
+  `docs/evidence/p50-full-dcf92df-20260815.json`.
 - Measured at 80: one complete 15-round tournament is 15/15 exact with zero
   no-matchings in 344.667 seconds using 30-bit limbs. Versioned evidence is
   `docs/evidence/pairing-p80-one-limbs-baseline.json`, corpus manifest
@@ -45,8 +46,8 @@
   The corpus run exposed and closed two model defects: the unmatched PAB's
   QC18/QC20 score-position complement and conditional C9 being placed ahead
   of QC6-QC8 instead of at its canonical position. Later p9, p15 and p30
-  partitions are also closed; p50, p80 and accelerated pairing remain open,
-  so criterion 3 is not yet closed.
+  partitions are also closed. p50 and p80 have since closed; p150, historical
+  misc and accelerated pairing remain open, so criterion 3 is not yet closed.
 - Closed: the complete 9-player partition at commit `14539a6`: 9,999/9,999
   decodable tournaments and 69,922/69,922 historical rounds exact, with zero
   variants, deviations, no-solutions and resource limits. One source file is
@@ -71,10 +72,22 @@
   `docs/evidence/pairing-corpus-p30-full-c48fd05.json` with corpus shard
   manifest `162d78844b3f04cdcff7dedc03401f95dbd629a4f8960e5f5f33257021b1fe3b`;
   the classifier summary is
-  `docs/evidence/pairing-corpus-p30-gacrux-c48fd05.json`. Across the closed
-  p7, p9, p15 and p30 partitions, 69,998 tournaments and 609,874 historical
-  rounds are exact. The p50, p80, p150, ten historical `misc` tournaments and
-  acceleration pairing gates remain open.
+  `docs/evidence/pairing-corpus-p30-gacrux-c48fd05.json`.
+- Closed: the complete 30,000-tournament p50 partition under the corrected
+  round-indexed semantic identity: 768,324/768,324 historical rounds exact,
+  with zero colour variants, deviations, no-solutions and resource limits.
+  Evidence is `docs/evidence/p50-full-dcf92df-20260815.json`.
+- Closed: the complete 20,000-tournament p80 epoch-4 partition under campaign
+  commit `86ec9d9`: 660,000/660,000 historical rounds exact, with zero colour
+  variants, deviations, no-solutions and resource limits. All 256 report and
+  classification pairs are complete and all classifications are
+  `PASS_NO_ORACLE_CASES`. The immutable aggregate is
+  `docs/evidence/p80-full-86ec9d9-20260826.json`; its SHA-256 and the
+  classification reconciliation are frozen in
+  `docs/evidence/p80-full-86ec9d9-20260826-receipt.json`.
+  Across the closed p7, p9, p15, p30, p50 and p80 partitions, 119,998
+  tournaments and 2,038,198 historical rounds are exact. p150, ten historical
+  `misc` tournaments and the acceleration pairing gate remain open.
 - Closed parser-only acceleration gate: all 1,000 `250` tournaments decode and
   complete a 100% semantic round-trip with zero diagnostics (manifest
   `11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6`;

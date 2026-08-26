@@ -160,8 +160,8 @@ $rows = $ranking->standings($state);
 |---|---|
 | Rapid offline suite / static analysis | PASS for RC8; exact counts are recorded in the RC8 evidence file |
 | GMP versus pure-PHP limbs | PASS on deterministic stress sequences; CI locks and proves both backends |
-| Historical p7-p50 | PASS: 99,998 tournaments and 1,378,198 exact rounds |
-| Historical p80/p150/misc | OPEN under the immutable RC8 campaign identity |
+| Historical p7-p80 | PASS: 119,998 tournaments and 2,038,198 exact rounds |
+| Historical p150/misc | OPEN under the immutable RC8 campaign identity |
 | Accelerated corpus | OPEN under the RC8 campaign identity |
 | Public PTC/RTG controls | PASS for deterministic positive, negative and round-trip fixtures |
 | Complete THP/TAPC product | NO-GO: product-level requirements remain open |
@@ -185,6 +185,11 @@ samples at 7, 30, 50 and 80 players are exact; these samples are not the
 complete size partitions, and the full 122,008-tournament campaign is still
 open. See
 `docs/HISTORICAL-PAIRING-VERIFICATION.md`.
+
+The closed p80 partition contributes 20,000 tournaments and 660,000/660,000
+exact historical rounds. Its immutable aggregate and promotion receipt are
+linked from `docs/CORPUS-GATE.md`; p150 and historical misc remain outside the
+closed subtotal.
 
 ## Provenance and licence
 

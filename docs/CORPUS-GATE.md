@@ -7,19 +7,30 @@ campaign. A partition is closed only when its committed evidence records the
 complete denominator, exact/reference comparison, source tree, replay harness
 and corpus identity. Parser/round-trip coverage is not pairing verification.
 
-As of 2026-08-15, 99,998 of the historical 122,008 decodable tournaments are
-closed: 1,378,198/1,378,198 attempted rounds are exact, with zero colour variants,
-pairing deviations, no-solutions or resource limits. An early p50 run was
+As of 2026-08-26, 119,998 of the historical 122,008 decodable tournaments are
+closed: 2,038,198/2,038,198 attempted rounds are exact, with zero colour
+variants, pairing deviations, no-solutions or resource limits. An early p50
+run was
 stopped after 14/14 candidate deviations proved inferior. That diagnostic was
 then invalidated as a product verdict: the replay aged float history by stored
 participations rather than tournament-round identity. The isolated RC6 fix
 makes all 20 affected file/round tuples exact and reconfirms the small-field
 gate at 500/500. The fresh p50 replay closed at 30,000/30,000 tournaments and
 768,324/768,324 exact rounds under the corrected semantic identity and
-per-shard fail-closed Gacrux watcher. p80 epoch 4 is active; p150 and historical
-misc remain queued behind it.
+per-shard fail-closed Gacrux watcher. p80 epoch 4 then closed at 20,000/20,000
+tournaments and 660,000/660,000 exact rounds. Its 256 report/classification
+pairs are complete and all classifications are `PASS_NO_ORACLE_CASES`. p150 is
+active and historical misc remains queued behind it.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
+
+The immutable p80 aggregate is
+`evidence/p80-full-86ec9d9-20260826.json` (SHA-256
+`e191f3fe27c4afb75144da2a145467034cc3b10f03fdd4f3732b3d8ea7617533`).
+The independent promotion receipt that reconciles all 256 report and
+classification basenames, identities, sentinels and health conditions is
+`evidence/p80-full-86ec9d9-20260826-receipt.json` (SHA-256
+`f050f2e6f4b7e0a12ec010436fe6048c52e789c1c8a6e0a14730bccb3389a2ec`).
 
 The first three completed p50 shards provide the official measured 20-worker
 throughput sample of 237 tournaments: 83.677 seconds per tournament under
@@ -47,8 +58,8 @@ The required privacy-minimised, atomic and explicitly non-evidentiary channel
 is specified in `CORPUS-SHARD-OBSERVABILITY.md`. Its frozen JSON envelope and
 independent fail-closed reader are implemented and verified by
 `evidence/corpus-shard-heartbeat-verifier-checkpoint-20260816.json`. The
-writer and runner integration remain future-epoch work; the active p80 runner
-and identity were not changed.
+writer and runner integration remain future-epoch work; the then-active p80
+runner and identity were not changed.
 
 The 17:00 Europe/Rome autonomy-window handoff is recorded in
 `evidence/autonomy-closeout-1700-20260816.json`. It leaves both p80 services
@@ -122,7 +133,7 @@ resource limits, in 84,894.272 seconds and 1,459,748 KiB maximum RSS. It is not
 relabelled as evidence for the active RC8 corpus identity.
 
 The queued p150, misc and accelerated runners were regenerated without
-touching the active p80 runner. They now lock the effective
+touching the then-active p80 runner. They now lock the effective
 `OPENPAIRING_BIGINT_BACKEND=gmp`, reject completed reports whose production,
 backend, source or harness identity differs, and record both the campaign
 runner and shard-classifier hashes in each accepted classification.
@@ -167,10 +178,10 @@ p600 pilot retained the same three processes across the rollover. Evidence is
 | p15 | 30,000 | 29,999 | 29,999 | 269,991 / 269,991 | closed; one corrupt input | `evidence/pairing-corpus-p15-sharded-14539a6.json` |
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
 | p50 | 30,000 | 30,000 | 30,000 | 768,324 / 768,324 | closed | `evidence/p50-full-dcf92df-20260815.json` |
-| p80 | 20,000 | 2,360 partial | 2,360 partial | 77,664 / 77,664 partial | active epoch 4 under `86ec9d9`; 30/256 shards | aggregate pending |
-| p150 | 2,000 | pending | pending | pending | queued | aggregate pending |
+| p80 | 20,000 | 20,000 | 20,000 | 660,000 / 660,000 | closed under epoch 4 / `86ec9d9` | `evidence/p80-full-86ec9d9-20260826.json` |
+| p150 | 2,000 | pending | pending | pending | active under `86ec9d9` | aggregate pending |
 | historical misc | 10 | pending | pending | pending | queued | aggregate pending |
-| **Total** | **122,010 read** | **122,008 expected decodable** | **99,998 closed** | **1,378,198 / 1,378,198 closed** | **open** | — |
+| **Total** | **122,010 read** | **122,008 expected decodable** | **119,998 closed** | **2,038,198 / 2,038,198 closed** | **open** | — |
 
 The two read/decoded differences are corrupt corpus records, not engine
 rejections. The 122,008 denominator is the historical pairing gate used before
@@ -184,6 +195,7 @@ the parser gained acceleration and larger-field support.
 | p9 | `bbfbbbb3e6c62ed10252a6d0c44e41e1036bd2033da78a648eb91aa41d43bba6` | `0990f14de24c4ad624dafafbc6b7ed248c0ca7f8f7ad58f1cc957be6ae0210f7` | `ecd419456f4563ac9505d4f5ee3a4aed83603072f3fc71a5d0d940bd0ab64c64` |
 | p15 | `bbfbbbb3e6c62ed10252a6d0c44e41e1036bd2033da78a648eb91aa41d43bba6` | `0990f14de24c4ad624dafafbc6b7ed248c0ca7f8f7ad58f1cc957be6ae0210f7` | `ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559` |
 | p30 | `fb06fa59b66d4eba8e6e41b97ba42600e29c99075c057153b970f9eca2fd9ba3` | `f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093` | `162d78844b3f04cdcff7dedc03401f95dbd629a4f8960e5f5f33257021b1fe3b` |
+| p80 | `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884` | `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c` | `3a76297c8706e960f4396e1c5ff15f99def248c676ca9f0cfecf23f52f1ab884` |
 
 These are distinct evidence epochs. Aggregates must never merge incompatible
 identities even when all outputs are exact.

@@ -2,7 +2,7 @@
 
 > Status: outline for review, not a submission draft.
 >
-> Snapshot: 2026-08-25. Campaign results that do not yet have a promoted,
+> Snapshot: 2026-08-26. Campaign results that do not yet have a promoted,
 > immutable aggregate are deliberately marked `[PENDING]`.
 
 ## Working-title alternatives
@@ -292,7 +292,7 @@ The following rows are intentionally incomplete in this outline:
 | Evidence lane | Paper status | Required source |
 |---|---|---|
 | Closed historical partitions before p80 | Ready for extraction, not yet copied into prose | Promoted aggregate JSONs below |
-| p80 | `[PENDING: promoted p80 aggregate]` | `[PENDING: path and SHA-256]` |
+| p80 | Closed: 20,000 tournaments; 660,000/660,000 exact rounds; zero anomaly categories; 256/256 `PASS_NO_ORACLE_CASES` classifications | `docs/evidence/p80-full-86ec9d9-20260826.json`, SHA-256 `e191f3fe27c4afb75144da2a145467034cc3b10f03fdd4f3732b3d8ea7617533`; promotion receipt below |
 | p150 and misc | `[PENDING: campaign not closed]` | `[PENDING: path and SHA-256]` |
 | Accelerated corpus | `[PENDING: campaign not closed]` | `[PENDING: path and SHA-256]` |
 | Uniform replay under final identity | `[PENDING: not executed]` | `[PENDING: path and SHA-256]` |
@@ -311,10 +311,15 @@ The following rows are intentionally incomplete in this outline:
   - SHA-256: `43f7abac47c6354e2968987bb685666a9380f05d071fab51776b4983f2146cbe`
 - `docs/evidence/p50-full-dcf92df-20260815.json`
   - SHA-256: `aaa6bec112d9103664bf10b4242f8ce8b627eb635532fd026ffb2304cb2c5b2b`
+- `docs/evidence/p80-full-86ec9d9-20260826.json`
+  - SHA-256: `e191f3fe27c4afb75144da2a145467034cc3b10f03fdd4f3732b3d8ea7617533`
+- `docs/evidence/p80-full-86ec9d9-20260826-receipt.json`
+  - SHA-256: `f050f2e6f4b7e0a12ec010436fe6048c52e789c1c8a6e0a14730bccb3389a2ec`
 
-No counters from those files enter the outline. They will be extracted by a
-small deterministic paper-table generator so that the prose cannot drift from
-the evidence.
+The p80 closure row above is extracted directly from its promoted aggregate
+and reconciliation receipt. Remaining counters will be extracted by a small
+deterministic paper-table generator so that the prose cannot drift from the
+evidence.
 
 ## 6. Infrastructure incidents as evidence for fail-closed design
 

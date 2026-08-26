@@ -62,11 +62,11 @@ php bin/openpairing-rtg.php --players=8 --rounds=4 --seed=42 > generated.trf
 
 This is a release candidate, not a FIDE certification. RC8 adds end-to-end
 individual TRF26 records `240` and `260` to the RC7 public PTC/RTG and
-fail-closed codec. Historical p7 through p50 are closed at 99,998
-tournaments and 1,378,198 exact rounds; p80 and the later partitions remain
-open and must run under an RC8-aligned immutable identity. No complete-corpus claim is
-made. Separate capacity gates cover the 547 files above the former 256-player
-limit. The 4,096-player/256-round format guard-rail and team pairing/tie-break
+fail-closed codec. Historical p7 through p80 are closed at 119,998
+tournaments and 2,038,198 exact rounds; p150, historical misc and the later
+partitions remain open and must run under an RC8-aligned immutable identity.
+No complete-corpus claim is made. Separate capacity gates cover the 547 files
+above the former 256-player limit. The 4,096-player/256-round format guard-rail and team pairing/tie-break
 functions remain documented limits. TRF `250` import/export and legacy `XXA`
 import are supported; generic individual bonus/penalty record `299` remains
 fail-closed, and the full accelerated pairing-corpus gate remains open.
