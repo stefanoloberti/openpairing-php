@@ -1,0 +1,137 @@
+{
+  "schema": "openpairing.p150-residual-capacity-evidence/1",
+  "recordedAt": "2026-09-14T08:43:19+02:00",
+  "authorization": "The operator explicitly authorized using ICQ and Gaia to finish p150 as soon as possible.",
+  "scope": {
+    "campaign": "p150-epoch4-86ec9d9",
+    "primaryClassifierAndAtomicAcceptor": "doppia-3090",
+    "productionChanged": false,
+    "stagingChanged": false,
+    "databaseChanged": false,
+    "engineChanged": false,
+    "existingCampaignsChanged": false,
+    "existingQuarantinesPreserved": true
+  },
+  "identity": {
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "arithmeticBackend": "gmp"
+  },
+  "tooling": {
+    "icqCommit": "dfa4bb464a6124fab239fc8727ff428b46178955",
+    "gaiaBootstrapCommit": "279a9017f84fd79cb3051481ad02211c80fd52a5",
+    "gaiaContinuityCommit": "ba338199141ab10e0dc404ef81011ad6d9ef5f82",
+    "gaiaMemoryLimitCommit": "91d09859b20f7623f951ecbb99569e48ca5882e9"
+  },
+  "payloads": {
+    "runtimeReleaseArchiveSha256": "bf22f93a5141b6a2e04fa35d5c7c0c32aa326278114c6d42458d1427e4bf8325",
+    "icqShardArchive": {
+      "shards": "s100-s107",
+      "sha256": "cb12a870b3b0933477126da7ab555f5d5ebb57bb1a18dd9a45b997b95d697779"
+    },
+    "gaiaShardArchive": {
+      "shards": "s108-s111",
+      "sha256": "f00370a531b8b68dacc4c4f922f5d0fa733b54f7818e38b7768942d398d2f680"
+    }
+  },
+  "icq": {
+    "host": "icq.local",
+    "address": "192.168.1.19",
+    "service": "openpairing-cross-p150-icq-residual.service",
+    "campaign": "/srv/openpairing-icq-worker/work/p150-epoch4-86ec9d9-icq-residual",
+    "runnerSha256": "28ea326513887ffc7b6696faab6a7cfef95f827ddaddd1ed3505cea25086b61d",
+    "unitSha256": "caa02f2dc4e61c8ff210cb9fee40f497679ac73d162fe32c867fc3a2aab2dbba",
+    "installerSha256": "34b9d9e9b5c0be942c2bc3cda8697c1bd1d8e854e90c9f2d126b18ccea492793",
+    "transferWrapperSha256": "c6c57ec733e2d6845a34b46d5f8a973678a562867bcbf287628814c5d33a8d95",
+    "sampledAt": "2026-09-14T08:40:54+02:00",
+    "activeState": "activating",
+    "subState": "start",
+    "mainPid": 1953026,
+    "nRestarts": 0,
+    "workers": 8,
+    "activeShards": ["s100", "s101", "s102", "s103", "s104", "s105", "s106", "s107"],
+    "cpuDeltaNSecOverTwoSeconds": 16104636000,
+    "memoryCurrentBytes": 1589030912,
+    "stopPresent": false,
+    "completeReportAttestationPairs": 0,
+    "previousPartition": {
+      "service": "openpairing-cross-p150-icq.service",
+      "state": "inactive/dead Result=success",
+      "pairsPreserved": "16/16"
+    }
+  },
+  "gaia": {
+    "host": "gaia.local",
+    "address": "192.168.1.80",
+    "service": "openpairing-cross-p150-gaia-r3.service",
+    "campaign": "/home/gaia/openpairing-worker/work/p150-epoch4-86ec9d9-gaia-r3",
+    "php": {
+      "version": "8.3.6",
+      "binarySha256": "1c564e6bafa56d03359c3774be6f4c77d0edecabd2075e18556940a56747c8d7",
+      "gmpSha256": "2ead95cccfd93852f2e35402090cfe246eb65e143e3ddcd44a903cd3e9cecfcf",
+      "opcacheSha256": "9d090f6752f28de27e3bcba562815d30659a2242d02212268b88a0330bb92331",
+      "memoryLimitPerWorker": "512M"
+    },
+    "runnerSha256": "494d09428463ef15d8681947b3d113a3469b90d41abb05f66033acc29d32a357",
+    "unitSha256": "1306398330e9a1af727cf9fc8c9f4fcbf3edc7fe02c9a0d4e563112aea63dede",
+    "installerSha256": "562b9f1ca6f5b36a2590dd0d0fdf852f193d11c8af2f14c56d80f496fe116f9c",
+    "transferWrapperSha256": "97a92b9b77a7050c6880dd02bf26ae7a0711014d4845e4d16cfb9647697c0253",
+    "sshKeepaliveSha256": "456dee8431ea03a52a534a940d0baf3d5ae9a915418254f44c423b2bd7e866cb",
+    "sampledAt": "2026-09-14T08:40:54+02:00",
+    "activeState": "activating",
+    "subState": "start",
+    "mainPid": 1292582,
+    "nRestarts": 0,
+    "workers": 4,
+    "activeShards": ["s108", "s109", "s110", "s111"],
+    "cpuDeltaNSecOverTwoSeconds": 8056421000,
+    "memoryCurrentBytes": 800391168,
+    "stopPresent": false,
+    "completeReportAttestationPairs": 0,
+    "continuity": {
+      "userManagerLinger": false,
+      "localSshKeepalivePidAtSample": 53844,
+      "unitEnabled": false,
+      "note": "The user unit deliberately remains disabled; the authenticated SSH keepalive keeps the non-linger user manager alive without requiring sudo."
+    },
+    "preservedFailedAttempts": [
+      {
+        "campaign": "p150-epoch4-86ec9d9-gaia",
+        "stop": "OPENPAIRING_GAIA_STOP=FAIL reason=verifier-infrastructure-error shard=s111 at=2026-09-14T06:22:55+00:00"
+      },
+      {
+        "campaign": "p150-epoch4-86ec9d9-gaia-r2",
+        "stop": "OPENPAIRING_GAIA_R2_STOP=FAIL reason=verifier-infrastructure-error shard=s109 at=2026-09-14T06:29:47+00:00",
+        "diagnosticSha256": "675b0fdc4dfd4db16486e223dfdfcd36675628906d32d5e35a0185124842d2bf",
+        "diagnostic": "PHP exhausted its 128 MiB default memory_limit in DutchShadowGlobalCoordinator.php; this is classified as infrastructure, not a pairing result."
+      }
+    ]
+  },
+  "campaignAtSample": {
+    "acceptedShards": 68,
+    "totalShards": 128,
+    "percent": 53.125,
+    "newPrimaryShards": ["s040", "s051"],
+    "tournamentsVerified": 1062,
+    "roundsAttempted": 96642,
+    "roundsExact": 96642,
+    "colourVariant": 0,
+    "deviation": 0,
+    "noSolution": 0,
+    "resourceLimit": 0,
+    "reportClassificationBasenamesMatch": true,
+    "primaryWorkers": 20,
+    "python69Workers": 10,
+    "icqResidualWorkers": 8,
+    "gaiaWorkers": 4,
+    "totalWorkers": 42
+  },
+  "eta": {
+    "window": "2026-09-21/22",
+    "method": "Homogeneous terminal elapsedSeconds medians: primary 464671.644 seconds, python-69 636437.715 seconds, ICQ 438151.935 seconds. The primary queue has 18 old near-terminal workers, 2 fresh workers, and 18 not-yet-started shards; python-69 is the expected critical path. Gaia has no terminal shard yet, so its contribution is not used to claim a tighter window.",
+    "previousWindow": "2026-09-25/26"
+  },
+  "verdict": "PASS: isolated residual capacity is running on ICQ and Gaia with exact engine/source/harness identity; no residual output has yet been imported, and doppia-3090 remains the sole classifier and atomic acceptor."
+}
