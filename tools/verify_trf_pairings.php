@@ -538,6 +538,10 @@ function scoresEnteringRounds(TournamentState $state, DutchRules $rules): array
 function historicalState(TournamentState $full, int $round, array $scoresEntering, DutchRules $rules): TournamentState
 {
     $floatClassifier = new DutchFloatClassifier($rules);
+    $playersById = [];
+    foreach ($full->players as $knownPlayer) {
+        $playersById[$knownPlayer->id] = $knownPlayer;
+    }
     $players = [];
     foreach ($full->players as $player) {
         $previous = array_values(array_filter($player->results, static fn (array $result): bool => $result['round'] < $round));
@@ -560,20 +564,25 @@ function historicalState(TournamentState $full, int $round, array $scoresEnterin
                     $colours[] = $colour;
                 }
             }
-            $float = 'none';
+            $historyRound = $result['round'];
+            $playerScore = TrfCorpusCompatibility::pairingScoreEnteringRound(
+                $player, $scoresEntering[$player->id][$historyRound], $historyRound,
+            );
             if ($result['opponentId'] !== null) {
-                $opponentScore = $scoresEntering[$result['opponentId']][$result['round']];
+                $opponentId = $result['opponentId'];
+                $opponentScore = TrfCorpusCompatibility::pairingScoreEnteringRound(
+                    $playersById[$opponentId], $scoresEntering[$opponentId][$historyRound], $historyRound,
+                );
             } else {
                 $opponentScore = null;
             }
-            $float = $floatClassifier->direction(
+            $floats[] = $floatClassifier->direction(
                 $full,
-                $scoresEntering[$player->id][$result['round']],
+                $playerScore,
                 $opponentScore,
                 (string) $result['result'],
                 (bool) $result['played'],
             );
-            $floats[] = $float;
             $receivedPab = $receivedPab || strtoupper($result['result']) === 'U';
         }
         $active = $current !== null && ($current['opponentId'] !== null || strtoupper($current['result']) === 'U');

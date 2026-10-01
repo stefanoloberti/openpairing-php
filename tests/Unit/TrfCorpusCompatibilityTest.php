@@ -4,12 +4,40 @@ declare(strict_types=1);
 
 namespace OpenPairing\Tests\Unit;
 
+use OpenPairing\Domain\Colour\Colour;
+use OpenPairing\Domain\Score\Score;
+use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\TournamentState;
+use OpenPairing\Engine\Dutch\DutchFloatClassifier;
 use PHPUnit\Framework\TestCase;
 
 require_once dirname(__DIR__, 2).'/tools/TrfCorpusCompatibility.php';
 
 final class TrfCorpusCompatibilityTest extends TestCase
 {
+    public function testHistoricalFloatUsesVirtualPointsFromThePlayedRound(): void
+    {
+        $accelerated = new Player(
+            1, 1, 'Accelerated', 2000, '', '', '', true, Score::zero(),
+            accelerationSchedule: [null, Score::fromDecimal('1.0')],
+        );
+        $opponent = new Player(2, 2, 'Opponent', 1900, '', '', '', true, Score::fromDecimal('1.0'));
+        $ownScore = \TrfCorpusCompatibility::pairingScoreEnteringRound($accelerated, Score::zero(), 2);
+        $opponentScore = \TrfCorpusCompatibility::pairingScoreEnteringRound($opponent, Score::fromDecimal('1.0'), 2);
+        $state = new TournamentState(
+            TournamentState::SCHEMA_VERSION, 2, 3, 'fide-dutch-2026', Colour::White,
+            Score::fromDecimal('1.0'), Score::fromDecimal('0.5'), 256, [$accelerated, $opponent],
+        );
+
+        self::assertSame('1.0', $ownScore->toDecimal(1));
+        self::assertSame('none', (new DutchFloatClassifier())->direction(
+            $state, $ownScore, $opponentScore, '1', true,
+        ));
+        self::assertSame('up', (new DutchFloatClassifier())->direction(
+            $state, Score::zero(), $opponentScore, '1', true,
+        ));
+    }
+
     public function testMissingTopColourIsInferredFromPlayedRoundOneReference(): void
     {
         [$normalized, $transformations, $provenance] = \TrfCorpusCompatibility::normalize(implode("\n", [

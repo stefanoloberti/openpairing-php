@@ -119,6 +119,10 @@ function historicalState(TournamentState $full, int $round, DutchRules $rules): 
         }
     }
     $classifier = new DutchFloatClassifier($rules);
+    $playersById = [];
+    foreach ($full->players as $knownPlayer) {
+        $playersById[$knownPlayer->id] = $knownPlayer;
+    }
     $players = [];
     foreach ($full->players as $player) {
         $previous = array_values(array_filter($player->results, static fn (array $result): bool => $result['round'] < $round));
@@ -141,9 +145,19 @@ function historicalState(TournamentState $full, int $round, DutchRules $rules): 
                     $colours[] = $colour;
                 }
             }
-            $opponentScore = $result['opponentId'] === null ? null : $scores[$result['opponentId']][$result['round']];
+            $historyRound = $result['round'];
+            $playerScore = TrfCorpusCompatibility::pairingScoreEnteringRound(
+                $player, $scores[$player->id][$historyRound], $historyRound,
+            );
+            $opponentScore = null;
+            if ($result['opponentId'] !== null) {
+                $opponentId = $result['opponentId'];
+                $opponentScore = TrfCorpusCompatibility::pairingScoreEnteringRound(
+                    $playersById[$opponentId], $scores[$opponentId][$historyRound], $historyRound,
+                );
+            }
             $floats[] = $classifier->direction(
-                $full, $scores[$player->id][$result['round']], $opponentScore,
+                $full, $playerScore, $opponentScore,
                 (string) $result['result'], (bool) $result['played'],
             );
             $receivedPab = $receivedPab || strtoupper((string) $result['result']) === 'U';

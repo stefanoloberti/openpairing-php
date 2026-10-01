@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 final class TrfCorpusCompatibility
 {
+    public static function pairingScoreEnteringRound(
+        \OpenPairing\Domain\Tournament\Player $player,
+        \OpenPairing\Domain\Score\Score $standingsScore,
+        int $round,
+    ): \OpenPairing\Domain\Score\Score {
+        $virtualPoints = $player->accelerationForRound($round);
+
+        return $virtualPoints === null ? $standingsScore : $standingsScore->add($virtualPoints);
+    }
+
     /** @return array{string, list<string>, array{source: string, colour: string, basis: array{pairingNumber: int, rankIndex: int, recordedColour: string}|null}} */
     public static function normalize(string $trf): array
     {
