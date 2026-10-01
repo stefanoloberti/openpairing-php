@@ -1,6 +1,6 @@
 # Historical pairing verification
 
-## Current status (2026-08-26)
+## Current status (2026-10-01)
 
 - Closed: parser gate and Dutch frozen small-field gate, 500/500 exact at tag
   `epoch-2-dutch-500` / commit `58ab5c6`.
@@ -46,8 +46,9 @@
   The corpus run exposed and closed two model defects: the unmatched PAB's
   QC18/QC20 score-position complement and conditional C9 being placed ahead
   of QC6-QC8 instead of at its canonical position. Later p9, p15 and p30
-  partitions are also closed. p50 and p80 have since closed; p150, historical
-  misc and accelerated pairing remain open, so criterion 3 is not yet closed.
+  partitions are also closed. p50, p80, p150 and historical misc have since
+  closed with the qualified misc classifications described above; accelerated
+  pairing remains open, so criterion 3 is not yet closed.
 - Closed: the complete 9-player partition at commit `14539a6`: 9,999/9,999
   decodable tournaments and 69,922/69,922 historical rounds exact, with zero
   variants, deviations, no-solutions and resource limits. One source file is
@@ -86,8 +87,17 @@
   classification reconciliation are frozen in
   `docs/evidence/p80-full-86ec9d9-20260826-receipt.json`.
   Across the closed p7, p9, p15, p30, p50 and p80 partitions, 119,998
-  tournaments and 2,038,198 historical rounds are exact. p150, ten historical
-  `misc` tournaments and the acceleration pairing gate remain open.
+  tournaments and 2,038,198 historical rounds are reference-exact. p150 is
+  also closed with 2,000/2,000 tournaments and 182,000/182,000 exact rounds.
+  Historical `misc` is closed with ten verified tournaments, 378/381
+  reference-exact rounds and three classified `checker-exact` deviations in
+  two tournaments. All 122,008 decodable historical tournaments are verified:
+  2,220,576/2,220,579 rounds are reference-exact and the remaining three
+  exactly match Gacrux's computed pairs. The p150 and misc aggregate/receipt
+  pairs are `docs/evidence/p150-full-86ec9d9-20261001*.json` and
+  `docs/evidence/misc-full-86ec9d9-20261001*.json`; the three-case review is
+  `docs/evidence/misc-checker-exact-review-20261001.json`. The accelerated
+  pairing gate remains open in a separate epoch.
 - Closed parser-only acceleration gate: all 1,000 `250` tournaments decode and
   complete a 100% semantic round-trip with zero diagnostics (manifest
   `11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6`;

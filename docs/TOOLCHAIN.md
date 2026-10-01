@@ -129,6 +129,15 @@ sequential differentials, the 300-vertex capacity test and development-oracle
 tests. An official replay must use a committed tree and record its commit plus
 runtime source hash.
 
+The Gacrux differential tests accept `OPENPAIRING_GACRUX_PYTHON` as an explicit
+path to the Python interpreter with Gacrux's `chessjson` and `networkx`
+dependencies; when unset they retain the platform `python`/`python3` default.
+This affects only the development tests, not the campaign classifier or
+runtime identity. On the isolated 3090 workbench, using the existing Gacrux
+venv made the complete PHPUnit suite pass on 2026-10-01 (287 tests, 33,300
+assertions, two expected skips); the earlier eight failures came from invoking
+system Python without those dependencies.
+
 `tools/commit.ps1 -Message "..."` commits an already staged, otherwise clean
 tree only after `composer check` succeeds. `-Wip` marks an intentionally
 incomplete branch checkpoint, but the wrapper still requires the rapid gate to
@@ -142,7 +151,7 @@ commit; the remote verification is part of the checkpoint, not a best-effort
 copy.
 
 Long corpus campaigns are installed under persistent WSL storage at
-`/srv/openpairing-validation`. The current queue uses 20 concurrent PHP/GMP
+`/srv/openpairing-validation`. The historical queue used 20 concurrent PHP/GMP
 workers and small atomic shards: p30 20,000/256, p50 30,000/384, p80
 20,000/256, p150 2,000/128, historical misc 10/1 and acceleration
 1,000/64. Separate post-corpus capacity gates cover the one newly accepted
@@ -336,8 +345,9 @@ distinct campaign directories (`p80`, `p150`, `misc` and `accel`); the RC7
 set was suffixed `epoch3-c759bd9`, and its supervisor contained only those
 identity-scoped stages. The intermediate `epoch2-9406571` set accepted zero
 shards before the RC7 realignment and remains preserved as non-evidence.
-RC8 then superseded epoch 3 with zero accepted reports. The active queue is
-`p80-epoch4-86ec9d9`, using the executable-mode-verified immutable runtime
+RC8 then superseded epoch 3 with zero accepted reports. The historical queue
+used epoch 4, starting with `p80-epoch4-86ec9d9`, and the
+executable-mode-verified immutable runtime
 `/srv/openpairing-validation/releases/86ec9d9-r2`; the first RC8 packaging
 attempt is preserved unused because launch preflight rejected its missing
 Unix executable modes.

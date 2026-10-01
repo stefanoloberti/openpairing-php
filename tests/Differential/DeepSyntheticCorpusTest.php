@@ -19,7 +19,7 @@ final class DeepSyntheticCorpusTest extends TestCase
     {
         $root = dirname(__DIR__, 2);
         $gacrux = new GacruxOracleAdapter(
-            PHP_OS_FAMILY === 'Windows' ? 'python' : 'python3',
+            getenv('OPENPAIRING_GACRUX_PYTHON') ?: (PHP_OS_FAMILY === 'Windows' ? 'python' : 'python3'),
             $root.'/tools/upstream/gacrux',
             $root.'/tools/oracle/gacrux_bridge.py',
         );

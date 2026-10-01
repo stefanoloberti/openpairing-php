@@ -1,0 +1,803 @@
+{
+    "schema": "openpairing.trf-sharded-aggregate/1",
+    "shards": 1,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/srv/openpairing-validation/releases/86ec9d9-r2",
+        "autoloadPsr4Roots": [
+            "/srv/openpairing-validation/releases/86ec9d9-r2/src"
+        ],
+        "expectedEnginePath": "/srv/openpairing-validation/releases/86ec9d9-r2/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/srv/openpairing-validation/releases/86ec9d9-r2/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+        "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+        "sourceFileCount": 85,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "harnessIdentity": {
+        "schema": "openpairing.historical-replay-harness/1",
+        "sha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+        "files": {
+            "TrfCorpusCompatibility.php": "b6715f6e34dcce1b6c087a6b7f6eb965fd1ddfe5c71930cdc843d980f0adc6bc",
+            "verify_trf_pairings.php": "23e4c867a22964556be10fd695ec73ca26c733e77d563198deda32bc8b4df0c1"
+        }
+    },
+    "historicalFloatSemantics": "fide-dutch-float/3-round-indexed",
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-sharded-identity/1",
+        "fileCount": 10,
+        "totalBytes": 423291,
+        "shardManifestSha256": "21de0160243ed55e3e4468e383b0964703a55ebf8cf6c4bd1f0b7d03719b1151"
+    },
+    "counts": {
+        "filesSeen": 10,
+        "decoded": 10,
+        "tournamentsVerified": 10,
+        "tournamentsAllExact": 8,
+        "roundsAttempted": 381,
+        "roundsExact": 378,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 3,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 378,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 3,
+        "largeField.candidateNoMatching": 0
+    },
+    "diagnostics": [],
+    "shadowSamples": [
+        {
+            "file": "T0025-09.trf",
+            "round": 9,
+            "code": "large-field.pairing-deviation",
+            "message": "Production engine differs from the reference.",
+            "candidate": {
+                "pairs": [
+                    {
+                        "white": 12,
+                        "black": 1
+                    },
+                    {
+                        "white": 2,
+                        "black": 4
+                    },
+                    {
+                        "white": 3,
+                        "black": 8
+                    },
+                    {
+                        "white": 5,
+                        "black": 9
+                    },
+                    {
+                        "white": 6,
+                        "black": 7
+                    },
+                    {
+                        "white": 10,
+                        "black": 14
+                    },
+                    {
+                        "white": 11,
+                        "black": 13
+                    }
+                ],
+                "bye": 15
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 3,
+                        "black": 1
+                    },
+                    {
+                        "white": 2,
+                        "black": 4
+                    },
+                    {
+                        "white": 5,
+                        "black": 9
+                    },
+                    {
+                        "white": 6,
+                        "black": 7
+                    },
+                    {
+                        "white": 10,
+                        "black": 14
+                    },
+                    {
+                        "white": 11,
+                        "black": 13
+                    },
+                    {
+                        "white": 15,
+                        "black": 12
+                    }
+                ],
+                "bye": 8
+            }
+        },
+        {
+            "file": "T6008.trf",
+            "round": 9,
+            "code": "large-field.pairing-deviation",
+            "message": "Production engine differs from the reference.",
+            "candidate": {
+                "pairs": [
+                    {
+                        "white": 7,
+                        "black": 1
+                    },
+                    {
+                        "white": 20,
+                        "black": 2
+                    },
+                    {
+                        "white": 3,
+                        "black": 23
+                    },
+                    {
+                        "white": 4,
+                        "black": 36
+                    },
+                    {
+                        "white": 16,
+                        "black": 5
+                    },
+                    {
+                        "white": 6,
+                        "black": 24
+                    },
+                    {
+                        "white": 46,
+                        "black": 8
+                    },
+                    {
+                        "white": 25,
+                        "black": 9
+                    },
+                    {
+                        "white": 31,
+                        "black": 10
+                    },
+                    {
+                        "white": 18,
+                        "black": 11
+                    },
+                    {
+                        "white": 12,
+                        "black": 15
+                    },
+                    {
+                        "white": 21,
+                        "black": 13
+                    },
+                    {
+                        "white": 69,
+                        "black": 14
+                    },
+                    {
+                        "white": 17,
+                        "black": 30
+                    },
+                    {
+                        "white": 19,
+                        "black": 22
+                    },
+                    {
+                        "white": 35,
+                        "black": 26
+                    },
+                    {
+                        "white": 27,
+                        "black": 67
+                    },
+                    {
+                        "white": 53,
+                        "black": 28
+                    },
+                    {
+                        "white": 39,
+                        "black": 29
+                    },
+                    {
+                        "white": 32,
+                        "black": 54
+                    },
+                    {
+                        "white": 33,
+                        "black": 56
+                    },
+                    {
+                        "white": 45,
+                        "black": 34
+                    },
+                    {
+                        "white": 38,
+                        "black": 47
+                    },
+                    {
+                        "white": 57,
+                        "black": 40
+                    },
+                    {
+                        "white": 41,
+                        "black": 62
+                    },
+                    {
+                        "white": 63,
+                        "black": 42
+                    },
+                    {
+                        "white": 58,
+                        "black": 43
+                    },
+                    {
+                        "white": 44,
+                        "black": 51
+                    },
+                    {
+                        "white": 61,
+                        "black": 48
+                    },
+                    {
+                        "white": 80,
+                        "black": 49
+                    },
+                    {
+                        "white": 77,
+                        "black": 50
+                    },
+                    {
+                        "white": 70,
+                        "black": 52
+                    },
+                    {
+                        "white": 55,
+                        "black": 65
+                    },
+                    {
+                        "white": 60,
+                        "black": 72
+                    },
+                    {
+                        "white": 64,
+                        "black": 68
+                    },
+                    {
+                        "white": 76,
+                        "black": 66
+                    },
+                    {
+                        "white": 74,
+                        "black": 71
+                    },
+                    {
+                        "white": 78,
+                        "black": 73
+                    },
+                    {
+                        "white": 75,
+                        "black": 79
+                    }
+                ],
+                "bye": 59
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 7,
+                        "black": 1
+                    },
+                    {
+                        "white": 20,
+                        "black": 2
+                    },
+                    {
+                        "white": 3,
+                        "black": 23
+                    },
+                    {
+                        "white": 4,
+                        "black": 36
+                    },
+                    {
+                        "white": 16,
+                        "black": 5
+                    },
+                    {
+                        "white": 6,
+                        "black": 24
+                    },
+                    {
+                        "white": 46,
+                        "black": 8
+                    },
+                    {
+                        "white": 25,
+                        "black": 9
+                    },
+                    {
+                        "white": 31,
+                        "black": 10
+                    },
+                    {
+                        "white": 18,
+                        "black": 11
+                    },
+                    {
+                        "white": 12,
+                        "black": 15
+                    },
+                    {
+                        "white": 21,
+                        "black": 13
+                    },
+                    {
+                        "white": 69,
+                        "black": 14
+                    },
+                    {
+                        "white": 17,
+                        "black": 30
+                    },
+                    {
+                        "white": 19,
+                        "black": 22
+                    },
+                    {
+                        "white": 35,
+                        "black": 26
+                    },
+                    {
+                        "white": 27,
+                        "black": 67
+                    },
+                    {
+                        "white": 53,
+                        "black": 28
+                    },
+                    {
+                        "white": 39,
+                        "black": 29
+                    },
+                    {
+                        "white": 32,
+                        "black": 54
+                    },
+                    {
+                        "white": 33,
+                        "black": 56
+                    },
+                    {
+                        "white": 45,
+                        "black": 34
+                    },
+                    {
+                        "white": 38,
+                        "black": 47
+                    },
+                    {
+                        "white": 57,
+                        "black": 40
+                    },
+                    {
+                        "white": 41,
+                        "black": 62
+                    },
+                    {
+                        "white": 63,
+                        "black": 42
+                    },
+                    {
+                        "white": 58,
+                        "black": 43
+                    },
+                    {
+                        "white": 44,
+                        "black": 51
+                    },
+                    {
+                        "white": 61,
+                        "black": 48
+                    },
+                    {
+                        "white": 80,
+                        "black": 49
+                    },
+                    {
+                        "white": 77,
+                        "black": 50
+                    },
+                    {
+                        "white": 70,
+                        "black": 52
+                    },
+                    {
+                        "white": 55,
+                        "black": 65
+                    },
+                    {
+                        "white": 74,
+                        "black": 59
+                    },
+                    {
+                        "white": 60,
+                        "black": 72
+                    },
+                    {
+                        "white": 64,
+                        "black": 68
+                    },
+                    {
+                        "white": 76,
+                        "black": 66
+                    },
+                    {
+                        "white": 78,
+                        "black": 73
+                    },
+                    {
+                        "white": 75,
+                        "black": 79
+                    }
+                ],
+                "bye": 71
+            }
+        },
+        {
+            "file": "T6008.trf",
+            "round": 11,
+            "code": "large-field.pairing-deviation",
+            "message": "Production engine differs from the reference.",
+            "candidate": {
+                "pairs": [
+                    {
+                        "white": 15,
+                        "black": 1
+                    },
+                    {
+                        "white": 2,
+                        "black": 10
+                    },
+                    {
+                        "white": 19,
+                        "black": 3
+                    },
+                    {
+                        "white": 4,
+                        "black": 11
+                    },
+                    {
+                        "white": 17,
+                        "black": 5
+                    },
+                    {
+                        "white": 6,
+                        "black": 21
+                    },
+                    {
+                        "white": 31,
+                        "black": 7
+                    },
+                    {
+                        "white": 38,
+                        "black": 8
+                    },
+                    {
+                        "white": 23,
+                        "black": 9
+                    },
+                    {
+                        "white": 12,
+                        "black": 26
+                    },
+                    {
+                        "white": 54,
+                        "black": 13
+                    },
+                    {
+                        "white": 56,
+                        "black": 14
+                    },
+                    {
+                        "white": 16,
+                        "black": 18
+                    },
+                    {
+                        "white": 20,
+                        "black": 24
+                    },
+                    {
+                        "white": 25,
+                        "black": 22
+                    },
+                    {
+                        "white": 27,
+                        "black": 40
+                    },
+                    {
+                        "white": 57,
+                        "black": 28
+                    },
+                    {
+                        "white": 29,
+                        "black": 36
+                    },
+                    {
+                        "white": 49,
+                        "black": 30
+                    },
+                    {
+                        "white": 32,
+                        "black": 50
+                    },
+                    {
+                        "white": 33,
+                        "black": 43
+                    },
+                    {
+                        "white": 60,
+                        "black": 34
+                    },
+                    {
+                        "white": 35,
+                        "black": 45
+                    },
+                    {
+                        "white": 39,
+                        "black": 37
+                    },
+                    {
+                        "white": 41,
+                        "black": 55
+                    },
+                    {
+                        "white": 44,
+                        "black": 67
+                    },
+                    {
+                        "white": 61,
+                        "black": 46
+                    },
+                    {
+                        "white": 53,
+                        "black": 47
+                    },
+                    {
+                        "white": 63,
+                        "black": 48
+                    },
+                    {
+                        "white": 80,
+                        "black": 51
+                    },
+                    {
+                        "white": 65,
+                        "black": 52
+                    },
+                    {
+                        "white": 58,
+                        "black": 62
+                    },
+                    {
+                        "white": 59,
+                        "black": 71
+                    },
+                    {
+                        "white": 70,
+                        "black": 66
+                    },
+                    {
+                        "white": 69,
+                        "black": 68
+                    },
+                    {
+                        "white": 75,
+                        "black": 73
+                    },
+                    {
+                        "white": 74,
+                        "black": 79
+                    },
+                    {
+                        "white": 76,
+                        "black": 78
+                    }
+                ],
+                "bye": 72
+            },
+            "reference": {
+                "pairs": [
+                    {
+                        "white": 15,
+                        "black": 1
+                    },
+                    {
+                        "white": 2,
+                        "black": 10
+                    },
+                    {
+                        "white": 19,
+                        "black": 3
+                    },
+                    {
+                        "white": 4,
+                        "black": 11
+                    },
+                    {
+                        "white": 17,
+                        "black": 5
+                    },
+                    {
+                        "white": 6,
+                        "black": 21
+                    },
+                    {
+                        "white": 31,
+                        "black": 7
+                    },
+                    {
+                        "white": 38,
+                        "black": 8
+                    },
+                    {
+                        "white": 23,
+                        "black": 9
+                    },
+                    {
+                        "white": 12,
+                        "black": 26
+                    },
+                    {
+                        "white": 54,
+                        "black": 13
+                    },
+                    {
+                        "white": 56,
+                        "black": 14
+                    },
+                    {
+                        "white": 16,
+                        "black": 18
+                    },
+                    {
+                        "white": 20,
+                        "black": 24
+                    },
+                    {
+                        "white": 25,
+                        "black": 22
+                    },
+                    {
+                        "white": 27,
+                        "black": 40
+                    },
+                    {
+                        "white": 57,
+                        "black": 28
+                    },
+                    {
+                        "white": 29,
+                        "black": 36
+                    },
+                    {
+                        "white": 49,
+                        "black": 30
+                    },
+                    {
+                        "white": 32,
+                        "black": 50
+                    },
+                    {
+                        "white": 33,
+                        "black": 43
+                    },
+                    {
+                        "white": 60,
+                        "black": 34
+                    },
+                    {
+                        "white": 35,
+                        "black": 45
+                    },
+                    {
+                        "white": 39,
+                        "black": 37
+                    },
+                    {
+                        "white": 41,
+                        "black": 55
+                    },
+                    {
+                        "white": 44,
+                        "black": 67
+                    },
+                    {
+                        "white": 61,
+                        "black": 46
+                    },
+                    {
+                        "white": 53,
+                        "black": 47
+                    },
+                    {
+                        "white": 63,
+                        "black": 48
+                    },
+                    {
+                        "white": 80,
+                        "black": 51
+                    },
+                    {
+                        "white": 72,
+                        "black": 52
+                    },
+                    {
+                        "white": 58,
+                        "black": 62
+                    },
+                    {
+                        "white": 59,
+                        "black": 71
+                    },
+                    {
+                        "white": 69,
+                        "black": 65
+                    },
+                    {
+                        "white": 70,
+                        "black": 66
+                    },
+                    {
+                        "white": 75,
+                        "black": 73
+                    },
+                    {
+                        "white": 74,
+                        "black": 79
+                    },
+                    {
+                        "white": 76,
+                        "black": 78
+                    }
+                ],
+                "bye": 68
+            }
+        }
+    ],
+    "reports": [
+        {
+            "root": "/srv/openpairing-validation/campaigns/misc/shards/s000",
+            "elapsedSeconds": 17733.356,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 10,
+                "totalBytes": 423291,
+                "manifestSha256": "2bd1b66889237364112e6f356820d3402834ee1468db5f798fa04b826ba21b73"
+            },
+            "counts": {
+                "filesSeen": 10,
+                "decoded": 10,
+                "tournamentsVerified": 10,
+                "tournamentsAllExact": 8,
+                "roundsAttempted": 381,
+                "roundsExact": 378,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 3,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 378,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 3,
+                "largeField.candidateNoMatching": 0
+            }
+        }
+    ]
+}

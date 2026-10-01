@@ -7,11 +7,20 @@ campaign. A partition is closed only when its committed evidence records the
 complete denominator, exact/reference comparison, source tree, replay harness
 and corpus identity. Parser/round-trip coverage is not pairing verification.
 
-As of 2026-08-26, 119,998 of the historical 122,008 decodable tournaments are
-closed: 2,038,198/2,038,198 attempted rounds are exact, with zero colour
-variants, pairing deviations, no-solutions or resource limits. An early p50
-run was
-stopped after 14/14 candidate deviations proved inferior. That diagnostic was
+As of 2026-10-01, all 122,008 decodable tournaments in the historical
+denominator have closed partition evidence. Of 2,220,579 attempted historical
+rounds, 2,220,576 match the recorded reference exactly; the other three are
+misc deviations whose PHP pairs exactly match Gacrux's computed pairs. There
+are zero colour variants, no-solutions or resource limits. This is a
+qualified historical replay result, not a claim that every recorded historical
+pairing was optimal, nor a complete accelerated-corpus or FIDE gate. The p150
+and misc aggregate/receipt pairs below independently reconcile every final
+report and classification, including 26 primary-validated cross-host imports.
+The accelerated pairing gate remains open in a separate epoch.
+
+At the 2026-08-26 checkpoint, 119,998 historical tournaments and
+2,038,198 exact rounds were already closed. An early p50 run was stopped
+after 14/14 candidate deviations proved inferior. That diagnostic was
 then invalidated as a product verdict: the replay aged float history by stored
 participations rather than tournament-round identity. The isolated RC6 fix
 makes all 20 affected file/round tuples exact and reconfirms the small-field
@@ -19,22 +28,50 @@ gate at 500/500. The fresh p50 replay closed at 30,000/30,000 tournaments and
 768,324/768,324 exact rounds under the corrected semantic identity and
 per-shard fail-closed Gacrux watcher. p80 epoch 4 then closed at 20,000/20,000
 tournaments and 660,000/660,000 exact rounds. Its 256 report/classification
-pairs are complete and all classifications are `PASS_NO_ORACLE_CASES`. p150 is
-active and historical misc remains queued behind it. A disjoint ICQ worker is
-computing only whole p150 shards `s112`-`s127` with eight workers; its output
-is quarantine-only and is not historical evidence until the 3090 validates
-the original shard corpus and identity, runs Gacrux and promotes the
+pairs are complete and all classifications are `PASS_NO_ORACLE_CASES`. At that
+time p150 was active and historical misc remained queued behind it. A disjoint
+ICQ worker was computing only whole p150 shards `s112`-`s127`; its output
+was quarantine-only at that checkpoint and could not become historical
+evidence until the 3090 validated the original shard corpus and identity,
+ran Gacrux and promoted the
 classification last. The bootstrap checkpoint is
 `evidence/cross-worker-icq-p150-bootstrap-20260826.json`; it records no
 accepted p150 evidence and therefore does not change the denominator.
-A second disjoint p150 worker on `python-69` computes only `s080`-`s111`
+A second disjoint p150 worker on `python-69` was assigned `s080`-`s111`
 with ten workers, in a new service and quarantine that do not alter its
 preserved 64/64 p80 cross-host result. Its bootstrap checkpoint is
 `evidence/cross-worker-python69-p150-bootstrap-20260826.json`; like the ICQ
-checkpoint, it authorizes computation but contributes nothing until primary
-validation, Gacrux classification and classification-last promotion succeed.
+checkpoint, it authorized computation but contributed nothing until primary
+validation, Gacrux classification and classification-last promotion succeeded.
 Acceleration and the newly accepted >256-player scope are tracked separately
 so they cannot silently change the historical denominator.
+
+The immutable p150 aggregate is
+`evidence/p150-full-86ec9d9-20261001.json` (SHA-256
+`492fa4f73c0ccc6b3f2d3137e41a97c19a04ece65a1ad8af05d70484391858c8`);
+its independent receipt is
+`evidence/p150-full-86ec9d9-20261001-receipt.json` (SHA-256
+`252318ae8322ec58856306b0cd01ec031ae1b84b192ff712a1300b066344285e`).
+The immutable misc aggregate is
+`evidence/misc-full-86ec9d9-20261001.json` (SHA-256
+`7ac92446a96baf99458a8de027df49fb66d9d26071ae1a8d446a7aa32a26106f`);
+its independent receipt is
+`evidence/misc-full-86ec9d9-20261001-receipt.json` (SHA-256
+`19f51d567a7751575533663ede20e37c10de3dca2588f7999afe3c6ccc0c9a92`).
+The interpretation of the three misc cases, including independent Gacrux
+checks of the original historical pairings, is
+`evidence/misc-checker-exact-review-20261001.json`. Here `checker-exact`
+means *exactly the pairs computed by Gacrux*, not a distinct equally optimal
+pairing. Under this checker the three original historical pairings are worse
+at QC9; their historical context is not inferred from that result.
+
+The subsequent acceleration epoch 4 stopped fail-closed with 20/20 shards in
+quarantine because its historical-float replay omitted virtual acceleration
+points. Those reports are not promoted. A distinct epoch-5 replay under
+campaign-tool commit `5b0e7648663e92d7d08790fa6b899f01dd76a718` and
+harness SHA-256 `1c8013f591a81e5d57393340466a4c2cec1ddac6ac87b027b6dcdbc9e58d829b`
+corrects that reconstruction without changing the Dutch engine SHA-256.
+Acceleration still requires its own completed, classified evidence.
 
 The immutable p80 aggregate is
 `evidence/p80-full-86ec9d9-20260826.json` (SHA-256
@@ -109,7 +146,7 @@ independent. Historical evidence is
 `evidence/p50-partial-20-gacrux-summary-20260813.json` and
 `evidence/p50-partial-20-gacrux-diagnostic-20260813.json`.
 
-Official replay identity for the active queue:
+Official replay identity for the closed p80/p150/misc epoch-4 partitions:
 
 - Git campaign-tool commit: `86ec9d9c003d68468906bddf12c69fbcaaf750ac`
 - source tree SHA-256: `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884`
@@ -191,9 +228,9 @@ p600 pilot retained the same three processes across the rollover. Evidence is
 | p30 | 20,000 | 20,000 | 20,000 | 220,000 / 220,000 | closed | `evidence/pairing-corpus-p30-full-c48fd05.json` |
 | p50 | 30,000 | 30,000 | 30,000 | 768,324 / 768,324 | closed | `evidence/p50-full-dcf92df-20260815.json` |
 | p80 | 20,000 | 20,000 | 20,000 | 660,000 / 660,000 | closed under epoch 4 / `86ec9d9` | `evidence/p80-full-86ec9d9-20260826.json` |
-| p150 | 2,000 | pending | pending | pending | active under `86ec9d9` | aggregate pending |
-| historical misc | 10 | pending | pending | pending | queued | aggregate pending |
-| **Total** | **122,010 read** | **122,008 expected decodable** | **119,998 closed** | **2,038,198 / 2,038,198 closed** | **open** | — |
+| p150 | 2,000 | 2,000 | 2,000 | 182,000 / 182,000 | closed under epoch 4 / `86ec9d9` | `evidence/p150-full-86ec9d9-20261001.json` and receipt |
+| historical misc | 10 | 10 | 8 | 378 / 381; 3 checker-exact deviations | closed, qualified under epoch 4 / `86ec9d9` | `evidence/misc-full-86ec9d9-20261001.json`, receipt and review |
+| **Total** | **122,010 read** | **122,008 decodable and verified** | **122,006 reference-exact** | **2,220,576 / 2,220,579; 3 classified deviations** | **historical partition rows closed; accelerated gate open** | — |
 
 The two read/decoded differences are corrupt corpus records, not engine
 rejections. The 122,008 denominator is the historical pairing gate used before
@@ -208,6 +245,8 @@ the parser gained acceleration and larger-field support.
 | p15 | `bbfbbbb3e6c62ed10252a6d0c44e41e1036bd2033da78a648eb91aa41d43bba6` | `0990f14de24c4ad624dafafbc6b7ed248c0ca7f8f7ad58f1cc957be6ae0210f7` | `ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559` |
 | p30 | `fb06fa59b66d4eba8e6e41b97ba42600e29c99075c057153b970f9eca2fd9ba3` | `f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093` | `162d78844b3f04cdcff7dedc03401f95dbd629a4f8960e5f5f33257021b1fe3b` |
 | p80 | `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884` | `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c` | `3a76297c8706e960f4396e1c5ff15f99def248c676ca9f0cfecf23f52f1ab884` |
+| p150 | `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884` | `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c` | `21dedd80ab9182f3cfd6302023de51b3940c5d0b5d427217036c34eb98201c0b` |
+| historical misc | `a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884` | `a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c` | `21de0160243ed55e3e4468e383b0964703a55ebf8cf6c4bd1f0b7d03719b1151` |
 
 These are distinct evidence epochs. Aggregates must never merge incompatible
 identities even when all outputs are exact.
@@ -216,7 +255,7 @@ identities even when all outputs are exact.
 
 | Partition | Files | Parser/round-trip | Pairing gate |
 |---|---:|---|---|
-| accelerated 250/XXA | 1,000 | supported | queued after historical partitions |
+| accelerated 250/XXA | 1,000 | supported | epoch 4 quarantined; corrected epoch 5 replay open |
 | large misc | 1 | supported | queued |
 | 300 players | 200 | supported | full gate suspended; one end-to-end pilot running |
 | 600 players | 200 | supported | full gate suspended; one end-to-end pilot running |

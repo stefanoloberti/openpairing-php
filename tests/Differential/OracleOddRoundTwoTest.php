@@ -24,7 +24,7 @@ final class OracleOddRoundTwoTest extends TestCase
     public static function oracles(): iterable
     {
         yield 'Gacrux' => [static fn (string $root, TournamentState $state): OracleResult => (new GacruxOracleAdapter(
-            PHP_OS_FAMILY === 'Windows' ? 'python' : 'python3',
+            getenv('OPENPAIRING_GACRUX_PYTHON') ?: (PHP_OS_FAMILY === 'Windows' ? 'python' : 'python3'),
             $root.'/tools/upstream/gacrux',
             $root.'/tools/oracle/gacrux_bridge.py',
         ))->pair($state)];

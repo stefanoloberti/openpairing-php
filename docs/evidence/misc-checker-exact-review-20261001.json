@@ -1,0 +1,76 @@
+{
+  "schema": "openpairing.misc-checker-exact-review/1",
+  "reviewedAt": "2026-10-01",
+  "partition": "misc",
+  "campaign": "misc-epoch4-86ec9d9",
+  "classification": {
+    "sourcePath": "/srv/openpairing-validation/campaigns/misc-epoch4-86ec9d9/classifications/s000.json",
+    "sha256": "c54a6940b79de51ff63493cd97a0d344a94eba39beac35286e8c8081760c1f69",
+    "classifierDefinition": "tools/oracle/gacrux_quality_classifier.py: checker-exact is selected when Gacrux pairingResult.roundpairing.check is true; Gacrux sets check when pairs equals current",
+    "gacruxRoot": "/srv/chesspairings-engine-staging/releases/production-engines-20260810/gacrux",
+    "cases": [
+      {
+        "file": "T0025-09.trf",
+        "round": 9,
+        "phpVersusGacrux": "checker-exact",
+        "candidatePairsEqualBestPairs": true,
+        "phpQualityTraceFirstDifference": null,
+        "historicalVersusGacrux": "inferior-to-checker-optimum",
+        "historicalFirstDifference": {
+          "criterion": "QC9",
+          "bracketIndex": 4,
+          "scorelevel": 3,
+          "candidate": 1,
+          "best": 0
+        },
+        "historicalDiagnosticSha256": "f13b50caa1f9b7cac4cffd3ec92e5a1d60a1e7d8a1c77cf18e584f7d01176b82"
+      },
+      {
+        "file": "T6008.trf",
+        "round": 9,
+        "phpVersusGacrux": "checker-exact",
+        "candidatePairsEqualBestPairs": true,
+        "phpQualityTraceFirstDifference": {
+          "criterion": "HO4",
+          "bracketIndex": 1,
+          "scorelevel": 10,
+          "candidate": [39],
+          "best": [10]
+        },
+        "historicalVersusGacrux": "inferior-to-checker-optimum",
+        "historicalFirstDifference": {
+          "criterion": "QC9",
+          "bracketIndex": 9,
+          "scorelevel": 2,
+          "candidate": 2,
+          "best": 0
+        },
+        "historicalDiagnosticSha256": "6fc4f7cb45608794865b2f8aa703eb56a412793d14eb2a879afd9e307705c694"
+      },
+      {
+        "file": "T6008.trf",
+        "round": 11,
+        "phpVersusGacrux": "checker-exact",
+        "candidatePairsEqualBestPairs": true,
+        "phpQualityTraceFirstDifference": {
+          "criterion": "HO4",
+          "bracketIndex": 2,
+          "scorelevel": 11,
+          "candidate": [37],
+          "best": [13]
+        },
+        "historicalVersusGacrux": "inferior-to-checker-optimum",
+        "historicalFirstDifference": {
+          "criterion": "QC9",
+          "bracketIndex": 9,
+          "scorelevel": 4,
+          "candidate": 1,
+          "best": 0
+        },
+        "historicalDiagnosticSha256": "dac0b1ea98104314d4869a6dbe744ca768ef11a8a5a1461d9b30a7caa2c9299d"
+      }
+    ]
+  },
+  "interpretation": "The three PHP pairings differ from the historical TRF pairings, but exactly match Gacrux's computed pair lists. They are not alternative optima under this checker. Independent check-mode runs on each original historical TRF return check=false and a worse QC9 comparison against the current Gacrux optimum. This is a statement about this checker and replay identity, not a blanket invalidation of historical tournament decisions. Two PHP cases have internal HO4 quality-trace differences despite identical pair lists; that trace is retained, not silently relabelled as equal-quality evidence.",
+  "claimBoundary": "Of 381 historical misc rounds, 378 match the recorded reference and 3 differ while matching Gacrux's computed pairs. Do not describe all 381 as reference-exact or describe the 3 as optimal alternatives."
+}

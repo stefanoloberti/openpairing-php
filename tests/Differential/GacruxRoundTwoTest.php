@@ -21,7 +21,7 @@ final class GacruxRoundTwoTest extends TestCase
         self::assertIsString($json);
         $state = (new CanonicalJson())->decode($json);
         $oracle = (new GacruxOracleAdapter(
-            PHP_OS_FAMILY === 'Windows' ? 'python' : 'python3',
+            getenv('OPENPAIRING_GACRUX_PYTHON') ?: (PHP_OS_FAMILY === 'Windows' ? 'python' : 'python3'),
             $root.'/tools/upstream/gacrux',
             $root.'/tools/oracle/gacrux_bridge.py',
         ))->pair($state);

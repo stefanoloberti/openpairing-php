@@ -100,8 +100,12 @@ but they must not be assumed to replace the current TEC forms or TAPC process.
 
 ## Current technical blockers in order
 
-1. Close the immutable Dutch corpus queue (`p80`, `p150`, `misc`) and the
-   accelerated queue without mixed identities.
+1. The historical Dutch partition rows (`p80`, `p150`, `misc`) are now closed
+   with qualified evidence: 2,220,576/2,220,579 reference-exact rounds and
+   three misc deviations matching Gacrux's computed pairs. Close the separate
+   accelerated pairing queue under its corrected immutable replay identity;
+   do not promote the quarantined epoch-4 STOP reports or infer a FIDE gate
+   from the historical subtotal.
 2. Freeze and publish the implemented PTC and RTG in the final runtime, with
    positive/negative machine-readable examples and a deterministic RTG-to-PTC
    round trip. Then close the two distinct 50,000-tournament cross-tests in TEC
