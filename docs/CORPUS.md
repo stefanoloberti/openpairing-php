@@ -11,6 +11,12 @@ reports. Successful decode or round-trip is not counted as engine verification.
 Use `tools/verify_trf_pairings.php` and the parallel launcher documented in
 `HISTORICAL-PAIRING-VERIFICATION.md` for the pairing gate.
 
+The external inputs are not an OpenPairing download. They originate from the
+[Gacrux test-tournament archive](https://www.gacrux.no/spp/tournaments/tournaments.zip).
+OpenPairing records the exact 53,201-input selection and its 1,633,555 exact
+rounds without mirroring the upstream payload; see
+`TRF-CORPUS-PROVENANCE.md`.
+
 | Required area | Evidence |
 |---|---|
 | 2-128 players, even/odd | `LargeInitialCorpusTest` |

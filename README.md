@@ -192,6 +192,11 @@ deviations. They do not close the 547 larger-field capacity tournaments or the
 ChessPairings/FIDE product gate. See `docs/CORPUS-GATE.md` and
 `docs/HISTORICAL-PAIRING-VERIFICATION.md` for exact evidence and limits.
 
+The synthetic TRF inputs are supplied by Gacrux and are not redistributed by
+OpenPairing. The exact 53,201-input selection behind the recorded 1,633,555
+reference-exact rounds, the upstream archive identity, and reproduction steps
+are documented in `docs/TRF-CORPUS-PROVENANCE.md`.
+
 ## Provenance and licence
 
 The project is Apache-2.0 and the runtime implementation is original code
