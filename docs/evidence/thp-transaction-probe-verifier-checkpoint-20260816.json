@@ -1,0 +1,59 @@
+{
+  "schema": "openpairing.thp-transaction-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T03:58:13+02:00",
+  "baseCommit": "d5566588a4446aa653e4884953d9ca3ee1b06c5c",
+  "files": {
+    "docs/schema/thp-transaction-probe-batch-1.schema.json": "9dc5896a3d60b23840c823c14416dee5ab564d56a2fbbf2a7ea54151cc0df989",
+    "tools/verify_thp_transaction_probes.php": "056362857a421cc931ce2c3b3d75b95f3362c9a12378ebf7b3edf2088ecedf6e",
+    "tests/Integration/ThpTransactionProbeVerifierTest.php": "a7b61382f10b14e9337bc00312ecec2d6d52eefe17a9128c1ca4921736f496ad",
+    "docs/THP-INTEGRATION-CONTRACT.md": "1731b67c0080b727bca5b5cb9ed13932de4be8306fbc86ee3a61161bd0aaa2d6",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "645140604205ae3b047b913bfba00e68a532b58c90b9c398eb3f37313f7ecde2"
+  },
+  "checks": {
+    "targetedWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 10,
+      "assertions": 96
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "errors": 0
+    },
+    "expandedRepositorySecretScan": {
+      "status": "PASS",
+      "filesScanned": 376,
+      "binaryFilesSkipped": 21,
+      "findings": 0
+    },
+    "repositorySuiteWindows": {
+      "status": "PASS",
+      "tests": 347,
+      "assertions": 2133,
+      "skipped": 1
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "closedGates": 2,
+      "blockingGates": 8,
+      "evidenceFilesVerifiedBeforeThisCheckpointWasFinalized": 44
+    },
+    "coveredBehaviours": [
+      "one successful atomic probe contains the complete ordered six-stage write set and exactly one commit",
+      "one failure probe is mandatory after every individual write stage",
+      "every failure probe must attempt the exact write prefix and restore baseline revision and state hashes",
+      "partial success, changed rollback state and unexpected commits are honest NO_GO outcomes",
+      "missing, duplicate or malformed probe denominators are infrastructure errors",
+      "personal-data keys fail closed without recording their values",
+      "GO does not claim database access, independent hash derivation or executed fault injection"
+    ]
+  },
+  "boundary": {
+    "chessPairingsTransactionImplemented": false,
+    "disposableDatabaseProbesExecuted": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_TRANSACTION_EVIDENCE_GATE_READY_PRODUCT_FAULT_INJECTION_REMAINS_OPEN"
+}

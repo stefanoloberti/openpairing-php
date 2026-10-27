@@ -1,0 +1,110 @@
+{
+  "schema": "openpairing.autonomy-closeout/1",
+  "capturedAt": "2026-08-16T17:00:34+02:00",
+  "timeZone": "Europe/Rome",
+  "status": "SAFE_HANDOFF_NO_GO",
+  "campaign": {
+    "identity": {
+      "release": "86ec9d9-r2",
+      "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+      "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+      "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+      "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+      "runtimeLockSha256": "4d9ae2656b46fcdd6e009dce5432049100f987cfb4a6275de9a5a1edd7bc28b1",
+      "backend": "gmp"
+    },
+    "primary": {
+      "host": "doppia-3090",
+      "service": "openpairing-full-corpus.service",
+      "active": true,
+      "enabled": true,
+      "workers": 20,
+      "workerShards": "s000-s019",
+      "promotedReports": 0,
+      "classifications": 0,
+      "stopMarkers": 0,
+      "nonEmptyErrors": 0,
+      "restarts": 0,
+      "workerElapsedSeconds": 60916,
+      "availableMemoryGiB": 36,
+      "diskUsedPercent": 6,
+      "load1": 22.09
+    },
+    "secondary": {
+      "host": "python-69",
+      "service": "openpairing-cross-p80.service",
+      "active": true,
+      "enabled": true,
+      "workers": 10,
+      "workerShards": "s192-s201",
+      "quarantinedReports": 0,
+      "attestations": 0,
+      "stopMarkers": 0,
+      "nonEmptyErrors": 0,
+      "restarts": 0,
+      "workerElapsedSeconds": 62018,
+      "availableMemoryGiB": 29,
+      "diskUsedPercent": 1,
+      "load1": 9.19,
+      "transferredAtClose": false
+    },
+    "capacityPilots": {
+      "p300": {
+        "currentRunActive": true,
+        "elapsedSeconds": 60913,
+        "terminalReportPresent": false,
+        "stderrBytes": 0,
+        "historicalVerdict": "PASS_61_OF_61"
+      },
+      "p600": {
+        "currentRunActive": true,
+        "elapsedSeconds": 60913,
+        "terminalReportPresent": false,
+        "stderrBytes": 0
+      }
+    },
+    "eta": {
+      "officialGateEtaAvailable": false,
+      "reason": "No accepted and classified epoch-4 shard exists yet.",
+      "historicalFirstPrimaryCompletionWindow": "2026-08-16T19:40:00+02:00/2026-08-16T20:05:00+02:00"
+    }
+  },
+  "verification": {
+    "repositoryCommit": "d4a4cce4e1f4a3968336ea85f65e549b6937578b",
+    "originAndOffsiteMatched": true,
+    "tests": {
+      "passed": 426,
+      "assertions": 4486,
+      "phpstanMax": "PASS",
+      "publicApi": "PASS_13_METHODS",
+      "secretScan": "PASS_409_FILES_0_FINDINGS"
+    },
+    "readiness": {
+      "verdict": "NO_GO",
+      "gates": 10,
+      "closed": 2,
+      "blocking": 8,
+      "evidenceFiles": 74,
+      "manifestSha256": "62e863359b7cdaed780ce44c464932451769ad601e6b8a19b4585c6c995541a4"
+    }
+  },
+  "candidate": {
+    "branch": "audit/web-rating-import-zip-boundary-rc38",
+    "commit": "68abe8d707967b2ac5260dcddc03c0553c6c710e",
+    "clean": true,
+    "deployed": false,
+    "sourceTarSha256": "1915f034c97aa2f1337860119793545462c448e925210f9150af8b27ff27c256",
+    "bundleSha256": "b1a7584858b80cb7db708641e28f9ca2f980ea7d1f9499062e2c6616ddc4c7f0"
+  },
+  "handoff": {
+    "localHost": "Dell",
+    "localNormalShutdownSafe": true,
+    "remoteHostsContinueIndependently": true,
+    "remoteServicesStoppedOrRestarted": false,
+    "productionMutated": false,
+    "stagingMutated": false,
+    "databaseMutated": false,
+    "unprovedGateDeclared": false,
+    "automationPausePendingAfterFinalEmail": true
+  }
+}

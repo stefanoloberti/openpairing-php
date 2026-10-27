@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-operator-workflow-probe-batch-1.schema.json",
+  "title": "OpenPairing THP English operator workflow probe batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "fideMode", "pairingSystem", "trfVersion", "syntheticPlayerCount", "roundsCompleted",
+    "finalStandingsSha256", "exportArtifactSha256", "steps"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-operator-workflow-probe-batch/1"},
+    "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+    "productSourceCommit": {"$ref": "#/$defs/gitCommit"},
+    "migrationManifestSha256": {"$ref": "#/$defs/sha256"},
+    "fideMode": {"type": "string", "minLength": 1, "maxLength": 128},
+    "pairingSystem": {"type": "string", "minLength": 1, "maxLength": 128},
+    "trfVersion": {"type": "string", "minLength": 1, "maxLength": 128},
+    "syntheticPlayerCount": {"type": "integer", "minimum": 4},
+    "roundsCompleted": {"type": "integer", "minimum": 1},
+    "finalStandingsSha256": {"$ref": "#/$defs/sha256"},
+    "exportArtifactSha256": {"$ref": "#/$defs/sha256"},
+    "steps": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {"$ref": "#/$defs/step"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gitCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "counter": {"type": "integer", "minimum": 0},
+    "zeroOrOne": {"type": "integer", "minimum": 0, "maximum": 1},
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stepId", "capability", "uiLocale", "screenContentSha256", "helpTopicId",
+        "helpContentSha256", "englishAssertionCount", "nonEnglishLabelCount", "missingHelpLinkCount",
+        "stateSha256Before", "stateSha256After", "engineInvocationCount", "legacyFallbackInvocationCount",
+        "manualFallbackInvocationCount", "transactionBeginCount", "transactionCommitCount",
+        "transactionRollbackCount", "publicationCount", "outcome", "diagnosticCode"
+      ],
+      "properties": {
+        "stepId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "capability": {"enum": [
+          "activate-fide-mode", "import-rating-list", "create-tournament", "register-players",
+          "generate-pairing", "enter-results", "calculate-standings", "export-trf", "recover-workflow"
+        ]},
+        "uiLocale": {"const": "en"},
+        "screenContentSha256": {"$ref": "#/$defs/sha256"},
+        "helpTopicId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{7,127}$"},
+        "helpContentSha256": {"$ref": "#/$defs/sha256"},
+        "englishAssertionCount": {"type": "integer", "minimum": 1},
+        "nonEnglishLabelCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "missingHelpLinkCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "stateSha256Before": {"$ref": "#/$defs/sha256"},
+        "stateSha256After": {"$ref": "#/$defs/sha256"},
+        "engineInvocationCount": {"$ref": "#/$defs/zeroOrOne"},
+        "legacyFallbackInvocationCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "manualFallbackInvocationCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "transactionBeginCount": {"$ref": "#/$defs/zeroOrOne"},
+        "transactionCommitCount": {"$ref": "#/$defs/zeroOrOne"},
+        "transactionRollbackCount": {"$ref": "#/$defs/zeroOrOne"},
+        "publicationCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "outcome": {"const": "success"},
+        "diagnosticCode": {"type": "null"}
+      }
+    }
+  }
+}

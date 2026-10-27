@@ -1,0 +1,91 @@
+{
+  "schema": "openpairing.p80-initial-colour-incident/1",
+  "observedAt": "2026-08-15T20:40:00+02:00",
+  "officialAcceptance": false,
+  "invalidRun": {
+    "campaign": "p80",
+    "reason": "campaign-tool identity mismatch and silent TRF 152 fallback",
+    "expectedCampaignCommit": "dcf92df7e7e8341c167c00d1d46ee0d25069bd86",
+    "expectedSourceTreeSha256": "4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74",
+    "observedRelease": "c48fd05",
+    "observedSourceTreeSha256": "fb06fa59b66d4eba8e6e41b97ba42600e29c99075c057153b970f9eca2fd9ba3",
+    "promotedReports": 17,
+    "observedColourVariants": 217,
+    "variantRounds": {
+      "round1": 216,
+      "round2": 1
+    },
+    "pairingDeviations": 0,
+    "noSolutionOrResourceLimit": 0,
+    "quarantine": "/srv/openpairing-validation/quarantine/p80-c48fd05-invalid-identity-20260815T2023",
+    "quarantineManifestSha256": "f91a7880bf68ef39c78a245ef86c3638140c0c34077a29ac76e02b63bdfdd305"
+  },
+  "controlledReplay": {
+    "changedInput": "add record 152 B only",
+    "case": "t_n51_p80_d10_s50--T4857.trf",
+    "result": "rounds 1 and 2 exact",
+    "engineSourceTreeSha256": "4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74",
+    "fixedHarnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "allObservedVariantsReplay": {
+      "round1": {
+        "files": 216,
+        "attempted": 216,
+        "exact": 216,
+        "colourVariants": 0,
+        "diagnostics": 0,
+        "reportSha256": "91a06a3887a1f0dd5f11db0a7c03dc60484cac9e7765d06ca4b0df36ed950d50",
+        "corpusManifestSha256": "ce29ce6caa7877d91211bc7f0fce057f5dd7bf98da3a2324ed1d8943de0de12d",
+        "topColourProvenanceSha256": "d2693bcb82f4b2ef750ed09c23169e41c626d8bd2f19c05c32db3b0d490feb89"
+      },
+      "round2": {
+        "files": 1,
+        "attempted": 1,
+        "exact": 1,
+        "colourVariants": 0,
+        "diagnostics": 0,
+        "reportSha256": "6a69c763f529000dd069796f2a6367fbf801a97a0332915ba95b3697afd9b4de",
+        "corpusManifestSha256": "4f71d548b79c34a455e2588479206f058cd96ef3022ce474bd727c7119886f68",
+        "topColourProvenanceSha256": "a624be42ca0eadb85d2ff0c701474cd3cd3c2d0cc1fdc73a42d48472ce08b3a6"
+      },
+      "classification": "PASS_NO_ORACLE_CASES"
+    }
+  },
+  "backwardScan": {
+    "rule": "remove record 152 when present, infer from the first played round-one colour and dense participant rank parity, then compare with the removed value",
+    "explicitInferenceMismatches": 0,
+    "indeducible": 0,
+    "partitions": {
+      "p30": {"files": 20000, "explicit": 2, "missing": 19998, "explicitInferenceMatches": 2, "missingInferredW": 19998, "missingInferredB": 0},
+      "p50": {"files": 30000, "explicit": 20001, "missing": 9999, "explicitInferenceMatches": 20001, "missingInferredW": 9999, "missingInferredB": 0},
+      "p80": {"files": 20000, "explicit": 13240, "missing": 6760, "explicitInferenceMatches": 13240, "missingInferredW": 3380, "missingInferredB": 3380},
+      "p150": {"files": 2000, "explicit": 0, "missing": 2000, "missingInferredW": 2000, "missingInferredB": 0},
+      "remainingMiscAndLargeMisc": {"files": 11, "explicit": 2, "missing": 9, "explicitInferenceMatches": 2, "inferredW": 9, "inferredB": 2},
+      "accelerated": {"files": 1000, "explicit": 1000, "missing": 0, "explicitInferenceMatches": 1000},
+      "large300": {"files": 200, "explicit": 200, "missing": 0, "explicitInferenceMatches": 200},
+      "large600": {"files": 200, "explicit": 200, "missing": 0, "explicitInferenceMatches": 200},
+      "large1200": {"files": 88, "explicit": 88, "missing": 0, "explicitInferenceMatches": 88},
+      "large1800": {"files": 41, "explicit": 41, "missing": 0, "explicitInferenceMatches": 41},
+      "large2400": {"files": 17, "explicit": 17, "missing": 0, "explicitInferenceMatches": 17}
+    }
+  },
+  "failClosedControls": {
+    "wrongSourceIdentity": {"exitCode": 4, "runnerCreated": false},
+    "wrongHarnessIdentity": {"exitCode": 4, "runnerCreated": false},
+    "wrongCampaignCommit": {"exitCode": 4, "runnerCreated": false},
+    "incompleteReport": {"exitCode": 25, "stopReason": "incomplete-evaluation"},
+    "diagnosticReport": {"exitCode": 26, "stopReason": "report-diagnostics-1"}
+  },
+  "replacementQueue": {
+    "campaignToolCommit": "94065712e2157341e41642067131089632cb74fe",
+    "sourceTreeSha256": "4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "release": "/srv/openpairing-validation/releases/9406571",
+    "campaign": "/srv/openpairing-validation/campaigns/p80-epoch2-9406571",
+    "startedAt": "2026-08-15T20:56:17+02:00",
+    "workers": 20,
+    "shards": 256,
+    "expectedFiles": 20000,
+    "perShardClassification": true
+  },
+  "conclusion": "The engine is unchanged. The variants were produced by replay input normalization, not Dutch pairing or forfeit colour history."
+}

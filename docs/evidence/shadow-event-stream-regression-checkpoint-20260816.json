@@ -1,0 +1,51 @@
+{
+  "schema": "openpairing.shadow-event-stream-regression-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T07:46:32+02:00",
+  "commitContainingRegression": "0510745983a0dd426f03b0f885dc1cd2067e6612",
+  "files": {
+    "tools/build_shadow_event_stream.php": "a8fd2825649f554c890d298706872f8aaaa4bcf0c8becead198d1a386e4c8a29",
+    "tests/Integration/ShadowEventStreamBuilderTest.php": "c6ff17aa39ae7b8303ce5a54a04476a9342263b7414502664bae515fba4e78fa"
+  },
+  "runtime": {
+    "host": "DESKTOP-EF1C0NB",
+    "wslDistribution": "Ubuntu",
+    "php": "8.3.6",
+    "executionPriority": "nice 19",
+    "temporaryRoot": "/tmp/openpairing-head-test",
+    "temporaryRootRemovedAfterTest": true
+  },
+  "checks": {
+    "phpunit": {
+      "status": "PASS",
+      "tests": 4,
+      "assertions": 31
+    },
+    "phpLint": {
+      "status": "PASS",
+      "files": 2
+    },
+    "phpstan": {
+      "status": "PASS",
+      "level": "max",
+      "errors": 0
+    },
+    "coveredBehaviours": [
+      "deterministic filename ordering",
+      "recursive associative-key normalization",
+      "byte-stable stream hash",
+      "existing output is never overwritten",
+      "hidden partial input is rejected",
+      "event filename and eventId mismatch is rejected",
+      "failed builds do not publish an output stream"
+    ]
+  },
+  "boundary": {
+    "officialShadowEvidenceProduced": false,
+    "campaignEvidenceProduced": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "productionContacted": false,
+    "productionMutationPerformed": false
+  },
+  "status": "PASS_TOOLING_REGRESSION_SHADOW_GATE_REMAINS_OPEN"
+}

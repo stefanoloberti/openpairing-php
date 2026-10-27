@@ -1,0 +1,56 @@
+{
+  "schema": "openpairing.historical-partition-promotion-receipt/1",
+  "partition": "p80",
+  "epoch": "p80-epoch4-86ec9d9",
+  "closedAt": "2026-08-26T01:07:53+02:00",
+  "verifiedAt": "2026-08-26T08:02:36+02:00",
+  "campaignToolCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+  "aggregate": {
+    "repositoryPath": "docs/evidence/p80-full-86ec9d9-20260826.json",
+    "sourcePath": "/srv/openpairing-validation/campaigns/p80-epoch4-86ec9d9/aggregate.json",
+    "bytes": 303867,
+    "sha256": "e191f3fe27c4afb75144da2a145467034cc3b10f03fdd4f3732b3d8ea7617533"
+  },
+  "identity": {
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "classificationGateSha256": "5c4c9c3b5c7785be05bfcd52c87fe6fa9dfe6761c947b403d805e9c0b4973a18",
+    "historicalFloatSemantics": "fide-dutch-float/3-round-indexed",
+    "arithmeticBackend": "gmp"
+  },
+  "corpusIdentity": {
+    "fileCount": 20000,
+    "totalBytes": 711927120,
+    "shardManifestSha256": "3a76297c8706e960f4396e1c5ff15f99def248c676ca9f0cfecf23f52f1ab884"
+  },
+  "counts": {
+    "shards": 256,
+    "reports": 256,
+    "classifications": 256,
+    "filesSeen": 20000,
+    "decoded": 20000,
+    "tournamentsVerified": 20000,
+    "tournamentsAllExact": 20000,
+    "roundsAttempted": 660000,
+    "roundsExact": 660000,
+    "roundsSamePairsColourVariant": 0,
+    "roundsPairingDeviation": 0,
+    "roundsEngineNoSolution": 0,
+    "roundsEngineResourceLimit": 0
+  },
+  "classification": {
+    "verdicts": {
+      "PASS_NO_ORACLE_CASES": 256
+    },
+    "requiredOracleCases": 0,
+    "missingClassifications": [],
+    "orphanClassifications": [],
+    "sourceReportMismatches": []
+  },
+  "health": {
+    "stopExists": false,
+    "nonEmptyErrors": 0
+  },
+  "sentinel": "PASS"
+}

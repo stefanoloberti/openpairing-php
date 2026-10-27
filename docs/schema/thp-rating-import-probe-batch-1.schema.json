@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-rating-import-probe-batch-1.schema.json",
+  "title": "OpenPairing THP FIDE rating-list import probe batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "requiredListPeriod", "scenarios"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-rating-import-probe-batch/1"},
+    "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+    "productSourceCommit": {"$ref": "#/$defs/gitCommit"},
+    "migrationManifestSha256": {"$ref": "#/$defs/sha256"},
+    "requiredListPeriod": {"$ref": "#/$defs/period"},
+    "scenarios": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/scenario"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gitCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "period": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+    "nonNegative": {"type": "integer", "minimum": 0},
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenarioId", "kind", "candidateIdentitySha256", "sourceArtifactSha256", "sourceListPeriod",
+        "parserDisposition", "decodedRows", "acceptedRows", "rejectedRows", "duplicateFideIds",
+        "existingBefore", "inserted", "updated", "unchanged", "deactivated", "finalActive",
+        "writeAttemptCount", "persistedWriteCount", "transactionBeginCount", "transactionCommitCount",
+        "transactionRollbackCount", "stateSha256Before", "stateSha256After", "diagnosticCode"
+      ],
+      "properties": {
+        "scenarioId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "kind": {"enum": ["fresh-import", "identical-reimport", "malformed-source", "stale-source", "injected-db-failure"]},
+        "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+        "sourceArtifactSha256": {"$ref": "#/$defs/sha256"},
+        "sourceListPeriod": {"$ref": "#/$defs/period"},
+        "parserDisposition": {"enum": ["accepted", "rejected"]},
+        "decodedRows": {"$ref": "#/$defs/nonNegative"},
+        "acceptedRows": {"$ref": "#/$defs/nonNegative"},
+        "rejectedRows": {"$ref": "#/$defs/nonNegative"},
+        "duplicateFideIds": {"$ref": "#/$defs/nonNegative"},
+        "existingBefore": {"$ref": "#/$defs/nonNegative"},
+        "inserted": {"$ref": "#/$defs/nonNegative"},
+        "updated": {"$ref": "#/$defs/nonNegative"},
+        "unchanged": {"$ref": "#/$defs/nonNegative"},
+        "deactivated": {"$ref": "#/$defs/nonNegative"},
+        "finalActive": {"$ref": "#/$defs/nonNegative"},
+        "writeAttemptCount": {"$ref": "#/$defs/nonNegative"},
+        "persistedWriteCount": {"$ref": "#/$defs/nonNegative"},
+        "transactionBeginCount": {"type": "integer", "minimum": 0, "maximum": 1},
+        "transactionCommitCount": {"type": "integer", "minimum": 0, "maximum": 1},
+        "transactionRollbackCount": {"type": "integer", "minimum": 0, "maximum": 1},
+        "stateSha256Before": {"$ref": "#/$defs/sha256"},
+        "stateSha256After": {"$ref": "#/$defs/sha256"},
+        "diagnosticCode": {"type": ["string", "null"], "minLength": 1, "maxLength": 128}
+      }
+    }
+  }
+}

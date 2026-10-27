@@ -1,0 +1,52 @@
+{
+  "schema": "openpairing.shadow-evidence-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T01:08:07+02:00",
+  "validatedBaseCommit": "2cac891e853f8e2248ac4b414b4b486f1eaa7407",
+  "runtime": {
+    "host": "DESKTOP-3OI0QHR",
+    "wslDistribution": "ChessPairings-Ubuntu-24.04",
+    "php": "8.3.6",
+    "campaignReleaseUsedAsTestRuntime": "86ec9d9-r2"
+  },
+  "files": {
+    "tools/verify_shadow_evidence.php": "14e3afdc27e0452b5c31538c68a657baf9c586d3335b0e48e37579ccddc4cfa3",
+    "tests/Integration/ShadowEvidenceVerifierTest.php": "3e2d858bc4fec2a134ceb50b798a559f38de09662e54bfcea121100882e8a634",
+    "docs/schema/shadow-evidence-batch-1.schema.json": "8f1db19082f38724d4b731b131210e911fbdfd213f3835ab914d3c981065e906",
+    "docs/schema/shadow-turn-1.schema.json": "7a22f23bbaf96a44551b23f198cdc21bc474ea4c57d245ec2d6eaf62b29686d1",
+    "docs/SHADOW-VALIDATION.md": "192e7874660ba8c5ea23ee07ae1d97034ac05c6cca51c2224c3883ea150ffb01"
+  },
+  "checks": {
+    "shadowVerifier": {
+      "status": "PASS",
+      "tests": 6,
+      "assertions": 49,
+      "coveredDecisions": [
+        "complete identity-scoped batch GO",
+        "infrastructure observation NO_GO",
+        "mixed identity ERROR",
+        "attempt denominator mismatch ERROR",
+        "unclassified non-exact NO_GO",
+        "personal-data key ERROR"
+      ]
+    },
+    "repositorySuite": {
+      "status": "PASS",
+      "tests": 280,
+      "assertions": 1327,
+      "excludedGroups": ["oracle", "stress"]
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "files": 138,
+      "errors": 0
+    }
+  },
+  "boundary": {
+    "productionShadowEnabled": false,
+    "productionMutationPerformed": false,
+    "realTournamentEvidenceProduced": false,
+    "submissionGateClosed": false,
+    "note": "The checkpoint makes future shadow evidence mechanically fail closed. It does not select an integrated product identity or authorize live observation."
+  },
+  "status": "PASS_TOOLING_READY_SHADOW_GATE_REMAINS_OPEN"
+}

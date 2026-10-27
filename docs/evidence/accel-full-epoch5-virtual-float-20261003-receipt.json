@@ -1,0 +1,68 @@
+{
+    "schema": "openpairing.acceleration-partition-promotion-receipt/1",
+    "partition": "accel",
+    "epoch": "accel-epoch5-virtual-float",
+    "closedAt": "2026-10-02T16:15:53+02:00",
+    "verifiedAt": "2026-10-03T08:30:04+02:00",
+    "campaignToolCommit": "5b0e7648663e92d7d08790fa6b899f01dd76a718",
+    "aggregate": {
+        "repositoryPath": "docs/evidence/accel-full-epoch5-virtual-float-20261003.json",
+        "sourcePath": "/srv/openpairing-validation/campaigns/accel-epoch5-virtual-float/aggregate.json",
+        "bytes": 77598,
+        "sha256": "3c64f91513e2d7b17ab6681de72ec4cbe99644bd3f31ba9925902a4efd135901"
+    },
+    "identity": {
+        "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+        "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+        "harnessSha256": "1c8013f591a81e5d57393340466a4c2cec1ddac6ac87b027b6dcdbc9e58d829b",
+        "classificationGateSha256": "5c4c9c3b5c7785be05bfcd52c87fe6fa9dfe6761c947b403d805e9c0b4973a18",
+        "campaignRunnerSha256": "1473522a8a811da307701a4993814e4455f38848cbaaab90e6c8c43d076a4459",
+        "historicalFloatSemantics": "fide-dutch-float/3-round-indexed",
+        "arithmeticBackend": "gmp",
+        "runtimeRoots": [
+            "/srv/openpairing-validation/releases/accel-epoch5-virtual-float"
+        ]
+    },
+    "corpusIdentity": {
+        "fileCount": 1000,
+        "totalBytes": 38907000,
+        "shardManifestSha256": "e37be0db4bad70d89f96216446444381594c06f89406bd021d857a84ff29ff66"
+    },
+    "counts": {
+        "shards": 64,
+        "reports": 64,
+        "classifications": 64,
+        "filesSeen": 1000,
+        "decoded": 1000,
+        "tournamentsVerified": 1000,
+        "tournamentsAllExact": 1000,
+        "roundsAttempted": 11000,
+        "roundsExact": 11000,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 11000,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 0,
+        "largeField.candidateNoMatching": 0
+    },
+    "classification": {
+        "verdicts": {
+            "PASS_NO_ORACLE_CASES": 64
+        },
+        "requiredOracleCases": 0,
+        "crossWorkerImports": {
+            "total": 0,
+            "sourceHosts": []
+        },
+        "missingClassifications": [],
+        "orphanClassifications": [],
+        "sourceReportMismatches": []
+    },
+    "health": {
+        "stopExists": false,
+        "nonEmptyErrors": 0
+    },
+    "sentinel": "PASS"
+}

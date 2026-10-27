@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.org/schema/shadow-attempt-1.schema.json",
+  "title": "OpenPairing shadow attempt reservation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "eventId",
+    "reservedAtUtc",
+    "identity",
+    "tournament",
+    "canonicalInputSha256",
+    "features"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.shadow-attempt/1"},
+    "eventId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "reservedAtUtc": {"type": "string", "format": "date-time"},
+    "identity": {"type": "object"},
+    "tournament": {"type": "object"},
+    "canonicalInputSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "features": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["odd-field", "even-field", "withdrawal", "pab", "forfeit", "scheduled-bye", "accelerated"]
+      }
+    }
+  }
+}

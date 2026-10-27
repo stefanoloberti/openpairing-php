@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/tec-cross-test-case-1.schema.json",
+  "title": "OpenPairing TEC cross-test case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "caseId", "inputTrfSha256", "checkerReportSha256", "status"],
+  "properties": {
+    "schema": {"const": "openpairing.tec-cross-test-case/1"},
+    "caseId": {"type": "string", "minLength": 1},
+    "inputTrfSha256": {"$ref": "#/$defs/sha256"},
+    "checkerReportSha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+    "status": {"enum": ["exact", "discrepancy", "infrastructure-error"]},
+    "classification": {"enum": ["input-error", "candidate-engine-error", "interpretation-divergence", null]},
+    "classificationReference": {"type": ["string", "null"]},
+    "reproductionReference": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
+

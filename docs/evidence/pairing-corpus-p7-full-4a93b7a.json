@@ -1,0 +1,71 @@
+{
+    "schema": "openpairing.trf-historical-pairing-verification/3",
+    "historicalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+    "root": "/tmp/openpairing-corpus-small-6c93a2a2/t_n5_p7_d20_s50",
+    "limit": 0,
+    "roundFilter": null,
+    "productionOnly": true,
+    "performanceRuntime": {
+        "opcacheEnableCli": "1",
+        "jit": "1255",
+        "jitBufferSize": "128M",
+        "xdebugMode": ""
+    },
+    "preliminaryGlobalAudit": false,
+    "shadowGlobalAudit": false,
+    "largeFieldAudit": true,
+    "elapsedSeconds": 144.23,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/tmp/openpairing-validation/backends/gmp-qc6/releases/e08aadf903794bb3",
+        "autoloadPsr4Roots": [
+            "/tmp/openpairing-validation/backends/gmp-qc6/releases/e08aadf903794bb3/src"
+        ],
+        "expectedEnginePath": "/tmp/openpairing-validation/backends/gmp-qc6/releases/e08aadf903794bb3/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/tmp/openpairing-validation/backends/gmp-qc6/releases/e08aadf903794bb3/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+        "sourceTreeSha256": "20a801e5a98b3874ba086649a67af5279e89d3253852d8d9b5e1e668f88041a6",
+        "sourceFileCount": 79,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "harnessIdentity": {
+        "schema": "openpairing.historical-replay-harness/1",
+        "sha256": "0990f14de24c4ad624dafafbc6b7ed248c0ca7f8f7ad58f1cc957be6ae0210f7",
+        "files": {
+            "TrfCorpusCompatibility.php": "d7f115471ad11ff26be8697027cde93216540be8a1a55e04be78d0ef37f8a60a",
+            "verify_trf_pairings.php": "0971f6a06f5b44153ccce9b6853fb7aed91182dbee64a48a9b6b286f4b65a12c"
+        }
+    },
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-identity/1",
+        "selection": "relative-path-ordinal-v1",
+        "requestedLimit": 0,
+        "fileCount": 10000,
+        "totalBytes": 12310000,
+        "manifestSha256": "faf0dc8e0f1618b703f9a270bfcb9ee8ad9fd26fd3a330a753cbd9dccb3445ba"
+    },
+    "counts": {
+        "filesSeen": 10000,
+        "decoded": 10000,
+        "tournamentsVerified": 10000,
+        "tournamentsAllExact": 10000,
+        "roundsAttempted": 49961,
+        "roundsExact": 49961,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 49961,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 0,
+        "largeField.candidateNoMatching": 0
+    },
+    "diagnostics": [],
+    "samples": [],
+    "preliminarySamples": [],
+    "shadowSamples": [],
+    "shadowTimingSamples": [],
+    "shadowTimingAggregates": []
+}

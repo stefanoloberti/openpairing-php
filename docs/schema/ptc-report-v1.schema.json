@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.org/schema/ptc-report-v1.schema.json",
+  "title": "OpenPairing public PTC report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "status", "pairingSystem", "tournamentName", "caseCount", "counts", "rounds", "tieBreaks"],
+  "properties": {
+    "schema": {"const": "openpairing.ptc-report/1"},
+    "status": {"enum": ["exact", "discrepancy"]},
+    "pairingSystem": {"enum": ["fide-dutch-2026", "fide-burstein-2026"]},
+    "tournamentName": {"type": "string"},
+    "caseCount": {"type": "integer", "minimum": 1},
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["roundsChecked", "roundsExact", "roundsSamePairsColourVariant", "roundsPairingDeviation", "roundsEngineFailure"],
+      "properties": {
+        "roundsChecked": {"type": "integer", "minimum": 0},
+        "roundsExact": {"type": "integer", "minimum": 0},
+        "roundsSamePairsColourVariant": {"type": "integer", "minimum": 0},
+        "roundsPairingDeviation": {"type": "integer", "minimum": 0},
+        "roundsEngineFailure": {"type": "integer", "minimum": 0}
+      }
+    },
+    "rounds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["round", "status", "referencePairCount", "generatedPairCount", "referenceByePlayerId", "generatedByePlayerId"],
+        "properties": {
+          "round": {"type": "integer", "minimum": 1},
+          "status": {"enum": ["exact", "same-pairs-colour-variant", "pairing-deviation", "engine-failure"]},
+          "referencePairCount": {"type": "integer", "minimum": 0},
+          "generatedPairCount": {"type": "integer", "minimum": 0},
+          "referenceByePlayerId": {"type": ["integer", "null"], "minimum": 1},
+          "generatedByePlayerId": {"type": ["integer", "null"], "minimum": 1},
+          "reference": {"type": "object"},
+          "generated": {"type": "object"},
+          "violations": {"type": "array"},
+          "unpairedPlayerIds": {"type": "array", "items": {"type": "integer", "minimum": 1}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "tieBreaks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "record", "rankOrder", "playersChecked", "mismatches"],
+      "properties": {
+        "status": {"enum": ["not-declared", "exact", "mismatch"]},
+        "record": {"enum": ["", "202", "212"]},
+        "rankOrder": {"type": "string"},
+        "playersChecked": {"type": "integer", "minimum": 0},
+        "mismatches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["playerId", "reportedRank", "calculatedRank"],
+            "properties": {
+              "playerId": {"type": "integer", "minimum": 1},
+              "reportedRank": {"type": "integer", "minimum": 1},
+              "calculatedRank": {"type": "integer", "minimum": 1}
+            }
+          }
+        }
+      }
+    }
+  }
+}

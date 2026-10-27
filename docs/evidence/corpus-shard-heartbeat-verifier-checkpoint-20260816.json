@@ -1,0 +1,60 @@
+{
+  "schema": "openpairing.corpus-shard-heartbeat-verifier-checkpoint/1",
+  "status": "PASS",
+  "observedAtUtc": "2026-08-16T11:27:57Z",
+  "implementation": {
+    "commit": "13f0a216444833644db73f6fc37827958c0316cd",
+    "tree": "bef4c9f9436363f804cd7c3da381a48343bc9233",
+    "schemaPath": "docs/schema/corpus-shard-heartbeat-1.schema.json",
+    "schemaSha256": "c8cc25fa2e299112b97ed9b0ed812b28dd73b5f1f5032bfbed73da9112053070",
+    "verifierPath": "tools/verify_corpus_shard_heartbeat.php",
+    "verifierSha256": "65370a9e66eebec289ae011dd8a868bf47f9d73611a42654d98c6ede528bb2b0",
+    "testPath": "tests/Integration/CorpusShardHeartbeatVerifierTest.php",
+    "testSha256": "1160b734861d5a559d3283d8f97a275dc2e8876d8cd4483084da964f66b679ff"
+  },
+  "environment": {
+    "host": "doppia-3090",
+    "runtime": "WSL ChessPairings-Ubuntu-24.04",
+    "php": "8.3.6",
+    "dependencySource": "/srv/openpairing-validation/releases/86ec9d9-r2/vendor",
+    "executionRoot": "/tmp/openpairing-heartbeat-exact-13f0a21"
+  },
+  "verification": {
+    "schemaJsonDecode": "PASS",
+    "targetedTests": {
+      "status": "PASS",
+      "tests": 8,
+      "assertions": 87
+    },
+    "fullTests": {
+      "status": "PASS",
+      "tests": 426,
+      "assertions": 4486
+    },
+    "phpstanLevelMax": "PASS",
+    "publicApi": {
+      "status": "PASS",
+      "methodCount": 13,
+      "manifestSha256": "de3cae95c62f4971d128a789150c4b5f956c4064238df8cda57eb1b91512af87",
+      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+    },
+    "secretScan": {
+      "status": "PASS",
+      "filesScanned": 406,
+      "findings": 0
+    },
+    "staleAutoloadNegativeControl": {
+      "status": "PASS",
+      "note": "A symlinked vendor directory resolved OpenPairing classes from the active release and the runtime identity test rejected the stale autoload. Dependencies were then copied into the isolated exact-commit root before the passing run."
+    }
+  },
+  "boundary": {
+    "activeCampaignChanged": false,
+    "activeRunnerChanged": false,
+    "heartbeatWriterImplemented": false,
+    "terminalEvidenceChanged": false,
+    "acceptedGateDeclared": false,
+    "productionChanged": false,
+    "note": "This checkpoint freezes a future-epoch schema and independent reader only. p80-epoch4-86ec9d9 remains identity-bound and untouched."
+  }
+}

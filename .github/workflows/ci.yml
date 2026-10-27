@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.3', '8.4']
+        arithmetic: [limbs, gmp]
+    name: PHP ${{ matrix.php }} / ${{ matrix.arithmetic }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ matrix.arithmetic == 'gmp' && 'mbstring, gmp' || 'mbstring' }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Install development dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Validate Composer metadata
+        run: composer validate --strict
+
+      - name: Lock arithmetic backend
+        shell: bash
+        run: |
+          if [[ "${{ matrix.arithmetic }}" == gmp ]]; then
+            echo 'OPENPAIRING_BIGINT_BACKEND=gmp' >> "$GITHUB_ENV"
+          else
+            echo 'OPENPAIRING_BIGINT_BACKEND=limbs' >> "$GITHUB_ENV"
+          fi
+
+      - name: Prove arithmetic backend
+        run: |
+          observed=$(php -r 'require "vendor/autoload.php"; $class = "OpenPairing\\Engine\\Matching\\DynamicUInt"; echo $class::backendName();')
+          expected="${{ matrix.arithmetic }}"
+          if [[ "$expected" == limbs ]]; then expected=limbs-30; fi
+          test "$observed" = "$expected"
+
+      - name: Rapid correctness gate
+        run: composer check
+
+      - name: Runtime package smoke
+        run: |
+          php bin/openpairing.php --version
+          php bin/openpairing.php examples/pairing-round-1.json
+          php bin/openpairing-ptc.php examples/ptc-completed-round-1.trf
+          php bin/openpairing-rtg.php --players=8 --rounds=4 --seed=42 > "$RUNNER_TEMP/rtg.trf"
+          php bin/openpairing-ptc.php "$RUNNER_TEMP/rtg.trf"
+
+  release-source-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify distribution provenance files
+        run: |
+          test -s LICENSE
+          test -s NOTICE
+          test -s docs/LICENSE-PROVENANCE.md
+          test -s docs/PORTING-MAP.md
+          ! git ls-files | grep -q '^tools/upstream/'
+          grep -F 'Copyright (c) 2024 FIDE' NOTICE
+          grep -F 'Copyright 2016-2026 Jeremy Bierema' NOTICE

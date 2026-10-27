@@ -1,0 +1,28 @@
+{
+  "schema": "openpairing.tiebreak-regression/1",
+  "oracle": {
+    "name": "Gacrux/TieBreakServer",
+    "commit": "14a34a2c2f36509b110e4f25d6247f31fc4bf2f5",
+    "source": "https://github.com/OttoMilvang/TieBreakServer",
+    "capturedAt": "2026-08-12"
+  },
+  "case": {
+    "name": "four-player-complete-encounter-set-formula-parity",
+    "ratings": {"1": 2200, "2": 2100, "3": 2000, "4": 1900},
+    "games": [
+      {"round": 1, "white": 1, "black": 2, "result": "1-0"},
+      {"round": 1, "white": 3, "black": 4, "result": "0-1"},
+      {"round": 2, "white": 2, "black": 4, "result": "1-0"},
+      {"round": 2, "white": 3, "black": 1, "result": "draw"},
+      {"round": 3, "white": 1, "black": 4, "result": "0-1"},
+      {"round": 3, "white": 2, "black": 3, "result": "draw"}
+    ]
+  },
+  "descriptors": ["BH", "FB", "AOB", "AOB/F", "KS", "TPR", "PTP", "APRO", "APPO"],
+  "valuesByPlayer": {
+    "1": ["4.5", "4.0", "4.50", "4.67", "1.0", "2000", "1999", "2067", "2063"],
+    "2": ["4.5", "4.5", "4.50", "4.50", "1.0", "2033", "2030", "2056", "2053"],
+    "3": ["5.0", "5.0", "4.33", "4.33", "1.0", "1942", "1933", "2086", "2085"],
+    "4": ["4.0", "4.5", "4.67", "4.50", "1.0", "2225", "2226", "1992", "1987"]
+  }
+}

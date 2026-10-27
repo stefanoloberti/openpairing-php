@@ -1,0 +1,22 @@
+{
+  "schema": "openpairing.negative-experiment/1",
+  "experimentCommit": "946bf8d",
+  "revertCommit": "25bafa1",
+  "hypothesis": "Per-score-group MDP identity selection can be ported before BBP's complete remainingMatched/matched accounting.",
+  "microCorpus": {
+    "files": ["T0032.trf", "T0056.trf", "T0088.trf"],
+    "result": "T0032 became exact; T0056 and T0088 remained non-exact; zero no-matchings"
+  },
+  "frozenReplay": {
+    "corpusManifestSha256": "e05981129109020ff5b35a77d972b3c36887823399dc2f5b7fd0e80d8b8bad44",
+    "sourceTreeSha256": "d3f317d1e4ed001fde7c771b8ff53105e8de41a99a266a5b5ccf0c1eaaade8f7",
+    "rounds": 500,
+    "bothExact": 443,
+    "candidateProgress": 39,
+    "candidateRegression": 2,
+    "sameDeviation": 2,
+    "divergentDeviation": 2,
+    "noMatching": 12
+  },
+  "verdict": "rejected and reverted; BBP's remainingMatchedMovedDownScoreGroupPlayers and matched/remainder state must be ported atomically"
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "openpairing.chesspairings-english-catalogue-checkpoint/1",
+  "generatedAtUtc": "2026-08-16T09:42:00Z",
+  "status": "SOURCE_CHECKPOINT_PASS",
+  "submissionGateStatus": "NO_GO",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.33",
+    "candidateId": "web-fide-candidate-20260816-az-english-catalogue-complete",
+    "parentVersion": "5.21.0-rc.32",
+    "parentCommit": "7a6c4d315410d2c8f0b63199ae460448ce93e250",
+    "sourceCommit": "7baabc4abdd714d719d4de1a5417407fc6bcd2cc",
+    "sourceTree": "b5e9c694ca69bc6fa27da5b650540e1a71cd3110",
+    "sourceArchiveSha256": "31c7075ce82bc51c747e4aa7a5736b9ff81cbc1fc8d5216eb9b8a5e16c1eb31a",
+    "sourceArchiveBytes": 40895253,
+    "bundleSha256": "2a927babf61cc086f1920a57880765166227bc882875afda1431bab20fc1b25d",
+    "bundleBytes": 40963906,
+    "offsiteBundleMatches": true,
+    "officialRecognition": "none"
+  },
+  "implementedBoundary": {
+    "italianCatalogueKeys": 3181,
+    "englishCatalogueKeys": 3181,
+    "missingEnglishKeysBefore": 59,
+    "missingEnglishKeysAfter": 0,
+    "emptyEnglishStringKeysAfter": 0,
+    "tiebreakGuideTranslated": true,
+    "roundRobinSelectionMessageTranslated": true
+  },
+  "verification": {
+    "windowsPhpVersion": "8.2.12",
+    "linuxPhpVersion": "8.3.6",
+    "linuxArithmeticBackend": "gmp",
+    "catalogueParityPassOnBothRuntimes": true,
+    "atomicResultBatchRegression": "18/18 PASS",
+    "individualInitialColourRegression": "PASS",
+    "individualTypeCodeRegression": "PASS",
+    "publishedRatingPolicyRegression": "PASS",
+    "publishedRatingTrfRegression": "PASS",
+    "teamFideModeAssertions": 36,
+    "teamTrf26CodecAssertions": 35,
+    "teamMtb26Assertions": 229,
+    "teamWizardAssertions": 12,
+    "sourceArchiveIndependentBuilds": 4,
+    "sourceArchiveBuildsMatch": true,
+    "sourceArchiveEntries": 669,
+    "trackedFiles": 628,
+    "forbiddenEnvironmentPaths": 0,
+    "symbolicLinks": 0,
+    "secretScanFiles": 499,
+    "secretScanFindings": 0
+  },
+  "inspectedFiles": [
+    {"path": "lang/en.php", "bytes": 227663, "sha256": "5b42fa6aa7bc8ac1f3a7addc3641896336ae82077d4e0402c93fe19ad562459e"},
+    {"path": "scripts/test_english_catalogue_parity.php", "bytes": 1813, "sha256": "f60b86c9f6d1673cc0421edb86f81af28d33308ab0b35ed8950f1344299139d1"},
+    {"path": "release.json", "bytes": 443, "sha256": "11854d986ade477404f891fcb2e232e2b35f40794873439fcd1ee6bd1ff292eb"},
+    {"path": "SOURCE_PROVENANCE.md", "bytes": 7213, "sha256": "4073e28b60bd9a0f7101fb0fa0f548e97b7235512118a51ed4acc8c0c52c9898"},
+    {"path": "docs/THIRD_PARTY_NOTICES_EN.md", "bytes": 3877, "sha256": "b96e9c10e53a1acc9731c6ff73ff1d90ce19975374054df2afd81fe737d74164"}
+  ],
+  "remainingEnglishWorkflow": [
+    "translate the hard-coded FIDE rating-import page",
+    "execute the complete operator workflow with the English locale on the exact isolated candidate",
+    "capture visual evidence for every required screen and error state",
+    "package and verify the final English operator manual"
+  ],
+  "boundary": {
+    "sourceCheckpointOnly": true,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionRequestPerformed": false,
+    "productionMutationPerformed": false,
+    "deployed": false,
+    "gateClosed": false,
+    "fideApprovedOrEndorsed": false
+  }
+}

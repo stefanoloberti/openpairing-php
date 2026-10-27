@@ -1,0 +1,73 @@
+{
+  "schema": "openpairing.release-dry-run-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T03:51:55+02:00",
+  "commit": "b30d3e3b7b0e1ac59675083a39e1e5f0b63e5aa6",
+  "version": "0.9.0-rc8",
+  "runs": 2,
+  "reproducible": true,
+  "artifacts": {
+    "buildReport": {
+      "bytes": 1200,
+      "sha256": "d9a5d05200f4cf367cb73d79b292dbe02ee9c588d683fe3f35820d68c425e422",
+      "byteIdenticalAcrossRuns": true
+    },
+    "sourceArchive": {
+      "bytes": 750757,
+      "sha256": "c0ea60dab20faa241aa6188ea64f2474bf25b3de166b3c8b12f586d600f3e11c",
+      "byteIdenticalAcrossRuns": true
+    },
+    "runtimeArchive": {
+      "bytes": 275454,
+      "sha256": "3eb3395dcfad65bf078cb19cce74597dad2b25cf96e07a69aabf60ad6ed5d630",
+      "byteIdenticalAcrossRuns": true
+    },
+    "sourceChecksumFile": {
+      "sha256": "cd59188735b98994a7e4fade866c59eb8b4a2f836b4db69f1eb3c4c95dbba35c",
+      "byteIdenticalAcrossRuns": true
+    },
+    "runtimeChecksumFile": {
+      "sha256": "943fde2bb7bcd71dcef12e985baafabd1abc01fcc4029a674f2f6563298e1d41",
+      "byteIdenticalAcrossRuns": true
+    }
+  },
+  "checks": {
+    "composerCheckWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 337,
+      "assertions": 2037,
+      "skipped": 1,
+      "staticAnalysisErrors": 0,
+      "publicApiStatus": "PASS",
+      "repositorySecretScanStatus": "PASS"
+    },
+    "buildVerificationFlags": {
+      "status": "PASS",
+      "count": 19,
+      "allTrue": true
+    },
+    "extractedSourceSecretScan": {
+      "status": "PASS",
+      "filesScanned": 346,
+      "binaryFilesSkipped": 21,
+      "findings": 0
+    },
+    "extractedRuntimeSecretScan": {
+      "status": "PASS",
+      "filesScanned": 147,
+      "binaryFilesSkipped": 0,
+      "findings": 0
+    }
+  },
+  "boundary": {
+    "secretValuesRecorded": false,
+    "tagCreated": false,
+    "githubReleaseCreated": false,
+    "packagistPublished": false,
+    "productCandidateFrozen": false,
+    "campaignIdentityChanged": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_REPRODUCIBLE_RC_DRY_RUN_STABLE_PRODUCT_IDENTITY_REMAINS_OPEN"
+}

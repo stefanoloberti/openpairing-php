@@ -1,0 +1,26 @@
+{
+  "schema": "openpairing.capacity-evidence/1",
+  "baseCommit": "fdbe682",
+  "configuredPlayerLimit": 4096,
+  "roundLimit": 256,
+  "realTrf": {
+    "relativeCorpusPath": "t_n21_p2400_d0_s200/T0000.trf",
+    "players": 2400,
+    "rounds": 21,
+    "bytes": 722652,
+    "decodeSeconds": 0.1848086,
+    "encodeDecodeSeconds": 0.3428231,
+    "roundTripPlayerCountExact": true
+  },
+  "initialPairing": {
+    "players": 2400,
+    "tables": 1200,
+    "pairingSeconds": 0.0050521,
+    "validationViolations": 0
+  },
+  "advancedRoundPairingAtThisScale": "unmeasured",
+  "notes": [
+    "The former 256-player limit was a parser/domain guard-rail, not a Blossom data-structure limit.",
+    "This evidence does not claim advanced-round performance or full historical parity at 2400 players."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "openpairing.shadow-engine-identity-contract-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T08:23:08+02:00",
+  "commitContainingImplementation": "167744cb31120f924aefc83528becccf1d01cdc6",
+  "files": {
+    "docs/schema/shadow-evidence-batch-1.schema.json": "e7ce96da706b1671b4a834327a96157c36007cf0162e34acc67c20bba1c56264",
+    "tools/verify_shadow_evidence.php": "a4b10211329966f590daf88ac56a78930b6e80318838a137a125d5faacb33301",
+    "tests/Integration/ShadowEvidenceVerifierTest.php": "2cf5671d7d57470e8f53f38792df91f74bdaa40dfb211cefd017fdc455220d04",
+    "tests/Integration/ShadowObservationStreamBuilderTest.php": "1a7b6409fcb2931751e34e946781a6d495de500ab9eb249f21236979b4876d53"
+  },
+  "runtime": {
+    "host": "DESKTOP-EF1C0NB",
+    "wslDistribution": "Ubuntu",
+    "php": "8.3.6",
+    "executionPriority": "nice 19",
+    "temporaryRoot": "/tmp/openpairing-shadow-contract-test",
+    "temporaryRootRemovedAfterTest": true
+  },
+  "checks": {
+    "phpunit": {"status": "PASS", "tests": 16, "assertions": 151},
+    "phpLint": {"status": "PASS", "files": 1},
+    "phpstan": {"status": "PASS", "level": "max", "errors": 0, "files": 4},
+    "contract": {
+      "engineSha256RequiredBySchema": true,
+      "engineSha256RequiredByVerifier": true,
+      "missingEngineSha256Rejected": true,
+      "adapterIdentityAcceptedWithoutFieldRemoval": true
+    }
+  },
+  "boundary": {
+    "applicationCallSiteEnabled": false,
+    "officialShadowEvidenceProduced": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "productionContacted": false,
+    "productionMutationPerformed": false
+  },
+  "status": "PASS_CONTRACT_REGRESSION_SHADOW_GATE_REMAINS_OPEN"
+}

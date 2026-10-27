@@ -1,0 +1,36 @@
+{
+  "schema": "openpairing.acceleration-parser-evidence/1",
+  "featureCommit": "c48fd05",
+  "record": "250",
+  "corpusIdentity": {
+    "schema": "openpairing.corpus-identity/1",
+    "selection": "relative-path-ordinal-v1",
+    "requestedLimit": 0,
+    "fileCount": 1000,
+    "totalBytes": 38907000,
+    "manifestSha256": "11ef7a63998d4665e0655e6797966e82325cba073fc18d321830df61676167b6"
+  },
+  "scan": {
+    "schema": "openpairing.trf-corpus-scan/1",
+    "roundTripEvery": 1,
+    "elapsedSeconds": 102.449,
+    "filesSeen": 1000,
+    "decoded": 1000,
+    "strictDecoded": 0,
+    "legacyNormalizedDecoded": 1000,
+    "roundTrip": 1000,
+    "diagnostics": 0
+  },
+  "legacyTransformations": {
+    "clear-legacy-unknown-sex": 1000,
+    "default-pairing-system-dutch": 1000,
+    "drop-empty-optional-record": 1000,
+    "expand-two-digit-year": 1000
+  },
+  "pairingGate": "open",
+  "notes": [
+    "This evidence closes TRF 250 decode and semantic round-trip for this corpus only.",
+    "It does not claim historical pairing equivalence across the 1000 tournaments.",
+    "The corpus contains no legacy per-player XXA records; later XXA support is contract-tested but not part of this corpus claim."
+  ]
+}

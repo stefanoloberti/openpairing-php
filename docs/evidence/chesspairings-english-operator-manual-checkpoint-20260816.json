@@ -1,0 +1,78 @@
+{
+  "schema": "openpairing.chesspairings-english-operator-manual-checkpoint/1",
+  "generatedAtUtc": "2026-08-16T10:09:15Z",
+  "status": "SOURCE_CHECKPOINT_PASS",
+  "submissionGateStatus": "NO_GO",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.36",
+    "candidateId": "web-fide-candidate-20260816-bc-english-operator-manual",
+    "parentVersion": "5.21.0-rc.35",
+    "parentCommit": "be7eda26b6083758afb1469e449826698cea3a85",
+    "sourceCommit": "9cf3f47ff1919be8c1d935480f2173c8e72049af",
+    "sourceTree": "3a6695ee67394794444445a602044b42f1c63fb5",
+    "sourceArchiveSha256": "237c1e58916eeff945fe51d0a88747fde225e1816eaa01c251efa810bac73954",
+    "sourceArchiveBytes": 40903830,
+    "bundleSha256": "5551f207495118b04b987b5a7f69fcc52000bb0d05463204e30e969ac9c8edfd",
+    "bundleBytes": 40970233,
+    "offsiteBundleMatches": true,
+    "officialRecognition": "none"
+  },
+  "manualCoverage": {
+    "language": "en",
+    "identityBound": true,
+    "existingRoutesVerified": 6,
+    "ratingImport": true,
+    "individualTournamentAndTrf": true,
+    "initialColourProvenance": true,
+    "playersByesWithdrawalsAndLateEntries": true,
+    "pairingReviewAndAtomicPublication": true,
+    "atomicResultEntry": true,
+    "standingsAndTrfExport": true,
+    "recoveryAndSafeRetry": true,
+    "teamFideModeBoundary": true,
+    "evidenceCloseout": true,
+    "securityAndNonRecognitionNotices": true
+  },
+  "verification": {
+    "windowsPhpVersion": "8.2.12",
+    "linuxPhpVersion": "8.3.6",
+    "linuxArithmeticBackend": "gmp",
+    "manualGuard": "PASS on PHP 8.2 and PHP 8.3/GMP",
+    "ratingImportI18nRegression": "PASS on both runtimes",
+    "browserKeyGuardRegression": "PASS on both runtimes",
+    "catalogueParity": "3243/3243; 0 missing; 0 empty",
+    "sourceArchiveIndependentBuilds": 4,
+    "sourceArchiveBuildsMatch": true,
+    "sourceArchiveEntries": 674,
+    "trackedFiles": 632,
+    "forbiddenEnvironmentPaths": 0,
+    "symbolicLinks": 0,
+    "secretScanFindingFiles": 0,
+    "bundleCloneCommitMatches": true,
+    "bundleCloneTreeMatches": true
+  },
+  "inspectedFiles": [
+    {"path": "docs/OPERATOR_MANUAL_EN.md", "bytes": 8303, "sha256": "66b69921614ce6bb5a49f41350f826e832ee0b0364320bc288674ffb1d64eede"},
+    {"path": "scripts/test_operator_manual_en.php", "bytes": 2200, "sha256": "9e7b0ab5d88f8f4a340c3fc9d70ecc8662dbe11e461bf44abb5d07c4da4219f0"},
+    {"path": "release.json", "bytes": 440, "sha256": "8716326d2991b9206075712da3997cd435cb6669daf2d29de89a9ddd5ede6c4a"},
+    {"path": "SOURCE_PROVENANCE.md", "bytes": 9021, "sha256": "9903300aa676ecfe4a31fbaa5186a9ca3ca00d5b5820e693acd2819b6eb0f46e"},
+    {"path": "docs/THIRD_PARTY_NOTICES_EN.md", "bytes": 3874, "sha256": "1fbe58d2a0efc4330bf0f80ca617bb80d1ef2b43304dc1f5a78639ce7dc48c17"}
+  ],
+  "remainingProductEvidence": [
+    "execute the complete English workflow against a disposable database under this exact identity",
+    "capture identity-bound visual observations for every required step and error state",
+    "verify rating import, transaction, recovery, mode, performance and runtime-configuration probe batches"
+  ],
+  "boundary": {
+    "manualPackaged": true,
+    "manualWorkflowExecuted": false,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionRequestPerformed": false,
+    "productionMutationPerformed": false,
+    "deployed": false,
+    "gateClosed": false,
+    "fideApprovedOrEndorsed": false
+  }
+}

@@ -1,0 +1,41 @@
+OpenPairingPHP
+Copyright 2026 OpenPairingPHP contributors
+
+This product is licensed under the Apache License, Version 2.0.
+
+Development and verification use the following separately acquired upstreams:
+
+- Gacrux/TieBreakServer, Copyright (c) 2024 FIDE, including source code
+  developed by Otto Milvang, under the MIT License. The incorporated
+  Gacrux-derived code retains its copyright and permission notice below. See
+  https://www.gacrux.no/ as requested by the upstream licence.
+- BBP Pairings, Copyright 2016-2026 Jeremy Bierema, under Apache-2.0. The
+  production matching core contains a modified semantic PHP port of BBP's
+  weighted Blossom architecture from commit 8f9e3c5ffdc4d7a08a33d31c6fb49b4e7acef4d5.
+
+`DutchQualityModel` is a modified semantic PHP port of the QC/HE/HO update
+semantics in Gacrux `crosstabledutch.py` from commit 14a34a2c. The Gacrux MIT
+permission notice follows:
+
+Copyright (c) 2024 FIDE
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions: the above copyright notice and
+this permission notice shall be included in all copies or substantial portions
+of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+Other runtime sources are original work except for the separately attributed
+BBP matching core. Upstream copies under tools/upstream are development-only,
+ignored by Git, and not distributed as part of the PHP runtime.
+
+FIDE is not affiliated with, and has not certified or endorsed, this project.

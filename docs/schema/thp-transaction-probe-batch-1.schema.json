@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-transaction-probe-batch-1.schema.json",
+  "title": "OpenPairing THP transaction fault-injection batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "baselineRevision", "committedRevision", "baselineStateSha256", "expectedCommittedStateSha256",
+    "requiredWriteStages", "successProbe", "failureProbes"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-transaction-probe-batch/1"},
+    "candidateIdentitySha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "productSourceCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "migrationManifestSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "baselineRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+    "committedRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+    "baselineStateSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "expectedCommittedStateSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "requiredWriteStages": {
+      "const": ["games", "history", "points", "round-state", "bye-resets", "attestation"]
+    },
+    "successProbe": {"$ref": "#/$defs/successProbe"},
+    "failureProbes": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/failureProbe"}
+    }
+  },
+  "$defs": {
+    "baseProbe": {
+      "type": "object",
+      "properties": {
+        "probeId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "jobId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "revisionBefore": {"type": "string", "minLength": 1, "maxLength": 128},
+        "revisionAfter": {"type": "string", "minLength": 1, "maxLength": 128},
+        "stateBeforeSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "stateAfterSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "stagesAttempted": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "committed": {"type": "boolean"},
+        "rollbackObserved": {"type": "boolean"},
+        "commitCount": {"type": "integer", "minimum": 0, "maximum": 1}
+      }
+    },
+    "successProbe": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {"$ref": "#/$defs/baseProbe"},
+        {
+          "required": ["probeId", "jobId", "revisionBefore", "revisionAfter", "stateBeforeSha256", "stateAfterSha256", "stagesAttempted", "committed", "rollbackObserved", "commitCount"]
+        }
+      ]
+    },
+    "failureProbe": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {"$ref": "#/$defs/baseProbe"},
+        {
+          "required": ["probeId", "jobId", "injectionPoint", "revisionBefore", "revisionAfter", "stateBeforeSha256", "stateAfterSha256", "stagesAttempted", "committed", "rollbackObserved", "commitCount"],
+          "properties": {
+            "injectionPoint": {"type": "string", "pattern": "^after:(games|history|points|round-state|bye-resets|attestation)$"}
+          }
+        }
+      ]
+    }
+  }
+}

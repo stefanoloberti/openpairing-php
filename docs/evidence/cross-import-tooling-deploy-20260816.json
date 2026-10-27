@@ -1,0 +1,51 @@
+{
+  "schema": "openpairing.cross-import-tooling-deploy/1",
+  "recordedAtEuropeRome": "2026-08-16T00:19:35+02:00",
+  "repositoryCommit": "511904e0f91eda4cb4ccf387abe3b14fc0283280",
+  "ci": {
+    "runId": 31911776001,
+    "status": "PASS"
+  },
+  "localGate": {
+    "tests": 278,
+    "assertions": 1331,
+    "skipped": 1,
+    "phpstanFiles": 138,
+    "phpstanErrors": 0,
+    "publicApiMethods": 13,
+    "status": "PASS"
+  },
+  "deployment": {
+    "host": "doppia-3090",
+    "path": "/srv/openpairing-validation/tooling/511904e/corpus",
+    "files": {
+      "import_cross_worker_shard.sh": "863aae256af65d16ee345236e1b9871abb51a02b02b983ab6c029c2a4d8bd6ee",
+      "validate_cross_worker_import.php": "b753eff26fe6e1e7f661cff65370ee2ab00b19979dd67adfe64bc193116250b7"
+    },
+    "localRemoteHashesEqual": true,
+    "bashSyntax": "PASS",
+    "phpSyntax": "PASS"
+  },
+  "acceptanceProtocol": {
+    "transportDestination": "primary quarantine",
+    "integrityFailureStopsPrimary": false,
+    "primaryCorpusManifestRecomputed": true,
+    "primaryGacruxRequired": true,
+    "semanticFailureStopsPrimary": true,
+    "classificationPromotedLast": true,
+    "existingOrActivePrimaryShardRefused": true,
+    "primaryAcceptor": "doppia-3090"
+  },
+  "campaignAtCheckpoint": {
+    "p80Reports": 0,
+    "p80Classifications": 0,
+    "p80Workers": 20,
+    "p80ServiceStartedAt": "2026-08-16T00:04:56+02:00",
+    "crossReports": 0,
+    "crossAttestations": 0,
+    "crossWorkers": 10,
+    "crossServiceStartedAt": "2026-08-15T23:46:30+02:00",
+    "stopPresent": false
+  },
+  "status": "PASS_READY_FOR_FIRST_QUARANTINED_SHARD"
+}

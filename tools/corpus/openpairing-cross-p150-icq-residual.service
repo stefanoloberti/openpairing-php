@@ -1,0 +1,19 @@
+[Unit]
+Description=OpenPairing p150 residual s100-s107 quarantined cross-worker on icq
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=stefano
+Group=stefano
+ExecStart=/srv/openpairing-icq-worker/bin/run_icq_p150_residual_worker.sh
+Nice=10
+CPUQuota=800%
+MemoryHigh=12G
+MemoryMax=14G
+Restart=no
+TimeoutStartSec=infinity
+
+[Install]
+WantedBy=multi-user.target

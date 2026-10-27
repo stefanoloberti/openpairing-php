@@ -1,0 +1,56 @@
+{
+  "schema": "openpairing.tec-official-source-refresh/1",
+  "status": "PASS",
+  "observedAtUtc": "2026-08-16T11:36:00Z",
+  "sources": [
+    {
+      "name": "FIDE Handbook - Chess Equipment with Electronic Components",
+      "url": "https://handbook.fide.com/chapter/ChessEquipmentWithElectronicComponenets032026",
+      "httpStatus": 200,
+      "retrievedBytes": 106620,
+      "retrievedSha256": "0b9cc5dc435ddd88a754c1bdf15037163b158bbdd7531278e721fc1f868ce3dc",
+      "observedMarkers": [
+        "effective from 1 March 2026",
+        "Tournament Handler Programs",
+        "Articles 7.1 through 7.3"
+      ]
+    },
+    {
+      "name": "FIDE TEC Policies and Procedures Manual 1.24",
+      "url": "https://tec.fide.com/wp-content/uploads/2026/03/FIDE-TEC-Manual-01.24-1.pdf",
+      "httpStatus": 200,
+      "retrievedBytes": 78378,
+      "retrievedSha256": "70638fe2e4afd99349cd2eff9a0dc694b935f07bae01778a947273ce0a2195df",
+      "observedPages": 15
+    },
+    {
+      "name": "FIDE TEC Online Forms menu",
+      "url": "https://www.cognitoforms.com/FIDE/TECMenu",
+      "httpStatus": 200,
+      "retrievedBytes": 2997,
+      "retrievedSha256": "333329564e08eb732433cd956eff9a03570b0a109b87be5ad6869da1c1e77aed"
+    }
+  ],
+  "confirmedRequirements": [
+    "A THP manages Swiss tournaments through player data, pairings and results.",
+    "FIDE mode requires an English interface/manual, current and backward TRF exchange, free embedded PTC and RTG unless exempted, and a controlled tester environment.",
+    "A successful SDPC precedes TAPC and TAPC applies only to the exact SDPC product version.",
+    "The candidate PTC processes 50000 tournaments from an external accepted RTG.",
+    "The candidate RTG generates 50000 tournaments for one or more available PTCs.",
+    "An external-engine exemption is described only for an engine already integrated into another FIDE-accepted THP and still requires TEC-visible engine inputs."
+  ],
+  "assessment": {
+    "localRoadmapContradicted": false,
+    "standaloneEngineRouteConfirmed": false,
+    "scopeEnquiryStillRequired": true,
+    "submissionReadinessGateChanged": false,
+    "note": "Availability and content markers confirm the current source basis. This refresh is not a TEC decision, application, waiver or product acceptance."
+  },
+  "boundary": {
+    "formsSubmitted": false,
+    "emailSentToTec": false,
+    "feePaid": false,
+    "externalAccountChanged": false,
+    "productionChanged": false
+  }
+}

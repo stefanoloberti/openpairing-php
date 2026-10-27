@@ -1,0 +1,43 @@
+{
+  "schema": "openpairing.turn-benchmark/1",
+  "generatedAtUtc": "2026-08-16T02:58:40+00:00",
+  "environment": {
+    "php": "8.4.24",
+    "os": "Windows 10.0 AMD64",
+    "arithmeticBackend": "limbs-30",
+    "opcacheEnableCli": "",
+    "jit": "",
+    "jitBufferSize": ""
+  },
+  "runtimeIdentity": {
+    "schema": "openpairing.runtime-code-identity/1",
+    "projectRoot": "C:/Users/stefa/tornei/engines/openpairing-php",
+    "autoloadPsr4Roots": ["C:/Users/stefa/tornei/engines/openpairing-php/src"],
+    "expectedEnginePath": "C:/Users/stefa/tornei/engines/openpairing-php/src/Engine/Dutch/DutchPairingEngine.php",
+    "loadedEnginePath": "C:/Users/stefa/tornei/engines/openpairing-php/src/Engine/Dutch/DutchPairingEngine.php",
+    "engineVersion": "fide-dutch-2026.global/1",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "sourceFileCount": 85,
+    "arithmeticBackend": "limbs-30",
+    "gmpAvailable": false
+  },
+  "scenario": {
+    "system": "fide-dutch-2026",
+    "players": 150,
+    "round": 9,
+    "numberOfRounds": 11,
+    "fixture": "deterministic-simulator/1",
+    "repetitions": 1
+  },
+  "preparationMilliseconds": 1273147.419,
+  "pairingMilliseconds": {
+    "minimum": 218123.484,
+    "median": 218123.484,
+    "maximum": 218123.484,
+    "samples": [218123.484]
+  },
+  "peakMemoryBytes": 192937984,
+  "functionalResultSha256": "d95123b40bca501c8679138d37e471d98c49b0df1f918a9c216ca5921c2ab055",
+  "status": "valid"
+}

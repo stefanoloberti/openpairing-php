@@ -1,0 +1,27 @@
+{
+    "schema": "openpairing.corpus-campaign-progress/1",
+    "generatedAt": "2026-08-13T08:51:20+00:00",
+    "status": "partial-not-a-correctness-gate",
+    "workers": 20,
+    "completedShards": 20,
+    "decodedTournaments": 1580,
+    "roundsAttempted": 40304,
+    "candidatePairingDeviationsAwaitingClassification": 14,
+    "engineNoSolution": 0,
+    "elapsedSeconds": {
+        "min": 6560.132,
+        "median": 6708.906,
+        "max": 6891.109,
+        "sum": 134486.84000000003
+    },
+    "observedSecondsPerTournament": 85.11825316455698,
+    "projectionHours": {
+        "p50": 35.46593881856541
+    },
+    "identity": {
+        "sourceTreeSha256": "fb06fa59b66d4eba8e6e41b97ba42600e29c99075c057153b970f9eca2fd9ba3",
+        "harnessSha256": "f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093",
+        "arithmeticBackend": "gmp"
+    },
+    "caveat": "Timing projection only. Candidate deviations remain unclassified until the complete partition enters its fail-closed classifier stage."
+}

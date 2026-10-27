@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.org/schema/corpus-shard-heartbeat-1.schema.json",
+  "title": "OpenPairing corpus shard heartbeat",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "campaign", "shard", "processStartToken", "startedAtUtc",
+    "observedAtUtc", "elapsedSeconds", "filesTotal", "filesCompleted",
+    "tournamentsVerified", "roundsAttempted", "rounds", "identity",
+    "lastCompletedInputPathSha256", "terminal", "acceptedEvidence"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.corpus-shard-heartbeat/1"},
+    "campaign": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "shard": {"type": "string", "pattern": "^s[0-9]{3}$"},
+    "processStartToken": {"$ref": "#/$defs/sha256"},
+    "startedAtUtc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "observedAtUtc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "elapsedSeconds": {"type": "number", "minimum": 0},
+    "filesTotal": {"type": "integer", "minimum": 1},
+    "filesCompleted": {"type": "integer", "minimum": 0},
+    "tournamentsVerified": {"type": "integer", "minimum": 0},
+    "roundsAttempted": {"type": "integer", "minimum": 0},
+    "rounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exact", "colourVariant", "pairingDeviation", "noSolution", "resourceLimit"],
+      "properties": {
+        "exact": {"type": "integer", "minimum": 0},
+        "colourVariant": {"type": "integer", "minimum": 0},
+        "pairingDeviation": {"type": "integer", "minimum": 0},
+        "noSolution": {"type": "integer", "minimum": 0},
+        "resourceLimit": {"type": "integer", "minimum": 0}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engineSha256", "sourceTreeSha256", "harnessSha256",
+        "runtimeIdentityLockSha256", "arithmeticBackend", "gmpAvailable",
+        "cliJitEnabled"
+      ],
+      "properties": {
+        "engineSha256": {"$ref": "#/$defs/sha256"},
+        "sourceTreeSha256": {"$ref": "#/$defs/sha256"},
+        "harnessSha256": {"$ref": "#/$defs/sha256"},
+        "runtimeIdentityLockSha256": {"$ref": "#/$defs/sha256"},
+        "arithmeticBackend": {"enum": ["gmp", "limbs"]},
+        "gmpAvailable": {"type": "boolean"},
+        "cliJitEnabled": {"type": "boolean"}
+      }
+    },
+    "lastCompletedInputPathSha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+    "terminal": {"const": false},
+    "acceptedEvidence": {"const": false}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

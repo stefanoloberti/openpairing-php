@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-performance-probe-batch-1.schema.json",
+  "title": "OpenPairing THP product-turn performance probe batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "arithmeticBackend", "supportedPlayerRange", "requiredPlayerCounts", "budgets", "probes"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-performance-probe-batch/1"},
+    "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+    "productSourceCommit": {"$ref": "#/$defs/gitCommit"},
+    "migrationManifestSha256": {"$ref": "#/$defs/sha256"},
+    "arithmeticBackend": {"enum": ["gmp", "limbs-30"]},
+    "supportedPlayerRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum"],
+      "properties": {
+        "minimum": {"type": "integer", "minimum": 2, "maximum": 4096},
+        "maximum": {"type": "integer", "minimum": 2, "maximum": 4096}
+      }
+    },
+    "requiredPlayerCounts": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 2, "maximum": 4096}
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maximumTurnElapsedMs", "maximumPeakMemoryBytes"],
+      "properties": {
+        "maximumTurnElapsedMs": {"type": "number", "exclusiveMinimum": 0},
+        "maximumPeakMemoryBytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "probes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 256,
+      "items": {"$ref": "#/$defs/probe"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gitCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "probeId", "candidateIdentitySha256", "system", "players", "round", "repetitions",
+        "writeCount", "samples"
+      ],
+      "properties": {
+        "probeId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+        "system": {"type": "string", "minLength": 1, "maxLength": 128},
+        "players": {"type": "integer", "minimum": 2, "maximum": 4096},
+        "round": {"type": "integer", "minimum": 1, "maximum": 256},
+        "repetitions": {"type": "integer", "minimum": 3, "maximum": 20},
+        "writeCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "samples": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 20,
+          "items": {"$ref": "#/$defs/sample"}
+        }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sampleId", "totalElapsedMs", "peakMemoryBytes", "functionalOutputSha256", "status"],
+      "properties": {
+        "sampleId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{7,127}$"},
+        "totalElapsedMs": {"type": "number", "minimum": 0},
+        "peakMemoryBytes": {"type": "integer", "minimum": 1},
+        "functionalOutputSha256": {"$ref": "#/$defs/sha256"},
+        "status": {"const": "success"}
+      }
+    }
+  }
+}

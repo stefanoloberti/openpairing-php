@@ -1,0 +1,42 @@
+{
+  "schema": "openpairing.shadow-attempt-denominator-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T08:16:18+02:00",
+  "commitContainingImplementation": "fcd7c0fcee97c28c976d15f3dda864cf7a6a4009",
+  "files": {
+    "tools/build_shadow_observation_stream.php": "c7fbe2f0e1a1baa327febd1a9ebd0ddb6321327792a44cb69f1a6980722fc7bb",
+    "tests/Integration/ShadowObservationStreamBuilderTest.php": "fbd0ec0c698ec55637f689b363224223643b493f5c64bdbbfd13669766aea6c3",
+    "docs/schema/shadow-attempt-1.schema.json": "3f1a012b6a092704ddd1f4753f737285310e3fd7554919648fe874466b4e4442"
+  },
+  "runtime": {
+    "host": "DESKTOP-EF1C0NB",
+    "wslDistribution": "Ubuntu",
+    "php": "8.3.6",
+    "executionPriority": "nice 19",
+    "temporaryRoot": "/tmp/openpairing-observation-test",
+    "temporaryRootRemovedAfterTest": true
+  },
+  "checks": {
+    "phpunit": {"status": "PASS", "tests": 6, "assertions": 70},
+    "phpLint": {"status": "PASS", "files": 2},
+    "phpstan": {"status": "PASS", "level": "max", "errors": 0},
+    "coveredBehaviours": [
+      "every immutable reservation is represented in the output stream",
+      "missing outcomes become explicit not-observed events",
+      "not-observed events cause the shadow verifier to return NO_GO",
+      "outcomes without a reservation are rejected",
+      "identity, tournament, input hash and feature drift are rejected",
+      "personal-data keys are rejected before stream publication",
+      "output ordering and publication are deterministic and atomic"
+    ]
+  },
+  "boundary": {
+    "productAttemptSinkImplemented": false,
+    "applicationCallSiteEnabled": false,
+    "officialShadowEvidenceProduced": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "productionContacted": false,
+    "productionMutationPerformed": false
+  },
+  "status": "PASS_TOOLING_REGRESSION_SHADOW_GATE_REMAINS_OPEN"
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.org/schema/shadow-turn-1.schema.json",
+  "title": "OpenPairing product shadow-turn envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "eventId",
+    "observedAtUtc",
+    "identity",
+    "tournament",
+    "canonicalInputSha256",
+    "primaryOutputSha256",
+    "shadowOutputSha256",
+    "primaryElapsedMs",
+    "shadowElapsedMs",
+    "shadowPeakMemoryBytes",
+    "status",
+    "validatorOutcome",
+    "features"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.shadow-turn/1"},
+    "eventId": {"type": "string", "minLength": 1},
+    "observedAtUtc": {"type": "string", "format": "date-time", "pattern": "Z$"},
+    "identity": {"$ref": "shadow-evidence-batch-1.schema.json#/$defs/identity"},
+    "tournament": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "pairingSystem", "round", "playerCount", "initialColour"],
+      "properties": {
+        "mode": {"type": "string", "minLength": 1},
+        "pairingSystem": {"type": "string", "minLength": 1},
+        "round": {"type": "integer", "minimum": 1},
+        "playerCount": {"type": "integer", "minimum": 1},
+        "initialColour": {"enum": ["white", "black"]}
+      }
+    },
+    "canonicalInputSha256": {"$ref": "shadow-evidence-batch-1.schema.json#/$defs/sha256"},
+    "primaryOutputSha256": {
+      "oneOf": [
+        {"$ref": "shadow-evidence-batch-1.schema.json#/$defs/sha256"},
+        {"type": "null"}
+      ]
+    },
+    "shadowOutputSha256": {
+      "oneOf": [
+        {"$ref": "shadow-evidence-batch-1.schema.json#/$defs/sha256"},
+        {"type": "null"}
+      ]
+    },
+    "primaryElapsedMs": {"type": "number", "minimum": 0},
+    "shadowElapsedMs": {"type": "number", "minimum": 0},
+    "shadowPeakMemoryBytes": {"type": "integer", "minimum": 0},
+    "status": {
+      "enum": [
+        "exact",
+        "same-pairs-colour-variant",
+        "legal-variant",
+        "inferior",
+        "local-violation",
+        "no-solution",
+        "resource-limit",
+        "invalid-input",
+        "infrastructure-error",
+        "not-observed"
+      ]
+    },
+    "validatorOutcome": {"enum": ["pass", "fail", "not-run"]},
+    "features": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "shadow-evidence-batch-1.schema.json#/$defs/observedFeature"}
+    },
+    "classificationReference": {"type": "string", "minLength": 1},
+    "reproductionReference": {"type": "string", "minLength": 1}
+  }
+}

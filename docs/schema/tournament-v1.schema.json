@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/tournament-v1.schema.json",
+  "title": "OpenPairing canonical tournament state v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "round", "numberOfRounds", "pairingSystem", "configuration", "scoring", "players"],
+  "properties": {
+    "schema": {"const": "openpairing.tournament/1"},
+    "tournamentName": {"type": "string", "maxLength": 512},
+    "round": {"type": "integer", "minimum": 1, "maximum": 256},
+    "numberOfRounds": {"type": "integer", "minimum": 1, "maximum": 256},
+    "pairingSystem": {"enum": ["fide-dutch-2026", "fide-burstein-2026", "fide-round-robin"]},
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topColour", "maxPlayers"],
+      "properties": {
+        "topColour": {"enum": ["white", "black"]},
+        "maxPlayers": {"type": "integer", "minimum": 0, "maximum": 4096}
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["win", "draw"],
+      "properties": {
+        "win": {"$ref": "#/$defs/score"},
+        "draw": {"$ref": "#/$defs/score"}
+        ,"loss": {"$ref": "#/$defs/score"}
+        ,"zeroPointBye": {"$ref": "#/$defs/score"}
+        ,"pairingAllocatedBye": {"$ref": "#/$defs/score"}
+        ,"unknown": {"$ref": "#/$defs/score"}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "city": {"type": "string", "maxLength": 512},
+        "federation": {"type": "string", "maxLength": 3},
+        "startDate": {"type": "string", "maxLength": 10},
+        "endDate": {"type": "string", "maxLength": 10},
+        "tournamentType": {"type": "string", "maxLength": 512},
+        "chiefArbiter": {"type": "string", "maxLength": 512},
+        "deputyArbiters": {"type": "array", "maxItems": 256, "items": {"type": "string", "maxLength": 512}},
+        "timeControlDescription": {"type": "string", "maxLength": 512},
+        "roundDates": {"type": "array", "maxItems": 256, "items": {"type": "string", "maxLength": 8}},
+        "pairingController": {"type": "string", "maxLength": 512},
+        "tieBreaksRecord": {"enum": ["", "202", "212"]},
+        "tieBreaks": {"type": "string", "maxLength": 512},
+        "encodedTimeControl": {"type": "string", "maxLength": 512}
+      }
+    },
+    "players": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {"$ref": "#/$defs/player"}
+    },
+    "prohibitedPairings": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {"$ref": "#/$defs/prohibitedPairing"}
+    },
+    "scheduledByes": {
+      "type": "array",
+      "maxItems": 768,
+      "items": {"$ref": "#/$defs/scheduledBye"}
+    }
+  },
+  "$defs": {
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["units", "scale"],
+      "properties": {
+        "units": {"type": "integer", "minimum": -1000000000, "maximum": 1000000000},
+        "scale": {"type": "integer", "minimum": 1, "maximum": 1000000}
+      }
+    },
+    "player": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "pairingNumber", "name", "rating", "title", "team", "club", "active", "score", "opponentHistory", "colourHistory", "results", "receivedPairingAllocatedBye", "floatHistory", "acceleration"],
+      "properties": {
+        "id": {"type": "integer", "minimum": 1},
+        "pairingNumber": {"type": "integer", "minimum": 1},
+        "name": {"type": "string", "maxLength": 512},
+        "rating": {"type": "integer", "minimum": 0, "maximum": 9999},
+        "title": {"type": "string", "maxLength": 16},
+        "team": {"type": "string", "maxLength": 512},
+        "club": {"type": "string", "maxLength": 512},
+        "active": {"type": "boolean"},
+        "score": {"$ref": "#/$defs/score"},
+        "opponentHistory": {"type": "array", "items": {"type": "integer", "minimum": 1}, "maxItems": 256},
+        "colourHistory": {"type": "array", "items": {"enum": ["white", "black", null]}, "maxItems": 256},
+        "results": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/result"}},
+        "receivedPairingAllocatedBye": {"type": "boolean"},
+        "floatHistory": {"type": "array", "items": {"enum": ["up", "down", "none"]}, "maxItems": 256},
+        "acceleration": {"oneOf": [{"$ref": "#/$defs/score"}, {"type": "null"}]}
+        ,"sex": {"type": "string", "maxLength": 1}
+        ,"federation": {"type": "string", "maxLength": 3}
+        ,"fideId": {"type": "integer", "minimum": 0}
+        ,"birthDate": {"type": "string", "maxLength": 10}
+        ,"rank": {"type": "integer", "minimum": 0, "maximum": 9999}
+        ,"accelerationSchedule": {"type": "array", "maxItems": 256, "items": {"oneOf": [{"$ref": "#/$defs/score"}, {"type": "null"}]}}
+      }
+    },
+    "prohibitedPairing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["firstRound", "lastRound", "playerIds"],
+      "properties": {
+        "firstRound": {"type": "integer", "minimum": 1, "maximum": 256},
+        "lastRound": {"type": "integer", "minimum": 1, "maximum": 256},
+        "playerIds": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "scheduledBye": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "round", "playerIds"],
+      "properties": {
+        "type": {"enum": ["F", "H", "Z"]},
+        "round": {"type": "integer", "minimum": 1, "maximum": 256},
+        "playerIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["round", "opponentId", "colour", "result", "played"],
+      "properties": {
+        "round": {"type": "integer", "minimum": 1, "maximum": 256},
+        "opponentId": {"oneOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]},
+        "colour": {"enum": ["white", "black", null]},
+        "result": {"enum": ["1", "W", "=", "D", "0", "L", "+", "-", "H", "F", "U", "Z"]},
+        "played": {"type": "boolean"}
+      }
+    }
+  }
+}

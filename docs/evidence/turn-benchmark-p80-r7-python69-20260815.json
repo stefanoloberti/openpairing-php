@@ -1,0 +1,41 @@
+{
+  "schema": "openpairing.turn-benchmark/1",
+  "generatedAtUtc": "2026-08-15T21:23:15+00:00",
+  "environment": {
+    "php": "8.3.6",
+    "os": "Linux 6.18.33.2-microsoft-standard-WSL2 x86_64",
+    "arithmeticBackend": "gmp",
+    "opcacheEnableCli": "1",
+    "jit": "1255",
+    "jitBufferSize": "128M"
+  },
+  "scenario": {
+    "system": "fide-dutch-2026",
+    "players": 80,
+    "round": 7,
+    "numberOfRounds": 9,
+    "fixture": "deterministic-simulator/1",
+    "repetitions": 3
+  },
+  "preparationMilliseconds": 48586.593,
+  "pairingMilliseconds": {
+    "minimum": 12419.703,
+    "median": 13111.857,
+    "maximum": 13434.228,
+    "samples": [
+      12419.703,
+      13111.857,
+      13434.228
+    ]
+  },
+  "peakMemoryBytes": 54525952,
+  "functionalResultSha256": "ef51fc31e49b9c8f71380e0ccc639932996a38c8e32a8771d6518527ab38e03d",
+  "status": "valid",
+  "measurementContext": {
+    "concurrentCrossWorkers": 10,
+    "crossWorkerCpuQuotaPercent": 800,
+    "processNice": 15,
+    "interpretation": "Loaded-host capacity observation; not an idle-host latency promise."
+  },
+  "rawReportSha256BeforeContextAnnotation": "a0207d492399cbeb7e10d6e2d5c9b8d3740c83392160679111539a3b80838ffb"
+}

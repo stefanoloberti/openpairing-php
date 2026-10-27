@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-recovery-probe-batch-1.schema.json",
+  "title": "OpenPairing THP asynchronous recovery probe batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "baselineRevision", "newerRevision", "baselineStateSha256", "committedStateSha256",
+    "newerRevisionStateSha256", "scenarios"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-recovery-probe-batch/1"},
+    "candidateIdentitySha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "productSourceCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "migrationManifestSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "baselineRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+    "newerRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+    "baselineStateSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "committedStateSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "newerRevisionStateSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "scenarios": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/scenario"}
+    }
+  },
+  "$defs": {
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenarioId", "type", "jobId", "requestRevision", "currentRevision",
+        "stateBeforeSha256", "stateAfterFirstHandlingSha256", "stateAfterRecoverySha256",
+        "stateAfterSecondRecoverySha256", "commitCount", "publicationCount", "resultDisposition",
+        "recoveryAction", "workerRestartObserved", "durableJobReloaded", "idempotent"
+      ],
+      "properties": {
+        "scenarioId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "type": {"enum": ["crash-before-commit", "crash-after-commit", "late-completion", "duplicate-delivery"]},
+        "jobId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "requestRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+        "currentRevision": {"type": "string", "minLength": 1, "maxLength": 128},
+        "stateBeforeSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "stateAfterFirstHandlingSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "stateAfterRecoverySha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "stateAfterSecondRecoverySha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "commitCount": {"type": "integer", "minimum": 0, "maximum": 1},
+        "publicationCount": {"type": "integer", "minimum": 0, "maximum": 1},
+        "resultDisposition": {"enum": ["discarded-uncommitted", "already-committed", "rejected-stale", "deduplicated"]},
+        "recoveryAction": {"enum": ["discard-uncommitted", "recognize-committed", "reject-stale", "deduplicate"]},
+        "workerRestartObserved": {"type": "boolean"},
+        "durableJobReloaded": {"type": "boolean"},
+        "idempotent": {"type": "boolean"}
+      }
+    }
+  }
+}

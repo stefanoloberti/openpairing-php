@@ -1,0 +1,103 @@
+{
+  "schema": "openpairing.chesspairings-rating-import-isolation-checkpoint/1",
+  "generatedAtUtc": "2026-08-16T10:35:56Z",
+  "status": "SOURCE_FREEZE_PASS",
+  "submissionGateStatus": "NO_GO",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.37",
+    "candidateId": "web-fide-candidate-20260816-bd-rating-import-isolation",
+    "parentVersion": "5.21.0-rc.36",
+    "parentCommit": "9cf3f47ff1919be8c1d935480f2173c8e72049af",
+    "sourceCommit": "95c3e6e20d335db3aee5bc34d6a0f6d38b3cdccf",
+    "sourceTree": "84ced9e9bf511e2de85b79ed12f49c26a9fd97ab",
+    "sourceArchiveSha256": "6c8a2271e948829e40f7429839e3f89ebbe44ca6046923004d0785dd4f6a1a8d",
+    "sourceArchiveBytes": 40906105,
+    "bundleSha256": "625aec1962a62f6b05533157d7a7fcd31ca1e1e87203e5d2e9cccefab2b4300e",
+    "bundleBytes": 40975351,
+    "offsiteBundleMatches": true,
+    "officialRecognition": "none"
+  },
+  "ratingImportIsolation": {
+    "realAdministratorScopedWorkspace": true,
+    "workspaceMode": "0700",
+    "singleNonBlockingWorkspaceLock": true,
+    "postAndCsrfRequiredForMutations": true,
+    "resumableRunOwnerBound": true,
+    "resumableRunSessionTokenBytes": 32,
+    "persistedAbsoluteFilePath": false,
+    "strictXmlBasenameValidation": true,
+    "uniqueXmlNameRandomSuffixBytes": 4,
+    "atomicProgressPromotion": true,
+    "partialProgressJsonObservable": false
+  },
+  "verification": {
+    "exactWindowsPhpVersion": "8.2.12",
+    "exactLinuxPhpVersion": "8.3.6",
+    "exactLinuxArithmeticBackend": "gmp",
+    "syntax": "PASS on PHP 8.2 and PHP 8.3/GMP",
+    "requestIsolationGuard": "PASS on both runtimes",
+    "ratingImportI18n": "70/70 non-empty keys in English and Italian on both runtimes",
+    "englishCatalogueParity": "3249/3249; 0 missing; 0 empty on both runtimes",
+    "operatorManualGuard": "PASS on both runtimes; 6 existing routes",
+    "browserKeyGuardRegression": "PASS on both runtimes",
+    "initialColourRegression": "21/21 PASS on both runtimes",
+    "atomicResultRegression": "18/18 PASS on both runtimes",
+    "teamFideModeRegression": "36/36 PASS on both runtimes",
+    "shadowAdapterRegression": "PASS; 20 checks",
+    "sourceArchiveIndependentBuilds": 4,
+    "sourceArchiveBuildsMatch": true,
+    "sourceArchiveEntries": 675,
+    "trackedFiles": 633,
+    "forbiddenEnvironmentPaths": 0,
+    "symbolicLinks": 0,
+    "bundleCompleteHistory": true,
+    "bundleCloneCommitMatches": true,
+    "bundleCloneTreeMatches": true
+  },
+  "sourceFreezeVerification": {
+    "schema": "openpairing.thp-source-freeze-verification/1",
+    "status": "PASS",
+    "trackedFileCount": 633,
+    "sourceManifestSha256": "12caac28d2e8364df9def44de5ffe16f3eea0658144accca19c39dec1a9e12d3",
+    "migrationPaths": ["database", "database/migrations"],
+    "migrationFileCount": 94,
+    "migrationManifestSha256": "9f2b8a36c2ab0fbbd98728b5ca7659f8cf90340fc8ec6cc6ae2ea387b73e5257",
+    "secretScan": {
+      "status": "PASS",
+      "filesScanned": 504,
+      "binaryFilesSkipped": 0,
+      "findings": 0,
+      "secretValuesEmitted": false
+    }
+  },
+  "inspectedFiles": [
+    {"path": "import_fide.php", "bytes": 31540, "sha256": "ad459dafb99a5d02a850f3cbca9d85b9aacfb0582cbb1725866e97721c6cadbf"},
+    {"path": "scripts/test_fide_import_request_isolation.php", "bytes": 2237, "sha256": "b4acc64c261035d7fa9633dd8554d4d7595bca377f7e02e2a0f468bf3aaa85fd"},
+    {"path": "lang/en.php", "bytes": 232407, "sha256": "7f077ffd921be6b66c3aaca829162f87b13e33a9838b1189cc3089218096ecf9"},
+    {"path": "lang/it.php", "bytes": 242480, "sha256": "e680bb4091c21a7d0c40275800b552b3ea52a5b2d5884943f687beb12f9c0784"},
+    {"path": "docs/OPERATOR_MANUAL_EN.md", "bytes": 8778, "sha256": "39bb7ad7ad35808c46632fc8eca6e8e5adb76da678c9a7aea39915dbd6235172"},
+    {"path": "release.json", "bytes": 440, "sha256": "3e4b40b4a03a810e8e534db8dbf3dd97a47d445706b22e9586442ec9720c2f62"},
+    {"path": "SOURCE_PROVENANCE.md", "bytes": 9699, "sha256": "0c5e1ee97a996daa7853beb56cf445006f85814fc9c0c18988b8b103f34f8c57"},
+    {"path": "docs/THIRD_PARTY_NOTICES_EN.md", "bytes": 3874, "sha256": "c5444b2ec7d931bfeb95e3152c30ff4d7f1bb3e52a91530897391e2577e2e99b"}
+  ],
+  "remainingProductEvidence": [
+    "run concurrent-administrator, interruption, idempotence and rollback probes against a disposable database under this exact identity",
+    "execute and visually attest the packaged English operator workflow under this exact identity",
+    "rotate or revoke the previously embedded browser API key through the external provider account",
+    "build one final THP candidate only after installer, runtime, PTC and RTG artifacts share this exact source identity"
+  ],
+  "boundary": {
+    "sourceModified": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionRequestPerformed": false,
+    "productionMutationPerformed": false,
+    "candidateIdentityCreated": false,
+    "deployed": false,
+    "gateClosed": false,
+    "fideApprovedOrEndorsed": false,
+    "note": "This is an identity-bound source checkpoint. It is not the final THP identity and cannot close the product or submission gate."
+  }
+}

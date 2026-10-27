@@ -1,0 +1,133 @@
+{
+  "schema": "openpairing.chesspairings-shadow-adapter-bootstrap/1",
+  "completedAtUtc": "2026-08-16T05:25:27Z",
+  "status": "PASS_ISOLATED_NOT_ENABLED",
+  "openPairing": {
+    "sourceCommit": "ad627131049da74f755c678fda64c5d48dbe2a9f",
+    "packageVersion": "0.9.0-rc8",
+    "ordinarySuite": {
+      "status": "PASS",
+      "tests": 404,
+      "assertions": 4261,
+      "phpVersion": "8.3.6"
+    },
+    "stressSuite": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 32003
+    },
+    "staticAnalysis": "PASS",
+    "publicApi": {
+      "status": "PASS",
+      "methods": 13,
+      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+    },
+    "distributionSecretScan": {
+      "status": "PASS",
+      "findings": 0
+    },
+    "oracleSuiteObservation": {
+      "status": "NOT_RUN_IN_TEMPORARY_CHECKOUT",
+      "reason": "The ignored upstream Gacrux checkout was deliberately absent from the temporary PHP 8.3 verification tree; existing identity-scoped oracle and corpus evidence was not relabelled."
+    }
+  },
+  "chessPairings": {
+    "candidateVersion": "5.21.0-rc.19",
+    "candidateId": "web-fide-candidate-20260816-al-openpairing-shadow",
+    "sourceCommit": "d63de7759c59c13cb9168a5befac51f70e84149c",
+    "sourceBundleSha256": "9c263e229ff61aa0677450a68ba12a94d260f9f7b6bd52e2b19f66df781ca876",
+    "parentCandidate": "web-fide-candidate-20260815-ak-team-gacrux299-failclosed",
+    "parentArchiveSha256": "75f6674f2e48a9d851cfea9672fe72550d28f04fbca08abda08a91c412639953",
+    "sourceFreeze": {
+      "status": "PASS",
+      "trackedFileCount": 604,
+      "sourceManifestSha256": "11affb80a854536aeee4477f6669bd123e76cf18b8af466365561cce57cc7271",
+      "migrationFileCount": 92,
+      "migrationManifestSha256": "32bd6dcdd8b1c86bd0632e7e86aea45302401e371306e40b0c40fbad645fc455",
+      "secretFindings": 0
+    },
+    "trf26TypeCodes": {
+      "canonicalDutch": "FIDE_DUTCH_2025",
+      "canonicalBaku": "FIDE_DUTCH_2025_BAKU",
+      "acceptedAliases": [
+        "FIDE_DUTCH",
+        "FIDE_DUTCH_BAKU"
+      ],
+      "bakuRequiresRecord250": true,
+      "blankOptionalRecordsOmitted": true
+    },
+    "internalServiceCredentials": {
+      "embeddedValuesRemoved": true,
+      "headerOnlyAuthentication": true,
+      "queryStringCredentialRejected": true,
+      "ownerRotationPerformed": false
+    }
+  },
+  "adapter": {
+    "class": "OpenPairingShadowAdapter",
+    "input": "ChessPairings FideTrfCodec TRF26 output",
+    "runtimeIdentityLockRequired": true,
+    "candidateIdentityManifestRequired": true,
+    "tamperedIdentityRejected": true,
+    "independentPairingValidator": true,
+    "primaryComparison": {
+      "completePlayerAccountingRequired": true,
+      "exactDetected": true,
+      "samePairsColourVariantDetected": true,
+      "nonExactRequiresIndependentClassification": true,
+      "incompletePrimaryRejected": true
+    },
+    "eventEnvelope": {
+      "schema": "openpairing.shadow-turn/1",
+      "unclassifiedDifferenceRejected": true,
+      "classificationAndReproductionReferencesRequired": true,
+      "atomicImmutableFileSink": true,
+      "duplicateEventRejected": true
+    },
+    "immutableRequestBoundary": {
+      "requestSchema": "openpairing.thp-pairing-request/1",
+      "canonicalInputBound": true,
+      "tournamentRevisionBound": true,
+      "freshRevisionAndInputGo": true,
+      "staleRevisionNoGo": true,
+      "staleInputNoGo": true,
+      "databaseReadPerformed": false,
+      "publicationAuthorized": false
+    },
+    "eventStreamBuilder": {
+      "status": "PASS",
+      "events": 2,
+      "eventsSha256": "0816cb64de3e2449bcd22d4763a2167c6c6d66ee762b30d4993cce6e3cd35026",
+      "deterministicOrdering": true,
+      "existingOutputRejected": true,
+      "partialEntryRejected": true,
+      "atomicPublication": true
+    },
+    "privacyChecks": {
+      "playerNamesAbsent": true,
+      "tournamentNameAbsent": true,
+      "fideIdsAbsent": true
+    },
+    "executableFixture": {
+      "status": "PASS",
+      "checks": 21
+    },
+    "applicationCallSiteEnabled": false,
+    "officialShadowEvidenceProduced": false
+  },
+  "boundaries": {
+    "productionContacted": false,
+    "productionMutationPerformed": false,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "candidateDeployed": false,
+    "fideApprovalClaimed": false
+  },
+  "remainingBlockers": [
+    "freeze final combined installer/runtime/PTC/RTG candidate identity",
+    "connect the isolated incumbent/shadow observer to a live revision reread without publication or database writes",
+    "prove stale-revision and injected-failure rollback",
+    "complete owner-side rotation of the removed internal credential",
+    "obtain owner/privacy approval before any live read-only cohort"
+  ]
+}

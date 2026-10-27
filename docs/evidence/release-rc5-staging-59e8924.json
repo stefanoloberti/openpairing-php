@@ -1,0 +1,42 @@
+{
+    "schema": "openpairing.release-staging-evidence/1",
+    "version": "0.9.0-rc5",
+    "tag": "v0.9.0-rc5",
+    "commit": "59e8924fe205f4ad6cee9e16d8a8b54be6d17d87",
+    "tagObject": "39b3696d5f14dd6985135cd736fe9ad85e1fc8e8",
+    "release": "/srv/chesspairings-production-staging/releases/production-current-20260813-openpairing-59e8924",
+    "package": {
+        "stagingTarSha256": "54126f96b4643174fe809302fa0fe1286705685ac92a9a21140a1abbbf44f04f",
+        "runtimeSha256": "1fdb1a800c333806c85717b049c42067013d940a73bcf1099bd3c470173d19b6",
+        "sourceSha256": "d1c214a717f3a42c96be4327230563146ec732320ee82cd8b4be5deef371bdf8",
+        "reproducibleBuildsByteIdentical": true
+    },
+    "preSwitchGate": {
+        "php": "8.3.6",
+        "tests": 228,
+        "assertions": 33056,
+        "phpunit": "pass",
+        "phpstan": "pass",
+        "lint": "pass",
+        "cliSmoke": "pass"
+    },
+    "separateLocalGates": {
+        "stress": {"tests": 5, "assertions": 31003, "skipped": 1, "seconds": 403.036, "result": "pass"},
+        "oracles": {"tests": 11, "assertions": 55, "seconds": 16.177, "result": "pass"}
+    },
+    "runtimeIdentity": {
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+        "sourceTreeSha256": "8242492e22c16bb6faa754763eed74ffff3dbed3f44bf85ae6684817b68f5f49",
+        "sourceFileCount": 80,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "postSwitch": {
+        "currentSymlinkExact": true,
+        "httpRoot": "pass",
+        "downloadIndexRecommendedVersion": "0.9.0-rc5",
+        "runtimeDownloadSha256Verified": true,
+        "historicalRuntimeLinksVerified": ["rc1", "rc2", "rc3", "rc4", "rc5"]
+    }
+}

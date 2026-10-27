@@ -1,0 +1,28 @@
+{
+  "schema": "openpairing.historical-partition-summary/1",
+  "partition": "p50",
+  "closedAt": "2026-08-15T00:23:44+02:00",
+  "campaignToolCommit": "dcf92df7e7e8341c167c00d1d46ee0d25069bd86",
+  "sourceTreeSha256": "4d06cd9a0db67a303d37acaf20a2e55bf206a80580b9c0ff376ff0b4717fcf74",
+  "harnessSha256": "f241e9d50267e2f597cb4f8549f75b4d5e30d376e66c2b3081d6d786dce47093",
+  "shards": 384,
+  "classifiedShards": 384,
+  "counts": {
+    "filesSeen": 30000,
+    "decoded": 30000,
+    "tournamentsVerified": 30000,
+    "tournamentsAllExact": 30000,
+    "roundsAttempted": 768324,
+    "roundsExact": 768324,
+    "roundsSamePairsColourVariant": 0,
+    "roundsPairingDeviation": 0,
+    "roundsEngineNoSolution": 0,
+    "roundsEngineResourceLimit": 0
+  },
+  "gacrux": {
+    "requiredCases": 0,
+    "summarySha256": "9c60247d098389e62959d5c53245cbc5fcf3470f1ad6ae1da5af75dcd4ccea04"
+  },
+  "aggregateSha256": "d335f0ff7abf4971f46f14f80d12270ebc2844c8997420334e0eae38bb5ee82f",
+  "sentinel": "PASS"
+}

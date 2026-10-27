@@ -1,0 +1,668 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OpenPairing\Tests\Integration;
+
+use OpenPairing\Domain\Colour\Colour;
+use OpenPairing\Domain\Score\Score;
+use OpenPairing\Domain\Tournament\InvalidTournamentState;
+use OpenPairing\Domain\Tournament\Player;
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\ScheduledBye;
+use OpenPairing\Domain\Tournament\TournamentState;
+use OpenPairing\Engine\Dutch\DutchPairingEngine;
+use OpenPairing\Format\Trf\Trf2026Codec;
+use PHPUnit\Framework\TestCase;
+
+final class Trf2026CodecTest extends TestCase
+{
+    public function testWritesAndReadsSupportedSecondRoundStateWithoutLoss(): void
+    {
+        $codec = new Trf2026Codec();
+        $state = $this->roundTwoState();
+        $trf = $codec->encode($state);
+
+        self::assertStringContainsString("012 Codec Cup\r\n", $trf);
+        self::assertStringContainsString("192 FIDE_DUTCH_2025\r\n", $trf);
+        self::assertStringNotContainsString("\n", str_replace("\r\n", '', $trf));
+
+        $decoded = $codec->decode($trf);
+        self::assertSame(2, $decoded->round);
+        self::assertSame('Codec Cup', $decoded->tournamentName);
+        self::assertSame('Rome', $decoded->city);
+        self::assertSame(['Deputy One', 'Deputy Two'], $decoded->deputyArbiters);
+        self::assertSame(['26/08/11', '26/08/12'], $decoded->roundDates);
+        self::assertSame('202', $decoded->tieBreaksRecord);
+        self::assertSame('BH/C1', $decoded->tieBreaks);
+        self::assertSame(Colour::White, $decoded->topColour);
+        self::assertSame($trf, $codec->encode($decoded));
+        self::assertSame([3], $decoded->players[0]->opponentHistory);
+        self::assertSame([Colour::White], $decoded->players[0]->colourHistory);
+    }
+
+    public function testDefaultsScoringWhenRecord162IsAbsent(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = preg_replace('/^162.*\r\n/m', '', $codec->encode($this->roundTwoState()));
+        self::assertIsString($trf);
+        $state = $codec->decode($trf);
+
+        self::assertSame(0, $state->pointsForWin->compare(new Score(2, 2)));
+        self::assertSame(0, $state->pointsForDraw->compare(new Score(1, 2)));
+        self::assertSame(0, $state->pairingAllocatedByeScore()->compare(new Score(2, 2)));
+    }
+
+    public function testRoundRobinRecordRoundTripsForStandings(): void
+    {
+        $base = $this->roundTwoState();
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: 'fide-round-robin',
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            tournamentName: 'Round Robin Cup',
+            pointsForLoss: $base->lossScore(),
+            pointsForZeroPointBye: $base->zeroPointByeScore(),
+            pointsForPairingAllocatedBye: $base->pairingAllocatedByeScore(),
+            pointsForUnknown: $base->unknownScore(),
+            tournamentType: 'Individual Round Robin',
+            tieBreaksRecord: '212',
+            tieBreaks: 'PTS,KS,DE',
+        );
+        $codec = new Trf2026Codec();
+        $trf = $codec->encode($state);
+        $decoded = $codec->decode($trf);
+
+        self::assertStringContainsString("192 FIDE_ROUNDROBIN\r\n", $trf);
+        self::assertSame('fide-round-robin', $decoded->pairingSystem);
+        self::assertSame('PTS,KS,DE', $decoded->tieBreaks);
+    }
+
+    public function testRejectsUnsupportedRecordInsteadOfDroppingIt(): void
+    {
+        $trf = "082 4\r\n".(new Trf2026Codec())->encode($this->roundTwoState());
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('outside the supported subset');
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRecord240RoundTripsAndExcludesFutureByeRecipientFromPairing(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "240 H 002    1\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        $pairing = (new DutchPairingEngine())->pair($decoded);
+        $pairedIds = [];
+        foreach ($pairing->tables as $table) {
+            $pairedIds[] = $table->whitePlayerId;
+            $pairedIds[] = $table->blackPlayerId;
+        }
+
+        self::assertTrue($decoded->isPlayerScheduledBye(1));
+        self::assertNotContains(1, $pairedIds);
+        self::assertNotSame(1, $pairing->byePlayerId);
+        self::assertStringContainsString("240 H 002    1\n", $codec->encode($decoded));
+        self::assertSame($codec->encode($decoded), $codec->encode($codec->decode($codec->encode($decoded))));
+    }
+
+    public function testRecord240RejectsConflictingByeTypesForSamePlayerAndRound(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "240 F 002    1\n240 H 002    1\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('A player cannot receive two scheduled-bye types in one round.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('scheduled_bye.player_conflict', $exception->diagnosticCode);
+        }
+    }
+
+    public function testRecord240MustAgreeWithCompletedRoundHistory(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "240 H 001    1\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('A completed scheduled-bye record must agree with the 001 round history.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('scheduled_bye.result_mismatch', $exception->diagnosticCode);
+        }
+    }
+
+    public function testWriterEmitsCanonicalRecord240(): void
+    {
+        $codec = new Trf2026Codec();
+        $base = $this->roundTwoState();
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            tournamentName: $base->tournamentName,
+            pointsForLoss: $base->lossScore(),
+            pointsForZeroPointBye: $base->zeroPointByeScore(),
+            pointsForPairingAllocatedBye: $base->pairingAllocatedByeScore(),
+            pointsForUnknown: $base->unknownScore(),
+            scheduledByes: [new ScheduledBye('Z', 3, [2, 4])],
+        );
+
+        self::assertStringContainsString("240 Z 003    2    4\n", $codec->encode($state));
+    }
+
+    public function testRecord260RoundTripsAsRoundRangedProhibitedPairings(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "260 001 003    1    2    4\r\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+
+        self::assertCount(1, $decoded->prohibitedPairingGroups);
+        self::assertTrue($decoded->isPairingProhibited(1, 4, 2));
+        self::assertFalse($decoded->isPairingProhibited(1, 3, 4));
+        self::assertStringContainsString("260 001 003    1    2    4\r\n", $codec->encode($decoded));
+        self::assertSame($codec->encode($decoded), $codec->encode($codec->decode($codec->encode($decoded))));
+    }
+
+    public function testRecord260RejectsUnknownCompetitor(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "001    1",
+            "260 001 003    1    9\r\n001    1",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('A prohibited-pairing group with an unknown competitor must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('prohibited.player_unknown', $exception->diagnosticCode);
+        }
+    }
+
+    public function testWriterEmitsCanonicalRecord260(): void
+    {
+        $base = $this->roundTwoState();
+        $state = new TournamentState(
+            schemaVersion: $base->schemaVersion,
+            round: $base->round,
+            numberOfRounds: $base->numberOfRounds,
+            pairingSystem: $base->pairingSystem,
+            topColour: $base->topColour,
+            pointsForWin: $base->pointsForWin,
+            pointsForDraw: $base->pointsForDraw,
+            maxPlayers: $base->maxPlayers,
+            players: $base->players,
+            tournamentName: $base->tournamentName,
+            pointsForLoss: $base->lossScore(),
+            pointsForZeroPointBye: $base->zeroPointByeScore(),
+            pointsForPairingAllocatedBye: $base->pairingAllocatedByeScore(),
+            pointsForUnknown: $base->unknownScore(),
+            prohibitedPairingGroups: [new ProhibitedPairingGroup(2, 4, [1, 4])],
+        );
+
+        self::assertStringContainsString("260 002 004    1    4\r\n", (new Trf2026Codec())->encode($state));
+    }
+
+    public function testPublicImportInfersMissingInitialColourFromHighestRankedPairedParticipant(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = preg_replace('/^152.*\r\n/m', '', $codec->encode($this->roundTwoState()));
+        self::assertIsString($trf);
+
+        self::assertSame(Colour::White, $codec->decode($trf)->topColour);
+    }
+
+    public function testPublicImportRequires152WhenInitialColourCannotBeInferred(): void
+    {
+        $codec = new Trf2026Codec();
+        $lines = explode("\r\n", $codec->encode($this->roundTwoState()));
+        $lines = array_values(array_filter($lines, static fn (string $line): bool => !str_starts_with($line, '152 ')));
+        foreach ($lines as &$line) {
+            if (str_starts_with($line, '001 ')) {
+                $line = substr_replace(substr($line, 0, 89), ' 0.0', 80, 4);
+            }
+        }
+        unset($line);
+
+        try {
+            $codec->decode(implode("\r\n", $lines));
+            self::fail('A pre-round-one TRF without 152 must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.initial_colour_required', $exception->diagnosticCode);
+            self::assertStringContainsString('152', $exception->getMessage());
+        }
+    }
+
+    public function testPublicImportInfersMissingRoundCountFromPlayerRecords(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = preg_replace('/^142.*\r\n/m', '', $codec->encode($this->roundTwoState()));
+        self::assertIsString($trf);
+
+        self::assertSame(1, $codec->decode($trf)->numberOfRounds);
+    }
+
+    public function testScheduledForfeitColoursRoundTripButDoNotEnterColourHistory(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            ['   3 w 1', '   1 b 0'],
+            ['   3 w +', '   1 b -'],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame([], $decoded->players[0]->opponentHistory);
+        self::assertSame([], $decoded->players[0]->colourHistory);
+        self::assertSame('white', $decoded->players[0]->results[0]['colour']);
+        self::assertFalse($decoded->players[0]->results[0]['played']);
+        self::assertSame($trf, $codec->encode($decoded));
+    }
+
+    public function testScheduledForfeitColoursMustBeReciprocalWhenPresent(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            ['   3 w 1', '   1 b 0'],
+            ['   3 w +', '   1 w -'],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('Equal scheduled colours for a forfeit must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.colour_incompatible', $exception->diagnosticCode);
+        }
+    }
+
+    public function testUnusualHalfZeroResultIsAcceptedAndRoundTrips(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            [' 1.0    1', '   3 w 1'],
+            [' 0.5    1', '   3 w ='],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('=', $decoded->players[0]->results[0]['result']);
+        self::assertSame('0', $decoded->players[2]->results[0]['result']);
+        self::assertSame($trf, $codec->encode($decoded));
+    }
+
+    public function testDoubleForfeitIsAcceptedAndRoundTrips(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            [' 1.0    1', '   3 w 1', '   1 b 0'],
+            [' 0.0    1', '   3 w -', '   1 b -'],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('-', $decoded->players[0]->results[0]['result']);
+        self::assertSame('-', $decoded->players[2]->results[0]['result']);
+        self::assertSame($trf, $codec->encode($decoded));
+    }
+
+    public function testInconsistentWinDrawResultIsRejected(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace('   1 b 0', '   1 b =', $codec->encode($this->roundTwoState()));
+
+        try {
+            $codec->decode($trf);
+            self::fail('A 1-1/2 result must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.result_incompatible', $exception->diagnosticCode);
+        }
+    }
+
+    public function testBlankByeResultImportsAsCanonicalZeroPointBye(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            [' 1.0    1', '   3 w 1', '   1 b 0'],
+            [' 0.0    1', '   0 -  ', '   0 -  '],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('Z', $decoded->players[0]->results[0]['result']);
+        self::assertNull($decoded->players[0]->results[0]['opponentId']);
+        self::assertStringContainsString('   0 - Z', $codec->encode($decoded));
+    }
+
+    public function testRejectsOversizedInputBeforeRecordParsing(): void
+    {
+        try {
+            (new Trf2026Codec())->decode(str_repeat(' ', Trf2026Codec::MAX_BYTES + 1));
+            self::fail('Oversized TRF must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.too_large', $exception->diagnosticCode);
+        }
+    }
+
+    public function testRejectsARecordLineOverTheConfiguredLimit(): void
+    {
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('exceeds 4096 bytes');
+        (new Trf2026Codec())->decode('012 '.str_repeat('A', 4093));
+    }
+
+    public function testRejectsDeclaredPlayerCountMismatch(): void
+    {
+        $trf = str_replace('062 4', '062 5', (new Trf2026Codec())->encode($this->roundTwoState()));
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('does not match the number');
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRejectsBothTieBreakRecordAlternatives(): void
+    {
+        $trf = "212 PTS,BH\r\n".(new Trf2026Codec())->encode($this->roundTwoState());
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('mutually exclusive');
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRejectsUnknownOpponent(): void
+    {
+        $trf = str_replace('   3 w 1', ' 999 w 1', (new Trf2026Codec())->encode($this->roundTwoState()));
+        $this->expectException(InvalidTournamentState::class);
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRejectsNonReciprocalResult(): void
+    {
+        $trf = str_replace('   1 b 0', '   2 b 0', (new Trf2026Codec())->encode($this->roundTwoState()));
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('no reciprocal opponent record');
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRejectsIncompatibleColour(): void
+    {
+        $trf = str_replace('   1 b 0', '   1 w 0', (new Trf2026Codec())->encode($this->roundTwoState()));
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('incompatible colours');
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRejectsScoreThatDoesNotMatchResults(): void
+    {
+        $trf = str_replace(' 1.0    1', ' 0.5    1', (new Trf2026Codec())->encode($this->roundTwoState()), $replacements);
+        self::assertSame(1, $replacements);
+        $this->expectException(InvalidTournamentState::class);
+        $this->expectExceptionMessage('score does not equal');
+        (new Trf2026Codec())->decode($trf);
+    }
+
+    public function testRoundTripPreservesBursteinPairingSystem(): void
+    {
+        $codec = new Trf2026Codec();
+        $dutch = $this->roundTwoState();
+        $burstein = new TournamentState(
+            schemaVersion: $dutch->schemaVersion,
+            round: $dutch->round,
+            numberOfRounds: $dutch->numberOfRounds,
+            pairingSystem: 'fide-burstein-2026',
+            topColour: $dutch->topColour,
+            pointsForWin: $dutch->pointsForWin,
+            pointsForDraw: $dutch->pointsForDraw,
+            maxPlayers: $dutch->maxPlayers,
+            players: $dutch->players,
+            tournamentName: $dutch->tournamentName,
+        );
+
+        $trf = $codec->encode($burstein);
+
+        self::assertStringContainsString("192 FIDE_BURSTEIN\r\n", $trf);
+        self::assertSame('fide-burstein-2026', $codec->decode($trf)->pairingSystem);
+    }
+
+    public function testRecord250RoundTripsAsRoundIndexedVirtualPoints(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = $codec->encode($this->roundTwoState());
+        $trf = str_replace(
+            "001    1",
+            "250  0.0  1.0   1   3    1    2\r\n250  0.0  0.5   4   6    1    2\r\n001    1",
+            $trf,
+        );
+
+        $decoded = $codec->decode($trf);
+        self::assertSame('1.0', $decoded->players[0]->acceleration?->toDecimal(1));
+        self::assertSame(
+            ['1.0', '1.0', '1.0', '0.5', '0.5', '0.5'],
+            array_map(static fn (?Score $score): ?string => $score?->toDecimal(1), $decoded->players[0]->accelerationSchedule),
+        );
+        self::assertSame([], $decoded->players[2]->accelerationSchedule);
+
+        $normalised = $codec->encode($decoded);
+        self::assertStringContainsString("250       1.0   1   3    1    2\r\n", $normalised);
+        self::assertStringContainsString("250       0.5   4   6    1    2\r\n", $normalised);
+        $roundTrip = $codec->decode($normalised);
+        self::assertEquals($decoded->players[0]->accelerationSchedule, $roundTrip->players[0]->accelerationSchedule);
+    }
+
+    public function testOfficialBakuTypeWithRecord250DecodesAsDutch(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            ["192 FIDE_DUTCH_2025\r\n", "001    1"],
+            ["192 FIDE_DUTCH_2025_BAKU\r\n", "250  0.0  1.0   1   3    1    2\r\n001    1"],
+            $codec->encode($this->roundTwoState()),
+        );
+
+        self::assertSame('fide-dutch-2026', $codec->decode($trf)->pairingSystem);
+        self::assertSame(
+            'fide-dutch-2026',
+            $codec->decode(str_replace('FIDE_DUTCH_2025_BAKU', 'FIDE_DUTCH_BAKU', $trf))->pairingSystem,
+        );
+    }
+
+    public function testOfficialBakuTypeWithoutRecord250FailsClosed(): void
+    {
+        $codec = new Trf2026Codec();
+        $trf = str_replace(
+            "192 FIDE_DUTCH_2025\r\n",
+            "192 FIDE_DUTCH_2025_BAKU\r\n",
+            $codec->encode($this->roundTwoState()),
+        );
+
+        try {
+            $codec->decode($trf);
+            self::fail('Baku type without record 250 must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_required', $exception->diagnosticCode);
+        }
+    }
+
+    public function testRecord250RejectsConflictingOverlaps(): void
+    {
+        $trf = (new Trf2026Codec())->encode($this->roundTwoState());
+        $trf = "250  0.0  1.0   1   2    1    1\r\n250  0.0  0.5   2   3    1    1\r\n".$trf;
+
+        try {
+            (new Trf2026Codec())->decode($trf);
+            self::fail('Conflicting acceleration ranges must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_overlap', $exception->diagnosticCode);
+        }
+    }
+
+    public function testRecord250RejectsUnknownCompetitor(): void
+    {
+        $trf = "250  0.0  1.0   1   2    9    9\r\n".(new Trf2026Codec())->encode($this->roundTwoState());
+
+        try {
+            (new Trf2026Codec())->decode($trf);
+            self::fail('Acceleration for an unknown competitor must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_player', $exception->diagnosticCode);
+        }
+    }
+
+    public function testCurrentAccelerationWithoutScheduleWritesCurrentRound250(): void
+    {
+        $state = $this->roundTwoState();
+        $players = $state->players;
+        $source = $players[0];
+        $players[0] = new Player(
+            id: $source->id, pairingNumber: $source->pairingNumber, name: $source->name,
+            rating: $source->rating, title: $source->title, team: $source->team,
+            club: $source->club, active: $source->active, score: $source->score,
+            opponentHistory: $source->opponentHistory, colourHistory: $source->colourHistory,
+            results: $source->results, receivedPairingAllocatedBye: $source->receivedPairingAllocatedBye,
+            floatHistory: $source->floatHistory, acceleration: new Score(1, 2),
+            sex: $source->sex, federation: $source->federation, fideId: $source->fideId,
+            birthDate: $source->birthDate, rank: $source->rank,
+        );
+        $accelerated = new TournamentState(
+            schemaVersion: $state->schemaVersion, round: $state->round,
+            numberOfRounds: $state->numberOfRounds, pairingSystem: $state->pairingSystem,
+            topColour: $state->topColour, pointsForWin: $state->pointsForWin,
+            pointsForDraw: $state->pointsForDraw, maxPlayers: $state->maxPlayers,
+            players: $players, tournamentName: $state->tournamentName,
+        );
+
+        $trf = (new Trf2026Codec())->encode($accelerated);
+
+        self::assertStringContainsString("250       0.5   2   2    1    1\r\n", $trf);
+        self::assertSame('0.5', (new Trf2026Codec())->decode($trf)->players[0]->acceleration?->toDecimal(1));
+    }
+
+    public function testLegacyXxaImportsRoundValuesAndCanonicalisesTo250(): void
+    {
+        $trf = (new Trf2026Codec())->encode($this->roundTwoState());
+        $trf = "XXA    1  1.0       0.5\r\n".$trf;
+
+        $decoded = (new Trf2026Codec())->decode($trf);
+
+        self::assertSame(
+            ['1.0', null, '0.5'],
+            array_map(static fn (?Score $score): ?string => $score?->toDecimal(1), $decoded->players[0]->accelerationSchedule),
+        );
+        $normalised = (new Trf2026Codec())->encode($decoded);
+        self::assertStringNotContainsString('XXA', $normalised);
+        self::assertStringContainsString("250       1.0   1   1    1    1\r\n", $normalised);
+        self::assertStringContainsString("250       0.5   3   3    1    1\r\n", $normalised);
+    }
+
+    public function testLegacyXxaConflictingWith250FailsClosed(): void
+    {
+        $trf = "250  0.0  1.0   1   1    1    1\r\nXXA    1  0.5\r\n".(new Trf2026Codec())->encode($this->roundTwoState());
+
+        try {
+            (new Trf2026Codec())->decode($trf);
+            self::fail('Conflicting XXA and 250 records must fail closed.');
+        } catch (InvalidTournamentState $exception) {
+            self::assertSame('trf.acceleration_overlap', $exception->diagnosticCode);
+        }
+    }
+
+    private function roundTwoState(): TournamentState
+    {
+        $players = [
+            $this->player(1, 'Alpha, A', 2400, new Score(2, 2), 3, Colour::White, '1'),
+            $this->player(2, 'Beta, B', 2300, Score::zero(), 4, Colour::Black, '0'),
+            $this->player(3, 'Gamma, C', 2200, Score::zero(), 1, Colour::Black, '0'),
+            $this->player(4, 'Delta, D', 2100, new Score(2, 2), 2, Colour::White, '1'),
+        ];
+
+        return new TournamentState(
+            schemaVersion: TournamentState::SCHEMA_VERSION,
+            round: 2,
+            numberOfRounds: 7,
+            pairingSystem: 'fide-dutch-2026',
+            topColour: Colour::White,
+            pointsForWin: new Score(2, 2),
+            pointsForDraw: new Score(1, 2),
+            maxPlayers: 256,
+            players: $players,
+            tournamentName: 'Codec Cup',
+            pointsForLoss: Score::zero(),
+            pointsForZeroPointBye: Score::zero(),
+            pointsForPairingAllocatedBye: new Score(2, 2),
+            pointsForUnknown: new Score(1, 2),
+            city: 'Rome',
+            federation: 'ITA',
+            startDate: '2026/08/11',
+            endDate: '2026/08/17',
+            tournamentType: 'Individual Swiss',
+            chiefArbiter: 'Chief Arbiter',
+            deputyArbiters: ['Deputy One', 'Deputy Two'],
+            timeControlDescription: '90 minutes plus 30 seconds per move',
+            roundDates: ['26/08/11', '26/08/12'],
+            pairingController: 'OpenPairingPHP',
+            tieBreaksRecord: '202',
+            tieBreaks: 'BH/C1',
+            encodedTimeControl: '5400+30',
+        );
+    }
+
+    private function player(int $id, string $name, int $rating, Score $score, int $opponent, Colour $colour, string $result): Player
+    {
+        return new Player(
+            id: $id,
+            pairingNumber: $id,
+            name: $name,
+            rating: $rating,
+            title: '',
+            team: '',
+            club: '',
+            active: true,
+            score: $score,
+            opponentHistory: [$opponent],
+            colourHistory: [$colour],
+            results: [[
+                'round' => 1,
+                'opponentId' => $opponent,
+                'colour' => $colour->value,
+                'result' => $result,
+                'played' => true,
+            ]],
+            receivedPairingAllocatedBye: false,
+            floatHistory: ['none'],
+            acceleration: null,
+            sex: $id % 2 === 0 ? 'w' : 'm',
+            federation: 'ITA',
+            fideId: 1000000 + $id,
+            birthDate: '2000/01/0'.$id,
+            rank: $id,
+        );
+    }
+}

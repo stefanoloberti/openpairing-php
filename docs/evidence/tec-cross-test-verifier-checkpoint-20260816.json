@@ -1,0 +1,55 @@
+{
+  "schema": "openpairing.tec-cross-test-verifier-checkpoint/1",
+  "recordedAt": "2026-08-16T01:45:56+02:00",
+  "purpose": "Qualify the local fail-closed evidence boundary for the two future TEC Manual 1.24 Article 3.9.4 cross-tests without claiming that either official test has run.",
+  "runtime": {
+    "hostRole": "quarantined secondary worker",
+    "php": "8.3.6",
+    "testTree": "temporary overlay of repository HEAD plus the files recorded below",
+    "campaignDataUsed": false
+  },
+  "artifacts": {
+    "tools/verify_tec_cross_test.php": "0ebf4a6d2286eacd7300801fd792f2123c18dec903bb936420062f8597803dce",
+    "docs/TEC-CROSS-TEST.md": "4b10e1dbdc17c31180e785cc709b1ee24c73c45753745a9e55707f4b9882c30f",
+    "docs/schema/tec-cross-test-batch-1.schema.json": "de12fd91dcf294a9a5142105c51ca904aeaa7be9a651cd995c8eefff382c1f15",
+    "docs/schema/tec-cross-test-case-1.schema.json": "e73671b35b39676083f7d9550691243b7a30582c7e27a3ddb735cbce7f3bc1bc"
+  },
+  "checks": {
+    "jsonSyntax": "PASS",
+    "targetedPhpunit": {
+      "status": "PASS",
+      "tests": 5,
+      "assertions": 40
+    },
+    "fullPhpunit": {
+      "status": "PASS",
+      "tests": 298,
+      "assertions": 1497
+    },
+    "phpstan": "PASS",
+    "publicApi": {
+      "status": "PASS",
+      "methodCount": 13,
+      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+    },
+    "submissionReadiness": {
+      "status": "NO_GO",
+      "manifestSha256": "247caf0221ce87eb188bd9d3107e5c43d53091f88b79eea1b834902f82f29673",
+      "closed": 2,
+      "blocking": 8,
+      "evidenceFilesVerified": 20
+    }
+  },
+  "verifiedOutcomes": [
+    "A zero-discrepancy batch can pass mechanically only after the configured tournament minimum is met.",
+    "Interpretation divergences remain REVIEW_REQUIRED for TEC clarification.",
+    "Candidate-engine errors and more than ten discrepancies are NO_GO.",
+    "Denominator, schema, identity and event-stream failures exit as infrastructure ERROR.",
+    "Mechanical verification never declares TEC acceptance."
+  ],
+  "boundary": {
+    "externalRtgToCandidatePtcExecuted": false,
+    "candidateRtgToExternalPtcExecuted": false,
+    "tecAcceptanceDeclared": false
+  }
+}

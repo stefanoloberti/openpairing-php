@@ -1,0 +1,55 @@
+{
+  "schema": "openpairing.public-tools-gate/1",
+  "recordedAt": "2026-08-15T21:49:00+02:00",
+  "version": "0.9.0-rc7",
+  "gitCommit": "f12f0a7b8bf803119e3c15c8cd688ac6fd4b454e",
+  "result": "pass",
+  "rapidGate": {
+    "tests": 257,
+    "assertions": 1220,
+    "skipped": 1,
+    "phpstanFiles": 134,
+    "phpstanErrors": 0
+  },
+  "extendedGate": {
+    "stress": {
+      "tests": 5,
+      "assertions": 31003,
+      "skipped": 1,
+      "result": "pass"
+    },
+    "oracles": {
+      "tests": 11,
+      "assertions": 55,
+      "result": "pass"
+    }
+  },
+  "runtimeSmokes": {
+    "publicPtcExact": true,
+    "publicPtcNegativeColourVariant": true,
+    "publicRtgGeneration": true,
+    "publicRtgDeterministicTwin": true,
+    "publicRtgPtcRoundTrip": true
+  },
+  "reproducibleBuild": {
+    "runs": 2,
+    "source": {
+      "file": "openpairing-php-0.9.0-rc7-source.zip",
+      "bytes": 595155,
+      "sha256": "83e17f771442db858b2564a53ca01cf123189a8062ae8b2eaf52417a93eb617e",
+      "identicalAcrossRuns": true
+    },
+    "runtime": {
+      "file": "openpairing-php-0.9.0-rc7-runtime.zip",
+      "bytes": 222273,
+      "sha256": "a404b5159adf7487efc8fbc6f3f605e50d605f46d06d5ac9dcc41f1681f0c2b3",
+      "identicalAcrossRuns": true
+    }
+  },
+  "campaignImpact": {
+    "requiresRestart": false,
+    "reason": "The post-campaign-identity commit changes documentation, fixtures, tests and release-build controls only; pairing source and the corpus replay harness are unchanged.",
+    "activeCampaignRelease": "/srv/openpairing-validation/releases/c759bd9",
+    "activeCampaignCommit": "c759bd9a97a5639bc8cec38029b6ad4e1a40b58c"
+  }
+}

@@ -1,0 +1,3638 @@
+{
+    "schema": "openpairing.trf-sharded-aggregate/1",
+    "shards": 128,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/srv/openpairing-validation/releases/86ec9d9-r2",
+        "autoloadPsr4Roots": [
+            "/srv/openpairing-validation/releases/86ec9d9-r2/src"
+        ],
+        "expectedEnginePath": "/srv/openpairing-validation/releases/86ec9d9-r2/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/srv/openpairing-validation/releases/86ec9d9-r2/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+        "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+        "sourceFileCount": 85,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "harnessIdentity": {
+        "schema": "openpairing.historical-replay-harness/1",
+        "sha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+        "files": {
+            "TrfCorpusCompatibility.php": "b6715f6e34dcce1b6c087a6b7f6eb965fd1ddfe5c71930cdc843d980f0adc6bc",
+            "verify_trf_pairings.php": "23e4c867a22964556be10fd695ec73ca26c733e77d563198deda32bc8b4df0c1"
+        }
+    },
+    "historicalFloatSemantics": "fide-dutch-float/3-round-indexed",
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-sharded-identity/1",
+        "fileCount": 2000,
+        "totalBytes": 300784000,
+        "shardManifestSha256": "21dedd80ab9182f3cfd6302023de51b3940c5d0b5d427217036c34eb98201c0b"
+    },
+    "counts": {
+        "filesSeen": 2000,
+        "decoded": 2000,
+        "tournamentsVerified": 2000,
+        "tournamentsAllExact": 2000,
+        "roundsAttempted": 182000,
+        "roundsExact": 182000,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 182000,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 0,
+        "largeField.candidateNoMatching": 0
+    },
+    "diagnostics": [],
+    "shadowSamples": [],
+    "reports": [
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s000",
+            "elapsedSeconds": 464587.303,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "2457e0e6013c54e5f89fbe4d03b459974e086424c29a5a940e4ecfdb18755cd4"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s001",
+            "elapsedSeconds": 470047.578,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "2d9c4d889941ed0213b31f1c821c254733184c16e021428b0bfd5c85e9d541a2"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s002",
+            "elapsedSeconds": 479208.72,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "1f62c1d4bb21522bd61a30c75fc8c387289fd864290f007cb13ac4682d2325fe"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s003",
+            "elapsedSeconds": 481272.761,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "f2f9c5947fca84109b5e469ac6434b25129f481bebed0df18c446396daabca35"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s004",
+            "elapsedSeconds": 474461.961,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "bcf12776bdddeed5116d90f681656d2ee65713872e0b6602ee34c60e1198193d"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s005",
+            "elapsedSeconds": 464685.728,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "908283b16a8b59746c9583fc2e397e0caeee75ca1e0ccb1a49d10b441edfc21e"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s006",
+            "elapsedSeconds": 470621.862,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "81503b986f67d12b0bec33e053a8cfebb6b205b73a3df7685de0224735000efc"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s007",
+            "elapsedSeconds": 464671.644,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "15a9108c954c032d23dcce073adf6249f2884ebcdee1883e747059637f35f7fb"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s008",
+            "elapsedSeconds": 466197.296,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "850a975c87ffa638e43631052949ecabfe03f3d5b19b6595e6abcc29f7cd6b6d"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s009",
+            "elapsedSeconds": 466979.796,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "67485aa3c1e51af0571bc679bfc3174c349b11dab5ed9cfbc37b3863f86219cd"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s010",
+            "elapsedSeconds": 469298.761,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "6501b0234301d90520e6e9c0e9df480552f0f9e540db91d1e07a5198581a4ef2"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s011",
+            "elapsedSeconds": 469189.981,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "132f87f21573e3b933bc5dbdbaf44f11047a76028b6d592661c6aff8b2777557"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s012",
+            "elapsedSeconds": 465601.119,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "e38366eadd5749bffe3cfe52b7856c3a05057bca9717e44dc3244f8cc9212154"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s013",
+            "elapsedSeconds": 472336.887,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "c85de3f9c1d20ffb1981a9c469589b9618d08f38acf0f94882be6a7a5aa955b4"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s014",
+            "elapsedSeconds": 485863.381,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "b474c799c73ccde6c106e5cca087cdf9a4d1efae17ccdf382daa75198ab8f10c"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s015",
+            "elapsedSeconds": 471818.382,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "15f431b919f46b84d3307e9a4a1a025e26db32f28db391cbed129f1db5214151"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s016",
+            "elapsedSeconds": 480664.841,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "ecbb359412ae5b531d07d9d813f28c1ebc39705f06490a84a3bfe7ba4e51c22f"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s017",
+            "elapsedSeconds": 468964.343,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "3f000233b6acdaef21e737abca70a1fcb7beee89537c1e0753f518e8c3e60383"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s018",
+            "elapsedSeconds": 468747.102,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "c591d31f31f6e76968bf5cf175c6022fb5005dd334f381e0575c5aa3b7802d10"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s019",
+            "elapsedSeconds": 470834.397,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "32a0d305649b9f51c03e0f22e5f95d7a16a7534fb4190689163c1ac544aba3a0"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s020",
+            "elapsedSeconds": 456571.186,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "c111b2e568b948b848d40ec637538045cdbff32ded8bd65cec29e84b66912c3c"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s021",
+            "elapsedSeconds": 452033.155,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "651eebf9e0a9b169fda26e1c3bd0871a2773ae36c598e777fff7d797a412dc3f"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s022",
+            "elapsedSeconds": 458366.377,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "89ef9a41642419869300649c38879430084552bac5675ed83c7460295c5b30c5"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s023",
+            "elapsedSeconds": 460968.128,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "440d7bfff3db60ecb1cd06d13c4d30a4f1e0afac3d9af09e3e778181144bb509"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s024",
+            "elapsedSeconds": 458110.612,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "fa03ef64a7ca561dcfccc38f6561a3b88b3f30e86a830bb3e26be614057695fb"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s025",
+            "elapsedSeconds": 460218.094,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "5c3004fa4f86155b3a1bc673a13a30d162ef2ba015f849ed73c00fa4686766bb"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s026",
+            "elapsedSeconds": 457854.607,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "e7addf3dc406352fc8e44e550c7bcc04cb693385d5e4cadc58b848702264b345"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s027",
+            "elapsedSeconds": 456156.494,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "a21cf6aa695e9b0684a40e4b201f243da8b3848fbd888f8ac453c632c58d3175"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s028",
+            "elapsedSeconds": 457984.534,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "182aba9633b025c8d0bb75663cceb899241253673fe221cc6901d2d6925aa881"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s029",
+            "elapsedSeconds": 453735.757,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "47c42a6d4af180f5b4eb63a0113afd4bab0e204758297f786d3be31143009f78"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s030",
+            "elapsedSeconds": 454481.289,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "3fd4f8cf763454bbcc8dfdf62db27b665c18d46f12260c848ae90a7d895550ac"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s031",
+            "elapsedSeconds": 465042.272,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "1f762840455d0bbb68b45dec4202384d913738107e4a180896c7003a2dc822f9"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s032",
+            "elapsedSeconds": 454548.011,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "4e09ba57ea4eaa7ab6217c6ced21e28ddbd7d7f1e77317fd7fddaa2d34a2ca44"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s033",
+            "elapsedSeconds": 453003.441,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "eb42af0266cab16a3bd21e243d315f12d1deee1e9572133acb63d8d25720a7b8"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s034",
+            "elapsedSeconds": 452447.353,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "6f99fd59b0e411b3bca6e057946d9a9309caca9674f70f4c46455c1145d104c6"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s035",
+            "elapsedSeconds": 466012.736,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "57da587bdbf06a85022158af04971c0f2a84c5a700736339e38d0171c6b0eaa3"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s036",
+            "elapsedSeconds": 463422.493,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "ead6928803523d811dde0f7a07788b817fa20940b3c34ef5225a634de3d687a9"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s037",
+            "elapsedSeconds": 457582.634,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "f2a0847b9f7da11b763458c521a43d3f98576863408a1f3b0bee5d6f791856cf"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s038",
+            "elapsedSeconds": 461188.832,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "1474da9900e1b75cb3cdb7ee1fc0a79b41da017c87e6f7d311cb9df65e7740a2"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s039",
+            "elapsedSeconds": 456786.135,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "2f4108180e7ff3f48cbd3683a2d6d45449d9f961c19fc7b907bbd504f7b28cd6"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s040",
+            "elapsedSeconds": 446684.785,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "77d4e1926d37422e6dd5e4474ce8a98e5b886d99c5f05b99089832a6bb1c9af3"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s041",
+            "elapsedSeconds": 454271.378,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "d6a5481da4bc1e42247c707a7dbc6a86bbaf23e376d1e95e061a7ed4f5725a27"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s042",
+            "elapsedSeconds": 447104.208,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "5c722b4b0043cc77a2f9fac6b680427ad99c34cbae32ffa949dad90dd7a61171"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s043",
+            "elapsedSeconds": 455140.873,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "3cd0e0d986885464e90c86213e676b0db3212682a1d490ef67af55912fea6ed5"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s044",
+            "elapsedSeconds": 451398.881,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "8737144974d56b2c4bd7e9f49006bf5c330dd11d3ba57adce8e60d8f9c882011"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s045",
+            "elapsedSeconds": 458289.87,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "5a5735a324670f07c462d32937f80fb5210497b95ef4925d34a346f96eefe21d"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s046",
+            "elapsedSeconds": 454241.776,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "967c9c9ad78664f2b0737dce8a12b55c3405e1855f9d059527a79145258a53d3"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s047",
+            "elapsedSeconds": 452626.634,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "61522eafb95d832fa6c4f74611fb027dc22da5c5116329cb6f6c14524226ea33"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s048",
+            "elapsedSeconds": 459091.013,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "6c888a31ada51237babb7902bf6f5a8c1cf5aeaae554c718f7741388e52edc55"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s049",
+            "elapsedSeconds": 447060.454,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "6a45a930fdbc1633182f7419c25b217b6abcb1deedf7637ce1829e0c01ee79c4"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s050",
+            "elapsedSeconds": 455662.039,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "e8296a61d9c98f9f053fd54f01e3f005dd8486f2046c6f3acee03d016b79ca7a"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s051",
+            "elapsedSeconds": 445556.874,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "de01d7b29504ac5dd2c09d27e1fdfbdbb826cea90c2e3b3a94ac903fdb41e0d0"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s052",
+            "elapsedSeconds": 452917.24,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "48a6ac68996274ee780deb2acabf1ff4ee112d5913201a41a0c94fc2c2836243"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s053",
+            "elapsedSeconds": 447618.308,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "e34e335108ff373e5aa023aabf256800390ee417e279bbf7194e63643a0171f3"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s054",
+            "elapsedSeconds": 460567.358,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "95ec4e95a27cc074086db3fda9807ca69d94b110cc14b66f34bd6a57de45459f"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s055",
+            "elapsedSeconds": 457086.279,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "23275837a83474f085a96fb487fb96189980eab54a52fccc685e9dc28b6a9a85"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s056",
+            "elapsedSeconds": 452818.578,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "af374901ab1d0a342375919313174919b545d044a43ec80dbbc841b8fd2db033"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s057",
+            "elapsedSeconds": 452242.236,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "1630e6dd7183f8d150df6dc26c428c08ffb4bafd071745cf04973244beb13890"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s058",
+            "elapsedSeconds": 450110.96,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "ab045b19dfc9d3e961233ddc329fd9ae6873b4d4e834c4cc1b0a9c3be53a1520"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s059",
+            "elapsedSeconds": 459467.309,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "ee8d98db8def9d10d408ad117e018fc92a6ad7f7c213a0da20a299ca124468ec"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s060",
+            "elapsedSeconds": 461970.61,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "0913610b762bab2b0ffd31acff00389823d8589bac1a94e5b6ea5e9550c44b6c"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s061",
+            "elapsedSeconds": 458262.781,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "16ac5f05a790ffce6a397cf9d7a1654f4adfe06f64493d9fd01b9a326b1a7a2e"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s062",
+            "elapsedSeconds": 459456.907,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "a1a2b797522f4db5ecdb83c1157da47c2e1deb8fd82a07007cae9e552011ae3d"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s063",
+            "elapsedSeconds": 461675.914,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "368865d3edf6c55c9d2cd42b21653b0bef5363b75b321858263ed8623dd55930"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s064",
+            "elapsedSeconds": 461379.94,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "1f959dea88556c383b457f3ea83ad09924f4aac98c55d751f2a90a71aa435e51"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s065",
+            "elapsedSeconds": 463103.568,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "a037b2cf6e2120513ec3a77616543de3200f9e7678902d4be47238522c0aec87"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s066",
+            "elapsedSeconds": 454499.122,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "c3aab7b3e6b0c63daa850cd4608593e5984bb78f17ae45306ae018f0fee8d719"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s067",
+            "elapsedSeconds": 456901.842,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "da70fbda95ead7a6b671ad621a62ac062488611272fdb111eddab1b26227eeef"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s068",
+            "elapsedSeconds": 456755.414,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "fe85e1941205c28b7199006200bf62f6aa5ffa4ef12b7d64d3a31dcad652c726"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s069",
+            "elapsedSeconds": 454387.669,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "9358a4b624aad3d639c8b762c58a86f9a78a07cf2030fae8d1f73d94ff74bd41"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s070",
+            "elapsedSeconds": 452410.694,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "caf6534b04d451a265bc11a19da24fa0a3142d80ce144605a87983bd1dd2f91f"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s071",
+            "elapsedSeconds": 455563.504,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "e53175795709bcd9149244b3492f87f43e4db06efaab51b93637e4bf663bfbf6"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s072",
+            "elapsedSeconds": 466983.275,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "7e8b11f10a6eeb3871fc64d3835635882e082531ec097023424d78b3bc34e90e"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s073",
+            "elapsedSeconds": 458423.548,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "dcaab35c9ab006debbb0ffa125e4c9ea9db6b25112379f822ea5a8b8be1bb9c6"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s074",
+            "elapsedSeconds": 451888.926,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "d1d15bb8e0eaf656490ab81f5bbe6346175b29373b70369e7a5249bddd42f5a0"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s075",
+            "elapsedSeconds": 461352.243,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "87a61ac3bd762f23a633b095262cf4c04b2a3d301b413fe031d3d03f55aa98be"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s076",
+            "elapsedSeconds": 469206.394,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "fc8880f403f6ac79228c220ef02a178ceaf93ef88098ebc47fa30b10a7a89b81"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s077",
+            "elapsedSeconds": 455310.215,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "769a9eafbd71417210726db6c911158065a646433057a88fb7b9475854c87e4d"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s078",
+            "elapsedSeconds": 463407.567,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "1b5f2eb0808e3aa0081a4d11d4697fd955c3c5de0e78bf4dcaf4912207d34d28"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s079",
+            "elapsedSeconds": 461252.556,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 16,
+                "totalBytes": 2406272,
+                "manifestSha256": "2e9584ad268555bc8294240d7858cf6833537a2ec29ec615509de518f3ce79f8"
+            },
+            "counts": {
+                "filesSeen": 16,
+                "decoded": 16,
+                "tournamentsVerified": 16,
+                "tournamentsAllExact": 16,
+                "roundsAttempted": 1456,
+                "roundsExact": 1456,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1456,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s080",
+            "elapsedSeconds": 634896.908,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "982efad4f200eb5e4778c90e1a5def815c48fcd27398e8acc457ecf787c41ca5"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s081",
+            "elapsedSeconds": 637172.221,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "d50f57130bb092c003ac37faa39841380bdd1ad257a015ba6d4ed765837734b9"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s082",
+            "elapsedSeconds": 628313.586,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "107f190c45837c2ba17b9bad0ba29b2e016905dc5bf34d9803db5adb3c047f49"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s083",
+            "elapsedSeconds": 645951.03,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "5d33b2b14230bd5c469f604bdfe1db7bec9aacce0488db4c68f42b7bbd9f9bf1"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s084",
+            "elapsedSeconds": 631991.664,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "63820503d2e3bda20f44b6c2466a684a8dd45bc4ca6f91bffafec9d69465ad8a"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s085",
+            "elapsedSeconds": 634903.53,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "14b4ca73977c20cd4a31dccacaafc6aaf0c5d19ede5d1739a61824ac2cab8d36"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s086",
+            "elapsedSeconds": 636437.715,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "870510d1fb57cbcc0e3fa7d3edd3f1f767ad28dcf4015f1c293e975d630f10fa"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s087",
+            "elapsedSeconds": 646950.035,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "7f5695374498a1d72e82c3fbe3d8b692e4761b4887e4c14b96ad105063e8caab"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s088",
+            "elapsedSeconds": 653120.383,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "a6ff326b633050302a570b9af8e3c196c36cc61f2be28fba6cb450ede0521206"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-cross-worker/campaigns/p150/shards/s089",
+            "elapsedSeconds": 628930.875,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "fa4af5a8559a86118e48a9aca02ae32ef009e87999af8efbdffe0b37e36e5a5e"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s090",
+            "elapsedSeconds": 430003.539,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "d585b5753692ba57a6a5b2d1e1cea808033e17a62cef8affc09361e67fab8dc7"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s091",
+            "elapsedSeconds": 431384.118,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "8d1e203686c67e7e4586de089937f52a50648214759aeebc9b9832c40f696d34"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s092",
+            "elapsedSeconds": 426510.781,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "9e5e50cc4ccd3869c363db8b8b66c7d4701b274062f2c5952f44bc526f3aad4f"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s093",
+            "elapsedSeconds": 433378.791,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "4e685fcc5aa66935fcbe42c89214fb4cf9904b703678c74aa83f5ad23e2d5680"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s094",
+            "elapsedSeconds": 423445.847,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "df34bbab77fe281be9d622baa323f7a0794467639e5c44e790e8691b5e0dd831"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s095",
+            "elapsedSeconds": 427156.923,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "cc512528e0cbc06f3923613467fff3a4e0324ba83daf9e20d6036d1034283595"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s096",
+            "elapsedSeconds": 433697.203,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "7540c387cb1ba888938471b63439735d167417efb48d865d7d101ceb84f6162d"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s097",
+            "elapsedSeconds": 430566.143,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "aa140314c899f0647231e9678839f400d8dc14d2b82d3caad7aa620a876b3a7d"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s098",
+            "elapsedSeconds": 429708.409,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "d304ded19e3ebdd194614b153fb883a3c1be1f230fdd03e001ee1bff537a174a"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s099",
+            "elapsedSeconds": 429124.955,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "69ac074428e263fb1cec52de82174667745376263d12beecab9ddde06e893a61"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s100",
+            "elapsedSeconds": 423817.568,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "3cf7d4f512bf224d6282b41c116d8468bf223a4b3e7bd851ea0c4ecedf1df342"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s101",
+            "elapsedSeconds": 432884.322,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "18ece2dc609548851bfe5d7e0fb2efe578992c7b913079e1293e642eed2697d6"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s102",
+            "elapsedSeconds": 431545.203,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "77e98254932d765220a3b9f6b5213a1db43ba9de2d7b83f6bf540fb0714413da"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s103",
+            "elapsedSeconds": 436105.37,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "34fc9a975fc690e21c55f89fbb6345bac2216e2ad2fc51916dbaff46a0a21bb2"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s104",
+            "elapsedSeconds": 430321.492,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "6fd3049d6dd5345af02931b6b6bd311ef0904b08312a09a76c557544d12c7c2b"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s105",
+            "elapsedSeconds": 433442.384,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "8f152694f505a61c3ed07d392090b12754a614d1c2f582f02ef85c37f1b1f226"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s106",
+            "elapsedSeconds": 430010.905,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "65d89a83e5e942149017e316043032700e3bbc5cf6c422e6c2350685722c144c"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s107",
+            "elapsedSeconds": 428551.224,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "115747198d093440985510b6e378e4c8ac2d2b3cb15ed3e1d9a309955b07fbe4"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s108",
+            "elapsedSeconds": 432752.886,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "e2b55c5e36a6c2a3db4620804bbc24dead731af1b1a718f03dc1611f6524aa86"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s109",
+            "elapsedSeconds": 434096.339,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "8b54edcf2db2585f63230eee62ab065eddda4c71585a6e984219641f821fa3aa"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s110",
+            "elapsedSeconds": 216698.826,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "c5677045dc7a7e4305a2d2ebc14cd674ab1017093c6d8171915fed6750177489"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-validation/campaigns/p150/shards/s111",
+            "elapsedSeconds": 218230.928,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "5361c3708bd6c93c685c15fa06b17ded677ec95461e889ecf99af41e4ca604d8"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s112",
+            "elapsedSeconds": 428400.329,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "95617a466aa477f245d942d1f587122ac7cce29bebb5f678d2fb8d9535876e32"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s113",
+            "elapsedSeconds": 437312.511,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "82e5f4c2a8adefc2e7523b3b0682e672303691f86a16fcdd870b92f4b96d88db"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s114",
+            "elapsedSeconds": 426021.368,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "ab196aac5a232fb834baddb25ac8f1e22ee8a7809c0e717841dded260d9e4150"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s115",
+            "elapsedSeconds": 429047.581,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "3d0f44e84aa81b60105c58d8afc078828bdedcec44e619afdbfe5688e7caa333"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s116",
+            "elapsedSeconds": 421225.644,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "e6fb52ef19e577b5280354dd6819159f035deaea920c0bbd3f937541c4305d92"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s117",
+            "elapsedSeconds": 421654.694,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "2b128cd331449eb4acd49361fb2bb4202ef3dfdb32bdfe6407753834064328eb"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s118",
+            "elapsedSeconds": 424850.236,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "ab8880007af70f6ea31b70565dbc578bdd795a52d48f52af397b709cc975872b"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s119",
+            "elapsedSeconds": 429540.395,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "d56e9e42d3aedc1845694bddde7cb3debfe697b09a673df7d58c21e8b7dabc18"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s120",
+            "elapsedSeconds": 442884.079,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "9af1f1f2728a32813571eabe0ec82d35307664b1e4a601cb4c80b6ff46a26e5b"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s121",
+            "elapsedSeconds": 440485.331,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "6e20ce8e41650e54b0a45fea2c06a5be9928987aa5b12d4e6c3785d0d9f8f8a2"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s122",
+            "elapsedSeconds": 441508.353,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "f9a3954b48ad4ce42fc645fd546e5dc7fedba2012a084fd52972f5abe5064818"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s123",
+            "elapsedSeconds": 441482.466,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "5f99709bf8fd7b4a97a7c54607d4a8dd363e40959efd12580fe1f40edcd4b588"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s124",
+            "elapsedSeconds": 438151.935,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "17466a7f2b8cbff185aad6435a809e5de746ff705e90104285510b81cea55cbe"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s125",
+            "elapsedSeconds": 440032.836,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "4cd69cb7585ed92e2bd1bc1fea07d75b1721016d376b595e5a537ff0d7cd3db3"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s126",
+            "elapsedSeconds": 444070.519,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "26fd17358be33fa4fe99c80f913e01858000587c14f76894538da51b52536bcb"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/srv/openpairing-icq-worker/campaigns/p150/shards/s127",
+            "elapsedSeconds": 450074.068,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 15,
+                "totalBytes": 2255880,
+                "manifestSha256": "b181efb3924f8ea2db35a7eaae5984bb8eaf7003fef201b2fa6e97c8823a4ad6"
+            },
+            "counts": {
+                "filesSeen": 15,
+                "decoded": 15,
+                "tournamentsVerified": 15,
+                "tournamentsAllExact": 15,
+                "roundsAttempted": 1365,
+                "roundsExact": 1365,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 1365,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        }
+    ]
+}

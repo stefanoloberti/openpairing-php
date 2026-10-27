@@ -1,0 +1,162 @@
+{
+  "schema": "openpairing.submission-readiness/1",
+  "target": "OpenPairingPHP 1.0 or exact THP integration accepted by FIDE TEC",
+  "asOf": "2026-08-16",
+  "gates": [
+    {
+      "id": "tec-product-scope",
+      "description": "TEC confirms the applicable assessment route or an exact ChessPairings THP integration is selected.",
+      "required": true,
+      "status": "external",
+      "evidence": [
+        {"path": "docs/SUBMISSION-ARCHITECTURE.md"},
+        {"path": "docs/TEC-SCOPE-ENQUIRY-DRAFT.md"},
+        {"path": "docs/TAPC-REQUIREMENT-MATRIX.md"}
+      ]
+    },
+    {
+      "id": "public-api-freeze",
+      "description": "The supported library API is frozen and mechanically verified.",
+      "required": true,
+      "status": "closed",
+      "evidence": [
+        {"path": "docs/schema/public-api-0.9.json", "sha256": "de3cae95c62f4971d128a789150c4b5f956c4064238df8cda57eb1b91512af87"},
+        {"path": "docs/API-STABILITY.md", "sha256": "40954c054d5b9deb2b0e612e633679178accbfc2fa62f4f949d62712133a2691"}
+      ]
+    },
+    {
+      "id": "rc8-reproducible-package-checkpoint",
+      "description": "The current RC8 source/runtime package checkpoint is reproducible and identity-scoped.",
+      "required": true,
+      "status": "closed",
+      "evidence": [
+        {"path": "docs/evidence/rc8-trf26-and-p80-realignment-20260815.json", "sha256": "282bd1016d142709a88ef548b86d0deaa548e611e4e868179a4f81686f3da850"}
+      ]
+    },
+    {
+      "id": "dutch-corpus",
+      "description": "All historical corpus partitions close under one immutable final identity with every non-exact case classified.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/CORPUS-GATE.md"}
+      ]
+    },
+    {
+      "id": "accelerated-corpus",
+      "description": "The 1,000-tournament accelerated 250 corpus closes under its corrected immutable replay identity; product and TEC acceleration scope remain separate.",
+      "required": true,
+      "status": "closed",
+      "evidence": [
+        {"path": "docs/evidence/accel-full-epoch5-virtual-float-20261003.json", "sha256": "3c64f91513e2d7b17ab6681de72ec4cbe99644bd3f31ba9925902a4efd135901"},
+        {"path": "docs/evidence/accel-full-epoch5-virtual-float-20261003-receipt.json", "sha256": "0922eb05c51d2a6d6631dcf6f6ff96b7eac247c33fecfbe04ff80f339cace993"}
+      ]
+    },
+    {
+      "id": "public-ptc-rtg-final-package",
+      "description": "PTC and RTG are reproduced from the exact final non-RC THP distribution; the candidate PTC closes 50,000 external-RTG tournaments and the candidate RTG closes 50,000 tournaments through one or more available independent PTCs.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/evidence/rc7-public-tools-gate-20260815.json"},
+        {"path": "docs/TEC-CROSS-TEST.md"},
+        {"path": "docs/schema/tec-cross-test-batch-1.schema.json"},
+        {"path": "docs/schema/tec-cross-test-case-1.schema.json"},
+        {"path": "docs/evidence/tec-cross-test-verifier-checkpoint-20260816.json"}
+      ]
+    },
+    {
+      "id": "trf26-declared-scope",
+      "description": "The final product claim explicitly resolves generic individual record 299 and any TEC-required backward formats.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/TRF26-INDIVIDUAL-GAP-AUDIT.md"},
+        {"path": "docs/LEGACY-TRF-COMPATIBILITY.md"},
+        {"path": "docs/evidence/legacy-trf-layout-audit-20260816.json"}
+      ]
+    },
+    {
+      "id": "complete-thp-workflow",
+      "description": "The exact submitted product proves rating import, tournament/player/result workflow, FIDE mode, recovery and English UI.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/FIDE-SUBMISSION-READINESS.md"},
+        {"path": "docs/SHADOW-VALIDATION.md"},
+        {"path": "docs/THP-INTEGRATION-CONTRACT.md"},
+        {"path": "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md"},
+        {"path": "docs/CHESSPAIRINGS-INTEGRATION-INVENTORY.md"},
+        {"path": "docs/THP-EVIDENCE-EXECUTION-RUNBOOK.md"},
+        {"path": "docs/schema/thp-candidate-identity-1.schema.json"},
+        {"path": "tools/verify_thp_source_freeze.php"},
+        {"path": "docs/schema/thp-pairing-request-1.schema.json"},
+        {"path": "docs/schema/thp-pairing-result-1.schema.json"},
+        {"path": "docs/schema/thp-precommit-observation-1.schema.json"},
+        {"path": "docs/schema/thp-transaction-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-recovery-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-mode-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-performance-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-rating-import-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-operator-workflow-probe-batch-1.schema.json"},
+        {"path": "docs/schema/thp-runtime-configuration-probe-batch-1.schema.json"},
+        {"path": "tools/verify_thp_pairing_result.php"},
+        {"path": "tools/verify_thp_precommit_guard.php"},
+        {"path": "tools/verify_thp_transaction_probes.php"},
+        {"path": "tools/verify_thp_recovery_probes.php"},
+        {"path": "tools/verify_thp_mode_probes.php"},
+        {"path": "tools/verify_thp_performance_probes.php"},
+        {"path": "tools/verify_thp_rating_import_probes.php"},
+        {"path": "tools/verify_thp_operator_workflow_probes.php"},
+        {"path": "tools/verify_thp_runtime_configuration_probes.php"},
+        {"path": "docs/evidence/thp-candidate-identity-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-source-freeze-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-pairing-request-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-pairing-result-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-precommit-guard-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-transaction-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-recovery-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-mode-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-performance-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-rating-import-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-operator-workflow-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/thp-runtime-configuration-probe-verifier-checkpoint-20260816.json"},
+        {"path": "docs/evidence/chesspairings-pairing-path-inventory-20260816.json"},
+        {"path": "docs/evidence/chesspairings-shadow-attempt-ledger-checkpoint-20260816.json", "sha256": "cfd9ff502b97dd3f9604c0bb2eea496580ee02c0bbfbc754e4f8674f9f3156f2"},
+        {"path": "docs/evidence/chesspairings-shadow-observation-coordinator-checkpoint-20260816.json", "sha256": "a8f4d7a070c7a2e3d78e76e1ee0736cb2ab447bbce12e64d20c0002cf4aba8b7"},
+        {"path": "docs/evidence/chesspairings-product-workflow-audit-20260816.json", "sha256": "7a0b442837169bd02a5b05265d5a80ed337ed349c0d7fe1d38edd87b27629c3b"},
+        {"path": "docs/evidence/chesspairings-initial-colour-checkpoint-20260816.json", "sha256": "dddcf275ce9505cde94d339128c26ab572eeeb6b51acbfa1fd320f20fd19d764"},
+        {"path": "docs/evidence/chesspairings-atomic-result-batch-checkpoint-20260816.json", "sha256": "bd08abf401ab25775b4102d3fe71ba163b1006e3474930f46da40112f4d191a4"},
+        {"path": "docs/evidence/chesspairings-english-catalogue-checkpoint-20260816.json", "sha256": "881a3492ccd5ffdbfd67754d194b9bf8bf395a6a1487bbec81da80cbceca5404"},
+        {"path": "docs/evidence/chesspairings-rating-import-i18n-key-hygiene-checkpoint-20260816.json", "sha256": "2dc2c496e4673d1124dc45cf3810edf2c2f7cf9fdba4eba25c40ffea89fd3be4"},
+        {"path": "docs/evidence/chesspairings-english-operator-manual-checkpoint-20260816.json", "sha256": "d2b3ab20acaaa4cfc5cbaa7f0d42db8971aeab226a568cabe04ba17465032767"},
+        {"path": "docs/evidence/chesspairings-rc36-source-freeze-checkpoint-20260816.json", "sha256": "13e2da556f68dc0c0e3ea686c02e32500f3b29d848c28ad300ff5eb59521f007"},
+        {"path": "docs/evidence/chesspairings-rating-import-isolation-checkpoint-20260816.json", "sha256": "01a562d8895e9fff1463c15e9659cd2235bd607724c3c140e23d81aaa8416b66"},
+        {"path": "docs/evidence/chesspairings-rating-import-zip-boundary-checkpoint-20260816.json", "sha256": "e6c8723a2b9353d2e06e4e1b2e3fe85aa5643ae1ab4f31f02f33b4ec6444ca44"}
+      ]
+    },
+    {
+      "id": "controlled-final-environment",
+      "description": "A TEC-accessible controlled environment reproduces the exact final product, PTC and RTG.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/CONTROLLED-ENVIRONMENT.md"}
+      ]
+    },
+    {
+      "id": "stable-release-identity",
+      "description": "One clean non-RC product/source/runtime identity is frozen, signed or checksummed and published without mixed evidence.",
+      "required": true,
+      "status": "open",
+      "evidence": [
+        {"path": "docs/PACKAGING.md"},
+        {"path": "docs/RELEASE.md"},
+        {"path": "tools/scan_distribution_secrets.php"},
+        {"path": "docs/evidence/distribution-secret-scanner-checkpoint-20260816.json"},
+        {"path": "docs/evidence/release-dry-run-1862318-20260816.json"},
+        {"path": "docs/evidence/release-dry-run-b30d3e3-20260816.json"}
+      ]
+    }
+  ]
+}

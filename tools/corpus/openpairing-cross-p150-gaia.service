@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenPairing p150 residual s108-s111 quarantined cross-worker on gaia
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/gaia/openpairing-worker/bin/run_gaia_p150_residual_worker.sh
+Nice=10
+CPUQuota=400%
+MemoryHigh=3G
+MemoryMax=3500M
+Restart=no
+TimeoutStartSec=infinity
+
+[Install]
+WantedBy=default.target

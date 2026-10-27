@@ -1,0 +1,14 @@
+{
+  "schema": "openpairing.tournament/1",
+  "round": 1,
+  "numberOfRounds": 7,
+  "pairingSystem": "fide-dutch-2026",
+  "configuration": {"topColour": "white", "maxPlayers": 256},
+  "scoring": {"win": {"units": 2, "scale": 2}, "draw": {"units": 1, "scale": 2}},
+  "players": [
+    {"id": 1, "pairingNumber": 1, "name": "Player 1", "rating": 2200, "title": "", "team": "", "club": "", "active": true, "score": {"units": 0, "scale": 1}, "opponentHistory": [], "colourHistory": [], "results": [], "receivedPairingAllocatedBye": false, "floatHistory": [], "acceleration": null},
+    {"id": 2, "pairingNumber": 2, "name": "Player 2", "rating": 2100, "title": "", "team": "", "club": "", "active": true, "score": {"units": 0, "scale": 1}, "opponentHistory": [], "colourHistory": [], "results": [], "receivedPairingAllocatedBye": false, "floatHistory": [], "acceleration": null},
+    {"id": 3, "pairingNumber": 3, "name": "Player 3", "rating": 2000, "title": "", "team": "", "club": "", "active": true, "score": {"units": 0, "scale": 1}, "opponentHistory": [], "colourHistory": [], "results": [], "receivedPairingAllocatedBye": false, "floatHistory": [], "acceleration": null}
+  ]
+}
+

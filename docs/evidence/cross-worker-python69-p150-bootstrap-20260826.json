@@ -1,0 +1,97 @@
+{
+  "schema": "openpairing.cross-worker-bootstrap-evidence/2",
+  "observedAtEuropeRome": "2026-08-26T13:39:53+02:00",
+  "purpose": "Quarantined disjoint p150 capacity on python-69 while preserving its closed p80 partition; doppia-3090 remains the sole Gacrux classifier and atomic acceptor.",
+  "campaignIdentity": {
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+    "arithmeticBackend": "gmp"
+  },
+  "tooling": {
+    "repositoryCommit": "ce21f476623ee65c1aa6afb7bdfc028e6bc9baff",
+    "remotesAligned": true,
+    "runnerSha256": "5506aeabc7bce9d02dd062c0ff92b1c486a7e7f4e5a771ce06705849fd22fbff",
+    "installerSha256": "5aa1eccf4891ddd9e143ec033dad38a24027c42a476db15c8ae48169389fadbf",
+    "unitSha256": "490e21558d821aeab787138a6450be53a7cf24e6e331bd57f50b6e1152623f21",
+    "transferWrapperSha256": "622455d5fed2e6d63daf6f4dc2899cc237df4810451f2fe5c46ffb39f35d999b",
+    "primaryImporter": "/srv/openpairing-validation/tooling/911bbab/corpus/import_cross_worker_shard.sh",
+    "primaryImporterSha256": "ed2e4da0aa0c5cbc807b867b53c6a4e55fb7f5654ca3796abc68e766d82f3c73"
+  },
+  "transport": {
+    "archive": "openpairing-python69-p150-s080-s111.tar.gz",
+    "bytes": 14888700,
+    "sha256Primary": "3cd2fdac26b7f482c60e41643543d6a307070776639519b3f8f1cfa83b2def9e",
+    "sha256Local": "3cd2fdac26b7f482c60e41643543d6a307070776639519b3f8f1cfa83b2def9e",
+    "sha256Python69": "3cd2fdac26b7f482c60e41643543d6a307070776639519b3f8f1cfa83b2def9e",
+    "firstShard": "s080",
+    "lastShard": "s111",
+    "shardCount": 32,
+    "overlapWithPrimaryAtLaunch": 0,
+    "overlapWithIcq": 0
+  },
+  "preservedP80": {
+    "service": "openpairing-cross-p80.service",
+    "activeState": "inactive",
+    "subState": "dead",
+    "result": "success",
+    "reports": 64,
+    "attestations": 64,
+    "mutated": false
+  },
+  "host": {
+    "hostname": "DESKTOP-EF1C0NB",
+    "operatingSystem": "Ubuntu 24.04.3 LTS",
+    "logicalProcessors": 20,
+    "memoryBytes": 33469128704,
+    "swapBytes": 8589934592,
+    "php": "8.3.6",
+    "gmp": true,
+    "opcache": true
+  },
+  "prerequisites": {
+    "runtimeIdentityPreflight": {
+      "status": "PASS",
+      "sentinel": "OPENPAIRING_PYTHON69_PREFLIGHT=PASS",
+      "shards": "s080-s111",
+      "workers": 10
+    },
+    "negativeIdentity": {
+      "status": "PASS",
+      "exitCode": 4,
+      "reportCountAfter": 0,
+      "attestationCountAfter": 0,
+      "stopCreated": false
+    },
+    "priorHostParity": "Preserved p80 bootstrap and 64/64 closed partition already established PHP 8.3/GMP host parity."
+  },
+  "service": {
+    "unit": "openpairing-cross-p150-python69.service",
+    "enabled": true,
+    "stateAtCheckpoint": "activating/start",
+    "mainPid": 7862,
+    "nRestarts": 0,
+    "workers": 10,
+    "activeShards": ["s080", "s081", "s082", "s083", "s084", "s085", "s086", "s087", "s088", "s089"],
+    "cpuUsageNSec": 3681444284000,
+    "memoryCurrentBytes": 1888636928,
+    "stopPresent": false,
+    "reportCount": 0,
+    "attestationCount": 0,
+    "outputRoot": "/srv/openpairing-cross-worker/work/p150-epoch4-86ec9d9-python69/quarantine",
+    "acceptance": "quarantine-only"
+  },
+  "promotionProtocol": {
+    "requiresWholeReportAttestationPair": true,
+    "requiresNoExistingOrActivePrimaryShard": true,
+    "requiresRawCanonicalIdentityAndOriginalCorpusValidation": true,
+    "requiresPrimaryGacruxClassification": true,
+    "promotion": "classification-last-after-pass"
+  },
+  "claims": {
+    "bootstrap": "PASS_TO_COMPUTE_NOT_ACCEPTED_EVIDENCE",
+    "p150EvidenceAtCheckpoint": "NONE",
+    "eta": "NOT_YET_DEFENSIBLE"
+  }
+}

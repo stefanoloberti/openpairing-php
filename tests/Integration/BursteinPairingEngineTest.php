@@ -1,0 +1,137 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OpenPairing\Tests\Integration;
+
+use OpenPairing\Domain\Tournament\ProhibitedPairingGroup;
+use OpenPairing\Domain\Tournament\TournamentState;
+use OpenPairing\Engine\Burstein\BursteinPairingEngine;
+use OpenPairing\Engine\Dutch\DutchPairingEngine;
+use OpenPairing\Tests\Fixtures\DeterministicTournamentSimulator;
+use OpenPairing\Validation\PairingResultValidator;
+use PHPUnit\Framework\TestCase;
+
+final class BursteinPairingEngineTest extends TestCase
+{
+    public function testBsnOrderAndBursteinInitialColoursAreExactWhenThereAreNoSeedingRounds(): void
+    {
+        $state = DeterministicTournamentSimulator::initial(8, 1, 'fide-burstein-2026');
+
+        $result = (new BursteinPairingEngine())->pair($state);
+
+        self::assertSame([
+            ['board' => 1, 'whitePlayerId' => 1, 'blackPlayerId' => 8],
+            ['board' => 2, 'whitePlayerId' => 7, 'blackPlayerId' => 2],
+            ['board' => 3, 'whitePlayerId' => 3, 'blackPlayerId' => 6],
+            ['board' => 4, 'whitePlayerId' => 5, 'blackPlayerId' => 4],
+        ], array_map(static fn ($table): array => $table->toArray(), $result->tables));
+    }
+
+    public function testBursteinByeRankingUsesLowestRankAfterScoreAndPlayedGames(): void
+    {
+        $state = DeterministicTournamentSimulator::initial(7, 1, 'fide-burstein-2026');
+
+        $result = (new BursteinPairingEngine())->pair($state);
+
+        self::assertSame(7, $result->byePlayerId);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+    }
+
+    public function testInitialRoundHonoursDeclaredProhibitedPairing(): void
+    {
+        $base = DeterministicTournamentSimulator::initial(4, 1, 'fide-burstein-2026');
+        $state = $this->withProhibitedGroups($base, [new ProhibitedPairingGroup(1, 1, [1, 4])]);
+
+        $result = (new BursteinPairingEngine())->pair($state);
+        $pairs = array_map(static function ($table): string {
+            $ids = [$table->whitePlayerId, $table->blackPlayerId];
+            sort($ids);
+
+            return implode('-', $ids);
+        }, $result->tables);
+
+        self::assertSame([], $result->violations);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+        self::assertNotContains('1-4', $pairs);
+    }
+
+    public function testConfiguredSeedingRoundsAreExactlyDutch(): void
+    {
+        $bursteinState = DeterministicTournamentSimulator::initial(8, 6, 'fide-burstein-2026');
+        $dutchState = DeterministicTournamentSimulator::initial(8, 6);
+
+        $burstein = (new BursteinPairingEngine())->pair($bursteinState);
+        $dutch = (new DutchPairingEngine())->pair($dutchState);
+
+        self::assertSame($dutch->byePlayerId, $burstein->byePlayerId);
+        self::assertSame(
+            array_map(static fn ($table): array => $table->toArray(), $dutch->tables),
+            array_map(static fn ($table): array => $table->toArray(), $burstein->tables),
+        );
+        self::assertStringContainsString('seeding-dutch', $burstein->algorithmVersion);
+    }
+
+    public function testPostSeedingRoundIsCompleteValidAndDeterministic(): void
+    {
+        $state = DeterministicTournamentSimulator::initial(8, 4, 'fide-burstein-2026');
+        $engine = new BursteinPairingEngine();
+        for ($round = 1; $round <= 2; ++$round) {
+            $state = DeterministicTournamentSimulator::advance($state, $engine->pair($state));
+        }
+
+        $first = $engine->pair($state);
+        $second = $engine->pair($state);
+
+        self::assertSame(BursteinPairingEngine::VERSION, $first->algorithmVersion);
+        self::assertCount(4, $first->tables);
+        self::assertSame([], $first->violations);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $first));
+        self::assertSame($first->toArray(), $second->toArray());
+    }
+
+    public function testOddPostSeedingRoundAssignsOneEligibleByeWithoutLosingPlayers(): void
+    {
+        $state = DeterministicTournamentSimulator::initial(7, 4, 'fide-burstein-2026');
+        $engine = new BursteinPairingEngine();
+        for ($round = 1; $round <= 2; ++$round) {
+            $pairing = $engine->pair($state);
+            self::assertNotNull($pairing->byePlayerId);
+            $state = DeterministicTournamentSimulator::advance($state, $pairing);
+        }
+
+        $result = $engine->pair($state);
+
+        self::assertNotNull($result->byePlayerId);
+        self::assertCount(3, $result->tables);
+        self::assertSame([], (new PairingResultValidator())->validate($state, $result));
+    }
+
+    public function testMatcherLimitReturnsExplicitResourceFailureWithoutPartialPairing(): void
+    {
+        $state = DeterministicTournamentSimulator::initial(24, 1, 'fide-burstein-2026');
+
+        $result = (new BursteinPairingEngine())->pair($state);
+
+        self::assertSame([], $result->tables);
+        self::assertCount(24, $result->unpairedPlayerIds);
+        self::assertSame('engine.resource_limit', $result->violations[0]->code);
+    }
+
+    /** @param list<ProhibitedPairingGroup> $groups */
+    private function withProhibitedGroups(TournamentState $state, array $groups): TournamentState
+    {
+        return new TournamentState(
+            schemaVersion: $state->schemaVersion,
+            round: $state->round,
+            numberOfRounds: $state->numberOfRounds,
+            pairingSystem: $state->pairingSystem,
+            topColour: $state->topColour,
+            pointsForWin: $state->pointsForWin,
+            pointsForDraw: $state->pointsForDraw,
+            maxPlayers: $state->maxPlayers,
+            players: $state->players,
+            prohibitedPairingGroups: $groups,
+        );
+    }
+}

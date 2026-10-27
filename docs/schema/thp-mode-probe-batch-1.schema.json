@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-mode-probe-batch-1.schema.json",
+  "title": "OpenPairing THP FIDE-mode selection probe batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "fideMode", "declaredPairingSystems", "scenarios"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-mode-probe-batch/1"},
+    "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+    "productSourceCommit": {"$ref": "#/$defs/gitCommit"},
+    "migrationManifestSha256": {"$ref": "#/$defs/sha256"},
+    "fideMode": {"type": "string", "minLength": 1, "maxLength": 128},
+    "declaredPairingSystems": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 128}
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 64,
+      "items": {"$ref": "#/$defs/scenario"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gitCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenarioId", "kind", "candidateIdentitySha256", "requestedMode", "requestedSystem",
+        "inputKind", "unsupportedMarker", "engineInvocationCount", "selectedSystem",
+        "legacyFallbackInvocationCount", "manualFallbackInvocationCount", "writeCount",
+        "disposition", "diagnosticCode"
+      ],
+      "properties": {
+        "scenarioId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "kind": {"enum": ["declared-system", "unknown-system", "team-input", "record-299", "undeclared-feature"]},
+        "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+        "requestedMode": {"type": "string", "minLength": 1, "maxLength": 128},
+        "requestedSystem": {"type": "string", "minLength": 1, "maxLength": 128},
+        "inputKind": {"enum": ["individual", "team"]},
+        "unsupportedMarker": {"enum": ["none", "record-299", "undeclared-feature"]},
+        "engineInvocationCount": {"type": "integer", "minimum": 0, "maximum": 1},
+        "selectedSystem": {"type": ["string", "null"], "minLength": 1, "maxLength": 128},
+        "legacyFallbackInvocationCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "manualFallbackInvocationCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "writeCount": {"type": "integer", "minimum": 0, "maximum": 0},
+        "disposition": {"enum": ["accepted", "rejected-unsupported"]},
+        "diagnosticCode": {"type": ["string", "null"], "minLength": 1, "maxLength": 128}
+      }
+    }
+  }
+}

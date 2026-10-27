@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpairing.example/schema/thp-runtime-configuration-probe-batch-1.schema.json",
+  "title": "OpenPairing THP runtime configuration probe batch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "candidateIdentitySha256", "productSourceCommit", "migrationManifestSha256",
+    "requiredConfigurationSlots", "slotProbes", "failureScenarios"
+  ],
+  "properties": {
+    "schema": {"const": "openpairing.thp-runtime-configuration-probe-batch/1"},
+    "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+    "productSourceCommit": {"$ref": "#/$defs/gitCommit"},
+    "migrationManifestSha256": {"$ref": "#/$defs/sha256"},
+    "requiredConfigurationSlots": {
+      "type": "array", "minItems": 1, "maxItems": 32, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/slotId"}
+    },
+    "slotProbes": {
+      "type": "array", "minItems": 1, "maxItems": 32,
+      "items": {"$ref": "#/$defs/slotProbe"}
+    },
+    "failureScenarios": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"$ref": "#/$defs/failureScenario"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gitCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "slotId": {"type": "string", "pattern": "^[a-z][a-z0-9._-]{7,127}$"},
+    "zero": {"type": "integer", "minimum": 0, "maximum": 0},
+    "zeroOrOne": {"type": "integer", "minimum": 0, "maximum": 1},
+    "slotProbe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "probeId", "slotId", "candidateIdentitySha256", "injectionSource", "configurationReadCount",
+        "declaredNetworkScope", "observedNetworkDestinationCount", "networkDestinationSha256",
+        "artifactExposureCount", "logExposureCount", "evidenceExposureCount", "diagnosticExposureCount",
+        "responseExposureCount", "writeCount", "outcome", "diagnosticCode"
+      ],
+      "properties": {
+        "probeId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "slotId": {"$ref": "#/$defs/slotId"},
+        "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+        "injectionSource": {"enum": ["environment", "secret-store"]},
+        "configurationReadCount": {"type": "integer", "minimum": 1, "maximum": 1},
+        "declaredNetworkScope": {"enum": ["none", "local-only", "single-declared-endpoint"]},
+        "observedNetworkDestinationCount": {"$ref": "#/$defs/zeroOrOne"},
+        "networkDestinationSha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "artifactExposureCount": {"$ref": "#/$defs/zero"},
+        "logExposureCount": {"$ref": "#/$defs/zero"},
+        "evidenceExposureCount": {"$ref": "#/$defs/zero"},
+        "diagnosticExposureCount": {"$ref": "#/$defs/zero"},
+        "responseExposureCount": {"$ref": "#/$defs/zero"},
+        "writeCount": {"$ref": "#/$defs/zero"},
+        "outcome": {"const": "accepted"},
+        "diagnosticCode": {"type": "null"}
+      }
+    },
+    "failureScenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenarioId", "kind", "slotId", "candidateIdentitySha256", "configurationReadCount",
+        "networkCallCount", "writeCount", "secretValueExposureCount", "outcome", "diagnosticCode"
+      ],
+      "properties": {
+        "scenarioId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{15,127}$"},
+        "kind": {"enum": ["missing-required", "invalid-scope", "redaction-probe"]},
+        "slotId": {"$ref": "#/$defs/slotId"},
+        "candidateIdentitySha256": {"$ref": "#/$defs/sha256"},
+        "configurationReadCount": {"$ref": "#/$defs/zeroOrOne"},
+        "networkCallCount": {"$ref": "#/$defs/zero"},
+        "writeCount": {"$ref": "#/$defs/zero"},
+        "secretValueExposureCount": {"$ref": "#/$defs/zero"},
+        "outcome": {"const": "rejected"},
+        "diagnosticCode": {"type": "string", "minLength": 1, "maxLength": 128}
+      }
+    }
+  }
+}

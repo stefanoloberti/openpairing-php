@@ -1,0 +1,49 @@
+{
+    "schema": "openpairing.performance-ab-evidence/1",
+    "experiment": "proven-optimal residual cache on the first round of one 80-player tournament",
+    "controlledInput": {
+        "corpusManifestSha256": "a6a001f19a7ea1b5985c45705bddba2dc39c5bdfe2c90f46178f345dbe35e8d2",
+        "files": 1,
+        "roundFilter": 1,
+        "arithmeticBackend": "gmp",
+        "opcacheEnableCli": "1",
+        "jit": "1255",
+        "jitBufferSize": "128M"
+    },
+    "before": {
+        "sourceTreeSha256": "78f2715787f1a0152f64e2879f5c46f61dbcb9692b7a54c3d82e683b98cada38",
+        "elapsedSeconds": 13.839,
+        "hoRemainder": {
+            "calls": 36,
+            "cacheServedCalls": 0,
+            "matchingOperations": 2228136,
+            "milliseconds": 12795.721957
+        },
+        "roundsExact": 1,
+        "roundsNonExact": 0
+    },
+    "after": {
+        "sourceTreeSha256": "ab5d668ed8cfde0d9b09045224a960a70d7c750507349a6fb151925aa3135fdc",
+        "elapsedSeconds": 2.430,
+        "hoRemainder": {
+            "calls": 36,
+            "cacheServedCalls": 35,
+            "matchingOperations": 234256,
+            "milliseconds": 1553.444603
+        },
+        "roundsExact": 1,
+        "roundsNonExact": 0
+    },
+    "derived": {
+        "endToEndSpeedup": 5.695,
+        "hoMatchingOperationsReductionPercent": 89.487,
+        "hoMillisecondsReductionPercent": 87.859,
+        "hoCacheServedPercent": 97.222
+    },
+    "correctnessGate": {
+        "unchangedResidualSequences": 1000,
+        "comparison": "cached state versus fresh Blossom and exhaustive matcher at every step",
+        "result": "pass"
+    },
+    "interpretation": "The controlled single-round comparison isolates the retained residual optimum. The later ten-tournament result is a scale confirmation, not a strict A/B, because its complete source-tree identity differs further."
+}

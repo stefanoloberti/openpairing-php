@@ -1,0 +1,9 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    scanFiles:
+        - tools/TrfCorpusCompatibility.php
+    tmpDir: build/phpstan
+    treatPhpDocTypesAsCertain: true

@@ -1,0 +1,108 @@
+{
+  "schema": "openpairing.cross-worker-first-accepted-import/1",
+  "capturedAt": "2026-08-17T08:06:40+02:00",
+  "purpose": "Record the first fail-closed acceptance of p80 shards computed on python-69 and classified on doppia-3090.",
+  "campaign": {
+    "epoch": "p80-epoch4-86ec9d9",
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+    "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+    "arithmeticBackend": "gmp",
+    "primaryAcceptor": "DESKTOP-3OI0QHR",
+    "crossWorkerSourceHost": "DESKTOP-EF1C0NB"
+  },
+  "tooling": {
+    "immutableImporter": "/srv/openpairing-validation/tooling/911bbab/corpus/import_cross_worker_shard.sh",
+    "importerSha256": "ed2e4da0aa0c5cbc807b867b53c6a4e55fb7f5654ca3796abc68e766d82f3c73",
+    "validatorSha256": "b753eff26fe6e1e7f661cff65370ee2ab00b19979dd67adfe64bc193116250b7",
+    "functionalFixCommit": "911bbab43169dcd2a93e6680eff69037f8077003",
+    "immutableSelectionCommit": "a393aa340c9ed33b35c6d682ac9e74ce5952ca42",
+    "transportHardeningCommits": [
+      "2a69ae3677bcc2419127c3dc388fa5a21208516c",
+      "68cb92874338f4a0e3dff252659d4887ab5be2f5",
+      "caebdfd6a45e362cb4e985680b9e2ebed62ad84f",
+      "fca945ace2730aafa396e35d12415f42a88576db",
+      "367404f5ccde7090f8402acff22e0d1c49c4adfa"
+    ],
+    "transport": "SHA-256 verified Base64 of a GZip-compressed payload, framed over SSH stdin; the decompressed artifact is hash-checked before atomic intake rename",
+    "regression": "CorpusFailFastScriptTest: 5 tests, 80 assertions, PHP 8.3.6"
+  },
+  "failClosedDevelopmentIncidents": {
+    "acceptedEvidenceBeforeFix": 0,
+    "persistentStopCreated": false,
+    "finalArtifactsFromFailedAttempts": false,
+    "summary": [
+      "The initial importer referenced not-yet-promoted final provenance paths while building the final classification.",
+      "Long uncompressed stdin payloads could deadlock or be rejected across the Windows OpenSSH/PowerShell bridge.",
+      "Every attempt failed before the report/classification final pair was promoted; quarantine and logs were retained."
+    ]
+  },
+  "acceptedCrossWorkerWave": {
+    "shards": [
+      "s192", "s193", "s194", "s195", "s196",
+      "s197", "s198", "s199", "s200", "s201"
+    ],
+    "reports": 10,
+    "classifications": 10,
+    "sentinel": "PASS_NO_ORACLE_CASES",
+    "tournamentsVerified": 780,
+    "roundsAttempted": 25740,
+    "roundsExact": 25740,
+    "roundsSamePairsColourVariant": 0,
+    "roundsPairingDeviation": 0,
+    "roundsEngineNoSolution": 0,
+    "roundsEngineResourceLimit": 0,
+    "classificationPromotedLast": true,
+    "rawReportHashesPreserved": true,
+    "canonicalSemanticIdentityValidated": true
+  },
+  "combinedEpochSnapshot": {
+    "acceptedShards": 30,
+    "totalShards": 256,
+    "percent": 11.71875,
+    "reports": 30,
+    "classifications": 30,
+    "crossImported": 10,
+    "tournamentsVerified": 2360,
+    "roundsAttempted": 77664,
+    "roundsExact": 77664,
+    "roundsSamePairsColourVariant": 0,
+    "roundsPairingDeviation": 0,
+    "roundsEngineNoSolution": 0,
+    "roundsEngineResourceLimit": 0,
+    "badSentinels": 0,
+    "missingClassifications": 0,
+    "stopPresent": false
+  },
+  "runtimeHealth": {
+    "primaryService": {
+      "name": "openpairing-full-corpus.service",
+      "state": "active/running",
+      "workers": 20,
+      "restarts": 0
+    },
+    "crossWorkerService": {
+      "name": "openpairing-cross-p80.service",
+      "state": "active/running",
+      "workers": 10,
+      "restarts": 0
+    },
+    "p600": {
+      "name": "openpairing-capacity-pilot-p600.service",
+      "state": "activating/start",
+      "terminalReport": false,
+      "restarts": 0
+    }
+  },
+  "identityBoundary": {
+    "p300Rerun": "PASS 61/61 under the independent ae5e8da8 capacity identity",
+    "claim": "The p300 rerun is not evidence that active p80 engine identity 464088b4 passed at 300 players."
+  },
+  "estimatedP80Completion": "2026-08-24 +/- 1 day, subject to future shard timing and regular primary acceptance",
+  "scope": {
+    "productionMutated": false,
+    "stagingMutated": false,
+    "databaseMutated": false,
+    "activeWorkersRestarted": false
+  }
+}

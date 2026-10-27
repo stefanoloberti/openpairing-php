@@ -1,0 +1,42 @@
+{
+  "schema": "openpairing.thp-mode-probe-verifier-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T04:24:48+02:00",
+  "baseCommit": "0b72ecc2f009cb613499c03052c06c903506685f",
+  "files": {
+    "docs/schema/thp-mode-probe-batch-1.schema.json": "cc4183aaf2900e783e5ce43fc83548242c73b0f3ec722790aae94392e7eb20c8",
+    "tools/verify_thp_mode_probes.php": "67d9db1b6a2d774db4d88478fe4b014be234f6e9181298b951a1318c2ae1cc6f",
+    "tests/Integration/ThpModeProbeVerifierTest.php": "0b05c5e6c2139bc6d740023d96807711a69cfa1b3905044e150d9d86860447fe",
+    "docs/THP-INTEGRATION-CONTRACT.md": "4375c8f6437b451a1e966662744c2145360476e723e3b833477cbaff406dd59d",
+    "docs/THP-PRODUCT-ACCEPTANCE-PLAN.md": "9caee6b9f42a3d1cdcb3cbee8d93470f55d6175087211aab4b83bf29bcfee6e9"
+  },
+  "checks": {
+    "targetedWindows": {
+      "status": "PASS",
+      "php": "8.4.24",
+      "tests": 9,
+      "assertions": 237
+    },
+    "staticAnalysis": {"status": "PASS", "errors": 0},
+    "expandedRepositorySecretScan": {"status": "PASS", "filesScanned": 385, "binaryFilesSkipped": 21, "findings": 0},
+    "repositorySuiteWindows": {"status": "PASS", "tests": 365, "assertions": 2517, "skipped": 1},
+    "submissionReadiness": {"status": "NO_GO", "closedGates": 2, "blockingGates": 8, "evidenceFilesVerified": 50},
+    "coveredBehaviours": [
+      "one successful pre-transaction route is mandatory for every pairing system declared by the verified candidate",
+      "unknown system, team input, individual record 299 and an undeclared feature each have one mandatory rejection route",
+      "rejected routes must have zero engine, legacy/manual fallback and write calls with stable diagnostics",
+      "accepted routes call the selected declared engine exactly once and still perform no write during selection",
+      "candidate identity, product commit, FIDE-mode label and ordered pairing-system declaration are bound",
+      "denominator drift, duplicate scenarios and malformed evidence are infrastructure errors",
+      "personal-data and secret keys fail closed without emitting their values",
+      "GO does not claim the product route, engine, database or UI was exercised"
+    ]
+  },
+  "boundary": {
+    "chessPairingsFideModeImplemented": false,
+    "productRouteProbesExecuted": false,
+    "databaseMutationPerformed": false,
+    "productionMutationPerformed": false,
+    "submissionGateClosed": false
+  },
+  "status": "PASS_FIDE_MODE_EVIDENCE_GATE_READY_PRODUCT_MODE_EXECUTION_REMAINS_OPEN"
+}

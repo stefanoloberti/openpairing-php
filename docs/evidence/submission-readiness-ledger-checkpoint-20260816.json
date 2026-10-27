@@ -1,0 +1,58 @@
+{
+  "schema": "openpairing.submission-readiness-ledger-checkpoint/1",
+  "recordedAtEuropeRome": "2026-08-16T00:56:18+02:00",
+  "validatedRepositoryCommit": "23263d5126d9410ba7b8148000ab482927be8b3a",
+  "validationMode": "tooling overlay on immutable RC8 PHP runtime",
+  "runtime": {
+    "host": "DESKTOP-3OI0QHR",
+    "wslDistribution": "ChessPairings-Ubuntu-24.04",
+    "php": "8.3.6",
+    "campaignRelease": "86ec9d9-r2",
+    "campaignCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884"
+  },
+  "files": {
+    "tools/verify_submission_readiness.php": "c5e1e24b32e06700d47b9811db647acef059526ffbfdbb0e460ed4cde9b37d71",
+    "docs/schema/submission-readiness-0.9.json": "27fbba2dfec5c2abc7cd32a38d75324604c3ce2ce3a06e1eed7aad114df2e20f",
+    "tests/Integration/SubmissionReadinessVerifierTest.php": "7131bbbe29e0946a15ad54d3763b69612bc996591073b20cd66137324bd3821b",
+    "tools/verify_public_api.php": "8ceaefa22b582c40f2c14ea25f91b05759c8efa68a015c0ccf4de57461925787",
+    "docs/schema/public-api-0.9.json": "de3cae95c62f4971d128a789150c4b5f956c4064238df8cda57eb1b91512af87"
+  },
+  "checks": {
+    "repositorySuite": {
+      "status": "PASS",
+      "tests": 274,
+      "assertions": 1278,
+      "excludedGroups": ["oracle", "stress"]
+    },
+    "submissionReadinessVerifier": {
+      "status": "PASS",
+      "tests": 3,
+      "assertions": 18,
+      "repositoryVerdict": "NO_GO",
+      "exitCode": 1,
+      "gates": 10,
+      "closed": 2,
+      "blocking": 8,
+      "evidenceFilesVerified": 14
+    },
+    "staticAnalysis": {
+      "status": "PASS",
+      "files": 137,
+      "errors": 0
+    },
+    "publicApi": {
+      "status": "PASS",
+      "packageVersion": "0.9.0-rc8",
+      "methods": 13,
+      "normalizedApiSha256": "45d48bc013d03312c254fdab0d267373b76aece59780d1c4c6a5212b6e81be2d"
+    }
+  },
+  "boundary": {
+    "corpusEvidenceProduced": false,
+    "productEvidenceProduced": false,
+    "submissionGateClosed": false,
+    "note": "This checkpoint validates the fail-closed ledger and frozen API tooling. It is not a product, corpus or FIDE acceptance verdict."
+  },
+  "status": "PASS_TOOLING_CHECKPOINT_SUBMISSION_REMAINS_NO_GO"
+}

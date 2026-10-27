@@ -1,0 +1,127 @@
+{
+  "schema": "openpairing.chesspairings-product-workflow-audit/1",
+  "generatedAtUtc": "2026-08-16T08:36:56Z",
+  "auditStatus": "COMPLETE",
+  "submissionGateStatus": "NO_GO",
+  "candidate": {
+    "product": "ChessPairings Web",
+    "version": "5.21.0-rc.21",
+    "candidateId": "web-fide-candidate-20260816-an-shadow-observation-coordinator",
+    "sourceCommit": "0544d6b65db547060d6a5563af2ff0085b803241",
+    "sourceManifestSha256": "dfb1d289ff3618e3c0a6ef5b614b0294439c0e53e4657ce7afadcef18e970b2f",
+    "bundleSha256": "07780b6dcc805a7cbd747a6e9d7438bb24d52d3c919ff56f7ea588961a61979d",
+    "officialRecognition": "none"
+  },
+  "areas": {
+    "ratingListImport": {
+      "sourceStatus": "PARTIAL",
+      "adminOnly": true,
+      "httpsFideHostPinned": true,
+      "atomicDownloadPublication": true,
+      "transactionalBatchRows": 500,
+      "wholeImportAtomic": false,
+      "sourceSha256Attested": false,
+      "uniqueConcurrentJobWorkspace": false,
+      "exactCandidateProbeExecuted": false
+    },
+    "operatorWorkflow": {
+      "sourceStatus": "PARTIAL",
+      "ownershipChecks": true,
+      "fideResultCodesModeled": true,
+      "requestedByesAndWithdrawalsModeled": true,
+      "bulkResultBatchAtomic": false,
+      "bulkResultCanReturnSuccessWithRowErrors": true,
+      "expectedRevisionRequired": false,
+      "exactCandidateProbeExecuted": false
+    },
+    "fideMode": {
+      "sourceStatus": "PARTIAL",
+      "serverSidePolicy": true,
+      "manualPairingDisabled": true,
+      "bbp6AndGacruxIdentityCheckedAtStart": true,
+      "openPairingProductRouteConnected": false,
+      "individualInitialColourFrozenBeforeFirstPairing": false,
+      "tournamentStartSingleTransaction": false,
+      "exactCandidateProbeExecuted": false
+    },
+    "recovery": {
+      "sourceStatus": "PARTIAL",
+      "deletedTournamentSnapshotRestore": true,
+      "snapshotRestoreCanSkipFailedChildRows": true,
+      "pairingFailureInjectionProbesExecuted": false,
+      "resultBatchRollbackProved": false
+    },
+    "trfInterchange": {
+      "sourceStatus": "PARTIAL",
+      "sourceHashRecordedOnImport": true,
+      "transactionOrSavepoint": true,
+      "unsupportedModeledSemanticsFailClosed": true,
+      "legacyDutchInterpretationRequiresConfirmation": true,
+      "missingRecord152Warned": false,
+      "missingRecord152ImportsAsRandom": true,
+      "canonicalExportCanOmitRecord152": true,
+      "record299Lossless": false,
+      "exactCandidateRoundTripProbeExecuted": false
+    },
+    "englishUiAndManual": {
+      "sourceStatus": "NO_GO",
+      "defaultLanguage": "en",
+      "availablePhpCatalogues": 7,
+      "englishKeys": 3126,
+      "italianKeys": 3185,
+      "italianKeysMissingFromEnglish": 59,
+      "phpPagesWithLiteralHtmlLangIt": 2,
+      "fideRatingImportHardcodedItalian": true,
+      "packagedEnglishOperatorManualProved": false,
+      "exactCandidateVisualWorkflowExecuted": false
+    },
+    "publicPackage": {
+      "sourceStatus": "NO_GO",
+      "releaseStatus": "release-candidate",
+      "publicFinalDownloadPresent": false,
+      "signedFinalChecksumsPresent": false,
+      "thirdPartyNoticeCandidateVersion": "5.21.0-rc.6",
+      "thirdPartyNoticeMatchesCandidate": false
+    }
+  },
+  "inspectedFiles": [
+    {"path": "import_fide.php", "bytes": 23161, "sha256": "0b1fb90f8f4773485590444fc70532abdbffdb9bb97c05911da94c96d7016f9c"},
+    {"path": "classes/Giocatore.php", "bytes": 40648, "sha256": "eb999a6b5e29fdd97085b6e659b2b4cab338fb80cfee6f4f5bbc37f626a949bd"},
+    {"path": "classes/FideTrfCodec.php", "bytes": 36755, "sha256": "bd6e36b4f355c0b46fc0bb612ddd199a2459e330208c6b29ea38da61ca761212"},
+    {"path": "classes/FideTrfImporter.php", "bytes": 22516, "sha256": "342939a2198bb378bb399630b51def2cc88418f4d7c6645d0312bbd7da2cd1c4"},
+    {"path": "import_trf.php", "bytes": 8164, "sha256": "75dc1e8b0225febde82fbc03e8f2fce499b503618f44fee507925614ae324fdf"},
+    {"path": "export_trf.php", "bytes": 1705, "sha256": "03d86efcd4e58b2a99487e5810409f838988d1e1fec61fc7842abe4c8a8dca2d"},
+    {"path": "classes/FideModePolicy.php", "bytes": 15561, "sha256": "9c2a09083699ed137c3885a8937bc75d229c1901055a3afeb5f87f4bfc976c46"},
+    {"path": "classes/Torneo.php", "bytes": 149305, "sha256": "a644e742ab5c815c2b1274775fd48843aa23442caf32596957c6efa3b90f5ee2"},
+    {"path": "classes/Abbinamenti.php", "bytes": 169564, "sha256": "c137515daf3a90f114eb0bfe5e2d0780fb9dd66b8ba34b8956eaa7947e09db22"},
+    {"path": "ajax/salva_risultati.php", "bytes": 3465, "sha256": "bcd1a1c64f245cdfbcb10c495f951cc150bd4d02ce523228fc11491ef4685dc2"},
+    {"path": "classes/BackupSnapshot.php", "bytes": 10003, "sha256": "839f6e769565a78b45800a0fcd1a423b338ef0f03c85f8c0bb1dc04e429da5ae"},
+    {"path": "includes/lang.php", "bytes": 12464, "sha256": "338c20d2d4e8b821ae7502ec7ed180f533cee1536997c24a8434548bbb58c8ef"},
+    {"path": "lang/en.php", "bytes": 218578, "sha256": "c41c2c5bbfe2e8756d3070cbb519c0608f5eff38f4ef27d8c4c015ad63422b01"},
+    {"path": "lang/it.php", "bytes": 237660, "sha256": "5d255b02b51790a2a9922dcd80d320f8fe0215a9242a2054968d4f45d11eb7f6"},
+    {"path": "release.json", "bytes": 447, "sha256": "b884c4594c5bd7c18226f05c8254a51a84d2c67ffa50815e5db61b77fff2a9f6"},
+    {"path": "SOURCE_PROVENANCE.md", "bytes": 1745, "sha256": "024c1a7c2f8cdcf606d51232257860befa747529903eb046974ee938e3b77c98"},
+    {"path": "docs/THIRD_PARTY_NOTICES_EN.md", "bytes": 3942, "sha256": "1cd176261cde7dc86d015ef4425c1357ed6ed31132939a376c646177e9365775"},
+    {"path": "classes/OpenPairingShadowObservationCoordinator.php", "bytes": 4982, "sha256": "0dba2a393592d552ff92a3dbe7dce8b69abcfcc7197fccb16ac09f67b0c56385"}
+  ],
+  "requiredClosure": [
+    "freeze-individual-initial-colour-and-atomic-start",
+    "atomic-revision-bound-result-batch",
+    "identity-bound-rating-import-and-recovery-probes",
+    "explicit-trf152-provenance-or-fail-closed",
+    "complete-english-ui-manual-and-visual-workflow",
+    "authorised-live-shadow-cohort",
+    "non-rc-controlled-public-package"
+  ],
+  "boundary": {
+    "sourceAuditOnly": true,
+    "databaseInspected": false,
+    "databaseMutationPerformed": false,
+    "stagingMutationPerformed": false,
+    "productionRequestPerformed": false,
+    "productionMutationPerformed": false,
+    "deployed": false,
+    "gateClosed": false,
+    "fideApprovedOrEndorsed": false
+  }
+}

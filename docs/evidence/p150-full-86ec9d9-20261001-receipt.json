@@ -1,0 +1,73 @@
+{
+    "schema": "openpairing.historical-partition-promotion-receipt/1",
+    "partition": "p150",
+    "epoch": "p150-epoch4-86ec9d9",
+    "closedAt": "2026-09-30T10:59:01+02:00",
+    "verifiedAt": "2026-10-01T08:23:04+02:00",
+    "campaignToolCommit": "86ec9d9c003d68468906bddf12c69fbcaaf750ac",
+    "aggregate": {
+        "repositoryPath": "docs/evidence/p150-full-86ec9d9-20261001.json",
+        "sourcePath": "/srv/openpairing-validation/campaigns/p150-epoch4-86ec9d9/aggregate.json",
+        "bytes": 153338,
+        "sha256": "492fa4f73c0ccc6b3f2d3137e41a97c19a04ece65a1ad8af05d70484391858c8"
+    },
+    "identity": {
+        "engineSha256": "464088b49fec2854eaff5923f777c6c3f05d6256677d0d43efa0c6a509d9c8f2",
+        "sourceTreeSha256": "a42e9e60024ce2526e247544f36d39a657163e56e814e9b76c7d34593a48e884",
+        "harnessSha256": "a617aa2677cdf3d0ad204caa73b18d6dceceb61b1d2d65ba95f9669a8ab06c4c",
+        "classificationGateSha256": "5c4c9c3b5c7785be05bfcd52c87fe6fa9dfe6761c947b403d805e9c0b4973a18",
+        "campaignRunnerSha256": "dc29b45df5d38b8fc065834b0121ab9936b00860ed6db51a59057e03ccab8ee3",
+        "historicalFloatSemantics": "fide-dutch-float/3-round-indexed",
+        "arithmeticBackend": "gmp",
+        "runtimeRoots": [
+            "/srv/openpairing-validation/releases/86ec9d9-r2",
+            "/srv/openpairing-cross-worker/releases/86ec9d9-r2",
+            "/srv/openpairing-icq-worker/releases/86ec9d9-r2"
+        ]
+    },
+    "corpusIdentity": {
+        "fileCount": 2000,
+        "totalBytes": 300784000,
+        "shardManifestSha256": "21dedd80ab9182f3cfd6302023de51b3940c5d0b5d427217036c34eb98201c0b"
+    },
+    "counts": {
+        "shards": 128,
+        "reports": 128,
+        "classifications": 128,
+        "filesSeen": 2000,
+        "decoded": 2000,
+        "tournamentsVerified": 2000,
+        "tournamentsAllExact": 2000,
+        "roundsAttempted": 182000,
+        "roundsExact": 182000,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 182000,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 0,
+        "largeField.candidateNoMatching": 0
+    },
+    "classification": {
+        "verdicts": {
+            "PASS_NO_ORACLE_CASES": 128
+        },
+        "requiredOracleCases": 0,
+        "crossWorkerImports": {
+            "total": 26,
+            "sourceHosts": {
+                "DESKTOP-EF1C0NB": 10,
+                "icq": 16
+            }
+        },
+        "missingClassifications": [],
+        "orphanClassifications": [],
+        "sourceReportMismatches": []
+    },
+    "health": {
+        "stopExists": false,
+        "nonEmptyErrors": 0
+    },
+    "sentinel": "PASS"
+}

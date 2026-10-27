@@ -1,0 +1,728 @@
+﻿{
+    "schema": "openpairing.trf-sharded-aggregate/1",
+    "shards": 24,
+    "runtimeIdentity": {
+        "schema": "openpairing.runtime-code-identity/1",
+        "projectRoot": "/tmp/openpairing-validation/backends/gmp-head/releases/63eb13587150eb20",
+        "autoloadPsr4Roots": [
+            "/tmp/openpairing-validation/backends/gmp-head/releases/63eb13587150eb20/src"
+        ],
+        "expectedEnginePath": "/tmp/openpairing-validation/backends/gmp-head/releases/63eb13587150eb20/src/Engine/Dutch/DutchPairingEngine.php",
+        "loadedEnginePath": "/tmp/openpairing-validation/backends/gmp-head/releases/63eb13587150eb20/src/Engine/Dutch/DutchPairingEngine.php",
+        "engineVersion": "fide-dutch-2026.global/1",
+        "engineSha256": "ae5e8da8715a77a1b4bc061198e7f03f5d41562346c259e58502de0ea895fdc5",
+        "sourceTreeSha256": "bbfbbbb3e6c62ed10252a6d0c44e41e1036bd2033da78a648eb91aa41d43bba6",
+        "sourceFileCount": 79,
+        "arithmeticBackend": "gmp",
+        "gmpAvailable": true
+    },
+    "harnessIdentity": {
+        "schema": "openpairing.historical-replay-harness/1",
+        "sha256": "0990f14de24c4ad624dafafbc6b7ed248c0ca7f8f7ad58f1cc957be6ae0210f7",
+        "files": {
+            "TrfCorpusCompatibility.php": "d7f115471ad11ff26be8697027cde93216540be8a1a55e04be78d0ef37f8a60a",
+            "verify_trf_pairings.php": "0971f6a06f5b44153ccce9b6853fb7aed91182dbee64a48a9b6b286f4b65a12c"
+        }
+    },
+    "historicalFloatSemantics": "fide-dutch-float/2-pab-downfloat",
+    "corpusIdentity": {
+        "schema": "openpairing.corpus-sharded-identity/1",
+        "fileCount": 30000,
+        "totalBytes": 88827039,
+        "shardManifestSha256": "ea160e208976b2c6ce75ba8aee92c5975112d2e8bb494a1160962487f80fc559"
+    },
+    "counts": {
+        "filesSeen": 30000,
+        "decoded": 29999,
+        "tournamentsVerified": 29999,
+        "tournamentsAllExact": 29999,
+        "roundsAttempted": 269991,
+        "roundsExact": 269991,
+        "roundsSamePairsColourVariant": 0,
+        "roundsPairingDeviation": 0,
+        "roundsEngineNoSolution": 0,
+        "roundsEngineResourceLimit": 0,
+        "largeField.candidateExact": 269991,
+        "largeField.candidateColourVariant": 0,
+        "largeField.candidateDeviation": 0,
+        "largeField.candidateNoMatching": 0
+    },
+    "diagnostics": {
+        "trf.record_required": 1
+    },
+    "shadowSamples": [],
+    "reports": [
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/0",
+            "elapsedSeconds": 929.376,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "8ee9d7f4c230a118a4cf79000d3ea5d7074c097d5cac5f4836cf66ec8caa9e33"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/1",
+            "elapsedSeconds": 915.013,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "f41d6c32305d9a69c45f51b847ffb7fcecf5c7d55d4075536dea0a645ecb7df1"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/2",
+            "elapsedSeconds": 775.22,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "95ea2282ea19c11838348a8df054661012a213ad58be1c058ef58063afd053e6"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/3",
+            "elapsedSeconds": 938.664,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "83398b5ceba1be3046ad6e4b03feadba1298360cd6b0e506764b2c168cbaec0a"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/4",
+            "elapsedSeconds": 892.261,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "fe1e25cfedf3315fda37568126d2cbe73603494be69846b8fc5af4b10112e76c"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/5",
+            "elapsedSeconds": 926.258,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "5e857ce84ff0dee40d741eb13657447e237d123f5526cf54ff7926c13c4a2018"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/6",
+            "elapsedSeconds": 1094.36,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "aa28b47aa173d81d755c46c0669084fa08e899f768f483a2387454380e3f8173"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d10_s50/7",
+            "elapsedSeconds": 1084.832,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "b28e3c7487c7c3fc2107fc68e25e62b5aa85da032c0a6b37a3dd50f3caebc21b"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/0",
+            "elapsedSeconds": 826.712,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3698289,
+                "manifestSha256": "056cb93e3b0589a0c39a2fad0de59d26d8015837c1669da31d93fb19710d0795"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1249,
+                "tournamentsVerified": 1249,
+                "tournamentsAllExact": 1249,
+                "roundsAttempted": 11241,
+                "roundsExact": 11241,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11241,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/1",
+            "elapsedSeconds": 1114.837,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "31b906371b56418cba12e28ff120f439f78dfe16c7d3337c3eea401a7a4fe461"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/2",
+            "elapsedSeconds": 830.909,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "779c2b73474c9cf068a11c980e2a999ab30f7f44ce72a6c6b970d9702e7175d5"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/3",
+            "elapsedSeconds": 1104.603,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "f88bf46671549e54c4b6dfbc78ed0eed16de6af985c4f0b2eeacbd7c9ee8f3a4"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/4",
+            "elapsedSeconds": 982.016,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "8d76b1414a1e38bdc2d1c25169a2b88493972ace10272e8ebeee15f2419c7f5d"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/5",
+            "elapsedSeconds": 992.34,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "9cdc0bc43b2691a664e46ce4942ab40eb6af6539bd770b8bc8af1c00910852c8"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/6",
+            "elapsedSeconds": 1056.362,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "1adef438210be73426572a177bd58a27f47de37629632b8474c75a3d027ed33a"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d20_s50/7",
+            "elapsedSeconds": 1113.309,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "aacedab01a6000041f7a2e83fc79335687c6d3824745e0c8c7f281a439af50f8"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/0",
+            "elapsedSeconds": 947.044,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "8ac697bb5a6e8408b0cb228911f66ab57054a3fc02b79937eb89b7b5852a2d61"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/1",
+            "elapsedSeconds": 1059.303,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "a06a75007fe9510202b4797e603f56021a6a23788748bf46f8212400848c5717"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/2",
+            "elapsedSeconds": 1055.219,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "818e84b50d85a25e4ca2c087a4ef7b96d199be26436f10c2b733c5d8609ea77a"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/3",
+            "elapsedSeconds": 1062.507,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "9357104be64d6cc94b8ef297124f0ae4610adee5d13a4835d7f1aafdae60c2cf"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/4",
+            "elapsedSeconds": 914.619,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "f0d82e2a0754eb10c682087a2f0d2b7cd2c730da082e44ffb26e1564335cd1a6"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/5",
+            "elapsedSeconds": 1053.849,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "060fff12c7d573f3a832615a76a72ef4f900a4d467fbc2b13e138cc6dd34fb8c"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/6",
+            "elapsedSeconds": 1128.341,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "67cd4c77fb654a5b2e24355edccab17becd0343c9578b950c9901e96ea22d45f"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        },
+        {
+            "root": "/tmp/openpairing-p15-shards-14539a6/t_n9_p15_d50_s50/7",
+            "elapsedSeconds": 1044.625,
+            "corpusIdentity": {
+                "schema": "openpairing.corpus-identity/1",
+                "selection": "relative-path-ordinal-v1",
+                "requestedLimit": 0,
+                "fileCount": 1250,
+                "totalBytes": 3701250,
+                "manifestSha256": "bbae242b54f2819b8b43e91415a44437f682a9c76cc098baee4bf6d1df9278d3"
+            },
+            "counts": {
+                "filesSeen": 1250,
+                "decoded": 1250,
+                "tournamentsVerified": 1250,
+                "tournamentsAllExact": 1250,
+                "roundsAttempted": 11250,
+                "roundsExact": 11250,
+                "roundsSamePairsColourVariant": 0,
+                "roundsPairingDeviation": 0,
+                "roundsEngineNoSolution": 0,
+                "roundsEngineResourceLimit": 0,
+                "largeField.candidateExact": 11250,
+                "largeField.candidateColourVariant": 0,
+                "largeField.candidateDeviation": 0,
+                "largeField.candidateNoMatching": 0
+            }
+        }
+    ]
+}

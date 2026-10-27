@@ -1,0 +1,17 @@
+{
+  "schema": "openpairing.negative-architectural-control/1",
+  "experiment": "freeze all resident pairs from one HO remainder optimum without intermediate rematches",
+  "baseline": {
+    "rounds": 500,
+    "exact": 500,
+    "noMatching": 0
+  },
+  "result": {
+    "bothExact": 424,
+    "candidateProgress": 44,
+    "candidateRegression": 0,
+    "noMatching": 32
+  },
+  "verdict": "rejected and fully reverted",
+  "reason": "Persistent freeze mutates the active graph; subsequent resident decisions require the recomputed stable matching and cannot be replayed from a stale snapshot."
+}

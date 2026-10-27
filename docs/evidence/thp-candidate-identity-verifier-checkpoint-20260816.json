@@ -1,0 +1,37 @@
+{
+  "schema": "openpairing.thp-candidate-identity-verifier-checkpoint/1",
+  "recordedAt": "2026-08-16T02:10:13+02:00",
+  "purpose": "Qualify the fail-closed byte-identity boundary for a future exact ChessPairings/OpenPairing THP candidate without representing that such a candidate has been frozen or submitted.",
+  "runtime": {
+    "hostRole": "quarantined secondary worker",
+    "php": "8.3.6",
+    "testTree": "temporary isolated overlay; the active p80 worker and immutable release were not modified",
+    "campaignDataUsed": false
+  },
+  "artifacts": {
+    "tools/verify_thp_candidate_identity.php": "23829159b7536be14217c7d33820821231452b24ec57b95a436e6854247820bc",
+    "docs/THP-INTEGRATION-CONTRACT.md": "48ee8ba0e1b41fadd899be16a2ec94bffbb1db00a34aec9762dc279248714a2f",
+    "docs/schema/thp-candidate-identity-1.schema.json": "1850a1b5adac87adf47c7a6cb352b8450b4fd60f49099ff8c03b49182f3b1104",
+    "tests/Integration/ThpCandidateIdentityVerifierTest.php": "0de4d2974dd3f40b9f09ef779594d468b43d10af0575fff6385042c221f79349"
+  },
+  "checks": {
+    "jsonSyntax": "PASS",
+    "phpLint": "PASS",
+    "finalTargetedPhpunit": {"status": "PASS", "tests": 5, "assertions": 71},
+    "finalTargetedPhpstan": "PASS",
+    "baselineSuiteWithVerifier": {"status": "PASS", "tests": 275, "assertions": 1311},
+    "baselineFullPhpstanWithVerifier": "PASS",
+    "publicApiImpact": "NONE; no src/ or public API manifest file changed"
+  },
+  "verifiedOutcomes": [
+    "The record pins product, package, engine, runtime profile, supported standards and exactly four mandatory distribution artifacts.",
+    "Missing roles, unknown or duplicate fields, duplicate paths or roles, unsafe paths, missing files and hash drift fail closed.",
+    "Canonical identity hashing ignores JSON object order and ordering of set-like standard and artifact lists.",
+    "A mechanical PASS does not declare submission readiness or TEC acceptance."
+  ],
+  "boundary": {
+    "exactThpCandidateFrozen": false,
+    "submissionReadyDeclared": false,
+    "tecAcceptanceDeclared": false
+  }
+}
