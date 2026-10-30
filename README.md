@@ -195,7 +195,10 @@ ChessPairings/FIDE product gate. See `docs/CORPUS-GATE.md` and
 The synthetic TRF inputs are supplied by Gacrux and are not redistributed by
 OpenPairing. The exact 53,201-input selection behind the recorded 1,633,555
 reference-exact rounds, the upstream archive identity, and reproduction steps
-are documented in `docs/TRF-CORPUS-PROVENANCE.md`.
+are documented in `docs/TRF-CORPUS-PROVENANCE.md`. Those public synthetic
+campaign figures are a publishable subset and do not replace the separate
+historical replay totals above; both denominators are valid for their stated
+scope.
 
 ## Provenance and licence
 
